@@ -1,0 +1,985 @@
+openapi: 3.0.3
+info:
+  description: Provides programmatic interface for projects within QuantCDN
+  title: QuantCDN Dashboard API
+  version: 1.2.0
+servers:
+- description: ""
+  url: https://dashboard.quantcdn.io/api/v1
+security:
+- ApiTokenAuth: []
+paths:
+  /organisations:
+    get:
+      description: List of organisations for your QuantCDN account
+      operationId: getOrganisations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisations'
+          description: OK
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Get organisations
+  /projects:
+    get:
+      description: List of QuantCDN projects
+      operationId: getProjects
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+          description: OK
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Get projects
+  /project:
+    get:
+      description: Get QuantCDN project
+      operationId: getProject
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: OK
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Get project
+  /project/create:
+    post:
+      description: Create QuantCDN project
+      operationId: createProject
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+        description: Project schema
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                Invalid name error:
+                  value:
+                    error: true
+                    message: The name field is required.
+                Name is not unique:
+                  value:
+                    error: true
+                    message: Project name is not unique in this organisation. Try
+                      another.
+                Invalid region error:
+                  value:
+                    error: true
+                    message: The region field is required.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Create project
+  /project/edit:
+    patch:
+      description: Edit QuantCDN project
+      operationId: editProject
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectEdit'
+        description: Project schema
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Invalid project.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Edit project
+  /project/delete:
+    delete:
+      description: Delete QuantCDN project
+      operationId: deleteProject
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  message: Success.
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Invalid project.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Delete project
+  /domain/create:
+    post:
+      description: Create QuantCDN domain
+      operationId: createDomain
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainCreate'
+        description: Domain schema
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  message: Domain added successfully.
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                Invalid domain error:
+                  value:
+                    error: true
+                    message: "Invalid domain format. Example: www.example.com."
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Create domaim
+  /domain/delete:
+    delete:
+      description: Delete QuantCDN domain
+      operationId: deleteDomain
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: example.quantcdn.io
+        explode: true
+        in: query
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  message: Domain deleted successfully.
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Domain does not exist.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Delete domain
+  /domain/ssl-renew:
+    post:
+      description: SSL certificates will generate and renew automatically
+      operationId: sslRenewDomain
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn-project
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainSSLRenew'
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  message: Certificate created/renewed successfully.
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Invalid domain.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Renew domain SSL certificate
+  /crawl/configs:
+    get:
+      description: List of crawler configurations
+      operationId: getCrawlers
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlerConfig'
+          description: OK
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Get crawl configs
+  /crawl/run/{uuid}:
+    post:
+      description: Triggers a new run for a specified crawler configuration
+      operationId: runCrawler
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn-project
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: UUID of the crawler to run
+        explode: false
+        in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/runCrawler_request'
+        description: ""
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  message: Crawl request accepted.
+                  run_id: 1234
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Invalid crawler specified. Did you pass in a valid uuid?
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Run crawl config
+  /crawl/runs/{runId}:
+    get:
+      description: Retrieve the status of a crawl run
+      operationId: getCrawlRun
+      parameters:
+      - example: quant
+        explode: false
+        in: header
+        name: Quant-Organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: quantcdn
+        explode: false
+        in: header
+        name: Quant-Project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Run ID to retrieve status for
+        explode: false
+        in: path
+        name: runId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCrawlRun_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                error: true
+                message: "No run with this id exists. Note: Run history is purged\
+                  \ after some time."
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        "403":
+          content:
+            application/json:
+              example:
+                error: true
+                message: Unauthenticated
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authorization header information is missing or invalid.
+      summary: Get crawl run status
+components:
+  parameters:
+    QuantOrganisation:
+      example: quant
+      explode: false
+      in: header
+      name: Quant-Organisation
+      required: true
+      schema:
+        type: string
+      style: simple
+    QuantProject:
+      example: quantcdn-project
+      explode: false
+      in: header
+      name: Quant-Project
+      required: true
+      schema:
+        type: string
+      style: simple
+    DomainDelete:
+      example: example.quantcdn.io
+      explode: true
+      in: query
+      name: domain
+      required: true
+      schema:
+        type: string
+      style: form
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          example:
+            error: true
+            message: Unauthenticated
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Authorization header information is missing or invalid.
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Body data is missing or invalid
+  schemas:
+    CrawlerConfig:
+      example:
+        domain: https://www.example.com
+        name: Crawler configuration example
+        uuid: fced63f0-2a61-4a25-bb0c-a40b055d6194
+        url_count: 50
+      properties:
+        name:
+          example: Crawler configuration example
+          type: string
+        uuid:
+          example: fced63f0-2a61-4a25-bb0c-a40b055d6194
+          type: string
+        domain:
+          example: https://www.example.com
+          type: string
+        url_count:
+          example: 50
+          type: integer
+      type: object
+    Organisations:
+      example:
+        data:
+          organisations:
+          - name: quant
+            machine_name: quant
+          - name: quant
+            machine_name: quant
+      properties:
+        data:
+          $ref: '#/components/schemas/Organisations_data'
+      type: object
+    Organisation:
+      example:
+        name: quant
+        machine_name: quant
+      properties:
+        name:
+          example: quant
+          type: string
+        machine_name:
+          example: quant
+          type: string
+      type: object
+    Projects:
+      example:
+        data:
+          projects:
+          - name: quant
+            machine_name: quant
+          - name: quant
+            machine_name: quant
+      properties:
+        data:
+          $ref: '#/components/schemas/Projects_data'
+      type: object
+    Project:
+      example:
+        name: quant
+        domains:
+        - domain: example.quantcdn.io
+          dns_engaged: 0
+        - domain: example.quantcdn.io
+          dns_engaged: 0
+        machine_name: quant
+        config:
+          search_enabled: false
+          query_params_enabled: true
+        token: aabbcc
+      properties:
+        name:
+          example: quant
+          type: string
+        machine_name:
+          example: quant
+          type: string
+        token:
+          example: aabbcc
+          type: string
+        config:
+          $ref: '#/components/schemas/Project_config'
+        domains:
+          items:
+            $ref: '#/components/schemas/Project_domains'
+          type: array
+      type: object
+    ProjectCreate:
+      example:
+        basic_auth_preview_only: false
+        allow_query_params: true
+        basic_auth_password: pass
+        name: quantcdn-project
+        basic_auth_username: user
+        region: au
+      properties:
+        name:
+          example: quantcdn-project
+          type: string
+        region:
+          example: au
+          type: string
+        allow_query_params:
+          example: true
+          type: boolean
+        basic_auth_username:
+          example: user
+          type: string
+        basic_auth_password:
+          example: pass
+          type: string
+        basic_auth_preview_only:
+          example: false
+          type: boolean
+      required:
+      - name
+      - region
+      type: object
+    ProjectEdit:
+      example:
+        basic_auth_preview_only: false
+        allow_query_params: true
+        basic_auth_password: pass
+        custom_s3_sync_region: us-west-1
+        custom_s3_sync_access_key: custom_s3_sync_access_key
+        name: quantcdn-project
+        basic_auth_username: user
+        region: au
+        custom_s3_sync_secret_key: custom_s3_sync_secret_key
+        custom_s3_sync_bucket: s3-bucket-name
+      properties:
+        name:
+          example: quantcdn-project
+          type: string
+        region:
+          example: au
+          type: string
+        allow_query_params:
+          example: true
+          type: boolean
+        basic_auth_username:
+          example: user
+          type: string
+        basic_auth_password:
+          example: pass
+          type: string
+        basic_auth_preview_only:
+          example: false
+          type: boolean
+        custom_s3_sync_bucket:
+          description: Optional bucket name for S3 sync function
+          example: s3-bucket-name
+          type: string
+        custom_s3_sync_region:
+          description: Bucket region for S3 sync. Required if s3 sync bucket is provided
+          example: us-west-1
+          type: string
+        custom_s3_sync_access_key:
+          description: Access key for S3 sync. Required if s3 sync bucket is provided
+          type: string
+        custom_s3_sync_secret_key:
+          description: Secret key for S3 sync. Required if s3 sync bucket is provided
+          type: string
+      required:
+      - allow_query_params
+      - name
+      - region
+      type: object
+    DomainCreate:
+      example:
+        domain: example.quantcdn.io
+      properties:
+        domain:
+          example: example.quantcdn.io
+          type: string
+      required:
+      - domain
+      type: object
+    DomainSSLRenew:
+      example:
+        domain: example.quantcdn.io
+      properties:
+        domain:
+          example: example.quantcdn.io
+          type: string
+      required:
+      - domain
+      type: object
+    Message:
+      example:
+        data:
+          message: message
+      properties:
+        data:
+          $ref: '#/components/schemas/Message_data'
+      type: object
+    Error:
+      properties:
+        error:
+          type: boolean
+        message:
+          type: string
+      type: object
+    inline_response_200:
+      example:
+        data:
+          project:
+            name: quant
+            domains:
+            - domain: example.quantcdn.io
+              dns_engaged: 0
+            - domain: example.quantcdn.io
+              dns_engaged: 0
+            machine_name: quant
+            config:
+              search_enabled: false
+              query_params_enabled: true
+            token: aabbcc
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_data'
+      type: object
+    Organisations_data:
+      example:
+        organisations:
+        - name: quant
+          machine_name: quant
+        - name: quant
+          machine_name: quant
+      properties:
+        organisations:
+          items:
+            $ref: '#/components/schemas/Organisation'
+          type: array
+      type: object
+    Projects_data_projects:
+      example:
+        name: quant
+        machine_name: quant
+      properties:
+        name:
+          example: quant
+          type: string
+        machine_name:
+          example: quant
+          type: string
+      type: object
+    Projects_data:
+      example:
+        projects:
+        - name: quant
+          machine_name: quant
+        - name: quant
+          machine_name: quant
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/Projects_data_projects'
+          type: array
+      type: object
+    Project_config:
+      example:
+        search_enabled: false
+        query_params_enabled: true
+      properties:
+        query_params_enabled:
+          example: true
+          type: boolean
+        search_enabled:
+          example: false
+          type: boolean
+      type: object
+    Project_domains:
+      example:
+        domain: example.quantcdn.io
+        dns_engaged: 0
+      properties:
+        domain:
+          example: example.quantcdn.io
+          type: string
+        dns_engaged:
+          example: 0
+          type: integer
+      type: object
+    Message_data:
+      example:
+        message: message
+      properties:
+        message:
+          type: string
+      type: object
+    inline_response_200_data:
+      example:
+        project:
+          name: quant
+          domains:
+          - domain: example.quantcdn.io
+            dns_engaged: 0
+          - domain: example.quantcdn.io
+            dns_engaged: 0
+          machine_name: quant
+          config:
+            search_enabled: false
+            query_params_enabled: true
+          token: aabbcc
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
+      type: object
+    runCrawler_request:
+      properties:
+        urls:
+          description: Optionally provide manual URLs to crawl. Full crawl will run
+            otherwise.
+          example: "{'urls': ['/example1', '/example2']}"
+          items:
+            type: string
+          type: array
+      type: object
+    getCrawlRun_200_response:
+      example:
+        completed_at: 0
+        started_at: 1602756600
+        status: running
+      properties:
+        status:
+          description: "Current status of the run (provisioning, running, stopped,\
+            \ canceled)."
+          example: running
+          type: string
+        started_at:
+          description: Unix timestamp denoting the start date and time of the run.
+          example: 1602756600
+          type: integer
+        completed_at:
+          description: Unix timestamp denoting the finish date and time of the run.
+            Value is null if the run is incomplete.
+          type: integer
+          example: null
+      type: object
+  securitySchemes:
+    ApiTokenAuth:
+      description: Create your API token from your user profile https://dashboard.quantcdn.io/profile
+      scheme: bearer
+      type: http
