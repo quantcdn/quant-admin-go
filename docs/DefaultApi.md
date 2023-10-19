@@ -36,12 +36,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
     domainCreate := *openapiclient.NewDomainCreate("example.quantcdn.io") // DomainCreate | Domain schema
 
     configuration := openapiclient.NewConfiguration()
@@ -67,9 +67,9 @@ Other parameters are passed through a pointer to a apiCreateDomainRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
- **domainCreate** | [**DomainCreate**](DomainCreate.md) | Domain schema | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
+ **domainCreate** | [**DomainCreate**](DomainCreate.md) | Domain schema |
 
 ### Return type
 
@@ -106,11 +106,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
+    quantOrganisation := "quant" // string |
     projectCreate := *openapiclient.NewProjectCreate("quantcdn-project", "au") // ProjectCreate | Project schema
 
     configuration := openapiclient.NewConfiguration()
@@ -136,8 +136,8 @@ Other parameters are passed through a pointer to a apiCreateProjectRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **projectCreate** | [**ProjectCreate**](ProjectCreate.md) | Project schema | 
+ **quantOrganisation** | **string** |  |
+ **projectCreate** | [**ProjectCreate**](ProjectCreate.md) | Project schema |
 
 ### Return type
 
@@ -174,13 +174,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
-    domain := "example.quantcdn.io" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
+    domain := "example.quantcdn.io" // string |
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -205,9 +205,9 @@ Other parameters are passed through a pointer to a apiDeleteDomainRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
- **domain** | **string** |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
+ **domain** | **string** |  |
 
 ### Return type
 
@@ -244,12 +244,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -274,8 +274,8 @@ Other parameters are passed through a pointer to a apiDeleteProjectRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
 
 ### Return type
 
@@ -312,12 +312,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
     projectEdit := *openapiclient.NewProjectEdit("quantcdn-project", "au", true) // ProjectEdit | Project schema
 
     configuration := openapiclient.NewConfiguration()
@@ -343,9 +343,9 @@ Other parameters are passed through a pointer to a apiEditProjectRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
- **projectEdit** | [**ProjectEdit**](ProjectEdit.md) | Project schema | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
+ **projectEdit** | [**ProjectEdit**](ProjectEdit.md) | Project schema |
 
 ### Return type
 
@@ -382,12 +382,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
     runId := "runId_example" // string | Run ID to retrieve status for
 
     configuration := openapiclient.NewConfiguration()
@@ -408,7 +408,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**runId** | **string** | Run ID to retrieve status for | 
+**runId** | **string** | Run ID to retrieve status for |
 
 ### Other Parameters
 
@@ -417,8 +417,8 @@ Other parameters are passed through a pointer to a apiGetCrawlRunRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
 
 
 ### Return type
@@ -456,12 +456,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -486,8 +486,8 @@ Other parameters are passed through a pointer to a apiGetCrawlersRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
 
 ### Return type
 
@@ -524,7 +524,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -585,12 +585,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn" // string |
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -615,8 +615,8 @@ Other parameters are passed through a pointer to a apiGetProjectRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
 
 ### Return type
 
@@ -653,11 +653,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
+    quantOrganisation := "quant" // string |
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -682,7 +682,7 @@ Other parameters are passed through a pointer to a apiGetProjectsRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
+ **quantOrganisation** | **string** |  |
 
 ### Return type
 
@@ -719,12 +719,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn-project" // string | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn-project" // string |
     uuid := "uuid_example" // string | UUID of the crawler to run
     runCrawlerRequest := *openapiclient.NewRunCrawlerRequest() // RunCrawlerRequest |  (optional)
 
@@ -746,7 +746,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**uuid** | **string** | UUID of the crawler to run | 
+**uuid** | **string** | UUID of the crawler to run |
 
 ### Other Parameters
 
@@ -755,10 +755,10 @@ Other parameters are passed through a pointer to a apiRunCrawlerRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
 
- **runCrawlerRequest** | [**RunCrawlerRequest**](RunCrawlerRequest.md) |  | 
+ **runCrawlerRequest** | [**RunCrawlerRequest**](RunCrawlerRequest.md) |  |
 
 ### Return type
 
@@ -795,13 +795,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    quantOrganisation := "quant" // string | 
-    quantProject := "quantcdn-project" // string | 
-    domainSSLRenew := *openapiclient.NewDomainSSLRenew("example.quantcdn.io") // DomainSSLRenew | 
+    quantOrganisation := "quant" // string |
+    quantProject := "quantcdn-project" // string |
+    domainSSLRenew := *openapiclient.NewDomainSSLRenew("example.quantcdn.io") // DomainSSLRenew |
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -826,9 +826,9 @@ Other parameters are passed through a pointer to a apiSslRenewDomainRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **quantOrganisation** | **string** |  | 
- **quantProject** | **string** |  | 
- **domainSSLRenew** | [**DomainSSLRenew**](DomainSSLRenew.md) |  | 
+ **quantOrganisation** | **string** |  |
+ **quantProject** | **string** |  |
+ **domainSSLRenew** | [**DomainSSLRenew**](DomainSSLRenew.md) |  |
 
 ### Return type
 

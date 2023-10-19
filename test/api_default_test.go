@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_DefaultApiService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService CreateDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.CreateDomain(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService CreateProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.CreateProject(context.Background()).Execute()
 
@@ -48,7 +48,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService DeleteDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.DeleteDomain(context.Background()).Execute()
 
@@ -60,7 +60,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService DeleteProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.DeleteProject(context.Background()).Execute()
 
@@ -72,7 +72,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService EditProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.EditProject(context.Background()).Execute()
 
@@ -84,7 +84,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService GetCrawlRun", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var runId string
 
@@ -98,7 +98,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService GetCrawlers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.GetCrawlers(context.Background()).Execute()
 
@@ -110,7 +110,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService GetOrganisations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.GetOrganisations(context.Background()).Execute()
 
@@ -122,7 +122,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService GetProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.GetProject(context.Background()).Execute()
 
@@ -134,7 +134,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService GetProjects", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.GetProjects(context.Background()).Execute()
 
@@ -146,7 +146,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService RunCrawler", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var uuid string
 
@@ -160,7 +160,7 @@ func Test_openapi_DefaultApiService(t *testing.T) {
 
 	t.Run("Test DefaultApiService SslRenewDomain", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.DefaultApi.SslRenewDomain(context.Background()).Execute()
 
