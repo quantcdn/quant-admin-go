@@ -123,7 +123,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectResponse'
           description: OK
         "400":
           content:
@@ -188,7 +188,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectResponse'
           description: OK
         "400":
           content:
@@ -459,7 +459,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrawlerConfig'
+                $ref: '#/components/schemas/CrawlerConfigResponse'
           description: OK
         "403":
           content:
@@ -639,6 +639,22 @@ components:
             $ref: '#/components/schemas/Error'
       description: Body data is missing or invalid
   schemas:
+    CrawlerConfigResponse:
+      example:
+        data:
+          crawler_configs:
+          - domain: https://www.example.com
+            name: Crawler configuration example
+            uuid: fced63f0-2a61-4a25-bb0c-a40b055d6194
+            url_count: 50
+          - domain: https://www.example.com
+            name: Crawler configuration example
+            uuid: fced63f0-2a61-4a25-bb0c-a40b055d6194
+            url_count: 50
+      properties:
+        data:
+          $ref: '#/components/schemas/CrawlerConfigResponse_data'
+      type: object
     CrawlerConfig:
       example:
         domain: https://www.example.com
@@ -694,6 +710,25 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Projects_data'
+      type: object
+    ProjectResponse:
+      example:
+        data:
+          project:
+            name: quant
+            domains:
+            - domain: example.quantcdn.io
+              dns_engaged: 0
+            - domain: example.quantcdn.io
+              dns_engaged: 0
+            machine_name: quant
+            config:
+              search_enabled: false
+              query_params_enabled: true
+            token: aabbcc
+      properties:
+        data:
+          $ref: '#/components/schemas/ProjectResponse_data'
       type: object
     Project:
       example:
@@ -957,7 +992,7 @@ components:
             type: string
           type: array
       type: object
-    getCrawlRun_200_response:
+    getCrawlRun_200_response_data:
       example:
         completed_at: 0
         started_at: 1602756600
@@ -977,6 +1012,51 @@ components:
             Value is null if the run is incomplete.
           type: integer
           example: null
+      type: object
+    getCrawlRun_200_response:
+      example:
+        data:
+          completed_at: 0
+          started_at: 1602756600
+          status: running
+      properties:
+        data:
+          $ref: '#/components/schemas/getCrawlRun_200_response_data'
+      type: object
+    CrawlerConfigResponse_data:
+      example:
+        crawler_configs:
+        - domain: https://www.example.com
+          name: Crawler configuration example
+          uuid: fced63f0-2a61-4a25-bb0c-a40b055d6194
+          url_count: 50
+        - domain: https://www.example.com
+          name: Crawler configuration example
+          uuid: fced63f0-2a61-4a25-bb0c-a40b055d6194
+          url_count: 50
+      properties:
+        crawler_configs:
+          items:
+            $ref: '#/components/schemas/CrawlerConfig'
+          type: array
+      type: object
+    ProjectResponse_data:
+      example:
+        project:
+          name: quant
+          domains:
+          - domain: example.quantcdn.io
+            dns_engaged: 0
+          - domain: example.quantcdn.io
+            dns_engaged: 0
+          machine_name: quant
+          config:
+            search_enabled: false
+            query_params_enabled: true
+          token: aabbcc
+      properties:
+        project:
+          $ref: '#/components/schemas/Project'
       type: object
   securitySchemes:
     ApiTokenAuth:

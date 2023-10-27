@@ -193,7 +193,7 @@ func (r ApiCreateProjectRequest) ProjectCreate(projectCreate ProjectCreate) ApiC
 	return r
 }
 
-func (r ApiCreateProjectRequest) Execute() (*Project, *http.Response, error) {
+func (r ApiCreateProjectRequest) Execute() (*ProjectResponse, *http.Response, error) {
 	return r.ApiService.CreateProjectExecute(r)
 }
 
@@ -213,13 +213,13 @@ func (a *DefaultApiService) CreateProject(ctx context.Context) ApiCreateProjectR
 }
 
 // Execute executes the request
-//  @return Project
-func (a *DefaultApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*Project, *http.Response, error) {
+//  @return ProjectResponse
+func (a *DefaultApiService) CreateProjectExecute(r ApiCreateProjectRequest) (*ProjectResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Project
+		localVarReturnValue  *ProjectResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.CreateProject")
@@ -631,7 +631,7 @@ func (r ApiEditProjectRequest) ProjectEdit(projectEdit ProjectEdit) ApiEditProje
 	return r
 }
 
-func (r ApiEditProjectRequest) Execute() (*Project, *http.Response, error) {
+func (r ApiEditProjectRequest) Execute() (*ProjectResponse, *http.Response, error) {
 	return r.ApiService.EditProjectExecute(r)
 }
 
@@ -651,13 +651,13 @@ func (a *DefaultApiService) EditProject(ctx context.Context) ApiEditProjectReque
 }
 
 // Execute executes the request
-//  @return Project
-func (a *DefaultApiService) EditProjectExecute(r ApiEditProjectRequest) (*Project, *http.Response, error) {
+//  @return ProjectResponse
+func (a *DefaultApiService) EditProjectExecute(r ApiEditProjectRequest) (*ProjectResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Project
+		localVarReturnValue  *ProjectResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.EditProject")
@@ -920,7 +920,7 @@ func (r ApiGetCrawlersRequest) QuantProject(quantProject string) ApiGetCrawlersR
 	return r
 }
 
-func (r ApiGetCrawlersRequest) Execute() (*CrawlerConfig, *http.Response, error) {
+func (r ApiGetCrawlersRequest) Execute() (*CrawlerConfigResponse, *http.Response, error) {
 	return r.ApiService.GetCrawlersExecute(r)
 }
 
@@ -940,13 +940,13 @@ func (a *DefaultApiService) GetCrawlers(ctx context.Context) ApiGetCrawlersReque
 }
 
 // Execute executes the request
-//  @return CrawlerConfig
-func (a *DefaultApiService) GetCrawlersExecute(r ApiGetCrawlersRequest) (*CrawlerConfig, *http.Response, error) {
+//  @return CrawlerConfigResponse
+func (a *DefaultApiService) GetCrawlersExecute(r ApiGetCrawlersRequest) (*CrawlerConfigResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CrawlerConfig
+		localVarReturnValue  *CrawlerConfigResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.GetCrawlers")

@@ -19,12 +19,7 @@ var _ MappedNullable = &GetCrawlRun200Response{}
 
 // GetCrawlRun200Response struct for GetCrawlRun200Response
 type GetCrawlRun200Response struct {
-	// Current status of the run (provisioning, running, stopped, canceled).
-	Status *string `json:"status,omitempty"`
-	// Unix timestamp denoting the start date and time of the run.
-	StartedAt *int32 `json:"started_at,omitempty"`
-	// Unix timestamp denoting the finish date and time of the run. Value is null if the run is incomplete.
-	CompletedAt *int32 `json:"completed_at,omitempty"`
+	Data *GetCrawlRun200ResponseData `json:"data,omitempty"`
 }
 
 // NewGetCrawlRun200Response instantiates a new GetCrawlRun200Response object
@@ -44,100 +39,36 @@ func NewGetCrawlRun200ResponseWithDefaults() *GetCrawlRun200Response {
 	return &this
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *GetCrawlRun200Response) GetStatus() string {
-	if o == nil || IsNil(o.Status) {
-		var ret string
+// GetData returns the Data field value if set, zero value otherwise.
+func (o *GetCrawlRun200Response) GetData() GetCrawlRun200ResponseData {
+	if o == nil || IsNil(o.Data) {
+		var ret GetCrawlRun200ResponseData
 		return ret
 	}
-	return *o.Status
+	return *o.Data
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetCrawlRun200Response) GetStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.Status) {
+func (o *GetCrawlRun200Response) GetDataOk() (*GetCrawlRun200ResponseData, bool) {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
-	return o.Status, true
+	return o.Data, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *GetCrawlRun200Response) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
+// HasData returns a boolean if a field has been set.
+func (o *GetCrawlRun200Response) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
 		return true
 	}
 
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *GetCrawlRun200Response) SetStatus(v string) {
-	o.Status = &v
-}
-
-// GetStartedAt returns the StartedAt field value if set, zero value otherwise.
-func (o *GetCrawlRun200Response) GetStartedAt() int32 {
-	if o == nil || IsNil(o.StartedAt) {
-		var ret int32
-		return ret
-	}
-	return *o.StartedAt
-}
-
-// GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetCrawlRun200Response) GetStartedAtOk() (*int32, bool) {
-	if o == nil || IsNil(o.StartedAt) {
-		return nil, false
-	}
-	return o.StartedAt, true
-}
-
-// HasStartedAt returns a boolean if a field has been set.
-func (o *GetCrawlRun200Response) HasStartedAt() bool {
-	if o != nil && !IsNil(o.StartedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetStartedAt gets a reference to the given int32 and assigns it to the StartedAt field.
-func (o *GetCrawlRun200Response) SetStartedAt(v int32) {
-	o.StartedAt = &v
-}
-
-// GetCompletedAt returns the CompletedAt field value if set, zero value otherwise.
-func (o *GetCrawlRun200Response) GetCompletedAt() int32 {
-	if o == nil || IsNil(o.CompletedAt) {
-		var ret int32
-		return ret
-	}
-	return *o.CompletedAt
-}
-
-// GetCompletedAtOk returns a tuple with the CompletedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetCrawlRun200Response) GetCompletedAtOk() (*int32, bool) {
-	if o == nil || IsNil(o.CompletedAt) {
-		return nil, false
-	}
-	return o.CompletedAt, true
-}
-
-// HasCompletedAt returns a boolean if a field has been set.
-func (o *GetCrawlRun200Response) HasCompletedAt() bool {
-	if o != nil && !IsNil(o.CompletedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompletedAt gets a reference to the given int32 and assigns it to the CompletedAt field.
-func (o *GetCrawlRun200Response) SetCompletedAt(v int32) {
-	o.CompletedAt = &v
+// SetData gets a reference to the given GetCrawlRun200ResponseData and assigns it to the Data field.
+func (o *GetCrawlRun200Response) SetData(v GetCrawlRun200ResponseData) {
+	o.Data = &v
 }
 
 func (o GetCrawlRun200Response) MarshalJSON() ([]byte, error) {
@@ -150,14 +81,8 @@ func (o GetCrawlRun200Response) MarshalJSON() ([]byte, error) {
 
 func (o GetCrawlRun200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.StartedAt) {
-		toSerialize["started_at"] = o.StartedAt
-	}
-	if !IsNil(o.CompletedAt) {
-		toSerialize["completed_at"] = o.CompletedAt
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
 	}
 	return toSerialize, nil
 }

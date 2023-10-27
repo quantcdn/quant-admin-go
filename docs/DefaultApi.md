@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## CreateProject
 
-> Project CreateProject(ctx).QuantOrganisation(quantOrganisation).ProjectCreate(projectCreate).Execute()
+> ProjectResponse CreateProject(ctx).QuantOrganisation(quantOrganisation).ProjectCreate(projectCreate).Execute()
 
 Create project
 
@@ -120,7 +120,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.CreateProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateProject`: Project
+    // response from `CreateProject`: ProjectResponse
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.CreateProject`: %v\n", resp)
 }
 ```
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Project**](Project.md)
+[**ProjectResponse**](ProjectResponse.md)
 
 ### Authorization
 
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 
 ## EditProject
 
-> Project EditProject(ctx).QuantOrganisation(quantOrganisation).QuantProject(quantProject).ProjectEdit(projectEdit).Execute()
+> ProjectResponse EditProject(ctx).QuantOrganisation(quantOrganisation).QuantProject(quantProject).ProjectEdit(projectEdit).Execute()
 
 Edit project
 
@@ -327,7 +327,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.EditProject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EditProject`: Project
+    // response from `EditProject`: ProjectResponse
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.EditProject`: %v\n", resp)
 }
 ```
@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Project**](Project.md)
+[**ProjectResponse**](ProjectResponse.md)
 
 ### Authorization
 
@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 ## GetCrawlers
 
-> CrawlerConfig GetCrawlers(ctx).QuantOrganisation(quantOrganisation).QuantProject(quantProject).Execute()
+> CrawlerConfigResponse GetCrawlers(ctx).QuantOrganisation(quantOrganisation).QuantProject(quantProject).Execute()
 
 Get crawl configs
 
@@ -470,7 +470,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetCrawlers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetCrawlers`: CrawlerConfig
+    // response from `GetCrawlers`: CrawlerConfigResponse
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetCrawlers`: %v\n", resp)
 }
 ```
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrawlerConfig**](CrawlerConfig.md)
+[**CrawlerConfigResponse**](CrawlerConfigResponse.md)
 
 ### Authorization
 

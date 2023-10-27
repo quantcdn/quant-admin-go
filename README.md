@@ -94,10 +94,13 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [CrawlerConfig](docs/CrawlerConfig.md)
+ - [CrawlerConfigResponse](docs/CrawlerConfigResponse.md)
+ - [CrawlerConfigResponseData](docs/CrawlerConfigResponseData.md)
  - [DomainCreate](docs/DomainCreate.md)
  - [DomainSSLRenew](docs/DomainSSLRenew.md)
  - [Error](docs/Error.md)
  - [GetCrawlRun200Response](docs/GetCrawlRun200Response.md)
+ - [GetCrawlRun200ResponseData](docs/GetCrawlRun200ResponseData.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse200Data](docs/InlineResponse200Data.md)
  - [Message](docs/Message.md)
@@ -110,6 +113,8 @@ Class | Method | HTTP request | Description
  - [ProjectCreate](docs/ProjectCreate.md)
  - [ProjectDomains](docs/ProjectDomains.md)
  - [ProjectEdit](docs/ProjectEdit.md)
+ - [ProjectResponse](docs/ProjectResponse.md)
+ - [ProjectResponseData](docs/ProjectResponseData.md)
  - [Projects](docs/Projects.md)
  - [ProjectsData](docs/ProjectsData.md)
  - [ProjectsDataProjects](docs/ProjectsDataProjects.md)

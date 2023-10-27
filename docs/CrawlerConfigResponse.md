@@ -1,52 +1,52 @@
-# GetCrawlRun200Response
+# CrawlerConfigResponse
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**GetCrawlRun200ResponseData**](GetCrawlRun200ResponseData.md) |  | [optional] 
+**Data** | Pointer to [**CrawlerConfigResponseData**](CrawlerConfigResponseData.md) |  | [optional] 
 
 ## Methods
 
-### NewGetCrawlRun200Response
+### NewCrawlerConfigResponse
 
-`func NewGetCrawlRun200Response() *GetCrawlRun200Response`
+`func NewCrawlerConfigResponse() *CrawlerConfigResponse`
 
-NewGetCrawlRun200Response instantiates a new GetCrawlRun200Response object
+NewCrawlerConfigResponse instantiates a new CrawlerConfigResponse object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetCrawlRun200ResponseWithDefaults
+### NewCrawlerConfigResponseWithDefaults
 
-`func NewGetCrawlRun200ResponseWithDefaults() *GetCrawlRun200Response`
+`func NewCrawlerConfigResponseWithDefaults() *CrawlerConfigResponse`
 
-NewGetCrawlRun200ResponseWithDefaults instantiates a new GetCrawlRun200Response object
+NewCrawlerConfigResponseWithDefaults instantiates a new CrawlerConfigResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *GetCrawlRun200Response) GetData() GetCrawlRun200ResponseData`
+`func (o *CrawlerConfigResponse) GetData() CrawlerConfigResponseData`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *GetCrawlRun200Response) GetDataOk() (*GetCrawlRun200ResponseData, bool)`
+`func (o *CrawlerConfigResponse) GetDataOk() (*CrawlerConfigResponseData, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *GetCrawlRun200Response) SetData(v GetCrawlRun200ResponseData)`
+`func (o *CrawlerConfigResponse) SetData(v CrawlerConfigResponseData)`
 
 SetData sets Data field to given value.
 
 ### HasData
 
-`func (o *GetCrawlRun200Response) HasData() bool`
+`func (o *CrawlerConfigResponse) HasData() bool`
 
 HasData returns a boolean if a field has been set.
 
