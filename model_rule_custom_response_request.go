@@ -11,3 +11,117 @@ Contact: apiteam@quantcdn.io
 
 package openapi
 
+import (
+	"encoding/json"
+)
+
+// checks if the RuleCustomResponseRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleCustomResponseRequest{}
+
+// RuleCustomResponseRequest struct for RuleCustomResponseRequest
+type RuleCustomResponseRequest struct {
+	Domain *string `json:"domain,omitempty"`
+}
+
+// NewRuleCustomResponseRequest instantiates a new RuleCustomResponseRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRuleCustomResponseRequest() *RuleCustomResponseRequest {
+	this := RuleCustomResponseRequest{}
+	return &this
+}
+
+// NewRuleCustomResponseRequestWithDefaults instantiates a new RuleCustomResponseRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRuleCustomResponseRequestWithDefaults() *RuleCustomResponseRequest {
+	this := RuleCustomResponseRequest{}
+	return &this
+}
+
+// GetDomain returns the Domain field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetDomain() string {
+	if o == nil || IsNil(o.Domain) {
+		var ret string
+		return ret
+	}
+	return *o.Domain
+}
+
+// GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetDomainOk() (*string, bool) {
+	if o == nil || IsNil(o.Domain) {
+		return nil, false
+	}
+	return o.Domain, true
+}
+
+// HasDomain returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasDomain() bool {
+	if o != nil && !IsNil(o.Domain) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomain gets a reference to the given string and assigns it to the Domain field.
+func (o *RuleCustomResponseRequest) SetDomain(v string) {
+	o.Domain = &v
+}
+
+func (o RuleCustomResponseRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RuleCustomResponseRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Domain) {
+		toSerialize["domain"] = o.Domain
+	}
+	return toSerialize, nil
+}
+
+type NullableRuleCustomResponseRequest struct {
+	value *RuleCustomResponseRequest
+	isSet bool
+}
+
+func (v NullableRuleCustomResponseRequest) Get() *RuleCustomResponseRequest {
+	return v.value
+}
+
+func (v *NullableRuleCustomResponseRequest) Set(val *RuleCustomResponseRequest) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableRuleCustomResponseRequest) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableRuleCustomResponseRequest) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableRuleCustomResponseRequest(val *RuleCustomResponseRequest) *NullableRuleCustomResponseRequest {
+	return &NullableRuleCustomResponseRequest{value: val, isSet: true}
+}
+
+func (v NullableRuleCustomResponseRequest) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableRuleCustomResponseRequest) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

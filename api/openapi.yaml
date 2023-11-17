@@ -1381,6 +1381,15 @@ components:
           type: array
         headers:
           type: object
+    Rule:
+      example:
+        uuid: uuid
+        config: "{}"
+      properties:
+        uuid:
+          type: string
+        config:
+          type: object
     RuleRedirectRequest:
       example:
         country: country
@@ -1456,6 +1465,128 @@ components:
           type: string
         status_code:
           type: integer
+    RuleProxyRequest:
+      example:
+        country: country
+        cache_lifetime: 0
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        strip_headers:
+        - strip_headers
+        - strip_headers
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        only_with_cookie: only_with_cookie
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        url: url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        only_proxy_404: true
+        auth_user: auth_user
+        domain: domain
+        name: name
+        host: host
+        waf_enabled: true
+        ip_is:
+        - ip_is
+        - ip_is
+        auth_pass: auth_pass
+        disabled: true
+        to: to
+        disable_ssl_verify: true
+        waf_config:
+          mode: block
+      properties:
+        domain:
+          type: string
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        disabled:
+          type: boolean
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        strip_headers:
+          items:
+            type: string
+          type: array
+        waf_enabled:
+          type: boolean
+        waf_config:
+          $ref: '#/components/schemas/RuleProxyRequest_waf_config'
+    RuleAuthRequest:
+      example:
+        domain: domain
+      properties:
+        domain:
+          type: string
+    RuleCustomResponseRequest:
+      example:
+        domain: domain
+      properties:
+        domain:
+          type: string
+    RuleHeaderRequest:
+      example:
+        domain: domain
+      properties:
+        domain:
+          type: string
     _organizations_get_200_response_data:
       example:
         organizations:
@@ -1683,8 +1814,10 @@ components:
     _organizations__organization__projects__project__rules_get_200_response_data:
       example:
         rules:
-        - "{}"
-        - "{}"
+        - uuid: uuid
+          config: "{}"
+        - uuid: uuid
+          config: "{}"
       properties:
         rules:
           items:
@@ -1694,11 +1827,63 @@ components:
       example:
         data:
           rules:
-          - "{}"
-          - "{}"
+          - uuid: uuid
+            config: "{}"
+          - uuid: uuid
+            config: "{}"
       properties:
         data:
           $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response_data'
+    RuleProxyRequest_waf_config:
+      example:
+        mode: block
+      properties:
+        mode:
+          enum:
+          - block
+          - report
+          type: string
+      paranoia_level:
+        type: integer
+      allow_rules:
+        type: array
+        items:
+          type: integer
+      allow_ip:
+        type: array
+        items:
+          type: integer
+      block_ip:
+        type: array
+        items:
+          type: integer
+      block_ua:
+        type: array
+        items:
+          type: string
+      block_referer:
+        type: array
+        items:
+          type: string
+      notify_slack:
+        type: string
+      notify_slack_hits_rpm:
+        type: integer
+      notify_email:
+        type: string
+      httpbl:
+        type: object
+        properties:
+          httpbl_enabled:
+            type: boolean
+          block_suspicious:
+            type: boolean
+          block_harvester:
+            type: boolean
+          block_spam:
+            type: boolean
+          block_search_engine:
+            type: boolean
   securitySchemes:
     BearerAuth:
       scheme: bearer

@@ -30,11 +30,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest struct {
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleAuthRequest
+	ruleAuthRequest *RuleAuthRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) Body(body RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) RuleAuthRequest(ruleAuthRequest RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
+	r.ruleAuthRequest = &ruleAuthRequest
 	return r
 }
 
@@ -103,7 +103,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPostE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleAuthRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -428,11 +428,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest struct
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleAuthRequest
+	ruleAuthRequest *RuleAuthRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) Body(body RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) RuleAuthRequest(ruleAuthRequest RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest {
+	r.ruleAuthRequest = &ruleAuthRequest
 	return r
 }
 
@@ -501,7 +501,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleP
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleAuthRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -566,11 +566,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest 
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleCustomResponseRequest
+	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) Body(body RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
+	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
 	return r
 }
 
@@ -639,7 +639,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleCustomResponseRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -964,11 +964,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequ
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleCustomResponseRequest
+	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) Body(body RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest {
+	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
 	return r
 }
 
@@ -1037,7 +1037,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleCustomResponseRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1228,11 +1228,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct {
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleHeaderRequest
+	ruleHeaderRequest *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) Body(body RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
+	r.ruleHeaderRequest = &ruleHeaderRequest
 	return r
 }
 
@@ -1301,7 +1301,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleHeaderRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1626,11 +1626,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest stru
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleHeaderRequest
+	ruleHeaderRequest *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) Body(body RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest {
+	r.ruleHeaderRequest = &ruleHeaderRequest
 	return r
 }
 
@@ -1699,7 +1699,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleHeaderRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1764,11 +1764,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest struct {
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleProxyRequest
+	ruleProxyRequest *RuleProxyRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) Body(body RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
+	r.ruleProxyRequest = &ruleProxyRequest
 	return r
 }
 
@@ -1837,7 +1837,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPost
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleProxyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2162,11 +2162,11 @@ type ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest struc
 	organization interface{}
 	project interface{}
 	rule interface{}
-	body *RuleProxyRequest
+	ruleProxyRequest *RuleProxyRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) Body(body RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest {
-	r.body = &body
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest {
+	r.ruleProxyRequest = &ruleProxyRequest
 	return r
 }
 
@@ -2235,7 +2235,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.ruleProxyRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -11,3 +11,117 @@ Contact: apiteam@quantcdn.io
 
 package openapi
 
+import (
+	"encoding/json"
+)
+
+// checks if the RuleAuthRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleAuthRequest{}
+
+// RuleAuthRequest struct for RuleAuthRequest
+type RuleAuthRequest struct {
+	Domain *string `json:"domain,omitempty"`
+}
+
+// NewRuleAuthRequest instantiates a new RuleAuthRequest object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRuleAuthRequest() *RuleAuthRequest {
+	this := RuleAuthRequest{}
+	return &this
+}
+
+// NewRuleAuthRequestWithDefaults instantiates a new RuleAuthRequest object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRuleAuthRequestWithDefaults() *RuleAuthRequest {
+	this := RuleAuthRequest{}
+	return &this
+}
+
+// GetDomain returns the Domain field value if set, zero value otherwise.
+func (o *RuleAuthRequest) GetDomain() string {
+	if o == nil || IsNil(o.Domain) {
+		var ret string
+		return ret
+	}
+	return *o.Domain
+}
+
+// GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleAuthRequest) GetDomainOk() (*string, bool) {
+	if o == nil || IsNil(o.Domain) {
+		return nil, false
+	}
+	return o.Domain, true
+}
+
+// HasDomain returns a boolean if a field has been set.
+func (o *RuleAuthRequest) HasDomain() bool {
+	if o != nil && !IsNil(o.Domain) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomain gets a reference to the given string and assigns it to the Domain field.
+func (o *RuleAuthRequest) SetDomain(v string) {
+	o.Domain = &v
+}
+
+func (o RuleAuthRequest) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RuleAuthRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Domain) {
+		toSerialize["domain"] = o.Domain
+	}
+	return toSerialize, nil
+}
+
+type NullableRuleAuthRequest struct {
+	value *RuleAuthRequest
+	isSet bool
+}
+
+func (v NullableRuleAuthRequest) Get() *RuleAuthRequest {
+	return v.value
+}
+
+func (v *NullableRuleAuthRequest) Set(val *RuleAuthRequest) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableRuleAuthRequest) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableRuleAuthRequest) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableRuleAuthRequest(val *RuleAuthRequest) *NullableRuleAuthRequest {
+	return &NullableRuleAuthRequest{value: val, isSet: true}
+}
+
+func (v NullableRuleAuthRequest) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableRuleAuthRequest) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

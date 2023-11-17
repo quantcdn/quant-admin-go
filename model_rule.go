@@ -11,3 +11,153 @@ Contact: apiteam@quantcdn.io
 
 package openapi
 
+import (
+	"encoding/json"
+)
+
+// checks if the Rule type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Rule{}
+
+// Rule struct for Rule
+type Rule struct {
+	Uuid *string `json:"uuid,omitempty"`
+	Config map[string]interface{} `json:"config,omitempty"`
+}
+
+// NewRule instantiates a new Rule object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRule() *Rule {
+	this := Rule{}
+	return &this
+}
+
+// NewRuleWithDefaults instantiates a new Rule object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRuleWithDefaults() *Rule {
+	this := Rule{}
+	return &this
+}
+
+// GetUuid returns the Uuid field value if set, zero value otherwise.
+func (o *Rule) GetUuid() string {
+	if o == nil || IsNil(o.Uuid) {
+		var ret string
+		return ret
+	}
+	return *o.Uuid
+}
+
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.Uuid) {
+		return nil, false
+	}
+	return o.Uuid, true
+}
+
+// HasUuid returns a boolean if a field has been set.
+func (o *Rule) HasUuid() bool {
+	if o != nil && !IsNil(o.Uuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+func (o *Rule) SetUuid(v string) {
+	o.Uuid = &v
+}
+
+// GetConfig returns the Config field value if set, zero value otherwise.
+func (o *Rule) GetConfig() map[string]interface{} {
+	if o == nil || IsNil(o.Config) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Config
+}
+
+// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetConfigOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Config) {
+		return map[string]interface{}{}, false
+	}
+	return o.Config, true
+}
+
+// HasConfig returns a boolean if a field has been set.
+func (o *Rule) HasConfig() bool {
+	if o != nil && !IsNil(o.Config) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfig gets a reference to the given map[string]interface{} and assigns it to the Config field.
+func (o *Rule) SetConfig(v map[string]interface{}) {
+	o.Config = v
+}
+
+func (o Rule) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Rule) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Uuid) {
+		toSerialize["uuid"] = o.Uuid
+	}
+	if !IsNil(o.Config) {
+		toSerialize["config"] = o.Config
+	}
+	return toSerialize, nil
+}
+
+type NullableRule struct {
+	value *Rule
+	isSet bool
+}
+
+func (v NullableRule) Get() *Rule {
+	return v.value
+}
+
+func (v *NullableRule) Set(val *Rule) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableRule) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableRule) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableRule(val *Rule) *NullableRule {
+	return &NullableRule{value: val, isSet: true}
+}
+
+func (v NullableRule) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableRule) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

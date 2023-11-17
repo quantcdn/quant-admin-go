@@ -139,6 +139,12 @@ Class | Method | HTTP request | Description
  - [OrganizationsOrganizationProjectsProjectRulesGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectRulesGet200ResponseData.md)
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
+ - [Rule](docs/Rule.md)
+ - [RuleAuthRequest](docs/RuleAuthRequest.md)
+ - [RuleCustomResponseRequest](docs/RuleCustomResponseRequest.md)
+ - [RuleHeaderRequest](docs/RuleHeaderRequest.md)
+ - [RuleProxyRequest](docs/RuleProxyRequest.md)
+ - [RuleProxyRequestWafConfig](docs/RuleProxyRequestWafConfig.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
 
 
