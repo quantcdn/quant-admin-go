@@ -20,7 +20,7 @@ var _ MappedNullable = &OrganizationsOrganizationProjectsProjectDomainsGet200Res
 
 // OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData struct for OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData
 type OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData struct {
-	Organizations []Domain `json:"organizations,omitempty"`
+	Domains []Domain `json:"domains,omitempty"`
 }
 
 // NewOrganizationsOrganizationProjectsProjectDomainsGet200ResponseData instantiates a new OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData object
@@ -40,36 +40,36 @@ func NewOrganizationsOrganizationProjectsProjectDomainsGet200ResponseDataWithDef
 	return &this
 }
 
-// GetOrganizations returns the Organizations field value if set, zero value otherwise.
-func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetOrganizations() []Domain {
-	if o == nil || IsNil(o.Organizations) {
+// GetDomains returns the Domains field value if set, zero value otherwise.
+func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetDomains() []Domain {
+	if o == nil || IsNil(o.Domains) {
 		var ret []Domain
 		return ret
 	}
-	return o.Organizations
+	return o.Domains
 }
 
-// GetOrganizationsOk returns a tuple with the Organizations field value if set, nil otherwise
+// GetDomainsOk returns a tuple with the Domains field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetOrganizationsOk() ([]Domain, bool) {
-	if o == nil || IsNil(o.Organizations) {
+func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetDomainsOk() ([]Domain, bool) {
+	if o == nil || IsNil(o.Domains) {
 		return nil, false
 	}
-	return o.Organizations, true
+	return o.Domains, true
 }
 
-// HasOrganizations returns a boolean if a field has been set.
-func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) HasOrganizations() bool {
-	if o != nil && !IsNil(o.Organizations) {
+// HasDomains returns a boolean if a field has been set.
+func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) HasDomains() bool {
+	if o != nil && !IsNil(o.Domains) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganizations gets a reference to the given []Domain and assigns it to the Organizations field.
-func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) SetOrganizations(v []Domain) {
-	o.Organizations = v
+// SetDomains gets a reference to the given []Domain and assigns it to the Domains field.
+func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) SetDomains(v []Domain) {
+	o.Domains = v
 }
 
 func (o OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) MarshalJSON() ([]byte, error) {
@@ -82,8 +82,8 @@ func (o OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) Marsh
 
 func (o OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Organizations) {
-		toSerialize["organizations"] = o.Organizations
+	if !IsNil(o.Domains) {
+		toSerialize["domains"] = o.Domains
 	}
 	return toSerialize, nil
 }

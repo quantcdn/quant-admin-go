@@ -9,6 +9,8 @@ info:
   version: 2.0.0
 servers:
 - url: http://localhost:8001/api/v2
+security:
+- BearerAuth: []
 paths:
   /organizations:
     get:
@@ -126,7 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__get_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
           description: The project data
         "400":
           content:
@@ -152,7 +154,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__get_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
           description: Show the project details
         "400":
           content:
@@ -183,7 +185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__get_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
           description: The project data
         "400":
           content:
@@ -533,7 +535,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -561,7 +563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -588,7 +590,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -620,7 +622,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -653,7 +655,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -681,7 +683,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -708,7 +710,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -740,7 +742,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -773,7 +775,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -801,7 +803,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -828,7 +830,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -860,7 +862,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -893,7 +895,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -921,7 +923,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -948,7 +950,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -980,7 +982,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -1013,7 +1015,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -1041,7 +1043,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -1068,7 +1070,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -1100,7 +1102,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response'
+                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
           description: The rule details
         "400":
           content:
@@ -1499,7 +1501,7 @@ components:
           $ref: '#/components/schemas/_organizations_get_200_response_data'
     _organizations__organization__projects_get_200_response_data:
       example:
-        organizations:
+        projects:
         - project_type: project_type
           project_parent_id: 1
           created_at: created_at
@@ -1527,78 +1529,11 @@ components:
           region: region
           git_url: git_url
       properties:
-        organizations:
+        projects:
           items:
             $ref: '#/components/schemas/Project'
           type: array
     _organizations__organization__projects_get_200_response:
-      example:
-        data:
-          organizations:
-          - project_type: project_type
-            project_parent_id: 1
-            created_at: created_at
-            machine_name: machine_name
-            deleted_at: deleted_at
-            uuid: uuid
-            organisation_id: 6
-            updated_at: updated_at
-            name: name
-            security_score: 5
-            id: 0
-            region: region
-            git_url: git_url
-          - project_type: project_type
-            project_parent_id: 1
-            created_at: created_at
-            machine_name: machine_name
-            deleted_at: deleted_at
-            uuid: uuid
-            organisation_id: 6
-            updated_at: updated_at
-            name: name
-            security_score: 5
-            id: 0
-            region: region
-            git_url: git_url
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations__organization__projects_get_200_response_data'
-    _organizations__organization__projects__project__get_200_response_data:
-      example:
-        projects:
-        - project_type: project_type
-          project_parent_id: 1
-          created_at: created_at
-          machine_name: machine_name
-          deleted_at: deleted_at
-          uuid: uuid
-          organisation_id: 6
-          updated_at: updated_at
-          name: name
-          security_score: 5
-          id: 0
-          region: region
-          git_url: git_url
-        - project_type: project_type
-          project_parent_id: 1
-          created_at: created_at
-          machine_name: machine_name
-          deleted_at: deleted_at
-          uuid: uuid
-          organisation_id: 6
-          updated_at: updated_at
-          name: name
-          security_score: 5
-          id: 0
-          region: region
-          git_url: git_url
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/Project'
-          type: array
-    _organizations__organization__projects__project__get_200_response:
       example:
         data:
           projects:
@@ -1630,7 +1565,7 @@ components:
             git_url: git_url
       properties:
         data:
-          $ref: '#/components/schemas/_organizations__organization__projects__project__get_200_response_data'
+          $ref: '#/components/schemas/_organizations__organization__projects_get_200_response_data'
     _organizations__organization__projects__project__crawlers_get_200_response_data:
       example:
         crawlers:
@@ -1696,7 +1631,7 @@ components:
           $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response_data'
     _organizations__organization__projects__project__domains_get_200_response_data:
       example:
-        organizations:
+        domains:
         - updated_at: updated_at
           project_id: 6
           domain: domain
@@ -1716,14 +1651,14 @@ components:
           in_section: 1
           section_message: section_message
       properties:
-        organizations:
+        domains:
           items:
             $ref: '#/components/schemas/Domain'
           type: array
     _organizations__organization__projects__project__domains_get_200_response:
       example:
         data:
-          organizations:
+          domains:
           - updated_at: updated_at
             project_id: 6
             domain: domain
@@ -1747,34 +1682,15 @@ components:
           $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response_data'
     _organizations__organization__projects__project__rules_get_200_response_data:
       example:
-        organizations:
+        rules:
         - "{}"
         - "{}"
       properties:
-        organizations:
+        rules:
           items:
             $ref: '#/components/schemas/Rule'
           type: array
     _organizations__organization__projects__project__rules_get_200_response:
-      example:
-        data:
-          organizations:
-          - "{}"
-          - "{}"
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response_data'
-    _organizations__organization__projects__project__rules_redirect_post_200_response_data:
-      example:
-        rules:
-        - "{}"
-        - "{}"
-      properties:
-        rules:
-          items:
-            $ref: '#/components/schemas/Rule'
-          type: array
-    _organizations__organization__projects__project__rules_redirect_post_200_response:
       example:
         data:
           rules:
@@ -1782,4 +1698,8 @@ components:
           - "{}"
       properties:
         data:
-          $ref: '#/components/schemas/_organizations__organization__projects__project__rules_redirect_post_200_response_data'
+          $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response_data'
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http

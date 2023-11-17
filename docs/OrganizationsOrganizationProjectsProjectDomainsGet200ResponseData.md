@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Organizations** | Pointer to [**[]Domain**](Domain.md) |  | [optional] 
+**Domains** | Pointer to [**[]Domain**](Domain.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewOrganizationsOrganizationProjectsProjectDomainsGet200ResponseDataWithDefaults
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOrganizations
+### GetDomains
 
-`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetOrganizations() []Domain`
+`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetDomains() []Domain`
 
-GetOrganizations returns the Organizations field if non-nil, zero value otherwise.
+GetDomains returns the Domains field if non-nil, zero value otherwise.
 
-### GetOrganizationsOk
+### GetDomainsOk
 
-`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetOrganizationsOk() (*[]Domain, bool)`
+`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) GetDomainsOk() (*[]Domain, bool)`
 
-GetOrganizationsOk returns a tuple with the Organizations field if it's non-nil, zero value otherwise
+GetDomainsOk returns a tuple with the Domains field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganizations
+### SetDomains
 
-`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) SetOrganizations(v []Domain)`
+`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) SetDomains(v []Domain)`
 
-SetOrganizations sets Organizations field to given value.
+SetDomains sets Domains field to given value.
 
-### HasOrganizations
+### HasDomains
 
-`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) HasOrganizations() bool`
+`func (o *OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData) HasDomains() bool`
 
-HasOrganizations returns a boolean if a field has been set.
+HasDomains returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

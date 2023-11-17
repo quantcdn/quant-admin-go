@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Organizations** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
+**Rules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewOrganizationsOrganizationProjectsProjectRulesGet200ResponseDataWithDefaults i
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOrganizations
+### GetRules
 
-`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetOrganizations() []Rule`
+`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetRules() []Rule`
 
-GetOrganizations returns the Organizations field if non-nil, zero value otherwise.
+GetRules returns the Rules field if non-nil, zero value otherwise.
 
-### GetOrganizationsOk
+### GetRulesOk
 
-`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetOrganizationsOk() (*[]Rule, bool)`
+`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetRulesOk() (*[]Rule, bool)`
 
-GetOrganizationsOk returns a tuple with the Organizations field if it's non-nil, zero value otherwise
+GetRulesOk returns a tuple with the Rules field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganizations
+### SetRules
 
-`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) SetOrganizations(v []Rule)`
+`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) SetRules(v []Rule)`
 
-SetOrganizations sets Organizations field to given value.
+SetRules sets Rules field to given value.
 
-### HasOrganizations
+### HasRules
 
-`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) HasOrganizations() bool`
+`func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) HasRules() bool`
 
-HasOrganizations returns a boolean if a field has been set.
+HasRules returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

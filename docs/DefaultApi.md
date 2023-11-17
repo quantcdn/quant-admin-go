@@ -1,6 +1,6 @@
 # \DefaultApi
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v1*
+All URIs are relative to *http://localhost:8001/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

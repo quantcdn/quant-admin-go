@@ -30,7 +30,7 @@ Method | HTTP request | Description
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthPost
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx, organization, project, rule).Body(body).Execute()
 
 Create authentication rules
 
@@ -43,7 +43,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -59,7 +59,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthPost`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost`: %v\n", resp)
 }
 ```
@@ -88,11 +88,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -106,7 +106,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete an authentication rule
 
@@ -119,7 +119,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -134,7 +134,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: %v\n", resp)
 }
 ```
@@ -162,11 +162,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -180,7 +180,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(ctx, organization, project, rule).Execute()
 
 Get authentication rule details
 
@@ -193,7 +193,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -208,7 +208,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: %v\n", resp)
 }
 ```
@@ -236,11 +236,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -254,7 +254,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update authentication rule details
 
@@ -267,7 +267,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -283,7 +283,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: %v\n", resp)
 }
 ```
@@ -312,11 +312,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -330,7 +330,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update custom response rule details
 
@@ -343,7 +343,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -359,7 +359,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: %v\n", resp)
 }
 ```
@@ -388,11 +388,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -406,7 +406,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a custom response rule
 
@@ -419,7 +419,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -434,7 +434,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: %v\n", resp)
 }
 ```
@@ -462,11 +462,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -480,7 +480,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(ctx, organization, project, rule).Execute()
 
 Get custom repsonse rule details
 
@@ -493,7 +493,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -508,7 +508,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: %v\n", resp)
 }
 ```
@@ -536,11 +536,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -554,7 +554,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update custom response rule details
 
@@ -567,7 +567,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -583,7 +583,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: %v\n", resp)
 }
 ```
@@ -612,11 +612,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -643,7 +643,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -687,7 +687,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -701,7 +701,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderPatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx, organization, project, rule).Body(body).Execute()
 
 Create header rules
 
@@ -714,7 +714,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -730,7 +730,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: %v\n", resp)
 }
 ```
@@ -759,11 +759,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -777,7 +777,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a header rule
 
@@ -790,7 +790,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -805,7 +805,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete`: %v\n", resp)
 }
 ```
@@ -833,11 +833,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -851,7 +851,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet(ctx, organization, project, rule).Execute()
 
 Get header rule details
 
@@ -864,7 +864,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -879,7 +879,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet`: %v\n", resp)
 }
 ```
@@ -907,11 +907,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -925,7 +925,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update header rule details
 
@@ -938,7 +938,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -954,7 +954,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch`: %v\n", resp)
 }
 ```
@@ -983,11 +983,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1001,7 +1001,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyPost
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx, organization, project, rule).Body(body).Execute()
 
 Update proxy rule details
 
@@ -1014,7 +1014,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1030,7 +1030,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyPost`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost`: %v\n", resp)
 }
 ```
@@ -1059,11 +1059,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1077,7 +1077,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a proxy rule
 
@@ -1090,7 +1090,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1105,7 +1105,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: %v\n", resp)
 }
 ```
@@ -1133,11 +1133,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1151,7 +1151,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(ctx, organization, project, rule).Execute()
 
 Get proxy rule details
 
@@ -1164,7 +1164,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1179,7 +1179,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: %v\n", resp)
 }
 ```
@@ -1207,11 +1207,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1225,7 +1225,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(ctx, organization, project, rule).Body(body).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update proxy rule details
 
@@ -1238,7 +1238,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1254,7 +1254,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: %v\n", resp)
 }
 ```
@@ -1283,11 +1283,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1301,7 +1301,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectPost
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 Create a new redirect rule
 
@@ -1314,7 +1314,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1330,7 +1330,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectPost`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost`: %v\n", resp)
 }
 ```
@@ -1359,11 +1359,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1377,7 +1377,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a redirect rule
 
@@ -1390,7 +1390,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1405,7 +1405,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: %v\n", resp)
 }
 ```
@@ -1433,11 +1433,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1451,7 +1451,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(ctx, organization, project, rule).Execute()
 
 Get redirect rule details
 
@@ -1464,7 +1464,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1479,7 +1479,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: %v\n", resp)
 }
 ```
@@ -1507,11 +1507,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -1525,7 +1525,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 Update redirect rule details
 
@@ -1538,7 +1538,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1554,7 +1554,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: %v\n", resp)
 }
 ```
@@ -1583,11 +1583,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

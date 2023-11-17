@@ -283,7 +283,7 @@ type ApiOrganizationsOrganizationProjectsProjectDeleteRequest struct {
 	project interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectDeleteRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectDeleteExecute(r)
 }
 
@@ -305,13 +305,13 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDelete(ctx 
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectDeleteRequest) (*OrganizationsOrganizationProjectsProjectGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsGet200Response
+func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectDeleteRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsProjectDelete")
@@ -409,7 +409,7 @@ type ApiOrganizationsOrganizationProjectsProjectGetRequest struct {
 	project interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectGetRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectGetExecute(r)
 }
 
@@ -431,13 +431,13 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGet(ctx con
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGetExecute(r ApiOrganizationsOrganizationProjectsProjectGetRequest) (*OrganizationsOrganizationProjectsProjectGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsGet200Response
+func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGetExecute(r ApiOrganizationsOrganizationProjectsProjectGetRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsProjectGet")
@@ -541,7 +541,7 @@ func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) ProjectRequest(
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectPatchExecute(r)
 }
 
@@ -563,13 +563,13 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatch(ctx c
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatchExecute(r ApiOrganizationsOrganizationProjectsProjectPatchRequest) (*OrganizationsOrganizationProjectsProjectGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsGet200Response
+func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatchExecute(r ApiOrganizationsOrganizationProjectsProjectPatchRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsProjectPatch")

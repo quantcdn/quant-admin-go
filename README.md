@@ -23,7 +23,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import openapi "github.com/quantcdn/quant-admin-go"
+import openapi "github.com/GIT_USER_ID/GIT_REPO_ID"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -135,12 +135,8 @@ Class | Method | HTTP request | Description
  - [OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData.md)
  - [OrganizationsOrganizationProjectsProjectDomainsGet200Response](docs/OrganizationsOrganizationProjectsProjectDomainsGet200Response.md)
  - [OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsProjectGet200Response](docs/OrganizationsOrganizationProjectsProjectGet200Response.md)
- - [OrganizationsOrganizationProjectsProjectGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectGet200ResponseData.md)
  - [OrganizationsOrganizationProjectsProjectRulesGet200Response](docs/OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
  - [OrganizationsOrganizationProjectsProjectRulesGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectRulesGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response](docs/OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
- - [OrganizationsOrganizationProjectsProjectRulesRedirectPost200ResponseData](docs/OrganizationsOrganizationProjectsProjectRulesRedirectPost200ResponseData.md)
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
@@ -148,7 +144,18 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
-Endpoints do not require authorization.
+
+Authentication schemes defined for the API:
+### BearerAuth
+
+- **Type**: HTTP Bearer token authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), openapi.ContextAccessToken, "BEARER_TOKEN_STRING")
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

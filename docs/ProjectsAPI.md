@@ -27,7 +27,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -95,7 +95,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -152,7 +152,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectDelete
 
-> OrganizationsOrganizationProjectsProjectGet200Response OrganizationsOrganizationProjectsProjectDelete(ctx, organization, project).Execute()
+> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsProjectDelete(ctx, organization, project).Execute()
 
 Delete a project
 
@@ -165,7 +165,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -179,7 +179,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectDelete`: OrganizationsOrganizationProjectsProjectGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectDelete`: OrganizationsOrganizationProjectsGet200Response
     fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsProjectDelete`: %v\n", resp)
 }
 ```
@@ -205,11 +205,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectGet200Response**](OrganizationsOrganizationProjectsProjectGet200Response.md)
+[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -223,7 +223,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectGet
 
-> OrganizationsOrganizationProjectsProjectGet200Response OrganizationsOrganizationProjectsProjectGet(ctx, organization, project).Execute()
+> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsProjectGet(ctx, organization, project).Execute()
 
 Get project details
 
@@ -236,7 +236,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -250,7 +250,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectGet`: OrganizationsOrganizationProjectsProjectGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectGet`: OrganizationsOrganizationProjectsGet200Response
     fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsProjectGet`: %v\n", resp)
 }
 ```
@@ -276,11 +276,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectGet200Response**](OrganizationsOrganizationProjectsProjectGet200Response.md)
+[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -294,7 +294,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectPatch
 
-> OrganizationsOrganizationProjectsProjectGet200Response OrganizationsOrganizationProjectsProjectPatch(ctx, organization, project).ProjectRequest(projectRequest).Execute()
+> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsProjectPatch(ctx, organization, project).ProjectRequest(projectRequest).Execute()
 
 Update project details
 
@@ -307,7 +307,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -322,7 +322,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectPatch`: OrganizationsOrganizationProjectsProjectGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectPatch`: OrganizationsOrganizationProjectsGet200Response
     fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch`: %v\n", resp)
 }
 ```
@@ -349,11 +349,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectGet200Response**](OrganizationsOrganizationProjectsProjectGet200Response.md)
+[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

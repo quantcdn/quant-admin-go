@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Organizations** | Pointer to [**[]Project**](Project.md) |  | [optional] 
+**Projects** | Pointer to [**[]Project**](Project.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewOrganizationsOrganizationProjectsGet200ResponseDataWithDefaults instantiates 
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOrganizations
+### GetProjects
 
-`func (o *OrganizationsOrganizationProjectsGet200ResponseData) GetOrganizations() []Project`
+`func (o *OrganizationsOrganizationProjectsGet200ResponseData) GetProjects() []Project`
 
-GetOrganizations returns the Organizations field if non-nil, zero value otherwise.
+GetProjects returns the Projects field if non-nil, zero value otherwise.
 
-### GetOrganizationsOk
+### GetProjectsOk
 
-`func (o *OrganizationsOrganizationProjectsGet200ResponseData) GetOrganizationsOk() (*[]Project, bool)`
+`func (o *OrganizationsOrganizationProjectsGet200ResponseData) GetProjectsOk() (*[]Project, bool)`
 
-GetOrganizationsOk returns a tuple with the Organizations field if it's non-nil, zero value otherwise
+GetProjectsOk returns a tuple with the Projects field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganizations
+### SetProjects
 
-`func (o *OrganizationsOrganizationProjectsGet200ResponseData) SetOrganizations(v []Project)`
+`func (o *OrganizationsOrganizationProjectsGet200ResponseData) SetProjects(v []Project)`
 
-SetOrganizations sets Organizations field to given value.
+SetProjects sets Projects field to given value.
 
-### HasOrganizations
+### HasProjects
 
-`func (o *OrganizationsOrganizationProjectsGet200ResponseData) HasOrganizations() bool`
+`func (o *OrganizationsOrganizationProjectsGet200ResponseData) HasProjects() bool`
 
-HasOrganizations returns a boolean if a field has been set.
+HasProjects returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

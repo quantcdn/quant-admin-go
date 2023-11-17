@@ -20,7 +20,7 @@ var _ MappedNullable = &OrganizationsOrganizationProjectsProjectRulesGet200Respo
 
 // OrganizationsOrganizationProjectsProjectRulesGet200ResponseData struct for OrganizationsOrganizationProjectsProjectRulesGet200ResponseData
 type OrganizationsOrganizationProjectsProjectRulesGet200ResponseData struct {
-	Organizations []Rule `json:"organizations,omitempty"`
+	Rules []Rule `json:"rules,omitempty"`
 }
 
 // NewOrganizationsOrganizationProjectsProjectRulesGet200ResponseData instantiates a new OrganizationsOrganizationProjectsProjectRulesGet200ResponseData object
@@ -40,36 +40,36 @@ func NewOrganizationsOrganizationProjectsProjectRulesGet200ResponseDataWithDefau
 	return &this
 }
 
-// GetOrganizations returns the Organizations field value if set, zero value otherwise.
-func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetOrganizations() []Rule {
-	if o == nil || IsNil(o.Organizations) {
+// GetRules returns the Rules field value if set, zero value otherwise.
+func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetRules() []Rule {
+	if o == nil || IsNil(o.Rules) {
 		var ret []Rule
 		return ret
 	}
-	return o.Organizations
+	return o.Rules
 }
 
-// GetOrganizationsOk returns a tuple with the Organizations field value if set, nil otherwise
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetOrganizationsOk() ([]Rule, bool) {
-	if o == nil || IsNil(o.Organizations) {
+func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) GetRulesOk() ([]Rule, bool) {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
-	return o.Organizations, true
+	return o.Rules, true
 }
 
-// HasOrganizations returns a boolean if a field has been set.
-func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) HasOrganizations() bool {
-	if o != nil && !IsNil(o.Organizations) {
+// HasRules returns a boolean if a field has been set.
+func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganizations gets a reference to the given []Rule and assigns it to the Organizations field.
-func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) SetOrganizations(v []Rule) {
-	o.Organizations = v
+// SetRules gets a reference to the given []Rule and assigns it to the Rules field.
+func (o *OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) SetRules(v []Rule) {
+	o.Rules = v
 }
 
 func (o OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) MarshalJSON() ([]byte, error) {
@@ -82,8 +82,8 @@ func (o OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) Marshal
 
 func (o OrganizationsOrganizationProjectsProjectRulesGet200ResponseData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Organizations) {
-		toSerialize["organizations"] = o.Organizations
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
 	}
 	return toSerialize, nil
 }
