@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_RulesAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -40,7 +41,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -56,7 +57,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthRuleGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -72,7 +73,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthRulePatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -88,7 +89,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -104,7 +105,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -120,7 +121,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -136,7 +137,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -152,7 +153,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -167,7 +168,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderPatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -183,7 +184,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -199,7 +200,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -215,7 +216,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -231,7 +232,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -247,7 +248,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -263,7 +264,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyRuleGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -279,7 +280,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyRulePatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -295,7 +296,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -311,7 +312,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -327,7 +328,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -343,7 +344,7 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization interface{}
 		var project interface{}
