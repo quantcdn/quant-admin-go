@@ -24,6 +24,144 @@ import (
 // RulesAPIService RulesAPI service
 type RulesAPIService service
 
+type ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization interface{}
+	project interface{}
+	rule interface{}
+	body *RuleAuthRequest
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) Body(body RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthPostExecute(r)
+}
+
+/*
+OrganizationsOrganizationProjectsProjectRulesAuthPost Create authentication rules
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest
+*/
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/auth"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
@@ -32,7 +170,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest struc
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteExecute(r)
 }
 
@@ -56,13 +194,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleD
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete")
@@ -162,7 +300,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest struct {
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthRuleGetExecute(r)
 }
 
@@ -186,13 +324,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleG
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet")
@@ -290,15 +428,15 @@ type ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest struct
 	organization interface{}
 	project interface{}
 	rule interface{}
-	organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest *OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+	body *RuleAuthRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest {
-	r.organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest = &organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) Body(body RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthRulePatchExecute(r)
 }
 
@@ -322,13 +460,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleP
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch")
@@ -363,7 +501,145 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleP
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization interface{}
+	project interface{}
+	rule interface{}
+	body *RuleCustomResponseRequest
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) Body(body RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatchExecute(r)
+}
+
+/*
+OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch Update custom response rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest
+*/
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -430,7 +706,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteReq
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteExecute(r)
 }
 
@@ -454,13 +730,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete")
@@ -560,7 +836,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetReques
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetExecute(r)
 }
 
@@ -584,13 +860,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet")
@@ -688,15 +964,15 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequ
 	organization interface{}
 	project interface{}
 	rule interface{}
-	organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest *OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+	body *RuleCustomResponseRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest {
-	r.organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest = &organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) Body(body RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchExecute(r)
 }
 
@@ -720,13 +996,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch")
@@ -761,7 +1037,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -946,6 +1222,144 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesGetExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization interface{}
+	project interface{}
+	rule interface{}
+	body *RuleHeaderRequest
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) Body(body RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderPatchExecute(r)
+}
+
+/*
+OrganizationsOrganizationProjectsProjectRulesHeaderPatch Create header rules
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest
+*/
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderPatch")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/header"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
@@ -954,7 +1368,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest str
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteExecute(r)
 }
 
@@ -978,13 +1392,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete")
@@ -1084,7 +1498,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest struct
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGetExecute(r)
 }
 
@@ -1108,13 +1522,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet")
@@ -1212,15 +1626,15 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest stru
 	organization interface{}
 	project interface{}
 	rule interface{}
-	organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest *OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+	body *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest {
-	r.organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest = &organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) Body(body RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatchExecute(r)
 }
 
@@ -1244,13 +1658,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch")
@@ -1285,7 +1699,145 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization interface{}
+	project interface{}
+	rule interface{}
+	body *RuleProxyRequest
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) Body(body RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyPostExecute(r)
+}
+
+/*
+OrganizationsOrganizationProjectsProjectRulesProxyPost Update proxy rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest
+*/
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1352,7 +1904,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest stru
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteExecute(r)
 }
 
@@ -1376,13 +1928,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete")
@@ -1482,7 +2034,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest struct 
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyRuleGetExecute(r)
 }
 
@@ -1506,13 +2058,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet")
@@ -1610,15 +2162,15 @@ type ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest struc
 	organization interface{}
 	project interface{}
 	rule interface{}
-	organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest *OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest
+	body *RuleProxyRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest(organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest {
-	r.organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest = &organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) Body(body RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest {
+	r.body = &body
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyRulePatchExecute(r)
 }
 
@@ -1642,13 +2194,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch")
@@ -1683,7 +2235,145 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization interface{}
+	project interface{}
+	rule interface{}
+	ruleRedirectRequest *RuleRedirectRequest
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest {
+	r.ruleRedirectRequest = &ruleRedirectRequest
+	return r
+}
+
+func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectPostExecute(r)
+}
+
+/*
+OrganizationsOrganizationProjectsProjectRulesRedirectPost Create a new redirect rule
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest
+*/
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleRedirectRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1750,7 +2440,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest s
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteExecute(r)
 }
 
@@ -1774,13 +2464,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectR
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete")
@@ -1880,7 +2570,7 @@ type ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest stru
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGetExecute(r)
 }
 
@@ -1904,13 +2594,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectR
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet")
@@ -2008,15 +2698,15 @@ type ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest st
 	organization interface{}
 	project interface{}
 	rule interface{}
-	organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest *OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest
+	ruleRedirectRequest *RuleRedirectRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest(organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest {
-	r.organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest = &organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest
+func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest {
+	r.ruleRedirectRequest = &ruleRedirectRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchExecute(r)
 }
 
@@ -2040,13 +2730,13 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectR
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response, *http.Response, error) {
+//  @return OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch")
@@ -2081,7 +2771,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest
+	localVarPostBody = r.ruleRedirectRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

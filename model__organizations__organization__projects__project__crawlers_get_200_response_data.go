@@ -20,7 +20,7 @@ var _ MappedNullable = &OrganizationsOrganizationProjectsProjectCrawlersGet200Re
 
 // OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData struct for OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData
 type OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData struct {
-	Organizations []Crawler `json:"organizations,omitempty"`
+	Crawlers []Crawler `json:"crawlers,omitempty"`
 }
 
 // NewOrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData instantiates a new OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData object
@@ -40,36 +40,36 @@ func NewOrganizationsOrganizationProjectsProjectCrawlersGet200ResponseDataWithDe
 	return &this
 }
 
-// GetOrganizations returns the Organizations field value if set, zero value otherwise.
-func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetOrganizations() []Crawler {
-	if o == nil || IsNil(o.Organizations) {
+// GetCrawlers returns the Crawlers field value if set, zero value otherwise.
+func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetCrawlers() []Crawler {
+	if o == nil || IsNil(o.Crawlers) {
 		var ret []Crawler
 		return ret
 	}
-	return o.Organizations
+	return o.Crawlers
 }
 
-// GetOrganizationsOk returns a tuple with the Organizations field value if set, nil otherwise
+// GetCrawlersOk returns a tuple with the Crawlers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetOrganizationsOk() ([]Crawler, bool) {
-	if o == nil || IsNil(o.Organizations) {
+func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetCrawlersOk() ([]Crawler, bool) {
+	if o == nil || IsNil(o.Crawlers) {
 		return nil, false
 	}
-	return o.Organizations, true
+	return o.Crawlers, true
 }
 
-// HasOrganizations returns a boolean if a field has been set.
-func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) HasOrganizations() bool {
-	if o != nil && !IsNil(o.Organizations) {
+// HasCrawlers returns a boolean if a field has been set.
+func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) HasCrawlers() bool {
+	if o != nil && !IsNil(o.Crawlers) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganizations gets a reference to the given []Crawler and assigns it to the Organizations field.
-func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) SetOrganizations(v []Crawler) {
-	o.Organizations = v
+// SetCrawlers gets a reference to the given []Crawler and assigns it to the Crawlers field.
+func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) SetCrawlers(v []Crawler) {
+	o.Crawlers = v
 }
 
 func (o OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) MarshalJSON() ([]byte, error) {
@@ -82,8 +82,8 @@ func (o OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) Mars
 
 func (o OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Organizations) {
-		toSerialize["organizations"] = o.Organizations
+	if !IsNil(o.Crawlers) {
+		toSerialize["crawlers"] = o.Crawlers
 	}
 	return toSerialize, nil
 }

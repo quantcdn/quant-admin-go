@@ -290,11 +290,11 @@ type ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest stru
 	organization interface{}
 	project interface{}
 	crawler interface{}
-	organizationsOrganizationProjectsProjectCrawlersPostRequest *OrganizationsOrganizationProjectsProjectCrawlersPostRequest
+	crawlerRequest *CrawlerRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest) OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest OrganizationsOrganizationProjectsProjectCrawlersPostRequest) ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest {
-	r.organizationsOrganizationProjectsProjectCrawlersPostRequest = &organizationsOrganizationProjectsProjectCrawlersPostRequest
+func (r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest {
+	r.crawlerRequest = &crawlerRequest
 	return r
 }
 
@@ -363,7 +363,7 @@ func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCra
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectCrawlersPostRequest
+	localVarPostBody = r.crawlerRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -553,11 +553,11 @@ type ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest struct {
 	ApiService *CrawlersAPIService
 	organization interface{}
 	project interface{}
-	organizationsOrganizationProjectsProjectCrawlersPostRequest *OrganizationsOrganizationProjectsProjectCrawlersPostRequest
+	crawlerRequest *CrawlerRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest) OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest OrganizationsOrganizationProjectsProjectCrawlersPostRequest) ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest {
-	r.organizationsOrganizationProjectsProjectCrawlersPostRequest = &organizationsOrganizationProjectsProjectCrawlersPostRequest
+func (r ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest {
+	r.crawlerRequest = &crawlerRequest
 	return r
 }
 
@@ -623,7 +623,7 @@ func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersPos
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectCrawlersPostRequest
+	localVarPostBody = r.crawlerRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

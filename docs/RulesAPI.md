@@ -4,28 +4,109 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**OrganizationsOrganizationProjectsProjectRulesAuthPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthPost) | **Post** /organizations/{organization}/projects/{project}/rules/auth | Create authentication rules
 [**OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule
 [**OrganizationsOrganizationProjectsProjectRulesAuthRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Get authentication rule details
 [**OrganizationsOrganizationProjectsProjectRulesAuthRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Update authentication rule details
+[**OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response | Update custom response rule details
 [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Delete a custom response rule
 [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Get custom repsonse rule details
 [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Update custom response rule details
 [**OrganizationsOrganizationProjectsProjectRulesGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesGet) | **Get** /organizations/{organization}/projects/{project}/rules | Get rules for a project
+[**OrganizationsOrganizationProjectsProjectRulesHeaderPatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderPatch) | **Patch** /organizations/{organization}/projects/{project}/rules/header | Create header rules
 [**OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/header/{rule} | Delete a header rule
 [**OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/header/{rule} | Get header rule details
 [**OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/header/{rule} | Update header rule details
+[**OrganizationsOrganizationProjectsProjectRulesProxyPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyPost) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | Update proxy rule details
 [**OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Delete a proxy rule
 [**OrganizationsOrganizationProjectsProjectRulesProxyRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Get proxy rule details
 [**OrganizationsOrganizationProjectsProjectRulesProxyRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Update proxy rule details
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectPost) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | Create a new redirect rule
 [**OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Delete a redirect rule
 [**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Get redirect rule details
 [**OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Update redirect rule details
 
 
 
+## OrganizationsOrganizationProjectsProjectRulesAuthPost
+
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx, organization, project, rule).Body(body).Execute()
+
+Create authentication rules
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+    organization := TODO // interface{} | Organization machine name
+    project := TODO // interface{} | Project machine name
+    rule := TODO // interface{} |
+    body := RuleAuthRequest(987) // RuleAuthRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost(context.Background(), organization, project, rule).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthPost`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**rule** | [**interface{}**](.md) |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **body** | **RuleAuthRequest** |  |
+
+### Return type
+
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete an authentication rule
 
@@ -53,7 +134,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: %v\n", resp)
 }
 ```
@@ -81,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -99,7 +180,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(ctx, organization, project, rule).Execute()
 
 Get authentication rule details
 
@@ -127,7 +208,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: %v\n", resp)
 }
 ```
@@ -155,7 +236,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -173,7 +254,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(ctx, organization, project, rule).OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update authentication rule details
 
@@ -193,16 +274,16 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     rule := TODO // interface{} |
-    organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest() // OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest |  (optional)
+    body := RuleAuthRequest(987) // RuleAuthRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(context.Background(), organization, project, rule).OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(context.Background(), organization, project, rule).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: %v\n", resp)
 }
 ```
@@ -227,11 +308,87 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest** | [**OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest**](OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest.md) |  |
+ **body** | **RuleAuthRequest** |  |
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch
+
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx, organization, project, rule).Body(body).Execute()
+
+Update custom response rule details
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+    organization := TODO // interface{} | Organization machine name
+    project := TODO // interface{} | Project machine name
+    rule := TODO // interface{} |
+    body := RuleCustomResponseRequest(987) // RuleCustomResponseRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(context.Background(), organization, project, rule).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**rule** | [**interface{}**](.md) |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **body** | **RuleCustomResponseRequest** |  |
+
+### Return type
+
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -249,7 +406,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a custom response rule
 
@@ -277,7 +434,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: %v\n", resp)
 }
 ```
@@ -305,7 +462,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -323,7 +480,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(ctx, organization, project, rule).Execute()
 
 Get custom repsonse rule details
 
@@ -351,7 +508,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: %v\n", resp)
 }
 ```
@@ -379,7 +536,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -397,7 +554,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(ctx, organization, project, rule).OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update custom response rule details
 
@@ -417,16 +574,16 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     rule := TODO // interface{} |
-    organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest() // OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest |  (optional)
+    body := RuleCustomResponseRequest(987) // RuleCustomResponseRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(context.Background(), organization, project, rule).OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(context.Background(), organization, project, rule).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: %v\n", resp)
 }
 ```
@@ -451,11 +608,11 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest** | [**OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest**](OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest.md) |  |
+ **body** | **RuleCustomResponseRequest** |  |
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -542,9 +699,85 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## OrganizationsOrganizationProjectsProjectRulesHeaderPatch
+
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx, organization, project, rule).Body(body).Execute()
+
+Create header rules
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+    organization := TODO // interface{} | Organization machine name
+    project := TODO // interface{} | Project machine name
+    rule := TODO // interface{} |
+    body := RuleHeaderRequest(987) // RuleHeaderRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch(context.Background(), organization, project, rule).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**rule** | [**interface{}**](.md) |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **body** | **RuleHeaderRequest** |  |
+
+### Return type
+
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a header rule
 
@@ -572,7 +805,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete`: %v\n", resp)
 }
 ```
@@ -600,7 +833,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -618,7 +851,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet(ctx, organization, project, rule).Execute()
 
 Get header rule details
 
@@ -646,7 +879,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet`: %v\n", resp)
 }
 ```
@@ -674,7 +907,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -692,7 +925,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(ctx, organization, project, rule).OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update header rule details
 
@@ -712,16 +945,16 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     rule := TODO // interface{} |
-    organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest() // OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest |  (optional)
+    body := RuleHeaderRequest(987) // RuleHeaderRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(context.Background(), organization, project, rule).OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest(organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(context.Background(), organization, project, rule).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch`: %v\n", resp)
 }
 ```
@@ -746,11 +979,87 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectRulesAuthRulePatchRequest** | [**OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest**](OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest.md) |  |
+ **body** | **RuleHeaderRequest** |  |
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrganizationsOrganizationProjectsProjectRulesProxyPost
+
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx, organization, project, rule).Body(body).Execute()
+
+Update proxy rule details
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+    organization := TODO // interface{} | Organization machine name
+    project := TODO // interface{} | Project machine name
+    rule := TODO // interface{} |
+    body := RuleProxyRequest(987) // RuleProxyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost(context.Background(), organization, project, rule).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyPost`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**rule** | [**interface{}**](.md) |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **body** | **RuleProxyRequest** |  |
+
+### Return type
+
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -768,7 +1077,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a proxy rule
 
@@ -796,7 +1105,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: %v\n", resp)
 }
 ```
@@ -824,7 +1133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -842,7 +1151,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(ctx, organization, project, rule).Execute()
 
 Get proxy rule details
 
@@ -870,7 +1179,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: %v\n", resp)
 }
 ```
@@ -898,7 +1207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -916,7 +1225,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(ctx, organization, project, rule).OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest(organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(ctx, organization, project, rule).Body(body).Execute()
 
 Update proxy rule details
 
@@ -936,16 +1245,16 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     rule := TODO // interface{} |
-    organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest() // OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest |  (optional)
+    body := RuleProxyRequest(987) // RuleProxyRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(context.Background(), organization, project, rule).OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest(organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(context.Background(), organization, project, rule).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: %v\n", resp)
 }
 ```
@@ -970,11 +1279,87 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectRulesProxyRulePatchRequest** | [**OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest**](OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest.md) |  |
+ **body** | **RuleProxyRequest** |  |
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrganizationsOrganizationProjectsProjectRulesRedirectPost
+
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+
+Create a new redirect rule
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+    organization := TODO // interface{} | Organization machine name
+    project := TODO // interface{} | Project machine name
+    rule := TODO // interface{} |
+    ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectPost`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**rule** | [**interface{}**](.md) |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
+
+### Return type
+
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -992,7 +1377,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(ctx, organization, project, rule).Execute()
 
 Delete a redirect rule
 
@@ -1020,7 +1405,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: %v\n", resp)
 }
 ```
@@ -1048,7 +1433,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -1066,7 +1451,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(ctx, organization, project, rule).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(ctx, organization, project, rule).Execute()
 
 Get redirect rule details
 
@@ -1094,7 +1479,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: %v\n", resp)
 }
 ```
@@ -1122,7 +1507,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 
@@ -1140,7 +1525,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch
 
-> OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(ctx, organization, project, rule).OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest(organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 Update redirect rule details
 
@@ -1160,16 +1545,16 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     rule := TODO // interface{} |
-    organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest() // OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest |  (optional)
+    ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(context.Background(), organization, project, rule).OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest(organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response
+    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response
     fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: %v\n", resp)
 }
 ```
@@ -1194,11 +1579,11 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest** | [**OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest**](OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest.md) |  |
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
+[**OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response**](OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
 
 ### Authorization
 

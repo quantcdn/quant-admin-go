@@ -290,11 +290,11 @@ type ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest struct
 	organization interface{}
 	project interface{}
 	domain interface{}
-	organizationsOrganizationProjectsProjectCrawlersPostRequest *OrganizationsOrganizationProjectsProjectCrawlersPostRequest
+	domainRequest *DomainRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest) OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest OrganizationsOrganizationProjectsProjectCrawlersPostRequest) ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest {
-	r.organizationsOrganizationProjectsProjectCrawlersPostRequest = &organizationsOrganizationProjectsProjectCrawlersPostRequest
+func (r ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest) DomainRequest(domainRequest DomainRequest) ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest {
+	r.domainRequest = &domainRequest
 	return r
 }
 
@@ -363,7 +363,7 @@ func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomai
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectCrawlersPostRequest
+	localVarPostBody = r.domainRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -553,11 +553,11 @@ type ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest struct {
 	ApiService *DomainsAPIService
 	organization interface{}
 	project interface{}
-	organizationsOrganizationProjectsProjectCrawlersPostRequest *OrganizationsOrganizationProjectsProjectCrawlersPostRequest
+	domainRequest *DomainRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest) OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest OrganizationsOrganizationProjectsProjectCrawlersPostRequest) ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest {
-	r.organizationsOrganizationProjectsProjectCrawlersPostRequest = &organizationsOrganizationProjectsProjectCrawlersPostRequest
+func (r ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest) DomainRequest(domainRequest DomainRequest) ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest {
+	r.domainRequest = &domainRequest
 	return r
 }
 
@@ -623,7 +623,7 @@ func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsPostE
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsProjectCrawlersPostRequest
+	localVarPostBody = r.domainRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

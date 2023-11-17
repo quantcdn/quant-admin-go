@@ -96,19 +96,24 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**OrganizationsOrganizationProjectsProjectDelete**](docs/ProjectsAPI.md#organizationsorganizationprojectsprojectdelete) | **Delete** /organizations/{organization}/projects/{project} | Delete a project
 *ProjectsAPI* | [**OrganizationsOrganizationProjectsProjectGet**](docs/ProjectsAPI.md#organizationsorganizationprojectsprojectget) | **Get** /organizations/{organization}/projects/{project} | Get project details
 *ProjectsAPI* | [**OrganizationsOrganizationProjectsProjectPatch**](docs/ProjectsAPI.md#organizationsorganizationprojectsprojectpatch) | **Patch** /organizations/{organization}/projects/{project} | Update project details
+*RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesAuthPost**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesauthpost) | **Post** /organizations/{organization}/projects/{project}/rules/auth | Create authentication rules
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesauthruledelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesAuthRuleGet**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesauthruleget) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Get authentication rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesAuthRulePatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesauthrulepatch) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Update authentication rule details
+*RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulescustomresponsepatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response | Update custom response rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulescustomresponseruledelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Delete a custom response rule
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulescustomresponseruleget) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Get custom repsonse rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulescustomresponserulepatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Update custom response rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesGet**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesget) | **Get** /organizations/{organization}/projects/{project}/rules | Get rules for a project
+*RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesHeaderPatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesheaderpatch) | **Patch** /organizations/{organization}/projects/{project}/rules/header | Create header rules
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesheaderruledelete) | **Delete** /organizations/{organization}/projects/{project}/rules/header/{rule} | Delete a header rule
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesheaderruleget) | **Get** /organizations/{organization}/projects/{project}/rules/header/{rule} | Get header rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesheaderrulepatch) | **Patch** /organizations/{organization}/projects/{project}/rules/header/{rule} | Update header rule details
+*RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesProxyPost**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesproxypost) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | Update proxy rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesproxyruledelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Delete a proxy rule
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesProxyRuleGet**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesproxyruleget) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Get proxy rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesProxyRulePatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesproxyrulepatch) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Update proxy rule details
+*RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesRedirectPost**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesredirectpost) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | Create a new redirect rule
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesredirectruledelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Delete a redirect rule
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesredirectruleget) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Get redirect rule details
 *RulesAPI* | [**OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch**](docs/RulesAPI.md#organizationsorganizationprojectsprojectrulesredirectrulepatch) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Update redirect rule details
@@ -117,30 +122,28 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Crawler](docs/Crawler.md)
+ - [CrawlerRequest](docs/CrawlerRequest.md)
  - [Domain](docs/Domain.md)
+ - [DomainRequest](docs/DomainRequest.md)
  - [Error](docs/Error.md)
  - [Organization](docs/Organization.md)
  - [OrganizationsGet200Response](docs/OrganizationsGet200Response.md)
  - [OrganizationsGet200ResponseData](docs/OrganizationsGet200ResponseData.md)
  - [OrganizationsOrganizationProjectsGet200Response](docs/OrganizationsOrganizationProjectsGet200Response.md)
  - [OrganizationsOrganizationProjectsGet200ResponseData](docs/OrganizationsOrganizationProjectsGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsPostRequest](docs/OrganizationsOrganizationProjectsPostRequest.md)
  - [OrganizationsOrganizationProjectsProjectCrawlersGet200Response](docs/OrganizationsOrganizationProjectsProjectCrawlersGet200Response.md)
  - [OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsProjectCrawlersPostRequest](docs/OrganizationsOrganizationProjectsProjectCrawlersPostRequest.md)
  - [OrganizationsOrganizationProjectsProjectDomainsGet200Response](docs/OrganizationsOrganizationProjectsProjectDomainsGet200Response.md)
  - [OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectDomainsGet200ResponseData.md)
  - [OrganizationsOrganizationProjectsProjectGet200Response](docs/OrganizationsOrganizationProjectsProjectGet200Response.md)
  - [OrganizationsOrganizationProjectsProjectGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest](docs/OrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest.md)
  - [OrganizationsOrganizationProjectsProjectRulesGet200Response](docs/OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
  - [OrganizationsOrganizationProjectsProjectRulesGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectRulesGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest](docs/OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest.md)
- - [OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequestWafConfig](docs/OrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequestWafConfig.md)
- - [OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response](docs/OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200Response.md)
- - [OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200ResponseData](docs/OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet200ResponseData.md)
- - [OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest](docs/OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest.md)
+ - [OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response](docs/OrganizationsOrganizationProjectsProjectRulesRedirectPost200Response.md)
+ - [OrganizationsOrganizationProjectsProjectRulesRedirectPost200ResponseData](docs/OrganizationsOrganizationProjectsProjectRulesRedirectPost200ResponseData.md)
  - [Project](docs/Project.md)
+ - [ProjectRequest](docs/ProjectRequest.md)
+ - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
 
 
 ## Documentation For Authorization

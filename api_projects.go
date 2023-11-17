@@ -150,11 +150,11 @@ type ApiOrganizationsOrganizationProjectsPostRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
 	organization interface{}
-	organizationsOrganizationProjectsPostRequest *OrganizationsOrganizationProjectsPostRequest
+	projectRequest *ProjectRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsPostRequest) OrganizationsOrganizationProjectsPostRequest(organizationsOrganizationProjectsPostRequest OrganizationsOrganizationProjectsPostRequest) ApiOrganizationsOrganizationProjectsPostRequest {
-	r.organizationsOrganizationProjectsPostRequest = &organizationsOrganizationProjectsPostRequest
+func (r ApiOrganizationsOrganizationProjectsPostRequest) ProjectRequest(projectRequest ProjectRequest) ApiOrganizationsOrganizationProjectsPostRequest {
+	r.projectRequest = &projectRequest
 	return r
 }
 
@@ -217,7 +217,7 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsPostExecute(r ApiO
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsPostRequest
+	localVarPostBody = r.projectRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -533,11 +533,11 @@ type ApiOrganizationsOrganizationProjectsProjectPatchRequest struct {
 	ApiService *ProjectsAPIService
 	organization interface{}
 	project interface{}
-	organizationsOrganizationProjectsPostRequest *OrganizationsOrganizationProjectsPostRequest
+	projectRequest *ProjectRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) OrganizationsOrganizationProjectsPostRequest(organizationsOrganizationProjectsPostRequest OrganizationsOrganizationProjectsPostRequest) ApiOrganizationsOrganizationProjectsProjectPatchRequest {
-	r.organizationsOrganizationProjectsPostRequest = &organizationsOrganizationProjectsPostRequest
+func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) ProjectRequest(projectRequest ProjectRequest) ApiOrganizationsOrganizationProjectsProjectPatchRequest {
+	r.projectRequest = &projectRequest
 	return r
 }
 
@@ -603,7 +603,7 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatchExecut
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.organizationsOrganizationProjectsPostRequest
+	localVarPostBody = r.projectRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

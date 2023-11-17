@@ -162,7 +162,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectDomainsDomainPatch
 
-> OrganizationsOrganizationProjectsProjectDomainsGet200Response OrganizationsOrganizationProjectsProjectDomainsDomainPatch(ctx, organization, project, domain).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+> OrganizationsOrganizationProjectsProjectDomainsGet200Response OrganizationsOrganizationProjectsProjectDomainsDomainPatch(ctx, organization, project, domain).DomainRequest(domainRequest).Execute()
 
 Update domain details
 
@@ -182,11 +182,11 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     domain := TODO // interface{} |
-    organizationsOrganizationProjectsProjectCrawlersPostRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectCrawlersPostRequest() // OrganizationsOrganizationProjectsProjectCrawlersPostRequest |  (optional)
+    domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsDomainPatch(context.Background(), organization, project, domain).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+    resp, r, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsDomainPatch(context.Background(), organization, project, domain).DomainRequest(domainRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsDomainPatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectCrawlersPostRequest** | [**OrganizationsOrganizationProjectsProjectCrawlersPostRequest**](OrganizationsOrganizationProjectsProjectCrawlersPostRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
 
 ### Return type
 
@@ -309,7 +309,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectDomainsPost
 
-> OrganizationsOrganizationProjectsProjectDomainsGet200Response OrganizationsOrganizationProjectsProjectDomainsPost(ctx, organization, project).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+> OrganizationsOrganizationProjectsProjectDomainsGet200Response OrganizationsOrganizationProjectsProjectDomainsPost(ctx, organization, project).DomainRequest(domainRequest).Execute()
 
 Create a new domain for a project
 
@@ -328,11 +328,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    organizationsOrganizationProjectsProjectCrawlersPostRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectCrawlersPostRequest() // OrganizationsOrganizationProjectsProjectCrawlersPostRequest |  (optional)
+    domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsPost(context.Background(), organization, project).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+    resp, r, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsPost(context.Background(), organization, project).DomainRequest(domainRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **organizationsOrganizationProjectsProjectCrawlersPostRequest** | [**OrganizationsOrganizationProjectsProjectCrawlersPostRequest**](OrganizationsOrganizationProjectsProjectCrawlersPostRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
 
 ### Return type
 

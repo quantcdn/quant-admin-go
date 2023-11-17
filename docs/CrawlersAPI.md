@@ -162,7 +162,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch
 
-> OrganizationsOrganizationProjectsProjectCrawlersGet200Response OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch(ctx, organization, project, crawler).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+> OrganizationsOrganizationProjectsProjectCrawlersGet200Response OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch(ctx, organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
 
 Update crawler details
 
@@ -182,11 +182,11 @@ func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
     crawler := TODO // interface{} | Crawler uuid
-    organizationsOrganizationProjectsProjectCrawlersPostRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectCrawlersPostRequest() // OrganizationsOrganizationProjectsProjectCrawlersPostRequest |  (optional)
+    crawlerRequest := *openapiclient.NewCrawlerRequest() // CrawlerRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch(context.Background(), organization, project, crawler).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+    resp, r, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch(context.Background(), organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 
 
- **organizationsOrganizationProjectsProjectCrawlersPostRequest** | [**OrganizationsOrganizationProjectsProjectCrawlersPostRequest**](OrganizationsOrganizationProjectsProjectCrawlersPostRequest.md) |  |
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 
@@ -309,7 +309,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectCrawlersPost
 
-> OrganizationsOrganizationProjectsProjectCrawlersGet200Response OrganizationsOrganizationProjectsProjectCrawlersPost(ctx, organization, project).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+> OrganizationsOrganizationProjectsProjectCrawlersGet200Response OrganizationsOrganizationProjectsProjectCrawlersPost(ctx, organization, project).CrawlerRequest(crawlerRequest).Execute()
 
 Create a new crawler for a project
 
@@ -328,11 +328,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    organizationsOrganizationProjectsProjectCrawlersPostRequest := *openapiclient.NewOrganizationsOrganizationProjectsProjectCrawlersPostRequest() // OrganizationsOrganizationProjectsProjectCrawlersPostRequest |  (optional)
+    crawlerRequest := *openapiclient.NewCrawlerRequest() // CrawlerRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersPost(context.Background(), organization, project).OrganizationsOrganizationProjectsProjectCrawlersPostRequest(organizationsOrganizationProjectsProjectCrawlersPostRequest).Execute()
+    resp, r, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersPost(context.Background(), organization, project).CrawlerRequest(crawlerRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **organizationsOrganizationProjectsProjectCrawlersPostRequest** | [**OrganizationsOrganizationProjectsProjectCrawlersPostRequest**](OrganizationsOrganizationProjectsProjectCrawlersPostRequest.md) |  |
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 

@@ -82,7 +82,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsPost
 
-> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsPost(ctx, organization).OrganizationsOrganizationProjectsPostRequest(organizationsOrganizationProjectsPostRequest).Execute()
+> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsPost(ctx, organization).ProjectRequest(projectRequest).Execute()
 
 Create a new project for an organization
 
@@ -100,11 +100,11 @@ import (
 
 func main() {
     organization := TODO // interface{} | Organization machine name
-    organizationsOrganizationProjectsPostRequest := *openapiclient.NewOrganizationsOrganizationProjectsPostRequest() // OrganizationsOrganizationProjectsPostRequest |  (optional)
+    projectRequest := *openapiclient.NewProjectRequest() // ProjectRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsPost(context.Background(), organization).OrganizationsOrganizationProjectsPostRequest(organizationsOrganizationProjectsPostRequest).Execute()
+    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsPost(context.Background(), organization).ProjectRequest(projectRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiOrganizationsOrganizationP
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **organizationsOrganizationProjectsPostRequest** | [**OrganizationsOrganizationProjectsPostRequest**](OrganizationsOrganizationProjectsPostRequest.md) |  |
+ **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  |
 
 ### Return type
 
@@ -294,7 +294,7 @@ No authorization required
 
 ## OrganizationsOrganizationProjectsProjectPatch
 
-> OrganizationsOrganizationProjectsProjectGet200Response OrganizationsOrganizationProjectsProjectPatch(ctx, organization, project).OrganizationsOrganizationProjectsPostRequest(organizationsOrganizationProjectsPostRequest).Execute()
+> OrganizationsOrganizationProjectsProjectGet200Response OrganizationsOrganizationProjectsProjectPatch(ctx, organization, project).ProjectRequest(projectRequest).Execute()
 
 Update project details
 
@@ -313,11 +313,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    organizationsOrganizationProjectsPostRequest := *openapiclient.NewOrganizationsOrganizationProjectsPostRequest() // OrganizationsOrganizationProjectsPostRequest |  (optional)
+    projectRequest := *openapiclient.NewProjectRequest() // ProjectRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch(context.Background(), organization, project).OrganizationsOrganizationProjectsPostRequest(organizationsOrganizationProjectsPostRequest).Execute()
+    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch(context.Background(), organization, project).ProjectRequest(projectRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **organizationsOrganizationProjectsPostRequest** | [**OrganizationsOrganizationProjectsPostRequest**](OrganizationsOrganizationProjectsPostRequest.md) |  |
+ **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  |
 
 ### Return type
 

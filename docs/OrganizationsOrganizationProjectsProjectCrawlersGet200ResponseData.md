@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Organizations** | Pointer to [**[]Crawler**](Crawler.md) |  | [optional] 
+**Crawlers** | Pointer to [**[]Crawler**](Crawler.md) |  | [optional] 
 
 ## Methods
 
@@ -25,30 +25,30 @@ NewOrganizationsOrganizationProjectsProjectCrawlersGet200ResponseDataWithDefault
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOrganizations
+### GetCrawlers
 
-`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetOrganizations() []Crawler`
+`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetCrawlers() []Crawler`
 
-GetOrganizations returns the Organizations field if non-nil, zero value otherwise.
+GetCrawlers returns the Crawlers field if non-nil, zero value otherwise.
 
-### GetOrganizationsOk
+### GetCrawlersOk
 
-`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetOrganizationsOk() (*[]Crawler, bool)`
+`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) GetCrawlersOk() (*[]Crawler, bool)`
 
-GetOrganizationsOk returns a tuple with the Organizations field if it's non-nil, zero value otherwise
+GetCrawlersOk returns a tuple with the Crawlers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganizations
+### SetCrawlers
 
-`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) SetOrganizations(v []Crawler)`
+`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) SetCrawlers(v []Crawler)`
 
-SetOrganizations sets Organizations field to given value.
+SetCrawlers sets Crawlers field to given value.
 
-### HasOrganizations
+### HasCrawlers
 
-`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) HasOrganizations() bool`
+`func (o *OrganizationsOrganizationProjectsProjectCrawlersGet200ResponseData) HasCrawlers() bool`
 
-HasOrganizations returns a boolean if a field has been set.
+HasCrawlers returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
