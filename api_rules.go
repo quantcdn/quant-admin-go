@@ -29,7 +29,6 @@ type ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest struct {
 	ApiService *RulesAPIService
 	organization interface{}
 	project interface{}
-	rule interface{}
 	ruleAuthRequest *RuleAuthRequest
 }
 
@@ -48,16 +47,14 @@ OrganizationsOrganizationProjectsProjectRulesAuthPost Create authentication rule
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param rule
  @return ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
 	return ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		rule: rule,
 	}
 }
 
@@ -79,7 +76,6 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPostE
 	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/auth"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -565,7 +561,6 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest 
 	ApiService *RulesAPIService
 	organization interface{}
 	project interface{}
-	rule interface{}
 	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
@@ -584,16 +579,14 @@ OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch Update custom r
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param rule
  @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
 	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		rule: rule,
 	}
 }
 
@@ -615,7 +608,6 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1227,7 +1219,6 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct {
 	ApiService *RulesAPIService
 	organization interface{}
 	project interface{}
-	rule interface{}
 	ruleHeaderRequest *RuleHeaderRequest
 }
 
@@ -1246,16 +1237,14 @@ OrganizationsOrganizationProjectsProjectRulesHeaderPatch Create header rules
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param rule
  @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
 	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		rule: rule,
 	}
 }
 
@@ -1277,7 +1266,6 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPat
 	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/header"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1763,7 +1751,6 @@ type ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest struct {
 	ApiService *RulesAPIService
 	organization interface{}
 	project interface{}
-	rule interface{}
 	ruleProxyRequest *RuleProxyRequest
 }
 
@@ -1782,16 +1769,14 @@ OrganizationsOrganizationProjectsProjectRulesProxyPost Update proxy rule details
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param rule
  @return ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
 	return ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		rule: rule,
 	}
 }
 
@@ -1813,7 +1798,6 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPost
 	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -2299,7 +2283,6 @@ type ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest struct 
 	ApiService *RulesAPIService
 	organization interface{}
 	project interface{}
-	rule interface{}
 	ruleRedirectRequest *RuleRedirectRequest
 }
 
@@ -2318,16 +2301,14 @@ OrganizationsOrganizationProjectsProjectRulesRedirectPost Create a new redirect 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param rule
  @return ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest {
 	return ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		rule: rule,
 	}
 }
 
@@ -2349,7 +2330,6 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectP
 	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

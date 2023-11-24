@@ -1,7 +1,7 @@
 /*
 Quant administration API
 
-The Quant administration API provides programmatic access to manage projects within your available organizations.
+The Quant administration API provides programmatic access to manage projects within your available organizations. 
 
 API version: 2.0.0
 Contact: apiteam@quantcdn.io
@@ -94,7 +94,7 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "http://localhost:8001/api/v2",
+				URL: "https://localhost:8001/api/v2",
 				Description: "No description provided",
 			},
 		},

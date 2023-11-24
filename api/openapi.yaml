@@ -8,7 +8,7 @@ info:
   title: Quant administration API
   version: 2.0.0
 servers:
-- url: http://localhost:8001/api/v2
+- url: https://localhost:8001/api/v2
 security:
 - BearerAuth: []
 paths:
@@ -524,7 +524,6 @@ paths:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
       requestBody:
         content:
           application/json:
@@ -644,7 +643,6 @@ paths:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
       requestBody:
         content:
           application/json:
@@ -764,7 +762,6 @@ paths:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
       requestBody:
         content:
           application/json:
@@ -884,7 +881,6 @@ paths:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
       requestBody:
         content:
           application/json:
@@ -1004,7 +1000,6 @@ paths:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
       requestBody:
         content:
           application/json:

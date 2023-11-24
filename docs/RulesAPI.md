@@ -1,6 +1,6 @@
 # \RulesAPI
 
-All URIs are relative to *http://localhost:8001/api/v2*
+All URIs are relative to *https://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,7 +30,7 @@ Method | HTTP request | Description
 
 ## OrganizationsOrganizationProjectsProjectRulesAuthPost
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx, organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx, organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
 
 Create authentication rules
 
@@ -49,12 +49,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
     ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost(context.Background(), organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost(context.Background(), organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -72,7 +71,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | [**interface{}**](.md) | Organization machine name |
 **project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
 
 ### Other Parameters
 
@@ -81,7 +79,6 @@ Other parameters are passed through a pointer to a apiOrganizationsOrganizationP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  |
@@ -330,7 +327,7 @@ Name | Type | Description  | Notes
 
 ## OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx, organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx, organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 
 Update custom response rule details
 
@@ -349,12 +346,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
     ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(context.Background(), organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(context.Background(), organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -372,7 +368,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | [**interface{}**](.md) | Organization machine name |
 **project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
 
 ### Other Parameters
 
@@ -381,7 +376,6 @@ Other parameters are passed through a pointer to a apiOrganizationsOrganizationP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
@@ -701,7 +695,7 @@ Name | Type | Description  | Notes
 
 ## OrganizationsOrganizationProjectsProjectRulesHeaderPatch
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx, organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
 
 Create header rules
 
@@ -720,12 +714,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
     ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch(context.Background(), organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch(context.Background(), organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -743,7 +736,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | [**interface{}**](.md) | Organization machine name |
 **project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
 
 ### Other Parameters
 
@@ -752,7 +744,6 @@ Other parameters are passed through a pointer to a apiOrganizationsOrganizationP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
@@ -1001,7 +992,7 @@ Name | Type | Description  | Notes
 
 ## OrganizationsOrganizationProjectsProjectRulesProxyPost
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx, organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
 
 Update proxy rule details
 
@@ -1020,12 +1011,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
     ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost(context.Background(), organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost(context.Background(), organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1043,7 +1033,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | [**interface{}**](.md) | Organization machine name |
 **project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
 
 ### Other Parameters
 
@@ -1052,7 +1041,6 @@ Other parameters are passed through a pointer to a apiOrganizationsOrganizationP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
@@ -1301,7 +1289,7 @@ Name | Type | Description  | Notes
 
 ## OrganizationsOrganizationProjectsProjectRulesRedirectPost
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx, organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 Create a new redirect rule
 
@@ -1320,12 +1308,11 @@ import (
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
     ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost(context.Background(), organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1343,7 +1330,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | [**interface{}**](.md) | Organization machine name |
 **project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
 
 ### Other Parameters
 
@@ -1352,7 +1338,6 @@ Other parameters are passed through a pointer to a apiOrganizationsOrganizationP
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
