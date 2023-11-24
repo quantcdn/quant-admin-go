@@ -21,6 +21,29 @@ var _ MappedNullable = &RuleCustomResponseRequest{}
 // RuleCustomResponseRequest struct for RuleCustomResponseRequest
 type RuleCustomResponseRequest struct {
 	Domain *string `json:"domain,omitempty"`
+	Country *string `json:"country,omitempty"`
+	CountryIs []string `json:"country_is,omitempty"`
+	CountryIsNot []string `json:"country_is_not,omitempty"`
+	Method *string `json:"method,omitempty"`
+	MethodIs []string `json:"method_is,omitempty"`
+	MethodIsNot []string `json:"method_is_not,omitempty"`
+	Ip *string `json:"ip,omitempty"`
+	IpIs []string `json:"ip_is,omitempty"`
+	IpIsNot []string `json:"ip_is_not,omitempty"`
+	OnlyWithCookie *string `json:"only_with_cookie,omitempty"`
+	Url *string `json:"url,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Disabled *bool `json:"disabled,omitempty"`
+	To *string `json:"to,omitempty"`
+	Host *string `json:"host,omitempty"`
+	AuthUser *string `json:"auth_user,omitempty"`
+	AuthPass *string `json:"auth_pass,omitempty"`
+	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
+	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
+	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
+	StripHeaders []string `json:"strip_headers,omitempty"`
+	CustomResponseStatusCode *int32 `json:"custom_response_status_code,omitempty"`
+	CustomResponseBody *string `json:"custom_response_body,omitempty"`
 }
 
 // NewRuleCustomResponseRequest instantiates a new RuleCustomResponseRequest object
@@ -72,6 +95,742 @@ func (o *RuleCustomResponseRequest) SetDomain(v string) {
 	o.Domain = &v
 }
 
+// GetCountry returns the Country field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCountry() string {
+	if o == nil || IsNil(o.Country) {
+		var ret string
+		return ret
+	}
+	return *o.Country
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCountryOk() (*string, bool) {
+	if o == nil || IsNil(o.Country) {
+		return nil, false
+	}
+	return o.Country, true
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCountry() bool {
+	if o != nil && !IsNil(o.Country) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given string and assigns it to the Country field.
+func (o *RuleCustomResponseRequest) SetCountry(v string) {
+	o.Country = &v
+}
+
+// GetCountryIs returns the CountryIs field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCountryIs() []string {
+	if o == nil || IsNil(o.CountryIs) {
+		var ret []string
+		return ret
+	}
+	return o.CountryIs
+}
+
+// GetCountryIsOk returns a tuple with the CountryIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCountryIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.CountryIs) {
+		return nil, false
+	}
+	return o.CountryIs, true
+}
+
+// HasCountryIs returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCountryIs() bool {
+	if o != nil && !IsNil(o.CountryIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryIs gets a reference to the given []string and assigns it to the CountryIs field.
+func (o *RuleCustomResponseRequest) SetCountryIs(v []string) {
+	o.CountryIs = v
+}
+
+// GetCountryIsNot returns the CountryIsNot field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCountryIsNot() []string {
+	if o == nil || IsNil(o.CountryIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.CountryIsNot
+}
+
+// GetCountryIsNotOk returns a tuple with the CountryIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCountryIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.CountryIsNot) {
+		return nil, false
+	}
+	return o.CountryIsNot, true
+}
+
+// HasCountryIsNot returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCountryIsNot() bool {
+	if o != nil && !IsNil(o.CountryIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryIsNot gets a reference to the given []string and assigns it to the CountryIsNot field.
+func (o *RuleCustomResponseRequest) SetCountryIsNot(v []string) {
+	o.CountryIsNot = v
+}
+
+// GetMethod returns the Method field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetMethod() string {
+	if o == nil || IsNil(o.Method) {
+		var ret string
+		return ret
+	}
+	return *o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetMethodOk() (*string, bool) {
+	if o == nil || IsNil(o.Method) {
+		return nil, false
+	}
+	return o.Method, true
+}
+
+// HasMethod returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasMethod() bool {
+	if o != nil && !IsNil(o.Method) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *RuleCustomResponseRequest) SetMethod(v string) {
+	o.Method = &v
+}
+
+// GetMethodIs returns the MethodIs field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetMethodIs() []string {
+	if o == nil || IsNil(o.MethodIs) {
+		var ret []string
+		return ret
+	}
+	return o.MethodIs
+}
+
+// GetMethodIsOk returns a tuple with the MethodIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetMethodIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.MethodIs) {
+		return nil, false
+	}
+	return o.MethodIs, true
+}
+
+// HasMethodIs returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasMethodIs() bool {
+	if o != nil && !IsNil(o.MethodIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethodIs gets a reference to the given []string and assigns it to the MethodIs field.
+func (o *RuleCustomResponseRequest) SetMethodIs(v []string) {
+	o.MethodIs = v
+}
+
+// GetMethodIsNot returns the MethodIsNot field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetMethodIsNot() []string {
+	if o == nil || IsNil(o.MethodIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.MethodIsNot
+}
+
+// GetMethodIsNotOk returns a tuple with the MethodIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetMethodIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.MethodIsNot) {
+		return nil, false
+	}
+	return o.MethodIsNot, true
+}
+
+// HasMethodIsNot returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasMethodIsNot() bool {
+	if o != nil && !IsNil(o.MethodIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethodIsNot gets a reference to the given []string and assigns it to the MethodIsNot field.
+func (o *RuleCustomResponseRequest) SetMethodIsNot(v []string) {
+	o.MethodIsNot = v
+}
+
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *RuleCustomResponseRequest) SetIp(v string) {
+	o.Ip = &v
+}
+
+// GetIpIs returns the IpIs field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetIpIs() []string {
+	if o == nil || IsNil(o.IpIs) {
+		var ret []string
+		return ret
+	}
+	return o.IpIs
+}
+
+// GetIpIsOk returns a tuple with the IpIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetIpIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.IpIs) {
+		return nil, false
+	}
+	return o.IpIs, true
+}
+
+// HasIpIs returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasIpIs() bool {
+	if o != nil && !IsNil(o.IpIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpIs gets a reference to the given []string and assigns it to the IpIs field.
+func (o *RuleCustomResponseRequest) SetIpIs(v []string) {
+	o.IpIs = v
+}
+
+// GetIpIsNot returns the IpIsNot field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetIpIsNot() []string {
+	if o == nil || IsNil(o.IpIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.IpIsNot
+}
+
+// GetIpIsNotOk returns a tuple with the IpIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetIpIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.IpIsNot) {
+		return nil, false
+	}
+	return o.IpIsNot, true
+}
+
+// HasIpIsNot returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasIpIsNot() bool {
+	if o != nil && !IsNil(o.IpIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpIsNot gets a reference to the given []string and assigns it to the IpIsNot field.
+func (o *RuleCustomResponseRequest) SetIpIsNot(v []string) {
+	o.IpIsNot = v
+}
+
+// GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetOnlyWithCookie() string {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		var ret string
+		return ret
+	}
+	return *o.OnlyWithCookie
+}
+
+// GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetOnlyWithCookieOk() (*string, bool) {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		return nil, false
+	}
+	return o.OnlyWithCookie, true
+}
+
+// HasOnlyWithCookie returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasOnlyWithCookie() bool {
+	if o != nil && !IsNil(o.OnlyWithCookie) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnlyWithCookie gets a reference to the given string and assigns it to the OnlyWithCookie field.
+func (o *RuleCustomResponseRequest) SetOnlyWithCookie(v string) {
+	o.OnlyWithCookie = &v
+}
+
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
+		var ret string
+		return ret
+	}
+	return *o.Url
+}
+
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
+		return nil, false
+	}
+	return o.Url, true
+}
+
+// HasUrl returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *RuleCustomResponseRequest) SetUrl(v string) {
+	o.Url = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *RuleCustomResponseRequest) SetName(v string) {
+	o.Name = &v
+}
+
+// GetDisabled returns the Disabled field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetDisabled() bool {
+	if o == nil || IsNil(o.Disabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Disabled
+}
+
+// GetDisabledOk returns a tuple with the Disabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetDisabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Disabled) {
+		return nil, false
+	}
+	return o.Disabled, true
+}
+
+// HasDisabled returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasDisabled() bool {
+	if o != nil && !IsNil(o.Disabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
+func (o *RuleCustomResponseRequest) SetDisabled(v bool) {
+	o.Disabled = &v
+}
+
+// GetTo returns the To field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetTo() string {
+	if o == nil || IsNil(o.To) {
+		var ret string
+		return ret
+	}
+	return *o.To
+}
+
+// GetToOk returns a tuple with the To field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetToOk() (*string, bool) {
+	if o == nil || IsNil(o.To) {
+		return nil, false
+	}
+	return o.To, true
+}
+
+// HasTo returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasTo() bool {
+	if o != nil && !IsNil(o.To) {
+		return true
+	}
+
+	return false
+}
+
+// SetTo gets a reference to the given string and assigns it to the To field.
+func (o *RuleCustomResponseRequest) SetTo(v string) {
+	o.To = &v
+}
+
+// GetHost returns the Host field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetHost() string {
+	if o == nil || IsNil(o.Host) {
+		var ret string
+		return ret
+	}
+	return *o.Host
+}
+
+// GetHostOk returns a tuple with the Host field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetHostOk() (*string, bool) {
+	if o == nil || IsNil(o.Host) {
+		return nil, false
+	}
+	return o.Host, true
+}
+
+// HasHost returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasHost() bool {
+	if o != nil && !IsNil(o.Host) {
+		return true
+	}
+
+	return false
+}
+
+// SetHost gets a reference to the given string and assigns it to the Host field.
+func (o *RuleCustomResponseRequest) SetHost(v string) {
+	o.Host = &v
+}
+
+// GetAuthUser returns the AuthUser field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetAuthUser() string {
+	if o == nil || IsNil(o.AuthUser) {
+		var ret string
+		return ret
+	}
+	return *o.AuthUser
+}
+
+// GetAuthUserOk returns a tuple with the AuthUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetAuthUserOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthUser) {
+		return nil, false
+	}
+	return o.AuthUser, true
+}
+
+// HasAuthUser returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasAuthUser() bool {
+	if o != nil && !IsNil(o.AuthUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthUser gets a reference to the given string and assigns it to the AuthUser field.
+func (o *RuleCustomResponseRequest) SetAuthUser(v string) {
+	o.AuthUser = &v
+}
+
+// GetAuthPass returns the AuthPass field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetAuthPass() string {
+	if o == nil || IsNil(o.AuthPass) {
+		var ret string
+		return ret
+	}
+	return *o.AuthPass
+}
+
+// GetAuthPassOk returns a tuple with the AuthPass field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetAuthPassOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthPass) {
+		return nil, false
+	}
+	return o.AuthPass, true
+}
+
+// HasAuthPass returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasAuthPass() bool {
+	if o != nil && !IsNil(o.AuthPass) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthPass gets a reference to the given string and assigns it to the AuthPass field.
+func (o *RuleCustomResponseRequest) SetAuthPass(v string) {
+	o.AuthPass = &v
+}
+
+// GetDisableSslVerify returns the DisableSslVerify field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetDisableSslVerify() bool {
+	if o == nil || IsNil(o.DisableSslVerify) {
+		var ret bool
+		return ret
+	}
+	return *o.DisableSslVerify
+}
+
+// GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetDisableSslVerifyOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisableSslVerify) {
+		return nil, false
+	}
+	return o.DisableSslVerify, true
+}
+
+// HasDisableSslVerify returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasDisableSslVerify() bool {
+	if o != nil && !IsNil(o.DisableSslVerify) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableSslVerify gets a reference to the given bool and assigns it to the DisableSslVerify field.
+func (o *RuleCustomResponseRequest) SetDisableSslVerify(v bool) {
+	o.DisableSslVerify = &v
+}
+
+// GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCacheLifetime() int32 {
+	if o == nil || IsNil(o.CacheLifetime) {
+		var ret int32
+		return ret
+	}
+	return *o.CacheLifetime
+}
+
+// GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCacheLifetimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.CacheLifetime) {
+		return nil, false
+	}
+	return o.CacheLifetime, true
+}
+
+// HasCacheLifetime returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCacheLifetime() bool {
+	if o != nil && !IsNil(o.CacheLifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
+func (o *RuleCustomResponseRequest) SetCacheLifetime(v int32) {
+	o.CacheLifetime = &v
+}
+
+// GetOnlyProxy404 returns the OnlyProxy404 field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetOnlyProxy404() bool {
+	if o == nil || IsNil(o.OnlyProxy404) {
+		var ret bool
+		return ret
+	}
+	return *o.OnlyProxy404
+}
+
+// GetOnlyProxy404Ok returns a tuple with the OnlyProxy404 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetOnlyProxy404Ok() (*bool, bool) {
+	if o == nil || IsNil(o.OnlyProxy404) {
+		return nil, false
+	}
+	return o.OnlyProxy404, true
+}
+
+// HasOnlyProxy404 returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasOnlyProxy404() bool {
+	if o != nil && !IsNil(o.OnlyProxy404) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnlyProxy404 gets a reference to the given bool and assigns it to the OnlyProxy404 field.
+func (o *RuleCustomResponseRequest) SetOnlyProxy404(v bool) {
+	o.OnlyProxy404 = &v
+}
+
+// GetStripHeaders returns the StripHeaders field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetStripHeaders() []string {
+	if o == nil || IsNil(o.StripHeaders) {
+		var ret []string
+		return ret
+	}
+	return o.StripHeaders
+}
+
+// GetStripHeadersOk returns a tuple with the StripHeaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetStripHeadersOk() ([]string, bool) {
+	if o == nil || IsNil(o.StripHeaders) {
+		return nil, false
+	}
+	return o.StripHeaders, true
+}
+
+// HasStripHeaders returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasStripHeaders() bool {
+	if o != nil && !IsNil(o.StripHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetStripHeaders gets a reference to the given []string and assigns it to the StripHeaders field.
+func (o *RuleCustomResponseRequest) SetStripHeaders(v []string) {
+	o.StripHeaders = v
+}
+
+// GetCustomResponseStatusCode returns the CustomResponseStatusCode field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCustomResponseStatusCode() int32 {
+	if o == nil || IsNil(o.CustomResponseStatusCode) {
+		var ret int32
+		return ret
+	}
+	return *o.CustomResponseStatusCode
+}
+
+// GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCustomResponseStatusCodeOk() (*int32, bool) {
+	if o == nil || IsNil(o.CustomResponseStatusCode) {
+		return nil, false
+	}
+	return o.CustomResponseStatusCode, true
+}
+
+// HasCustomResponseStatusCode returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCustomResponseStatusCode() bool {
+	if o != nil && !IsNil(o.CustomResponseStatusCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomResponseStatusCode gets a reference to the given int32 and assigns it to the CustomResponseStatusCode field.
+func (o *RuleCustomResponseRequest) SetCustomResponseStatusCode(v int32) {
+	o.CustomResponseStatusCode = &v
+}
+
+// GetCustomResponseBody returns the CustomResponseBody field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCustomResponseBody() string {
+	if o == nil || IsNil(o.CustomResponseBody) {
+		var ret string
+		return ret
+	}
+	return *o.CustomResponseBody
+}
+
+// GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCustomResponseBodyOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomResponseBody) {
+		return nil, false
+	}
+	return o.CustomResponseBody, true
+}
+
+// HasCustomResponseBody returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCustomResponseBody() bool {
+	if o != nil && !IsNil(o.CustomResponseBody) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomResponseBody gets a reference to the given string and assigns it to the CustomResponseBody field.
+func (o *RuleCustomResponseRequest) SetCustomResponseBody(v string) {
+	o.CustomResponseBody = &v
+}
+
 func (o RuleCustomResponseRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -84,6 +843,75 @@ func (o RuleCustomResponseRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Domain) {
 		toSerialize["domain"] = o.Domain
+	}
+	if !IsNil(o.Country) {
+		toSerialize["country"] = o.Country
+	}
+	if !IsNil(o.CountryIs) {
+		toSerialize["country_is"] = o.CountryIs
+	}
+	if !IsNil(o.CountryIsNot) {
+		toSerialize["country_is_not"] = o.CountryIsNot
+	}
+	if !IsNil(o.Method) {
+		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.MethodIs) {
+		toSerialize["method_is"] = o.MethodIs
+	}
+	if !IsNil(o.MethodIsNot) {
+		toSerialize["method_is_not"] = o.MethodIsNot
+	}
+	if !IsNil(o.Ip) {
+		toSerialize["ip"] = o.Ip
+	}
+	if !IsNil(o.IpIs) {
+		toSerialize["ip_is"] = o.IpIs
+	}
+	if !IsNil(o.IpIsNot) {
+		toSerialize["ip_is_not"] = o.IpIsNot
+	}
+	if !IsNil(o.OnlyWithCookie) {
+		toSerialize["only_with_cookie"] = o.OnlyWithCookie
+	}
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Disabled) {
+		toSerialize["disabled"] = o.Disabled
+	}
+	if !IsNil(o.To) {
+		toSerialize["to"] = o.To
+	}
+	if !IsNil(o.Host) {
+		toSerialize["host"] = o.Host
+	}
+	if !IsNil(o.AuthUser) {
+		toSerialize["auth_user"] = o.AuthUser
+	}
+	if !IsNil(o.AuthPass) {
+		toSerialize["auth_pass"] = o.AuthPass
+	}
+	if !IsNil(o.DisableSslVerify) {
+		toSerialize["disable_ssl_verify"] = o.DisableSslVerify
+	}
+	if !IsNil(o.CacheLifetime) {
+		toSerialize["cache_lifetime"] = o.CacheLifetime
+	}
+	if !IsNil(o.OnlyProxy404) {
+		toSerialize["only_proxy_404"] = o.OnlyProxy404
+	}
+	if !IsNil(o.StripHeaders) {
+		toSerialize["strip_headers"] = o.StripHeaders
+	}
+	if !IsNil(o.CustomResponseStatusCode) {
+		toSerialize["custom_response_status_code"] = o.CustomResponseStatusCode
+	}
+	if !IsNil(o.CustomResponseBody) {
+		toSerialize["custom_response_body"] = o.CustomResponseBody
 	}
 	return toSerialize, nil
 }

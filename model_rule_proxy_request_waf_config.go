@@ -21,6 +21,16 @@ var _ MappedNullable = &RuleProxyRequestWafConfig{}
 // RuleProxyRequestWafConfig struct for RuleProxyRequestWafConfig
 type RuleProxyRequestWafConfig struct {
 	Mode *string `json:"mode,omitempty"`
+	ParanoiaLevel *int32 `json:"paranoia_level,omitempty"`
+	AllowRules []int32 `json:"allow_rules,omitempty"`
+	AllowIp []int32 `json:"allow_ip,omitempty"`
+	BlockIp []int32 `json:"block_ip,omitempty"`
+	BlockUa []string `json:"block_ua,omitempty"`
+	BlockReferer []string `json:"block_referer,omitempty"`
+	NotifySlack *string `json:"notify_slack,omitempty"`
+	NotifySlackHitsRpm *int32 `json:"notify_slack_hits_rpm,omitempty"`
+	NotifyEmail *string `json:"notify_email,omitempty"`
+	Httpbl *RuleProxyRequestWafConfigHttpbl `json:"httpbl,omitempty"`
 }
 
 // NewRuleProxyRequestWafConfig instantiates a new RuleProxyRequestWafConfig object
@@ -72,6 +82,326 @@ func (o *RuleProxyRequestWafConfig) SetMode(v string) {
 	o.Mode = &v
 }
 
+// GetParanoiaLevel returns the ParanoiaLevel field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetParanoiaLevel() int32 {
+	if o == nil || IsNil(o.ParanoiaLevel) {
+		var ret int32
+		return ret
+	}
+	return *o.ParanoiaLevel
+}
+
+// GetParanoiaLevelOk returns a tuple with the ParanoiaLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetParanoiaLevelOk() (*int32, bool) {
+	if o == nil || IsNil(o.ParanoiaLevel) {
+		return nil, false
+	}
+	return o.ParanoiaLevel, true
+}
+
+// HasParanoiaLevel returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasParanoiaLevel() bool {
+	if o != nil && !IsNil(o.ParanoiaLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetParanoiaLevel gets a reference to the given int32 and assigns it to the ParanoiaLevel field.
+func (o *RuleProxyRequestWafConfig) SetParanoiaLevel(v int32) {
+	o.ParanoiaLevel = &v
+}
+
+// GetAllowRules returns the AllowRules field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetAllowRules() []int32 {
+	if o == nil || IsNil(o.AllowRules) {
+		var ret []int32
+		return ret
+	}
+	return o.AllowRules
+}
+
+// GetAllowRulesOk returns a tuple with the AllowRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetAllowRulesOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AllowRules) {
+		return nil, false
+	}
+	return o.AllowRules, true
+}
+
+// HasAllowRules returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasAllowRules() bool {
+	if o != nil && !IsNil(o.AllowRules) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowRules gets a reference to the given []int32 and assigns it to the AllowRules field.
+func (o *RuleProxyRequestWafConfig) SetAllowRules(v []int32) {
+	o.AllowRules = v
+}
+
+// GetAllowIp returns the AllowIp field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetAllowIp() []int32 {
+	if o == nil || IsNil(o.AllowIp) {
+		var ret []int32
+		return ret
+	}
+	return o.AllowIp
+}
+
+// GetAllowIpOk returns a tuple with the AllowIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetAllowIpOk() ([]int32, bool) {
+	if o == nil || IsNil(o.AllowIp) {
+		return nil, false
+	}
+	return o.AllowIp, true
+}
+
+// HasAllowIp returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasAllowIp() bool {
+	if o != nil && !IsNil(o.AllowIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowIp gets a reference to the given []int32 and assigns it to the AllowIp field.
+func (o *RuleProxyRequestWafConfig) SetAllowIp(v []int32) {
+	o.AllowIp = v
+}
+
+// GetBlockIp returns the BlockIp field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetBlockIp() []int32 {
+	if o == nil || IsNil(o.BlockIp) {
+		var ret []int32
+		return ret
+	}
+	return o.BlockIp
+}
+
+// GetBlockIpOk returns a tuple with the BlockIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetBlockIpOk() ([]int32, bool) {
+	if o == nil || IsNil(o.BlockIp) {
+		return nil, false
+	}
+	return o.BlockIp, true
+}
+
+// HasBlockIp returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasBlockIp() bool {
+	if o != nil && !IsNil(o.BlockIp) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockIp gets a reference to the given []int32 and assigns it to the BlockIp field.
+func (o *RuleProxyRequestWafConfig) SetBlockIp(v []int32) {
+	o.BlockIp = v
+}
+
+// GetBlockUa returns the BlockUa field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetBlockUa() []string {
+	if o == nil || IsNil(o.BlockUa) {
+		var ret []string
+		return ret
+	}
+	return o.BlockUa
+}
+
+// GetBlockUaOk returns a tuple with the BlockUa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetBlockUaOk() ([]string, bool) {
+	if o == nil || IsNil(o.BlockUa) {
+		return nil, false
+	}
+	return o.BlockUa, true
+}
+
+// HasBlockUa returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasBlockUa() bool {
+	if o != nil && !IsNil(o.BlockUa) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockUa gets a reference to the given []string and assigns it to the BlockUa field.
+func (o *RuleProxyRequestWafConfig) SetBlockUa(v []string) {
+	o.BlockUa = v
+}
+
+// GetBlockReferer returns the BlockReferer field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetBlockReferer() []string {
+	if o == nil || IsNil(o.BlockReferer) {
+		var ret []string
+		return ret
+	}
+	return o.BlockReferer
+}
+
+// GetBlockRefererOk returns a tuple with the BlockReferer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetBlockRefererOk() ([]string, bool) {
+	if o == nil || IsNil(o.BlockReferer) {
+		return nil, false
+	}
+	return o.BlockReferer, true
+}
+
+// HasBlockReferer returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasBlockReferer() bool {
+	if o != nil && !IsNil(o.BlockReferer) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockReferer gets a reference to the given []string and assigns it to the BlockReferer field.
+func (o *RuleProxyRequestWafConfig) SetBlockReferer(v []string) {
+	o.BlockReferer = v
+}
+
+// GetNotifySlack returns the NotifySlack field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetNotifySlack() string {
+	if o == nil || IsNil(o.NotifySlack) {
+		var ret string
+		return ret
+	}
+	return *o.NotifySlack
+}
+
+// GetNotifySlackOk returns a tuple with the NotifySlack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetNotifySlackOk() (*string, bool) {
+	if o == nil || IsNil(o.NotifySlack) {
+		return nil, false
+	}
+	return o.NotifySlack, true
+}
+
+// HasNotifySlack returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasNotifySlack() bool {
+	if o != nil && !IsNil(o.NotifySlack) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifySlack gets a reference to the given string and assigns it to the NotifySlack field.
+func (o *RuleProxyRequestWafConfig) SetNotifySlack(v string) {
+	o.NotifySlack = &v
+}
+
+// GetNotifySlackHitsRpm returns the NotifySlackHitsRpm field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetNotifySlackHitsRpm() int32 {
+	if o == nil || IsNil(o.NotifySlackHitsRpm) {
+		var ret int32
+		return ret
+	}
+	return *o.NotifySlackHitsRpm
+}
+
+// GetNotifySlackHitsRpmOk returns a tuple with the NotifySlackHitsRpm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetNotifySlackHitsRpmOk() (*int32, bool) {
+	if o == nil || IsNil(o.NotifySlackHitsRpm) {
+		return nil, false
+	}
+	return o.NotifySlackHitsRpm, true
+}
+
+// HasNotifySlackHitsRpm returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasNotifySlackHitsRpm() bool {
+	if o != nil && !IsNil(o.NotifySlackHitsRpm) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifySlackHitsRpm gets a reference to the given int32 and assigns it to the NotifySlackHitsRpm field.
+func (o *RuleProxyRequestWafConfig) SetNotifySlackHitsRpm(v int32) {
+	o.NotifySlackHitsRpm = &v
+}
+
+// GetNotifyEmail returns the NotifyEmail field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetNotifyEmail() string {
+	if o == nil || IsNil(o.NotifyEmail) {
+		var ret string
+		return ret
+	}
+	return *o.NotifyEmail
+}
+
+// GetNotifyEmailOk returns a tuple with the NotifyEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetNotifyEmailOk() (*string, bool) {
+	if o == nil || IsNil(o.NotifyEmail) {
+		return nil, false
+	}
+	return o.NotifyEmail, true
+}
+
+// HasNotifyEmail returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasNotifyEmail() bool {
+	if o != nil && !IsNil(o.NotifyEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifyEmail gets a reference to the given string and assigns it to the NotifyEmail field.
+func (o *RuleProxyRequestWafConfig) SetNotifyEmail(v string) {
+	o.NotifyEmail = &v
+}
+
+// GetHttpbl returns the Httpbl field value if set, zero value otherwise.
+func (o *RuleProxyRequestWafConfig) GetHttpbl() RuleProxyRequestWafConfigHttpbl {
+	if o == nil || IsNil(o.Httpbl) {
+		var ret RuleProxyRequestWafConfigHttpbl
+		return ret
+	}
+	return *o.Httpbl
+}
+
+// GetHttpblOk returns a tuple with the Httpbl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestWafConfig) GetHttpblOk() (*RuleProxyRequestWafConfigHttpbl, bool) {
+	if o == nil || IsNil(o.Httpbl) {
+		return nil, false
+	}
+	return o.Httpbl, true
+}
+
+// HasHttpbl returns a boolean if a field has been set.
+func (o *RuleProxyRequestWafConfig) HasHttpbl() bool {
+	if o != nil && !IsNil(o.Httpbl) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpbl gets a reference to the given RuleProxyRequestWafConfigHttpbl and assigns it to the Httpbl field.
+func (o *RuleProxyRequestWafConfig) SetHttpbl(v RuleProxyRequestWafConfigHttpbl) {
+	o.Httpbl = &v
+}
+
 func (o RuleProxyRequestWafConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -84,6 +414,36 @@ func (o RuleProxyRequestWafConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
+	}
+	if !IsNil(o.ParanoiaLevel) {
+		toSerialize["paranoia_level"] = o.ParanoiaLevel
+	}
+	if !IsNil(o.AllowRules) {
+		toSerialize["allow_rules"] = o.AllowRules
+	}
+	if !IsNil(o.AllowIp) {
+		toSerialize["allow_ip"] = o.AllowIp
+	}
+	if !IsNil(o.BlockIp) {
+		toSerialize["block_ip"] = o.BlockIp
+	}
+	if !IsNil(o.BlockUa) {
+		toSerialize["block_ua"] = o.BlockUa
+	}
+	if !IsNil(o.BlockReferer) {
+		toSerialize["block_referer"] = o.BlockReferer
+	}
+	if !IsNil(o.NotifySlack) {
+		toSerialize["notify_slack"] = o.NotifySlack
+	}
+	if !IsNil(o.NotifySlackHitsRpm) {
+		toSerialize["notify_slack_hits_rpm"] = o.NotifySlackHitsRpm
+	}
+	if !IsNil(o.NotifyEmail) {
+		toSerialize["notify_email"] = o.NotifyEmail
+	}
+	if !IsNil(o.Httpbl) {
+		toSerialize["httpbl"] = o.Httpbl
 	}
 	return toSerialize, nil
 }

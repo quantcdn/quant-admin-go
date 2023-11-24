@@ -145,6 +145,7 @@ Class | Method | HTTP request | Description
  - [RuleHeaderRequest](docs/RuleHeaderRequest.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
  - [RuleProxyRequestWafConfig](docs/RuleProxyRequestWafConfig.md)
+ - [RuleProxyRequestWafConfigHttpbl](docs/RuleProxyRequestWafConfigHttpbl.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
 
 

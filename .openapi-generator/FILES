@@ -37,6 +37,7 @@ docs/RuleCustomResponseRequest.md
 docs/RuleHeaderRequest.md
 docs/RuleProxyRequest.md
 docs/RuleProxyRequestWafConfig.md
+docs/RuleProxyRequestWafConfigHttpbl.md
 docs/RuleRedirectRequest.md
 docs/RulesAPI.md
 git_push.sh
@@ -66,6 +67,7 @@ model_rule_custom_response_request.go
 model_rule_header_request.go
 model_rule_proxy_request.go
 model_rule_proxy_request_waf_config.go
+model_rule_proxy_request_waf_config_httpbl.go
 model_rule_redirect_request.go
 response.go
 utils.go

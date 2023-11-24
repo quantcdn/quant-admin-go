@@ -1506,6 +1506,31 @@ components:
         disable_ssl_verify: true
         waf_config:
           mode: block
+          allow_rules:
+          - 1
+          - 1
+          httpbl:
+            block_harvester: true
+            httpbl_enabled: true
+            block_spam: true
+            block_search_engine: true
+            block_suspicious: true
+          notify_email: notify_email
+          block_ip:
+          - 5
+          - 5
+          block_referer:
+          - block_referer
+          - block_referer
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack_hits_rpm: 2
+          notify_slack: notify_slack
+          paranoia_level: 6
+          allow_ip:
+          - 5
+          - 5
       properties:
         domain:
           type: string
@@ -1571,22 +1596,310 @@ components:
           $ref: '#/components/schemas/RuleProxyRequest_waf_config'
     RuleAuthRequest:
       example:
+        country: country
+        cache_lifetime: 0
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        strip_headers:
+        - strip_headers
+        - strip_headers
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        only_with_cookie: only_with_cookie
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        url: url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        only_proxy_404: true
+        auth_user: auth_user
         domain: domain
+        name: name
+        host: host
+        ip_is:
+        - ip_is
+        - ip_is
+        auth_pass: auth_pass
+        disabled: true
+        to: to
+        disable_ssl_verify: true
       properties:
         domain:
           type: string
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        disabled:
+          type: boolean
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        strip_headers:
+          items:
+            type: string
+          type: array
     RuleCustomResponseRequest:
       example:
+        country: country
+        cache_lifetime: 0
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        strip_headers:
+        - strip_headers
+        - strip_headers
+        custom_response_status_code: 6
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        only_with_cookie: only_with_cookie
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        custom_response_body: custom_response_body
+        url: url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        only_proxy_404: true
+        auth_user: auth_user
         domain: domain
+        name: name
+        host: host
+        ip_is:
+        - ip_is
+        - ip_is
+        auth_pass: auth_pass
+        disabled: true
+        to: to
+        disable_ssl_verify: true
       properties:
         domain:
+          type: string
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        disabled:
+          type: boolean
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        strip_headers:
+          items:
+            type: string
+          type: array
+        custom_response_status_code:
+          type: integer
+        custom_response_body:
           type: string
     RuleHeaderRequest:
       example:
+        country: country
+        cache_lifetime: 0
+        method_is:
+        - method_is
+        - method_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        custom_response_body: custom_response_body
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        auth_user: auth_user
+        host: host
+        auth_pass: auth_pass
+        disabled: true
+        headers: "{}"
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        strip_headers:
+        - strip_headers
+        - strip_headers
+        custom_response_status_code: 6
+        ip: ip
+        only_with_cookie: only_with_cookie
+        country_is:
+        - country_is
+        - country_is
+        url: url
+        only_proxy_404: true
         domain: domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        to: to
+        disable_ssl_verify: true
       properties:
         domain:
           type: string
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        disabled:
+          type: boolean
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        strip_headers:
+          items:
+            type: string
+          type: array
+        custom_response_status_code:
+          type: integer
+        custom_response_body:
+          type: string
+        headers:
+          type: object
     _organizations_get_200_response_data:
       example:
         organizations:
@@ -1834,56 +2147,88 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response_data'
+    RuleProxyRequest_waf_config_httpbl:
+      example:
+        block_harvester: true
+        httpbl_enabled: true
+        block_spam: true
+        block_search_engine: true
+        block_suspicious: true
+      properties:
+        httpbl_enabled:
+          type: boolean
+        block_suspicious:
+          type: boolean
+        block_harvester:
+          type: boolean
+        block_spam:
+          type: boolean
+        block_search_engine:
+          type: boolean
     RuleProxyRequest_waf_config:
       example:
         mode: block
+        allow_rules:
+        - 1
+        - 1
+        httpbl:
+          block_harvester: true
+          httpbl_enabled: true
+          block_spam: true
+          block_search_engine: true
+          block_suspicious: true
+        notify_email: notify_email
+        block_ip:
+        - 5
+        - 5
+        block_referer:
+        - block_referer
+        - block_referer
+        block_ua:
+        - block_ua
+        - block_ua
+        notify_slack_hits_rpm: 2
+        notify_slack: notify_slack
+        paranoia_level: 6
+        allow_ip:
+        - 5
+        - 5
       properties:
         mode:
           enum:
           - block
           - report
           type: string
-      paranoia_level:
-        type: integer
-      allow_rules:
-        type: array
-        items:
+        paranoia_level:
           type: integer
-      allow_ip:
-        type: array
-        items:
-          type: integer
-      block_ip:
-        type: array
-        items:
-          type: integer
-      block_ua:
-        type: array
-        items:
+        allow_rules:
+          items:
+            type: integer
+          type: array
+        allow_ip:
+          items:
+            type: integer
+          type: array
+        block_ip:
+          items:
+            type: integer
+          type: array
+        block_ua:
+          items:
+            type: string
+          type: array
+        block_referer:
+          items:
+            type: string
+          type: array
+        notify_slack:
           type: string
-      block_referer:
-        type: array
-        items:
+        notify_slack_hits_rpm:
+          type: integer
+        notify_email:
           type: string
-      notify_slack:
-        type: string
-      notify_slack_hits_rpm:
-        type: integer
-      notify_email:
-        type: string
-      httpbl:
-        type: object
-        properties:
-          httpbl_enabled:
-            type: boolean
-          block_suspicious:
-            type: boolean
-          block_harvester:
-            type: boolean
-          block_spam:
-            type: boolean
-          block_search_engine:
-            type: boolean
+        httpbl:
+          $ref: '#/components/schemas/RuleProxyRequest_waf_config_httpbl'
   securitySchemes:
     BearerAuth:
       scheme: bearer
