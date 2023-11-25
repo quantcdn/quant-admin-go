@@ -94,7 +94,7 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://localhost:8001/api/v2",
+				URL: "http://localhost:8001/api/v2",
 				Description: "No description provided",
 			},
 		},
