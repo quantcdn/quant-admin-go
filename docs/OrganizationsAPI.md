@@ -24,7 +24,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -83,7 +83,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -107,7 +107,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name | 
+**organization** | [**interface{}**](.md) | Organization machine name |
 
 ### Other Parameters
 

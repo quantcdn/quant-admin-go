@@ -27,7 +27,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -53,9 +53,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name | 
-**project** | [**interface{}**](.md) | Project machine name | 
-**crawler** | [**interface{}**](.md) | Crawler uuid | 
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**crawler** | [**interface{}**](.md) | Crawler uuid |
 
 ### Other Parameters
 
@@ -101,7 +101,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -127,9 +127,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name | 
-**project** | [**interface{}**](.md) | Project machine name | 
-**crawler** | [**interface{}**](.md) | Crawler uuid | 
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**crawler** | [**interface{}**](.md) | Crawler uuid |
 
 ### Other Parameters
 
@@ -175,7 +175,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -202,9 +202,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name | 
-**project** | [**interface{}**](.md) | Project machine name | 
-**crawler** | [**interface{}**](.md) | Crawler uuid | 
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
+**crawler** | [**interface{}**](.md) | Crawler uuid |
 
 ### Other Parameters
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 
@@ -251,7 +251,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -276,8 +276,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name | 
-**project** | [**interface{}**](.md) | Project machine name | 
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
 
 ### Other Parameters
 
@@ -322,7 +322,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -348,8 +348,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name | 
-**project** | [**interface{}**](.md) | Project machine name | 
+**organization** | [**interface{}**](.md) | Organization machine name |
+**project** | [**interface{}**](.md) | Project machine name |
 
 ### Other Parameters
 
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 
