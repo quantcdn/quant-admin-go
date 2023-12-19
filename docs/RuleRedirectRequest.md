@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **Url** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
-**To** | Pointer to **string** |  | [optional] 
-**StatusCode** | Pointer to **int32** |  | [optional] 
+**RedirectTo** | Pointer to **string** |  | [optional] 
+**RedirectCode** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -390,55 +390,55 @@ SetDisabled sets Disabled field to given value.
 
 HasDisabled returns a boolean if a field has been set.
 
-### GetTo
+### GetRedirectTo
 
-`func (o *RuleRedirectRequest) GetTo() string`
+`func (o *RuleRedirectRequest) GetRedirectTo() string`
 
-GetTo returns the To field if non-nil, zero value otherwise.
+GetRedirectTo returns the RedirectTo field if non-nil, zero value otherwise.
 
-### GetToOk
+### GetRedirectToOk
 
-`func (o *RuleRedirectRequest) GetToOk() (*string, bool)`
+`func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool)`
 
-GetToOk returns a tuple with the To field if it's non-nil, zero value otherwise
+GetRedirectToOk returns a tuple with the RedirectTo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTo
+### SetRedirectTo
 
-`func (o *RuleRedirectRequest) SetTo(v string)`
+`func (o *RuleRedirectRequest) SetRedirectTo(v string)`
 
-SetTo sets To field to given value.
+SetRedirectTo sets RedirectTo field to given value.
 
-### HasTo
+### HasRedirectTo
 
-`func (o *RuleRedirectRequest) HasTo() bool`
+`func (o *RuleRedirectRequest) HasRedirectTo() bool`
 
-HasTo returns a boolean if a field has been set.
+HasRedirectTo returns a boolean if a field has been set.
 
-### GetStatusCode
+### GetRedirectCode
 
-`func (o *RuleRedirectRequest) GetStatusCode() int32`
+`func (o *RuleRedirectRequest) GetRedirectCode() int32`
 
-GetStatusCode returns the StatusCode field if non-nil, zero value otherwise.
+GetRedirectCode returns the RedirectCode field if non-nil, zero value otherwise.
 
-### GetStatusCodeOk
+### GetRedirectCodeOk
 
-`func (o *RuleRedirectRequest) GetStatusCodeOk() (*int32, bool)`
+`func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool)`
 
-GetStatusCodeOk returns a tuple with the StatusCode field if it's non-nil, zero value otherwise
+GetRedirectCodeOk returns a tuple with the RedirectCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatusCode
+### SetRedirectCode
 
-`func (o *RuleRedirectRequest) SetStatusCode(v int32)`
+`func (o *RuleRedirectRequest) SetRedirectCode(v int32)`
 
-SetStatusCode sets StatusCode field to given value.
+SetRedirectCode sets RedirectCode field to given value.
 
-### HasStatusCode
+### HasRedirectCode
 
-`func (o *RuleRedirectRequest) HasStatusCode() bool`
+`func (o *RuleRedirectRequest) HasRedirectCode() bool`
 
-HasStatusCode returns a boolean if a field has been set.
+HasRedirectCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

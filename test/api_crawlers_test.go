@@ -11,11 +11,10 @@ package openapi
 
 import (
 	"context"
-	"testing"
-
-	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_CrawlersAPIService(t *testing.T) {
@@ -25,7 +24,7 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersCrawlerDelete", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -41,7 +40,7 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersCrawlerGet", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -57,7 +56,7 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -73,7 +72,7 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersGet", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization interface{}
 		var project interface{}
@@ -88,7 +87,7 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersPost", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization interface{}
 		var project interface{}

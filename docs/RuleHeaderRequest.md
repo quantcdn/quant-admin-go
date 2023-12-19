@@ -26,8 +26,6 @@ Name | Type | Description | Notes
 **CacheLifetime** | Pointer to **int32** |  | [optional] 
 **OnlyProxy404** | Pointer to **bool** |  | [optional] 
 **StripHeaders** | Pointer to **[]string** |  | [optional] 
-**CustomResponseStatusCode** | Pointer to **int32** |  | [optional] 
-**CustomResponseBody** | Pointer to **string** |  | [optional] 
 **Headers** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
@@ -598,56 +596,6 @@ SetStripHeaders sets StripHeaders field to given value.
 `func (o *RuleHeaderRequest) HasStripHeaders() bool`
 
 HasStripHeaders returns a boolean if a field has been set.
-
-### GetCustomResponseStatusCode
-
-`func (o *RuleHeaderRequest) GetCustomResponseStatusCode() int32`
-
-GetCustomResponseStatusCode returns the CustomResponseStatusCode field if non-nil, zero value otherwise.
-
-### GetCustomResponseStatusCodeOk
-
-`func (o *RuleHeaderRequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
-
-GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomResponseStatusCode
-
-`func (o *RuleHeaderRequest) SetCustomResponseStatusCode(v int32)`
-
-SetCustomResponseStatusCode sets CustomResponseStatusCode field to given value.
-
-### HasCustomResponseStatusCode
-
-`func (o *RuleHeaderRequest) HasCustomResponseStatusCode() bool`
-
-HasCustomResponseStatusCode returns a boolean if a field has been set.
-
-### GetCustomResponseBody
-
-`func (o *RuleHeaderRequest) GetCustomResponseBody() string`
-
-GetCustomResponseBody returns the CustomResponseBody field if non-nil, zero value otherwise.
-
-### GetCustomResponseBodyOk
-
-`func (o *RuleHeaderRequest) GetCustomResponseBodyOk() (*string, bool)`
-
-GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomResponseBody
-
-`func (o *RuleHeaderRequest) SetCustomResponseBody(v string)`
-
-SetCustomResponseBody sets CustomResponseBody field to given value.
-
-### HasCustomResponseBody
-
-`func (o *RuleHeaderRequest) HasCustomResponseBody() bool`
-
-HasCustomResponseBody returns a boolean if a field has been set.
 
 ### GetHeaders
 

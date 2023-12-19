@@ -27,13 +27,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    domain := TODO // interface{} |
+    domain := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,9 +53,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**domain** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**domain** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -101,13 +101,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    domain := TODO // interface{} |
+    domain := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -127,9 +127,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**domain** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**domain** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -175,13 +175,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    domain := TODO // interface{} |
+    domain := TODO // interface{} | 
     domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -202,9 +202,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**domain** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**domain** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
 
 ### Return type
 
@@ -251,7 +251,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -276,8 +276,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -322,7 +322,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -348,8 +348,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
 
 ### Return type
 

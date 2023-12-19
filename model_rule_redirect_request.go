@@ -34,8 +34,8 @@ type RuleRedirectRequest struct {
 	Url *string `json:"url,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Disabled *bool `json:"disabled,omitempty"`
-	To *string `json:"to,omitempty"`
-	StatusCode *int32 `json:"status_code,omitempty"`
+	RedirectTo *string `json:"redirect_to,omitempty"`
+	RedirectCode *int32 `json:"redirect_code,omitempty"`
 }
 
 // NewRuleRedirectRequest instantiates a new RuleRedirectRequest object
@@ -503,68 +503,68 @@ func (o *RuleRedirectRequest) SetDisabled(v bool) {
 	o.Disabled = &v
 }
 
-// GetTo returns the To field value if set, zero value otherwise.
-func (o *RuleRedirectRequest) GetTo() string {
-	if o == nil || IsNil(o.To) {
+// GetRedirectTo returns the RedirectTo field value if set, zero value otherwise.
+func (o *RuleRedirectRequest) GetRedirectTo() string {
+	if o == nil || IsNil(o.RedirectTo) {
 		var ret string
 		return ret
 	}
-	return *o.To
+	return *o.RedirectTo
 }
 
-// GetToOk returns a tuple with the To field value if set, nil otherwise
+// GetRedirectToOk returns a tuple with the RedirectTo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleRedirectRequest) GetToOk() (*string, bool) {
-	if o == nil || IsNil(o.To) {
+func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool) {
+	if o == nil || IsNil(o.RedirectTo) {
 		return nil, false
 	}
-	return o.To, true
+	return o.RedirectTo, true
 }
 
-// HasTo returns a boolean if a field has been set.
-func (o *RuleRedirectRequest) HasTo() bool {
-	if o != nil && !IsNil(o.To) {
+// HasRedirectTo returns a boolean if a field has been set.
+func (o *RuleRedirectRequest) HasRedirectTo() bool {
+	if o != nil && !IsNil(o.RedirectTo) {
 		return true
 	}
 
 	return false
 }
 
-// SetTo gets a reference to the given string and assigns it to the To field.
-func (o *RuleRedirectRequest) SetTo(v string) {
-	o.To = &v
+// SetRedirectTo gets a reference to the given string and assigns it to the RedirectTo field.
+func (o *RuleRedirectRequest) SetRedirectTo(v string) {
+	o.RedirectTo = &v
 }
 
-// GetStatusCode returns the StatusCode field value if set, zero value otherwise.
-func (o *RuleRedirectRequest) GetStatusCode() int32 {
-	if o == nil || IsNil(o.StatusCode) {
+// GetRedirectCode returns the RedirectCode field value if set, zero value otherwise.
+func (o *RuleRedirectRequest) GetRedirectCode() int32 {
+	if o == nil || IsNil(o.RedirectCode) {
 		var ret int32
 		return ret
 	}
-	return *o.StatusCode
+	return *o.RedirectCode
 }
 
-// GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
+// GetRedirectCodeOk returns a tuple with the RedirectCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleRedirectRequest) GetStatusCodeOk() (*int32, bool) {
-	if o == nil || IsNil(o.StatusCode) {
+func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool) {
+	if o == nil || IsNil(o.RedirectCode) {
 		return nil, false
 	}
-	return o.StatusCode, true
+	return o.RedirectCode, true
 }
 
-// HasStatusCode returns a boolean if a field has been set.
-func (o *RuleRedirectRequest) HasStatusCode() bool {
-	if o != nil && !IsNil(o.StatusCode) {
+// HasRedirectCode returns a boolean if a field has been set.
+func (o *RuleRedirectRequest) HasRedirectCode() bool {
+	if o != nil && !IsNil(o.RedirectCode) {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusCode gets a reference to the given int32 and assigns it to the StatusCode field.
-func (o *RuleRedirectRequest) SetStatusCode(v int32) {
-	o.StatusCode = &v
+// SetRedirectCode gets a reference to the given int32 and assigns it to the RedirectCode field.
+func (o *RuleRedirectRequest) SetRedirectCode(v int32) {
+	o.RedirectCode = &v
 }
 
 func (o RuleRedirectRequest) MarshalJSON() ([]byte, error) {
@@ -619,11 +619,11 @@ func (o RuleRedirectRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Disabled) {
 		toSerialize["disabled"] = o.Disabled
 	}
-	if !IsNil(o.To) {
-		toSerialize["to"] = o.To
+	if !IsNil(o.RedirectTo) {
+		toSerialize["redirect_to"] = o.RedirectTo
 	}
-	if !IsNil(o.StatusCode) {
-		toSerialize["status_code"] = o.StatusCode
+	if !IsNil(o.RedirectCode) {
+		toSerialize["redirect_code"] = o.RedirectCode
 	}
 	return toSerialize, nil
 }

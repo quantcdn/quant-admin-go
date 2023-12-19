@@ -43,7 +43,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -69,8 +69,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  |
+ **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  | 
 
 ### Return type
 
@@ -116,13 +116,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -142,9 +142,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -190,13 +190,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -216,9 +216,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -264,13 +264,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
     ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -291,9 +291,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  |
+ **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  | 
 
 ### Return type
 
@@ -340,7 +340,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -366,8 +366,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -378,7 +378,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  | 
 
 ### Return type
 
@@ -413,13 +413,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -439,9 +439,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -487,13 +487,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -513,9 +513,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -561,13 +561,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
     ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -588,9 +588,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -602,7 +602,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  | 
 
 ### Return type
 
@@ -637,7 +637,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -662,8 +662,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -708,7 +708,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -734,8 +734,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -746,7 +746,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
+ **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  | 
 
 ### Return type
 
@@ -781,13 +781,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -807,9 +807,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -855,13 +855,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -881,9 +881,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -929,13 +929,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
     ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -956,9 +956,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -970,7 +970,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
+ **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  | 
 
 ### Return type
 
@@ -1005,7 +1005,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1031,8 +1031,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -1043,7 +1043,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
+ **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
 
 ### Return type
 
@@ -1078,13 +1078,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1104,9 +1104,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -1152,13 +1152,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1178,9 +1178,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -1226,13 +1226,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
     ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1253,9 +1253,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -1267,7 +1267,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
+ **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
 
 ### Return type
 
@@ -1302,7 +1302,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1328,8 +1328,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
 
 ### Other Parameters
 
@@ -1340,7 +1340,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
 
 ### Return type
 
@@ -1375,13 +1375,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1401,9 +1401,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -1449,13 +1449,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1475,9 +1475,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -1523,13 +1523,13 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
     organization := TODO // interface{} | Organization machine name
     project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+    rule := TODO // interface{} | 
     ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1550,9 +1550,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | [**interface{}**](.md) | Organization machine name | 
+**project** | [**interface{}**](.md) | Project machine name | 
+**rule** | [**interface{}**](.md) |  | 
 
 ### Other Parameters
 
@@ -1564,7 +1564,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
 
 ### Return type
 

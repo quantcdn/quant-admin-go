@@ -7,14 +7,23 @@ Name | Type | Description | Notes
 **Mode** | Pointer to **string** |  | [optional] 
 **ParanoiaLevel** | Pointer to **int32** |  | [optional] 
 **AllowRules** | Pointer to **[]int32** |  | [optional] 
-**AllowIp** | Pointer to **[]int32** |  | [optional] 
-**BlockIp** | Pointer to **[]int32** |  | [optional] 
+**AllowIp** | Pointer to **[]string** |  | [optional] 
+**BlockIp** | Pointer to **[]string** |  | [optional] 
 **BlockUa** | Pointer to **[]string** |  | [optional] 
 **BlockReferer** | Pointer to **[]string** |  | [optional] 
 **NotifySlack** | Pointer to **string** |  | [optional] 
 **NotifySlackHitsRpm** | Pointer to **int32** |  | [optional] 
 **NotifyEmail** | Pointer to **string** |  | [optional] 
 **Httpbl** | Pointer to [**RuleProxyRequestWafConfigHttpbl**](RuleProxyRequestWafConfigHttpbl.md) |  | [optional] 
+**ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
+**OriginTimeout** | Pointer to **int64** |  | [optional] 
+**FailoverMode** | Pointer to **bool** |  | [optional] 
+**FailoverOriginTtfb** | Pointer to **int64** |  | [optional] 
+**FailoverOriginStatusCode** | Pointer to **int64** |  | [optional] 
+**FailoverLifetime** | Pointer to [**Inte64**](inte64.md) |  | [optional] 
+**Notify** | Pointer to **string** |  | [optional] 
+**NotifyConfig** | Pointer to [**RuleProxyRequestWafConfigNotifyConfig**](RuleProxyRequestWafConfigNotifyConfig.md) |  | [optional] 
+**InjectHeaders** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -112,20 +121,20 @@ HasAllowRules returns a boolean if a field has been set.
 
 ### GetAllowIp
 
-`func (o *RuleProxyRequestWafConfig) GetAllowIp() []int32`
+`func (o *RuleProxyRequestWafConfig) GetAllowIp() []string`
 
 GetAllowIp returns the AllowIp field if non-nil, zero value otherwise.
 
 ### GetAllowIpOk
 
-`func (o *RuleProxyRequestWafConfig) GetAllowIpOk() (*[]int32, bool)`
+`func (o *RuleProxyRequestWafConfig) GetAllowIpOk() (*[]string, bool)`
 
 GetAllowIpOk returns a tuple with the AllowIp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAllowIp
 
-`func (o *RuleProxyRequestWafConfig) SetAllowIp(v []int32)`
+`func (o *RuleProxyRequestWafConfig) SetAllowIp(v []string)`
 
 SetAllowIp sets AllowIp field to given value.
 
@@ -137,20 +146,20 @@ HasAllowIp returns a boolean if a field has been set.
 
 ### GetBlockIp
 
-`func (o *RuleProxyRequestWafConfig) GetBlockIp() []int32`
+`func (o *RuleProxyRequestWafConfig) GetBlockIp() []string`
 
 GetBlockIp returns the BlockIp field if non-nil, zero value otherwise.
 
 ### GetBlockIpOk
 
-`func (o *RuleProxyRequestWafConfig) GetBlockIpOk() (*[]int32, bool)`
+`func (o *RuleProxyRequestWafConfig) GetBlockIpOk() (*[]string, bool)`
 
 GetBlockIpOk returns a tuple with the BlockIp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBlockIp
 
-`func (o *RuleProxyRequestWafConfig) SetBlockIp(v []int32)`
+`func (o *RuleProxyRequestWafConfig) SetBlockIp(v []string)`
 
 SetBlockIp sets BlockIp field to given value.
 
@@ -309,6 +318,231 @@ SetHttpbl sets Httpbl field to given value.
 `func (o *RuleProxyRequestWafConfig) HasHttpbl() bool`
 
 HasHttpbl returns a boolean if a field has been set.
+
+### GetProxyAlertEnabled
+
+`func (o *RuleProxyRequestWafConfig) GetProxyAlertEnabled() bool`
+
+GetProxyAlertEnabled returns the ProxyAlertEnabled field if non-nil, zero value otherwise.
+
+### GetProxyAlertEnabledOk
+
+`func (o *RuleProxyRequestWafConfig) GetProxyAlertEnabledOk() (*bool, bool)`
+
+GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyAlertEnabled
+
+`func (o *RuleProxyRequestWafConfig) SetProxyAlertEnabled(v bool)`
+
+SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
+
+### HasProxyAlertEnabled
+
+`func (o *RuleProxyRequestWafConfig) HasProxyAlertEnabled() bool`
+
+HasProxyAlertEnabled returns a boolean if a field has been set.
+
+### GetOriginTimeout
+
+`func (o *RuleProxyRequestWafConfig) GetOriginTimeout() int64`
+
+GetOriginTimeout returns the OriginTimeout field if non-nil, zero value otherwise.
+
+### GetOriginTimeoutOk
+
+`func (o *RuleProxyRequestWafConfig) GetOriginTimeoutOk() (*int64, bool)`
+
+GetOriginTimeoutOk returns a tuple with the OriginTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginTimeout
+
+`func (o *RuleProxyRequestWafConfig) SetOriginTimeout(v int64)`
+
+SetOriginTimeout sets OriginTimeout field to given value.
+
+### HasOriginTimeout
+
+`func (o *RuleProxyRequestWafConfig) HasOriginTimeout() bool`
+
+HasOriginTimeout returns a boolean if a field has been set.
+
+### GetFailoverMode
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverMode() bool`
+
+GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
+
+### GetFailoverModeOk
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverModeOk() (*bool, bool)`
+
+GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverMode
+
+`func (o *RuleProxyRequestWafConfig) SetFailoverMode(v bool)`
+
+SetFailoverMode sets FailoverMode field to given value.
+
+### HasFailoverMode
+
+`func (o *RuleProxyRequestWafConfig) HasFailoverMode() bool`
+
+HasFailoverMode returns a boolean if a field has been set.
+
+### GetFailoverOriginTtfb
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfb() int64`
+
+GetFailoverOriginTtfb returns the FailoverOriginTtfb field if non-nil, zero value otherwise.
+
+### GetFailoverOriginTtfbOk
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfbOk() (*int64, bool)`
+
+GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverOriginTtfb
+
+`func (o *RuleProxyRequestWafConfig) SetFailoverOriginTtfb(v int64)`
+
+SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
+
+### HasFailoverOriginTtfb
+
+`func (o *RuleProxyRequestWafConfig) HasFailoverOriginTtfb() bool`
+
+HasFailoverOriginTtfb returns a boolean if a field has been set.
+
+### GetFailoverOriginStatusCode
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCode() int64`
+
+GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field if non-nil, zero value otherwise.
+
+### GetFailoverOriginStatusCodeOk
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCodeOk() (*int64, bool)`
+
+GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverOriginStatusCode
+
+`func (o *RuleProxyRequestWafConfig) SetFailoverOriginStatusCode(v int64)`
+
+SetFailoverOriginStatusCode sets FailoverOriginStatusCode field to given value.
+
+### HasFailoverOriginStatusCode
+
+`func (o *RuleProxyRequestWafConfig) HasFailoverOriginStatusCode() bool`
+
+HasFailoverOriginStatusCode returns a boolean if a field has been set.
+
+### GetFailoverLifetime
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() Inte64`
+
+GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
+
+### GetFailoverLifetimeOk
+
+`func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*Inte64, bool)`
+
+GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverLifetime
+
+`func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v Inte64)`
+
+SetFailoverLifetime sets FailoverLifetime field to given value.
+
+### HasFailoverLifetime
+
+`func (o *RuleProxyRequestWafConfig) HasFailoverLifetime() bool`
+
+HasFailoverLifetime returns a boolean if a field has been set.
+
+### GetNotify
+
+`func (o *RuleProxyRequestWafConfig) GetNotify() string`
+
+GetNotify returns the Notify field if non-nil, zero value otherwise.
+
+### GetNotifyOk
+
+`func (o *RuleProxyRequestWafConfig) GetNotifyOk() (*string, bool)`
+
+GetNotifyOk returns a tuple with the Notify field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotify
+
+`func (o *RuleProxyRequestWafConfig) SetNotify(v string)`
+
+SetNotify sets Notify field to given value.
+
+### HasNotify
+
+`func (o *RuleProxyRequestWafConfig) HasNotify() bool`
+
+HasNotify returns a boolean if a field has been set.
+
+### GetNotifyConfig
+
+`func (o *RuleProxyRequestWafConfig) GetNotifyConfig() RuleProxyRequestWafConfigNotifyConfig`
+
+GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
+
+### GetNotifyConfigOk
+
+`func (o *RuleProxyRequestWafConfig) GetNotifyConfigOk() (*RuleProxyRequestWafConfigNotifyConfig, bool)`
+
+GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotifyConfig
+
+`func (o *RuleProxyRequestWafConfig) SetNotifyConfig(v RuleProxyRequestWafConfigNotifyConfig)`
+
+SetNotifyConfig sets NotifyConfig field to given value.
+
+### HasNotifyConfig
+
+`func (o *RuleProxyRequestWafConfig) HasNotifyConfig() bool`
+
+HasNotifyConfig returns a boolean if a field has been set.
+
+### GetInjectHeaders
+
+`func (o *RuleProxyRequestWafConfig) GetInjectHeaders() []string`
+
+GetInjectHeaders returns the InjectHeaders field if non-nil, zero value otherwise.
+
+### GetInjectHeadersOk
+
+`func (o *RuleProxyRequestWafConfig) GetInjectHeadersOk() (*[]string, bool)`
+
+GetInjectHeadersOk returns a tuple with the InjectHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInjectHeaders
+
+`func (o *RuleProxyRequestWafConfig) SetInjectHeaders(v []string)`
+
+SetInjectHeaders sets InjectHeaders field to given value.
+
+### HasInjectHeaders
+
+`func (o *RuleProxyRequestWafConfig) HasInjectHeaders() bool`
+
+HasInjectHeaders returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

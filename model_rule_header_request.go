@@ -42,8 +42,6 @@ type RuleHeaderRequest struct {
 	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	StripHeaders []string `json:"strip_headers,omitempty"`
-	CustomResponseStatusCode *int32 `json:"custom_response_status_code,omitempty"`
-	CustomResponseBody *string `json:"custom_response_body,omitempty"`
 	Headers map[string]interface{} `json:"headers,omitempty"`
 }
 
@@ -768,70 +766,6 @@ func (o *RuleHeaderRequest) SetStripHeaders(v []string) {
 	o.StripHeaders = v
 }
 
-// GetCustomResponseStatusCode returns the CustomResponseStatusCode field value if set, zero value otherwise.
-func (o *RuleHeaderRequest) GetCustomResponseStatusCode() int32 {
-	if o == nil || IsNil(o.CustomResponseStatusCode) {
-		var ret int32
-		return ret
-	}
-	return *o.CustomResponseStatusCode
-}
-
-// GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleHeaderRequest) GetCustomResponseStatusCodeOk() (*int32, bool) {
-	if o == nil || IsNil(o.CustomResponseStatusCode) {
-		return nil, false
-	}
-	return o.CustomResponseStatusCode, true
-}
-
-// HasCustomResponseStatusCode returns a boolean if a field has been set.
-func (o *RuleHeaderRequest) HasCustomResponseStatusCode() bool {
-	if o != nil && !IsNil(o.CustomResponseStatusCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomResponseStatusCode gets a reference to the given int32 and assigns it to the CustomResponseStatusCode field.
-func (o *RuleHeaderRequest) SetCustomResponseStatusCode(v int32) {
-	o.CustomResponseStatusCode = &v
-}
-
-// GetCustomResponseBody returns the CustomResponseBody field value if set, zero value otherwise.
-func (o *RuleHeaderRequest) GetCustomResponseBody() string {
-	if o == nil || IsNil(o.CustomResponseBody) {
-		var ret string
-		return ret
-	}
-	return *o.CustomResponseBody
-}
-
-// GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleHeaderRequest) GetCustomResponseBodyOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomResponseBody) {
-		return nil, false
-	}
-	return o.CustomResponseBody, true
-}
-
-// HasCustomResponseBody returns a boolean if a field has been set.
-func (o *RuleHeaderRequest) HasCustomResponseBody() bool {
-	if o != nil && !IsNil(o.CustomResponseBody) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomResponseBody gets a reference to the given string and assigns it to the CustomResponseBody field.
-func (o *RuleHeaderRequest) SetCustomResponseBody(v string) {
-	o.CustomResponseBody = &v
-}
-
 // GetHeaders returns the Headers field value if set, zero value otherwise.
 func (o *RuleHeaderRequest) GetHeaders() map[string]interface{} {
 	if o == nil || IsNil(o.Headers) {
@@ -939,12 +873,6 @@ func (o RuleHeaderRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.StripHeaders) {
 		toSerialize["strip_headers"] = o.StripHeaders
-	}
-	if !IsNil(o.CustomResponseStatusCode) {
-		toSerialize["custom_response_status_code"] = o.CustomResponseStatusCode
-	}
-	if !IsNil(o.CustomResponseBody) {
-		toSerialize["custom_response_body"] = o.CustomResponseBody
 	}
 	if !IsNil(o.Headers) {
 		toSerialize["headers"] = o.Headers

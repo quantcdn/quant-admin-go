@@ -23,7 +23,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import openapi "github.com/quantcdn/quant-admin-go"
+import openapi "github.com/GIT_USER_ID/GIT_REPO_ID"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -146,6 +146,7 @@ Class | Method | HTTP request | Description
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
  - [RuleProxyRequestWafConfig](docs/RuleProxyRequestWafConfig.md)
  - [RuleProxyRequestWafConfigHttpbl](docs/RuleProxyRequestWafConfigHttpbl.md)
+ - [RuleProxyRequestWafConfigNotifyConfig](docs/RuleProxyRequestWafConfigNotifyConfig.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
 
 

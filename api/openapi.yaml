@@ -1387,17 +1387,17 @@ components:
           type: object
     RuleRedirectRequest:
       example:
-        country: country
-        status_code: 0
-        method: method
+        country: country_is
+        method: method_is
         ip_is_not:
         - ip_is_not
         - ip_is_not
         method_is:
         - method_is
         - method_is
-        ip: ip
+        ip: ip_is
         only_with_cookie: only_with_cookie
+        redirect_code: 0
         country_is:
         - country_is
         - country_is
@@ -1405,6 +1405,7 @@ components:
         - method_is_not
         - method_is_not
         url: url
+        redirect_to: redirect_to
         country_is_not:
         - country_is_not
         - country_is_not
@@ -1414,11 +1415,13 @@ components:
         - ip_is
         - ip_is
         disabled: true
-        to: to
       properties:
         domain:
           type: string
         country:
+          enum:
+          - country_is
+          - country_is_not
           type: string
         country_is:
           items:
@@ -1429,6 +1432,9 @@ components:
             type: string
           type: array
         method:
+          enum:
+          - method_is
+          - method_is_not
           type: string
         method_is:
           items:
@@ -1439,6 +1445,9 @@ components:
             type: string
           type: array
         ip:
+          enum:
+          - ip_is
+          - ip_is_not
           type: string
         ip_is:
           items:
@@ -1456,15 +1465,15 @@ components:
           type: string
         disabled:
           type: boolean
-        to:
+        redirect_to:
           type: string
-        status_code:
+        redirect_code:
           type: integer
     RuleProxyRequest:
       example:
-        country: country
+        country: country_is
         cache_lifetime: 0
-        method: method
+        method: method_is
         ip_is_not:
         - ip_is_not
         - ip_is_not
@@ -1474,7 +1483,7 @@ components:
         method_is:
         - method_is
         - method_is
-        ip: ip
+        ip: ip_is
         only_with_cookie: only_with_cookie
         country_is:
         - country_is
@@ -1500,36 +1509,55 @@ components:
         to: to
         disable_ssl_verify: true
         waf_config:
-          mode: block
           allow_rules:
           - 1
           - 1
+          origin_timeout: ""
           httpbl:
             block_harvester: true
             httpbl_enabled: true
             block_spam: true
             block_search_engine: true
             block_suspicious: true
+          failover_origin_ttfb: ""
+          notify_slack_hits_rpm: 5
+          notify_config:
+            period: ""
+            slack_webhook: slack_webhook
+            origin_status_code:
+            - ""
+            - ""
+          notify: notify
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          mode: block
+          inject_headers:
+          - inject_headers
+          - inject_headers
           notify_email: notify_email
           block_ip:
-          - 5
-          - 5
+          - block_ip
+          - block_ip
           block_referer:
           - block_referer
           - block_referer
+          failover_lifetime: ""
           block_ua:
           - block_ua
           - block_ua
-          notify_slack_hits_rpm: 2
+          failover_origin_status_code: ""
           notify_slack: notify_slack
+          proxy_alert_enabled: true
           paranoia_level: 6
-          allow_ip:
-          - 5
-          - 5
+          failover_mode: true
       properties:
         domain:
           type: string
         country:
+          enum:
+          - country_is
+          - country_is_not
           type: string
         country_is:
           items:
@@ -1540,6 +1568,9 @@ components:
             type: string
           type: array
         method:
+          enum:
+          - method_is
+          - method_is_not
           type: string
         method_is:
           items:
@@ -1550,6 +1581,9 @@ components:
             type: string
           type: array
         ip:
+          enum:
+          - ip_is
+          - ip_is_not
           type: string
         ip_is:
           items:
@@ -1591,9 +1625,9 @@ components:
           $ref: '#/components/schemas/RuleProxyRequest_waf_config'
     RuleAuthRequest:
       example:
-        country: country
+        country: country_is
         cache_lifetime: 0
-        method: method
+        method: method_is
         ip_is_not:
         - ip_is_not
         - ip_is_not
@@ -1603,7 +1637,7 @@ components:
         method_is:
         - method_is
         - method_is
-        ip: ip
+        ip: ip_is
         only_with_cookie: only_with_cookie
         country_is:
         - country_is
@@ -1631,6 +1665,9 @@ components:
         domain:
           type: string
         country:
+          enum:
+          - country_is
+          - country_is_not
           type: string
         country_is:
           items:
@@ -1641,6 +1678,9 @@ components:
             type: string
           type: array
         method:
+          enum:
+          - method_is
+          - method_is_not
           type: string
         method_is:
           items:
@@ -1651,6 +1691,9 @@ components:
             type: string
           type: array
         ip:
+          enum:
+          - ip_is
+          - ip_is_not
           type: string
         ip_is:
           items:
@@ -1688,9 +1731,9 @@ components:
           type: array
     RuleCustomResponseRequest:
       example:
-        country: country
+        country: country_is
         cache_lifetime: 0
-        method: method
+        method: method_is
         ip_is_not:
         - ip_is_not
         - ip_is_not
@@ -1701,7 +1744,7 @@ components:
         method_is:
         - method_is
         - method_is
-        ip: ip
+        ip: ip_is
         only_with_cookie: only_with_cookie
         country_is:
         - country_is
@@ -1730,6 +1773,9 @@ components:
         domain:
           type: string
         country:
+          enum:
+          - country_is
+          - country_is_not
           type: string
         country_is:
           items:
@@ -1740,6 +1786,9 @@ components:
             type: string
           type: array
         method:
+          enum:
+          - method_is
+          - method_is_not
           type: string
         method_is:
           items:
@@ -1750,6 +1799,9 @@ components:
             type: string
           type: array
         ip:
+          enum:
+          - ip_is
+          - ip_is_not
           type: string
         ip_is:
           items:
@@ -1791,49 +1843,50 @@ components:
           type: string
     RuleHeaderRequest:
       example:
-        country: country
-        cache_lifetime: 0
-        method_is:
-        - method_is
-        - method_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        custom_response_body: custom_response_body
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        auth_user: auth_user
-        host: host
-        auth_pass: auth_pass
-        disabled: true
+        country: country_is
         headers: "{}"
-        method: method
+        cache_lifetime: 0
+        method: method_is
         ip_is_not:
         - ip_is_not
         - ip_is_not
         strip_headers:
         - strip_headers
         - strip_headers
-        custom_response_status_code: 6
-        ip: ip
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
         only_with_cookie: only_with_cookie
         country_is:
         - country_is
         - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
         url: url
+        country_is_not:
+        - country_is_not
+        - country_is_not
         only_proxy_404: true
+        auth_user: auth_user
         domain: domain
         name: name
+        host: host
         ip_is:
         - ip_is
         - ip_is
+        auth_pass: auth_pass
+        disabled: true
         to: to
         disable_ssl_verify: true
       properties:
         domain:
           type: string
         country:
+          enum:
+          - country_is
+          - country_is_not
           type: string
         country_is:
           items:
@@ -1844,6 +1897,9 @@ components:
             type: string
           type: array
         method:
+          enum:
+          - method_is
+          - method_is_not
           type: string
         method_is:
           items:
@@ -1854,6 +1910,9 @@ components:
             type: string
           type: array
         ip:
+          enum:
+          - ip_is
+          - ip_is_not
           type: string
         ip_is:
           items:
@@ -1889,10 +1948,6 @@ components:
           items:
             type: string
           type: array
-        custom_response_status_code:
-          type: integer
-        custom_response_body:
-          type: string
         headers:
           type: object
     _organizations_get_200_response_data:
@@ -2160,34 +2215,66 @@ components:
           type: boolean
         block_search_engine:
           type: boolean
+    RuleProxyRequest_waf_config_notify_config:
+      example:
+        period: ""
+        slack_webhook: slack_webhook
+        origin_status_code:
+        - ""
+        - ""
+      properties:
+        origin_status_code:
+          items:
+            type: int64
+          type: array
+        period:
+          type: int64
+        slack_webhook:
+          type: string
     RuleProxyRequest_waf_config:
       example:
-        mode: block
         allow_rules:
         - 1
         - 1
+        origin_timeout: ""
         httpbl:
           block_harvester: true
           httpbl_enabled: true
           block_spam: true
           block_search_engine: true
           block_suspicious: true
+        failover_origin_ttfb: ""
+        notify_slack_hits_rpm: 5
+        notify_config:
+          period: ""
+          slack_webhook: slack_webhook
+          origin_status_code:
+          - ""
+          - ""
+        notify: notify
+        allow_ip:
+        - allow_ip
+        - allow_ip
+        mode: block
+        inject_headers:
+        - inject_headers
+        - inject_headers
         notify_email: notify_email
         block_ip:
-        - 5
-        - 5
+        - block_ip
+        - block_ip
         block_referer:
         - block_referer
         - block_referer
+        failover_lifetime: ""
         block_ua:
         - block_ua
         - block_ua
-        notify_slack_hits_rpm: 2
+        failover_origin_status_code: ""
         notify_slack: notify_slack
+        proxy_alert_enabled: true
         paranoia_level: 6
-        allow_ip:
-        - 5
-        - 5
+        failover_mode: true
       properties:
         mode:
           enum:
@@ -2202,11 +2289,11 @@ components:
           type: array
         allow_ip:
           items:
-            type: integer
+            type: string
           type: array
         block_ip:
           items:
-            type: integer
+            type: string
           type: array
         block_ua:
           items:
@@ -2224,6 +2311,26 @@ components:
           type: string
         httpbl:
           $ref: '#/components/schemas/RuleProxyRequest_waf_config_httpbl'
+        proxy_alert_enabled:
+          type: boolean
+        origin_timeout:
+          type: int64
+        failover_mode:
+          type: boolean
+        failover_origin_ttfb:
+          type: int64
+        failover_origin_status_code:
+          type: int64
+        failover_lifetime:
+          type: inte64
+        notify:
+          type: string
+        notify_config:
+          $ref: '#/components/schemas/RuleProxyRequest_waf_config_notify_config'
+        inject_headers:
+          items:
+            type: string
+          type: array
   securitySchemes:
     BearerAuth:
       scheme: bearer
