@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **FailoverMode** | Pointer to **bool** |  | [optional] 
 **FailoverOriginTtfb** | Pointer to **int64** |  | [optional] 
 **FailoverOriginStatusCode** | Pointer to **int64** |  | [optional] 
-**FailoverLifetime** | Pointer to [**Inte64**](inte64.md) |  | [optional] 
+**FailoverLifetime** | Pointer to **int64** |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] 
 **NotifyConfig** | Pointer to [**RuleProxyRequestWafConfigNotifyConfig**](RuleProxyRequestWafConfigNotifyConfig.md) |  | [optional] 
 **InjectHeaders** | Pointer to **[]string** |  | [optional] 
@@ -446,20 +446,20 @@ HasFailoverOriginStatusCode returns a boolean if a field has been set.
 
 ### GetFailoverLifetime
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() Inte64`
+`func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() int64`
 
 GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
 
 ### GetFailoverLifetimeOk
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*Inte64, bool)`
+`func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*int64, bool)`
 
 GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverLifetime
 
-`func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v Inte64)`
+`func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v int64)`
 
 SetFailoverLifetime sets FailoverLifetime field to given value.
 

@@ -2322,7 +2322,7 @@ components:
         failover_origin_status_code:
           type: int64
         failover_lifetime:
-          type: inte64
+          type: int64
         notify:
           type: string
         notify_config:
