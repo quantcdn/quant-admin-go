@@ -556,7 +556,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest struct {
+type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
 	organization interface{}
@@ -564,25 +564,25 @@ type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest 
 	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest {
 	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatchExecute(r)
+func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePostExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch Update custom response rule details
+OrganizationsOrganizationProjectsProjectRulesCustomResponsePost Create custom response rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest
+ @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest{
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -592,15 +592,15 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 
 // Execute executes the request
 //  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1214,7 +1214,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesGetExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct {
+type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
 	organization interface{}
@@ -1222,25 +1222,25 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct {
 	ruleHeaderRequest *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest {
 	r.ruleHeaderRequest = &ruleHeaderRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderPatchExecute(r)
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderPostExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesHeaderPatch Create header rules
+OrganizationsOrganizationProjectsProjectRulesHeaderPost Create header rules
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest
+ @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest{
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1250,15 +1250,15 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPat
 
 // Execute executes the request
 //  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderPatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

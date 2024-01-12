@@ -8,12 +8,12 @@ Method | HTTP request | Description
 [**OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule
 [**OrganizationsOrganizationProjectsProjectRulesAuthRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Get authentication rule details
 [**OrganizationsOrganizationProjectsProjectRulesAuthRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Update authentication rule details
-[**OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response | Update custom response rule details
+[**OrganizationsOrganizationProjectsProjectRulesCustomResponsePost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponsePost) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | Create custom response rule details
 [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Delete a custom response rule
 [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Get custom repsonse rule details
 [**OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Update custom response rule details
 [**OrganizationsOrganizationProjectsProjectRulesGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesGet) | **Get** /organizations/{organization}/projects/{project}/rules | Get rules for a project
-[**OrganizationsOrganizationProjectsProjectRulesHeaderPatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderPatch) | **Patch** /organizations/{organization}/projects/{project}/rules/header | Create header rules
+[**OrganizationsOrganizationProjectsProjectRulesHeaderPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderPost) | **Post** /organizations/{organization}/projects/{project}/rules/header | Create header rules
 [**OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/header/{rule} | Delete a header rule
 [**OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/header/{rule} | Get header rule details
 [**OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/header/{rule} | Update header rule details
@@ -325,11 +325,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch
+## OrganizationsOrganizationProjectsProjectRulesCustomResponsePost
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(ctx, organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePost(ctx, organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 
-Update custom response rule details
+Create custom response rule details
 
 ### Example
 
@@ -350,13 +350,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(context.Background(), organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost(context.Background(), organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch`: %v\n", resp)
+    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponsePost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost`: %v\n", resp)
 }
 ```
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponsePatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -693,9 +693,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesHeaderPatch
+## OrganizationsOrganizationProjectsProjectRulesHeaderPost
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderPatch(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
+> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeaderPost(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
 
 Create header rules
 
@@ -718,13 +718,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch(context.Background(), organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
+    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPost(context.Background(), organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch`: %v\n", resp)
+    // response from `OrganizationsOrganizationProjectsProjectRulesHeaderPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
+    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPost`: %v\n", resp)
 }
 ```
 
@@ -739,7 +739,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeaderPatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

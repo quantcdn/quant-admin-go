@@ -877,7 +877,7 @@ paths:
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/custom-response:
-    patch:
+    post:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -905,7 +905,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update custom response rule details
+      summary: Create custom response rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/custom-response/{rule}:
@@ -996,7 +996,7 @@ paths:
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/header:
-    patch:
+    post:
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
