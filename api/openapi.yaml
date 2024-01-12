@@ -995,7 +995,7 @@ paths:
       summary: Update custom response rule details
       tags:
       - rules
-  /organizations/{organization}/projects/{project}/rules/header:
+  /organizations/{organization}/projects/{project}/rules/headers:
     post:
       parameters:
       - $ref: '#/components/parameters/organization'
@@ -1027,7 +1027,7 @@ paths:
       summary: Create header rules
       tags:
       - rules
-  /organizations/{organization}/projects/{project}/rules/header/{rule}:
+  /organizations/{organization}/projects/{project}/rules/headers/{rule}:
     delete:
       parameters:
       - $ref: '#/components/parameters/organization'

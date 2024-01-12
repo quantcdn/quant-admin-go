@@ -1214,7 +1214,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesGetExecut
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest struct {
+type ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
 	organization interface{}
@@ -1222,25 +1222,25 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest struct {
 	ruleHeaderRequest *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest {
 	r.ruleHeaderRequest = &ruleHeaderRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderPostExecute(r)
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersPostExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesHeaderPost Create header rules
+OrganizationsOrganizationProjectsProjectRulesHeadersPost Create header rules
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest
+ @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest{
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1250,7 +1250,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPos
 
 // Execute executes the request
 //  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1258,12 +1258,12 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPos
 		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/header"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 
@@ -1348,7 +1348,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderPos
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest struct {
+type ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
 	organization interface{}
@@ -1356,21 +1356,21 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest str
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteExecute(r)
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete Delete a header rule
+OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete Delete a header rule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest
+ @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest{
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1381,7 +1381,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 
 // Execute executes the request
 //  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -1389,12 +1389,12 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/header/{rule}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
@@ -1478,7 +1478,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest struct {
+type ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
 	organization interface{}
@@ -1486,21 +1486,21 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest struct
 	rule interface{}
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGetExecute(r)
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGetExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet Get header rule details
+OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet Get header rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest
+ @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest{
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1511,7 +1511,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 
 // Execute executes the request
 //  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1519,12 +1519,12 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/header/{rule}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
@@ -1608,7 +1608,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest struct {
+type ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
 	organization interface{}
@@ -1617,26 +1617,26 @@ type ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest stru
 	ruleHeaderRequest *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest {
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest {
 	r.ruleHeaderRequest = &ruleHeaderRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatchExecute(r)
+func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatchExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch Update header rule details
+OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch Update header rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest
+ @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest{
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest {
+	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1647,7 +1647,7 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 
 // Execute executes the request
 //  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeaderRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -1655,12 +1655,12 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeaderRul
 		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/header/{rule}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
