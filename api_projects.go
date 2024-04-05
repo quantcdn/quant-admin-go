@@ -24,153 +24,33 @@ import (
 // ProjectsAPIService ProjectsAPI service
 type ProjectsAPIService service
 
-type ApiOrganizationsOrganizationProjectsGetRequest struct {
+type ApiCreateProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	organization interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsGetRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsGet Get projects for an organization
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @return ApiOrganizationsOrganizationProjectsGetRequest
-*/
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsGet(ctx context.Context, organization interface{}) ApiOrganizationsOrganizationProjectsGetRequest {
-	return ApiOrganizationsOrganizationProjectsGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsGetExecute(r ApiOrganizationsOrganizationProjectsGetRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsPostRequest struct {
-	ctx context.Context
-	ApiService *ProjectsAPIService
-	organization interface{}
+	organization string
 	projectRequest *ProjectRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsPostRequest) ProjectRequest(projectRequest ProjectRequest) ApiOrganizationsOrganizationProjectsPostRequest {
+func (r ApiCreateProjectRequest) ProjectRequest(projectRequest ProjectRequest) ApiCreateProjectRequest {
 	r.projectRequest = &projectRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsPostRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsPostExecute(r)
+func (r ApiCreateProjectRequest) Execute() (*Project, *http.Response, error) {
+	return r.ApiService.CreateProjectExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsPost Create a new project for an organization
+CreateProject Method for CreateProject
+
+Create a new project for an organization
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
- @return ApiOrganizationsOrganizationProjectsPostRequest
+ @return ApiCreateProjectRequest
 */
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsPost(ctx context.Context, organization interface{}) ApiOrganizationsOrganizationProjectsPostRequest {
-	return ApiOrganizationsOrganizationProjectsPostRequest{
+func (a *ProjectsAPIService) CreateProject(ctx context.Context, organization string) ApiCreateProjectRequest {
+	return ApiCreateProjectRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -178,16 +58,16 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsPost(ctx context.C
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsPostExecute(r ApiOrganizationsOrganizationProjectsPostRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
+//  @return Project
+func (a *ProjectsAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
+		localVarReturnValue  *Project
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.CreateProject")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -276,27 +156,29 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsPostExecute(r ApiO
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectDeleteRequest struct {
+type ApiDeleteProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDeleteRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectDeleteExecute(r)
+func (r ApiDeleteProjectRequest) Execute() (*Project, *http.Response, error) {
+	return r.ApiService.DeleteProjectExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectDelete Delete a project
+DeleteProject Method for DeleteProject
+
+Delete a project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectDeleteRequest
+ @return ApiDeleteProjectRequest
 */
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDelete(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectDeleteRequest{
+func (a *ProjectsAPIService) DeleteProject(ctx context.Context, organization string, project string) ApiDeleteProjectRequest {
+	return ApiDeleteProjectRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -305,16 +187,16 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDelete(ctx 
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectDeleteRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
+//  @return Project
+func (a *ProjectsAPIService) DeleteProjectExecute(r ApiDeleteProjectRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
+		localVarReturnValue  *Project
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsProjectDelete")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.DeleteProject")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -402,27 +284,29 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectDeleteExecu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectGetRequest struct {
+type ApiGetProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectGetRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectGetExecute(r)
+func (r ApiGetProjectRequest) Execute() ([]Project, *http.Response, error) {
+	return r.ApiService.GetProjectExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectGet Get project details
+GetProject Method for GetProject
+
+Get project details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectGetRequest
+ @return ApiGetProjectRequest
 */
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGet(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectGetRequest{
+func (a *ProjectsAPIService) GetProject(ctx context.Context, organization string, project string) ApiGetProjectRequest {
+	return ApiGetProjectRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -431,16 +315,16 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGet(ctx con
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGetExecute(r ApiOrganizationsOrganizationProjectsProjectGetRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
+//  @return []Project
+func (a *ProjectsAPIService) GetProjectExecute(r ApiGetProjectRequest) ([]Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
+		localVarReturnValue  []Project
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsProjectGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.GetProject")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -528,33 +412,159 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectGetExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectPatchRequest struct {
+type ApiListProjectsRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	organization interface{}
-	project interface{}
+	organization string
+}
+
+func (r ApiListProjectsRequest) Execute() ([]Project, *http.Response, error) {
+	return r.ApiService.ListProjectsExecute(r)
+}
+
+/*
+ListProjects Method for ListProjects
+
+Get projects for an organization
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @return ApiListProjectsRequest
+*/
+func (a *ProjectsAPIService) ListProjects(ctx context.Context, organization string) ApiListProjectsRequest {
+	return ApiListProjectsRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+	}
+}
+
+// Execute executes the request
+//  @return []Project
+func (a *ProjectsAPIService) ListProjectsExecute(r ApiListProjectsRequest) ([]Project, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []Project
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.ListProjects")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateProjectRequest struct {
+	ctx context.Context
+	ApiService *ProjectsAPIService
+	organization string
+	project string
 	projectRequest *ProjectRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) ProjectRequest(projectRequest ProjectRequest) ApiOrganizationsOrganizationProjectsProjectPatchRequest {
+func (r ApiUpdateProjectRequest) ProjectRequest(projectRequest ProjectRequest) ApiUpdateProjectRequest {
 	r.projectRequest = &projectRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectPatchRequest) Execute() (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectPatchExecute(r)
+func (r ApiUpdateProjectRequest) Execute() (*Project, *http.Response, error) {
+	return r.ApiService.UpdateProjectExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectPatch Update project details
+UpdateProject Method for UpdateProject
+
+Update project details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectPatchRequest
+ @return ApiUpdateProjectRequest
 */
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatch(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectPatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectPatchRequest{
+func (a *ProjectsAPIService) UpdateProject(ctx context.Context, organization string, project string) ApiUpdateProjectRequest {
+	return ApiUpdateProjectRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -563,16 +573,16 @@ func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatch(ctx c
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsGet200Response
-func (a *ProjectsAPIService) OrganizationsOrganizationProjectsProjectPatchExecute(r ApiOrganizationsOrganizationProjectsProjectPatchRequest) (*OrganizationsOrganizationProjectsGet200Response, *http.Response, error) {
+//  @return Project
+func (a *ProjectsAPIService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsGet200Response
+		localVarReturnValue  *Project
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.OrganizationsOrganizationProjectsProjectPatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.UpdateProject")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

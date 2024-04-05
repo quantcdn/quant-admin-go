@@ -20,8 +20,8 @@ var _ MappedNullable = &RuleProxyRequestWafConfigNotifyConfig{}
 
 // RuleProxyRequestWafConfigNotifyConfig struct for RuleProxyRequestWafConfigNotifyConfig
 type RuleProxyRequestWafConfigNotifyConfig struct {
-	OriginStatusCode []int64 `json:"origin_status_code,omitempty"`
-	Period *int64 `json:"period,omitempty"`
+	OriginStatusCode []int32 `json:"origin_status_code,omitempty"`
+	Period *int32 `json:"period,omitempty"`
 	SlackWebhook *string `json:"slack_webhook,omitempty"`
 }
 
@@ -43,9 +43,9 @@ func NewRuleProxyRequestWafConfigNotifyConfigWithDefaults() *RuleProxyRequestWaf
 }
 
 // GetOriginStatusCode returns the OriginStatusCode field value if set, zero value otherwise.
-func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCode() []int64 {
+func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCode() []int32 {
 	if o == nil || IsNil(o.OriginStatusCode) {
-		var ret []int64
+		var ret []int32
 		return ret
 	}
 	return o.OriginStatusCode
@@ -53,7 +53,7 @@ func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCode() []int64 {
 
 // GetOriginStatusCodeOk returns a tuple with the OriginStatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCodeOk() ([]int64, bool) {
+func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCodeOk() ([]int32, bool) {
 	if o == nil || IsNil(o.OriginStatusCode) {
 		return nil, false
 	}
@@ -69,15 +69,15 @@ func (o *RuleProxyRequestWafConfigNotifyConfig) HasOriginStatusCode() bool {
 	return false
 }
 
-// SetOriginStatusCode gets a reference to the given []int64 and assigns it to the OriginStatusCode field.
-func (o *RuleProxyRequestWafConfigNotifyConfig) SetOriginStatusCode(v []int64) {
+// SetOriginStatusCode gets a reference to the given []int32 and assigns it to the OriginStatusCode field.
+func (o *RuleProxyRequestWafConfigNotifyConfig) SetOriginStatusCode(v []int32) {
 	o.OriginStatusCode = v
 }
 
 // GetPeriod returns the Period field value if set, zero value otherwise.
-func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriod() int64 {
+func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriod() int32 {
 	if o == nil || IsNil(o.Period) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.Period
@@ -85,7 +85,7 @@ func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriod() int64 {
 
 // GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriodOk() (*int64, bool) {
+func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriodOk() (*int32, bool) {
 	if o == nil || IsNil(o.Period) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *RuleProxyRequestWafConfigNotifyConfig) HasPeriod() bool {
 	return false
 }
 
-// SetPeriod gets a reference to the given int64 and assigns it to the Period field.
-func (o *RuleProxyRequestWafConfigNotifyConfig) SetPeriod(v int64) {
+// SetPeriod gets a reference to the given int32 and assigns it to the Period field.
+func (o *RuleProxyRequestWafConfigNotifyConfig) SetPeriod(v int32) {
 	o.Period = &v
 }
 

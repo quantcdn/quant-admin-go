@@ -24,33 +24,35 @@ import (
 // RulesAPIService RulesAPI service
 type RulesAPIService service
 
-type ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest struct {
+type ApiCreateRuleAuthRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
 	ruleAuthRequest *RuleAuthRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) RuleAuthRequest(ruleAuthRequest RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
+func (r ApiCreateRuleAuthRequest) RuleAuthRequest(ruleAuthRequest RuleAuthRequest) ApiCreateRuleAuthRequest {
 	r.ruleAuthRequest = &ruleAuthRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthPostExecute(r)
+func (r ApiCreateRuleAuthRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.CreateRuleAuthExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesAuthPost Create authentication rules
+CreateRuleAuth Method for CreateRuleAuth
+
+Create authentication rules
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest
+ @return ApiCreateRuleAuthRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest{
+func (a *RulesAPIService) CreateRuleAuth(ctx context.Context, organization string, project string) ApiCreateRuleAuthRequest {
+	return ApiCreateRuleAuthRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -59,16 +61,16 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPost(
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) CreateRuleAuthExecute(r ApiCreateRuleAuthRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.CreateRuleAuth")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -158,29 +160,575 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthPostE
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest struct {
+type ApiCreateRuleCustomResponseRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
+	organization string
+	project string
+	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteExecute(r)
+func (r ApiCreateRuleCustomResponseRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiCreateRuleCustomResponseRequest {
+	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
+	return r
+}
+
+func (r ApiCreateRuleCustomResponseRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.CreateRuleCustomResponseExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete Delete an authentication rule
+CreateRuleCustomResponse Method for CreateRuleCustomResponse
+
+Create custom response rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiCreateRuleCustomResponseRequest
+*/
+func (a *RulesAPIService) CreateRuleCustomResponse(ctx context.Context, organization string, project string) ApiCreateRuleCustomResponseRequest {
+	return ApiCreateRuleCustomResponseRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) CreateRuleCustomResponseExecute(r ApiCreateRuleCustomResponseRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.CreateRuleCustomResponse")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleCustomResponseRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateRuleHeadersRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	ruleHeaderRequest *RuleHeaderRequest
+}
+
+func (r ApiCreateRuleHeadersRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiCreateRuleHeadersRequest {
+	r.ruleHeaderRequest = &ruleHeaderRequest
+	return r
+}
+
+func (r ApiCreateRuleHeadersRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.CreateRuleHeadersExecute(r)
+}
+
+/*
+CreateRuleHeaders Method for CreateRuleHeaders
+
+Create header rules
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiCreateRuleHeadersRequest
+*/
+func (a *RulesAPIService) CreateRuleHeaders(ctx context.Context, organization string, project string) ApiCreateRuleHeadersRequest {
+	return ApiCreateRuleHeadersRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) CreateRuleHeadersExecute(r ApiCreateRuleHeadersRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.CreateRuleHeaders")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleHeaderRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateRuleProxyRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	ruleProxyRequest *RuleProxyRequest
+}
+
+func (r ApiCreateRuleProxyRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiCreateRuleProxyRequest {
+	r.ruleProxyRequest = &ruleProxyRequest
+	return r
+}
+
+func (r ApiCreateRuleProxyRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.CreateRuleProxyExecute(r)
+}
+
+/*
+CreateRuleProxy Method for CreateRuleProxy
+
+Update proxy rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiCreateRuleProxyRequest
+*/
+func (a *RulesAPIService) CreateRuleProxy(ctx context.Context, organization string, project string) ApiCreateRuleProxyRequest {
+	return ApiCreateRuleProxyRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) CreateRuleProxyExecute(r ApiCreateRuleProxyRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.CreateRuleProxy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleProxyRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateRuleRedirectRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	ruleRedirectRequest *RuleRedirectRequest
+}
+
+func (r ApiCreateRuleRedirectRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiCreateRuleRedirectRequest {
+	r.ruleRedirectRequest = &ruleRedirectRequest
+	return r
+}
+
+func (r ApiCreateRuleRedirectRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.CreateRuleRedirectExecute(r)
+}
+
+/*
+CreateRuleRedirect Method for CreateRuleRedirect
+
+Create a new redirect rule
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiCreateRuleRedirectRequest
+*/
+func (a *RulesAPIService) CreateRuleRedirect(ctx context.Context, organization string, project string) ApiCreateRuleRedirectRequest {
+	return ApiCreateRuleRedirectRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) CreateRuleRedirectExecute(r ApiCreateRuleRedirectRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.CreateRuleRedirect")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleRedirectRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteRuleAuthRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiDeleteRuleAuthRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.DeleteRuleAuthExecute(r)
+}
+
+/*
+DeleteRuleAuth Method for DeleteRuleAuth
+
+Delete an authentication rule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest
+ @return ApiDeleteRuleAuthRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest{
+func (a *RulesAPIService) DeleteRuleAuth(ctx context.Context, organization string, project string, rule string) ApiDeleteRuleAuthRequest {
+	return ApiDeleteRuleAuthRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -190,16 +738,16 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleD
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) DeleteRuleAuthExecute(r ApiDeleteRuleAuthRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.DeleteRuleAuth")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -288,29 +836,31 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleD
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest struct {
+type ApiDeleteRuleCustomResponseRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
+	organization string
+	project string
+	rule string
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthRuleGetExecute(r)
+func (r ApiDeleteRuleCustomResponseRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.DeleteRuleCustomResponseExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesAuthRuleGet Get authentication rule details
+DeleteRuleCustomResponse Method for DeleteRuleCustomResponse
+
+Delete a custom response rule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest
+ @return ApiDeleteRuleCustomResponseRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest{
+func (a *RulesAPIService) DeleteRuleCustomResponse(ctx context.Context, organization string, project string, rule string) ApiDeleteRuleCustomResponseRequest {
+	return ApiDeleteRuleCustomResponseRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -320,16 +870,544 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleG
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) DeleteRuleCustomResponseExecute(r ApiDeleteRuleCustomResponseRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.DeleteRuleCustomResponse")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteRuleHeadersRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiDeleteRuleHeadersRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.DeleteRuleHeadersExecute(r)
+}
+
+/*
+DeleteRuleHeaders Method for DeleteRuleHeaders
+
+Delete a header rule
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiDeleteRuleHeadersRequest
+*/
+func (a *RulesAPIService) DeleteRuleHeaders(ctx context.Context, organization string, project string, rule string) ApiDeleteRuleHeadersRequest {
+	return ApiDeleteRuleHeadersRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) DeleteRuleHeadersExecute(r ApiDeleteRuleHeadersRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.DeleteRuleHeaders")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteRuleProxyRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiDeleteRuleProxyRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.DeleteRuleProxyExecute(r)
+}
+
+/*
+DeleteRuleProxy Method for DeleteRuleProxy
+
+Delete a proxy rule
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiDeleteRuleProxyRequest
+*/
+func (a *RulesAPIService) DeleteRuleProxy(ctx context.Context, organization string, project string, rule string) ApiDeleteRuleProxyRequest {
+	return ApiDeleteRuleProxyRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) DeleteRuleProxyExecute(r ApiDeleteRuleProxyRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.DeleteRuleProxy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteRuleRedirectRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiDeleteRuleRedirectRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.DeleteRuleRedirectExecute(r)
+}
+
+/*
+DeleteRuleRedirect Method for DeleteRuleRedirect
+
+Delete a redirect rule
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiDeleteRuleRedirectRequest
+*/
+func (a *RulesAPIService) DeleteRuleRedirect(ctx context.Context, organization string, project string, rule string) ApiDeleteRuleRedirectRequest {
+	return ApiDeleteRuleRedirectRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) DeleteRuleRedirectExecute(r ApiDeleteRuleRedirectRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.DeleteRuleRedirect")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetRuleAuthRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiGetRuleAuthRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.GetRuleAuthExecute(r)
+}
+
+/*
+GetRuleAuth Method for GetRuleAuth
+
+Get authentication rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiGetRuleAuthRequest
+*/
+func (a *RulesAPIService) GetRuleAuth(ctx context.Context, organization string, project string, rule string) ApiGetRuleAuthRequest {
+	return ApiGetRuleAuthRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) GetRuleAuthExecute(r ApiGetRuleAuthRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.GetRuleAuth")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -418,35 +1496,31 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleG
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest struct {
+type ApiGetRuleCustomResponseRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-	ruleAuthRequest *RuleAuthRequest
+	organization string
+	project string
+	rule string
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) RuleAuthRequest(ruleAuthRequest RuleAuthRequest) ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest {
-	r.ruleAuthRequest = &ruleAuthRequest
-	return r
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesAuthRulePatchExecute(r)
+func (r ApiGetRuleCustomResponseRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.GetRuleCustomResponseExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesAuthRulePatch Update authentication rule details
+GetRuleCustomResponse Method for GetRuleCustomResponse
+
+Get custom repsonse rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest
+ @return ApiGetRuleCustomResponseRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest{
+func (a *RulesAPIService) GetRuleCustomResponse(ctx context.Context, organization string, project string, rule string) ApiGetRuleCustomResponseRequest {
+	return ApiGetRuleCustomResponseRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -456,16 +1530,678 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleP
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) GetRuleCustomResponseExecute(r ApiGetRuleCustomResponseRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.GetRuleCustomResponse")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetRuleHeadersRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiGetRuleHeadersRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.GetRuleHeadersExecute(r)
+}
+
+/*
+GetRuleHeaders Method for GetRuleHeaders
+
+Get header rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiGetRuleHeadersRequest
+*/
+func (a *RulesAPIService) GetRuleHeaders(ctx context.Context, organization string, project string, rule string) ApiGetRuleHeadersRequest {
+	return ApiGetRuleHeadersRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) GetRuleHeadersExecute(r ApiGetRuleHeadersRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.GetRuleHeaders")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetRuleProxyRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiGetRuleProxyRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.GetRuleProxyExecute(r)
+}
+
+/*
+GetRuleProxy Method for GetRuleProxy
+
+Get proxy rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiGetRuleProxyRequest
+*/
+func (a *RulesAPIService) GetRuleProxy(ctx context.Context, organization string, project string, rule string) ApiGetRuleProxyRequest {
+	return ApiGetRuleProxyRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) GetRuleProxyExecute(r ApiGetRuleProxyRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.GetRuleProxy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetRuleRedirectRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+}
+
+func (r ApiGetRuleRedirectRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.GetRuleRedirectExecute(r)
+}
+
+/*
+GetRuleRedirect Method for GetRuleRedirect
+
+Get redirect rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiGetRuleRedirectRequest
+*/
+func (a *RulesAPIService) GetRuleRedirect(ctx context.Context, organization string, project string, rule string) ApiGetRuleRedirectRequest {
+	return ApiGetRuleRedirectRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) GetRuleRedirectExecute(r ApiGetRuleRedirectRequest) (*Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.GetRuleRedirect")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListRulesRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+}
+
+func (r ApiListRulesRequest) Execute() ([]Rule, *http.Response, error) {
+	return r.ApiService.ListRulesExecute(r)
+}
+
+/*
+ListRules Method for ListRules
+
+Get rules for a project
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiListRulesRequest
+*/
+func (a *RulesAPIService) ListRules(ctx context.Context, organization string, project string) ApiListRulesRequest {
+	return ApiListRulesRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return []Rule
+func (a *RulesAPIService) ListRulesExecute(r ApiListRulesRequest) ([]Rule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []Rule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.ListRules")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateRuleAuthRequest struct {
+	ctx context.Context
+	ApiService *RulesAPIService
+	organization string
+	project string
+	rule string
+	ruleAuthRequest *RuleAuthRequest
+}
+
+func (r ApiUpdateRuleAuthRequest) RuleAuthRequest(ruleAuthRequest RuleAuthRequest) ApiUpdateRuleAuthRequest {
+	r.ruleAuthRequest = &ruleAuthRequest
+	return r
+}
+
+func (r ApiUpdateRuleAuthRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.UpdateRuleAuthExecute(r)
+}
+
+/*
+UpdateRuleAuth Method for UpdateRuleAuth
+
+Update authentication rule details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param rule
+ @return ApiUpdateRuleAuthRequest
+*/
+func (a *RulesAPIService) UpdateRuleAuth(ctx context.Context, organization string, project string, rule string) ApiUpdateRuleAuthRequest {
+	return ApiUpdateRuleAuthRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return Rule
+func (a *RulesAPIService) UpdateRuleAuthExecute(r ApiUpdateRuleAuthRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.UpdateRuleAuth")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -556,163 +2292,37 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesAuthRuleP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest struct {
+type ApiUpdateRuleCustomResponseRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	rule string
 	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest {
+func (r ApiUpdateRuleCustomResponseRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiUpdateRuleCustomResponseRequest {
 	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePostExecute(r)
+func (r ApiUpdateRuleCustomResponseRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.UpdateRuleCustomResponseExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesCustomResponsePost Create custom response rule details
+UpdateRuleCustomResponse Method for UpdateRuleCustomResponse
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponsePostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.ruleCustomResponseRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete Delete a custom response rule
+Update custom response rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest
+ @return ApiUpdateRuleCustomResponseRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest{
+func (a *RulesAPIService) UpdateRuleCustomResponse(ctx context.Context, organization string, project string, rule string) ApiUpdateRuleCustomResponseRequest {
+	return ApiUpdateRuleCustomResponseRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -722,282 +2332,16 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet Get custom repsonse rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/custom-response/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-	ruleCustomResponseRequest *RuleCustomResponseRequest
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest {
-	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
-	return r
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch Update custom response rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) UpdateRuleCustomResponseExecute(r ApiUpdateRuleCustomResponseRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.UpdateRuleCustomResponse")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1088,289 +2432,37 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesCustomRes
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesGetRequest struct {
+type ApiUpdateRuleHeadersRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesGet Get rules for a project
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesGetRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesGet(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	rule string
 	ruleHeaderRequest *RuleHeaderRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest {
+func (r ApiUpdateRuleHeadersRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiUpdateRuleHeadersRequest {
 	r.ruleHeaderRequest = &ruleHeaderRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersPostExecute(r)
+func (r ApiUpdateRuleHeadersRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.UpdateRuleHeadersExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesHeadersPost Create header rules
+UpdateRuleHeaders Method for UpdateRuleHeaders
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersPost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.ruleHeaderRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete Delete a header rule
+Update header rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest
+ @return ApiUpdateRuleHeadersRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest{
+func (a *RulesAPIService) UpdateRuleHeaders(ctx context.Context, organization string, project string, rule string) ApiUpdateRuleHeadersRequest {
+	return ApiUpdateRuleHeadersRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1380,282 +2472,16 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRu
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet Get header rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/headers/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-	ruleHeaderRequest *RuleHeaderRequest
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest) RuleHeaderRequest(ruleHeaderRequest RuleHeaderRequest) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest {
-	r.ruleHeaderRequest = &ruleHeaderRequest
-	return r
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatchExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch Update header rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) UpdateRuleHeadersExecute(r ApiUpdateRuleHeadersRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.UpdateRuleHeaders")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1746,163 +2572,37 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesHeadersRu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest struct {
+type ApiUpdateRuleProxyRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	rule string
 	ruleProxyRequest *RuleProxyRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
+func (r ApiUpdateRuleProxyRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiUpdateRuleProxyRequest {
 	r.ruleProxyRequest = &ruleProxyRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyPostExecute(r)
+func (r ApiUpdateRuleProxyRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.UpdateRuleProxyExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesProxyPost Update proxy rule details
+UpdateRuleProxy Method for UpdateRuleProxy
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyPost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.ruleProxyRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete Delete a proxy rule
+Update proxy rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest
+ @return ApiUpdateRuleProxyRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest{
+func (a *RulesAPIService) UpdateRuleProxy(ctx context.Context, organization string, project string, rule string) ApiUpdateRuleProxyRequest {
+	return ApiUpdateRuleProxyRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -1912,282 +2612,16 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyRuleGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesProxyRuleGet Get proxy rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-	ruleProxyRequest *RuleProxyRequest
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest {
-	r.ruleProxyRequest = &ruleProxyRequest
-	return r
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesProxyRulePatchExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesProxyRulePatch Update proxy rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) UpdateRuleProxyExecute(r ApiUpdateRuleProxyRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.UpdateRuleProxy")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -2278,163 +2712,37 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesProxyRule
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest struct {
+type ApiUpdateRuleRedirectRequest struct {
 	ctx context.Context
 	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	rule string
 	ruleRedirectRequest *RuleRedirectRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest {
+func (r ApiUpdateRuleRedirectRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiUpdateRuleRedirectRequest {
 	r.ruleRedirectRequest = &ruleRedirectRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectPostExecute(r)
+func (r ApiUpdateRuleRedirectRequest) Execute() (*Rule, *http.Response, error) {
+	return r.ApiService.UpdateRuleRedirectExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectRulesRedirectPost Create a new redirect rule
+UpdateRuleRedirect Method for UpdateRuleRedirect
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectPostExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectPost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.ruleRedirectRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete Delete a redirect rule
+Update redirect rule details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
  @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest
+ @return ApiUpdateRuleRedirectRequest
 */
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest{
+func (a *RulesAPIService) UpdateRuleRedirect(ctx context.Context, organization string, project string, rule string) ApiUpdateRuleRedirectRequest {
+	return ApiUpdateRuleRedirectRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -2444,282 +2752,16 @@ func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectR
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet Get redirect rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRuleGetExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/redirect/{rule}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest struct {
-	ctx context.Context
-	ApiService *RulesAPIService
-	organization interface{}
-	project interface{}
-	rule interface{}
-	ruleRedirectRequest *RuleRedirectRequest
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest {
-	r.ruleRedirectRequest = &ruleRedirectRequest
-	return r
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch Update redirect rule details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param rule
- @return ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest
-*/
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(ctx context.Context, organization interface{}, project interface{}, rule interface{}) ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		rule: rule,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectRulesGet200Response
-func (a *RulesAPIService) OrganizationsOrganizationProjectsProjectRulesRedirectRulePatchExecute(r ApiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest) (*OrganizationsOrganizationProjectsProjectRulesGet200Response, *http.Response, error) {
+//  @return Rule
+func (a *RulesAPIService) UpdateRuleRedirectExecute(r ApiUpdateRuleRedirectRequest) (*Rule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectRulesGet200Response
+		localVarReturnValue  *Rule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAPIService.UpdateRuleRedirect")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

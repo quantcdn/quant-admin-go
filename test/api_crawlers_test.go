@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_CrawlersAPIService(t *testing.T) {
@@ -22,15 +23,14 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersCrawlerDelete", func(t *testing.T) {
+	t.Run("Test CrawlersAPIService CreateCrawlers", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var crawler interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersCrawlerDelete(context.Background(), organization, project, crawler).Execute()
+		resp, httpRes, err := apiClient.CrawlersAPI.CreateCrawlers(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -38,15 +38,15 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersCrawlerGet", func(t *testing.T) {
+	t.Run("Test CrawlersAPIService DeleteCrawler", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var crawler interface{}
+		var organization string
+		var project string
+		var crawler string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersCrawlerGet(context.Background(), organization, project, crawler).Execute()
+		resp, httpRes, err := apiClient.CrawlersAPI.DeleteCrawler(context.Background(), organization, project, crawler).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -54,15 +54,15 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch", func(t *testing.T) {
+	t.Run("Test CrawlersAPIService GetCrawler", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var crawler interface{}
+		var organization string
+		var project string
+		var crawler string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch(context.Background(), organization, project, crawler).Execute()
+		resp, httpRes, err := apiClient.CrawlersAPI.GetCrawler(context.Background(), organization, project, crawler).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -70,14 +70,14 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersGet", func(t *testing.T) {
+	t.Run("Test CrawlersAPIService ListCrawlers", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersGet(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.CrawlersAPI.ListCrawlers(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -85,14 +85,15 @@ func Test_openapi_CrawlersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlersAPIService OrganizationsOrganizationProjectsProjectCrawlersPost", func(t *testing.T) {
+	t.Run("Test CrawlersAPIService UpdateCrawler", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
+		var organization string
+		var project string
+		var crawler string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.OrganizationsOrganizationProjectsProjectCrawlersPost(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.CrawlersAPI.UpdateCrawler(context.Background(), organization, project, crawler).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

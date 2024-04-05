@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OriginStatusCode** | Pointer to **[]int64** |  | [optional] 
-**Period** | Pointer to **int64** |  | [optional] 
+**OriginStatusCode** | Pointer to **[]int32** |  | [optional] 
+**Period** | Pointer to **int32** |  | [optional] 
 **SlackWebhook** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOriginStatusCode
 
-`func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCode() []int64`
+`func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCode() []int32`
 
 GetOriginStatusCode returns the OriginStatusCode field if non-nil, zero value otherwise.
 
 ### GetOriginStatusCodeOk
 
-`func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCodeOk() (*[]int64, bool)`
+`func (o *RuleProxyRequestWafConfigNotifyConfig) GetOriginStatusCodeOk() (*[]int32, bool)`
 
 GetOriginStatusCodeOk returns a tuple with the OriginStatusCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginStatusCode
 
-`func (o *RuleProxyRequestWafConfigNotifyConfig) SetOriginStatusCode(v []int64)`
+`func (o *RuleProxyRequestWafConfigNotifyConfig) SetOriginStatusCode(v []int32)`
 
 SetOriginStatusCode sets OriginStatusCode field to given value.
 
@@ -54,20 +54,20 @@ HasOriginStatusCode returns a boolean if a field has been set.
 
 ### GetPeriod
 
-`func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriod() int64`
+`func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriod() int32`
 
 GetPeriod returns the Period field if non-nil, zero value otherwise.
 
 ### GetPeriodOk
 
-`func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriodOk() (*int64, bool)`
+`func (o *RuleProxyRequestWafConfigNotifyConfig) GetPeriodOk() (*int32, bool)`
 
 GetPeriodOk returns a tuple with the Period field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPeriod
 
-`func (o *RuleProxyRequestWafConfigNotifyConfig) SetPeriod(v int64)`
+`func (o *RuleProxyRequestWafConfigNotifyConfig) SetPeriod(v int32)`
 
 SetPeriod sets Period field to given value.
 

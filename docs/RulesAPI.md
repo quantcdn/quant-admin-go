@@ -4,35 +4,37 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**OrganizationsOrganizationProjectsProjectRulesAuthPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthPost) | **Post** /organizations/{organization}/projects/{project}/rules/auth | Create authentication rules
-[**OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule
-[**OrganizationsOrganizationProjectsProjectRulesAuthRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Get authentication rule details
-[**OrganizationsOrganizationProjectsProjectRulesAuthRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesAuthRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} | Update authentication rule details
-[**OrganizationsOrganizationProjectsProjectRulesCustomResponsePost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponsePost) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | Create custom response rule details
-[**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Delete a custom response rule
-[**OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Get custom repsonse rule details
-[**OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Update custom response rule details
-[**OrganizationsOrganizationProjectsProjectRulesGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesGet) | **Get** /organizations/{organization}/projects/{project}/rules | Get rules for a project
-[**OrganizationsOrganizationProjectsProjectRulesHeadersPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeadersPost) | **Post** /organizations/{organization}/projects/{project}/rules/headers | Create header rules
-[**OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} | Delete a header rule
-[**OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} | Get header rule details
-[**OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/headers/{rule} | Update header rule details
-[**OrganizationsOrganizationProjectsProjectRulesProxyPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyPost) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | Update proxy rule details
-[**OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Delete a proxy rule
-[**OrganizationsOrganizationProjectsProjectRulesProxyRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Get proxy rule details
-[**OrganizationsOrganizationProjectsProjectRulesProxyRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesProxyRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | Update proxy rule details
-[**OrganizationsOrganizationProjectsProjectRulesRedirectPost**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectPost) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | Create a new redirect rule
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Delete a redirect rule
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Get redirect rule details
-[**OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch**](RulesAPI.md#OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | Update redirect rule details
+[**CreateRuleAuth**](RulesAPI.md#CreateRuleAuth) | **Post** /organizations/{organization}/projects/{project}/rules/auth |
+[**CreateRuleCustomResponse**](RulesAPI.md#CreateRuleCustomResponse) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response |
+[**CreateRuleHeaders**](RulesAPI.md#CreateRuleHeaders) | **Post** /organizations/{organization}/projects/{project}/rules/headers |
+[**CreateRuleProxy**](RulesAPI.md#CreateRuleProxy) | **Post** /organizations/{organization}/projects/{project}/rules/proxy |
+[**CreateRuleRedirect**](RulesAPI.md#CreateRuleRedirect) | **Post** /organizations/{organization}/projects/{project}/rules/redirect |
+[**DeleteRuleAuth**](RulesAPI.md#DeleteRuleAuth) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
+[**DeleteRuleCustomResponse**](RulesAPI.md#DeleteRuleCustomResponse) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
+[**DeleteRuleHeaders**](RulesAPI.md#DeleteRuleHeaders) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
+[**DeleteRuleProxy**](RulesAPI.md#DeleteRuleProxy) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
+[**DeleteRuleRedirect**](RulesAPI.md#DeleteRuleRedirect) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
+[**GetRuleAuth**](RulesAPI.md#GetRuleAuth) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
+[**GetRuleCustomResponse**](RulesAPI.md#GetRuleCustomResponse) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
+[**GetRuleHeaders**](RulesAPI.md#GetRuleHeaders) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
+[**GetRuleProxy**](RulesAPI.md#GetRuleProxy) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
+[**GetRuleRedirect**](RulesAPI.md#GetRuleRedirect) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
+[**ListRules**](RulesAPI.md#ListRules) | **Get** /organizations/{organization}/projects/{project}/rules |
+[**UpdateRuleAuth**](RulesAPI.md#UpdateRuleAuth) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
+[**UpdateRuleCustomResponse**](RulesAPI.md#UpdateRuleCustomResponse) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
+[**UpdateRuleHeaders**](RulesAPI.md#UpdateRuleHeaders) | **Patch** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
+[**UpdateRuleProxy**](RulesAPI.md#UpdateRuleProxy) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
+[**UpdateRuleRedirect**](RulesAPI.md#UpdateRuleRedirect) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
 
 
 
-## OrganizationsOrganizationProjectsProjectRulesAuthPost
+## CreateRuleAuth
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthPost(ctx, organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
+> Rule CreateRuleAuth(ctx, organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
 
-Create authentication rules
+
+
+
 
 ### Example
 
@@ -40,26 +42,26 @@ Create authentication rules
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost(context.Background(), organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.CreateRuleAuth(context.Background(), organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.CreateRuleAuth``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRuleAuth`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.CreateRuleAuth`: %v\n", resp)
 }
 ```
 
@@ -69,12 +71,12 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesAuthPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateRuleAuthRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -101,11 +103,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete
+## CreateRuleCustomResponse
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(ctx, organization, project, rule).Execute()
+> Rule CreateRuleCustomResponse(ctx, organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 
-Delete an authentication rule
+
+
+
 
 ### Example
 
@@ -113,26 +117,26 @@ Delete an authentication rule
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.CreateRuleCustomResponse(context.Background(), organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.CreateRuleCustomResponse``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRuleCustomResponse`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.CreateRuleCustomResponse`: %v\n", resp)
 }
 ```
 
@@ -142,13 +146,313 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesAuthRuleDeleteRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateRuleCustomResponseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateRuleHeaders
+
+> Rule CreateRuleHeaders(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.CreateRuleHeaders(context.Background(), organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.CreateRuleHeaders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRuleHeaders`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.CreateRuleHeaders`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRuleHeadersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateRuleProxy
+
+> Rule CreateRuleProxy(ctx, organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.CreateRuleProxy(context.Background(), organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.CreateRuleProxy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRuleProxy`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.CreateRuleProxy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRuleProxyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateRuleRedirect
+
+> Rule CreateRuleRedirect(ctx, organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.CreateRuleRedirect(context.Background(), organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.CreateRuleRedirect``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateRuleRedirect`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.CreateRuleRedirect`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRuleRedirectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteRuleAuth
+
+> Rule DeleteRuleAuth(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.DeleteRuleAuth(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.DeleteRuleAuth``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteRuleAuth`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.DeleteRuleAuth`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteRuleAuthRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -159,7 +463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -175,11 +479,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesAuthRuleGet
+## DeleteRuleCustomResponse
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(ctx, organization, project, rule).Execute()
+> Rule DeleteRuleCustomResponse(ctx, organization, project, rule).Execute()
 
-Get authentication rule details
+
+
+
 
 ### Example
 
@@ -187,26 +493,26 @@ Get authentication rule details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.DeleteRuleCustomResponse(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.DeleteRuleCustomResponse``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteRuleCustomResponse`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.DeleteRuleCustomResponse`: %v\n", resp)
 }
 ```
 
@@ -216,13 +522,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesAuthRuleGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteRuleCustomResponseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -233,7 +539,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -249,11 +555,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesAuthRulePatch
+## DeleteRuleHeaders
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(ctx, organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+> Rule DeleteRuleHeaders(ctx, organization, project, rule).Execute()
 
-Update authentication rule details
+
+
+
 
 ### Example
 
@@ -261,27 +569,26 @@ Update authentication rule details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-    ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(context.Background(), organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.DeleteRuleHeaders(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.DeleteRuleHeaders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteRuleHeaders`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.DeleteRuleHeaders`: %v\n", resp)
 }
 ```
 
@@ -291,13 +598,695 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesAuthRulePatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteRuleHeadersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteRuleProxy
+
+> Rule DeleteRuleProxy(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.DeleteRuleProxy(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.DeleteRuleProxy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteRuleProxy`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.DeleteRuleProxy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteRuleProxyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteRuleRedirect
+
+> Rule DeleteRuleRedirect(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.DeleteRuleRedirect(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.DeleteRuleRedirect``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteRuleRedirect`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.DeleteRuleRedirect`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteRuleRedirectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRuleAuth
+
+> Rule GetRuleAuth(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.GetRuleAuth(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.GetRuleAuth``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRuleAuth`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.GetRuleAuth`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRuleAuthRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRuleCustomResponse
+
+> Rule GetRuleCustomResponse(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.GetRuleCustomResponse(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.GetRuleCustomResponse``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRuleCustomResponse`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.GetRuleCustomResponse`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRuleCustomResponseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRuleHeaders
+
+> Rule GetRuleHeaders(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.GetRuleHeaders(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.GetRuleHeaders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRuleHeaders`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.GetRuleHeaders`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRuleHeadersRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRuleProxy
+
+> Rule GetRuleProxy(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.GetRuleProxy(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.GetRuleProxy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRuleProxy`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.GetRuleProxy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRuleProxyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRuleRedirect
+
+> Rule GetRuleRedirect(ctx, organization, project, rule).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.GetRuleRedirect(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.GetRuleRedirect``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRuleRedirect`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.GetRuleRedirect`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRuleRedirectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListRules
+
+> []Rule ListRules(ctx, organization, project).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.ListRules(context.Background(), organization, project).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.ListRules``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListRules`: []Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.ListRules`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListRulesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateRuleAuth
+
+> Rule UpdateRuleAuth(ctx, organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.UpdateRuleAuth(context.Background(), organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.UpdateRuleAuth``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateRuleAuth`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.UpdateRuleAuth`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateRuleAuthRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -309,7 +1298,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -325,11 +1314,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesCustomResponsePost
+## UpdateRuleCustomResponse
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponsePost(ctx, organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+> Rule UpdateRuleCustomResponse(ctx, organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 
-Create custom response rule details
+
+
+
 
 ### Example
 
@@ -337,26 +1328,27 @@ Create custom response rule details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+	ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost(context.Background(), organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponsePost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePost`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.UpdateRuleCustomResponse(context.Background(), organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.UpdateRuleCustomResponse``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateRuleCustomResponse`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.UpdateRuleCustomResponse`: %v\n", resp)
 }
 ```
 
@@ -366,235 +1358,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponsePostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(ctx, organization, project, rule).Execute()
-
-Delete a custom response rule
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDeleteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(ctx, organization, project, rule).Execute()
-
-Get custom repsonse rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(ctx, organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
-
-Update custom response rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-    ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(context.Background(), organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateRuleCustomResponseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -606,7 +1376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -622,11 +1392,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesGet
+## UpdateRuleHeaders
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesGet(ctx, organization, project).Execute()
+> Rule UpdateRuleHeaders(ctx, organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
 
-Get rules for a project
+
+
+
 
 ### Example
 
@@ -634,25 +1406,27 @@ Get rules for a project
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesGet(context.Background(), organization, project).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.UpdateRuleHeaders(context.Background(), organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.UpdateRuleHeaders``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateRuleHeaders`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.UpdateRuleHeaders`: %v\n", resp)
 }
 ```
 
@@ -662,307 +1436,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesHeadersPost
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeadersPost(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
-
-Create header rules
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersPost(context.Background(), organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeadersPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeadersPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete(ctx, organization, project, rule).Execute()
-
-Delete a header rule
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRuleDelete`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeadersRuleDeleteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet(ctx, organization, project, rule).Execute()
-
-Get header rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRuleGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeadersRuleGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch(ctx, organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
-
-Update header rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-    ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch(context.Background(), organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeadersRulePatch`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesHeadersRulePatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateRuleHeadersRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -974,7 +1454,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -990,11 +1470,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesProxyPost
+## UpdateRuleProxy
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyPost(ctx, organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
+> Rule UpdateRuleProxy(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
 
-Update proxy rule details
+
+
+
 
 ### Example
 
@@ -1002,26 +1484,27 @@ Update proxy rule details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost(context.Background(), organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.UpdateRuleProxy(context.Background(), organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.UpdateRuleProxy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateRuleProxy`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.UpdateRuleProxy`: %v\n", resp)
 }
 ```
 
@@ -1031,235 +1514,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesProxyPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(ctx, organization, project, rule).Execute()
-
-Delete a proxy rule
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesProxyRuleDeleteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesProxyRuleGet
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(ctx, organization, project, rule).Execute()
-
-Get proxy rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesProxyRuleGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesProxyRulePatch
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
-
-Update proxy rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-    ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(context.Background(), organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesProxyRulePatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateRuleProxyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1271,7 +1532,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 
@@ -1287,11 +1548,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectRulesRedirectPost
+## UpdateRuleRedirect
 
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectPost(ctx, organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> Rule UpdateRuleRedirect(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
-Create a new redirect rule
+
+
+
 
 ### Example
 
@@ -1299,26 +1562,27 @@ Create a new redirect rule
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	rule := "rule_example" // string |
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost(context.Background(), organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectPost`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.UpdateRuleRedirect(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.UpdateRuleRedirect``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateRuleRedirect`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.UpdateRuleRedirect`: %v\n", resp)
 }
 ```
 
@@ -1328,235 +1592,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**rule** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesRedirectPostRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(ctx, organization, project, rule).Execute()
-
-Delete a redirect rule
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesRedirectRuleDeleteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(ctx, organization, project, rule).Execute()
-
-Get redirect rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(context.Background(), organization, project, rule).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesRedirectRuleGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch
-
-> OrganizationsOrganizationProjectsProjectRulesGet200Response OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
-
-Update redirect rule details
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    rule := TODO // interface{} |
-    ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: OrganizationsOrganizationProjectsProjectRulesGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
-**rule** | [**interface{}**](.md) |  |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectRulesRedirectRulePatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateRuleRedirectRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -1568,7 +1610,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsProjectRulesGet200Response**](OrganizationsOrganizationProjectsProjectRulesGet200Response.md)
+[**Rule**](Rule.md)
 
 ### Authorization
 

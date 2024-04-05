@@ -16,11 +16,11 @@ Name | Type | Description | Notes
 **NotifyEmail** | Pointer to **string** |  | [optional] 
 **Httpbl** | Pointer to [**RuleProxyRequestWafConfigHttpbl**](RuleProxyRequestWafConfigHttpbl.md) |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
-**OriginTimeout** | Pointer to **int64** |  | [optional] 
+**OriginTimeout** | Pointer to **int32** |  | [optional] 
 **FailoverMode** | Pointer to **bool** |  | [optional] 
-**FailoverOriginTtfb** | Pointer to **int64** |  | [optional] 
-**FailoverOriginStatusCode** | Pointer to **int64** |  | [optional] 
-**FailoverLifetime** | Pointer to **int64** |  | [optional] 
+**FailoverOriginTtfb** | Pointer to **int32** |  | [optional] 
+**FailoverOriginStatusCode** | Pointer to **int32** |  | [optional] 
+**FailoverLifetime** | Pointer to **int32** |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] 
 **NotifyConfig** | Pointer to [**RuleProxyRequestWafConfigNotifyConfig**](RuleProxyRequestWafConfigNotifyConfig.md) |  | [optional] 
 **InjectHeaders** | Pointer to **[]string** |  | [optional] 
@@ -346,20 +346,20 @@ HasProxyAlertEnabled returns a boolean if a field has been set.
 
 ### GetOriginTimeout
 
-`func (o *RuleProxyRequestWafConfig) GetOriginTimeout() int64`
+`func (o *RuleProxyRequestWafConfig) GetOriginTimeout() int32`
 
 GetOriginTimeout returns the OriginTimeout field if non-nil, zero value otherwise.
 
 ### GetOriginTimeoutOk
 
-`func (o *RuleProxyRequestWafConfig) GetOriginTimeoutOk() (*int64, bool)`
+`func (o *RuleProxyRequestWafConfig) GetOriginTimeoutOk() (*int32, bool)`
 
 GetOriginTimeoutOk returns a tuple with the OriginTimeout field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginTimeout
 
-`func (o *RuleProxyRequestWafConfig) SetOriginTimeout(v int64)`
+`func (o *RuleProxyRequestWafConfig) SetOriginTimeout(v int32)`
 
 SetOriginTimeout sets OriginTimeout field to given value.
 
@@ -396,20 +396,20 @@ HasFailoverMode returns a boolean if a field has been set.
 
 ### GetFailoverOriginTtfb
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfb() int64`
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfb() int32`
 
 GetFailoverOriginTtfb returns the FailoverOriginTtfb field if non-nil, zero value otherwise.
 
 ### GetFailoverOriginTtfbOk
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfbOk() (*int64, bool)`
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfbOk() (*int32, bool)`
 
 GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverOriginTtfb
 
-`func (o *RuleProxyRequestWafConfig) SetFailoverOriginTtfb(v int64)`
+`func (o *RuleProxyRequestWafConfig) SetFailoverOriginTtfb(v int32)`
 
 SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
 
@@ -421,20 +421,20 @@ HasFailoverOriginTtfb returns a boolean if a field has been set.
 
 ### GetFailoverOriginStatusCode
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCode() int64`
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCode() int32`
 
 GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field if non-nil, zero value otherwise.
 
 ### GetFailoverOriginStatusCodeOk
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCodeOk() (*int64, bool)`
+`func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCodeOk() (*int32, bool)`
 
 GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverOriginStatusCode
 
-`func (o *RuleProxyRequestWafConfig) SetFailoverOriginStatusCode(v int64)`
+`func (o *RuleProxyRequestWafConfig) SetFailoverOriginStatusCode(v int32)`
 
 SetFailoverOriginStatusCode sets FailoverOriginStatusCode field to given value.
 
@@ -446,20 +446,20 @@ HasFailoverOriginStatusCode returns a boolean if a field has been set.
 
 ### GetFailoverLifetime
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() int64`
+`func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() int32`
 
 GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
 
 ### GetFailoverLifetimeOk
 
-`func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*int64, bool)`
+`func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*int32, bool)`
 
 GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverLifetime
 
-`func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v int64)`
+`func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v int32)`
 
 SetFailoverLifetime sets FailoverLifetime field to given value.
 

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_DomainsAPIService(t *testing.T) {
@@ -22,15 +23,14 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test DomainsAPIService OrganizationsOrganizationProjectsProjectDomainsDomainDelete", func(t *testing.T) {
+	t.Run("Test DomainsAPIService CreateDomain", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var domain interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsDomainDelete(context.Background(), organization, project, domain).Execute()
+		resp, httpRes, err := apiClient.DomainsAPI.CreateDomain(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -38,15 +38,15 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DomainsAPIService OrganizationsOrganizationProjectsProjectDomainsDomainGet", func(t *testing.T) {
+	t.Run("Test DomainsAPIService DeleteDomain", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var domain interface{}
+		var organization string
+		var project string
+		var domain string
 
-		resp, httpRes, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsDomainGet(context.Background(), organization, project, domain).Execute()
+		resp, httpRes, err := apiClient.DomainsAPI.DeleteDomain(context.Background(), organization, project, domain).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -54,15 +54,15 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DomainsAPIService OrganizationsOrganizationProjectsProjectDomainsDomainPatch", func(t *testing.T) {
+	t.Run("Test DomainsAPIService GetDomain", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var domain interface{}
+		var organization string
+		var project string
+		var domain string
 
-		resp, httpRes, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsDomainPatch(context.Background(), organization, project, domain).Execute()
+		resp, httpRes, err := apiClient.DomainsAPI.GetDomain(context.Background(), organization, project, domain).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -70,14 +70,14 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DomainsAPIService OrganizationsOrganizationProjectsProjectDomainsGet", func(t *testing.T) {
+	t.Run("Test DomainsAPIService ListDomains", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsGet(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.DomainsAPI.ListDomains(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -85,14 +85,15 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DomainsAPIService OrganizationsOrganizationProjectsProjectDomainsPost", func(t *testing.T) {
+	t.Run("Test DomainsAPIService UpdateDomain", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
+		var organization string
+		var project string
+		var domain string
 
-		resp, httpRes, err := apiClient.DomainsAPI.OrganizationsOrganizationProjectsProjectDomainsPost(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.DomainsAPI.UpdateDomain(context.Background(), organization, project, domain).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -4,16 +4,18 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**OrganizationsGet**](OrganizationsAPI.md#OrganizationsGet) | **Get** /organizations | List organizations
-[**OrganizationsOrganizationGet**](OrganizationsAPI.md#OrganizationsOrganizationGet) | **Get** /organizations/{organization} | Get organization by machine name
+[**GetOrganization**](OrganizationsAPI.md#GetOrganization) | **Get** /organizations/{organization} |
+[**ListOrganizations**](OrganizationsAPI.md#ListOrganizations) | **Get** /organizations |
 
 
 
-## OrganizationsGet
+## GetOrganization
 
-> OrganizationsGet200Response OrganizationsGet(ctx).Execute()
+> Organization GetOrganization(ctx, organization).Execute()
 
-List organizations
+
+
+
 
 ### Example
 
@@ -21,38 +23,47 @@ List organizations
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
+	organization := "organization_example" // string | Organization machine name
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrganizationsAPI.OrganizationsGet(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.OrganizationsGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsGet`: OrganizationsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.OrganizationsGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetOrganization(context.Background(), organization).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetOrganization``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrganization`: Organization
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetOrganization`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetOrganizationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
 
-[**OrganizationsGet200Response**](OrganizationsGet200Response.md)
+[**Organization**](Organization.md)
 
 ### Authorization
 
@@ -68,11 +79,13 @@ Other parameters are passed through a pointer to a apiOrganizationsGetRequest st
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationGet
+## ListOrganizations
 
-> OrganizationsGet200Response OrganizationsOrganizationGet(ctx, organization).Execute()
+> []Organization ListOrganizations(ctx).Execute()
 
-Get organization by machine name
+
+
+
 
 ### Example
 
@@ -80,47 +93,38 @@ Get organization by machine name
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrganizationsAPI.OrganizationsOrganizationGet(context.Background(), organization).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.OrganizationsOrganizationGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationGet`: OrganizationsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.OrganizationsOrganizationGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.ListOrganizations(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.ListOrganizations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListOrganizations`: []Organization
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.ListOrganizations`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
+Other parameters are passed through a pointer to a apiListOrganizationsRequest struct via the builder pattern
 
 
 ### Return type
 
-[**OrganizationsGet200Response**](OrganizationsGet200Response.md)
+[**[]Organization**](Organization.md)
 
 ### Authorization
 

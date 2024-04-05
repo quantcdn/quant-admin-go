@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int64** |  | [optional] 
+**Id** | Pointer to **int32** |  | [optional] 
 **MachineName** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
 **DeletedAt** | Pointer to **string** |  | [optional] 
-**OrganisationId** | Pointer to **int64** |  | [optional] 
-**Uuid** | Pointer to **string** |  | [optional] 
+**OrganisationId** | Pointer to **int32** |  | [optional] 
+**Uuid** | Pointer to **int32** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
 **ProjectType** | Pointer to **string** |  | [optional] 
 **ProjectParentId** | Pointer to **int32** |  | [optional] 
@@ -39,20 +39,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *Project) GetId() int64`
+`func (o *Project) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *Project) GetIdOk() (*int64, bool)`
+`func (o *Project) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *Project) SetId(v int64)`
+`func (o *Project) SetId(v int32)`
 
 SetId sets Id field to given value.
 
@@ -189,20 +189,20 @@ HasDeletedAt returns a boolean if a field has been set.
 
 ### GetOrganisationId
 
-`func (o *Project) GetOrganisationId() int64`
+`func (o *Project) GetOrganisationId() int32`
 
 GetOrganisationId returns the OrganisationId field if non-nil, zero value otherwise.
 
 ### GetOrganisationIdOk
 
-`func (o *Project) GetOrganisationIdOk() (*int64, bool)`
+`func (o *Project) GetOrganisationIdOk() (*int32, bool)`
 
 GetOrganisationIdOk returns a tuple with the OrganisationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrganisationId
 
-`func (o *Project) SetOrganisationId(v int64)`
+`func (o *Project) SetOrganisationId(v int32)`
 
 SetOrganisationId sets OrganisationId field to given value.
 
@@ -214,20 +214,20 @@ HasOrganisationId returns a boolean if a field has been set.
 
 ### GetUuid
 
-`func (o *Project) GetUuid() string`
+`func (o *Project) GetUuid() int32`
 
 GetUuid returns the Uuid field if non-nil, zero value otherwise.
 
 ### GetUuidOk
 
-`func (o *Project) GetUuidOk() (*string, bool)`
+`func (o *Project) GetUuidOk() (*int32, bool)`
 
 GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUuid
 
-`func (o *Project) SetUuid(v string)`
+`func (o *Project) SetUuid(v int32)`
 
 SetUuid sets Uuid field to given value.
 

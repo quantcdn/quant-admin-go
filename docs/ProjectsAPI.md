@@ -4,19 +4,21 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**OrganizationsOrganizationProjectsGet**](ProjectsAPI.md#OrganizationsOrganizationProjectsGet) | **Get** /organizations/{organization}/projects | Get projects for an organization
-[**OrganizationsOrganizationProjectsPost**](ProjectsAPI.md#OrganizationsOrganizationProjectsPost) | **Post** /organizations/{organization}/projects | Create a new project for an organization
-[**OrganizationsOrganizationProjectsProjectDelete**](ProjectsAPI.md#OrganizationsOrganizationProjectsProjectDelete) | **Delete** /organizations/{organization}/projects/{project} | Delete a project
-[**OrganizationsOrganizationProjectsProjectGet**](ProjectsAPI.md#OrganizationsOrganizationProjectsProjectGet) | **Get** /organizations/{organization}/projects/{project} | Get project details
-[**OrganizationsOrganizationProjectsProjectPatch**](ProjectsAPI.md#OrganizationsOrganizationProjectsProjectPatch) | **Patch** /organizations/{organization}/projects/{project} | Update project details
+[**CreateProject**](ProjectsAPI.md#CreateProject) | **Post** /organizations/{organization}/projects |
+[**DeleteProject**](ProjectsAPI.md#DeleteProject) | **Delete** /organizations/{organization}/projects/{project} |
+[**GetProject**](ProjectsAPI.md#GetProject) | **Get** /organizations/{organization}/projects/{project} |
+[**ListProjects**](ProjectsAPI.md#ListProjects) | **Get** /organizations/{organization}/projects |
+[**UpdateProject**](ProjectsAPI.md#UpdateProject) | **Patch** /organizations/{organization}/projects/{project} |
 
 
 
-## OrganizationsOrganizationProjectsGet
+## CreateProject
 
-> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsGet(ctx, organization).Execute()
+> Project CreateProject(ctx, organization).ProjectRequest(projectRequest).Execute()
 
-Get projects for an organization
+
+
+
 
 ### Example
 
@@ -24,24 +26,25 @@ Get projects for an organization
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
+	organization := "organization_example" // string | Organization machine name
+	projectRequest := *openapiclient.NewProjectRequest() // ProjectRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsGet(context.Background(), organization).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsGet`: OrganizationsOrganizationProjectsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProjectsAPI.CreateProject(context.Background(), organization).ProjectRequest(projectRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.CreateProject``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateProject`: Project
+	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.CreateProject`: %v\n", resp)
 }
 ```
 
@@ -51,80 +54,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
+**organization** | **string** | Organization machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## OrganizationsOrganizationProjectsPost
-
-> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsPost(ctx, organization).ProjectRequest(projectRequest).Execute()
-
-Create a new project for an organization
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-    organization := TODO // interface{} | Organization machine name
-    projectRequest := *openapiclient.NewProjectRequest() // ProjectRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsPost(context.Background(), organization).ProjectRequest(projectRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsPost`: OrganizationsOrganizationProjectsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsPost`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateProjectRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -134,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
+[**Project**](Project.md)
 
 ### Authorization
 
@@ -150,11 +84,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectDelete
+## DeleteProject
 
-> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsProjectDelete(ctx, organization, project).Execute()
+> Project DeleteProject(ctx, organization, project).Execute()
 
-Delete a project
+
+
+
 
 ### Example
 
@@ -162,25 +98,25 @@ Delete a project
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsProjectDelete(context.Background(), organization, project).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectDelete`: OrganizationsOrganizationProjectsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsProjectDelete`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProjectsAPI.DeleteProject(context.Background(), organization, project).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.DeleteProject``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteProject`: Project
+	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.DeleteProject`: %v\n", resp)
 }
 ```
 
@@ -190,12 +126,12 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectDeleteRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteProjectRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -205,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
+[**Project**](Project.md)
 
 ### Authorization
 
@@ -221,11 +157,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectGet
+## GetProject
 
-> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsProjectGet(ctx, organization, project).Execute()
+> []Project GetProject(ctx, organization, project).Execute()
 
-Get project details
+
+
+
 
 ### Example
 
@@ -233,25 +171,25 @@ Get project details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsProjectGet(context.Background(), organization, project).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectGet`: OrganizationsOrganizationProjectsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsProjectGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProjectsAPI.GetProject(context.Background(), organization, project).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.GetProject``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetProject`: []Project
+	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.GetProject`: %v\n", resp)
 }
 ```
 
@@ -261,12 +199,12 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetProjectRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -276,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
+[**[]Project**](Project.md)
 
 ### Authorization
 
@@ -292,11 +230,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## OrganizationsOrganizationProjectsProjectPatch
+## ListProjects
 
-> OrganizationsOrganizationProjectsGet200Response OrganizationsOrganizationProjectsProjectPatch(ctx, organization, project).ProjectRequest(projectRequest).Execute()
+> []Project ListProjects(ctx, organization).Execute()
 
-Update project details
+
+
+
 
 ### Example
 
@@ -304,26 +244,24 @@ Update project details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/quantcdn/quant-admin-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
-    organization := TODO // interface{} | Organization machine name
-    project := TODO // interface{} | Project machine name
-    projectRequest := *openapiclient.NewProjectRequest() // ProjectRequest |  (optional)
+	organization := "organization_example" // string | Organization machine name
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch(context.Background(), organization, project).ProjectRequest(projectRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrganizationsOrganizationProjectsProjectPatch`: OrganizationsOrganizationProjectsGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.OrganizationsOrganizationProjectsProjectPatch`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProjectsAPI.ListProjects(context.Background(), organization).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ListProjects``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListProjects`: []Project
+	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ListProjects`: %v\n", resp)
 }
 ```
 
@@ -333,12 +271,84 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | [**interface{}**](.md) | Organization machine name |
-**project** | [**interface{}**](.md) | Project machine name |
+**organization** | **string** | Organization machine name |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiOrganizationsOrganizationProjectsProjectPatchRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListProjectsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]Project**](Project.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateProject
+
+> Project UpdateProject(ctx, organization, project).ProjectRequest(projectRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization machine name
+	project := "project_example" // string | Project machine name
+	projectRequest := *openapiclient.NewProjectRequest() // ProjectRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProjectsAPI.UpdateProject(context.Background(), organization, project).ProjectRequest(projectRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.UpdateProject``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateProject`: Project
+	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.UpdateProject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateProjectRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -349,7 +359,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationsOrganizationProjectsGet200Response**](OrganizationsOrganizationProjectsGet200Response.md)
+[**Project**](Project.md)
 
 ### Authorization
 

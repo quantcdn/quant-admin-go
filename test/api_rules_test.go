@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_openapi_RulesAPIService(t *testing.T) {
@@ -22,15 +23,14 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthPost", func(t *testing.T) {
+	t.Run("Test RulesAPIService CreateRuleAuth", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthPost(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.CreateRuleAuth(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -38,15 +38,14 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete", func(t *testing.T) {
+	t.Run("Test RulesAPIService CreateRuleCustomResponse", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleDelete(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.CreateRuleCustomResponse(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -54,15 +53,14 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthRuleGet", func(t *testing.T) {
+	t.Run("Test RulesAPIService CreateRuleHeaders", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRuleGet(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.CreateRuleHeaders(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -70,15 +68,14 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesAuthRulePatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService CreateRuleProxy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesAuthRulePatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.CreateRuleProxy(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -86,15 +83,14 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService CreateRuleRedirect", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponsePatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.CreateRuleRedirect(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -102,15 +98,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete", func(t *testing.T) {
+	t.Run("Test RulesAPIService DeleteRuleAuth", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleDelete(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.DeleteRuleAuth(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -118,15 +114,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet", func(t *testing.T) {
+	t.Run("Test RulesAPIService DeleteRuleCustomResponse", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRuleGet(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.DeleteRuleCustomResponse(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -134,15 +130,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService DeleteRuleHeaders", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesCustomResponseRulePatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.DeleteRuleHeaders(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -150,14 +146,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesGet", func(t *testing.T) {
+	t.Run("Test RulesAPIService DeleteRuleProxy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesGet(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.DeleteRuleProxy(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -165,15 +162,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderPatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService DeleteRuleRedirect", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderPatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.DeleteRuleRedirect(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -181,15 +178,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete", func(t *testing.T) {
+	t.Run("Test RulesAPIService GetRuleAuth", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleDelete(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.GetRuleAuth(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -197,15 +194,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet", func(t *testing.T) {
+	t.Run("Test RulesAPIService GetRuleCustomResponse", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRuleGet(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.GetRuleCustomResponse(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -213,15 +210,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService GetRuleHeaders", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesHeaderRulePatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.GetRuleHeaders(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -229,15 +226,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyPost", func(t *testing.T) {
+	t.Run("Test RulesAPIService GetRuleProxy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyPost(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.GetRuleProxy(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -245,15 +242,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete", func(t *testing.T) {
+	t.Run("Test RulesAPIService GetRuleRedirect", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleDelete(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.GetRuleRedirect(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -261,15 +258,14 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyRuleGet", func(t *testing.T) {
+	t.Run("Test RulesAPIService ListRules", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRuleGet(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.ListRules(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -277,15 +273,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesProxyRulePatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService UpdateRuleAuth", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesProxyRulePatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.UpdateRuleAuth(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -293,15 +289,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectPost", func(t *testing.T) {
+	t.Run("Test RulesAPIService UpdateRuleCustomResponse", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectPost(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.UpdateRuleCustomResponse(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -309,15 +305,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete", func(t *testing.T) {
+	t.Run("Test RulesAPIService UpdateRuleHeaders", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleDelete(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.UpdateRuleHeaders(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -325,15 +321,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet", func(t *testing.T) {
+	t.Run("Test RulesAPIService UpdateRuleProxy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRuleGet(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.UpdateRuleProxy(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -341,15 +337,15 @@ func Test_openapi_RulesAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test RulesAPIService OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch", func(t *testing.T) {
+	t.Run("Test RulesAPIService UpdateRuleRedirect", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var organization interface{}
-		var project interface{}
-		var rule interface{}
+		var organization string
+		var project string
+		var rule string
 
-		resp, httpRes, err := apiClient.RulesAPI.OrganizationsOrganizationProjectsProjectRulesRedirectRulePatch(context.Background(), organization, project, rule).Execute()
+		resp, httpRes, err := apiClient.RulesAPI.UpdateRuleRedirect(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

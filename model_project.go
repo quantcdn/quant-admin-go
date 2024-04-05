@@ -20,14 +20,14 @@ var _ MappedNullable = &Project{}
 
 // Project struct for Project
 type Project struct {
-	Id *int64 `json:"id,omitempty"`
+	Id *int32 `json:"id,omitempty"`
 	MachineName *string `json:"machine_name,omitempty"`
 	Name *string `json:"name,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
-	OrganisationId *int64 `json:"organisation_id,omitempty"`
-	Uuid *string `json:"uuid,omitempty"`
+	OrganisationId *int32 `json:"organisation_id,omitempty"`
+	Uuid *int32 `json:"uuid,omitempty"`
 	Region *string `json:"region,omitempty"`
 	ProjectType *string `json:"project_type,omitempty"`
 	ProjectParentId *int32 `json:"project_parent_id,omitempty"`
@@ -53,9 +53,9 @@ func NewProjectWithDefaults() *Project {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *Project) GetId() int64 {
+func (o *Project) GetId() int32 {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.Id
@@ -63,7 +63,7 @@ func (o *Project) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetIdOk() (*int64, bool) {
+func (o *Project) GetIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *Project) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *Project) SetId(v int64) {
+// SetId gets a reference to the given int32 and assigns it to the Id field.
+func (o *Project) SetId(v int32) {
 	o.Id = &v
 }
 
@@ -245,9 +245,9 @@ func (o *Project) SetDeletedAt(v string) {
 }
 
 // GetOrganisationId returns the OrganisationId field value if set, zero value otherwise.
-func (o *Project) GetOrganisationId() int64 {
+func (o *Project) GetOrganisationId() int32 {
 	if o == nil || IsNil(o.OrganisationId) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.OrganisationId
@@ -255,7 +255,7 @@ func (o *Project) GetOrganisationId() int64 {
 
 // GetOrganisationIdOk returns a tuple with the OrganisationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetOrganisationIdOk() (*int64, bool) {
+func (o *Project) GetOrganisationIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.OrganisationId) {
 		return nil, false
 	}
@@ -271,15 +271,15 @@ func (o *Project) HasOrganisationId() bool {
 	return false
 }
 
-// SetOrganisationId gets a reference to the given int64 and assigns it to the OrganisationId field.
-func (o *Project) SetOrganisationId(v int64) {
+// SetOrganisationId gets a reference to the given int32 and assigns it to the OrganisationId field.
+func (o *Project) SetOrganisationId(v int32) {
 	o.OrganisationId = &v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
-func (o *Project) GetUuid() string {
+func (o *Project) GetUuid() int32 {
 	if o == nil || IsNil(o.Uuid) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.Uuid
@@ -287,7 +287,7 @@ func (o *Project) GetUuid() string {
 
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetUuidOk() (*string, bool) {
+func (o *Project) GetUuidOk() (*int32, bool) {
 	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
@@ -303,8 +303,8 @@ func (o *Project) HasUuid() bool {
 	return false
 }
 
-// SetUuid gets a reference to the given string and assigns it to the Uuid field.
-func (o *Project) SetUuid(v string) {
+// SetUuid gets a reference to the given int32 and assigns it to the Uuid field.
+func (o *Project) SetUuid(v int32) {
 	o.Uuid = &v
 }
 

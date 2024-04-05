@@ -11,15 +11,30 @@ servers:
 - url: http://localhost:8001/api/v2
 security:
 - BearerAuth: []
+tags:
+- description: Operations related to organizations.
+  name: organizations
+- description: Operations related to projects.
+  name: projects
+- description: Operations related to crawlers.
+  name: crawlers
+- description: Operations related to domains.
+  name: domains
+- description: Operations related to rules.
+  name: rules
 paths:
   /organizations:
     get:
+      description: List organizations
+      operationId: listOrganizations
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations_get_200_response'
+                items:
+                  $ref: '#/components/schemas/Organization'
+                type: array
           description: List all organizations accessible by the token
         "400":
           content:
@@ -33,11 +48,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: List organizations
       tags:
       - organizations
   /organizations/{organization}:
     get:
+      description: Get organization by machine name
+      operationId: getOrganization
       parameters:
       - $ref: '#/components/parameters/organization'
       responses:
@@ -45,7 +61,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations_get_200_response'
+                $ref: '#/components/schemas/Organization'
           description: Show an organizations details
         "400":
           content:
@@ -59,11 +75,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get organization by machine name
       tags:
       - organizations
   /organizations/{organization}/projects:
     get:
+      description: Get projects for an organization
+      operationId: listProjects
       parameters:
       - $ref: '#/components/parameters/organization'
       responses:
@@ -71,7 +88,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
           description: The project data
         "400":
           content:
@@ -85,10 +104,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get projects for an organization
       tags:
       - projects
     post:
+      description: Create a new project for an organization
+      operationId: createProject
       parameters:
       - $ref: '#/components/parameters/organization'
       requestBody:
@@ -101,7 +121,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
+                $ref: '#/components/schemas/Project'
           description: The project data
         "400":
           content:
@@ -115,11 +135,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create a new project for an organization
       tags:
       - projects
   /organizations/{organization}/projects/{project}:
     delete:
+      description: Delete a project
+      operationId: deleteProject
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -128,7 +149,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
+                $ref: '#/components/schemas/Project'
           description: The project data
         "400":
           content:
@@ -142,10 +163,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a project
       tags:
       - projects
     get:
+      description: Get project details
+      operationId: getProject
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -154,7 +176,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
           description: Show the project details
         "400":
           content:
@@ -168,10 +192,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get project details
       tags:
       - projects
     patch:
+      description: Update project details
+      operationId: updateProject
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -185,7 +210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects_get_200_response'
+                $ref: '#/components/schemas/Project'
           description: The project data
         "400":
           content:
@@ -199,11 +224,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update project details
       tags:
       - projects
   /organizations/{organization}/projects/{project}/crawlers:
     get:
+      description: Get crawlers for a project
+      operationId: listCrawlers
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -212,7 +238,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response'
+                items:
+                  $ref: '#/components/schemas/Crawler'
+                type: array
           description: Get crawlers for a project
         "400":
           content:
@@ -226,10 +254,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get crawlers for a project
       tags:
       - crawlers
     post:
+      description: Create a new crawler for a project
+      operationId: createCrawlers
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -243,7 +272,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response'
+                $ref: '#/components/schemas/Crawler'
           description: The created crawler
         "400":
           content:
@@ -257,11 +286,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create a new crawler for a project
       tags:
       - crawlers
   /organizations/{organization}/projects/{project}/crawlers/{crawler}:
     delete:
+      description: Delete a crawler
+      operationId: deleteCrawler
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -271,7 +301,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response'
+                $ref: '#/components/schemas/Crawler'
           description: The deleted crawler
         "400":
           content:
@@ -285,10 +315,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a crawler
       tags:
       - crawlers
     get:
+      description: Get crawler details
+      operationId: getCrawler
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -298,7 +329,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response'
+                $ref: '#/components/schemas/Crawler'
           description: Get crawler details
         "400":
           content:
@@ -312,10 +343,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get crawler details
       tags:
       - crawlers
     patch:
+      description: Update crawler details
+      operationId: updateCrawler
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -330,7 +362,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response'
+                $ref: '#/components/schemas/Crawler'
           description: The updated crawler
         "400":
           content:
@@ -344,11 +376,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update crawler details
       tags:
       - crawlers
   /organizations/{organization}/projects/{project}/domains:
     get:
+      description: List domains for a project
+      operationId: listDomains
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -357,7 +390,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response'
+                items:
+                  $ref: '#/components/schemas/Domain'
+                type: array
           description: List all projects for this organization
         "400":
           content:
@@ -371,10 +406,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: List domains for a project
       tags:
       - domains
     post:
+      description: Create a new domain for a project
+      operationId: createDomain
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -388,7 +424,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response'
+                $ref: '#/components/schemas/Domain'
           description: The created domain
         "400":
           content:
@@ -402,11 +438,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create a new domain for a project
       tags:
       - domains
   /organizations/{organization}/projects/{project}/domains/{domain}:
     delete:
+      description: Delete a domain
+      operationId: deleteDomain
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -416,7 +453,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response'
+                $ref: '#/components/schemas/Domain'
           description: The deleted domain
         "400":
           content:
@@ -430,10 +467,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a domain
       tags:
       - domains
     get:
+      description: Get domain details
+      operationId: getDomain
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -443,7 +481,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response'
+                $ref: '#/components/schemas/Domain'
           description: Show the domain details
         "400":
           content:
@@ -457,10 +495,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get domain details
       tags:
       - domains
     patch:
+      description: Update domain details
+      operationId: updateDomain
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -475,7 +514,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response'
+                $ref: '#/components/schemas/Domain'
           description: The edited domain
         "400":
           content:
@@ -489,11 +528,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update domain details
       tags:
       - domains
   /organizations/{organization}/projects/{project}/rules:
     get:
+      description: Get rules for a project
+      operationId: listRules
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -502,7 +542,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                items:
+                  $ref: '#/components/schemas/Rule'
+                type: array
           description: List all projects for this organization
         "400":
           content:
@@ -516,11 +558,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get rules for a project
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/redirect:
     post:
+      description: Create a new redirect rule
+      operationId: createRuleRedirect
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -534,7 +577,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -548,11 +591,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create a new redirect rule
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/redirect/{rule}:
     delete:
+      description: Delete a redirect rule
+      operationId: deleteRuleRedirect
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -562,7 +606,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -576,10 +620,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a redirect rule
       tags:
       - rules
     get:
+      description: Get redirect rule details
+      operationId: getRuleRedirect
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -589,7 +634,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -603,10 +648,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get redirect rule details
       tags:
       - rules
     patch:
+      description: Update redirect rule details
+      operationId: updateRuleRedirect
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -621,7 +667,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -635,11 +681,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update redirect rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/proxy:
     post:
+      description: Update proxy rule details
+      operationId: createRuleProxy
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -653,7 +700,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -667,11 +714,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update proxy rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/proxy/{rule}:
     delete:
+      description: Delete a proxy rule
+      operationId: deleteRuleProxy
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -681,7 +729,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -695,10 +743,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a proxy rule
       tags:
       - rules
     get:
+      description: Get proxy rule details
+      operationId: getRuleProxy
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -708,7 +757,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -722,10 +771,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get proxy rule details
       tags:
       - rules
     patch:
+      description: Update proxy rule details
+      operationId: updateRuleProxy
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -740,7 +790,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -754,11 +804,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update proxy rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/auth:
     post:
+      description: Create authentication rules
+      operationId: createRuleAuth
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -772,7 +823,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -786,11 +837,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create authentication rules
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/auth/{rule}:
     delete:
+      description: Delete an authentication rule
+      operationId: deleteRuleAuth
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -800,7 +852,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -814,10 +866,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete an authentication rule
       tags:
       - rules
     get:
+      description: Get authentication rule details
+      operationId: getRuleAuth
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -827,7 +880,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -841,10 +894,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get authentication rule details
       tags:
       - rules
     patch:
+      description: Update authentication rule details
+      operationId: updateRuleAuth
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -859,7 +913,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -873,11 +927,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update authentication rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/custom-response:
     post:
+      description: Create custom response rule details
+      operationId: createRuleCustomResponse
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -891,7 +946,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -905,11 +960,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create custom response rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/custom-response/{rule}:
     delete:
+      description: Delete a custom response rule
+      operationId: deleteRuleCustomResponse
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -919,7 +975,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -933,10 +989,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a custom response rule
       tags:
       - rules
     get:
+      description: Get custom repsonse rule details
+      operationId: getRuleCustomResponse
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -946,7 +1003,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -960,10 +1017,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get custom repsonse rule details
       tags:
       - rules
     patch:
+      description: Update custom response rule details
+      operationId: updateRuleCustomResponse
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -978,7 +1036,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -992,11 +1050,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update custom response rule details
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/headers:
     post:
+      description: Create header rules
+      operationId: createRuleHeaders
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -1010,7 +1069,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -1024,11 +1083,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Create header rules
       tags:
       - rules
   /organizations/{organization}/projects/{project}/rules/headers/{rule}:
     delete:
+      description: Delete a header rule
+      operationId: deleteRuleHeaders
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -1038,7 +1098,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -1052,10 +1112,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Delete a header rule
       tags:
       - rules
     get:
+      description: Get header rule details
+      operationId: getRuleHeaders
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -1065,7 +1126,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -1079,10 +1140,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Get header rule details
       tags:
       - rules
     patch:
+      description: Update header rule details
+      operationId: updateRuleHeaders
       parameters:
       - $ref: '#/components/parameters/organization'
       - $ref: '#/components/parameters/project'
@@ -1097,7 +1159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response'
+                $ref: '#/components/schemas/Rule'
           description: The rule details
         "400":
           content:
@@ -1111,7 +1173,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Invalid token provided
-      summary: Update header rule details
       tags:
       - rules
 components:
@@ -1122,7 +1183,8 @@ components:
       in: path
       name: organization
       required: true
-      schema: {}
+      schema:
+        type: string
       style: simple
     project:
       description: Project machine name
@@ -1130,7 +1192,8 @@ components:
       in: path
       name: project
       required: true
-      schema: {}
+      schema:
+        type: string
       style: simple
     crawler:
       description: Crawler uuid
@@ -1138,24 +1201,31 @@ components:
       in: path
       name: crawler
       required: true
-      schema: {}
+      schema:
+        type: string
       style: simple
     domain:
       explode: false
       in: path
       name: domain
       required: true
-      schema: {}
+      schema:
+        type: string
       style: simple
     rule:
       explode: false
       in: path
       name: rule
       required: true
-      schema: {}
+      schema:
+        type: string
       style: simple
   schemas:
     Error:
+      example:
+        data: "{}"
+        error: true
+        message: message
       properties:
         error:
           type: boolean
@@ -1204,7 +1274,7 @@ components:
         git_url: git_url
       properties:
         id:
-          format: int64
+          format: integer
           type: integer
         machine_name:
           type: string
@@ -1217,10 +1287,10 @@ components:
         deleted_at:
           type: string
         organisation_id:
-          format: int64
+          format: integer
           type: integer
         uuid:
-          format: int64
+          format: integer
           type: string
         region:
           type: string
@@ -1231,39 +1301,6 @@ components:
         security_score:
           type: integer
         git_url:
-          type: string
-    ProjectRequest:
-      example:
-        basic_auth_preview_only: basic_auth_preview_only
-        allow_query_params: true
-        basic_auth_password: basic_auth_password
-        custom_s3_sync_region: custom_s3_sync_region
-        custom_s3_sync_access_key: custom_s3_sync_access_key
-        name: name
-        basic_auth_username: basic_auth_username
-        region: region
-        custom_s3_sync_secret_key: custom_s3_sync_secret_key
-        custom_s3_sync_bucket: custom_s3_sync_bucket
-      properties:
-        name:
-          type: string
-        region:
-          type: string
-        allow_query_params:
-          type: boolean
-        basic_auth_username:
-          type: string
-        basic_auth_password:
-          type: string
-        basic_auth_preview_only:
-          type: string
-        custom_s3_sync_bucket:
-          type: string
-        custom_s3_sync_region:
-          type: string
-        custom_s3_sync_access_key:
-          type: string
-        custom_s3_sync_secret_key:
           type: string
     Crawler:
       example:
@@ -1302,28 +1339,6 @@ components:
           type: string
         domain_verified:
           type: integer
-    CrawlerRequest:
-      example:
-        headers: "{}"
-        url_list:
-        - url_list
-        - url_list
-        domain: domain
-        name: name
-        browser_mode: true
-      properties:
-        name:
-          type: string
-        domain:
-          type: string
-        browser_mode:
-          type: boolean
-        url_list:
-          items:
-            type: string
-          type: array
-        headers:
-          type: object
     Domain:
       example:
         updated_at: updated_at
@@ -1354,7 +1369,49 @@ components:
           type: string
         dns_engaged:
           type: integer
-    DomainRequest:
+    Rule:
+      example:
+        uuid: uuid
+        config: "{}"
+      properties:
+        uuid:
+          type: string
+        config:
+          type: object
+    ProjectRequest:
+      example:
+        basic_auth_preview_only: basic_auth_preview_only
+        allow_query_params: true
+        basic_auth_password: basic_auth_password
+        custom_s3_sync_region: custom_s3_sync_region
+        custom_s3_sync_access_key: custom_s3_sync_access_key
+        name: name
+        basic_auth_username: basic_auth_username
+        region: region
+        custom_s3_sync_secret_key: custom_s3_sync_secret_key
+        custom_s3_sync_bucket: custom_s3_sync_bucket
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        allow_query_params:
+          type: boolean
+        basic_auth_username:
+          type: string
+        basic_auth_password:
+          type: string
+        basic_auth_preview_only:
+          type: string
+        custom_s3_sync_bucket:
+          type: string
+        custom_s3_sync_region:
+          type: string
+        custom_s3_sync_access_key:
+          type: string
+        custom_s3_sync_secret_key:
+          type: string
+    CrawlerRequest:
       example:
         headers: "{}"
         url_list:
@@ -1376,14 +1433,27 @@ components:
           type: array
         headers:
           type: object
-    Rule:
+    DomainRequest:
       example:
-        uuid: uuid
-        config: "{}"
+        headers: "{}"
+        url_list:
+        - url_list
+        - url_list
+        domain: domain
+        name: name
+        browser_mode: true
       properties:
-        uuid:
+        name:
           type: string
-        config:
+        domain:
+          type: string
+        browser_mode:
+          type: boolean
+        url_list:
+          items:
+            type: string
+          type: array
+        headers:
           type: object
     RuleRedirectRequest:
       example:
@@ -1512,21 +1582,21 @@ components:
           allow_rules:
           - 1
           - 1
-          origin_timeout: ""
+          origin_timeout: 5
           httpbl:
             block_harvester: true
             httpbl_enabled: true
             block_spam: true
             block_search_engine: true
             block_suspicious: true
-          failover_origin_ttfb: ""
+          failover_origin_ttfb: 2
           notify_slack_hits_rpm: 5
           notify_config:
-            period: ""
+            period: 2
             slack_webhook: slack_webhook
             origin_status_code:
-            - ""
-            - ""
+            - 3
+            - 3
           notify: notify
           allow_ip:
           - allow_ip
@@ -1542,11 +1612,11 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          failover_lifetime: ""
+          failover_lifetime: 9
           block_ua:
           - block_ua
           - block_ua
-          failover_origin_status_code: ""
+          failover_origin_status_code: 7
           notify_slack: notify_slack
           proxy_alert_enabled: true
           paranoia_level: 6
@@ -1950,253 +2020,6 @@ components:
           type: array
         headers:
           type: object
-    _organizations_get_200_response_data:
-      example:
-        organizations:
-        - organisation_machine_name: organisation_machine_name
-          updated_at: updated_at
-          name: name
-          created_at: created_at
-          subscrption: 0
-          type: type
-          region: region
-        - organisation_machine_name: organisation_machine_name
-          updated_at: updated_at
-          name: name
-          created_at: created_at
-          subscrption: 0
-          type: type
-          region: region
-      properties:
-        organizations:
-          items:
-            $ref: '#/components/schemas/Organization'
-          type: array
-    _organizations_get_200_response:
-      example:
-        data:
-          organizations:
-          - organisation_machine_name: organisation_machine_name
-            updated_at: updated_at
-            name: name
-            created_at: created_at
-            subscrption: 0
-            type: type
-            region: region
-          - organisation_machine_name: organisation_machine_name
-            updated_at: updated_at
-            name: name
-            created_at: created_at
-            subscrption: 0
-            type: type
-            region: region
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations_get_200_response_data'
-    _organizations__organization__projects_get_200_response_data:
-      example:
-        projects:
-        - project_type: project_type
-          project_parent_id: 1
-          created_at: created_at
-          machine_name: machine_name
-          deleted_at: deleted_at
-          uuid: uuid
-          organisation_id: 6
-          updated_at: updated_at
-          name: name
-          security_score: 5
-          id: 0
-          region: region
-          git_url: git_url
-        - project_type: project_type
-          project_parent_id: 1
-          created_at: created_at
-          machine_name: machine_name
-          deleted_at: deleted_at
-          uuid: uuid
-          organisation_id: 6
-          updated_at: updated_at
-          name: name
-          security_score: 5
-          id: 0
-          region: region
-          git_url: git_url
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/Project'
-          type: array
-    _organizations__organization__projects_get_200_response:
-      example:
-        data:
-          projects:
-          - project_type: project_type
-            project_parent_id: 1
-            created_at: created_at
-            machine_name: machine_name
-            deleted_at: deleted_at
-            uuid: uuid
-            organisation_id: 6
-            updated_at: updated_at
-            name: name
-            security_score: 5
-            id: 0
-            region: region
-            git_url: git_url
-          - project_type: project_type
-            project_parent_id: 1
-            created_at: created_at
-            machine_name: machine_name
-            deleted_at: deleted_at
-            uuid: uuid
-            organisation_id: 6
-            updated_at: updated_at
-            name: name
-            security_score: 5
-            id: 0
-            region: region
-            git_url: git_url
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations__organization__projects_get_200_response_data'
-    _organizations__organization__projects__project__crawlers_get_200_response_data:
-      example:
-        crawlers:
-        - urls_list:
-          - urls_list
-          - urls_list
-          updated_at: updated_at
-          project_id: 6
-          domain: domain
-          created_at: created_at
-          domain_verified: 1
-          id: 0
-          uuid: uuid
-          config: config
-          deleted_at: deleted_at
-        - urls_list:
-          - urls_list
-          - urls_list
-          updated_at: updated_at
-          project_id: 6
-          domain: domain
-          created_at: created_at
-          domain_verified: 1
-          id: 0
-          uuid: uuid
-          config: config
-          deleted_at: deleted_at
-      properties:
-        crawlers:
-          items:
-            $ref: '#/components/schemas/Crawler'
-          type: array
-    _organizations__organization__projects__project__crawlers_get_200_response:
-      example:
-        data:
-          crawlers:
-          - urls_list:
-            - urls_list
-            - urls_list
-            updated_at: updated_at
-            project_id: 6
-            domain: domain
-            created_at: created_at
-            domain_verified: 1
-            id: 0
-            uuid: uuid
-            config: config
-            deleted_at: deleted_at
-          - urls_list:
-            - urls_list
-            - urls_list
-            updated_at: updated_at
-            project_id: 6
-            domain: domain
-            created_at: created_at
-            domain_verified: 1
-            id: 0
-            uuid: uuid
-            config: config
-            deleted_at: deleted_at
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations__organization__projects__project__crawlers_get_200_response_data'
-    _organizations__organization__projects__project__domains_get_200_response_data:
-      example:
-        domains:
-        - updated_at: updated_at
-          project_id: 6
-          domain: domain
-          dns_engaged: 5
-          created_at: created_at
-          id: 0
-          deleted_at: deleted_at
-          in_section: 1
-          section_message: section_message
-        - updated_at: updated_at
-          project_id: 6
-          domain: domain
-          dns_engaged: 5
-          created_at: created_at
-          id: 0
-          deleted_at: deleted_at
-          in_section: 1
-          section_message: section_message
-      properties:
-        domains:
-          items:
-            $ref: '#/components/schemas/Domain'
-          type: array
-    _organizations__organization__projects__project__domains_get_200_response:
-      example:
-        data:
-          domains:
-          - updated_at: updated_at
-            project_id: 6
-            domain: domain
-            dns_engaged: 5
-            created_at: created_at
-            id: 0
-            deleted_at: deleted_at
-            in_section: 1
-            section_message: section_message
-          - updated_at: updated_at
-            project_id: 6
-            domain: domain
-            dns_engaged: 5
-            created_at: created_at
-            id: 0
-            deleted_at: deleted_at
-            in_section: 1
-            section_message: section_message
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations__organization__projects__project__domains_get_200_response_data'
-    _organizations__organization__projects__project__rules_get_200_response_data:
-      example:
-        rules:
-        - uuid: uuid
-          config: "{}"
-        - uuid: uuid
-          config: "{}"
-      properties:
-        rules:
-          items:
-            $ref: '#/components/schemas/Rule'
-          type: array
-    _organizations__organization__projects__project__rules_get_200_response:
-      example:
-        data:
-          rules:
-          - uuid: uuid
-            config: "{}"
-          - uuid: uuid
-            config: "{}"
-      properties:
-        data:
-          $ref: '#/components/schemas/_organizations__organization__projects__project__rules_get_200_response_data'
     RuleProxyRequest_waf_config_httpbl:
       example:
         block_harvester: true
@@ -2217,18 +2040,18 @@ components:
           type: boolean
     RuleProxyRequest_waf_config_notify_config:
       example:
-        period: ""
+        period: 2
         slack_webhook: slack_webhook
         origin_status_code:
-        - ""
-        - ""
+        - 3
+        - 3
       properties:
         origin_status_code:
           items:
-            type: int64
+            type: integer
           type: array
         period:
-          type: int64
+          type: integer
         slack_webhook:
           type: string
     RuleProxyRequest_waf_config:
@@ -2236,21 +2059,21 @@ components:
         allow_rules:
         - 1
         - 1
-        origin_timeout: ""
+        origin_timeout: 5
         httpbl:
           block_harvester: true
           httpbl_enabled: true
           block_spam: true
           block_search_engine: true
           block_suspicious: true
-        failover_origin_ttfb: ""
+        failover_origin_ttfb: 2
         notify_slack_hits_rpm: 5
         notify_config:
-          period: ""
+          period: 2
           slack_webhook: slack_webhook
           origin_status_code:
-          - ""
-          - ""
+          - 3
+          - 3
         notify: notify
         allow_ip:
         - allow_ip
@@ -2266,11 +2089,11 @@ components:
         block_referer:
         - block_referer
         - block_referer
-        failover_lifetime: ""
+        failover_lifetime: 9
         block_ua:
         - block_ua
         - block_ua
-        failover_origin_status_code: ""
+        failover_origin_status_code: 7
         notify_slack: notify_slack
         proxy_alert_enabled: true
         paranoia_level: 6
@@ -2314,15 +2137,15 @@ components:
         proxy_alert_enabled:
           type: boolean
         origin_timeout:
-          type: int64
+          type: integer
         failover_mode:
           type: boolean
         failover_origin_ttfb:
-          type: int64
+          type: integer
         failover_origin_status_code:
-          type: int64
+          type: integer
         failover_lifetime:
-          type: int64
+          type: integer
         notify:
           type: string
         notify_config:

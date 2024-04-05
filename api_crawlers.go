@@ -24,322 +24,60 @@ import (
 // CrawlersAPIService CrawlersAPI service
 type CrawlersAPIService service
 
-type ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteRequest struct {
+type ApiCreateCrawlersRequest struct {
 	ctx context.Context
 	ApiService *CrawlersAPIService
-	organization interface{}
-	project interface{}
-	crawler interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectCrawlersCrawlerDelete Delete a crawler
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param crawler Crawler uuid
- @return ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteRequest
-*/
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCrawlerDelete(ctx context.Context, organization interface{}, project interface{}, crawler interface{}) ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		crawler: crawler,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerDeleteRequest) (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.OrganizationsOrganizationProjectsProjectCrawlersCrawlerDelete")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers/{crawler}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerGetRequest struct {
-	ctx context.Context
-	ApiService *CrawlersAPIService
-	organization interface{}
-	project interface{}
-	crawler interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectCrawlersCrawlerGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectCrawlersCrawlerGet Get crawler details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param crawler Crawler uuid
- @return ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerGetRequest
-*/
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCrawlerGet(ctx context.Context, organization interface{}, project interface{}, crawler interface{}) ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		crawler: crawler,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCrawlerGetExecute(r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerGetRequest) (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.OrganizationsOrganizationProjectsProjectCrawlersCrawlerGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers/{crawler}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest struct {
-	ctx context.Context
-	ApiService *CrawlersAPIService
-	organization interface{}
-	project interface{}
-	crawler interface{}
+	organization string
+	project string
 	crawlerRequest *CrawlerRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest {
+func (r ApiCreateCrawlersRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiCreateCrawlersRequest {
 	r.crawlerRequest = &crawlerRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchExecute(r)
+func (r ApiCreateCrawlersRequest) Execute() (*Crawler, *http.Response, error) {
+	return r.ApiService.CreateCrawlersExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch Update crawler details
+CreateCrawlers Method for CreateCrawlers
+
+Create a new crawler for a project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param crawler Crawler uuid
- @return ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest
+ @return ApiCreateCrawlersRequest
 */
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch(ctx context.Context, organization interface{}, project interface{}, crawler interface{}) ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest{
+func (a *CrawlersAPIService) CreateCrawlers(ctx context.Context, organization string, project string) ApiCreateCrawlersRequest {
+	return ApiCreateCrawlersRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		crawler: crawler,
 	}
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchExecute(r ApiOrganizationsOrganizationProjectsProjectCrawlersCrawlerPatchRequest) (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
+//  @return Crawler
+func (a *CrawlersAPIService) CreateCrawlersExecute(r ApiCreateCrawlersRequest) (*Crawler, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectCrawlersGet200Response
+		localVarReturnValue  *Crawler
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.OrganizationsOrganizationProjectsProjectCrawlersCrawlerPatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.CreateCrawlers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers/{crawler}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -422,27 +160,293 @@ func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersCra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectCrawlersGetRequest struct {
+type ApiDeleteCrawlerRequest struct {
 	ctx context.Context
 	ApiService *CrawlersAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	crawler string
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectCrawlersGetExecute(r)
+func (r ApiDeleteCrawlerRequest) Execute() (*Crawler, *http.Response, error) {
+	return r.ApiService.DeleteCrawlerExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectCrawlersGet Get crawlers for a project
+DeleteCrawler Method for DeleteCrawler
+
+Delete a crawler
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectCrawlersGetRequest
+ @param crawler Crawler uuid
+ @return ApiDeleteCrawlerRequest
 */
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersGet(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectCrawlersGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectCrawlersGetRequest{
+func (a *CrawlersAPIService) DeleteCrawler(ctx context.Context, organization string, project string, crawler string) ApiDeleteCrawlerRequest {
+	return ApiDeleteCrawlerRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		crawler: crawler,
+	}
+}
+
+// Execute executes the request
+//  @return Crawler
+func (a *CrawlersAPIService) DeleteCrawlerExecute(r ApiDeleteCrawlerRequest) (*Crawler, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Crawler
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.DeleteCrawler")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers/{crawler}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetCrawlerRequest struct {
+	ctx context.Context
+	ApiService *CrawlersAPIService
+	organization string
+	project string
+	crawler string
+}
+
+func (r ApiGetCrawlerRequest) Execute() (*Crawler, *http.Response, error) {
+	return r.ApiService.GetCrawlerExecute(r)
+}
+
+/*
+GetCrawler Method for GetCrawler
+
+Get crawler details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param crawler Crawler uuid
+ @return ApiGetCrawlerRequest
+*/
+func (a *CrawlersAPIService) GetCrawler(ctx context.Context, organization string, project string, crawler string) ApiGetCrawlerRequest {
+	return ApiGetCrawlerRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		crawler: crawler,
+	}
+}
+
+// Execute executes the request
+//  @return Crawler
+func (a *CrawlersAPIService) GetCrawlerExecute(r ApiGetCrawlerRequest) (*Crawler, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Crawler
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.GetCrawler")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers/{crawler}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListCrawlersRequest struct {
+	ctx context.Context
+	ApiService *CrawlersAPIService
+	organization string
+	project string
+}
+
+func (r ApiListCrawlersRequest) Execute() ([]Crawler, *http.Response, error) {
+	return r.ApiService.ListCrawlersExecute(r)
+}
+
+/*
+ListCrawlers Method for ListCrawlers
+
+Get crawlers for a project
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiListCrawlersRequest
+*/
+func (a *CrawlersAPIService) ListCrawlers(ctx context.Context, organization string, project string) ApiListCrawlersRequest {
+	return ApiListCrawlersRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -451,16 +455,16 @@ func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersGet
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersGetExecute(r ApiOrganizationsOrganizationProjectsProjectCrawlersGetRequest) (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
+//  @return []Crawler
+func (a *CrawlersAPIService) ListCrawlersExecute(r ApiListCrawlersRequest) ([]Crawler, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectCrawlersGet200Response
+		localVarReturnValue  []Crawler
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.OrganizationsOrganizationProjectsProjectCrawlersGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.ListCrawlers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -548,58 +552,64 @@ func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest struct {
+type ApiUpdateCrawlerRequest struct {
 	ctx context.Context
 	ApiService *CrawlersAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	crawler string
 	crawlerRequest *CrawlerRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest {
+func (r ApiUpdateCrawlerRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiUpdateCrawlerRequest {
 	r.crawlerRequest = &crawlerRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectCrawlersPostExecute(r)
+func (r ApiUpdateCrawlerRequest) Execute() (*Crawler, *http.Response, error) {
+	return r.ApiService.UpdateCrawlerExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectCrawlersPost Create a new crawler for a project
+UpdateCrawler Method for UpdateCrawler
+
+Update crawler details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest
+ @param crawler Crawler uuid
+ @return ApiUpdateCrawlerRequest
 */
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest{
+func (a *CrawlersAPIService) UpdateCrawler(ctx context.Context, organization string, project string, crawler string) ApiUpdateCrawlerRequest {
+	return ApiUpdateCrawlerRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
+		crawler: crawler,
 	}
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectCrawlersGet200Response
-func (a *CrawlersAPIService) OrganizationsOrganizationProjectsProjectCrawlersPostExecute(r ApiOrganizationsOrganizationProjectsProjectCrawlersPostRequest) (*OrganizationsOrganizationProjectsProjectCrawlersGet200Response, *http.Response, error) {
+//  @return Crawler
+func (a *CrawlersAPIService) UpdateCrawlerExecute(r ApiUpdateCrawlerRequest) (*Crawler, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectCrawlersGet200Response
+		localVarReturnValue  *Crawler
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.OrganizationsOrganizationProjectsProjectCrawlersPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CrawlersAPIService.UpdateCrawler")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/crawlers/{crawler}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

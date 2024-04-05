@@ -24,44 +24,50 @@ import (
 // OrganizationsAPIService OrganizationsAPI service
 type OrganizationsAPIService service
 
-type ApiOrganizationsGetRequest struct {
+type ApiGetOrganizationRequest struct {
 	ctx context.Context
 	ApiService *OrganizationsAPIService
+	organization string
 }
 
-func (r ApiOrganizationsGetRequest) Execute() (*OrganizationsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsGetExecute(r)
+func (r ApiGetOrganizationRequest) Execute() (*Organization, *http.Response, error) {
+	return r.ApiService.GetOrganizationExecute(r)
 }
 
 /*
-OrganizationsGet List organizations
+GetOrganization Method for GetOrganization
+
+Get organization by machine name
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOrganizationsGetRequest
+ @param organization Organization machine name
+ @return ApiGetOrganizationRequest
 */
-func (a *OrganizationsAPIService) OrganizationsGet(ctx context.Context) ApiOrganizationsGetRequest {
-	return ApiOrganizationsGetRequest{
+func (a *OrganizationsAPIService) GetOrganization(ctx context.Context, organization string) ApiGetOrganizationRequest {
+	return ApiGetOrganizationRequest{
 		ApiService: a,
 		ctx: ctx,
+		organization: organization,
 	}
 }
 
 // Execute executes the request
-//  @return OrganizationsGet200Response
-func (a *OrganizationsAPIService) OrganizationsGetExecute(r ApiOrganizationsGetRequest) (*OrganizationsGet200Response, *http.Response, error) {
+//  @return Organization
+func (a *OrganizationsAPIService) GetOrganizationExecute(r ApiGetOrganizationRequest) (*Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsGet200Response
+		localVarReturnValue  *Organization
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsAPIService.OrganizationsGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsAPIService.GetOrganization")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations"
+	localVarPath := localBasePath + "/organizations/{organization}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -142,48 +148,46 @@ func (a *OrganizationsAPIService) OrganizationsGetExecute(r ApiOrganizationsGetR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationGetRequest struct {
+type ApiListOrganizationsRequest struct {
 	ctx context.Context
 	ApiService *OrganizationsAPIService
-	organization interface{}
 }
 
-func (r ApiOrganizationsOrganizationGetRequest) Execute() (*OrganizationsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationGetExecute(r)
+func (r ApiListOrganizationsRequest) Execute() ([]Organization, *http.Response, error) {
+	return r.ApiService.ListOrganizationsExecute(r)
 }
 
 /*
-OrganizationsOrganizationGet Get organization by machine name
+ListOrganizations Method for ListOrganizations
+
+List organizations
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @return ApiOrganizationsOrganizationGetRequest
+ @return ApiListOrganizationsRequest
 */
-func (a *OrganizationsAPIService) OrganizationsOrganizationGet(ctx context.Context, organization interface{}) ApiOrganizationsOrganizationGetRequest {
-	return ApiOrganizationsOrganizationGetRequest{
+func (a *OrganizationsAPIService) ListOrganizations(ctx context.Context) ApiListOrganizationsRequest {
+	return ApiListOrganizationsRequest{
 		ApiService: a,
 		ctx: ctx,
-		organization: organization,
 	}
 }
 
 // Execute executes the request
-//  @return OrganizationsGet200Response
-func (a *OrganizationsAPIService) OrganizationsOrganizationGetExecute(r ApiOrganizationsOrganizationGetRequest) (*OrganizationsGet200Response, *http.Response, error) {
+//  @return []Organization
+func (a *OrganizationsAPIService) ListOrganizationsExecute(r ApiListOrganizationsRequest) ([]Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsGet200Response
+		localVarReturnValue  []Organization
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsAPIService.OrganizationsOrganizationGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsAPIService.ListOrganizations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath := localBasePath + "/organizations"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

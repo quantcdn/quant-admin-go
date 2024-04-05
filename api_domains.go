@@ -24,322 +24,60 @@ import (
 // DomainsAPIService DomainsAPI service
 type DomainsAPIService service
 
-type ApiOrganizationsOrganizationProjectsProjectDomainsDomainDeleteRequest struct {
+type ApiCreateDomainRequest struct {
 	ctx context.Context
 	ApiService *DomainsAPIService
-	organization interface{}
-	project interface{}
-	domain interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsDomainDeleteRequest) Execute() (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectDomainsDomainDeleteExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectDomainsDomainDelete Delete a domain
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param domain
- @return ApiOrganizationsOrganizationProjectsProjectDomainsDomainDeleteRequest
-*/
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomainDelete(ctx context.Context, organization interface{}, project interface{}, domain interface{}) ApiOrganizationsOrganizationProjectsProjectDomainsDomainDeleteRequest {
-	return ApiOrganizationsOrganizationProjectsProjectDomainsDomainDeleteRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		domain: domain,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectDomainsGet200Response
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomainDeleteExecute(r ApiOrganizationsOrganizationProjectsProjectDomainsDomainDeleteRequest) (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectDomainsGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.OrganizationsOrganizationProjectsProjectDomainsDomainDelete")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains/{domain}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectDomainsDomainGetRequest struct {
-	ctx context.Context
-	ApiService *DomainsAPIService
-	organization interface{}
-	project interface{}
-	domain interface{}
-}
-
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsDomainGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectDomainsDomainGetExecute(r)
-}
-
-/*
-OrganizationsOrganizationProjectsProjectDomainsDomainGet Get domain details
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization Organization machine name
- @param project Project machine name
- @param domain
- @return ApiOrganizationsOrganizationProjectsProjectDomainsDomainGetRequest
-*/
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomainGet(ctx context.Context, organization interface{}, project interface{}, domain interface{}) ApiOrganizationsOrganizationProjectsProjectDomainsDomainGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectDomainsDomainGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		organization: organization,
-		project: project,
-		domain: domain,
-	}
-}
-
-// Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectDomainsGet200Response
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomainGetExecute(r ApiOrganizationsOrganizationProjectsProjectDomainsDomainGetRequest) (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectDomainsGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.OrganizationsOrganizationProjectsProjectDomainsDomainGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains/{domain}"
-	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest struct {
-	ctx context.Context
-	ApiService *DomainsAPIService
-	organization interface{}
-	project interface{}
-	domain interface{}
+	organization string
+	project string
 	domainRequest *DomainRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest) DomainRequest(domainRequest DomainRequest) ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest {
+func (r ApiCreateDomainRequest) DomainRequest(domainRequest DomainRequest) ApiCreateDomainRequest {
 	r.domainRequest = &domainRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest) Execute() (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectDomainsDomainPatchExecute(r)
+func (r ApiCreateDomainRequest) Execute() (*Domain, *http.Response, error) {
+	return r.ApiService.CreateDomainExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectDomainsDomainPatch Update domain details
+CreateDomain Method for CreateDomain
+
+Create a new domain for a project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @param domain
- @return ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest
+ @return ApiCreateDomainRequest
 */
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomainPatch(ctx context.Context, organization interface{}, project interface{}, domain interface{}) ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest {
-	return ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest{
+func (a *DomainsAPIService) CreateDomain(ctx context.Context, organization string, project string) ApiCreateDomainRequest {
+	return ApiCreateDomainRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		domain: domain,
 	}
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectDomainsGet200Response
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomainPatchExecute(r ApiOrganizationsOrganizationProjectsProjectDomainsDomainPatchRequest) (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
+//  @return Domain
+func (a *DomainsAPIService) CreateDomainExecute(r ApiCreateDomainRequest) (*Domain, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectDomainsGet200Response
+		localVarReturnValue  *Domain
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.OrganizationsOrganizationProjectsProjectDomainsDomainPatch")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.CreateDomain")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains/{domain}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -422,27 +160,293 @@ func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsDomai
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectDomainsGetRequest struct {
+type ApiDeleteDomainRequest struct {
 	ctx context.Context
 	ApiService *DomainsAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	domain string
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsGetRequest) Execute() (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectDomainsGetExecute(r)
+func (r ApiDeleteDomainRequest) Execute() (*Domain, *http.Response, error) {
+	return r.ApiService.DeleteDomainExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectDomainsGet List domains for a project
+DeleteDomain Method for DeleteDomain
+
+Delete a domain
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectDomainsGetRequest
+ @param domain
+ @return ApiDeleteDomainRequest
 */
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsGet(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectDomainsGetRequest {
-	return ApiOrganizationsOrganizationProjectsProjectDomainsGetRequest{
+func (a *DomainsAPIService) DeleteDomain(ctx context.Context, organization string, project string, domain string) ApiDeleteDomainRequest {
+	return ApiDeleteDomainRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		domain: domain,
+	}
+}
+
+// Execute executes the request
+//  @return Domain
+func (a *DomainsAPIService) DeleteDomainExecute(r ApiDeleteDomainRequest) (*Domain, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Domain
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.DeleteDomain")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains/{domain}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetDomainRequest struct {
+	ctx context.Context
+	ApiService *DomainsAPIService
+	organization string
+	project string
+	domain string
+}
+
+func (r ApiGetDomainRequest) Execute() (*Domain, *http.Response, error) {
+	return r.ApiService.GetDomainExecute(r)
+}
+
+/*
+GetDomain Method for GetDomain
+
+Get domain details
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @param domain
+ @return ApiGetDomainRequest
+*/
+func (a *DomainsAPIService) GetDomain(ctx context.Context, organization string, project string, domain string) ApiGetDomainRequest {
+	return ApiGetDomainRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		domain: domain,
+	}
+}
+
+// Execute executes the request
+//  @return Domain
+func (a *DomainsAPIService) GetDomainExecute(r ApiGetDomainRequest) (*Domain, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Domain
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.GetDomain")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains/{domain}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListDomainsRequest struct {
+	ctx context.Context
+	ApiService *DomainsAPIService
+	organization string
+	project string
+}
+
+func (r ApiListDomainsRequest) Execute() ([]Domain, *http.Response, error) {
+	return r.ApiService.ListDomainsExecute(r)
+}
+
+/*
+ListDomains Method for ListDomains
+
+List domains for a project
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization Organization machine name
+ @param project Project machine name
+ @return ApiListDomainsRequest
+*/
+func (a *DomainsAPIService) ListDomains(ctx context.Context, organization string, project string) ApiListDomainsRequest {
+	return ApiListDomainsRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -451,16 +455,16 @@ func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsGet(c
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectDomainsGet200Response
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsGetExecute(r ApiOrganizationsOrganizationProjectsProjectDomainsGetRequest) (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
+//  @return []Domain
+func (a *DomainsAPIService) ListDomainsExecute(r ApiListDomainsRequest) ([]Domain, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectDomainsGet200Response
+		localVarReturnValue  []Domain
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.OrganizationsOrganizationProjectsProjectDomainsGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.ListDomains")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -548,58 +552,64 @@ func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsGetEx
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest struct {
+type ApiUpdateDomainRequest struct {
 	ctx context.Context
 	ApiService *DomainsAPIService
-	organization interface{}
-	project interface{}
+	organization string
+	project string
+	domain string
 	domainRequest *DomainRequest
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest) DomainRequest(domainRequest DomainRequest) ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest {
+func (r ApiUpdateDomainRequest) DomainRequest(domainRequest DomainRequest) ApiUpdateDomainRequest {
 	r.domainRequest = &domainRequest
 	return r
 }
 
-func (r ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest) Execute() (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
-	return r.ApiService.OrganizationsOrganizationProjectsProjectDomainsPostExecute(r)
+func (r ApiUpdateDomainRequest) Execute() (*Domain, *http.Response, error) {
+	return r.ApiService.UpdateDomainExecute(r)
 }
 
 /*
-OrganizationsOrganizationProjectsProjectDomainsPost Create a new domain for a project
+UpdateDomain Method for UpdateDomain
+
+Update domain details
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization machine name
  @param project Project machine name
- @return ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest
+ @param domain
+ @return ApiUpdateDomainRequest
 */
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsPost(ctx context.Context, organization interface{}, project interface{}) ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest {
-	return ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest{
+func (a *DomainsAPIService) UpdateDomain(ctx context.Context, organization string, project string, domain string) ApiUpdateDomainRequest {
+	return ApiUpdateDomainRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
+		domain: domain,
 	}
 }
 
 // Execute executes the request
-//  @return OrganizationsOrganizationProjectsProjectDomainsGet200Response
-func (a *DomainsAPIService) OrganizationsOrganizationProjectsProjectDomainsPostExecute(r ApiOrganizationsOrganizationProjectsProjectDomainsPostRequest) (*OrganizationsOrganizationProjectsProjectDomainsGet200Response, *http.Response, error) {
+//  @return Domain
+func (a *DomainsAPIService) UpdateDomainExecute(r ApiUpdateDomainRequest) (*Domain, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrganizationsOrganizationProjectsProjectDomainsGet200Response
+		localVarReturnValue  *Domain
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.OrganizationsOrganizationProjectsProjectDomainsPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.UpdateDomain")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/domains/{domain}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"domain"+"}", url.PathEscape(parameterValueToString(r.domain, "domain")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -32,11 +32,11 @@ type RuleProxyRequestWafConfig struct {
 	NotifyEmail *string `json:"notify_email,omitempty"`
 	Httpbl *RuleProxyRequestWafConfigHttpbl `json:"httpbl,omitempty"`
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
-	OriginTimeout *int64 `json:"origin_timeout,omitempty"`
+	OriginTimeout *int32 `json:"origin_timeout,omitempty"`
 	FailoverMode *bool `json:"failover_mode,omitempty"`
-	FailoverOriginTtfb *int64 `json:"failover_origin_ttfb,omitempty"`
-	FailoverOriginStatusCode *int64 `json:"failover_origin_status_code,omitempty"`
-	FailoverLifetime *int64 `json:"failover_lifetime,omitempty"`
+	FailoverOriginTtfb *int32 `json:"failover_origin_ttfb,omitempty"`
+	FailoverOriginStatusCode *int32 `json:"failover_origin_status_code,omitempty"`
+	FailoverLifetime *int32 `json:"failover_lifetime,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *RuleProxyRequestWafConfigNotifyConfig `json:"notify_config,omitempty"`
 	InjectHeaders []string `json:"inject_headers,omitempty"`
@@ -444,9 +444,9 @@ func (o *RuleProxyRequestWafConfig) SetProxyAlertEnabled(v bool) {
 }
 
 // GetOriginTimeout returns the OriginTimeout field value if set, zero value otherwise.
-func (o *RuleProxyRequestWafConfig) GetOriginTimeout() int64 {
+func (o *RuleProxyRequestWafConfig) GetOriginTimeout() int32 {
 	if o == nil || IsNil(o.OriginTimeout) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.OriginTimeout
@@ -454,7 +454,7 @@ func (o *RuleProxyRequestWafConfig) GetOriginTimeout() int64 {
 
 // GetOriginTimeoutOk returns a tuple with the OriginTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequestWafConfig) GetOriginTimeoutOk() (*int64, bool) {
+func (o *RuleProxyRequestWafConfig) GetOriginTimeoutOk() (*int32, bool) {
 	if o == nil || IsNil(o.OriginTimeout) {
 		return nil, false
 	}
@@ -470,8 +470,8 @@ func (o *RuleProxyRequestWafConfig) HasOriginTimeout() bool {
 	return false
 }
 
-// SetOriginTimeout gets a reference to the given int64 and assigns it to the OriginTimeout field.
-func (o *RuleProxyRequestWafConfig) SetOriginTimeout(v int64) {
+// SetOriginTimeout gets a reference to the given int32 and assigns it to the OriginTimeout field.
+func (o *RuleProxyRequestWafConfig) SetOriginTimeout(v int32) {
 	o.OriginTimeout = &v
 }
 
@@ -508,9 +508,9 @@ func (o *RuleProxyRequestWafConfig) SetFailoverMode(v bool) {
 }
 
 // GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
-func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfb() int64 {
+func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfb() int32 {
 	if o == nil || IsNil(o.FailoverOriginTtfb) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.FailoverOriginTtfb
@@ -518,7 +518,7 @@ func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfb() int64 {
 
 // GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfbOk() (*int64, bool) {
+func (o *RuleProxyRequestWafConfig) GetFailoverOriginTtfbOk() (*int32, bool) {
 	if o == nil || IsNil(o.FailoverOriginTtfb) {
 		return nil, false
 	}
@@ -534,15 +534,15 @@ func (o *RuleProxyRequestWafConfig) HasFailoverOriginTtfb() bool {
 	return false
 }
 
-// SetFailoverOriginTtfb gets a reference to the given int64 and assigns it to the FailoverOriginTtfb field.
-func (o *RuleProxyRequestWafConfig) SetFailoverOriginTtfb(v int64) {
+// SetFailoverOriginTtfb gets a reference to the given int32 and assigns it to the FailoverOriginTtfb field.
+func (o *RuleProxyRequestWafConfig) SetFailoverOriginTtfb(v int32) {
 	o.FailoverOriginTtfb = &v
 }
 
 // GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field value if set, zero value otherwise.
-func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCode() int64 {
+func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCode() int32 {
 	if o == nil || IsNil(o.FailoverOriginStatusCode) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.FailoverOriginStatusCode
@@ -550,7 +550,7 @@ func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCode() int64 {
 
 // GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCodeOk() (*int64, bool) {
+func (o *RuleProxyRequestWafConfig) GetFailoverOriginStatusCodeOk() (*int32, bool) {
 	if o == nil || IsNil(o.FailoverOriginStatusCode) {
 		return nil, false
 	}
@@ -566,15 +566,15 @@ func (o *RuleProxyRequestWafConfig) HasFailoverOriginStatusCode() bool {
 	return false
 }
 
-// SetFailoverOriginStatusCode gets a reference to the given int64 and assigns it to the FailoverOriginStatusCode field.
-func (o *RuleProxyRequestWafConfig) SetFailoverOriginStatusCode(v int64) {
+// SetFailoverOriginStatusCode gets a reference to the given int32 and assigns it to the FailoverOriginStatusCode field.
+func (o *RuleProxyRequestWafConfig) SetFailoverOriginStatusCode(v int32) {
 	o.FailoverOriginStatusCode = &v
 }
 
 // GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() int64 {
+func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() int32 {
 	if o == nil || IsNil(o.FailoverLifetime) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.FailoverLifetime
@@ -582,7 +582,7 @@ func (o *RuleProxyRequestWafConfig) GetFailoverLifetime() int64 {
 
 // GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*int64, bool) {
+func (o *RuleProxyRequestWafConfig) GetFailoverLifetimeOk() (*int32, bool) {
 	if o == nil || IsNil(o.FailoverLifetime) {
 		return nil, false
 	}
@@ -598,8 +598,8 @@ func (o *RuleProxyRequestWafConfig) HasFailoverLifetime() bool {
 	return false
 }
 
-// SetFailoverLifetime gets a reference to the given int64 and assigns it to the FailoverLifetime field.
-func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v int64) {
+// SetFailoverLifetime gets a reference to the given int32 and assigns it to the FailoverLifetime field.
+func (o *RuleProxyRequestWafConfig) SetFailoverLifetime(v int32) {
 	o.FailoverLifetime = &v
 }
 
