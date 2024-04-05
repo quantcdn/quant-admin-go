@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -53,9 +52,4 @@ model_rule_proxy_request_waf_config_httpbl.go
 model_rule_proxy_request_waf_config_notify_config.go
 model_rule_redirect_request.go
 response.go
-test/api_crawlers_test.go
-test/api_domains_test.go
-test/api_organizations_test.go
-test/api_projects_test.go
-test/api_rules_test.go
 utils.go

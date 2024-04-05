@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **string** |  | [optional] 
 **DeletedAt** | Pointer to **string** |  | [optional] 
 **OrganisationId** | Pointer to **int32** |  | [optional] 
-**Uuid** | Pointer to **int32** |  | [optional] 
+**Uuid** | Pointer to **string** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
 **ProjectType** | Pointer to **string** |  | [optional] 
 **ProjectParentId** | Pointer to **int32** |  | [optional] 
@@ -214,20 +214,20 @@ HasOrganisationId returns a boolean if a field has been set.
 
 ### GetUuid
 
-`func (o *Project) GetUuid() int32`
+`func (o *Project) GetUuid() string`
 
 GetUuid returns the Uuid field if non-nil, zero value otherwise.
 
 ### GetUuidOk
 
-`func (o *Project) GetUuidOk() (*int32, bool)`
+`func (o *Project) GetUuidOk() (*string, bool)`
 
 GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUuid
 
-`func (o *Project) SetUuid(v int32)`
+`func (o *Project) SetUuid(v string)`
 
 SetUuid sets Uuid field to given value.
 

@@ -1290,7 +1290,6 @@ components:
           format: integer
           type: integer
         uuid:
-          format: integer
           type: string
         region:
           type: string

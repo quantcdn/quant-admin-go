@@ -27,7 +27,7 @@ type Project struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
 	OrganisationId *int32 `json:"organisation_id,omitempty"`
-	Uuid *int32 `json:"uuid,omitempty"`
+	Uuid *string `json:"uuid,omitempty"`
 	Region *string `json:"region,omitempty"`
 	ProjectType *string `json:"project_type,omitempty"`
 	ProjectParentId *int32 `json:"project_parent_id,omitempty"`
@@ -277,9 +277,9 @@ func (o *Project) SetOrganisationId(v int32) {
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
-func (o *Project) GetUuid() int32 {
+func (o *Project) GetUuid() string {
 	if o == nil || IsNil(o.Uuid) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.Uuid
@@ -287,7 +287,7 @@ func (o *Project) GetUuid() int32 {
 
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetUuidOk() (*int32, bool) {
+func (o *Project) GetUuidOk() (*string, bool) {
 	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
@@ -303,8 +303,8 @@ func (o *Project) HasUuid() bool {
 	return false
 }
 
-// SetUuid gets a reference to the given int32 and assigns it to the Uuid field.
-func (o *Project) SetUuid(v int32) {
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+func (o *Project) SetUuid(v string) {
 	o.Uuid = &v
 }
 
