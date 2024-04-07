@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## GetProject
 
-> []Project GetProject(ctx, organization, project).Execute()
+> Project GetProject(ctx, organization, project).Execute()
 
 
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.GetProject``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetProject`: []Project
+	// response from `GetProject`: Project
 	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.GetProject`: %v\n", resp)
 }
 ```
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Project**](Project.md)
+[**Project**](Project.md)
 
 ### Authorization
 

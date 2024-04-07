@@ -291,7 +291,7 @@ type ApiGetProjectRequest struct {
 	project string
 }
 
-func (r ApiGetProjectRequest) Execute() ([]Project, *http.Response, error) {
+func (r ApiGetProjectRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.GetProjectExecute(r)
 }
 
@@ -315,13 +315,13 @@ func (a *ProjectsAPIService) GetProject(ctx context.Context, organization string
 }
 
 // Execute executes the request
-//  @return []Project
-func (a *ProjectsAPIService) GetProjectExecute(r ApiGetProjectRequest) ([]Project, *http.Response, error) {
+//  @return Project
+func (a *ProjectsAPIService) GetProjectExecute(r ApiGetProjectRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Project
+		localVarReturnValue  *Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.GetProject")

@@ -176,9 +176,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Project'
-                type: array
+                $ref: '#/components/schemas/Project'
           description: Show the project details
         "400":
           content:
