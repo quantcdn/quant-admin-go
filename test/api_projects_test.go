@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_ProjectsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	t.Run("Test ProjectsAPIService CreateProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization string
 
@@ -38,7 +39,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	t.Run("Test ProjectsAPIService DeleteProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization string
 		var project string
@@ -53,7 +54,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	t.Run("Test ProjectsAPIService GetProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization string
 		var project string
@@ -68,7 +69,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	t.Run("Test ProjectsAPIService ListProjects", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization string
 
@@ -82,7 +83,7 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	t.Run("Test ProjectsAPIService UpdateProject", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var organization string
 		var project string

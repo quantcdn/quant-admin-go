@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCrawlers**](CrawlersAPI.md#CreateCrawlers) | **Post** /organizations/{organization}/projects/{project}/crawlers | 
-[**DeleteCrawler**](CrawlersAPI.md#DeleteCrawler) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-[**GetCrawler**](CrawlersAPI.md#GetCrawler) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-[**ListCrawlers**](CrawlersAPI.md#ListCrawlers) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
-[**UpdateCrawler**](CrawlersAPI.md#UpdateCrawler) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
+[**CreateCrawlers**](CrawlersAPI.md#CreateCrawlers) | **Post** /organizations/{organization}/projects/{project}/crawlers |
+[**DeleteCrawler**](CrawlersAPI.md#DeleteCrawler) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
+[**GetCrawler**](CrawlersAPI.md#GetCrawler) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
+[**ListCrawlers**](CrawlersAPI.md#ListCrawlers) | **Get** /organizations/{organization}/projects/{project}/crawlers |
+[**UpdateCrawler**](CrawlersAPI.md#UpdateCrawler) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -55,8 +55,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name | 
-**project** | **string** | Project machine name | 
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
 
 ### Other Parameters
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 
@@ -104,7 +104,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -130,9 +130,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name | 
-**project** | **string** | Project machine name | 
-**crawler** | **string** | Crawler uuid | 
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**crawler** | **string** | Crawler uuid |
 
 ### Other Parameters
 
@@ -180,7 +180,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -206,9 +206,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name | 
-**project** | **string** | Project machine name | 
-**crawler** | **string** | Crawler uuid | 
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**crawler** | **string** | Crawler uuid |
 
 ### Other Parameters
 
@@ -256,7 +256,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -281,8 +281,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name | 
-**project** | **string** | Project machine name | 
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
 
 ### Other Parameters
 
@@ -329,7 +329,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func main() {
@@ -356,9 +356,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name | 
-**project** | **string** | Project machine name | 
-**crawler** | **string** | Crawler uuid | 
+**organization** | **string** | Organization machine name |
+**project** | **string** | Project machine name |
+**crawler** | **string** | Crawler uuid |
 
 ### Other Parameters
 
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 

@@ -24,7 +24,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import openapi "github.com/GIT_USER_ID/GIT_REPO_ID"
+import openapi "github.com/quantcdn/quant-admin-go"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -80,44 +80,44 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CrawlersAPI* | [**CreateCrawlers**](docs/CrawlersAPI.md#createcrawlers) | **Post** /organizations/{organization}/projects/{project}/crawlers | 
-*CrawlersAPI* | [**DeleteCrawler**](docs/CrawlersAPI.md#deletecrawler) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-*CrawlersAPI* | [**GetCrawler**](docs/CrawlersAPI.md#getcrawler) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-*CrawlersAPI* | [**ListCrawlers**](docs/CrawlersAPI.md#listcrawlers) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
-*CrawlersAPI* | [**UpdateCrawler**](docs/CrawlersAPI.md#updatecrawler) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-*DomainsAPI* | [**CreateDomain**](docs/DomainsAPI.md#createdomain) | **Post** /organizations/{organization}/projects/{project}/domains | 
-*DomainsAPI* | [**DeleteDomain**](docs/DomainsAPI.md#deletedomain) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
-*DomainsAPI* | [**GetDomain**](docs/DomainsAPI.md#getdomain) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
-*DomainsAPI* | [**ListDomains**](docs/DomainsAPI.md#listdomains) | **Get** /organizations/{organization}/projects/{project}/domains | 
-*DomainsAPI* | [**UpdateDomain**](docs/DomainsAPI.md#updatedomain) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} | 
-*OrganizationsAPI* | [**GetOrganization**](docs/OrganizationsAPI.md#getorganization) | **Get** /organizations/{organization} | 
-*OrganizationsAPI* | [**ListOrganizations**](docs/OrganizationsAPI.md#listorganizations) | **Get** /organizations | 
-*ProjectsAPI* | [**CreateProject**](docs/ProjectsAPI.md#createproject) | **Post** /organizations/{organization}/projects | 
-*ProjectsAPI* | [**DeleteProject**](docs/ProjectsAPI.md#deleteproject) | **Delete** /organizations/{organization}/projects/{project} | 
-*ProjectsAPI* | [**GetProject**](docs/ProjectsAPI.md#getproject) | **Get** /organizations/{organization}/projects/{project} | 
-*ProjectsAPI* | [**ListProjects**](docs/ProjectsAPI.md#listprojects) | **Get** /organizations/{organization}/projects | 
-*ProjectsAPI* | [**UpdateProject**](docs/ProjectsAPI.md#updateproject) | **Patch** /organizations/{organization}/projects/{project} | 
-*RulesAPI* | [**CreateRuleAuth**](docs/RulesAPI.md#createruleauth) | **Post** /organizations/{organization}/projects/{project}/rules/auth | 
-*RulesAPI* | [**CreateRuleCustomResponse**](docs/RulesAPI.md#createrulecustomresponse) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | 
-*RulesAPI* | [**CreateRuleHeaders**](docs/RulesAPI.md#createruleheaders) | **Post** /organizations/{organization}/projects/{project}/rules/headers | 
-*RulesAPI* | [**CreateRuleProxy**](docs/RulesAPI.md#createruleproxy) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
-*RulesAPI* | [**CreateRuleRedirect**](docs/RulesAPI.md#createruleredirect) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
-*RulesAPI* | [**DeleteRuleAuth**](docs/RulesAPI.md#deleteruleauth) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
-*RulesAPI* | [**DeleteRuleCustomResponse**](docs/RulesAPI.md#deleterulecustomresponse) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
-*RulesAPI* | [**DeleteRuleHeaders**](docs/RulesAPI.md#deleteruleheaders) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
-*RulesAPI* | [**DeleteRuleProxy**](docs/RulesAPI.md#deleteruleproxy) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
-*RulesAPI* | [**DeleteRuleRedirect**](docs/RulesAPI.md#deleteruleredirect) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-*RulesAPI* | [**GetRuleAuth**](docs/RulesAPI.md#getruleauth) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
-*RulesAPI* | [**GetRuleCustomResponse**](docs/RulesAPI.md#getrulecustomresponse) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
-*RulesAPI* | [**GetRuleHeaders**](docs/RulesAPI.md#getruleheaders) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
-*RulesAPI* | [**GetRuleProxy**](docs/RulesAPI.md#getruleproxy) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
-*RulesAPI* | [**GetRuleRedirect**](docs/RulesAPI.md#getruleredirect) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-*RulesAPI* | [**ListRules**](docs/RulesAPI.md#listrules) | **Get** /organizations/{organization}/projects/{project}/rules | 
-*RulesAPI* | [**UpdateRuleAuth**](docs/RulesAPI.md#updateruleauth) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
-*RulesAPI* | [**UpdateRuleCustomResponse**](docs/RulesAPI.md#updaterulecustomresponse) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
-*RulesAPI* | [**UpdateRuleHeaders**](docs/RulesAPI.md#updateruleheaders) | **Patch** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
-*RulesAPI* | [**UpdateRuleProxy**](docs/RulesAPI.md#updateruleproxy) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
-*RulesAPI* | [**UpdateRuleRedirect**](docs/RulesAPI.md#updateruleredirect) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+*CrawlersAPI* | [**CreateCrawlers**](docs/CrawlersAPI.md#createcrawlers) | **Post** /organizations/{organization}/projects/{project}/crawlers |
+*CrawlersAPI* | [**DeleteCrawler**](docs/CrawlersAPI.md#deletecrawler) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
+*CrawlersAPI* | [**GetCrawler**](docs/CrawlersAPI.md#getcrawler) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
+*CrawlersAPI* | [**ListCrawlers**](docs/CrawlersAPI.md#listcrawlers) | **Get** /organizations/{organization}/projects/{project}/crawlers |
+*CrawlersAPI* | [**UpdateCrawler**](docs/CrawlersAPI.md#updatecrawler) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
+*DomainsAPI* | [**CreateDomain**](docs/DomainsAPI.md#createdomain) | **Post** /organizations/{organization}/projects/{project}/domains |
+*DomainsAPI* | [**DeleteDomain**](docs/DomainsAPI.md#deletedomain) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} |
+*DomainsAPI* | [**GetDomain**](docs/DomainsAPI.md#getdomain) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} |
+*DomainsAPI* | [**ListDomains**](docs/DomainsAPI.md#listdomains) | **Get** /organizations/{organization}/projects/{project}/domains |
+*DomainsAPI* | [**UpdateDomain**](docs/DomainsAPI.md#updatedomain) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} |
+*OrganizationsAPI* | [**GetOrganization**](docs/OrganizationsAPI.md#getorganization) | **Get** /organizations/{organization} |
+*OrganizationsAPI* | [**ListOrganizations**](docs/OrganizationsAPI.md#listorganizations) | **Get** /organizations |
+*ProjectsAPI* | [**CreateProject**](docs/ProjectsAPI.md#createproject) | **Post** /organizations/{organization}/projects |
+*ProjectsAPI* | [**DeleteProject**](docs/ProjectsAPI.md#deleteproject) | **Delete** /organizations/{organization}/projects/{project} |
+*ProjectsAPI* | [**GetProject**](docs/ProjectsAPI.md#getproject) | **Get** /organizations/{organization}/projects/{project} |
+*ProjectsAPI* | [**ListProjects**](docs/ProjectsAPI.md#listprojects) | **Get** /organizations/{organization}/projects |
+*ProjectsAPI* | [**UpdateProject**](docs/ProjectsAPI.md#updateproject) | **Patch** /organizations/{organization}/projects/{project} |
+*RulesAPI* | [**CreateRuleAuth**](docs/RulesAPI.md#createruleauth) | **Post** /organizations/{organization}/projects/{project}/rules/auth |
+*RulesAPI* | [**CreateRuleCustomResponse**](docs/RulesAPI.md#createrulecustomresponse) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response |
+*RulesAPI* | [**CreateRuleHeaders**](docs/RulesAPI.md#createruleheaders) | **Post** /organizations/{organization}/projects/{project}/rules/headers |
+*RulesAPI* | [**CreateRuleProxy**](docs/RulesAPI.md#createruleproxy) | **Post** /organizations/{organization}/projects/{project}/rules/proxy |
+*RulesAPI* | [**CreateRuleRedirect**](docs/RulesAPI.md#createruleredirect) | **Post** /organizations/{organization}/projects/{project}/rules/redirect |
+*RulesAPI* | [**DeleteRuleAuth**](docs/RulesAPI.md#deleteruleauth) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
+*RulesAPI* | [**DeleteRuleCustomResponse**](docs/RulesAPI.md#deleterulecustomresponse) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
+*RulesAPI* | [**DeleteRuleHeaders**](docs/RulesAPI.md#deleteruleheaders) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
+*RulesAPI* | [**DeleteRuleProxy**](docs/RulesAPI.md#deleteruleproxy) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
+*RulesAPI* | [**DeleteRuleRedirect**](docs/RulesAPI.md#deleteruleredirect) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
+*RulesAPI* | [**GetRuleAuth**](docs/RulesAPI.md#getruleauth) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
+*RulesAPI* | [**GetRuleCustomResponse**](docs/RulesAPI.md#getrulecustomresponse) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
+*RulesAPI* | [**GetRuleHeaders**](docs/RulesAPI.md#getruleheaders) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
+*RulesAPI* | [**GetRuleProxy**](docs/RulesAPI.md#getruleproxy) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
+*RulesAPI* | [**GetRuleRedirect**](docs/RulesAPI.md#getruleredirect) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
+*RulesAPI* | [**ListRules**](docs/RulesAPI.md#listrules) | **Get** /organizations/{organization}/projects/{project}/rules |
+*RulesAPI* | [**UpdateRuleAuth**](docs/RulesAPI.md#updateruleauth) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
+*RulesAPI* | [**UpdateRuleCustomResponse**](docs/RulesAPI.md#updaterulecustomresponse) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
+*RulesAPI* | [**UpdateRuleHeaders**](docs/RulesAPI.md#updateruleheaders) | **Patch** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
+*RulesAPI* | [**UpdateRuleProxy**](docs/RulesAPI.md#updateruleproxy) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
+*RulesAPI* | [**UpdateRuleRedirect**](docs/RulesAPI.md#updateruleredirect) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
 
 
 ## Documentation For Models
