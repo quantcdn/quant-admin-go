@@ -4,27 +4,27 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateRuleAuth**](RulesAPI.md#CreateRuleAuth) | **Post** /organizations/{organization}/projects/{project}/rules/auth |
-[**CreateRuleCustomResponse**](RulesAPI.md#CreateRuleCustomResponse) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response |
-[**CreateRuleHeaders**](RulesAPI.md#CreateRuleHeaders) | **Post** /organizations/{organization}/projects/{project}/rules/headers |
-[**CreateRuleProxy**](RulesAPI.md#CreateRuleProxy) | **Post** /organizations/{organization}/projects/{project}/rules/proxy |
-[**CreateRuleRedirect**](RulesAPI.md#CreateRuleRedirect) | **Post** /organizations/{organization}/projects/{project}/rules/redirect |
-[**DeleteRuleAuth**](RulesAPI.md#DeleteRuleAuth) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
-[**DeleteRuleCustomResponse**](RulesAPI.md#DeleteRuleCustomResponse) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
-[**DeleteRuleHeaders**](RulesAPI.md#DeleteRuleHeaders) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
-[**DeleteRuleProxy**](RulesAPI.md#DeleteRuleProxy) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
-[**DeleteRuleRedirect**](RulesAPI.md#DeleteRuleRedirect) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
-[**GetRuleAuth**](RulesAPI.md#GetRuleAuth) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
-[**GetRuleCustomResponse**](RulesAPI.md#GetRuleCustomResponse) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
-[**GetRuleHeaders**](RulesAPI.md#GetRuleHeaders) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
-[**GetRuleProxy**](RulesAPI.md#GetRuleProxy) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
-[**GetRuleRedirect**](RulesAPI.md#GetRuleRedirect) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
-[**ListRules**](RulesAPI.md#ListRules) | **Get** /organizations/{organization}/projects/{project}/rules |
-[**UpdateRuleAuth**](RulesAPI.md#UpdateRuleAuth) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} |
-[**UpdateRuleCustomResponse**](RulesAPI.md#UpdateRuleCustomResponse) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} |
-[**UpdateRuleHeaders**](RulesAPI.md#UpdateRuleHeaders) | **Patch** /organizations/{organization}/projects/{project}/rules/headers/{rule} |
-[**UpdateRuleProxy**](RulesAPI.md#UpdateRuleProxy) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} |
-[**UpdateRuleRedirect**](RulesAPI.md#UpdateRuleRedirect) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} |
+[**CreateRuleAuth**](RulesAPI.md#CreateRuleAuth) | **Post** /organizations/{organization}/projects/{project}/rules/auth | 
+[**CreateRuleCustomResponse**](RulesAPI.md#CreateRuleCustomResponse) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | 
+[**CreateRuleHeaders**](RulesAPI.md#CreateRuleHeaders) | **Post** /organizations/{organization}/projects/{project}/rules/headers | 
+[**CreateRuleProxy**](RulesAPI.md#CreateRuleProxy) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
+[**CreateRuleRedirect**](RulesAPI.md#CreateRuleRedirect) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
+[**DeleteRuleAuth**](RulesAPI.md#DeleteRuleAuth) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
+[**DeleteRuleCustomResponse**](RulesAPI.md#DeleteRuleCustomResponse) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+[**DeleteRuleHeaders**](RulesAPI.md#DeleteRuleHeaders) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
+[**DeleteRuleProxy**](RulesAPI.md#DeleteRuleProxy) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+[**DeleteRuleRedirect**](RulesAPI.md#DeleteRuleRedirect) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+[**GetRuleAuth**](RulesAPI.md#GetRuleAuth) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
+[**GetRuleCustomResponse**](RulesAPI.md#GetRuleCustomResponse) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+[**GetRuleHeaders**](RulesAPI.md#GetRuleHeaders) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
+[**GetRuleProxy**](RulesAPI.md#GetRuleProxy) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+[**GetRuleRedirect**](RulesAPI.md#GetRuleRedirect) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+[**ListRules**](RulesAPI.md#ListRules) | **Get** /organizations/{organization}/projects/{project}/rules | 
+[**UpdateRuleAuth**](RulesAPI.md#UpdateRuleAuth) | **Patch** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
+[**UpdateRuleCustomResponse**](RulesAPI.md#UpdateRuleCustomResponse) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+[**UpdateRuleHeaders**](RulesAPI.md#UpdateRuleHeaders) | **Patch** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
+[**UpdateRuleProxy**](RulesAPI.md#UpdateRuleProxy) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+[**UpdateRuleRedirect**](RulesAPI.md#UpdateRuleRedirect) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 
@@ -45,7 +45,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -71,8 +71,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  |
+ **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  | 
 
 ### Return type
 
@@ -120,7 +120,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -146,8 +146,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  | 
 
 ### Return type
 
@@ -195,7 +195,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -221,8 +221,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -233,7 +233,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
+ **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  | 
 
 ### Return type
 
@@ -270,7 +270,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -296,8 +296,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
+ **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
 
 ### Return type
 
@@ -345,7 +345,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -371,8 +371,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -383,7 +383,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
 
 ### Return type
 
@@ -420,13 +420,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -446,9 +446,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -496,13 +496,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -522,9 +522,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -572,13 +572,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -598,9 +598,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -648,13 +648,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -674,9 +674,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -724,13 +724,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -750,9 +750,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -800,13 +800,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -826,9 +826,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -876,13 +876,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -902,9 +902,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -952,13 +952,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -978,9 +978,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1028,13 +1028,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1054,9 +1054,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1104,13 +1104,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1130,9 +1130,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1180,7 +1180,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -1205,8 +1205,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -1253,13 +1253,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 	ruleAuthRequest := *openapiclient.NewRuleAuthRequest() // RuleAuthRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1280,9 +1280,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1294,7 +1294,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  |
+ **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  | 
 
 ### Return type
 
@@ -1331,13 +1331,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 	ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest() // RuleCustomResponseRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1358,9 +1358,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1372,7 +1372,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  |
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  | 
 
 ### Return type
 
@@ -1409,13 +1409,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest() // RuleHeaderRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1436,9 +1436,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1450,7 +1450,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  |
+ **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  | 
 
 ### Return type
 
@@ -1487,13 +1487,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 	ruleProxyRequest := *openapiclient.NewRuleProxyRequest() // RuleProxyRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1514,9 +1514,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1528,7 +1528,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  |
+ **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
 
 ### Return type
 
@@ -1565,13 +1565,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	rule := "rule_example" // string |
+	rule := "rule_example" // string | 
 	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest() // RuleRedirectRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1592,9 +1592,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**rule** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
@@ -1606,7 +1606,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  |
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
 
 ### Return type
 

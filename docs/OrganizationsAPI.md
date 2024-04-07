@@ -4,8 +4,8 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetOrganization**](OrganizationsAPI.md#GetOrganization) | **Get** /organizations/{organization} |
-[**ListOrganizations**](OrganizationsAPI.md#ListOrganizations) | **Get** /organizations |
+[**GetOrganization**](OrganizationsAPI.md#GetOrganization) | **Get** /organizations/{organization} | 
+[**ListOrganizations**](OrganizationsAPI.md#ListOrganizations) | **Get** /organizations | 
 
 
 
@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -50,7 +50,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
+**organization** | **string** | Organization machine name | 
 
 ### Other Parameters
 
@@ -96,7 +96,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {

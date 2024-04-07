@@ -11,11 +11,10 @@ package openapi
 
 import (
 	"context"
-	"testing"
-
-	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_DomainsAPIService(t *testing.T) {
@@ -25,7 +24,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService CreateDomain", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -40,7 +39,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService DeleteDomain", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -56,7 +55,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService GetDomain", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -72,7 +71,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService ListDomains", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -87,7 +86,7 @@ func Test_openapi_DomainsAPIService(t *testing.T) {
 
 	t.Run("Test DomainsAPIService UpdateDomain", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string

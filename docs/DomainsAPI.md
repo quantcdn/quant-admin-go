@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateDomain**](DomainsAPI.md#CreateDomain) | **Post** /organizations/{organization}/projects/{project}/domains |
-[**DeleteDomain**](DomainsAPI.md#DeleteDomain) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} |
-[**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} |
-[**ListDomains**](DomainsAPI.md#ListDomains) | **Get** /organizations/{organization}/projects/{project}/domains |
-[**UpdateDomain**](DomainsAPI.md#UpdateDomain) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} |
+[**CreateDomain**](DomainsAPI.md#CreateDomain) | **Post** /organizations/{organization}/projects/{project}/domains | 
+[**DeleteDomain**](DomainsAPI.md#DeleteDomain) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
+[**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
+[**ListDomains**](DomainsAPI.md#ListDomains) | **Get** /organizations/{organization}/projects/{project}/domains | 
+[**UpdateDomain**](DomainsAPI.md#UpdateDomain) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} | 
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -55,8 +55,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
 
 ### Return type
 
@@ -104,13 +104,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	domain := "domain_example" // string |
+	domain := "domain_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -130,9 +130,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**domain** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**domain** | **string** |  | 
 
 ### Other Parameters
 
@@ -180,13 +180,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	domain := "domain_example" // string |
+	domain := "domain_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -206,9 +206,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**domain** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**domain** | **string** |  | 
 
 ### Other Parameters
 
@@ -256,7 +256,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -281,8 +281,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -329,13 +329,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | Organization machine name
 	project := "project_example" // string | Project machine name
-	domain := "domain_example" // string |
+	domain := "domain_example" // string | 
 	domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -356,9 +356,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**domain** | **string** |  |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
+**domain** | **string** |  | 
 
 ### Other Parameters
 
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
 
 ### Return type
 

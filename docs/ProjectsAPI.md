@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:8001/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateProject**](ProjectsAPI.md#CreateProject) | **Post** /organizations/{organization}/projects |
-[**DeleteProject**](ProjectsAPI.md#DeleteProject) | **Delete** /organizations/{organization}/projects/{project} |
-[**GetProject**](ProjectsAPI.md#GetProject) | **Get** /organizations/{organization}/projects/{project} |
-[**ListProjects**](ProjectsAPI.md#ListProjects) | **Get** /organizations/{organization}/projects |
-[**UpdateProject**](ProjectsAPI.md#UpdateProject) | **Patch** /organizations/{organization}/projects/{project} |
+[**CreateProject**](ProjectsAPI.md#CreateProject) | **Post** /organizations/{organization}/projects | 
+[**DeleteProject**](ProjectsAPI.md#DeleteProject) | **Delete** /organizations/{organization}/projects/{project} | 
+[**GetProject**](ProjectsAPI.md#GetProject) | **Get** /organizations/{organization}/projects/{project} | 
+[**ListProjects**](ProjectsAPI.md#ListProjects) | **Get** /organizations/{organization}/projects | 
+[**UpdateProject**](ProjectsAPI.md#UpdateProject) | **Patch** /organizations/{organization}/projects/{project} | 
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -54,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
+**organization** | **string** | Organization machine name | 
 
 ### Other Parameters
 
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateProjectRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  |
+ **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  | 
 
 ### Return type
 
@@ -101,7 +101,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -126,8 +126,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -174,7 +174,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -199,8 +199,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -247,7 +247,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -271,7 +271,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
+**organization** | **string** | Organization machine name | 
 
 ### Other Parameters
 
@@ -317,7 +317,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -343,8 +343,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** | Organization machine name | 
+**project** | **string** | Project machine name | 
 
 ### Other Parameters
 
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  |
+ **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  | 
 
 ### Return type
 
