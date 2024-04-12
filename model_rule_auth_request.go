@@ -31,7 +31,7 @@ type RuleAuthRequest struct {
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
 	OnlyWithCookie *string `json:"only_with_cookie,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Url []string `json:"url,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Disabled *bool `json:"disabled,omitempty"`
 	To *string `json:"to,omitempty"`
@@ -414,17 +414,17 @@ func (o *RuleAuthRequest) SetOnlyWithCookie(v string) {
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
-func (o *RuleAuthRequest) GetUrl() string {
+func (o *RuleAuthRequest) GetUrl() []string {
 	if o == nil || IsNil(o.Url) {
-		var ret string
+		var ret []string
 		return ret
 	}
-	return *o.Url
+	return o.Url
 }
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleAuthRequest) GetUrlOk() (*string, bool) {
+func (o *RuleAuthRequest) GetUrlOk() ([]string, bool) {
 	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
@@ -440,9 +440,9 @@ func (o *RuleAuthRequest) HasUrl() bool {
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *RuleAuthRequest) SetUrl(v string) {
-	o.Url = &v
+// SetUrl gets a reference to the given []string and assigns it to the Url field.
+func (o *RuleAuthRequest) SetUrl(v []string) {
+	o.Url = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.

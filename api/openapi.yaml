@@ -1471,7 +1471,9 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         redirect_to: redirect_to
         country_is_not:
         - country_is_not
@@ -1527,7 +1529,9 @@ components:
         only_with_cookie:
           type: string
         url:
-          type: string
+          items:
+            type: string
+          type: array
         name:
           type: string
         disabled:
@@ -1558,7 +1562,9 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         country_is_not:
         - country_is_not
         - country_is_not
@@ -1663,7 +1669,9 @@ components:
         only_with_cookie:
           type: string
         url:
-          type: string
+          items:
+            type: string
+          type: array
         name:
           type: string
         disabled:
@@ -1712,7 +1720,9 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         country_is_not:
         - country_is_not
         - country_is_not
@@ -1773,7 +1783,9 @@ components:
         only_with_cookie:
           type: string
         url:
-          type: string
+          items:
+            type: string
+          type: array
         name:
           type: string
         disabled:
@@ -1820,7 +1832,9 @@ components:
         - method_is_not
         - method_is_not
         custom_response_body: custom_response_body
-        url: url
+        url:
+        - url
+        - url
         country_is_not:
         - country_is_not
         - country_is_not
@@ -1881,7 +1895,9 @@ components:
         only_with_cookie:
           type: string
         url:
-          type: string
+          items:
+            type: string
+          type: array
         name:
           type: string
         disabled:
@@ -1931,7 +1947,9 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         country_is_not:
         - country_is_not
         - country_is_not
@@ -1992,7 +2010,9 @@ components:
         only_with_cookie:
           type: string
         url:
-          type: string
+          items:
+            type: string
+          type: array
         name:
           type: string
         disabled:

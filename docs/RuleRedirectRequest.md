@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
 **OnlyWithCookie** | Pointer to **string** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
+**Url** | Pointer to **[]string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
 **RedirectTo** | Pointer to **string** |  | [optional] 
@@ -317,20 +317,20 @@ HasOnlyWithCookie returns a boolean if a field has been set.
 
 ### GetUrl
 
-`func (o *RuleRedirectRequest) GetUrl() string`
+`func (o *RuleRedirectRequest) GetUrl() []string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *RuleRedirectRequest) GetUrlOk() (*string, bool)`
+`func (o *RuleRedirectRequest) GetUrlOk() (*[]string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *RuleRedirectRequest) SetUrl(v string)`
+`func (o *RuleRedirectRequest) SetUrl(v []string)`
 
 SetUrl sets Url field to given value.
 
