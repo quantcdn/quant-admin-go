@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiOrganizationsListRequest s
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

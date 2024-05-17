@@ -5,6 +5,8 @@ info:
 servers:
 - description: Staging Dashboard
   url: https://portal.stage.quantcdn.io
+security:
+- BearerAuth: []
 tags:
 - name: Organizations
 - name: Projects
@@ -2118,3 +2120,7 @@ components:
       - notify_email
       - origin_timeout
       type: object
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
