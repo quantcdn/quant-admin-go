@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Domain** | **string** |  | 
 **BrowserMode** | Pointer to **bool** |  | [optional] 
 **UrlList** | **[]string** |  | 
-**Headers** | **string** |  | 
+**Headers** | **map[string]string** |  | 
 
 ## Methods
 
 ### NewCrawlerRequest
 
-`func NewCrawlerRequest(domain string, urlList []string, headers string, ) *CrawlerRequest`
+`func NewCrawlerRequest(domain string, urlList []string, headers map[string]string, ) *CrawlerRequest`
 
 NewCrawlerRequest instantiates a new CrawlerRequest object
 This constructor will assign default values to properties that have it defined,
@@ -121,20 +121,20 @@ SetUrlList sets UrlList field to given value.
 
 ### GetHeaders
 
-`func (o *CrawlerRequest) GetHeaders() string`
+`func (o *CrawlerRequest) GetHeaders() map[string]string`
 
 GetHeaders returns the Headers field if non-nil, zero value otherwise.
 
 ### GetHeadersOk
 
-`func (o *CrawlerRequest) GetHeadersOk() (*string, bool)`
+`func (o *CrawlerRequest) GetHeadersOk() (*map[string]string, bool)`
 
 GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHeaders
 
-`func (o *CrawlerRequest) SetHeaders(v string)`
+`func (o *CrawlerRequest) SetHeaders(v map[string]string)`
 
 SetHeaders sets Headers field to given value.
 

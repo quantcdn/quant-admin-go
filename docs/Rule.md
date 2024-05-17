@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | **string** |  | 
 **Config** | **string** |  | 
+**Urls** | **[]string** |  | 
 
 ## Methods
 
 ### NewRule
 
-`func NewRule(uuid string, config string, ) *Rule`
+`func NewRule(uuid string, config string, urls []string, ) *Rule`
 
 NewRule instantiates a new Rule object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *Rule) SetConfig(v string)`
 
 SetConfig sets Config field to given value.
+
+
+### GetUrls
+
+`func (o *Rule) GetUrls() []string`
+
+GetUrls returns the Urls field if non-nil, zero value otherwise.
+
+### GetUrlsOk
+
+`func (o *Rule) GetUrlsOk() (*[]string, bool)`
+
+GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrls
+
+`func (o *Rule) SetUrls(v []string)`
+
+SetUrls sets Urls field to given value.
 
 
 

@@ -23,6 +23,7 @@ var _ MappedNullable = &Rule{}
 type Rule struct {
 	Uuid string `json:"uuid"`
 	Config string `json:"config"`
+	Urls []string `json:"urls"`
 }
 
 type _Rule Rule
@@ -31,10 +32,11 @@ type _Rule Rule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRule(uuid string, config string) *Rule {
+func NewRule(uuid string, config string, urls []string) *Rule {
 	this := Rule{}
 	this.Uuid = uuid
 	this.Config = config
+	this.Urls = urls
 	return &this
 }
 
@@ -94,6 +96,30 @@ func (o *Rule) SetConfig(v string) {
 	o.Config = v
 }
 
+// GetUrls returns the Urls field value
+func (o *Rule) GetUrls() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value
+// and a boolean to check if the value has been set.
+func (o *Rule) GetUrlsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// SetUrls sets field value
+func (o *Rule) SetUrls(v []string) {
+	o.Urls = v
+}
+
 func (o Rule) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,6 +132,7 @@ func (o Rule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["config"] = o.Config
+	toSerialize["urls"] = o.Urls
 	return toSerialize, nil
 }
 
@@ -116,6 +143,7 @@ func (o *Rule) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"uuid",
 		"config",
+		"urls",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -25,7 +25,7 @@ type CrawlerRequest struct {
 	Domain string `json:"domain"`
 	BrowserMode *bool `json:"browser_mode,omitempty"`
 	UrlList []string `json:"url_list"`
-	Headers string `json:"headers"`
+	Headers map[string]string `json:"headers"`
 }
 
 type _CrawlerRequest CrawlerRequest
@@ -34,7 +34,7 @@ type _CrawlerRequest CrawlerRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCrawlerRequest(domain string, urlList []string, headers string) *CrawlerRequest {
+func NewCrawlerRequest(domain string, urlList []string, headers map[string]string) *CrawlerRequest {
 	this := CrawlerRequest{}
 	this.Domain = domain
 	this.UrlList = urlList
@@ -163,9 +163,9 @@ func (o *CrawlerRequest) SetUrlList(v []string) {
 }
 
 // GetHeaders returns the Headers field value
-func (o *CrawlerRequest) GetHeaders() string {
+func (o *CrawlerRequest) GetHeaders() map[string]string {
 	if o == nil {
-		var ret string
+		var ret map[string]string
 		return ret
 	}
 
@@ -174,7 +174,7 @@ func (o *CrawlerRequest) GetHeaders() string {
 
 // GetHeadersOk returns a tuple with the Headers field value
 // and a boolean to check if the value has been set.
-func (o *CrawlerRequest) GetHeadersOk() (*string, bool) {
+func (o *CrawlerRequest) GetHeadersOk() (*map[string]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -182,7 +182,7 @@ func (o *CrawlerRequest) GetHeadersOk() (*string, bool) {
 }
 
 // SetHeaders sets field value
-func (o *CrawlerRequest) SetHeaders(v string) {
+func (o *CrawlerRequest) SetHeaders(v map[string]string) {
 	o.Headers = v
 }
 

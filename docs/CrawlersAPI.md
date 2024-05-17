@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, "Headers_example") // CrawlerRequest | 
+	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, map[string]string{"key": "Inner_example"}) // CrawlerRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	crawler := "crawler_example" // string | 
-	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, "Headers_example") // CrawlerRequest | 
+	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, map[string]string{"key": "Inner_example"}) // CrawlerRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

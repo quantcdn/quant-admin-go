@@ -1517,7 +1517,8 @@ components:
       type: object
     CrawlerRequest:
       example:
-        headers: headers
+        headers:
+          key: headers
         url_list:
         - url_list
         - url_list
@@ -1536,7 +1537,9 @@ components:
             type: string
           type: array
         headers:
-          type: string
+          additionalProperties:
+            type: string
+          type: object
       required:
       - domain
       - headers
@@ -1797,6 +1800,9 @@ components:
       type: object
     Rule:
       example:
+        urls:
+        - urls
+        - urls
         uuid: uuid
         config: config
       properties:
@@ -1804,8 +1810,13 @@ components:
           type: string
         config:
           type: string
+        urls:
+          items:
+            type: string
+          type: array
       required:
       - config
+      - urls
       - uuid
       type: object
     RuleAuthRequest:
