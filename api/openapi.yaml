@@ -1816,7 +1816,6 @@ components:
           type: array
       required:
       - config
-      - urls
       - uuid
       type: object
     RuleAuthRequest:

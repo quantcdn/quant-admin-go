@@ -23,7 +23,7 @@ var _ MappedNullable = &Rule{}
 type Rule struct {
 	Uuid string `json:"uuid"`
 	Config string `json:"config"`
-	Urls []string `json:"urls"`
+	Urls []string `json:"urls,omitempty"`
 }
 
 type _Rule Rule
@@ -32,11 +32,10 @@ type _Rule Rule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRule(uuid string, config string, urls []string) *Rule {
+func NewRule(uuid string, config string) *Rule {
 	this := Rule{}
 	this.Uuid = uuid
 	this.Config = config
-	this.Urls = urls
 	return &this
 }
 
@@ -96,26 +95,34 @@ func (o *Rule) SetConfig(v string) {
 	o.Config = v
 }
 
-// GetUrls returns the Urls field value
+// GetUrls returns the Urls field value if set, zero value otherwise.
 func (o *Rule) GetUrls() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Urls) {
 		var ret []string
 		return ret
 	}
-
 	return o.Urls
 }
 
-// GetUrlsOk returns a tuple with the Urls field value
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Rule) GetUrlsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Urls) {
 		return nil, false
 	}
 	return o.Urls, true
 }
 
-// SetUrls sets field value
+// HasUrls returns a boolean if a field has been set.
+func (o *Rule) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
 func (o *Rule) SetUrls(v []string) {
 	o.Urls = v
 }
@@ -132,7 +139,9 @@ func (o Rule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["config"] = o.Config
-	toSerialize["urls"] = o.Urls
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
 	return toSerialize, nil
 }
 
@@ -143,7 +152,6 @@ func (o *Rule) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"uuid",
 		"config",
-		"urls",
 	}
 
 	allProperties := make(map[string]interface{})

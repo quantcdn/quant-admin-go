@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | **string** |  | 
 **Config** | **string** |  | 
-**Urls** | **[]string** |  | 
+**Urls** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
 ### NewRule
 
-`func NewRule(uuid string, config string, urls []string, ) *Rule`
+`func NewRule(uuid string, config string, ) *Rule`
 
 NewRule instantiates a new Rule object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +86,11 @@ and a boolean to check if the value has been set.
 
 SetUrls sets Urls field to given value.
 
+### HasUrls
+
+`func (o *Rule) HasUrls() bool`
+
+HasUrls returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
