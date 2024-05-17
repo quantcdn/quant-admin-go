@@ -137,7 +137,7 @@ Class | Method | HTTP request | Description
  - [ProxyNotifyConfig](docs/ProxyNotifyConfig.md)
  - [Rule](docs/Rule.md)
  - [RuleAuthRequest](docs/RuleAuthRequest.md)
- - [RuleCustomResponserequest](docs/RuleCustomResponserequest.md)
+ - [RuleCustomResponseRequest](docs/RuleCustomResponseRequest.md)
  - [RuleHeaderRequest](docs/RuleHeaderRequest.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)

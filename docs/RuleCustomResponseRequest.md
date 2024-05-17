@@ -1,4 +1,4 @@
-# RuleCustomResponserequest
+# RuleCustomResponseRequest
 
 ## Properties
 
@@ -22,374 +22,374 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewRuleCustomResponserequest
+### NewRuleCustomResponseRequest
 
-`func NewRuleCustomResponserequest(domain string, disabled bool, customResponseStatusCode int32, customResponseBody string, ) *RuleCustomResponserequest`
+`func NewRuleCustomResponseRequest(domain string, disabled bool, customResponseStatusCode int32, customResponseBody string, ) *RuleCustomResponseRequest`
 
-NewRuleCustomResponserequest instantiates a new RuleCustomResponserequest object
+NewRuleCustomResponseRequest instantiates a new RuleCustomResponseRequest object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRuleCustomResponserequestWithDefaults
+### NewRuleCustomResponseRequestWithDefaults
 
-`func NewRuleCustomResponserequestWithDefaults() *RuleCustomResponserequest`
+`func NewRuleCustomResponseRequestWithDefaults() *RuleCustomResponseRequest`
 
-NewRuleCustomResponserequestWithDefaults instantiates a new RuleCustomResponserequest object
+NewRuleCustomResponseRequestWithDefaults instantiates a new RuleCustomResponseRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetDomain
 
-`func (o *RuleCustomResponserequest) GetDomain() string`
+`func (o *RuleCustomResponseRequest) GetDomain() string`
 
 GetDomain returns the Domain field if non-nil, zero value otherwise.
 
 ### GetDomainOk
 
-`func (o *RuleCustomResponserequest) GetDomainOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetDomainOk() (*string, bool)`
 
 GetDomainOk returns a tuple with the Domain field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDomain
 
-`func (o *RuleCustomResponserequest) SetDomain(v string)`
+`func (o *RuleCustomResponseRequest) SetDomain(v string)`
 
 SetDomain sets Domain field to given value.
 
 
 ### GetName
 
-`func (o *RuleCustomResponserequest) GetName() string`
+`func (o *RuleCustomResponseRequest) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *RuleCustomResponserequest) GetNameOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *RuleCustomResponserequest) SetName(v string)`
+`func (o *RuleCustomResponseRequest) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *RuleCustomResponserequest) HasName() bool`
+`func (o *RuleCustomResponseRequest) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetDisabled
 
-`func (o *RuleCustomResponserequest) GetDisabled() bool`
+`func (o *RuleCustomResponseRequest) GetDisabled() bool`
 
 GetDisabled returns the Disabled field if non-nil, zero value otherwise.
 
 ### GetDisabledOk
 
-`func (o *RuleCustomResponserequest) GetDisabledOk() (*bool, bool)`
+`func (o *RuleCustomResponseRequest) GetDisabledOk() (*bool, bool)`
 
 GetDisabledOk returns a tuple with the Disabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisabled
 
-`func (o *RuleCustomResponserequest) SetDisabled(v bool)`
+`func (o *RuleCustomResponseRequest) SetDisabled(v bool)`
 
 SetDisabled sets Disabled field to given value.
 
 
 ### GetUrls
 
-`func (o *RuleCustomResponserequest) GetUrls() []string`
+`func (o *RuleCustomResponseRequest) GetUrls() []string`
 
 GetUrls returns the Urls field if non-nil, zero value otherwise.
 
 ### GetUrlsOk
 
-`func (o *RuleCustomResponserequest) GetUrlsOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetUrlsOk() (*[]string, bool)`
 
 GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrls
 
-`func (o *RuleCustomResponserequest) SetUrls(v []string)`
+`func (o *RuleCustomResponseRequest) SetUrls(v []string)`
 
 SetUrls sets Urls field to given value.
 
 ### HasUrls
 
-`func (o *RuleCustomResponserequest) HasUrls() bool`
+`func (o *RuleCustomResponseRequest) HasUrls() bool`
 
 HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 
-`func (o *RuleCustomResponserequest) GetCountry() string`
+`func (o *RuleCustomResponseRequest) GetCountry() string`
 
 GetCountry returns the Country field if non-nil, zero value otherwise.
 
 ### GetCountryOk
 
-`func (o *RuleCustomResponserequest) GetCountryOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetCountryOk() (*string, bool)`
 
 GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCountry
 
-`func (o *RuleCustomResponserequest) SetCountry(v string)`
+`func (o *RuleCustomResponseRequest) SetCountry(v string)`
 
 SetCountry sets Country field to given value.
 
 ### HasCountry
 
-`func (o *RuleCustomResponserequest) HasCountry() bool`
+`func (o *RuleCustomResponseRequest) HasCountry() bool`
 
 HasCountry returns a boolean if a field has been set.
 
 ### GetCountryIs
 
-`func (o *RuleCustomResponserequest) GetCountryIs() []string`
+`func (o *RuleCustomResponseRequest) GetCountryIs() []string`
 
 GetCountryIs returns the CountryIs field if non-nil, zero value otherwise.
 
 ### GetCountryIsOk
 
-`func (o *RuleCustomResponserequest) GetCountryIsOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetCountryIsOk() (*[]string, bool)`
 
 GetCountryIsOk returns a tuple with the CountryIs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCountryIs
 
-`func (o *RuleCustomResponserequest) SetCountryIs(v []string)`
+`func (o *RuleCustomResponseRequest) SetCountryIs(v []string)`
 
 SetCountryIs sets CountryIs field to given value.
 
 ### HasCountryIs
 
-`func (o *RuleCustomResponserequest) HasCountryIs() bool`
+`func (o *RuleCustomResponseRequest) HasCountryIs() bool`
 
 HasCountryIs returns a boolean if a field has been set.
 
 ### GetCountryIsNot
 
-`func (o *RuleCustomResponserequest) GetCountryIsNot() []string`
+`func (o *RuleCustomResponseRequest) GetCountryIsNot() []string`
 
 GetCountryIsNot returns the CountryIsNot field if non-nil, zero value otherwise.
 
 ### GetCountryIsNotOk
 
-`func (o *RuleCustomResponserequest) GetCountryIsNotOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetCountryIsNotOk() (*[]string, bool)`
 
 GetCountryIsNotOk returns a tuple with the CountryIsNot field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCountryIsNot
 
-`func (o *RuleCustomResponserequest) SetCountryIsNot(v []string)`
+`func (o *RuleCustomResponseRequest) SetCountryIsNot(v []string)`
 
 SetCountryIsNot sets CountryIsNot field to given value.
 
 ### HasCountryIsNot
 
-`func (o *RuleCustomResponserequest) HasCountryIsNot() bool`
+`func (o *RuleCustomResponseRequest) HasCountryIsNot() bool`
 
 HasCountryIsNot returns a boolean if a field has been set.
 
 ### GetMethod
 
-`func (o *RuleCustomResponserequest) GetMethod() string`
+`func (o *RuleCustomResponseRequest) GetMethod() string`
 
 GetMethod returns the Method field if non-nil, zero value otherwise.
 
 ### GetMethodOk
 
-`func (o *RuleCustomResponserequest) GetMethodOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetMethodOk() (*string, bool)`
 
 GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMethod
 
-`func (o *RuleCustomResponserequest) SetMethod(v string)`
+`func (o *RuleCustomResponseRequest) SetMethod(v string)`
 
 SetMethod sets Method field to given value.
 
 ### HasMethod
 
-`func (o *RuleCustomResponserequest) HasMethod() bool`
+`func (o *RuleCustomResponseRequest) HasMethod() bool`
 
 HasMethod returns a boolean if a field has been set.
 
 ### GetMethodIs
 
-`func (o *RuleCustomResponserequest) GetMethodIs() []string`
+`func (o *RuleCustomResponseRequest) GetMethodIs() []string`
 
 GetMethodIs returns the MethodIs field if non-nil, zero value otherwise.
 
 ### GetMethodIsOk
 
-`func (o *RuleCustomResponserequest) GetMethodIsOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetMethodIsOk() (*[]string, bool)`
 
 GetMethodIsOk returns a tuple with the MethodIs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMethodIs
 
-`func (o *RuleCustomResponserequest) SetMethodIs(v []string)`
+`func (o *RuleCustomResponseRequest) SetMethodIs(v []string)`
 
 SetMethodIs sets MethodIs field to given value.
 
 ### HasMethodIs
 
-`func (o *RuleCustomResponserequest) HasMethodIs() bool`
+`func (o *RuleCustomResponseRequest) HasMethodIs() bool`
 
 HasMethodIs returns a boolean if a field has been set.
 
 ### GetMethodIsNot
 
-`func (o *RuleCustomResponserequest) GetMethodIsNot() []string`
+`func (o *RuleCustomResponseRequest) GetMethodIsNot() []string`
 
 GetMethodIsNot returns the MethodIsNot field if non-nil, zero value otherwise.
 
 ### GetMethodIsNotOk
 
-`func (o *RuleCustomResponserequest) GetMethodIsNotOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetMethodIsNotOk() (*[]string, bool)`
 
 GetMethodIsNotOk returns a tuple with the MethodIsNot field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMethodIsNot
 
-`func (o *RuleCustomResponserequest) SetMethodIsNot(v []string)`
+`func (o *RuleCustomResponseRequest) SetMethodIsNot(v []string)`
 
 SetMethodIsNot sets MethodIsNot field to given value.
 
 ### HasMethodIsNot
 
-`func (o *RuleCustomResponserequest) HasMethodIsNot() bool`
+`func (o *RuleCustomResponseRequest) HasMethodIsNot() bool`
 
 HasMethodIsNot returns a boolean if a field has been set.
 
 ### GetIp
 
-`func (o *RuleCustomResponserequest) GetIp() string`
+`func (o *RuleCustomResponseRequest) GetIp() string`
 
 GetIp returns the Ip field if non-nil, zero value otherwise.
 
 ### GetIpOk
 
-`func (o *RuleCustomResponserequest) GetIpOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetIpOk() (*string, bool)`
 
 GetIpOk returns a tuple with the Ip field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIp
 
-`func (o *RuleCustomResponserequest) SetIp(v string)`
+`func (o *RuleCustomResponseRequest) SetIp(v string)`
 
 SetIp sets Ip field to given value.
 
 ### HasIp
 
-`func (o *RuleCustomResponserequest) HasIp() bool`
+`func (o *RuleCustomResponseRequest) HasIp() bool`
 
 HasIp returns a boolean if a field has been set.
 
 ### GetIpIs
 
-`func (o *RuleCustomResponserequest) GetIpIs() []string`
+`func (o *RuleCustomResponseRequest) GetIpIs() []string`
 
 GetIpIs returns the IpIs field if non-nil, zero value otherwise.
 
 ### GetIpIsOk
 
-`func (o *RuleCustomResponserequest) GetIpIsOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetIpIsOk() (*[]string, bool)`
 
 GetIpIsOk returns a tuple with the IpIs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpIs
 
-`func (o *RuleCustomResponserequest) SetIpIs(v []string)`
+`func (o *RuleCustomResponseRequest) SetIpIs(v []string)`
 
 SetIpIs sets IpIs field to given value.
 
 ### HasIpIs
 
-`func (o *RuleCustomResponserequest) HasIpIs() bool`
+`func (o *RuleCustomResponseRequest) HasIpIs() bool`
 
 HasIpIs returns a boolean if a field has been set.
 
 ### GetIpIsNot
 
-`func (o *RuleCustomResponserequest) GetIpIsNot() []string`
+`func (o *RuleCustomResponseRequest) GetIpIsNot() []string`
 
 GetIpIsNot returns the IpIsNot field if non-nil, zero value otherwise.
 
 ### GetIpIsNotOk
 
-`func (o *RuleCustomResponserequest) GetIpIsNotOk() (*[]string, bool)`
+`func (o *RuleCustomResponseRequest) GetIpIsNotOk() (*[]string, bool)`
 
 GetIpIsNotOk returns a tuple with the IpIsNot field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpIsNot
 
-`func (o *RuleCustomResponserequest) SetIpIsNot(v []string)`
+`func (o *RuleCustomResponseRequest) SetIpIsNot(v []string)`
 
 SetIpIsNot sets IpIsNot field to given value.
 
 ### HasIpIsNot
 
-`func (o *RuleCustomResponserequest) HasIpIsNot() bool`
+`func (o *RuleCustomResponseRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
 
 ### GetCustomResponseStatusCode
 
-`func (o *RuleCustomResponserequest) GetCustomResponseStatusCode() int32`
+`func (o *RuleCustomResponseRequest) GetCustomResponseStatusCode() int32`
 
 GetCustomResponseStatusCode returns the CustomResponseStatusCode field if non-nil, zero value otherwise.
 
 ### GetCustomResponseStatusCodeOk
 
-`func (o *RuleCustomResponserequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
+`func (o *RuleCustomResponseRequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
 
 GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomResponseStatusCode
 
-`func (o *RuleCustomResponserequest) SetCustomResponseStatusCode(v int32)`
+`func (o *RuleCustomResponseRequest) SetCustomResponseStatusCode(v int32)`
 
 SetCustomResponseStatusCode sets CustomResponseStatusCode field to given value.
 
 
 ### GetCustomResponseBody
 
-`func (o *RuleCustomResponserequest) GetCustomResponseBody() string`
+`func (o *RuleCustomResponseRequest) GetCustomResponseBody() string`
 
 GetCustomResponseBody returns the CustomResponseBody field if non-nil, zero value otherwise.
 
 ### GetCustomResponseBodyOk
 
-`func (o *RuleCustomResponserequest) GetCustomResponseBodyOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetCustomResponseBodyOk() (*string, bool)`
 
 GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomResponseBody
 
-`func (o *RuleCustomResponserequest) SetCustomResponseBody(v string)`
+`func (o *RuleCustomResponseRequest) SetCustomResponseBody(v string)`
 
 SetCustomResponseBody sets CustomResponseBody field to given value.
 

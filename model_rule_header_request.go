@@ -47,6 +47,7 @@ func NewRuleHeaderRequest(domain string, disabled bool, headers map[string]strin
 	this := RuleHeaderRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	this.Headers = headers
 	return &this
 }
 

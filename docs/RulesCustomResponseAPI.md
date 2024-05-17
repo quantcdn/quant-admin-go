@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## RulesCustomResponseCreate
 
-> Rule RulesCustomResponseCreate(ctx, organization, project).RuleCustomResponserequest(ruleCustomResponserequest).Execute()
+> Rule RulesCustomResponseCreate(ctx, organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 
 
 
@@ -33,11 +33,11 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleCustomResponserequest := *openapiclient.NewRuleCustomResponserequest("Domain_example", false, int32(123), "CustomResponseBody_example") // RuleCustomResponserequest | 
+	ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest("Domain_example", false, int32(123), "CustomResponseBody_example") // RuleCustomResponseRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RulesCustomResponseAPI.RulesCustomResponseCreate(context.Background(), organization, project).RuleCustomResponserequest(ruleCustomResponserequest).Execute()
+	resp, r, err := apiClient.RulesCustomResponseAPI.RulesCustomResponseCreate(context.Background(), organization, project).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesCustomResponseAPI.RulesCustomResponseCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleCustomResponserequest** | [**RuleCustomResponserequest**](RuleCustomResponserequest.md) |  | 
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  | 
 
 ### Return type
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesCustomResponseUpdate
 
-> Rule RulesCustomResponseUpdate(ctx, organization, project, rule).RuleCustomResponserequest(ruleCustomResponserequest).Execute()
+> Rule RulesCustomResponseUpdate(ctx, organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 
 
 
@@ -326,11 +326,11 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleCustomResponserequest := *openapiclient.NewRuleCustomResponserequest("Domain_example", false, int32(123), "CustomResponseBody_example") // RuleCustomResponserequest | 
+	ruleCustomResponseRequest := *openapiclient.NewRuleCustomResponseRequest("Domain_example", false, int32(123), "CustomResponseBody_example") // RuleCustomResponseRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RulesCustomResponseAPI.RulesCustomResponseUpdate(context.Background(), organization, project, rule).RuleCustomResponserequest(ruleCustomResponserequest).Execute()
+	resp, r, err := apiClient.RulesCustomResponseAPI.RulesCustomResponseUpdate(context.Background(), organization, project, rule).RuleCustomResponseRequest(ruleCustomResponseRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesCustomResponseAPI.RulesCustomResponseUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleCustomResponserequest** | [**RuleCustomResponserequest**](RuleCustomResponserequest.md) |  | 
+ **ruleCustomResponseRequest** | [**RuleCustomResponseRequest**](RuleCustomResponseRequest.md) |  | 
 
 ### Return type
 

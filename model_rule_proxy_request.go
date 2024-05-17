@@ -56,6 +56,7 @@ func NewRuleProxyRequest(domain string, disabled bool, to string) *RuleProxyRequ
 	this := RuleProxyRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	this.To = to
 	return &this
 }
 

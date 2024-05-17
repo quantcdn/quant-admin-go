@@ -28,11 +28,11 @@ type ApiRulesCustomResponseCreateRequest struct {
 	ApiService *RulesCustomResponseAPIService
 	organization string
 	project string
-	ruleCustomResponserequest *RuleCustomResponserequest
+	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiRulesCustomResponseCreateRequest) RuleCustomResponserequest(ruleCustomResponserequest RuleCustomResponserequest) ApiRulesCustomResponseCreateRequest {
-	r.ruleCustomResponserequest = &ruleCustomResponserequest
+func (r ApiRulesCustomResponseCreateRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiRulesCustomResponseCreateRequest {
+	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
 	return r
 }
 
@@ -79,8 +79,8 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseCreateExecute(r ApiRu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ruleCustomResponserequest == nil {
-		return localVarReturnValue, nil, reportError("ruleCustomResponserequest is required and must be specified")
+	if r.ruleCustomResponseRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleCustomResponseRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +101,7 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseCreateExecute(r ApiRu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ruleCustomResponserequest
+	localVarPostBody = r.ruleCustomResponseRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -508,11 +508,11 @@ type ApiRulesCustomResponseUpdateRequest struct {
 	organization string
 	project string
 	rule string
-	ruleCustomResponserequest *RuleCustomResponserequest
+	ruleCustomResponseRequest *RuleCustomResponseRequest
 }
 
-func (r ApiRulesCustomResponseUpdateRequest) RuleCustomResponserequest(ruleCustomResponserequest RuleCustomResponserequest) ApiRulesCustomResponseUpdateRequest {
-	r.ruleCustomResponserequest = &ruleCustomResponserequest
+func (r ApiRulesCustomResponseUpdateRequest) RuleCustomResponseRequest(ruleCustomResponseRequest RuleCustomResponseRequest) ApiRulesCustomResponseUpdateRequest {
+	r.ruleCustomResponseRequest = &ruleCustomResponseRequest
 	return r
 }
 
@@ -562,8 +562,8 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseUpdateExecute(r ApiRu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ruleCustomResponserequest == nil {
-		return localVarReturnValue, nil, reportError("ruleCustomResponserequest is required and must be specified")
+	if r.ruleCustomResponseRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleCustomResponseRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -584,7 +584,7 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseUpdateExecute(r ApiRu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ruleCustomResponserequest
+	localVarPostBody = r.ruleCustomResponseRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

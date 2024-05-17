@@ -30,7 +30,7 @@ docs/ProxyConfigHttpbl.md
 docs/ProxyNotifyConfig.md
 docs/Rule.md
 docs/RuleAuthRequest.md
-docs/RuleCustomResponserequest.md
+docs/RuleCustomResponseRequest.md
 docs/RuleHeaderRequest.md
 docs/RuleProxyRequest.md
 docs/RuleRedirectRequest.md
@@ -57,7 +57,7 @@ model_proxy_config_httpbl.go
 model_proxy_notify_config.go
 model_rule.go
 model_rule_auth_request.go
-model_rule_custom_responserequest.go
+model_rule_custom_response_request.go
 model_rule_header_request.go
 model_rule_proxy_request.go
 model_rule_redirect_request.go

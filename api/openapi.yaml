@@ -934,7 +934,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleCustomResponserequest'
+              $ref: '#/components/schemas/RuleCustomResponseRequest'
         required: true
       responses:
         "200":
@@ -1061,7 +1061,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleCustomResponserequest'
+              $ref: '#/components/schemas/RuleCustomResponseRequest'
         required: true
       responses:
         "200":
@@ -2141,9 +2141,7 @@ components:
       - disabled
       - domain
       type: object
-    RuleCustomResponserequest:
-      allOf:
-      - $ref: '#/components/schemas/RuleRequest'
+    RuleCustomResponseRequest:
       example:
         country: country_is
         method: method_is
@@ -2239,8 +2237,6 @@ components:
       - domain
       type: object
     RuleHeaderRequest:
-      allOf:
-      - $ref: '#/components/schemas/RuleRequest'
       example:
         country: country_is
         headers:
@@ -2333,8 +2329,6 @@ components:
       - headers
       type: object
     RuleProxyRequest:
-      allOf:
-      - $ref: '#/components/schemas/RuleRequest'
       example:
         country: country_is
         cache_lifetime: 0
