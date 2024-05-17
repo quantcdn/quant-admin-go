@@ -1881,7 +1881,6 @@ components:
     Project:
       example:
         project_type: normal
-        project_parent_id: 5
         created_at: created_at
         machine_name: machine_name
         uuid: uuid
@@ -1892,6 +1891,7 @@ components:
         security_score: 1
         id: 0
         git_url: git_url
+        parent_project_id: 5
         region: region
       properties:
         id:
@@ -1917,7 +1917,7 @@ components:
         security_score:
           format: int32
           type: integer
-        project_parent_id:
+        parent_project_id:
           format: int32
           type: integer
         region:

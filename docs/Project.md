@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **ProjectType** | Pointer to **string** |  | [optional] [default to "normal"]
 **GitUrl** | Pointer to **string** |  | [optional] 
 **SecurityScore** | Pointer to **int32** |  | [optional] 
-**ProjectParentId** | Pointer to **int32** |  | [optional] 
+**ParentProjectId** | Pointer to **int32** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
@@ -227,30 +227,30 @@ SetSecurityScore sets SecurityScore field to given value.
 
 HasSecurityScore returns a boolean if a field has been set.
 
-### GetProjectParentId
+### GetParentProjectId
 
-`func (o *Project) GetProjectParentId() int32`
+`func (o *Project) GetParentProjectId() int32`
 
-GetProjectParentId returns the ProjectParentId field if non-nil, zero value otherwise.
+GetParentProjectId returns the ParentProjectId field if non-nil, zero value otherwise.
 
-### GetProjectParentIdOk
+### GetParentProjectIdOk
 
-`func (o *Project) GetProjectParentIdOk() (*int32, bool)`
+`func (o *Project) GetParentProjectIdOk() (*int32, bool)`
 
-GetProjectParentIdOk returns a tuple with the ProjectParentId field if it's non-nil, zero value otherwise
+GetParentProjectIdOk returns a tuple with the ParentProjectId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProjectParentId
+### SetParentProjectId
 
-`func (o *Project) SetProjectParentId(v int32)`
+`func (o *Project) SetParentProjectId(v int32)`
 
-SetProjectParentId sets ProjectParentId field to given value.
+SetParentProjectId sets ParentProjectId field to given value.
 
-### HasProjectParentId
+### HasParentProjectId
 
-`func (o *Project) HasProjectParentId() bool`
+`func (o *Project) HasParentProjectId() bool`
 
-HasProjectParentId returns a boolean if a field has been set.
+HasParentProjectId returns a boolean if a field has been set.
 
 ### GetRegion
 

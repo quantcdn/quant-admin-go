@@ -29,7 +29,7 @@ type Project struct {
 	ProjectType *string `json:"project_type,omitempty"`
 	GitUrl *string `json:"git_url,omitempty"`
 	SecurityScore *int32 `json:"security_score,omitempty"`
-	ProjectParentId *int32 `json:"project_parent_id,omitempty"`
+	ParentProjectId *int32 `json:"parent_project_id,omitempty"`
 	Region *string `json:"region,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
@@ -301,36 +301,36 @@ func (o *Project) SetSecurityScore(v int32) {
 	o.SecurityScore = &v
 }
 
-// GetProjectParentId returns the ProjectParentId field value if set, zero value otherwise.
-func (o *Project) GetProjectParentId() int32 {
-	if o == nil || IsNil(o.ProjectParentId) {
+// GetParentProjectId returns the ParentProjectId field value if set, zero value otherwise.
+func (o *Project) GetParentProjectId() int32 {
+	if o == nil || IsNil(o.ParentProjectId) {
 		var ret int32
 		return ret
 	}
-	return *o.ProjectParentId
+	return *o.ParentProjectId
 }
 
-// GetProjectParentIdOk returns a tuple with the ProjectParentId field value if set, nil otherwise
+// GetParentProjectIdOk returns a tuple with the ParentProjectId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetProjectParentIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.ProjectParentId) {
+func (o *Project) GetParentProjectIdOk() (*int32, bool) {
+	if o == nil || IsNil(o.ParentProjectId) {
 		return nil, false
 	}
-	return o.ProjectParentId, true
+	return o.ParentProjectId, true
 }
 
-// HasProjectParentId returns a boolean if a field has been set.
-func (o *Project) HasProjectParentId() bool {
-	if o != nil && !IsNil(o.ProjectParentId) {
+// HasParentProjectId returns a boolean if a field has been set.
+func (o *Project) HasParentProjectId() bool {
+	if o != nil && !IsNil(o.ParentProjectId) {
 		return true
 	}
 
 	return false
 }
 
-// SetProjectParentId gets a reference to the given int32 and assigns it to the ProjectParentId field.
-func (o *Project) SetProjectParentId(v int32) {
-	o.ProjectParentId = &v
+// SetParentProjectId gets a reference to the given int32 and assigns it to the ParentProjectId field.
+func (o *Project) SetParentProjectId(v int32) {
+	o.ParentProjectId = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
@@ -491,8 +491,8 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SecurityScore) {
 		toSerialize["security_score"] = o.SecurityScore
 	}
-	if !IsNil(o.ProjectParentId) {
-		toSerialize["project_parent_id"] = o.ProjectParentId
+	if !IsNil(o.ParentProjectId) {
+		toSerialize["parent_project_id"] = o.ParentProjectId
 	}
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
