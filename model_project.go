@@ -24,7 +24,7 @@ type Project struct {
 	Id int32 `json:"id"`
 	MachineName string `json:"machine_name"`
 	Name string `json:"name"`
-	OrgnisationId int32 `json:"orgnisation_id"`
+	OrganizationId int32 `json:"organization_id"`
 	Uuid string `json:"uuid"`
 	ProjectType string `json:"project_type"`
 	GitUrl string `json:"git_url"`
@@ -42,12 +42,12 @@ type _Project Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProject(id int32, machineName string, name string, orgnisationId int32, uuid string, projectType string, gitUrl string) *Project {
+func NewProject(id int32, machineName string, name string, organizationId int32, uuid string, projectType string, gitUrl string) *Project {
 	this := Project{}
 	this.Id = id
 	this.MachineName = machineName
 	this.Name = name
-	this.OrgnisationId = orgnisationId
+	this.OrganizationId = organizationId
 	this.Uuid = uuid
 	this.ProjectType = projectType
 	this.GitUrl = gitUrl
@@ -136,28 +136,28 @@ func (o *Project) SetName(v string) {
 	o.Name = v
 }
 
-// GetOrgnisationId returns the OrgnisationId field value
-func (o *Project) GetOrgnisationId() int32 {
+// GetOrganizationId returns the OrganizationId field value
+func (o *Project) GetOrganizationId() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.OrgnisationId
+	return o.OrganizationId
 }
 
-// GetOrgnisationIdOk returns a tuple with the OrgnisationId field value
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value
 // and a boolean to check if the value has been set.
-func (o *Project) GetOrgnisationIdOk() (*int32, bool) {
+func (o *Project) GetOrganizationIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OrgnisationId, true
+	return &o.OrganizationId, true
 }
 
-// SetOrgnisationId sets field value
-func (o *Project) SetOrgnisationId(v int32) {
-	o.OrgnisationId = v
+// SetOrganizationId sets field value
+func (o *Project) SetOrganizationId(v int32) {
+	o.OrganizationId = v
 }
 
 // GetUuid returns the Uuid field value
@@ -437,7 +437,7 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["machine_name"] = o.MachineName
 	toSerialize["name"] = o.Name
-	toSerialize["orgnisation_id"] = o.OrgnisationId
+	toSerialize["organization_id"] = o.OrganizationId
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["project_type"] = o.ProjectType
 	toSerialize["git_url"] = o.GitUrl
@@ -470,7 +470,7 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"machine_name",
 		"name",
-		"orgnisation_id",
+		"organization_id",
 		"uuid",
 		"project_type",
 		"git_url",

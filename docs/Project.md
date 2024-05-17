@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **int32** |  | 
 **MachineName** | **string** |  | 
 **Name** | **string** |  | 
-**OrgnisationId** | **int32** |  | 
+**OrganizationId** | **int32** |  | 
 **Uuid** | **string** |  | 
 **ProjectType** | **string** |  | [default to "normal"]
 **GitUrl** | **string** |  | 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewProject
 
-`func NewProject(id int32, machineName string, name string, orgnisationId int32, uuid string, projectType string, gitUrl string, ) *Project`
+`func NewProject(id int32, machineName string, name string, organizationId int32, uuid string, projectType string, gitUrl string, ) *Project`
 
 NewProject instantiates a new Project object
 This constructor will assign default values to properties that have it defined,
@@ -97,24 +97,24 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetOrgnisationId
+### GetOrganizationId
 
-`func (o *Project) GetOrgnisationId() int32`
+`func (o *Project) GetOrganizationId() int32`
 
-GetOrgnisationId returns the OrgnisationId field if non-nil, zero value otherwise.
+GetOrganizationId returns the OrganizationId field if non-nil, zero value otherwise.
 
-### GetOrgnisationIdOk
+### GetOrganizationIdOk
 
-`func (o *Project) GetOrgnisationIdOk() (*int32, bool)`
+`func (o *Project) GetOrganizationIdOk() (*int32, bool)`
 
-GetOrgnisationIdOk returns a tuple with the OrgnisationId field if it's non-nil, zero value otherwise
+GetOrganizationIdOk returns a tuple with the OrganizationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrgnisationId
+### SetOrganizationId
 
-`func (o *Project) SetOrgnisationId(v int32)`
+`func (o *Project) SetOrganizationId(v int32)`
 
-SetOrgnisationId sets OrgnisationId field to given value.
+SetOrganizationId sets OrganizationId field to given value.
 
 
 ### GetUuid

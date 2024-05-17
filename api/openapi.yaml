@@ -1652,9 +1652,9 @@ components:
         uuid: uuid
         deleted_at: deleted_at
         updated_at: updated_at
+        organization_id: 6
         name: name
         security_score: 1
-        orgnisation_id: 6
         id: 0
         git_url: git_url
         region: region
@@ -1666,7 +1666,7 @@ components:
           type: string
         name:
           type: string
-        orgnisation_id:
+        organization_id:
           format: int32
           type: integer
         uuid:
@@ -1698,7 +1698,7 @@ components:
       - id
       - machine_name
       - name
-      - orgnisation_id
+      - organization_id
       - project_type
       - uuid
       type: object

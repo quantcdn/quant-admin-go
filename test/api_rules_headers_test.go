@@ -11,11 +11,10 @@ package openapi
 
 import (
 	"context"
-	"testing"
-
-	openapiclient "github.com/quantcdn/quant-admin-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_RulesHeadersAPIService(t *testing.T) {
@@ -25,7 +24,7 @@ func Test_openapi_RulesHeadersAPIService(t *testing.T) {
 
 	t.Run("Test RulesHeadersAPIService RulesHeadersCreate", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -40,7 +39,7 @@ func Test_openapi_RulesHeadersAPIService(t *testing.T) {
 
 	t.Run("Test RulesHeadersAPIService RulesHeadersDelete", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -56,7 +55,7 @@ func Test_openapi_RulesHeadersAPIService(t *testing.T) {
 
 	t.Run("Test RulesHeadersAPIService RulesHeadersList", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
@@ -71,7 +70,7 @@ func Test_openapi_RulesHeadersAPIService(t *testing.T) {
 
 	t.Run("Test RulesHeadersAPIService RulesHeadersRead", func(t *testing.T) {
 
-		t.Skip("skip test") // remove to run test
+		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
