@@ -35,6 +35,7 @@ type Project struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
 	FastlyMigrated *int32 `json:"fastly_migrated,omitempty"`
+	AllowQueryParams *bool `json:"allow_query_params,omitempty"`
 }
 
 type _Project Project
@@ -49,6 +50,8 @@ func NewProject(machineName string, name string) *Project {
 	this.Name = name
 	var projectType string = "normal"
 	this.ProjectType = &projectType
+	var fastlyMigrated int32 = 1
+	this.FastlyMigrated = &fastlyMigrated
 	return &this
 }
 
@@ -59,6 +62,8 @@ func NewProjectWithDefaults() *Project {
 	this := Project{}
 	var projectType string = "normal"
 	this.ProjectType = &projectType
+	var fastlyMigrated int32 = 1
+	this.FastlyMigrated = &fastlyMigrated
 	return &this
 }
 
@@ -494,6 +499,38 @@ func (o *Project) SetFastlyMigrated(v int32) {
 	o.FastlyMigrated = &v
 }
 
+// GetAllowQueryParams returns the AllowQueryParams field value if set, zero value otherwise.
+func (o *Project) GetAllowQueryParams() bool {
+	if o == nil || IsNil(o.AllowQueryParams) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowQueryParams
+}
+
+// GetAllowQueryParamsOk returns a tuple with the AllowQueryParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Project) GetAllowQueryParamsOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowQueryParams) {
+		return nil, false
+	}
+	return o.AllowQueryParams, true
+}
+
+// HasAllowQueryParams returns a boolean if a field has been set.
+func (o *Project) HasAllowQueryParams() bool {
+	if o != nil && !IsNil(o.AllowQueryParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowQueryParams gets a reference to the given bool and assigns it to the AllowQueryParams field.
+func (o *Project) SetAllowQueryParams(v bool) {
+	o.AllowQueryParams = &v
+}
+
 func (o Project) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -541,6 +578,9 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FastlyMigrated) {
 		toSerialize["fastly_migrated"] = o.FastlyMigrated
+	}
+	if !IsNil(o.AllowQueryParams) {
+		toSerialize["allow_query_params"] = o.AllowQueryParams
 	}
 	return toSerialize, nil
 }

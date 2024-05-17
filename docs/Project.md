@@ -17,7 +17,8 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
 **DeletedAt** | Pointer to **string** |  | [optional] 
-**FastlyMigrated** | Pointer to **int32** |  | [optional] 
+**FastlyMigrated** | Pointer to **int32** |  | [optional] [default to 1]
+**AllowQueryParams** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -377,6 +378,31 @@ SetFastlyMigrated sets FastlyMigrated field to given value.
 `func (o *Project) HasFastlyMigrated() bool`
 
 HasFastlyMigrated returns a boolean if a field has been set.
+
+### GetAllowQueryParams
+
+`func (o *Project) GetAllowQueryParams() bool`
+
+GetAllowQueryParams returns the AllowQueryParams field if non-nil, zero value otherwise.
+
+### GetAllowQueryParamsOk
+
+`func (o *Project) GetAllowQueryParamsOk() (*bool, bool)`
+
+GetAllowQueryParamsOk returns a tuple with the AllowQueryParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowQueryParams
+
+`func (o *Project) SetAllowQueryParams(v bool)`
+
+SetAllowQueryParams sets AllowQueryParams field to given value.
+
+### HasAllowQueryParams
+
+`func (o *Project) HasAllowQueryParams() bool`
+
+HasAllowQueryParams returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1886,6 +1886,7 @@ components:
         machine_name: machine_name
         uuid: uuid
         deleted_at: deleted_at
+        allow_query_params: true
         updated_at: updated_at
         organization_id: 6
         name: name
@@ -1930,8 +1931,11 @@ components:
         deleted_at:
           type: string
         fastly_migrated:
+          default: 1
           format: int32
           type: integer
+        allow_query_params:
+          type: boolean
       required:
       - machine_name
       - name
