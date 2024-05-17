@@ -21,13 +21,13 @@ var _ MappedNullable = &Project{}
 
 // Project struct for Project
 type Project struct {
-	Id int32 `json:"id"`
+	Id *int32 `json:"id,omitempty"`
 	MachineName string `json:"machine_name"`
 	Name string `json:"name"`
-	OrganizationId int32 `json:"organization_id"`
-	Uuid string `json:"uuid"`
-	ProjectType string `json:"project_type"`
-	GitUrl string `json:"git_url"`
+	OrganizationId *int32 `json:"organization_id,omitempty"`
+	Uuid *string `json:"uuid,omitempty"`
+	ProjectType *string `json:"project_type,omitempty"`
+	GitUrl *string `json:"git_url,omitempty"`
 	SecurityScore *int32 `json:"security_score,omitempty"`
 	ProjectParentId *int32 `json:"project_parent_id,omitempty"`
 	Region *string `json:"region,omitempty"`
@@ -42,15 +42,12 @@ type _Project Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProject(id int32, machineName string, name string, organizationId int32, uuid string, projectType string, gitUrl string) *Project {
+func NewProject(machineName string, name string) *Project {
 	this := Project{}
-	this.Id = id
 	this.MachineName = machineName
 	this.Name = name
-	this.OrganizationId = organizationId
-	this.Uuid = uuid
-	this.ProjectType = projectType
-	this.GitUrl = gitUrl
+	var projectType string = "normal"
+	this.ProjectType = &projectType
 	return &this
 }
 
@@ -60,32 +57,40 @@ func NewProject(id int32, machineName string, name string, organizationId int32,
 func NewProjectWithDefaults() *Project {
 	this := Project{}
 	var projectType string = "normal"
-	this.ProjectType = projectType
+	this.ProjectType = &projectType
 	return &this
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *Project) GetId() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret int32
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Project) GetIdOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *Project) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given int32 and assigns it to the Id field.
 func (o *Project) SetId(v int32) {
-	o.Id = v
+	o.Id = &v
 }
 
 // GetMachineName returns the MachineName field value
@@ -136,100 +141,132 @@ func (o *Project) SetName(v string) {
 	o.Name = v
 }
 
-// GetOrganizationId returns the OrganizationId field value
+// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
 func (o *Project) GetOrganizationId() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.OrganizationId) {
 		var ret int32
 		return ret
 	}
-
-	return o.OrganizationId
+	return *o.OrganizationId
 }
 
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Project) GetOrganizationIdOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OrganizationId) {
 		return nil, false
 	}
-	return &o.OrganizationId, true
+	return o.OrganizationId, true
 }
 
-// SetOrganizationId sets field value
+// HasOrganizationId returns a boolean if a field has been set.
+func (o *Project) HasOrganizationId() bool {
+	if o != nil && !IsNil(o.OrganizationId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrganizationId gets a reference to the given int32 and assigns it to the OrganizationId field.
 func (o *Project) SetOrganizationId(v int32) {
-	o.OrganizationId = v
+	o.OrganizationId = &v
 }
 
-// GetUuid returns the Uuid field value
+// GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *Project) GetUuid() string {
-	if o == nil {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
-
-	return o.Uuid
+	return *o.Uuid
 }
 
-// GetUuidOk returns a tuple with the Uuid field value
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Project) GetUuidOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
-	return &o.Uuid, true
+	return o.Uuid, true
 }
 
-// SetUuid sets field value
+// HasUuid returns a boolean if a field has been set.
+func (o *Project) HasUuid() bool {
+	if o != nil && !IsNil(o.Uuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
 func (o *Project) SetUuid(v string) {
-	o.Uuid = v
+	o.Uuid = &v
 }
 
-// GetProjectType returns the ProjectType field value
+// GetProjectType returns the ProjectType field value if set, zero value otherwise.
 func (o *Project) GetProjectType() string {
-	if o == nil {
+	if o == nil || IsNil(o.ProjectType) {
 		var ret string
 		return ret
 	}
-
-	return o.ProjectType
+	return *o.ProjectType
 }
 
-// GetProjectTypeOk returns a tuple with the ProjectType field value
+// GetProjectTypeOk returns a tuple with the ProjectType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Project) GetProjectTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ProjectType) {
 		return nil, false
 	}
-	return &o.ProjectType, true
+	return o.ProjectType, true
 }
 
-// SetProjectType sets field value
+// HasProjectType returns a boolean if a field has been set.
+func (o *Project) HasProjectType() bool {
+	if o != nil && !IsNil(o.ProjectType) {
+		return true
+	}
+
+	return false
+}
+
+// SetProjectType gets a reference to the given string and assigns it to the ProjectType field.
 func (o *Project) SetProjectType(v string) {
-	o.ProjectType = v
+	o.ProjectType = &v
 }
 
-// GetGitUrl returns the GitUrl field value
+// GetGitUrl returns the GitUrl field value if set, zero value otherwise.
 func (o *Project) GetGitUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.GitUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.GitUrl
+	return *o.GitUrl
 }
 
-// GetGitUrlOk returns a tuple with the GitUrl field value
+// GetGitUrlOk returns a tuple with the GitUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Project) GetGitUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.GitUrl) {
 		return nil, false
 	}
-	return &o.GitUrl, true
+	return o.GitUrl, true
 }
 
-// SetGitUrl sets field value
+// HasGitUrl returns a boolean if a field has been set.
+func (o *Project) HasGitUrl() bool {
+	if o != nil && !IsNil(o.GitUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetGitUrl gets a reference to the given string and assigns it to the GitUrl field.
 func (o *Project) SetGitUrl(v string) {
-	o.GitUrl = v
+	o.GitUrl = &v
 }
 
 // GetSecurityScore returns the SecurityScore field value if set, zero value otherwise.
@@ -434,13 +471,23 @@ func (o Project) MarshalJSON() ([]byte, error) {
 
 func (o Project) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	toSerialize["machine_name"] = o.MachineName
 	toSerialize["name"] = o.Name
-	toSerialize["organization_id"] = o.OrganizationId
-	toSerialize["uuid"] = o.Uuid
-	toSerialize["project_type"] = o.ProjectType
-	toSerialize["git_url"] = o.GitUrl
+	if !IsNil(o.OrganizationId) {
+		toSerialize["organization_id"] = o.OrganizationId
+	}
+	if !IsNil(o.Uuid) {
+		toSerialize["uuid"] = o.Uuid
+	}
+	if !IsNil(o.ProjectType) {
+		toSerialize["project_type"] = o.ProjectType
+	}
+	if !IsNil(o.GitUrl) {
+		toSerialize["git_url"] = o.GitUrl
+	}
 	if !IsNil(o.SecurityScore) {
 		toSerialize["security_score"] = o.SecurityScore
 	}
@@ -467,13 +514,8 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"machine_name",
 		"name",
-		"organization_id",
-		"uuid",
-		"project_type",
-		"git_url",
 	}
 
 	allProperties := make(map[string]interface{})

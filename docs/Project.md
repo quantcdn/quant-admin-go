@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** |  | 
+**Id** | Pointer to **int32** |  | [optional] 
 **MachineName** | **string** |  | 
 **Name** | **string** |  | 
-**OrganizationId** | **int32** |  | 
-**Uuid** | **string** |  | 
-**ProjectType** | **string** |  | [default to "normal"]
-**GitUrl** | **string** |  | 
+**OrganizationId** | Pointer to **int32** |  | [optional] 
+**Uuid** | Pointer to **string** |  | [optional] 
+**ProjectType** | Pointer to **string** |  | [optional] [default to "normal"]
+**GitUrl** | Pointer to **string** |  | [optional] 
 **SecurityScore** | Pointer to **int32** |  | [optional] 
 **ProjectParentId** | Pointer to **int32** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewProject
 
-`func NewProject(id int32, machineName string, name string, organizationId int32, uuid string, projectType string, gitUrl string, ) *Project`
+`func NewProject(machineName string, name string, ) *Project`
 
 NewProject instantiates a new Project object
 This constructor will assign default values to properties that have it defined,
@@ -56,6 +56,11 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *Project) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetMachineName
 
@@ -116,6 +121,11 @@ and a boolean to check if the value has been set.
 
 SetOrganizationId sets OrganizationId field to given value.
 
+### HasOrganizationId
+
+`func (o *Project) HasOrganizationId() bool`
+
+HasOrganizationId returns a boolean if a field has been set.
 
 ### GetUuid
 
@@ -136,6 +146,11 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
+### HasUuid
+
+`func (o *Project) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
 
 ### GetProjectType
 
@@ -156,6 +171,11 @@ and a boolean to check if the value has been set.
 
 SetProjectType sets ProjectType field to given value.
 
+### HasProjectType
+
+`func (o *Project) HasProjectType() bool`
+
+HasProjectType returns a boolean if a field has been set.
 
 ### GetGitUrl
 
@@ -176,6 +196,11 @@ and a boolean to check if the value has been set.
 
 SetGitUrl sets GitUrl field to given value.
 
+### HasGitUrl
+
+`func (o *Project) HasGitUrl() bool`
+
+HasGitUrl returns a boolean if a field has been set.
 
 ### GetSecurityScore
 

@@ -1929,13 +1929,8 @@ components:
         deleted_at:
           type: string
       required:
-      - git_url
-      - id
       - machine_name
       - name
-      - organization_id
-      - project_type
-      - uuid
       type: object
     ProjectRequest:
       example:
