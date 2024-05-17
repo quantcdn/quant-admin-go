@@ -4,11 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RedirectTo** | **string** |  | 
-**RedirectCode** | **int32** |  | [default to 301]
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
+**Urls** | Pointer to **[]string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -18,12 +17,14 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
+**RedirectTo** | **string** |  | 
+**RedirectCode** | **int32** |  | [default to 301]
 
 ## Methods
 
 ### NewRuleRedirectRequest
 
-`func NewRuleRedirectRequest(redirectTo string, redirectCode int32, domain string, disabled bool, ) *RuleRedirectRequest`
+`func NewRuleRedirectRequest(domain string, disabled bool, redirectTo string, redirectCode int32, ) *RuleRedirectRequest`
 
 NewRuleRedirectRequest instantiates a new RuleRedirectRequest object
 This constructor will assign default values to properties that have it defined,
@@ -37,46 +38,6 @@ will change when the set of required properties is changed
 NewRuleRedirectRequestWithDefaults instantiates a new RuleRedirectRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetRedirectTo
-
-`func (o *RuleRedirectRequest) GetRedirectTo() string`
-
-GetRedirectTo returns the RedirectTo field if non-nil, zero value otherwise.
-
-### GetRedirectToOk
-
-`func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool)`
-
-GetRedirectToOk returns a tuple with the RedirectTo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRedirectTo
-
-`func (o *RuleRedirectRequest) SetRedirectTo(v string)`
-
-SetRedirectTo sets RedirectTo field to given value.
-
-
-### GetRedirectCode
-
-`func (o *RuleRedirectRequest) GetRedirectCode() int32`
-
-GetRedirectCode returns the RedirectCode field if non-nil, zero value otherwise.
-
-### GetRedirectCodeOk
-
-`func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool)`
-
-GetRedirectCodeOk returns a tuple with the RedirectCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRedirectCode
-
-`func (o *RuleRedirectRequest) SetRedirectCode(v int32)`
-
-SetRedirectCode sets RedirectCode field to given value.
-
 
 ### GetDomain
 
@@ -142,6 +103,31 @@ and a boolean to check if the value has been set.
 
 SetDisabled sets Disabled field to given value.
 
+
+### GetUrls
+
+`func (o *RuleRedirectRequest) GetUrls() []string`
+
+GetUrls returns the Urls field if non-nil, zero value otherwise.
+
+### GetUrlsOk
+
+`func (o *RuleRedirectRequest) GetUrlsOk() (*[]string, bool)`
+
+GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrls
+
+`func (o *RuleRedirectRequest) SetUrls(v []string)`
+
+SetUrls sets Urls field to given value.
+
+### HasUrls
+
+`func (o *RuleRedirectRequest) HasUrls() bool`
+
+HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 
@@ -367,6 +353,46 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleRedirectRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetRedirectTo
+
+`func (o *RuleRedirectRequest) GetRedirectTo() string`
+
+GetRedirectTo returns the RedirectTo field if non-nil, zero value otherwise.
+
+### GetRedirectToOk
+
+`func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool)`
+
+GetRedirectToOk returns a tuple with the RedirectTo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRedirectTo
+
+`func (o *RuleRedirectRequest) SetRedirectTo(v string)`
+
+SetRedirectTo sets RedirectTo field to given value.
+
+
+### GetRedirectCode
+
+`func (o *RuleRedirectRequest) GetRedirectCode() int32`
+
+GetRedirectCode returns the RedirectCode field if non-nil, zero value otherwise.
+
+### GetRedirectCodeOk
+
+`func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool)`
+
+GetRedirectCodeOk returns a tuple with the RedirectCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRedirectCode
+
+`func (o *RuleRedirectRequest) SetRedirectCode(v int32)`
+
+SetRedirectCode sets RedirectCode field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

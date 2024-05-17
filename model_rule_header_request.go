@@ -21,10 +21,10 @@ var _ MappedNullable = &RuleHeaderRequest{}
 
 // RuleHeaderRequest struct for RuleHeaderRequest
 type RuleHeaderRequest struct {
-	Headers map[string]string `json:"headers"`
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
+	Urls []string `json:"urls,omitempty"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -34,6 +34,7 @@ type RuleHeaderRequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	Headers map[string]string `json:"headers"`
 }
 
 type _RuleHeaderRequest RuleHeaderRequest
@@ -42,7 +43,7 @@ type _RuleHeaderRequest RuleHeaderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleHeaderRequest(headers map[string]string, domain string, disabled bool) *RuleHeaderRequest {
+func NewRuleHeaderRequest(domain string, disabled bool, headers map[string]string) *RuleHeaderRequest {
 	this := RuleHeaderRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -59,30 +60,6 @@ func NewRuleHeaderRequestWithDefaults() *RuleHeaderRequest {
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
-}
-
-// GetHeaders returns the Headers field value
-func (o *RuleHeaderRequest) GetHeaders() map[string]string {
-	if o == nil {
-		var ret map[string]string
-		return ret
-	}
-
-	return o.Headers
-}
-
-// GetHeadersOk returns a tuple with the Headers field value
-// and a boolean to check if the value has been set.
-func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Headers, true
-}
-
-// SetHeaders sets field value
-func (o *RuleHeaderRequest) SetHeaders(v map[string]string) {
-	o.Headers = v
 }
 
 // GetDomain returns the Domain field value
@@ -163,6 +140,38 @@ func (o *RuleHeaderRequest) GetDisabledOk() (*bool, bool) {
 // SetDisabled sets field value
 func (o *RuleHeaderRequest) SetDisabled(v bool) {
 	o.Disabled = v
+}
+
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *RuleHeaderRequest) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
+		var ret []string
+		return ret
+	}
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleHeaderRequest) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// HasUrls returns a boolean if a field has been set.
+func (o *RuleHeaderRequest) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *RuleHeaderRequest) SetUrls(v []string) {
+	o.Urls = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -453,6 +462,30 @@ func (o *RuleHeaderRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetHeaders returns the Headers field value
+func (o *RuleHeaderRequest) GetHeaders() map[string]string {
+	if o == nil {
+		var ret map[string]string
+		return ret
+	}
+
+	return o.Headers
+}
+
+// GetHeadersOk returns a tuple with the Headers field value
+// and a boolean to check if the value has been set.
+func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Headers, true
+}
+
+// SetHeaders sets field value
+func (o *RuleHeaderRequest) SetHeaders(v map[string]string) {
+	o.Headers = v
+}
+
 func (o RuleHeaderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -463,12 +496,14 @@ func (o RuleHeaderRequest) MarshalJSON() ([]byte, error) {
 
 func (o RuleHeaderRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["headers"] = o.Headers
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["disabled"] = o.Disabled
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
@@ -496,6 +531,7 @@ func (o RuleHeaderRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
+	toSerialize["headers"] = o.Headers
 	return toSerialize, nil
 }
 
@@ -504,9 +540,9 @@ func (o *RuleHeaderRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"headers",
 		"domain",
 		"disabled",
+		"headers",
 	}
 
 	allProperties := make(map[string]interface{})

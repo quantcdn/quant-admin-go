@@ -21,11 +21,10 @@ var _ MappedNullable = &RuleRedirectRequest{}
 
 // RuleRedirectRequest struct for RuleRedirectRequest
 type RuleRedirectRequest struct {
-	RedirectTo string `json:"redirect_to"`
-	RedirectCode int32 `json:"redirect_code"`
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
+	Urls []string `json:"urls,omitempty"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -35,6 +34,8 @@ type RuleRedirectRequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	RedirectTo string `json:"redirect_to"`
+	RedirectCode int32 `json:"redirect_code"`
 }
 
 type _RuleRedirectRequest RuleRedirectRequest
@@ -43,7 +44,7 @@ type _RuleRedirectRequest RuleRedirectRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleRedirectRequest(redirectTo string, redirectCode int32, domain string, disabled bool) *RuleRedirectRequest {
+func NewRuleRedirectRequest(domain string, disabled bool, redirectTo string, redirectCode int32) *RuleRedirectRequest {
 	this := RuleRedirectRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -55,61 +56,13 @@ func NewRuleRedirectRequest(redirectTo string, redirectCode int32, domain string
 // but it doesn't guarantee that properties required by API are set
 func NewRuleRedirectRequestWithDefaults() *RuleRedirectRequest {
 	this := RuleRedirectRequest{}
-	var redirectCode int32 = 301
-	this.RedirectCode = redirectCode
 	var domain string = "any"
 	this.Domain = domain
 	var disabled bool = false
 	this.Disabled = disabled
+	var redirectCode int32 = 301
+	this.RedirectCode = redirectCode
 	return &this
-}
-
-// GetRedirectTo returns the RedirectTo field value
-func (o *RuleRedirectRequest) GetRedirectTo() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RedirectTo
-}
-
-// GetRedirectToOk returns a tuple with the RedirectTo field value
-// and a boolean to check if the value has been set.
-func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RedirectTo, true
-}
-
-// SetRedirectTo sets field value
-func (o *RuleRedirectRequest) SetRedirectTo(v string) {
-	o.RedirectTo = v
-}
-
-// GetRedirectCode returns the RedirectCode field value
-func (o *RuleRedirectRequest) GetRedirectCode() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.RedirectCode
-}
-
-// GetRedirectCodeOk returns a tuple with the RedirectCode field value
-// and a boolean to check if the value has been set.
-func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RedirectCode, true
-}
-
-// SetRedirectCode sets field value
-func (o *RuleRedirectRequest) SetRedirectCode(v int32) {
-	o.RedirectCode = v
 }
 
 // GetDomain returns the Domain field value
@@ -190,6 +143,38 @@ func (o *RuleRedirectRequest) GetDisabledOk() (*bool, bool) {
 // SetDisabled sets field value
 func (o *RuleRedirectRequest) SetDisabled(v bool) {
 	o.Disabled = v
+}
+
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *RuleRedirectRequest) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
+		var ret []string
+		return ret
+	}
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleRedirectRequest) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// HasUrls returns a boolean if a field has been set.
+func (o *RuleRedirectRequest) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *RuleRedirectRequest) SetUrls(v []string) {
+	o.Urls = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -480,6 +465,54 @@ func (o *RuleRedirectRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetRedirectTo returns the RedirectTo field value
+func (o *RuleRedirectRequest) GetRedirectTo() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RedirectTo
+}
+
+// GetRedirectToOk returns a tuple with the RedirectTo field value
+// and a boolean to check if the value has been set.
+func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RedirectTo, true
+}
+
+// SetRedirectTo sets field value
+func (o *RuleRedirectRequest) SetRedirectTo(v string) {
+	o.RedirectTo = v
+}
+
+// GetRedirectCode returns the RedirectCode field value
+func (o *RuleRedirectRequest) GetRedirectCode() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.RedirectCode
+}
+
+// GetRedirectCodeOk returns a tuple with the RedirectCode field value
+// and a boolean to check if the value has been set.
+func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RedirectCode, true
+}
+
+// SetRedirectCode sets field value
+func (o *RuleRedirectRequest) SetRedirectCode(v int32) {
+	o.RedirectCode = v
+}
+
 func (o RuleRedirectRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -490,13 +523,14 @@ func (o RuleRedirectRequest) MarshalJSON() ([]byte, error) {
 
 func (o RuleRedirectRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["redirect_to"] = o.RedirectTo
-	toSerialize["redirect_code"] = o.RedirectCode
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["disabled"] = o.Disabled
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
@@ -524,6 +558,8 @@ func (o RuleRedirectRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
+	toSerialize["redirect_to"] = o.RedirectTo
+	toSerialize["redirect_code"] = o.RedirectCode
 	return toSerialize, nil
 }
 
@@ -532,10 +568,10 @@ func (o *RuleRedirectRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"redirect_to",
-		"redirect_code",
 		"domain",
 		"disabled",
+		"redirect_to",
+		"redirect_code",
 	}
 
 	allProperties := make(map[string]interface{})

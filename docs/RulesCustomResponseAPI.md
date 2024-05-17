@@ -32,7 +32,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleCustomResponserequest := *openapiclient.NewRuleCustomResponserequest(int32(123), "CustomResponseBody_example", "Domain_example", false) // RuleCustomResponserequest | 
+	ruleCustomResponserequest := *openapiclient.NewRuleCustomResponserequest("Domain_example", false, int32(123), "CustomResponseBody_example") // RuleCustomResponserequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

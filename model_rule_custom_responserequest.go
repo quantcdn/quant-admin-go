@@ -21,11 +21,10 @@ var _ MappedNullable = &RuleCustomResponserequest{}
 
 // RuleCustomResponserequest struct for RuleCustomResponserequest
 type RuleCustomResponserequest struct {
-	CustomResponseStatusCode int32 `json:"custom_response_status_code"`
-	CustomResponseBody string `json:"custom_response_body"`
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
+	Urls []string `json:"urls,omitempty"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -35,6 +34,8 @@ type RuleCustomResponserequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	CustomResponseStatusCode int32 `json:"custom_response_status_code"`
+	CustomResponseBody string `json:"custom_response_body"`
 }
 
 type _RuleCustomResponserequest RuleCustomResponserequest
@@ -43,7 +44,7 @@ type _RuleCustomResponserequest RuleCustomResponserequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleCustomResponserequest(customResponseStatusCode int32, customResponseBody string, domain string, disabled bool) *RuleCustomResponserequest {
+func NewRuleCustomResponserequest(domain string, disabled bool, customResponseStatusCode int32, customResponseBody string) *RuleCustomResponserequest {
 	this := RuleCustomResponserequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -55,61 +56,13 @@ func NewRuleCustomResponserequest(customResponseStatusCode int32, customResponse
 // but it doesn't guarantee that properties required by API are set
 func NewRuleCustomResponserequestWithDefaults() *RuleCustomResponserequest {
 	this := RuleCustomResponserequest{}
-	var customResponseStatusCode int32 = 200
-	this.CustomResponseStatusCode = customResponseStatusCode
 	var domain string = "any"
 	this.Domain = domain
 	var disabled bool = false
 	this.Disabled = disabled
+	var customResponseStatusCode int32 = 200
+	this.CustomResponseStatusCode = customResponseStatusCode
 	return &this
-}
-
-// GetCustomResponseStatusCode returns the CustomResponseStatusCode field value
-func (o *RuleCustomResponserequest) GetCustomResponseStatusCode() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.CustomResponseStatusCode
-}
-
-// GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field value
-// and a boolean to check if the value has been set.
-func (o *RuleCustomResponserequest) GetCustomResponseStatusCodeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CustomResponseStatusCode, true
-}
-
-// SetCustomResponseStatusCode sets field value
-func (o *RuleCustomResponserequest) SetCustomResponseStatusCode(v int32) {
-	o.CustomResponseStatusCode = v
-}
-
-// GetCustomResponseBody returns the CustomResponseBody field value
-func (o *RuleCustomResponserequest) GetCustomResponseBody() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.CustomResponseBody
-}
-
-// GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field value
-// and a boolean to check if the value has been set.
-func (o *RuleCustomResponserequest) GetCustomResponseBodyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CustomResponseBody, true
-}
-
-// SetCustomResponseBody sets field value
-func (o *RuleCustomResponserequest) SetCustomResponseBody(v string) {
-	o.CustomResponseBody = v
 }
 
 // GetDomain returns the Domain field value
@@ -190,6 +143,38 @@ func (o *RuleCustomResponserequest) GetDisabledOk() (*bool, bool) {
 // SetDisabled sets field value
 func (o *RuleCustomResponserequest) SetDisabled(v bool) {
 	o.Disabled = v
+}
+
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *RuleCustomResponserequest) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
+		var ret []string
+		return ret
+	}
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponserequest) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// HasUrls returns a boolean if a field has been set.
+func (o *RuleCustomResponserequest) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *RuleCustomResponserequest) SetUrls(v []string) {
+	o.Urls = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -480,6 +465,54 @@ func (o *RuleCustomResponserequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetCustomResponseStatusCode returns the CustomResponseStatusCode field value
+func (o *RuleCustomResponserequest) GetCustomResponseStatusCode() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.CustomResponseStatusCode
+}
+
+// GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field value
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponserequest) GetCustomResponseStatusCodeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CustomResponseStatusCode, true
+}
+
+// SetCustomResponseStatusCode sets field value
+func (o *RuleCustomResponserequest) SetCustomResponseStatusCode(v int32) {
+	o.CustomResponseStatusCode = v
+}
+
+// GetCustomResponseBody returns the CustomResponseBody field value
+func (o *RuleCustomResponserequest) GetCustomResponseBody() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CustomResponseBody
+}
+
+// GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field value
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponserequest) GetCustomResponseBodyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CustomResponseBody, true
+}
+
+// SetCustomResponseBody sets field value
+func (o *RuleCustomResponserequest) SetCustomResponseBody(v string) {
+	o.CustomResponseBody = v
+}
+
 func (o RuleCustomResponserequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -490,13 +523,14 @@ func (o RuleCustomResponserequest) MarshalJSON() ([]byte, error) {
 
 func (o RuleCustomResponserequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["custom_response_status_code"] = o.CustomResponseStatusCode
-	toSerialize["custom_response_body"] = o.CustomResponseBody
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["disabled"] = o.Disabled
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
@@ -524,6 +558,8 @@ func (o RuleCustomResponserequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
+	toSerialize["custom_response_status_code"] = o.CustomResponseStatusCode
+	toSerialize["custom_response_body"] = o.CustomResponseBody
 	return toSerialize, nil
 }
 
@@ -532,10 +568,10 @@ func (o *RuleCustomResponserequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"custom_response_status_code",
-		"custom_response_body",
 		"domain",
 		"disabled",
+		"custom_response_status_code",
+		"custom_response_body",
 	}
 
 	allProperties := make(map[string]interface{})

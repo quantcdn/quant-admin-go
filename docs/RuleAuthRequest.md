@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
+**Urls** | Pointer to **[]string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -102,6 +103,31 @@ and a boolean to check if the value has been set.
 
 SetDisabled sets Disabled field to given value.
 
+
+### GetUrls
+
+`func (o *RuleAuthRequest) GetUrls() []string`
+
+GetUrls returns the Urls field if non-nil, zero value otherwise.
+
+### GetUrlsOk
+
+`func (o *RuleAuthRequest) GetUrlsOk() (*[]string, bool)`
+
+GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrls
+
+`func (o *RuleAuthRequest) SetUrls(v []string)`
+
+SetUrls sets Urls field to given value.
+
+### HasUrls
+
+`func (o *RuleAuthRequest) HasUrls() bool`
+
+HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 

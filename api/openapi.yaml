@@ -1838,6 +1838,9 @@ components:
         country_is_not:
         - country_is_not
         - country_is_not
+        urls:
+        - urls
+        - urls
         auth_user: auth_user
         domain: any
         name: name
@@ -1855,6 +1858,10 @@ components:
         disabled:
           default: false
           type: boolean
+        urls:
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is
@@ -1908,9 +1915,87 @@ components:
       allOf:
       - $ref: '#/components/schemas/RuleRequest'
       example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
         custom_response_status_code: 0
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
         custom_response_body: custom_response_body
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        urls:
+        - urls
+        - urls
+        domain: any
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
       properties:
+        domain:
+          default: any
+          type: string
+        name:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        urls:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
         custom_response_status_code:
           default: 200
           format: int32
@@ -1920,34 +2005,143 @@ components:
       required:
       - custom_response_body
       - custom_response_status_code
+      - disabled
+      - domain
       type: object
     RuleHeaderRequest:
       allOf:
       - $ref: '#/components/schemas/RuleRequest'
       example:
+        country: country_is
         headers:
           key: headers
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        urls:
+        - urls
+        - urls
+        domain: any
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
       properties:
+        domain:
+          default: any
+          type: string
+        name:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        urls:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
         headers:
           additionalProperties:
             type: string
           type: object
       required:
+      - disabled
+      - domain
       - headers
       type: object
     RuleProxyRequest:
       allOf:
       - $ref: '#/components/schemas/RuleRequest'
       example:
+        country: country_is
         cache_lifetime: 0
-        only_proxy_404: true
-        auth_user: auth_user
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
         strip_headers:
         - strip_headers
         - strip_headers
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        urls:
+        - urls
+        - urls
+        only_proxy_404: true
+        auth_user: auth_user
+        domain: any
+        name: name
         host: host
         waf_enabled: true
+        ip_is:
+        - ip_is
+        - ip_is
         auth_pass: auth_pass
+        disabled: false
         to: to
         disable_ssl_verify: true
         waf_config:
@@ -1994,6 +2188,57 @@ components:
           paranoia_level: 6
           failover_mode: true
       properties:
+        domain:
+          default: any
+          type: string
+        name:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        urls:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
         to:
           type: string
         host:
@@ -2018,21 +2263,103 @@ components:
         waf_config:
           $ref: '#/components/schemas/RuleWAFConfig'
       required:
+      - disabled
+      - domain
       - to
       type: object
     RuleRedirectRequest:
       allOf:
       - $ref: '#/components/schemas/RuleRequest'
       example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
         redirect_code: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
         redirect_to: redirect_to
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        urls:
+        - urls
+        - urls
+        domain: any
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
       properties:
+        domain:
+          default: any
+          type: string
+        name:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        urls:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
         redirect_to:
           type: string
         redirect_code:
           default: 301
           type: integer
       required:
+      - disabled
+      - domain
       - redirect_code
       - redirect_to
       type: object
@@ -2046,6 +2373,10 @@ components:
         disabled:
           default: false
           type: boolean
+        urls:
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is

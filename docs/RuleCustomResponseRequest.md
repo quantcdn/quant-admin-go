@@ -4,11 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CustomResponseStatusCode** | **int32** |  | [default to 200]
-**CustomResponseBody** | **string** |  | 
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
+**Urls** | Pointer to **[]string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -18,12 +17,14 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
+**CustomResponseStatusCode** | **int32** |  | [default to 200]
+**CustomResponseBody** | **string** |  | 
 
 ## Methods
 
 ### NewRuleCustomResponserequest
 
-`func NewRuleCustomResponserequest(customResponseStatusCode int32, customResponseBody string, domain string, disabled bool, ) *RuleCustomResponserequest`
+`func NewRuleCustomResponserequest(domain string, disabled bool, customResponseStatusCode int32, customResponseBody string, ) *RuleCustomResponserequest`
 
 NewRuleCustomResponserequest instantiates a new RuleCustomResponserequest object
 This constructor will assign default values to properties that have it defined,
@@ -37,46 +38,6 @@ will change when the set of required properties is changed
 NewRuleCustomResponserequestWithDefaults instantiates a new RuleCustomResponserequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCustomResponseStatusCode
-
-`func (o *RuleCustomResponserequest) GetCustomResponseStatusCode() int32`
-
-GetCustomResponseStatusCode returns the CustomResponseStatusCode field if non-nil, zero value otherwise.
-
-### GetCustomResponseStatusCodeOk
-
-`func (o *RuleCustomResponserequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
-
-GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomResponseStatusCode
-
-`func (o *RuleCustomResponserequest) SetCustomResponseStatusCode(v int32)`
-
-SetCustomResponseStatusCode sets CustomResponseStatusCode field to given value.
-
-
-### GetCustomResponseBody
-
-`func (o *RuleCustomResponserequest) GetCustomResponseBody() string`
-
-GetCustomResponseBody returns the CustomResponseBody field if non-nil, zero value otherwise.
-
-### GetCustomResponseBodyOk
-
-`func (o *RuleCustomResponserequest) GetCustomResponseBodyOk() (*string, bool)`
-
-GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomResponseBody
-
-`func (o *RuleCustomResponserequest) SetCustomResponseBody(v string)`
-
-SetCustomResponseBody sets CustomResponseBody field to given value.
-
 
 ### GetDomain
 
@@ -142,6 +103,31 @@ and a boolean to check if the value has been set.
 
 SetDisabled sets Disabled field to given value.
 
+
+### GetUrls
+
+`func (o *RuleCustomResponserequest) GetUrls() []string`
+
+GetUrls returns the Urls field if non-nil, zero value otherwise.
+
+### GetUrlsOk
+
+`func (o *RuleCustomResponserequest) GetUrlsOk() (*[]string, bool)`
+
+GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrls
+
+`func (o *RuleCustomResponserequest) SetUrls(v []string)`
+
+SetUrls sets Urls field to given value.
+
+### HasUrls
+
+`func (o *RuleCustomResponserequest) HasUrls() bool`
+
+HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 
@@ -367,6 +353,46 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleCustomResponserequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetCustomResponseStatusCode
+
+`func (o *RuleCustomResponserequest) GetCustomResponseStatusCode() int32`
+
+GetCustomResponseStatusCode returns the CustomResponseStatusCode field if non-nil, zero value otherwise.
+
+### GetCustomResponseStatusCodeOk
+
+`func (o *RuleCustomResponserequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
+
+GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomResponseStatusCode
+
+`func (o *RuleCustomResponserequest) SetCustomResponseStatusCode(v int32)`
+
+SetCustomResponseStatusCode sets CustomResponseStatusCode field to given value.
+
+
+### GetCustomResponseBody
+
+`func (o *RuleCustomResponserequest) GetCustomResponseBody() string`
+
+GetCustomResponseBody returns the CustomResponseBody field if non-nil, zero value otherwise.
+
+### GetCustomResponseBodyOk
+
+`func (o *RuleCustomResponserequest) GetCustomResponseBodyOk() (*string, bool)`
+
+GetCustomResponseBodyOk returns a tuple with the CustomResponseBody field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomResponseBody
+
+`func (o *RuleCustomResponserequest) SetCustomResponseBody(v string)`
+
+SetCustomResponseBody sets CustomResponseBody field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

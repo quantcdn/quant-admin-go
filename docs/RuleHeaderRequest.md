@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Headers** | **map[string]string** |  | 
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
+**Urls** | Pointer to **[]string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -17,12 +17,13 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
+**Headers** | **map[string]string** |  | 
 
 ## Methods
 
 ### NewRuleHeaderRequest
 
-`func NewRuleHeaderRequest(headers map[string]string, domain string, disabled bool, ) *RuleHeaderRequest`
+`func NewRuleHeaderRequest(domain string, disabled bool, headers map[string]string, ) *RuleHeaderRequest`
 
 NewRuleHeaderRequest instantiates a new RuleHeaderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -36,26 +37,6 @@ will change when the set of required properties is changed
 NewRuleHeaderRequestWithDefaults instantiates a new RuleHeaderRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHeaders
-
-`func (o *RuleHeaderRequest) GetHeaders() map[string]string`
-
-GetHeaders returns the Headers field if non-nil, zero value otherwise.
-
-### GetHeadersOk
-
-`func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]string, bool)`
-
-GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHeaders
-
-`func (o *RuleHeaderRequest) SetHeaders(v map[string]string)`
-
-SetHeaders sets Headers field to given value.
-
 
 ### GetDomain
 
@@ -121,6 +102,31 @@ and a boolean to check if the value has been set.
 
 SetDisabled sets Disabled field to given value.
 
+
+### GetUrls
+
+`func (o *RuleHeaderRequest) GetUrls() []string`
+
+GetUrls returns the Urls field if non-nil, zero value otherwise.
+
+### GetUrlsOk
+
+`func (o *RuleHeaderRequest) GetUrlsOk() (*[]string, bool)`
+
+GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrls
+
+`func (o *RuleHeaderRequest) SetUrls(v []string)`
+
+SetUrls sets Urls field to given value.
+
+### HasUrls
+
+`func (o *RuleHeaderRequest) HasUrls() bool`
+
+HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 
@@ -346,6 +352,26 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleHeaderRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetHeaders
+
+`func (o *RuleHeaderRequest) GetHeaders() map[string]string`
+
+GetHeaders returns the Headers field if non-nil, zero value otherwise.
+
+### GetHeadersOk
+
+`func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]string, bool)`
+
+GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHeaders
+
+`func (o *RuleHeaderRequest) SetHeaders(v map[string]string)`
+
+SetHeaders sets Headers field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

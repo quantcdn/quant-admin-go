@@ -32,7 +32,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("To_example", "Domain_example", false) // RuleProxyRequest | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, "To_example") // RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

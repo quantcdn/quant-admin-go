@@ -24,6 +24,7 @@ type RuleRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
+	Urls []string `json:"urls,omitempty"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -138,6 +139,38 @@ func (o *RuleRequest) GetDisabledOk() (*bool, bool) {
 // SetDisabled sets field value
 func (o *RuleRequest) SetDisabled(v bool) {
 	o.Disabled = v
+}
+
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *RuleRequest) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
+		var ret []string
+		return ret
+	}
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleRequest) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// HasUrls returns a boolean if a field has been set.
+func (o *RuleRequest) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *RuleRequest) SetUrls(v []string) {
+	o.Urls = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -443,6 +476,9 @@ func (o RuleRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["disabled"] = o.Disabled
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}

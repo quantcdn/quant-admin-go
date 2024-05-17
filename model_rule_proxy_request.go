@@ -21,6 +21,19 @@ var _ MappedNullable = &RuleProxyRequest{}
 
 // RuleProxyRequest struct for RuleProxyRequest
 type RuleProxyRequest struct {
+	Domain string `json:"domain"`
+	Name *string `json:"name,omitempty"`
+	Disabled bool `json:"disabled"`
+	Urls []string `json:"urls,omitempty"`
+	Country *string `json:"country,omitempty"`
+	CountryIs []string `json:"country_is,omitempty"`
+	CountryIsNot []string `json:"country_is_not,omitempty"`
+	Method *string `json:"method,omitempty"`
+	MethodIs []string `json:"method_is,omitempty"`
+	MethodIsNot []string `json:"method_is_not,omitempty"`
+	Ip *string `json:"ip,omitempty"`
+	IpIs []string `json:"ip_is,omitempty"`
+	IpIsNot []string `json:"ip_is_not,omitempty"`
 	To string `json:"to"`
 	Host *string `json:"host,omitempty"`
 	AuthUser *string `json:"auth_user,omitempty"`
@@ -31,18 +44,6 @@ type RuleProxyRequest struct {
 	StripHeaders []string `json:"strip_headers,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
 	WafConfig *RuleWAFConfig `json:"waf_config,omitempty"`
-	Domain string `json:"domain"`
-	Name *string `json:"name,omitempty"`
-	Disabled bool `json:"disabled"`
-	Country *string `json:"country,omitempty"`
-	CountryIs []string `json:"country_is,omitempty"`
-	CountryIsNot []string `json:"country_is_not,omitempty"`
-	Method *string `json:"method,omitempty"`
-	MethodIs []string `json:"method_is,omitempty"`
-	MethodIsNot []string `json:"method_is_not,omitempty"`
-	Ip *string `json:"ip,omitempty"`
-	IpIs []string `json:"ip_is,omitempty"`
-	IpIsNot []string `json:"ip_is_not,omitempty"`
 }
 
 type _RuleProxyRequest RuleProxyRequest
@@ -51,7 +52,7 @@ type _RuleProxyRequest RuleProxyRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxyRequest(to string, domain string, disabled bool) *RuleProxyRequest {
+func NewRuleProxyRequest(domain string, disabled bool, to string) *RuleProxyRequest {
 	this := RuleProxyRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -68,6 +69,406 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
+}
+
+// GetDomain returns the Domain field value
+func (o *RuleProxyRequest) GetDomain() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Domain
+}
+
+// GetDomainOk returns a tuple with the Domain field value
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetDomainOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Domain, true
+}
+
+// SetDomain sets field value
+func (o *RuleProxyRequest) SetDomain(v string) {
+	o.Domain = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *RuleProxyRequest) SetName(v string) {
+	o.Name = &v
+}
+
+// GetDisabled returns the Disabled field value
+func (o *RuleProxyRequest) GetDisabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Disabled
+}
+
+// GetDisabledOk returns a tuple with the Disabled field value
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetDisabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Disabled, true
+}
+
+// SetDisabled sets field value
+func (o *RuleProxyRequest) SetDisabled(v bool) {
+	o.Disabled = v
+}
+
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
+		var ret []string
+		return ret
+	}
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// HasUrls returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *RuleProxyRequest) SetUrls(v []string) {
+	o.Urls = v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetCountry() string {
+	if o == nil || IsNil(o.Country) {
+		var ret string
+		return ret
+	}
+	return *o.Country
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetCountryOk() (*string, bool) {
+	if o == nil || IsNil(o.Country) {
+		return nil, false
+	}
+	return o.Country, true
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasCountry() bool {
+	if o != nil && !IsNil(o.Country) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given string and assigns it to the Country field.
+func (o *RuleProxyRequest) SetCountry(v string) {
+	o.Country = &v
+}
+
+// GetCountryIs returns the CountryIs field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetCountryIs() []string {
+	if o == nil || IsNil(o.CountryIs) {
+		var ret []string
+		return ret
+	}
+	return o.CountryIs
+}
+
+// GetCountryIsOk returns a tuple with the CountryIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetCountryIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.CountryIs) {
+		return nil, false
+	}
+	return o.CountryIs, true
+}
+
+// HasCountryIs returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasCountryIs() bool {
+	if o != nil && !IsNil(o.CountryIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryIs gets a reference to the given []string and assigns it to the CountryIs field.
+func (o *RuleProxyRequest) SetCountryIs(v []string) {
+	o.CountryIs = v
+}
+
+// GetCountryIsNot returns the CountryIsNot field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetCountryIsNot() []string {
+	if o == nil || IsNil(o.CountryIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.CountryIsNot
+}
+
+// GetCountryIsNotOk returns a tuple with the CountryIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetCountryIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.CountryIsNot) {
+		return nil, false
+	}
+	return o.CountryIsNot, true
+}
+
+// HasCountryIsNot returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasCountryIsNot() bool {
+	if o != nil && !IsNil(o.CountryIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryIsNot gets a reference to the given []string and assigns it to the CountryIsNot field.
+func (o *RuleProxyRequest) SetCountryIsNot(v []string) {
+	o.CountryIsNot = v
+}
+
+// GetMethod returns the Method field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetMethod() string {
+	if o == nil || IsNil(o.Method) {
+		var ret string
+		return ret
+	}
+	return *o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetMethodOk() (*string, bool) {
+	if o == nil || IsNil(o.Method) {
+		return nil, false
+	}
+	return o.Method, true
+}
+
+// HasMethod returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasMethod() bool {
+	if o != nil && !IsNil(o.Method) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *RuleProxyRequest) SetMethod(v string) {
+	o.Method = &v
+}
+
+// GetMethodIs returns the MethodIs field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetMethodIs() []string {
+	if o == nil || IsNil(o.MethodIs) {
+		var ret []string
+		return ret
+	}
+	return o.MethodIs
+}
+
+// GetMethodIsOk returns a tuple with the MethodIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetMethodIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.MethodIs) {
+		return nil, false
+	}
+	return o.MethodIs, true
+}
+
+// HasMethodIs returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasMethodIs() bool {
+	if o != nil && !IsNil(o.MethodIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethodIs gets a reference to the given []string and assigns it to the MethodIs field.
+func (o *RuleProxyRequest) SetMethodIs(v []string) {
+	o.MethodIs = v
+}
+
+// GetMethodIsNot returns the MethodIsNot field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetMethodIsNot() []string {
+	if o == nil || IsNil(o.MethodIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.MethodIsNot
+}
+
+// GetMethodIsNotOk returns a tuple with the MethodIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetMethodIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.MethodIsNot) {
+		return nil, false
+	}
+	return o.MethodIsNot, true
+}
+
+// HasMethodIsNot returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasMethodIsNot() bool {
+	if o != nil && !IsNil(o.MethodIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethodIsNot gets a reference to the given []string and assigns it to the MethodIsNot field.
+func (o *RuleProxyRequest) SetMethodIsNot(v []string) {
+	o.MethodIsNot = v
+}
+
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *RuleProxyRequest) SetIp(v string) {
+	o.Ip = &v
+}
+
+// GetIpIs returns the IpIs field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetIpIs() []string {
+	if o == nil || IsNil(o.IpIs) {
+		var ret []string
+		return ret
+	}
+	return o.IpIs
+}
+
+// GetIpIsOk returns a tuple with the IpIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetIpIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.IpIs) {
+		return nil, false
+	}
+	return o.IpIs, true
+}
+
+// HasIpIs returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasIpIs() bool {
+	if o != nil && !IsNil(o.IpIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpIs gets a reference to the given []string and assigns it to the IpIs field.
+func (o *RuleProxyRequest) SetIpIs(v []string) {
+	o.IpIs = v
+}
+
+// GetIpIsNot returns the IpIsNot field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetIpIsNot() []string {
+	if o == nil || IsNil(o.IpIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.IpIsNot
+}
+
+// GetIpIsNotOk returns a tuple with the IpIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetIpIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.IpIsNot) {
+		return nil, false
+	}
+	return o.IpIsNot, true
+}
+
+// HasIpIsNot returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasIpIsNot() bool {
+	if o != nil && !IsNil(o.IpIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpIsNot gets a reference to the given []string and assigns it to the IpIsNot field.
+func (o *RuleProxyRequest) SetIpIsNot(v []string) {
+	o.IpIsNot = v
 }
 
 // GetTo returns the To field value
@@ -382,374 +783,6 @@ func (o *RuleProxyRequest) SetWafConfig(v RuleWAFConfig) {
 	o.WafConfig = &v
 }
 
-// GetDomain returns the Domain field value
-func (o *RuleProxyRequest) GetDomain() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Domain
-}
-
-// GetDomainOk returns a tuple with the Domain field value
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetDomainOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Domain, true
-}
-
-// SetDomain sets field value
-func (o *RuleProxyRequest) SetDomain(v string) {
-	o.Domain = v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *RuleProxyRequest) SetName(v string) {
-	o.Name = &v
-}
-
-// GetDisabled returns the Disabled field value
-func (o *RuleProxyRequest) GetDisabled() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Disabled
-}
-
-// GetDisabledOk returns a tuple with the Disabled field value
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetDisabledOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Disabled, true
-}
-
-// SetDisabled sets field value
-func (o *RuleProxyRequest) SetDisabled(v bool) {
-	o.Disabled = v
-}
-
-// GetCountry returns the Country field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCountry() string {
-	if o == nil || IsNil(o.Country) {
-		var ret string
-		return ret
-	}
-	return *o.Country
-}
-
-// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCountryOk() (*string, bool) {
-	if o == nil || IsNil(o.Country) {
-		return nil, false
-	}
-	return o.Country, true
-}
-
-// HasCountry returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCountry() bool {
-	if o != nil && !IsNil(o.Country) {
-		return true
-	}
-
-	return false
-}
-
-// SetCountry gets a reference to the given string and assigns it to the Country field.
-func (o *RuleProxyRequest) SetCountry(v string) {
-	o.Country = &v
-}
-
-// GetCountryIs returns the CountryIs field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCountryIs() []string {
-	if o == nil || IsNil(o.CountryIs) {
-		var ret []string
-		return ret
-	}
-	return o.CountryIs
-}
-
-// GetCountryIsOk returns a tuple with the CountryIs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCountryIsOk() ([]string, bool) {
-	if o == nil || IsNil(o.CountryIs) {
-		return nil, false
-	}
-	return o.CountryIs, true
-}
-
-// HasCountryIs returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCountryIs() bool {
-	if o != nil && !IsNil(o.CountryIs) {
-		return true
-	}
-
-	return false
-}
-
-// SetCountryIs gets a reference to the given []string and assigns it to the CountryIs field.
-func (o *RuleProxyRequest) SetCountryIs(v []string) {
-	o.CountryIs = v
-}
-
-// GetCountryIsNot returns the CountryIsNot field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCountryIsNot() []string {
-	if o == nil || IsNil(o.CountryIsNot) {
-		var ret []string
-		return ret
-	}
-	return o.CountryIsNot
-}
-
-// GetCountryIsNotOk returns a tuple with the CountryIsNot field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCountryIsNotOk() ([]string, bool) {
-	if o == nil || IsNil(o.CountryIsNot) {
-		return nil, false
-	}
-	return o.CountryIsNot, true
-}
-
-// HasCountryIsNot returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCountryIsNot() bool {
-	if o != nil && !IsNil(o.CountryIsNot) {
-		return true
-	}
-
-	return false
-}
-
-// SetCountryIsNot gets a reference to the given []string and assigns it to the CountryIsNot field.
-func (o *RuleProxyRequest) SetCountryIsNot(v []string) {
-	o.CountryIsNot = v
-}
-
-// GetMethod returns the Method field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetMethod() string {
-	if o == nil || IsNil(o.Method) {
-		var ret string
-		return ret
-	}
-	return *o.Method
-}
-
-// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetMethodOk() (*string, bool) {
-	if o == nil || IsNil(o.Method) {
-		return nil, false
-	}
-	return o.Method, true
-}
-
-// HasMethod returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasMethod() bool {
-	if o != nil && !IsNil(o.Method) {
-		return true
-	}
-
-	return false
-}
-
-// SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *RuleProxyRequest) SetMethod(v string) {
-	o.Method = &v
-}
-
-// GetMethodIs returns the MethodIs field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetMethodIs() []string {
-	if o == nil || IsNil(o.MethodIs) {
-		var ret []string
-		return ret
-	}
-	return o.MethodIs
-}
-
-// GetMethodIsOk returns a tuple with the MethodIs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetMethodIsOk() ([]string, bool) {
-	if o == nil || IsNil(o.MethodIs) {
-		return nil, false
-	}
-	return o.MethodIs, true
-}
-
-// HasMethodIs returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasMethodIs() bool {
-	if o != nil && !IsNil(o.MethodIs) {
-		return true
-	}
-
-	return false
-}
-
-// SetMethodIs gets a reference to the given []string and assigns it to the MethodIs field.
-func (o *RuleProxyRequest) SetMethodIs(v []string) {
-	o.MethodIs = v
-}
-
-// GetMethodIsNot returns the MethodIsNot field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetMethodIsNot() []string {
-	if o == nil || IsNil(o.MethodIsNot) {
-		var ret []string
-		return ret
-	}
-	return o.MethodIsNot
-}
-
-// GetMethodIsNotOk returns a tuple with the MethodIsNot field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetMethodIsNotOk() ([]string, bool) {
-	if o == nil || IsNil(o.MethodIsNot) {
-		return nil, false
-	}
-	return o.MethodIsNot, true
-}
-
-// HasMethodIsNot returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasMethodIsNot() bool {
-	if o != nil && !IsNil(o.MethodIsNot) {
-		return true
-	}
-
-	return false
-}
-
-// SetMethodIsNot gets a reference to the given []string and assigns it to the MethodIsNot field.
-func (o *RuleProxyRequest) SetMethodIsNot(v []string) {
-	o.MethodIsNot = v
-}
-
-// GetIp returns the Ip field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetIp() string {
-	if o == nil || IsNil(o.Ip) {
-		var ret string
-		return ret
-	}
-	return *o.Ip
-}
-
-// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetIpOk() (*string, bool) {
-	if o == nil || IsNil(o.Ip) {
-		return nil, false
-	}
-	return o.Ip, true
-}
-
-// HasIp returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasIp() bool {
-	if o != nil && !IsNil(o.Ip) {
-		return true
-	}
-
-	return false
-}
-
-// SetIp gets a reference to the given string and assigns it to the Ip field.
-func (o *RuleProxyRequest) SetIp(v string) {
-	o.Ip = &v
-}
-
-// GetIpIs returns the IpIs field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetIpIs() []string {
-	if o == nil || IsNil(o.IpIs) {
-		var ret []string
-		return ret
-	}
-	return o.IpIs
-}
-
-// GetIpIsOk returns a tuple with the IpIs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetIpIsOk() ([]string, bool) {
-	if o == nil || IsNil(o.IpIs) {
-		return nil, false
-	}
-	return o.IpIs, true
-}
-
-// HasIpIs returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasIpIs() bool {
-	if o != nil && !IsNil(o.IpIs) {
-		return true
-	}
-
-	return false
-}
-
-// SetIpIs gets a reference to the given []string and assigns it to the IpIs field.
-func (o *RuleProxyRequest) SetIpIs(v []string) {
-	o.IpIs = v
-}
-
-// GetIpIsNot returns the IpIsNot field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetIpIsNot() []string {
-	if o == nil || IsNil(o.IpIsNot) {
-		var ret []string
-		return ret
-	}
-	return o.IpIsNot
-}
-
-// GetIpIsNotOk returns a tuple with the IpIsNot field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetIpIsNotOk() ([]string, bool) {
-	if o == nil || IsNil(o.IpIsNot) {
-		return nil, false
-	}
-	return o.IpIsNot, true
-}
-
-// HasIpIsNot returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasIpIsNot() bool {
-	if o != nil && !IsNil(o.IpIsNot) {
-		return true
-	}
-
-	return false
-}
-
-// SetIpIsNot gets a reference to the given []string and assigns it to the IpIsNot field.
-func (o *RuleProxyRequest) SetIpIsNot(v []string) {
-	o.IpIsNot = v
-}
-
 func (o RuleProxyRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -760,6 +793,41 @@ func (o RuleProxyRequest) MarshalJSON() ([]byte, error) {
 
 func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["domain"] = o.Domain
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	toSerialize["disabled"] = o.Disabled
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
+	if !IsNil(o.Country) {
+		toSerialize["country"] = o.Country
+	}
+	if !IsNil(o.CountryIs) {
+		toSerialize["country_is"] = o.CountryIs
+	}
+	if !IsNil(o.CountryIsNot) {
+		toSerialize["country_is_not"] = o.CountryIsNot
+	}
+	if !IsNil(o.Method) {
+		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.MethodIs) {
+		toSerialize["method_is"] = o.MethodIs
+	}
+	if !IsNil(o.MethodIsNot) {
+		toSerialize["method_is_not"] = o.MethodIsNot
+	}
+	if !IsNil(o.Ip) {
+		toSerialize["ip"] = o.Ip
+	}
+	if !IsNil(o.IpIs) {
+		toSerialize["ip_is"] = o.IpIs
+	}
+	if !IsNil(o.IpIsNot) {
+		toSerialize["ip_is_not"] = o.IpIsNot
+	}
 	toSerialize["to"] = o.To
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
@@ -788,38 +856,6 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WafConfig) {
 		toSerialize["waf_config"] = o.WafConfig
 	}
-	toSerialize["domain"] = o.Domain
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	toSerialize["disabled"] = o.Disabled
-	if !IsNil(o.Country) {
-		toSerialize["country"] = o.Country
-	}
-	if !IsNil(o.CountryIs) {
-		toSerialize["country_is"] = o.CountryIs
-	}
-	if !IsNil(o.CountryIsNot) {
-		toSerialize["country_is_not"] = o.CountryIsNot
-	}
-	if !IsNil(o.Method) {
-		toSerialize["method"] = o.Method
-	}
-	if !IsNil(o.MethodIs) {
-		toSerialize["method_is"] = o.MethodIs
-	}
-	if !IsNil(o.MethodIsNot) {
-		toSerialize["method_is_not"] = o.MethodIsNot
-	}
-	if !IsNil(o.Ip) {
-		toSerialize["ip"] = o.Ip
-	}
-	if !IsNil(o.IpIs) {
-		toSerialize["ip_is"] = o.IpIs
-	}
-	if !IsNil(o.IpIsNot) {
-		toSerialize["ip_is_not"] = o.IpIsNot
-	}
 	return toSerialize, nil
 }
 
@@ -828,9 +864,9 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"to",
 		"domain",
 		"disabled",
+		"to",
 	}
 
 	allProperties := make(map[string]interface{})
