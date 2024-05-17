@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
-**Region** | Pointer to **string** |  | [optional] 
+**Name** | **string** |  | 
+**Region** | **string** |  | [default to "au"]
 **AllowQueryParams** | Pointer to **bool** |  | [optional] 
 **BasicAuthUsername** | Pointer to **string** |  | [optional] 
 **BasicAuthPassword** | Pointer to **string** |  | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewProjectRequest
 
-`func NewProjectRequest() *ProjectRequest`
+`func NewProjectRequest(name string, region string, ) *ProjectRequest`
 
 NewProjectRequest instantiates a new ProjectRequest object
 This constructor will assign default values to properties that have it defined,
@@ -53,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *ProjectRequest) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetRegion
 
@@ -78,11 +73,6 @@ and a boolean to check if the value has been set.
 
 SetRegion sets Region field to given value.
 
-### HasRegion
-
-`func (o *ProjectRequest) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetAllowQueryParams
 

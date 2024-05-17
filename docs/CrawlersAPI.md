@@ -1,22 +1,20 @@
 # \CrawlersAPI
 
-All URIs are relative to *http://localhost:8001/api/v2*
+All URIs are relative to *https://portal.stage.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCrawlers**](CrawlersAPI.md#CreateCrawlers) | **Post** /organizations/{organization}/projects/{project}/crawlers |
-[**DeleteCrawler**](CrawlersAPI.md#DeleteCrawler) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
-[**GetCrawler**](CrawlersAPI.md#GetCrawler) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
-[**ListCrawlers**](CrawlersAPI.md#ListCrawlers) | **Get** /organizations/{organization}/projects/{project}/crawlers |
-[**UpdateCrawler**](CrawlersAPI.md#UpdateCrawler) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} |
+[**CrawlersCreate**](CrawlersAPI.md#CrawlersCreate) | **Post** /organizations/{organization}/projects/{project}/crawlers | 
+[**CrawlersDelete**](CrawlersAPI.md#CrawlersDelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
+[**CrawlersList**](CrawlersAPI.md#CrawlersList) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
+[**CrawlersRead**](CrawlersAPI.md#CrawlersRead) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
+[**CrawlersUpdate**](CrawlersAPI.md#CrawlersUpdate) | **Put** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 
 
 
-## CreateCrawlers
+## CrawlersCreate
 
-> Crawler CreateCrawlers(ctx, organization, project).CrawlerRequest(crawlerRequest).Execute()
-
-
+> Crawler CrawlersCreate(ctx, organization, project).CrawlerRequest(crawlerRequest).Execute()
 
 
 
@@ -33,19 +31,19 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	crawlerRequest := *openapiclient.NewCrawlerRequest() // CrawlerRequest |  (optional)
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, "Headers_example") // CrawlerRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.CreateCrawlers(context.Background(), organization, project).CrawlerRequest(crawlerRequest).Execute()
+	resp, r, err := apiClient.CrawlersAPI.CrawlersCreate(context.Background(), organization, project).CrawlerRequest(crawlerRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CreateCrawlers``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateCrawlers`: Crawler
-	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CreateCrawlers`: %v\n", resp)
+	// response from `CrawlersCreate`: Crawler
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersCreate`: %v\n", resp)
 }
 ```
 
@@ -55,19 +53,19 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** |  | 
+**project** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateCrawlersRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCrawlersCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
 
 ### Return type
 
@@ -75,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -87,11 +85,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteCrawler
+## CrawlersDelete
 
-> Crawler DeleteCrawler(ctx, organization, project, crawler).Execute()
-
-
+> Crawler CrawlersDelete(ctx, organization, project, crawler).Execute()
 
 
 
@@ -108,19 +104,19 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	crawler := "crawler_example" // string | Crawler uuid
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	crawler := "crawler_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.DeleteCrawler(context.Background(), organization, project, crawler).Execute()
+	resp, r, err := apiClient.CrawlersAPI.CrawlersDelete(context.Background(), organization, project, crawler).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.DeleteCrawler``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteCrawler`: Crawler
-	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.DeleteCrawler`: %v\n", resp)
+	// response from `CrawlersDelete`: Crawler
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersDelete`: %v\n", resp)
 }
 ```
 
@@ -130,13 +126,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**crawler** | **string** | Crawler uuid |
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**crawler** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteCrawlerRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCrawlersDeleteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -151,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -163,11 +159,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetCrawler
+## CrawlersList
 
-> Crawler GetCrawler(ctx, organization, project, crawler).Execute()
-
-
+> []Crawler CrawlersList(ctx, organization, project).Execute()
 
 
 
@@ -184,19 +178,18 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	crawler := "crawler_example" // string | Crawler uuid
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.GetCrawler(context.Background(), organization, project, crawler).Execute()
+	resp, r, err := apiClient.CrawlersAPI.CrawlersList(context.Background(), organization, project).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.GetCrawler``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetCrawler`: Crawler
-	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.GetCrawler`: %v\n", resp)
+	// response from `CrawlersList`: []Crawler
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersList`: %v\n", resp)
 }
 ```
 
@@ -206,87 +199,12 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**crawler** | **string** | Crawler uuid |
+**organization** | **string** |  | 
+**project** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetCrawlerRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**Crawler**](Crawler.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListCrawlers
-
-> []Crawler ListCrawlers(ctx, organization, project).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.ListCrawlers(context.Background(), organization, project).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.ListCrawlers``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListCrawlers`: []Crawler
-	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.ListCrawlers`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListCrawlersRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCrawlersListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -300,7 +218,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -312,11 +230,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateCrawler
+## CrawlersRead
 
-> Crawler UpdateCrawler(ctx, organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
-
-
+> Crawler CrawlersRead(ctx, organization, project, crawler).Execute()
 
 
 
@@ -333,20 +249,19 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	crawler := "crawler_example" // string | Crawler uuid
-	crawlerRequest := *openapiclient.NewCrawlerRequest() // CrawlerRequest |  (optional)
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	crawler := "crawler_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.UpdateCrawler(context.Background(), organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
+	resp, r, err := apiClient.CrawlersAPI.CrawlersRead(context.Background(), organization, project, crawler).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.UpdateCrawler``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateCrawler`: Crawler
-	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.UpdateCrawler`: %v\n", resp)
+	// response from `CrawlersRead`: Crawler
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersRead`: %v\n", resp)
 }
 ```
 
@@ -356,13 +271,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**crawler** | **string** | Crawler uuid |
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**crawler** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateCrawlerRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCrawlersReadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -370,7 +285,6 @@ Name | Type | Description  | Notes
 
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  |
 
 ### Return type
 
@@ -378,7 +292,83 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CrawlersUpdate
+
+> Crawler CrawlersUpdate(ctx, organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	crawler := "crawler_example" // string | 
+	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, "Headers_example") // CrawlerRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CrawlersAPI.CrawlersUpdate(context.Background(), organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CrawlersUpdate`: Crawler
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**crawler** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCrawlersUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
+
+### Return type
+
+[**Crawler**](Crawler.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

@@ -1,22 +1,20 @@
 # \DomainsAPI
 
-All URIs are relative to *http://localhost:8001/api/v2*
+All URIs are relative to *https://portal.stage.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateDomain**](DomainsAPI.md#CreateDomain) | **Post** /organizations/{organization}/projects/{project}/domains |
-[**DeleteDomain**](DomainsAPI.md#DeleteDomain) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} |
-[**GetDomain**](DomainsAPI.md#GetDomain) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} |
-[**ListDomains**](DomainsAPI.md#ListDomains) | **Get** /organizations/{organization}/projects/{project}/domains |
-[**UpdateDomain**](DomainsAPI.md#UpdateDomain) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} |
+[**DomainsCreate**](DomainsAPI.md#DomainsCreate) | **Post** /organizations/{organization}/projects/{project}/domains | 
+[**DomainsDelete**](DomainsAPI.md#DomainsDelete) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
+[**DomainsList**](DomainsAPI.md#DomainsList) | **Get** /organizations/{organization}/projects/{project}/domains | 
+[**DomainsRead**](DomainsAPI.md#DomainsRead) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
+[**DomainsUpdate**](DomainsAPI.md#DomainsUpdate) | **Put** /organizations/{organization}/projects/{project}/domains/{domain} | 
 
 
 
-## CreateDomain
+## DomainsCreate
 
-> Domain CreateDomain(ctx, organization, project).DomainRequest(domainRequest).Execute()
-
-
+> Domain DomainsCreate(ctx, organization, project).DomainRequest(domainRequest).Execute()
 
 
 
@@ -33,19 +31,19 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	domainRequest := *openapiclient.NewDomainRequest("Name_example", "Domain_example") // DomainRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.CreateDomain(context.Background(), organization, project).DomainRequest(domainRequest).Execute()
+	resp, r, err := apiClient.DomainsAPI.DomainsCreate(context.Background(), organization, project).DomainRequest(domainRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.CreateDomain``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateDomain`: Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.CreateDomain`: %v\n", resp)
+	// response from `DomainsCreate`: Domain
+	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsCreate`: %v\n", resp)
 }
 ```
 
@@ -55,19 +53,19 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
+**organization** | **string** |  | 
+**project** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateDomainRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDomainsCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
 
 ### Return type
 
@@ -75,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -87,11 +85,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteDomain
+## DomainsDelete
 
-> Domain DeleteDomain(ctx, organization, project, domain).Execute()
-
-
+> Domain DomainsDelete(ctx, organization, project, domain).Execute()
 
 
 
@@ -108,19 +104,19 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	domain := "domain_example" // string |
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	domain := "domain_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.DeleteDomain(context.Background(), organization, project, domain).Execute()
+	resp, r, err := apiClient.DomainsAPI.DomainsDelete(context.Background(), organization, project, domain).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DeleteDomain``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteDomain`: Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DeleteDomain`: %v\n", resp)
+	// response from `DomainsDelete`: Domain
+	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsDelete`: %v\n", resp)
 }
 ```
 
@@ -130,13 +126,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**domain** | **string** |  |
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**domain** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteDomainRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDomainsDeleteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -151,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -163,11 +159,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetDomain
+## DomainsList
 
-> Domain GetDomain(ctx, organization, project, domain).Execute()
-
-
+> []Domain DomainsList(ctx, organization, project).Execute()
 
 
 
@@ -184,19 +178,18 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	domain := "domain_example" // string |
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.GetDomain(context.Background(), organization, project, domain).Execute()
+	resp, r, err := apiClient.DomainsAPI.DomainsList(context.Background(), organization, project).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.GetDomain``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetDomain`: Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.GetDomain`: %v\n", resp)
+	// response from `DomainsList`: []Domain
+	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsList`: %v\n", resp)
 }
 ```
 
@@ -206,87 +199,12 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**domain** | **string** |  |
+**organization** | **string** |  | 
+**project** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetDomainRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**Domain**](Domain.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListDomains
-
-> []Domain ListDomains(ctx, organization, project).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.ListDomains(context.Background(), organization, project).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.ListDomains``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListDomains`: []Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.ListDomains`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListDomainsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDomainsListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -300,7 +218,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -312,11 +230,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateDomain
+## DomainsRead
 
-> Domain UpdateDomain(ctx, organization, project, domain).DomainRequest(domainRequest).Execute()
-
-
+> Domain DomainsRead(ctx, organization, project, domain).Execute()
 
 
 
@@ -333,20 +249,19 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization machine name
-	project := "project_example" // string | Project machine name
-	domain := "domain_example" // string |
-	domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	domain := "domain_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.UpdateDomain(context.Background(), organization, project, domain).DomainRequest(domainRequest).Execute()
+	resp, r, err := apiClient.DomainsAPI.DomainsRead(context.Background(), organization, project, domain).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.UpdateDomain``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateDomain`: Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.UpdateDomain`: %v\n", resp)
+	// response from `DomainsRead`: Domain
+	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsRead`: %v\n", resp)
 }
 ```
 
@@ -356,13 +271,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** | Organization machine name |
-**project** | **string** | Project machine name |
-**domain** | **string** |  |
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**domain** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateDomainRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDomainsReadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -370,7 +285,6 @@ Name | Type | Description  | Notes
 
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  |
 
 ### Return type
 
@@ -378,7 +292,83 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DomainsUpdate
+
+> Domain DomainsUpdate(ctx, organization, project, domain).DomainRequest(domainRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	domain := "domain_example" // string | 
+	domainRequest := *openapiclient.NewDomainRequest("Name_example", "Domain_example") // DomainRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DomainsAPI.DomainsUpdate(context.Background(), organization, project, domain).DomainRequest(domainRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DomainsUpdate`: Domain
+	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**domain** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDomainsUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
+
+### Return type
+
+[**Domain**](Domain.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

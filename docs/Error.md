@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Error** | Pointer to **bool** |  | [optional] 
-**Message** | Pointer to **string** |  | [optional] 
+**Message** | **string** |  | 
+**Error** | **bool** |  | 
 **Data** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewError
 
-`func NewError() *Error`
+`func NewError(message string, error_ bool, ) *Error`
 
 NewError instantiates a new Error object
 This constructor will assign default values to properties that have it defined,
@@ -26,31 +26,6 @@ will change when the set of required properties is changed
 NewErrorWithDefaults instantiates a new Error object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetError
-
-`func (o *Error) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *Error) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *Error) SetError(v bool)`
-
-SetError sets Error field to given value.
-
-### HasError
-
-`func (o *Error) HasError() bool`
-
-HasError returns a boolean if a field has been set.
 
 ### GetMessage
 
@@ -71,11 +46,26 @@ and a boolean to check if the value has been set.
 
 SetMessage sets Message field to given value.
 
-### HasMessage
 
-`func (o *Error) HasMessage() bool`
+### GetError
 
-HasMessage returns a boolean if a field has been set.
+`func (o *Error) GetError() bool`
+
+GetError returns the Error field if non-nil, zero value otherwise.
+
+### GetErrorOk
+
+`func (o *Error) GetErrorOk() (*bool, bool)`
+
+GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetError
+
+`func (o *Error) SetError(v bool)`
+
+SetError sets Error field to given value.
+
 
 ### GetData
 

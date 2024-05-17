@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** |  | [optional] 
-**Domain** | Pointer to **string** |  | [optional] 
+**Id** | **int32** |  | 
+**Domain** | **string** |  | 
+**ProjectId** | **int32** |  | 
+**InSection** | **int32** |  | 
+**DnsEngaged** | **int32** |  | 
+**SectionMessage** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
 **DeletedAt** | Pointer to **string** |  | [optional] 
-**ProjectId** | Pointer to **int32** |  | [optional] 
-**InSection** | Pointer to **int32** |  | [optional] 
-**SectionMessage** | Pointer to **string** |  | [optional] 
-**DnsEngaged** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
 ### NewDomain
 
-`func NewDomain() *Domain`
+`func NewDomain(id int32, domain string, projectId int32, inSection int32, dnsEngaged int32, ) *Domain`
 
 NewDomain instantiates a new Domain object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Domain) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetDomain
 
@@ -77,11 +72,91 @@ and a boolean to check if the value has been set.
 
 SetDomain sets Domain field to given value.
 
-### HasDomain
 
-`func (o *Domain) HasDomain() bool`
+### GetProjectId
 
-HasDomain returns a boolean if a field has been set.
+`func (o *Domain) GetProjectId() int32`
+
+GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+
+### GetProjectIdOk
+
+`func (o *Domain) GetProjectIdOk() (*int32, bool)`
+
+GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectId
+
+`func (o *Domain) SetProjectId(v int32)`
+
+SetProjectId sets ProjectId field to given value.
+
+
+### GetInSection
+
+`func (o *Domain) GetInSection() int32`
+
+GetInSection returns the InSection field if non-nil, zero value otherwise.
+
+### GetInSectionOk
+
+`func (o *Domain) GetInSectionOk() (*int32, bool)`
+
+GetInSectionOk returns a tuple with the InSection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInSection
+
+`func (o *Domain) SetInSection(v int32)`
+
+SetInSection sets InSection field to given value.
+
+
+### GetDnsEngaged
+
+`func (o *Domain) GetDnsEngaged() int32`
+
+GetDnsEngaged returns the DnsEngaged field if non-nil, zero value otherwise.
+
+### GetDnsEngagedOk
+
+`func (o *Domain) GetDnsEngagedOk() (*int32, bool)`
+
+GetDnsEngagedOk returns a tuple with the DnsEngaged field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsEngaged
+
+`func (o *Domain) SetDnsEngaged(v int32)`
+
+SetDnsEngaged sets DnsEngaged field to given value.
+
+
+### GetSectionMessage
+
+`func (o *Domain) GetSectionMessage() string`
+
+GetSectionMessage returns the SectionMessage field if non-nil, zero value otherwise.
+
+### GetSectionMessageOk
+
+`func (o *Domain) GetSectionMessageOk() (*string, bool)`
+
+GetSectionMessageOk returns a tuple with the SectionMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSectionMessage
+
+`func (o *Domain) SetSectionMessage(v string)`
+
+SetSectionMessage sets SectionMessage field to given value.
+
+### HasSectionMessage
+
+`func (o *Domain) HasSectionMessage() bool`
+
+HasSectionMessage returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -157,106 +232,6 @@ SetDeletedAt sets DeletedAt field to given value.
 `func (o *Domain) HasDeletedAt() bool`
 
 HasDeletedAt returns a boolean if a field has been set.
-
-### GetProjectId
-
-`func (o *Domain) GetProjectId() int32`
-
-GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
-
-### GetProjectIdOk
-
-`func (o *Domain) GetProjectIdOk() (*int32, bool)`
-
-GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProjectId
-
-`func (o *Domain) SetProjectId(v int32)`
-
-SetProjectId sets ProjectId field to given value.
-
-### HasProjectId
-
-`func (o *Domain) HasProjectId() bool`
-
-HasProjectId returns a boolean if a field has been set.
-
-### GetInSection
-
-`func (o *Domain) GetInSection() int32`
-
-GetInSection returns the InSection field if non-nil, zero value otherwise.
-
-### GetInSectionOk
-
-`func (o *Domain) GetInSectionOk() (*int32, bool)`
-
-GetInSectionOk returns a tuple with the InSection field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInSection
-
-`func (o *Domain) SetInSection(v int32)`
-
-SetInSection sets InSection field to given value.
-
-### HasInSection
-
-`func (o *Domain) HasInSection() bool`
-
-HasInSection returns a boolean if a field has been set.
-
-### GetSectionMessage
-
-`func (o *Domain) GetSectionMessage() string`
-
-GetSectionMessage returns the SectionMessage field if non-nil, zero value otherwise.
-
-### GetSectionMessageOk
-
-`func (o *Domain) GetSectionMessageOk() (*string, bool)`
-
-GetSectionMessageOk returns a tuple with the SectionMessage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSectionMessage
-
-`func (o *Domain) SetSectionMessage(v string)`
-
-SetSectionMessage sets SectionMessage field to given value.
-
-### HasSectionMessage
-
-`func (o *Domain) HasSectionMessage() bool`
-
-HasSectionMessage returns a boolean if a field has been set.
-
-### GetDnsEngaged
-
-`func (o *Domain) GetDnsEngaged() int32`
-
-GetDnsEngaged returns the DnsEngaged field if non-nil, zero value otherwise.
-
-### GetDnsEngagedOk
-
-`func (o *Domain) GetDnsEngagedOk() (*int32, bool)`
-
-GetDnsEngagedOk returns a tuple with the DnsEngaged field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDnsEngaged
-
-`func (o *Domain) SetDnsEngaged(v int32)`
-
-SetDnsEngaged sets DnsEngaged field to given value.
-
-### HasDnsEngaged
-
-`func (o *Domain) HasDnsEngaged() bool`
-
-HasDnsEngaged returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,32 +1,26 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  contact:
-    email: apiteam@quantcdn.io
-  description: |
-    The Quant administration API provides programmatic access to manage
-    projects within your available organizations.
-  title: Quant administration API
-  version: 2.0.0
+  title: QuantCDN Admin API
+  version: 0.0.0
 servers:
-- url: http://localhost:8001/api/v2
-security:
-- BearerAuth: []
+- description: Staging Dashboard
+  url: https://portal.stage.quantcdn.io
 tags:
-- description: Operations related to organizations.
-  name: organizations
-- description: Operations related to projects.
-  name: projects
-- description: Operations related to crawlers.
-  name: crawlers
-- description: Operations related to domains.
-  name: domains
-- description: Operations related to rules.
-  name: rules
+- name: Organizations
+- name: Projects
+- name: Crawlers
+- name: Domains
+- name: Rules
+- name: Rules__Redirect
+- name: Rules__Proxy
+- name: Rules__Auth
+- name: Rules__Headers
+- name: Rules__CustomResponse
 paths:
   /organizations:
     get:
-      description: List organizations
-      operationId: listOrganizations
+      operationId: Organizations_list
+      parameters: []
       responses:
         "200":
           content:
@@ -35,54 +29,54 @@ paths:
                 items:
                   $ref: '#/components/schemas/Organization'
                 type: array
-          description: List all organizations accessible by the token
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - organizations
+      - Organizations
   /organizations/{organization}:
     get:
-      description: Get organization by machine name
-      operationId: getOrganization
+      operationId: Organizations_read
       parameters:
-      - $ref: '#/components/parameters/organization'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Organization'
-          description: Show an organizations details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - organizations
+      - Organizations
   /organizations/{organization}/projects:
     get:
-      description: Get projects for an organization
-      operationId: listProjects
+      operationId: Projects_list
       parameters:
-      - $ref: '#/components/parameters/organization'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -91,146 +85,172 @@ paths:
                 items:
                   $ref: '#/components/schemas/Project'
                 type: array
-          description: The project data
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - projects
+      - Projects
     post:
-      description: Create a new project for an organization
-      operationId: createProject
+      operationId: Projects_create
       parameters:
-      - $ref: '#/components/parameters/organization'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ProjectRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-          description: The project data
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - projects
+      - Projects
   /organizations/{organization}/projects/{project}:
     delete:
-      description: Delete a project
-      operationId: deleteProject
+      operationId: Projects_delete
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-          description: The project data
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - projects
+      - Projects
     get:
-      description: Get project details
-      operationId: getProject
+      operationId: Projects_read
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-          description: Show the project details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - projects
-    patch:
-      description: Update project details
-      operationId: updateProject
+      - Projects
+    put:
+      operationId: Projects_update
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ProjectRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-          description: The project data
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - projects
+      - Projects
   /organizations/{organization}/projects/{project}/crawlers:
     get:
-      description: Get crawlers for a project
-      operationId: listCrawlers
+      operationId: Crawlers_list
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -239,150 +259,200 @@ paths:
                 items:
                   $ref: '#/components/schemas/Crawler'
                 type: array
-          description: Get crawlers for a project
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - crawlers
+      - Crawlers
     post:
-      description: Create a new crawler for a project
-      operationId: createCrawlers
+      operationId: Crawlers_create
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CrawlerRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crawler'
-          description: The created crawler
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - crawlers
+      - Crawlers
   /organizations/{organization}/projects/{project}/crawlers/{crawler}:
     delete:
-      description: Delete a crawler
-      operationId: deleteCrawler
+      operationId: Crawlers_delete
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/crawler'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crawler'
-          description: The deleted crawler
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - crawlers
+      - Crawlers
     get:
-      description: Get crawler details
-      operationId: getCrawler
+      operationId: Crawlers_read
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/crawler'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crawler'
-          description: Get crawler details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - crawlers
-    patch:
-      description: Update crawler details
-      operationId: updateCrawler
+      - Crawlers
+    put:
+      operationId: Crawlers_update
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/crawler'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CrawlerRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Crawler'
-          description: The updated crawler
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - crawlers
+      - Crawlers
   /organizations/{organization}/projects/{project}/domains:
     get:
-      description: List domains for a project
-      operationId: listDomains
+      operationId: Domains_list
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -391,150 +461,200 @@ paths:
                 items:
                   $ref: '#/components/schemas/Domain'
                 type: array
-          description: List all projects for this organization
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - domains
+      - Domains
     post:
-      description: Create a new domain for a project
-      operationId: createDomain
+      operationId: Domains_create
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DomainRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Domain'
-          description: The created domain
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - domains
+      - Domains
   /organizations/{organization}/projects/{project}/domains/{domain}:
     delete:
-      description: Delete a domain
-      operationId: deleteDomain
+      operationId: Domains_delete
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/domain'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Domain'
-          description: The deleted domain
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - domains
+      - Domains
     get:
-      description: Get domain details
-      operationId: getDomain
+      operationId: Domains_read
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/domain'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Domain'
-          description: Show the domain details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - domains
-    patch:
-      description: Update domain details
-      operationId: updateDomain
+      - Domains
+    put:
+      operationId: Domains_update
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/domain'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DomainRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Domain'
-          description: The edited domain
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - domains
+      - Domains
   /organizations/{organization}/projects/{project}/rules:
     get:
-      description: Get rules for a project
-      operationId: listRules
+      operationId: Rules_list
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -543,640 +663,799 @@ paths:
                 items:
                   $ref: '#/components/schemas/Rule'
                 type: array
-          description: List all projects for this organization
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
-  /organizations/{organization}/projects/{project}/rules/redirect:
-    post:
-      description: Create a new redirect rule
-      operationId: createRuleRedirect
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleRedirectRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-  /organizations/{organization}/projects/{project}/rules/redirect/{rule}:
-    delete:
-      description: Delete a redirect rule
-      operationId: deleteRuleRedirect
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-    get:
-      description: Get redirect rule details
-      operationId: getRuleRedirect
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-    patch:
-      description: Update redirect rule details
-      operationId: updateRuleRedirect
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleRedirectRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-  /organizations/{organization}/projects/{project}/rules/proxy:
-    post:
-      description: Update proxy rule details
-      operationId: createRuleProxy
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleProxyRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-  /organizations/{organization}/projects/{project}/rules/proxy/{rule}:
-    delete:
-      description: Delete a proxy rule
-      operationId: deleteRuleProxy
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-    get:
-      description: Get proxy rule details
-      operationId: getRuleProxy
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
-    patch:
-      description: Update proxy rule details
-      operationId: updateRuleProxy
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleProxyRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
+      - Rules
   /organizations/{organization}/projects/{project}/rules/auth:
-    post:
-      description: Create authentication rules
-      operationId: createRuleAuth
+    get:
+      operationId: RulesAuth_list
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Rule'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Auth
+    post:
+      operationId: RulesAuth_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RuleAuthRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__Auth
   /organizations/{organization}/projects/{project}/rules/auth/{rule}:
     delete:
-      description: Delete an authentication rule
-      operationId: deleteRuleAuth
+      operationId: RulesAuth_delete
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__Auth
     get:
-      description: Get authentication rule details
-      operationId: getRuleAuth
+      operationId: RulesAuth_read
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
-    patch:
-      description: Update authentication rule details
-      operationId: updateRuleAuth
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleAuthRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
+      - Rules__Auth
   /organizations/{organization}/projects/{project}/rules/custom-response:
-    post:
-      description: Create custom response rule details
-      operationId: createRuleCustomResponse
+    get:
+      operationId: RulesCustomResponse_list
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Rule'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__CustomResponse
+    post:
+      operationId: RulesCustomResponse_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleCustomResponseRequest'
+              $ref: '#/components/schemas/RuleCustomResponserequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__CustomResponse
   /organizations/{organization}/projects/{project}/rules/custom-response/{rule}:
     delete:
-      description: Delete a custom response rule
-      operationId: deleteRuleCustomResponse
+      operationId: RulesCustomResponse_delete
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__CustomResponse
     get:
-      description: Get custom repsonse rule details
-      operationId: getRuleCustomResponse
+      operationId: RulesCustomResponse_read
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
-    patch:
-      description: Update custom response rule details
-      operationId: updateRuleCustomResponse
-      parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleCustomResponseRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Rule'
-          description: The rule details
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
-      tags:
-      - rules
+      - Rules__CustomResponse
   /organizations/{organization}/projects/{project}/rules/headers:
-    post:
-      description: Create header rules
-      operationId: createRuleHeaders
+    get:
+      operationId: RulesHeaders_list
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Rule'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Headers
+    post:
+      operationId: RulesHeaders_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RuleHeaderRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__Headers
   /organizations/{organization}/projects/{project}/rules/headers/{rule}:
     delete:
-      description: Delete a header rule
-      operationId: deleteRuleHeaders
+      operationId: RulesHeaders_delete
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__Headers
     get:
-      description: Get header rule details
-      operationId: getRuleHeaders
+      operationId: RulesHeaders_read
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Headers
+  /organizations/{organization}/projects/{project}/rules/proxy:
+    get:
+      operationId: RulesProxy_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Rule'
+                type: array
+          description: The request has succeeded.
+        "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
-    patch:
-      description: Update header rule details
-      operationId: updateRuleHeaders
+      - Rules__Proxy
+    post:
+      operationId: RulesProxy_create
       parameters:
-      - $ref: '#/components/parameters/organization'
-      - $ref: '#/components/parameters/project'
-      - $ref: '#/components/parameters/rule'
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleHeaderRequest'
+              $ref: '#/components/schemas/RuleProxyRequest'
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
-          description: The rule details
+          description: The request has succeeded.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Bad request
-        "403":
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Proxy
+  /organizations/{organization}/projects/{project}/rules/proxy/{rule}:
+    delete:
+      operationId: RulesProxy_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+          description: The request has succeeded.
+        "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-          description: Invalid token provided
+          description: The server could not understand the request due to invalid
+            syntax.
       tags:
-      - rules
+      - Rules__Proxy
+    get:
+      operationId: RulesProxy_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Proxy
+  /organizations/{organization}/projects/{project}/rules/redirect:
+    get:
+      operationId: RulesRedirect_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Rule'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+    post:
+      operationId: RulesRedirect_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleRedirectRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+  /organizations/{organization}/projects/{project}/rules/redirect/{rule}:
+    delete:
+      operationId: RulesRedirect_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+    get:
+      operationId: RulesRedirect_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
 components:
   parameters:
-    organization:
-      description: Organization machine name
+    ResourceURLParameters.organization:
       explode: false
       in: path
       name: organization
@@ -1184,8 +1463,7 @@ components:
       schema:
         type: string
       style: simple
-    project:
-      description: Project machine name
+    ResourceURLParameters.project:
       explode: false
       in: path
       name: project
@@ -1193,149 +1471,75 @@ components:
       schema:
         type: string
       style: simple
-    crawler:
-      description: Crawler uuid
-      explode: false
-      in: path
-      name: crawler
-      required: true
-      schema:
-        type: string
-      style: simple
-    domain:
-      explode: false
-      in: path
-      name: domain
-      required: true
-      schema:
-        type: string
-      style: simple
-    rule:
-      explode: false
-      in: path
-      name: rule
-      required: true
-      schema:
-        type: string
-      style: simple
   schemas:
-    Error:
-      example:
-        data: "{}"
-        error: true
-        message: message
-      properties:
-        error:
-          type: boolean
-        message:
-          type: string
-        data:
-          type: object
-    Organization:
-      example:
-        organisation_machine_name: organisation_machine_name
-        updated_at: updated_at
-        name: name
-        created_at: created_at
-        subscrption: 0
-        type: type
-        region: region
-      properties:
-        name:
-          type: string
-        organisation_machine_name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        subscrption:
-          type: integer
-        type:
-          type: string
-        region:
-          type: string
-    Project:
-      example:
-        project_type: project_type
-        project_parent_id: 1
-        created_at: created_at
-        machine_name: machine_name
-        deleted_at: deleted_at
-        uuid: uuid
-        organisation_id: 6
-        updated_at: updated_at
-        name: name
-        security_score: 5
-        id: 0
-        region: region
-        git_url: git_url
-      properties:
-        id:
-          format: integer
-          type: integer
-        machine_name:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        deleted_at:
-          type: string
-        organisation_id:
-          format: integer
-          type: integer
-        uuid:
-          type: string
-        region:
-          type: string
-        project_type:
-          type: string
-        project_parent_id:
-          type: integer
-        security_score:
-          type: integer
-        git_url:
-          type: string
     Crawler:
       example:
-        urls_list:
-        - urls_list
-        - urls_list
         updated_at: updated_at
         project_id: 6
         domain: domain
-        created_at: created_at
         domain_verified: 1
+        created_at: created_at
         id: 0
         uuid: uuid
         config: config
         deleted_at: deleted_at
       properties:
         id:
+          format: int32
           type: integer
         project_id:
+          format: int32
           type: integer
         uuid:
           type: string
         config:
           type: string
-        urls_list:
-          items:
-            type: string
-          type: array
+        domain:
+          type: string
+        domain_verified:
+          format: int32
+          type: integer
         created_at:
           type: string
         updated_at:
           type: string
         deleted_at:
           type: string
+      required:
+      - config
+      - domain
+      - domain_verified
+      - id
+      - project_id
+      - uuid
+      type: object
+    CrawlerRequest:
+      example:
+        headers: headers
+        url_list:
+        - url_list
+        - url_list
+        domain: domain
+        name: name
+        browser_mode: true
+      properties:
+        name:
+          type: string
         domain:
           type: string
-        domain_verified:
-          type: integer
+        browser_mode:
+          type: boolean
+        url_list:
+          items:
+            type: string
+          type: array
+        headers:
+          type: string
+      required:
+      - domain
+      - headers
+      - url_list
+      type: object
     Domain:
       example:
         updated_at: updated_at
@@ -1344,13 +1548,25 @@ components:
         dns_engaged: 5
         created_at: created_at
         id: 0
-        deleted_at: deleted_at
         in_section: 1
+        deleted_at: deleted_at
         section_message: section_message
       properties:
         id:
+          format: int32
           type: integer
         domain:
+          type: string
+        project_id:
+          format: int32
+          type: integer
+        in_section:
+          format: int32
+          type: integer
+        dns_engaged:
+          format: int32
+          type: integer
+        section_message:
           type: string
         created_at:
           type: string
@@ -1358,23 +1574,134 @@ components:
           type: string
         deleted_at:
           type: string
-        project_id:
-          type: integer
-        in_section:
-          type: integer
-        section_message:
-          type: string
-        dns_engaged:
-          type: integer
-    Rule:
+      required:
+      - dns_engaged
+      - domain
+      - id
+      - in_section
+      - project_id
+      type: object
+    DomainRequest:
       example:
-        uuid: uuid
-        config: "{}"
+        domain: domain
+        name: name
       properties:
+        name:
+          type: string
+        domain:
+          type: string
+      required:
+      - domain
+      - name
+      type: object
+    Error:
+      example:
+        data:
+          key: ""
+        message: message
+        error: true
+      properties:
+        message:
+          type: string
+        error:
+          type: boolean
+        data:
+          additionalProperties: {}
+          type: object
+      required:
+      - error
+      - message
+      type: object
+    Organization:
+      example:
+        updated_at: updated_at
+        name: name
+        organizations: organizations
+        created_at: created_at
+        subscription: subscription
+        region: au
+        type: type
+      properties:
+        name:
+          readOnly: true
+          type: string
+        organizations:
+          type: string
+        region:
+          default: au
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        subscription:
+          type: string
+        type:
+          type: string
+      required:
+      - name
+      - organizations
+      - region
+      type: object
+    Project:
+      example:
+        project_type: normal
+        project_parent_id: 5
+        created_at: created_at
+        machine_name: machine_name
+        uuid: uuid
+        deleted_at: deleted_at
+        updated_at: updated_at
+        name: name
+        security_score: 1
+        orgnisation_id: 6
+        id: 0
+        git_url: git_url
+        region: region
+      properties:
+        id:
+          format: int32
+          type: integer
+        machine_name:
+          type: string
+        name:
+          type: string
+        orgnisation_id:
+          format: int32
+          type: integer
         uuid:
           type: string
-        config:
-          type: object
+        project_type:
+          default: normal
+          enum:
+          - normal
+          - opensource
+          type: string
+        git_url:
+          type: string
+        security_score:
+          format: int32
+          type: integer
+        project_parent_id:
+          format: int32
+          type: integer
+        region:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+      required:
+      - git_url
+      - id
+      - machine_name
+      - name
+      - orgnisation_id
+      - project_type
+      - uuid
+      type: object
     ProjectRequest:
       example:
         basic_auth_preview_only: basic_auth_preview_only
@@ -1384,13 +1711,14 @@ components:
         custom_s3_sync_access_key: custom_s3_sync_access_key
         name: name
         basic_auth_username: basic_auth_username
-        region: region
+        region: au
         custom_s3_sync_secret_key: custom_s3_sync_secret_key
         custom_s3_sync_bucket: custom_s3_sync_bucket
       properties:
         name:
           type: string
         region:
+          default: au
           type: string
         allow_query_params:
           type: boolean
@@ -1408,198 +1736,155 @@ components:
           type: string
         custom_s3_sync_secret_key:
           type: string
-    CrawlerRequest:
+      required:
+      - name
+      - region
+      type: object
+    ProxyConfigHttpbl:
       example:
-        headers: "{}"
-        url_list:
-        - url_list
-        - url_list
-        domain: domain
-        name: name
-        browser_mode: true
+        block_harvester: false
+        httpbl_enabled: false
+        block_spam: false
+        block_search_enginer: false
+        block_suspicious: false
       properties:
-        name:
-          type: string
-        domain:
-          type: string
-        browser_mode:
+        httpbl_enabled:
+          default: false
           type: boolean
-        url_list:
-          items:
-            type: string
-          type: array
-        headers:
-          type: object
-    DomainRequest:
+        block_suspicious:
+          default: false
+          type: boolean
+        block_harvester:
+          default: false
+          type: boolean
+        block_spam:
+          default: false
+          type: boolean
+        block_search_enginer:
+          default: false
+          type: boolean
+      required:
+      - block_harvester
+      - block_search_enginer
+      - block_spam
+      - block_suspicious
+      - httpbl_enabled
+      type: object
+    ProxyNotifyConfig:
       example:
-        headers: "{}"
-        url_list:
-        - url_list
-        - url_list
-        domain: domain
-        name: name
-        browser_mode: true
+        period: 3
+        slack_webhook: slack_webhook
+        origin_status_code:
+        - 9
+        - 9
       properties:
-        name:
-          type: string
-        domain:
-          type: string
-        browser_mode:
-          type: boolean
-        url_list:
+        origin_status_code:
           items:
-            type: string
+            format: int32
+            type: integer
           type: array
-        headers:
-          type: object
-    RuleRedirectRequest:
-      example:
-        country: country_is
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: only_with_cookie
-        redirect_code: 0
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        url:
-        - url
-        - url
-        redirect_to: redirect_to
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        disabled: true
-      properties:
-        domain:
-          type: string
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        disabled:
-          type: boolean
-        redirect_to:
-          type: string
-        redirect_code:
+        period:
+          format: int32
           type: integer
-    RuleProxyRequest:
+        slack_webhook:
+          type: string
+      required:
+      - origin_status_code
+      - period
+      - slack_webhook
+      type: object
+    Rule:
       example:
-        country: country_is
+        uuid: uuid
+        config: config
+      properties:
+        uuid:
+          type: string
+        config:
+          type: string
+      required:
+      - config
+      - uuid
+      type: object
+    RuleAuthRequest:
+      allOf:
+      - $ref: '#/components/schemas/RuleRequest'
+      example:
+        auth_user: auth_user
+        auth_pass: auth_pass
+      properties:
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+      required:
+      - auth_pass
+      - auth_user
+      type: object
+    RuleCustomResponserequest:
+      allOf:
+      - $ref: '#/components/schemas/RuleRequest'
+      example:
+        custom_response_status_code: 0
+        custom_response_body: custom_response_body
+      properties:
+        custom_response_status_code:
+          default: 200
+          format: int32
+          type: integer
+        custom_response_body:
+          type: string
+      required:
+      - custom_response_body
+      - custom_response_status_code
+      type: object
+    RuleHeaderRequest:
+      allOf:
+      - $ref: '#/components/schemas/RuleRequest'
+      example:
+        headers:
+          key: ""
+      properties:
+        headers:
+          additionalProperties: {}
+          type: object
+      required:
+      - headers
+      type: object
+    RuleProxyRequest:
+      allOf:
+      - $ref: '#/components/schemas/RuleRequest'
+      example:
         cache_lifetime: 0
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
+        only_proxy_404: true
+        auth_user: auth_user
         strip_headers:
         - strip_headers
         - strip_headers
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: only_with_cookie
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        only_proxy_404: true
-        auth_user: auth_user
-        domain: domain
-        name: name
         host: host
         waf_enabled: true
-        ip_is:
-        - ip_is
-        - ip_is
         auth_pass: auth_pass
-        disabled: true
         to: to
         disable_ssl_verify: true
         waf_config:
           allow_rules:
-          - 1
-          - 1
+          - allow_rules
+          - allow_rules
           origin_timeout: 5
           httpbl:
-            block_harvester: true
-            httpbl_enabled: true
-            block_spam: true
-            block_search_engine: true
-            block_suspicious: true
-          failover_origin_ttfb: 2
-          notify_slack_hits_rpm: 5
+            block_harvester: false
+            httpbl_enabled: false
+            block_spam: false
+            block_search_enginer: false
+            block_suspicious: false
+          notify_slack_hist_rpm: 1
+          failover_origin_ttfb: 5
           notify_config:
-            period: 2
+            period: 3
             slack_webhook: slack_webhook
             origin_status_code:
-            - 3
-            - 3
+            - 9
+            - 9
           notify: notify
           allow_ip:
           - allow_ip
@@ -1615,67 +1900,16 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          failover_lifetime: 9
+          failover_lifetime: 7
           block_ua:
           - block_ua
           - block_ua
-          failover_origin_status_code: 7
+          failover_origin_status_code: 2
           notify_slack: notify_slack
           proxy_alert_enabled: true
           paranoia_level: 6
           failover_mode: true
       properties:
-        domain:
-          type: string
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        disabled:
-          type: boolean
         to:
           type: string
         host:
@@ -1687,6 +1921,7 @@ components:
         disable_ssl_verify:
           type: boolean
         cache_lifetime:
+          format: int32
           type: integer
         only_proxy_404:
           type: boolean
@@ -1697,50 +1932,36 @@ components:
         waf_enabled:
           type: boolean
         waf_config:
-          $ref: '#/components/schemas/RuleProxyRequest_waf_config'
-    RuleAuthRequest:
+          $ref: '#/components/schemas/RuleWAFConfig'
+      required:
+      - to
+      type: object
+    RuleRedirectRequest:
+      allOf:
+      - $ref: '#/components/schemas/RuleRequest'
       example:
-        country: country_is
-        cache_lifetime: 0
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        strip_headers:
-        - strip_headers
-        - strip_headers
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: only_with_cookie
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        only_proxy_404: true
-        auth_user: auth_user
-        domain: domain
-        name: name
-        host: host
-        ip_is:
-        - ip_is
-        - ip_is
-        auth_pass: auth_pass
-        disabled: true
-        to: to
-        disable_ssl_verify: true
+        redirect_code: 0
+        redirect_to: redirect_to
+      properties:
+        redirect_to:
+          type: string
+        redirect_code:
+          default: 301
+          type: integer
+      required:
+      - redirect_code
+      - redirect_to
+      type: object
+    RuleRequest:
       properties:
         domain:
+          default: any
           type: string
+        name:
+          type: string
+        disabled:
+          default: false
+          type: boolean
         country:
           enum:
           - country_is
@@ -1780,317 +2001,30 @@ components:
           items:
             type: string
           type: array
-        only_with_cookie:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        disabled:
-          type: boolean
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        strip_headers:
-          items:
-            type: string
-          type: array
-    RuleCustomResponseRequest:
-      example:
-        country: country_is
-        cache_lifetime: 0
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        strip_headers:
-        - strip_headers
-        - strip_headers
-        custom_response_status_code: 6
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: only_with_cookie
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        custom_response_body: custom_response_body
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        only_proxy_404: true
-        auth_user: auth_user
-        domain: domain
-        name: name
-        host: host
-        ip_is:
-        - ip_is
-        - ip_is
-        auth_pass: auth_pass
-        disabled: true
-        to: to
-        disable_ssl_verify: true
-      properties:
-        domain:
-          type: string
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        disabled:
-          type: boolean
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        strip_headers:
-          items:
-            type: string
-          type: array
-        custom_response_status_code:
-          type: integer
-        custom_response_body:
-          type: string
-    RuleHeaderRequest:
-      example:
-        country: country_is
-        headers: "{}"
-        cache_lifetime: 0
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        strip_headers:
-        - strip_headers
-        - strip_headers
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: only_with_cookie
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        only_proxy_404: true
-        auth_user: auth_user
-        domain: domain
-        name: name
-        host: host
-        ip_is:
-        - ip_is
-        - ip_is
-        auth_pass: auth_pass
-        disabled: true
-        to: to
-        disable_ssl_verify: true
-      properties:
-        domain:
-          type: string
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        disabled:
-          type: boolean
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        strip_headers:
-          items:
-            type: string
-          type: array
-        headers:
-          type: object
-    RuleProxyRequest_waf_config_httpbl:
-      example:
-        block_harvester: true
-        httpbl_enabled: true
-        block_spam: true
-        block_search_engine: true
-        block_suspicious: true
-      properties:
-        httpbl_enabled:
-          type: boolean
-        block_suspicious:
-          type: boolean
-        block_harvester:
-          type: boolean
-        block_spam:
-          type: boolean
-        block_search_engine:
-          type: boolean
-    RuleProxyRequest_waf_config_notify_config:
-      example:
-        period: 2
-        slack_webhook: slack_webhook
-        origin_status_code:
-        - 3
-        - 3
-      properties:
-        origin_status_code:
-          items:
-            type: integer
-          type: array
-        period:
-          type: integer
-        slack_webhook:
-          type: string
-    RuleProxyRequest_waf_config:
+      required:
+      - disabled
+      - domain
+      type: object
+    RuleWAFConfig:
       example:
         allow_rules:
-        - 1
-        - 1
+        - allow_rules
+        - allow_rules
         origin_timeout: 5
         httpbl:
-          block_harvester: true
-          httpbl_enabled: true
-          block_spam: true
-          block_search_engine: true
-          block_suspicious: true
-        failover_origin_ttfb: 2
-        notify_slack_hits_rpm: 5
+          block_harvester: false
+          httpbl_enabled: false
+          block_spam: false
+          block_search_enginer: false
+          block_suspicious: false
+        notify_slack_hist_rpm: 1
+        failover_origin_ttfb: 5
         notify_config:
-          period: 2
+          period: 3
           slack_webhook: slack_webhook
           origin_status_code:
-          - 3
-          - 3
+          - 9
+          - 9
         notify: notify
         allow_ip:
         - allow_ip
@@ -2106,11 +2040,11 @@ components:
         block_referer:
         - block_referer
         - block_referer
-        failover_lifetime: 9
+        failover_lifetime: 7
         block_ua:
         - block_ua
         - block_ua
-        failover_origin_status_code: 7
+        failover_origin_status_code: 2
         notify_slack: notify_slack
         proxy_alert_enabled: true
         paranoia_level: 6
@@ -2122,10 +2056,11 @@ components:
           - report
           type: string
         paranoia_level:
+          default: 1
           type: integer
         allow_rules:
           items:
-            type: integer
+            type: string
           type: array
         allow_ip:
           items:
@@ -2145,33 +2080,41 @@ components:
           type: array
         notify_slack:
           type: string
-        notify_slack_hits_rpm:
+        notify_slack_hist_rpm:
+          format: int32
           type: integer
         notify_email:
           type: string
         httpbl:
-          $ref: '#/components/schemas/RuleProxyRequest_waf_config_httpbl'
+          $ref: '#/components/schemas/ProxyConfigHttpbl'
         proxy_alert_enabled:
           type: boolean
         origin_timeout:
+          default: 30
+          format: int32
           type: integer
         failover_mode:
           type: boolean
         failover_origin_ttfb:
+          format: int32
           type: integer
         failover_origin_status_code:
+          format: int32
           type: integer
         failover_lifetime:
+          format: int32
           type: integer
         notify:
           type: string
         notify_config:
-          $ref: '#/components/schemas/RuleProxyRequest_waf_config_notify_config'
+          $ref: '#/components/schemas/ProxyNotifyConfig'
         inject_headers:
           items:
             type: string
           type: array
-  securitySchemes:
-    BearerAuth:
-      scheme: bearer
-      type: http
+      required:
+      - inject_headers
+      - mode
+      - notify_email
+      - origin_timeout
+      type: object

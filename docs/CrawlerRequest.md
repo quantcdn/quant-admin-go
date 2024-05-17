@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
-**Domain** | Pointer to **string** |  | [optional] 
+**Domain** | **string** |  | 
 **BrowserMode** | Pointer to **bool** |  | [optional] 
-**UrlList** | Pointer to **[]string** |  | [optional] 
-**Headers** | Pointer to **map[string]interface{}** |  | [optional] 
+**UrlList** | **[]string** |  | 
+**Headers** | **string** |  | 
 
 ## Methods
 
 ### NewCrawlerRequest
 
-`func NewCrawlerRequest() *CrawlerRequest`
+`func NewCrawlerRequest(domain string, urlList []string, headers string, ) *CrawlerRequest`
 
 NewCrawlerRequest instantiates a new CrawlerRequest object
 This constructor will assign default values to properties that have it defined,
@@ -73,11 +73,6 @@ and a boolean to check if the value has been set.
 
 SetDomain sets Domain field to given value.
 
-### HasDomain
-
-`func (o *CrawlerRequest) HasDomain() bool`
-
-HasDomain returns a boolean if a field has been set.
 
 ### GetBrowserMode
 
@@ -123,36 +118,26 @@ and a boolean to check if the value has been set.
 
 SetUrlList sets UrlList field to given value.
 
-### HasUrlList
-
-`func (o *CrawlerRequest) HasUrlList() bool`
-
-HasUrlList returns a boolean if a field has been set.
 
 ### GetHeaders
 
-`func (o *CrawlerRequest) GetHeaders() map[string]interface{}`
+`func (o *CrawlerRequest) GetHeaders() string`
 
 GetHeaders returns the Headers field if non-nil, zero value otherwise.
 
 ### GetHeadersOk
 
-`func (o *CrawlerRequest) GetHeadersOk() (*map[string]interface{}, bool)`
+`func (o *CrawlerRequest) GetHeadersOk() (*string, bool)`
 
 GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHeaders
 
-`func (o *CrawlerRequest) SetHeaders(v map[string]interface{})`
+`func (o *CrawlerRequest) SetHeaders(v string)`
 
 SetHeaders sets Headers field to given value.
 
-### HasHeaders
-
-`func (o *CrawlerRequest) HasHeaders() bool`
-
-HasHeaders returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

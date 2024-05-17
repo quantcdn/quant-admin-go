@@ -4,7 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Domain** | Pointer to **string** |  | [optional] 
+**RedirectTo** | **string** |  | 
+**RedirectCode** | **int32** |  | [default to 301]
+**Domain** | **string** |  | [default to "any"]
+**Name** | Pointer to **string** |  | [optional] 
+**Disabled** | **bool** |  | [default to false]
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -14,18 +18,12 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
-**OnlyWithCookie** | Pointer to **string** |  | [optional] 
-**Url** | Pointer to **[]string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Disabled** | Pointer to **bool** |  | [optional] 
-**RedirectTo** | Pointer to **string** |  | [optional] 
-**RedirectCode** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
 ### NewRuleRedirectRequest
 
-`func NewRuleRedirectRequest() *RuleRedirectRequest`
+`func NewRuleRedirectRequest(redirectTo string, redirectCode int32, domain string, disabled bool, ) *RuleRedirectRequest`
 
 NewRuleRedirectRequest instantiates a new RuleRedirectRequest object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +37,46 @@ will change when the set of required properties is changed
 NewRuleRedirectRequestWithDefaults instantiates a new RuleRedirectRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetRedirectTo
+
+`func (o *RuleRedirectRequest) GetRedirectTo() string`
+
+GetRedirectTo returns the RedirectTo field if non-nil, zero value otherwise.
+
+### GetRedirectToOk
+
+`func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool)`
+
+GetRedirectToOk returns a tuple with the RedirectTo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRedirectTo
+
+`func (o *RuleRedirectRequest) SetRedirectTo(v string)`
+
+SetRedirectTo sets RedirectTo field to given value.
+
+
+### GetRedirectCode
+
+`func (o *RuleRedirectRequest) GetRedirectCode() int32`
+
+GetRedirectCode returns the RedirectCode field if non-nil, zero value otherwise.
+
+### GetRedirectCodeOk
+
+`func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool)`
+
+GetRedirectCodeOk returns a tuple with the RedirectCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRedirectCode
+
+`func (o *RuleRedirectRequest) SetRedirectCode(v int32)`
+
+SetRedirectCode sets RedirectCode field to given value.
+
 
 ### GetDomain
 
@@ -59,11 +97,51 @@ and a boolean to check if the value has been set.
 
 SetDomain sets Domain field to given value.
 
-### HasDomain
 
-`func (o *RuleRedirectRequest) HasDomain() bool`
+### GetName
 
-HasDomain returns a boolean if a field has been set.
+`func (o *RuleRedirectRequest) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *RuleRedirectRequest) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *RuleRedirectRequest) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *RuleRedirectRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### GetDisabled
+
+`func (o *RuleRedirectRequest) GetDisabled() bool`
+
+GetDisabled returns the Disabled field if non-nil, zero value otherwise.
+
+### GetDisabledOk
+
+`func (o *RuleRedirectRequest) GetDisabledOk() (*bool, bool)`
+
+GetDisabledOk returns a tuple with the Disabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisabled
+
+`func (o *RuleRedirectRequest) SetDisabled(v bool)`
+
+SetDisabled sets Disabled field to given value.
+
 
 ### GetCountry
 
@@ -289,156 +367,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleRedirectRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetOnlyWithCookie
-
-`func (o *RuleRedirectRequest) GetOnlyWithCookie() string`
-
-GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
-
-### GetOnlyWithCookieOk
-
-`func (o *RuleRedirectRequest) GetOnlyWithCookieOk() (*string, bool)`
-
-GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOnlyWithCookie
-
-`func (o *RuleRedirectRequest) SetOnlyWithCookie(v string)`
-
-SetOnlyWithCookie sets OnlyWithCookie field to given value.
-
-### HasOnlyWithCookie
-
-`func (o *RuleRedirectRequest) HasOnlyWithCookie() bool`
-
-HasOnlyWithCookie returns a boolean if a field has been set.
-
-### GetUrl
-
-`func (o *RuleRedirectRequest) GetUrl() []string`
-
-GetUrl returns the Url field if non-nil, zero value otherwise.
-
-### GetUrlOk
-
-`func (o *RuleRedirectRequest) GetUrlOk() (*[]string, bool)`
-
-GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUrl
-
-`func (o *RuleRedirectRequest) SetUrl(v []string)`
-
-SetUrl sets Url field to given value.
-
-### HasUrl
-
-`func (o *RuleRedirectRequest) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
-
-### GetName
-
-`func (o *RuleRedirectRequest) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *RuleRedirectRequest) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *RuleRedirectRequest) SetName(v string)`
-
-SetName sets Name field to given value.
-
-### HasName
-
-`func (o *RuleRedirectRequest) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### GetDisabled
-
-`func (o *RuleRedirectRequest) GetDisabled() bool`
-
-GetDisabled returns the Disabled field if non-nil, zero value otherwise.
-
-### GetDisabledOk
-
-`func (o *RuleRedirectRequest) GetDisabledOk() (*bool, bool)`
-
-GetDisabledOk returns a tuple with the Disabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisabled
-
-`func (o *RuleRedirectRequest) SetDisabled(v bool)`
-
-SetDisabled sets Disabled field to given value.
-
-### HasDisabled
-
-`func (o *RuleRedirectRequest) HasDisabled() bool`
-
-HasDisabled returns a boolean if a field has been set.
-
-### GetRedirectTo
-
-`func (o *RuleRedirectRequest) GetRedirectTo() string`
-
-GetRedirectTo returns the RedirectTo field if non-nil, zero value otherwise.
-
-### GetRedirectToOk
-
-`func (o *RuleRedirectRequest) GetRedirectToOk() (*string, bool)`
-
-GetRedirectToOk returns a tuple with the RedirectTo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRedirectTo
-
-`func (o *RuleRedirectRequest) SetRedirectTo(v string)`
-
-SetRedirectTo sets RedirectTo field to given value.
-
-### HasRedirectTo
-
-`func (o *RuleRedirectRequest) HasRedirectTo() bool`
-
-HasRedirectTo returns a boolean if a field has been set.
-
-### GetRedirectCode
-
-`func (o *RuleRedirectRequest) GetRedirectCode() int32`
-
-GetRedirectCode returns the RedirectCode field if non-nil, zero value otherwise.
-
-### GetRedirectCodeOk
-
-`func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool)`
-
-GetRedirectCodeOk returns a tuple with the RedirectCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRedirectCode
-
-`func (o *RuleRedirectRequest) SetRedirectCode(v int32)`
-
-SetRedirectCode sets RedirectCode field to given value.
-
-### HasRedirectCode
-
-`func (o *RuleRedirectRequest) HasRedirectCode() bool`
-
-HasRedirectCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

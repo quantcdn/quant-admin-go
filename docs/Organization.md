@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
-**OrganisationMachineName** | Pointer to **string** |  | [optional] 
+**Name** | **string** |  | [readonly] 
+**Organizations** | **string** |  | 
+**Region** | **string** |  | [default to "au"]
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
-**Subscrption** | Pointer to **int32** |  | [optional] 
+**Subscription** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
-**Region** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewOrganization
 
-`func NewOrganization() *Organization`
+`func NewOrganization(name string, organizations string, region string, ) *Organization`
 
 NewOrganization instantiates a new Organization object
 This constructor will assign default values to properties that have it defined,
@@ -50,36 +50,46 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *Organization) HasName() bool`
+### GetOrganizations
 
-HasName returns a boolean if a field has been set.
+`func (o *Organization) GetOrganizations() string`
 
-### GetOrganisationMachineName
+GetOrganizations returns the Organizations field if non-nil, zero value otherwise.
 
-`func (o *Organization) GetOrganisationMachineName() string`
+### GetOrganizationsOk
 
-GetOrganisationMachineName returns the OrganisationMachineName field if non-nil, zero value otherwise.
+`func (o *Organization) GetOrganizationsOk() (*string, bool)`
 
-### GetOrganisationMachineNameOk
-
-`func (o *Organization) GetOrganisationMachineNameOk() (*string, bool)`
-
-GetOrganisationMachineNameOk returns a tuple with the OrganisationMachineName field if it's non-nil, zero value otherwise
+GetOrganizationsOk returns a tuple with the Organizations field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrganisationMachineName
+### SetOrganizations
 
-`func (o *Organization) SetOrganisationMachineName(v string)`
+`func (o *Organization) SetOrganizations(v string)`
 
-SetOrganisationMachineName sets OrganisationMachineName field to given value.
+SetOrganizations sets Organizations field to given value.
 
-### HasOrganisationMachineName
 
-`func (o *Organization) HasOrganisationMachineName() bool`
+### GetRegion
 
-HasOrganisationMachineName returns a boolean if a field has been set.
+`func (o *Organization) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *Organization) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *Organization) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
 
 ### GetCreatedAt
 
@@ -131,30 +141,30 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
-### GetSubscrption
+### GetSubscription
 
-`func (o *Organization) GetSubscrption() int32`
+`func (o *Organization) GetSubscription() string`
 
-GetSubscrption returns the Subscrption field if non-nil, zero value otherwise.
+GetSubscription returns the Subscription field if non-nil, zero value otherwise.
 
-### GetSubscrptionOk
+### GetSubscriptionOk
 
-`func (o *Organization) GetSubscrptionOk() (*int32, bool)`
+`func (o *Organization) GetSubscriptionOk() (*string, bool)`
 
-GetSubscrptionOk returns a tuple with the Subscrption field if it's non-nil, zero value otherwise
+GetSubscriptionOk returns a tuple with the Subscription field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSubscrption
+### SetSubscription
 
-`func (o *Organization) SetSubscrption(v int32)`
+`func (o *Organization) SetSubscription(v string)`
 
-SetSubscrption sets Subscrption field to given value.
+SetSubscription sets Subscription field to given value.
 
-### HasSubscrption
+### HasSubscription
 
-`func (o *Organization) HasSubscrption() bool`
+`func (o *Organization) HasSubscription() bool`
 
-HasSubscrption returns a boolean if a field has been set.
+HasSubscription returns a boolean if a field has been set.
 
 ### GetType
 
@@ -180,31 +190,6 @@ SetType sets Type field to given value.
 `func (o *Organization) HasType() bool`
 
 HasType returns a boolean if a field has been set.
-
-### GetRegion
-
-`func (o *Organization) GetRegion() string`
-
-GetRegion returns the Region field if non-nil, zero value otherwise.
-
-### GetRegionOk
-
-`func (o *Organization) GetRegionOk() (*string, bool)`
-
-GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegion
-
-`func (o *Organization) SetRegion(v string)`
-
-SetRegion sets Region field to given value.
-
-### HasRegion
-
-`func (o *Organization) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
