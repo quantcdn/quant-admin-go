@@ -74,7 +74,7 @@ ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVari
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://portal.stage.quantcdn.io*
+All URIs are relative to *https://portal.stage.quantcdn.io/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

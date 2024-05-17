@@ -1,6 +1,6 @@
 # \RulesProxyAPI
 
-All URIs are relative to *https://portal.stage.quantcdn.io*
+All URIs are relative to *https://portal.stage.quantcdn.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
