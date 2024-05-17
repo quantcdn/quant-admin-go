@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**RulesCustomResponseDelete**](RulesCustomResponseAPI.md#RulesCustomResponseDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
 [**RulesCustomResponseList**](RulesCustomResponseAPI.md#RulesCustomResponseList) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response | 
 [**RulesCustomResponseRead**](RulesCustomResponseAPI.md#RulesCustomResponseRead) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+[**RulesCustomResponseUpdate**](RulesCustomResponseAPI.md#RulesCustomResponseUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
 
 
 
@@ -296,6 +297,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesCustomResponseUpdate
+
+> Rule RulesCustomResponseUpdate(ctx, organization, project, rule).RuleCustomResponserequest(ruleCustomResponserequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	rule := "rule_example" // string | 
+	ruleCustomResponserequest := *openapiclient.NewRuleCustomResponserequest("Domain_example", false, int32(123), "CustomResponseBody_example") // RuleCustomResponserequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesCustomResponseAPI.RulesCustomResponseUpdate(context.Background(), organization, project, rule).RuleCustomResponserequest(ruleCustomResponserequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesCustomResponseAPI.RulesCustomResponseUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesCustomResponseUpdate`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesCustomResponseAPI.RulesCustomResponseUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**rule** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesCustomResponseUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **ruleCustomResponserequest** | [**RuleCustomResponserequest**](RuleCustomResponserequest.md) |  | 
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

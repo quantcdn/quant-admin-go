@@ -100,22 +100,27 @@ Class | Method | HTTP request | Description
 *RulesAuthAPI* | [**RulesAuthDelete**](docs/RulesAuthAPI.md#rulesauthdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
 *RulesAuthAPI* | [**RulesAuthList**](docs/RulesAuthAPI.md#rulesauthlist) | **Get** /organizations/{organization}/projects/{project}/rules/auth | 
 *RulesAuthAPI* | [**RulesAuthRead**](docs/RulesAuthAPI.md#rulesauthread) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
+*RulesAuthAPI* | [**RulesAuthUpdate**](docs/RulesAuthAPI.md#rulesauthupdate) | **Put** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
 *RulesCustomResponseAPI* | [**RulesCustomResponseCreate**](docs/RulesCustomResponseAPI.md#rulescustomresponsecreate) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | 
 *RulesCustomResponseAPI* | [**RulesCustomResponseDelete**](docs/RulesCustomResponseAPI.md#rulescustomresponsedelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
 *RulesCustomResponseAPI* | [**RulesCustomResponseList**](docs/RulesCustomResponseAPI.md#rulescustomresponselist) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response | 
 *RulesCustomResponseAPI* | [**RulesCustomResponseRead**](docs/RulesCustomResponseAPI.md#rulescustomresponseread) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+*RulesCustomResponseAPI* | [**RulesCustomResponseUpdate**](docs/RulesCustomResponseAPI.md#rulescustomresponseupdate) | **Put** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
 *RulesHeadersAPI* | [**RulesHeadersCreate**](docs/RulesHeadersAPI.md#rulesheaderscreate) | **Post** /organizations/{organization}/projects/{project}/rules/headers | 
 *RulesHeadersAPI* | [**RulesHeadersDelete**](docs/RulesHeadersAPI.md#rulesheadersdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
 *RulesHeadersAPI* | [**RulesHeadersList**](docs/RulesHeadersAPI.md#rulesheaderslist) | **Get** /organizations/{organization}/projects/{project}/rules/headers | 
 *RulesHeadersAPI* | [**RulesHeadersRead**](docs/RulesHeadersAPI.md#rulesheadersread) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
+*RulesHeadersAPI* | [**RulesHeadersUpdate**](docs/RulesHeadersAPI.md#rulesheadersupdate) | **Put** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
 *RulesProxyAPI* | [**RulesProxyCreate**](docs/RulesProxyAPI.md#rulesproxycreate) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyDelete**](docs/RulesProxyAPI.md#rulesproxydelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyList**](docs/RulesProxyAPI.md#rulesproxylist) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyRead**](docs/RulesProxyAPI.md#rulesproxyread) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+*RulesProxyAPI* | [**RulesProxyUpdate**](docs/RulesProxyAPI.md#rulesproxyupdate) | **Put** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesRedirectAPI* | [**RulesRedirectCreate**](docs/RulesRedirectAPI.md#rulesredirectcreate) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
 *RulesRedirectAPI* | [**RulesRedirectDelete**](docs/RulesRedirectAPI.md#rulesredirectdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 *RulesRedirectAPI* | [**RulesRedirectList**](docs/RulesRedirectAPI.md#rulesredirectlist) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
 *RulesRedirectAPI* | [**RulesRedirectRead**](docs/RulesRedirectAPI.md#rulesredirectread) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+*RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Put** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 ## Documentation For Models

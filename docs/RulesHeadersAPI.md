@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**RulesHeadersDelete**](RulesHeadersAPI.md#RulesHeadersDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
 [**RulesHeadersList**](RulesHeadersAPI.md#RulesHeadersList) | **Get** /organizations/{organization}/projects/{project}/rules/headers | 
 [**RulesHeadersRead**](RulesHeadersAPI.md#RulesHeadersRead) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
+[**RulesHeadersUpdate**](RulesHeadersAPI.md#RulesHeadersUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
 
 
 
@@ -296,6 +297,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesHeadersUpdate
+
+> Rule RulesHeadersUpdate(ctx, organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	rule := "rule_example" // string | 
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesHeadersAPI.RulesHeadersUpdate(context.Background(), organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesHeadersAPI.RulesHeadersUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesHeadersUpdate`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesHeadersAPI.RulesHeadersUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**rule** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesHeadersUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **ruleHeaderRequest** | [**RuleHeaderRequest**](RuleHeaderRequest.md) |  | 
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

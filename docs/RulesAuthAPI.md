@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**RulesAuthDelete**](RulesAuthAPI.md#RulesAuthDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
 [**RulesAuthList**](RulesAuthAPI.md#RulesAuthList) | **Get** /organizations/{organization}/projects/{project}/rules/auth | 
 [**RulesAuthRead**](RulesAuthAPI.md#RulesAuthRead) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
+[**RulesAuthUpdate**](RulesAuthAPI.md#RulesAuthUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
 
 
 
@@ -296,6 +297,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesAuthUpdate
+
+> Rule RulesAuthUpdate(ctx, organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	rule := "rule_example" // string | 
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAuthAPI.RulesAuthUpdate(context.Background(), organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAuthAPI.RulesAuthUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesAuthUpdate`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesAuthAPI.RulesAuthUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**rule** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesAuthUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **ruleAuthRequest** | [**RuleAuthRequest**](RuleAuthRequest.md) |  | 
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**RulesProxyDelete**](RulesProxyAPI.md#RulesProxyDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 [**RulesProxyList**](RulesProxyAPI.md#RulesProxyList) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
 [**RulesProxyRead**](RulesProxyAPI.md#RulesProxyRead) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+[**RulesProxyUpdate**](RulesProxyAPI.md#RulesProxyUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 
 
 
@@ -296,6 +297,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesProxyUpdate
+
+> Rule RulesProxyUpdate(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	rule := "rule_example" // string | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, "To_example") // RuleProxyRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesProxyAPI.RulesProxyUpdate(context.Background(), organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesProxyUpdate`: Rule
+	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**rule** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesProxyUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
+
+### Return type
+
+[**Rule**](Rule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
