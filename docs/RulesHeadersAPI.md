@@ -32,7 +32,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest(map[string]interface{}{"key": interface{}(123)}, "Domain_example", false) // RuleHeaderRequest | 
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest(map[string]string{"key": "Inner_example"}, "Domain_example", false) // RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

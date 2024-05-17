@@ -1819,12 +1819,81 @@ components:
       - uuid
       type: object
     RuleAuthRequest:
-      allOf:
-      - $ref: '#/components/schemas/RuleRequest'
       example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        country_is_not:
+        - country_is_not
+        - country_is_not
         auth_user: auth_user
+        domain: any
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
         auth_pass: auth_pass
+        disabled: false
       properties:
+        domain:
+          default: any
+          type: string
+        name:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
         auth_user:
           type: string
         auth_pass:
@@ -1832,6 +1901,8 @@ components:
       required:
       - auth_pass
       - auth_user
+      - disabled
+      - domain
       type: object
     RuleCustomResponserequest:
       allOf:
@@ -1855,10 +1926,11 @@ components:
       - $ref: '#/components/schemas/RuleRequest'
       example:
         headers:
-          key: ""
+          key: headers
       properties:
         headers:
-          additionalProperties: {}
+          additionalProperties:
+            type: string
           type: object
       required:
       - headers

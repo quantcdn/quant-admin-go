@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthUser** | **string** |  | 
-**AuthPass** | **string** |  | 
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
@@ -18,12 +16,14 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
+**AuthUser** | **string** |  | 
+**AuthPass** | **string** |  | 
 
 ## Methods
 
 ### NewRuleAuthRequest
 
-`func NewRuleAuthRequest(authUser string, authPass string, domain string, disabled bool, ) *RuleAuthRequest`
+`func NewRuleAuthRequest(domain string, disabled bool, authUser string, authPass string, ) *RuleAuthRequest`
 
 NewRuleAuthRequest instantiates a new RuleAuthRequest object
 This constructor will assign default values to properties that have it defined,
@@ -37,46 +37,6 @@ will change when the set of required properties is changed
 NewRuleAuthRequestWithDefaults instantiates a new RuleAuthRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAuthUser
-
-`func (o *RuleAuthRequest) GetAuthUser() string`
-
-GetAuthUser returns the AuthUser field if non-nil, zero value otherwise.
-
-### GetAuthUserOk
-
-`func (o *RuleAuthRequest) GetAuthUserOk() (*string, bool)`
-
-GetAuthUserOk returns a tuple with the AuthUser field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthUser
-
-`func (o *RuleAuthRequest) SetAuthUser(v string)`
-
-SetAuthUser sets AuthUser field to given value.
-
-
-### GetAuthPass
-
-`func (o *RuleAuthRequest) GetAuthPass() string`
-
-GetAuthPass returns the AuthPass field if non-nil, zero value otherwise.
-
-### GetAuthPassOk
-
-`func (o *RuleAuthRequest) GetAuthPassOk() (*string, bool)`
-
-GetAuthPassOk returns a tuple with the AuthPass field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthPass
-
-`func (o *RuleAuthRequest) SetAuthPass(v string)`
-
-SetAuthPass sets AuthPass field to given value.
-
 
 ### GetDomain
 
@@ -367,6 +327,46 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleAuthRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetAuthUser
+
+`func (o *RuleAuthRequest) GetAuthUser() string`
+
+GetAuthUser returns the AuthUser field if non-nil, zero value otherwise.
+
+### GetAuthUserOk
+
+`func (o *RuleAuthRequest) GetAuthUserOk() (*string, bool)`
+
+GetAuthUserOk returns a tuple with the AuthUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthUser
+
+`func (o *RuleAuthRequest) SetAuthUser(v string)`
+
+SetAuthUser sets AuthUser field to given value.
+
+
+### GetAuthPass
+
+`func (o *RuleAuthRequest) GetAuthPass() string`
+
+GetAuthPass returns the AuthPass field if non-nil, zero value otherwise.
+
+### GetAuthPassOk
+
+`func (o *RuleAuthRequest) GetAuthPassOk() (*string, bool)`
+
+GetAuthPassOk returns a tuple with the AuthPass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthPass
+
+`func (o *RuleAuthRequest) SetAuthPass(v string)`
+
+SetAuthPass sets AuthPass field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

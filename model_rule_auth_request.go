@@ -21,8 +21,6 @@ var _ MappedNullable = &RuleAuthRequest{}
 
 // RuleAuthRequest struct for RuleAuthRequest
 type RuleAuthRequest struct {
-	AuthUser string `json:"auth_user"`
-	AuthPass string `json:"auth_pass"`
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
@@ -35,6 +33,8 @@ type RuleAuthRequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	AuthUser string `json:"auth_user"`
+	AuthPass string `json:"auth_pass"`
 }
 
 type _RuleAuthRequest RuleAuthRequest
@@ -43,10 +43,12 @@ type _RuleAuthRequest RuleAuthRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleAuthRequest(authUser string, authPass string, domain string, disabled bool) *RuleAuthRequest {
+func NewRuleAuthRequest(domain string, disabled bool, authUser string, authPass string) *RuleAuthRequest {
 	this := RuleAuthRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	this.AuthUser = authUser
+	this.AuthPass = authPass
 	return &this
 }
 
@@ -60,54 +62,6 @@ func NewRuleAuthRequestWithDefaults() *RuleAuthRequest {
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
-}
-
-// GetAuthUser returns the AuthUser field value
-func (o *RuleAuthRequest) GetAuthUser() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AuthUser
-}
-
-// GetAuthUserOk returns a tuple with the AuthUser field value
-// and a boolean to check if the value has been set.
-func (o *RuleAuthRequest) GetAuthUserOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AuthUser, true
-}
-
-// SetAuthUser sets field value
-func (o *RuleAuthRequest) SetAuthUser(v string) {
-	o.AuthUser = v
-}
-
-// GetAuthPass returns the AuthPass field value
-func (o *RuleAuthRequest) GetAuthPass() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AuthPass
-}
-
-// GetAuthPassOk returns a tuple with the AuthPass field value
-// and a boolean to check if the value has been set.
-func (o *RuleAuthRequest) GetAuthPassOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AuthPass, true
-}
-
-// SetAuthPass sets field value
-func (o *RuleAuthRequest) SetAuthPass(v string) {
-	o.AuthPass = v
 }
 
 // GetDomain returns the Domain field value
@@ -478,6 +432,54 @@ func (o *RuleAuthRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetAuthUser returns the AuthUser field value
+func (o *RuleAuthRequest) GetAuthUser() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AuthUser
+}
+
+// GetAuthUserOk returns a tuple with the AuthUser field value
+// and a boolean to check if the value has been set.
+func (o *RuleAuthRequest) GetAuthUserOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AuthUser, true
+}
+
+// SetAuthUser sets field value
+func (o *RuleAuthRequest) SetAuthUser(v string) {
+	o.AuthUser = v
+}
+
+// GetAuthPass returns the AuthPass field value
+func (o *RuleAuthRequest) GetAuthPass() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AuthPass
+}
+
+// GetAuthPassOk returns a tuple with the AuthPass field value
+// and a boolean to check if the value has been set.
+func (o *RuleAuthRequest) GetAuthPassOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AuthPass, true
+}
+
+// SetAuthPass sets field value
+func (o *RuleAuthRequest) SetAuthPass(v string) {
+	o.AuthPass = v
+}
+
 func (o RuleAuthRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -488,8 +490,6 @@ func (o RuleAuthRequest) MarshalJSON() ([]byte, error) {
 
 func (o RuleAuthRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["auth_user"] = o.AuthUser
-	toSerialize["auth_pass"] = o.AuthPass
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -522,6 +522,8 @@ func (o RuleAuthRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
+	toSerialize["auth_user"] = o.AuthUser
+	toSerialize["auth_pass"] = o.AuthPass
 	return toSerialize, nil
 }
 
@@ -530,10 +532,10 @@ func (o *RuleAuthRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"auth_user",
-		"auth_pass",
 		"domain",
 		"disabled",
+		"auth_user",
+		"auth_pass",
 	}
 
 	allProperties := make(map[string]interface{})

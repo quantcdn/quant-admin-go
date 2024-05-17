@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Headers** | **map[string]interface{}** |  | 
+**Headers** | **map[string]string** |  | 
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewRuleHeaderRequest
 
-`func NewRuleHeaderRequest(headers map[string]interface{}, domain string, disabled bool, ) *RuleHeaderRequest`
+`func NewRuleHeaderRequest(headers map[string]string, domain string, disabled bool, ) *RuleHeaderRequest`
 
 NewRuleHeaderRequest instantiates a new RuleHeaderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -39,20 +39,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetHeaders
 
-`func (o *RuleHeaderRequest) GetHeaders() map[string]interface{}`
+`func (o *RuleHeaderRequest) GetHeaders() map[string]string`
 
 GetHeaders returns the Headers field if non-nil, zero value otherwise.
 
 ### GetHeadersOk
 
-`func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]interface{}, bool)`
+`func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]string, bool)`
 
 GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHeaders
 
-`func (o *RuleHeaderRequest) SetHeaders(v map[string]interface{})`
+`func (o *RuleHeaderRequest) SetHeaders(v map[string]string)`
 
 SetHeaders sets Headers field to given value.
 

@@ -21,7 +21,7 @@ var _ MappedNullable = &RuleHeaderRequest{}
 
 // RuleHeaderRequest struct for RuleHeaderRequest
 type RuleHeaderRequest struct {
-	Headers map[string]interface{} `json:"headers"`
+	Headers map[string]string `json:"headers"`
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
@@ -42,7 +42,7 @@ type _RuleHeaderRequest RuleHeaderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleHeaderRequest(headers map[string]interface{}, domain string, disabled bool) *RuleHeaderRequest {
+func NewRuleHeaderRequest(headers map[string]string, domain string, disabled bool) *RuleHeaderRequest {
 	this := RuleHeaderRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -62,9 +62,9 @@ func NewRuleHeaderRequestWithDefaults() *RuleHeaderRequest {
 }
 
 // GetHeaders returns the Headers field value
-func (o *RuleHeaderRequest) GetHeaders() map[string]interface{} {
+func (o *RuleHeaderRequest) GetHeaders() map[string]string {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret map[string]string
 		return ret
 	}
 
@@ -73,15 +73,15 @@ func (o *RuleHeaderRequest) GetHeaders() map[string]interface{} {
 
 // GetHeadersOk returns a tuple with the Headers field value
 // and a boolean to check if the value has been set.
-func (o *RuleHeaderRequest) GetHeadersOk() (map[string]interface{}, bool) {
+func (o *RuleHeaderRequest) GetHeadersOk() (*map[string]string, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Headers, true
+	return &o.Headers, true
 }
 
 // SetHeaders sets field value
-func (o *RuleHeaderRequest) SetHeaders(v map[string]interface{}) {
+func (o *RuleHeaderRequest) SetHeaders(v map[string]string) {
 	o.Headers = v
 }
 
