@@ -11,12 +11,13 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** |  | [optional] 
 **ProjectType** | Pointer to **string** |  | [optional] [default to "normal"]
 **GitUrl** | Pointer to **string** |  | [optional] 
-**SecurityScore** | Pointer to **int32** |  | [optional] 
+**SecurityScore** | Pointer to **string** |  | [optional] 
 **ParentProjectId** | Pointer to **int32** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
 **DeletedAt** | Pointer to **string** |  | [optional] 
+**FastlyMigrated** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -204,20 +205,20 @@ HasGitUrl returns a boolean if a field has been set.
 
 ### GetSecurityScore
 
-`func (o *Project) GetSecurityScore() int32`
+`func (o *Project) GetSecurityScore() string`
 
 GetSecurityScore returns the SecurityScore field if non-nil, zero value otherwise.
 
 ### GetSecurityScoreOk
 
-`func (o *Project) GetSecurityScoreOk() (*int32, bool)`
+`func (o *Project) GetSecurityScoreOk() (*string, bool)`
 
 GetSecurityScoreOk returns a tuple with the SecurityScore field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSecurityScore
 
-`func (o *Project) SetSecurityScore(v int32)`
+`func (o *Project) SetSecurityScore(v string)`
 
 SetSecurityScore sets SecurityScore field to given value.
 
@@ -351,6 +352,31 @@ SetDeletedAt sets DeletedAt field to given value.
 `func (o *Project) HasDeletedAt() bool`
 
 HasDeletedAt returns a boolean if a field has been set.
+
+### GetFastlyMigrated
+
+`func (o *Project) GetFastlyMigrated() int32`
+
+GetFastlyMigrated returns the FastlyMigrated field if non-nil, zero value otherwise.
+
+### GetFastlyMigratedOk
+
+`func (o *Project) GetFastlyMigratedOk() (*int32, bool)`
+
+GetFastlyMigratedOk returns a tuple with the FastlyMigrated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFastlyMigrated
+
+`func (o *Project) SetFastlyMigrated(v int32)`
+
+SetFastlyMigrated sets FastlyMigrated field to given value.
+
+### HasFastlyMigrated
+
+`func (o *Project) HasFastlyMigrated() bool`
+
+HasFastlyMigrated returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

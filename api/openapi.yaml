@@ -1881,6 +1881,7 @@ components:
     Project:
       example:
         project_type: normal
+        fastly_migrated: 5
         created_at: created_at
         machine_name: machine_name
         uuid: uuid
@@ -1888,10 +1889,10 @@ components:
         updated_at: updated_at
         organization_id: 6
         name: name
-        security_score: 1
+        security_score: security_score
         id: 0
         git_url: git_url
-        parent_project_id: 5
+        parent_project_id: 1
         region: region
       properties:
         id:
@@ -1911,12 +1912,12 @@ components:
           enum:
           - normal
           - opensource
+          - quant
           type: string
         git_url:
           type: string
         security_score:
-          format: int32
-          type: integer
+          type: string
         parent_project_id:
           format: int32
           type: integer
@@ -1928,6 +1929,9 @@ components:
           type: string
         deleted_at:
           type: string
+        fastly_migrated:
+          format: int32
+          type: integer
       required:
       - machine_name
       - name

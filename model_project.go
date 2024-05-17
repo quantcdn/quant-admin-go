@@ -28,12 +28,13 @@ type Project struct {
 	Uuid *string `json:"uuid,omitempty"`
 	ProjectType *string `json:"project_type,omitempty"`
 	GitUrl *string `json:"git_url,omitempty"`
-	SecurityScore *int32 `json:"security_score,omitempty"`
+	SecurityScore *string `json:"security_score,omitempty"`
 	ParentProjectId *int32 `json:"parent_project_id,omitempty"`
 	Region *string `json:"region,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
+	FastlyMigrated *int32 `json:"fastly_migrated,omitempty"`
 }
 
 type _Project Project
@@ -270,9 +271,9 @@ func (o *Project) SetGitUrl(v string) {
 }
 
 // GetSecurityScore returns the SecurityScore field value if set, zero value otherwise.
-func (o *Project) GetSecurityScore() int32 {
+func (o *Project) GetSecurityScore() string {
 	if o == nil || IsNil(o.SecurityScore) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.SecurityScore
@@ -280,7 +281,7 @@ func (o *Project) GetSecurityScore() int32 {
 
 // GetSecurityScoreOk returns a tuple with the SecurityScore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetSecurityScoreOk() (*int32, bool) {
+func (o *Project) GetSecurityScoreOk() (*string, bool) {
 	if o == nil || IsNil(o.SecurityScore) {
 		return nil, false
 	}
@@ -296,8 +297,8 @@ func (o *Project) HasSecurityScore() bool {
 	return false
 }
 
-// SetSecurityScore gets a reference to the given int32 and assigns it to the SecurityScore field.
-func (o *Project) SetSecurityScore(v int32) {
+// SetSecurityScore gets a reference to the given string and assigns it to the SecurityScore field.
+func (o *Project) SetSecurityScore(v string) {
 	o.SecurityScore = &v
 }
 
@@ -461,6 +462,38 @@ func (o *Project) SetDeletedAt(v string) {
 	o.DeletedAt = &v
 }
 
+// GetFastlyMigrated returns the FastlyMigrated field value if set, zero value otherwise.
+func (o *Project) GetFastlyMigrated() int32 {
+	if o == nil || IsNil(o.FastlyMigrated) {
+		var ret int32
+		return ret
+	}
+	return *o.FastlyMigrated
+}
+
+// GetFastlyMigratedOk returns a tuple with the FastlyMigrated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Project) GetFastlyMigratedOk() (*int32, bool) {
+	if o == nil || IsNil(o.FastlyMigrated) {
+		return nil, false
+	}
+	return o.FastlyMigrated, true
+}
+
+// HasFastlyMigrated returns a boolean if a field has been set.
+func (o *Project) HasFastlyMigrated() bool {
+	if o != nil && !IsNil(o.FastlyMigrated) {
+		return true
+	}
+
+	return false
+}
+
+// SetFastlyMigrated gets a reference to the given int32 and assigns it to the FastlyMigrated field.
+func (o *Project) SetFastlyMigrated(v int32) {
+	o.FastlyMigrated = &v
+}
+
 func (o Project) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -505,6 +538,9 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DeletedAt) {
 		toSerialize["deleted_at"] = o.DeletedAt
+	}
+	if !IsNil(o.FastlyMigrated) {
+		toSerialize["fastly_migrated"] = o.FastlyMigrated
 	}
 	return toSerialize, nil
 }
