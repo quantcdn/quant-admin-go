@@ -5,16 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **HttpblEnabled** | **bool** |  | [default to false]
+**ApiKey** | Pointer to **string** |  | [optional] 
 **BlockSuspicious** | **bool** |  | [default to false]
 **BlockHarvester** | **bool** |  | [default to false]
 **BlockSpam** | **bool** |  | [default to false]
-**BlockSearchEnginer** | **bool** |  | [default to false]
+**BlockSearchEngine** | **bool** |  | [default to false]
 
 ## Methods
 
 ### NewProxyConfigHttpbl
 
-`func NewProxyConfigHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, blockSpam bool, blockSearchEnginer bool, ) *ProxyConfigHttpbl`
+`func NewProxyConfigHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, blockSpam bool, blockSearchEngine bool, ) *ProxyConfigHttpbl`
 
 NewProxyConfigHttpbl instantiates a new ProxyConfigHttpbl object
 This constructor will assign default values to properties that have it defined,
@@ -48,6 +49,31 @@ and a boolean to check if the value has been set.
 
 SetHttpblEnabled sets HttpblEnabled field to given value.
 
+
+### GetApiKey
+
+`func (o *ProxyConfigHttpbl) GetApiKey() string`
+
+GetApiKey returns the ApiKey field if non-nil, zero value otherwise.
+
+### GetApiKeyOk
+
+`func (o *ProxyConfigHttpbl) GetApiKeyOk() (*string, bool)`
+
+GetApiKeyOk returns a tuple with the ApiKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiKey
+
+`func (o *ProxyConfigHttpbl) SetApiKey(v string)`
+
+SetApiKey sets ApiKey field to given value.
+
+### HasApiKey
+
+`func (o *ProxyConfigHttpbl) HasApiKey() bool`
+
+HasApiKey returns a boolean if a field has been set.
 
 ### GetBlockSuspicious
 
@@ -109,24 +135,24 @@ and a boolean to check if the value has been set.
 SetBlockSpam sets BlockSpam field to given value.
 
 
-### GetBlockSearchEnginer
+### GetBlockSearchEngine
 
-`func (o *ProxyConfigHttpbl) GetBlockSearchEnginer() bool`
+`func (o *ProxyConfigHttpbl) GetBlockSearchEngine() bool`
 
-GetBlockSearchEnginer returns the BlockSearchEnginer field if non-nil, zero value otherwise.
+GetBlockSearchEngine returns the BlockSearchEngine field if non-nil, zero value otherwise.
 
-### GetBlockSearchEnginerOk
+### GetBlockSearchEngineOk
 
-`func (o *ProxyConfigHttpbl) GetBlockSearchEnginerOk() (*bool, bool)`
+`func (o *ProxyConfigHttpbl) GetBlockSearchEngineOk() (*bool, bool)`
 
-GetBlockSearchEnginerOk returns a tuple with the BlockSearchEnginer field if it's non-nil, zero value otherwise
+GetBlockSearchEngineOk returns a tuple with the BlockSearchEngine field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBlockSearchEnginer
+### SetBlockSearchEngine
 
-`func (o *ProxyConfigHttpbl) SetBlockSearchEnginer(v bool)`
+`func (o *ProxyConfigHttpbl) SetBlockSearchEngine(v bool)`
 
-SetBlockSearchEnginer sets BlockSearchEnginer field to given value.
+SetBlockSearchEngine sets BlockSearchEngine field to given value.
 
 
 

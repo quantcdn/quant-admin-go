@@ -11,25 +11,29 @@ Name | Type | Description | Notes
 **BlockIp** | Pointer to **[]string** |  | [optional] 
 **BlockUa** | Pointer to **[]string** |  | [optional] 
 **BlockReferer** | Pointer to **[]string** |  | [optional] 
+**BlockBadBots** | Pointer to **bool** |  | [optional] [default to false]
+**BlockBadReferers** | Pointer to **bool** |  | [optional] [default to false]
+**BlockBadIps** | Pointer to **bool** |  | [optional] [default to false]
+**Httpbl** | Pointer to [**ProxyConfigHttpbl**](ProxyConfigHttpbl.md) |  | [optional] 
+**IpRatelimitMode** | Pointer to **string** |  | [optional] [default to "disabled"]
+**IpRatelimitRps** | Pointer to **int32** |  | [optional] [default to 5]
+**IpRatelimitCooldown** | Pointer to **int32** |  | [optional] [default to 30]
+**RequestHeaderRatelimitMode** | Pointer to **string** |  | [optional] [default to "disabled"]
+**RequestHeaderName** | Pointer to **string** |  | [optional] 
+**RequestHeaderRatelimitRps** | Pointer to **int32** |  | [optional] [default to 5]
+**RequestHeaderRatelimitCooldown** | Pointer to **int32** |  | [optional] [default to 30]
+**WafRatelimitMode** | Pointer to **string** |  | [optional] [default to "disabled"]
+**WafRatelimitHits** | Pointer to **int32** |  | [optional] [default to 10]
+**WafRatelimitRps** | Pointer to **int32** |  | [optional] [default to 5]
+**WafRatelimitCooldown** | Pointer to **int32** |  | [optional] [default to 300]
 **NotifySlack** | Pointer to **string** |  | [optional] 
 **NotifySlackHistRpm** | Pointer to **int32** |  | [optional] 
-**NotifyEmail** | **string** |  | 
-**Httpbl** | Pointer to [**ProxyConfigHttpbl**](ProxyConfigHttpbl.md) |  | [optional] 
-**ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
-**OriginTimeout** | **int32** |  | [default to 30]
-**FailoverMode** | Pointer to **bool** |  | [optional] 
-**FailoverOriginTtfb** | Pointer to **int32** |  | [optional] 
-**FailoverOriginStatusCode** | Pointer to **int32** |  | [optional] 
-**FailoverLifetime** | Pointer to **int32** |  | [optional] 
-**Notify** | Pointer to **string** |  | [optional] 
-**NotifyConfig** | Pointer to [**ProxyNotifyConfig**](ProxyNotifyConfig.md) |  | [optional] 
-**InjectHeaders** | **[]string** |  | 
 
 ## Methods
 
 ### NewRuleWAFConfig
 
-`func NewRuleWAFConfig(mode string, notifyEmail string, originTimeout int32, injectHeaders []string, ) *RuleWAFConfig`
+`func NewRuleWAFConfig(mode string, ) *RuleWAFConfig`
 
 NewRuleWAFConfig instantiates a new RuleWAFConfig object
 This constructor will assign default values to properties that have it defined,
@@ -214,6 +218,381 @@ SetBlockReferer sets BlockReferer field to given value.
 
 HasBlockReferer returns a boolean if a field has been set.
 
+### GetBlockBadBots
+
+`func (o *RuleWAFConfig) GetBlockBadBots() bool`
+
+GetBlockBadBots returns the BlockBadBots field if non-nil, zero value otherwise.
+
+### GetBlockBadBotsOk
+
+`func (o *RuleWAFConfig) GetBlockBadBotsOk() (*bool, bool)`
+
+GetBlockBadBotsOk returns a tuple with the BlockBadBots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlockBadBots
+
+`func (o *RuleWAFConfig) SetBlockBadBots(v bool)`
+
+SetBlockBadBots sets BlockBadBots field to given value.
+
+### HasBlockBadBots
+
+`func (o *RuleWAFConfig) HasBlockBadBots() bool`
+
+HasBlockBadBots returns a boolean if a field has been set.
+
+### GetBlockBadReferers
+
+`func (o *RuleWAFConfig) GetBlockBadReferers() bool`
+
+GetBlockBadReferers returns the BlockBadReferers field if non-nil, zero value otherwise.
+
+### GetBlockBadReferersOk
+
+`func (o *RuleWAFConfig) GetBlockBadReferersOk() (*bool, bool)`
+
+GetBlockBadReferersOk returns a tuple with the BlockBadReferers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlockBadReferers
+
+`func (o *RuleWAFConfig) SetBlockBadReferers(v bool)`
+
+SetBlockBadReferers sets BlockBadReferers field to given value.
+
+### HasBlockBadReferers
+
+`func (o *RuleWAFConfig) HasBlockBadReferers() bool`
+
+HasBlockBadReferers returns a boolean if a field has been set.
+
+### GetBlockBadIps
+
+`func (o *RuleWAFConfig) GetBlockBadIps() bool`
+
+GetBlockBadIps returns the BlockBadIps field if non-nil, zero value otherwise.
+
+### GetBlockBadIpsOk
+
+`func (o *RuleWAFConfig) GetBlockBadIpsOk() (*bool, bool)`
+
+GetBlockBadIpsOk returns a tuple with the BlockBadIps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBlockBadIps
+
+`func (o *RuleWAFConfig) SetBlockBadIps(v bool)`
+
+SetBlockBadIps sets BlockBadIps field to given value.
+
+### HasBlockBadIps
+
+`func (o *RuleWAFConfig) HasBlockBadIps() bool`
+
+HasBlockBadIps returns a boolean if a field has been set.
+
+### GetHttpbl
+
+`func (o *RuleWAFConfig) GetHttpbl() ProxyConfigHttpbl`
+
+GetHttpbl returns the Httpbl field if non-nil, zero value otherwise.
+
+### GetHttpblOk
+
+`func (o *RuleWAFConfig) GetHttpblOk() (*ProxyConfigHttpbl, bool)`
+
+GetHttpblOk returns a tuple with the Httpbl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpbl
+
+`func (o *RuleWAFConfig) SetHttpbl(v ProxyConfigHttpbl)`
+
+SetHttpbl sets Httpbl field to given value.
+
+### HasHttpbl
+
+`func (o *RuleWAFConfig) HasHttpbl() bool`
+
+HasHttpbl returns a boolean if a field has been set.
+
+### GetIpRatelimitMode
+
+`func (o *RuleWAFConfig) GetIpRatelimitMode() string`
+
+GetIpRatelimitMode returns the IpRatelimitMode field if non-nil, zero value otherwise.
+
+### GetIpRatelimitModeOk
+
+`func (o *RuleWAFConfig) GetIpRatelimitModeOk() (*string, bool)`
+
+GetIpRatelimitModeOk returns a tuple with the IpRatelimitMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpRatelimitMode
+
+`func (o *RuleWAFConfig) SetIpRatelimitMode(v string)`
+
+SetIpRatelimitMode sets IpRatelimitMode field to given value.
+
+### HasIpRatelimitMode
+
+`func (o *RuleWAFConfig) HasIpRatelimitMode() bool`
+
+HasIpRatelimitMode returns a boolean if a field has been set.
+
+### GetIpRatelimitRps
+
+`func (o *RuleWAFConfig) GetIpRatelimitRps() int32`
+
+GetIpRatelimitRps returns the IpRatelimitRps field if non-nil, zero value otherwise.
+
+### GetIpRatelimitRpsOk
+
+`func (o *RuleWAFConfig) GetIpRatelimitRpsOk() (*int32, bool)`
+
+GetIpRatelimitRpsOk returns a tuple with the IpRatelimitRps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpRatelimitRps
+
+`func (o *RuleWAFConfig) SetIpRatelimitRps(v int32)`
+
+SetIpRatelimitRps sets IpRatelimitRps field to given value.
+
+### HasIpRatelimitRps
+
+`func (o *RuleWAFConfig) HasIpRatelimitRps() bool`
+
+HasIpRatelimitRps returns a boolean if a field has been set.
+
+### GetIpRatelimitCooldown
+
+`func (o *RuleWAFConfig) GetIpRatelimitCooldown() int32`
+
+GetIpRatelimitCooldown returns the IpRatelimitCooldown field if non-nil, zero value otherwise.
+
+### GetIpRatelimitCooldownOk
+
+`func (o *RuleWAFConfig) GetIpRatelimitCooldownOk() (*int32, bool)`
+
+GetIpRatelimitCooldownOk returns a tuple with the IpRatelimitCooldown field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpRatelimitCooldown
+
+`func (o *RuleWAFConfig) SetIpRatelimitCooldown(v int32)`
+
+SetIpRatelimitCooldown sets IpRatelimitCooldown field to given value.
+
+### HasIpRatelimitCooldown
+
+`func (o *RuleWAFConfig) HasIpRatelimitCooldown() bool`
+
+HasIpRatelimitCooldown returns a boolean if a field has been set.
+
+### GetRequestHeaderRatelimitMode
+
+`func (o *RuleWAFConfig) GetRequestHeaderRatelimitMode() string`
+
+GetRequestHeaderRatelimitMode returns the RequestHeaderRatelimitMode field if non-nil, zero value otherwise.
+
+### GetRequestHeaderRatelimitModeOk
+
+`func (o *RuleWAFConfig) GetRequestHeaderRatelimitModeOk() (*string, bool)`
+
+GetRequestHeaderRatelimitModeOk returns a tuple with the RequestHeaderRatelimitMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestHeaderRatelimitMode
+
+`func (o *RuleWAFConfig) SetRequestHeaderRatelimitMode(v string)`
+
+SetRequestHeaderRatelimitMode sets RequestHeaderRatelimitMode field to given value.
+
+### HasRequestHeaderRatelimitMode
+
+`func (o *RuleWAFConfig) HasRequestHeaderRatelimitMode() bool`
+
+HasRequestHeaderRatelimitMode returns a boolean if a field has been set.
+
+### GetRequestHeaderName
+
+`func (o *RuleWAFConfig) GetRequestHeaderName() string`
+
+GetRequestHeaderName returns the RequestHeaderName field if non-nil, zero value otherwise.
+
+### GetRequestHeaderNameOk
+
+`func (o *RuleWAFConfig) GetRequestHeaderNameOk() (*string, bool)`
+
+GetRequestHeaderNameOk returns a tuple with the RequestHeaderName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestHeaderName
+
+`func (o *RuleWAFConfig) SetRequestHeaderName(v string)`
+
+SetRequestHeaderName sets RequestHeaderName field to given value.
+
+### HasRequestHeaderName
+
+`func (o *RuleWAFConfig) HasRequestHeaderName() bool`
+
+HasRequestHeaderName returns a boolean if a field has been set.
+
+### GetRequestHeaderRatelimitRps
+
+`func (o *RuleWAFConfig) GetRequestHeaderRatelimitRps() int32`
+
+GetRequestHeaderRatelimitRps returns the RequestHeaderRatelimitRps field if non-nil, zero value otherwise.
+
+### GetRequestHeaderRatelimitRpsOk
+
+`func (o *RuleWAFConfig) GetRequestHeaderRatelimitRpsOk() (*int32, bool)`
+
+GetRequestHeaderRatelimitRpsOk returns a tuple with the RequestHeaderRatelimitRps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestHeaderRatelimitRps
+
+`func (o *RuleWAFConfig) SetRequestHeaderRatelimitRps(v int32)`
+
+SetRequestHeaderRatelimitRps sets RequestHeaderRatelimitRps field to given value.
+
+### HasRequestHeaderRatelimitRps
+
+`func (o *RuleWAFConfig) HasRequestHeaderRatelimitRps() bool`
+
+HasRequestHeaderRatelimitRps returns a boolean if a field has been set.
+
+### GetRequestHeaderRatelimitCooldown
+
+`func (o *RuleWAFConfig) GetRequestHeaderRatelimitCooldown() int32`
+
+GetRequestHeaderRatelimitCooldown returns the RequestHeaderRatelimitCooldown field if non-nil, zero value otherwise.
+
+### GetRequestHeaderRatelimitCooldownOk
+
+`func (o *RuleWAFConfig) GetRequestHeaderRatelimitCooldownOk() (*int32, bool)`
+
+GetRequestHeaderRatelimitCooldownOk returns a tuple with the RequestHeaderRatelimitCooldown field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestHeaderRatelimitCooldown
+
+`func (o *RuleWAFConfig) SetRequestHeaderRatelimitCooldown(v int32)`
+
+SetRequestHeaderRatelimitCooldown sets RequestHeaderRatelimitCooldown field to given value.
+
+### HasRequestHeaderRatelimitCooldown
+
+`func (o *RuleWAFConfig) HasRequestHeaderRatelimitCooldown() bool`
+
+HasRequestHeaderRatelimitCooldown returns a boolean if a field has been set.
+
+### GetWafRatelimitMode
+
+`func (o *RuleWAFConfig) GetWafRatelimitMode() string`
+
+GetWafRatelimitMode returns the WafRatelimitMode field if non-nil, zero value otherwise.
+
+### GetWafRatelimitModeOk
+
+`func (o *RuleWAFConfig) GetWafRatelimitModeOk() (*string, bool)`
+
+GetWafRatelimitModeOk returns a tuple with the WafRatelimitMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWafRatelimitMode
+
+`func (o *RuleWAFConfig) SetWafRatelimitMode(v string)`
+
+SetWafRatelimitMode sets WafRatelimitMode field to given value.
+
+### HasWafRatelimitMode
+
+`func (o *RuleWAFConfig) HasWafRatelimitMode() bool`
+
+HasWafRatelimitMode returns a boolean if a field has been set.
+
+### GetWafRatelimitHits
+
+`func (o *RuleWAFConfig) GetWafRatelimitHits() int32`
+
+GetWafRatelimitHits returns the WafRatelimitHits field if non-nil, zero value otherwise.
+
+### GetWafRatelimitHitsOk
+
+`func (o *RuleWAFConfig) GetWafRatelimitHitsOk() (*int32, bool)`
+
+GetWafRatelimitHitsOk returns a tuple with the WafRatelimitHits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWafRatelimitHits
+
+`func (o *RuleWAFConfig) SetWafRatelimitHits(v int32)`
+
+SetWafRatelimitHits sets WafRatelimitHits field to given value.
+
+### HasWafRatelimitHits
+
+`func (o *RuleWAFConfig) HasWafRatelimitHits() bool`
+
+HasWafRatelimitHits returns a boolean if a field has been set.
+
+### GetWafRatelimitRps
+
+`func (o *RuleWAFConfig) GetWafRatelimitRps() int32`
+
+GetWafRatelimitRps returns the WafRatelimitRps field if non-nil, zero value otherwise.
+
+### GetWafRatelimitRpsOk
+
+`func (o *RuleWAFConfig) GetWafRatelimitRpsOk() (*int32, bool)`
+
+GetWafRatelimitRpsOk returns a tuple with the WafRatelimitRps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWafRatelimitRps
+
+`func (o *RuleWAFConfig) SetWafRatelimitRps(v int32)`
+
+SetWafRatelimitRps sets WafRatelimitRps field to given value.
+
+### HasWafRatelimitRps
+
+`func (o *RuleWAFConfig) HasWafRatelimitRps() bool`
+
+HasWafRatelimitRps returns a boolean if a field has been set.
+
+### GetWafRatelimitCooldown
+
+`func (o *RuleWAFConfig) GetWafRatelimitCooldown() int32`
+
+GetWafRatelimitCooldown returns the WafRatelimitCooldown field if non-nil, zero value otherwise.
+
+### GetWafRatelimitCooldownOk
+
+`func (o *RuleWAFConfig) GetWafRatelimitCooldownOk() (*int32, bool)`
+
+GetWafRatelimitCooldownOk returns a tuple with the WafRatelimitCooldown field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWafRatelimitCooldown
+
+`func (o *RuleWAFConfig) SetWafRatelimitCooldown(v int32)`
+
+SetWafRatelimitCooldown sets WafRatelimitCooldown field to given value.
+
+### HasWafRatelimitCooldown
+
+`func (o *RuleWAFConfig) HasWafRatelimitCooldown() bool`
+
+HasWafRatelimitCooldown returns a boolean if a field has been set.
+
 ### GetNotifySlack
 
 `func (o *RuleWAFConfig) GetNotifySlack() string`
@@ -263,266 +642,6 @@ SetNotifySlackHistRpm sets NotifySlackHistRpm field to given value.
 `func (o *RuleWAFConfig) HasNotifySlackHistRpm() bool`
 
 HasNotifySlackHistRpm returns a boolean if a field has been set.
-
-### GetNotifyEmail
-
-`func (o *RuleWAFConfig) GetNotifyEmail() string`
-
-GetNotifyEmail returns the NotifyEmail field if non-nil, zero value otherwise.
-
-### GetNotifyEmailOk
-
-`func (o *RuleWAFConfig) GetNotifyEmailOk() (*string, bool)`
-
-GetNotifyEmailOk returns a tuple with the NotifyEmail field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotifyEmail
-
-`func (o *RuleWAFConfig) SetNotifyEmail(v string)`
-
-SetNotifyEmail sets NotifyEmail field to given value.
-
-
-### GetHttpbl
-
-`func (o *RuleWAFConfig) GetHttpbl() ProxyConfigHttpbl`
-
-GetHttpbl returns the Httpbl field if non-nil, zero value otherwise.
-
-### GetHttpblOk
-
-`func (o *RuleWAFConfig) GetHttpblOk() (*ProxyConfigHttpbl, bool)`
-
-GetHttpblOk returns a tuple with the Httpbl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpbl
-
-`func (o *RuleWAFConfig) SetHttpbl(v ProxyConfigHttpbl)`
-
-SetHttpbl sets Httpbl field to given value.
-
-### HasHttpbl
-
-`func (o *RuleWAFConfig) HasHttpbl() bool`
-
-HasHttpbl returns a boolean if a field has been set.
-
-### GetProxyAlertEnabled
-
-`func (o *RuleWAFConfig) GetProxyAlertEnabled() bool`
-
-GetProxyAlertEnabled returns the ProxyAlertEnabled field if non-nil, zero value otherwise.
-
-### GetProxyAlertEnabledOk
-
-`func (o *RuleWAFConfig) GetProxyAlertEnabledOk() (*bool, bool)`
-
-GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProxyAlertEnabled
-
-`func (o *RuleWAFConfig) SetProxyAlertEnabled(v bool)`
-
-SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
-
-### HasProxyAlertEnabled
-
-`func (o *RuleWAFConfig) HasProxyAlertEnabled() bool`
-
-HasProxyAlertEnabled returns a boolean if a field has been set.
-
-### GetOriginTimeout
-
-`func (o *RuleWAFConfig) GetOriginTimeout() int32`
-
-GetOriginTimeout returns the OriginTimeout field if non-nil, zero value otherwise.
-
-### GetOriginTimeoutOk
-
-`func (o *RuleWAFConfig) GetOriginTimeoutOk() (*int32, bool)`
-
-GetOriginTimeoutOk returns a tuple with the OriginTimeout field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOriginTimeout
-
-`func (o *RuleWAFConfig) SetOriginTimeout(v int32)`
-
-SetOriginTimeout sets OriginTimeout field to given value.
-
-
-### GetFailoverMode
-
-`func (o *RuleWAFConfig) GetFailoverMode() bool`
-
-GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
-
-### GetFailoverModeOk
-
-`func (o *RuleWAFConfig) GetFailoverModeOk() (*bool, bool)`
-
-GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverMode
-
-`func (o *RuleWAFConfig) SetFailoverMode(v bool)`
-
-SetFailoverMode sets FailoverMode field to given value.
-
-### HasFailoverMode
-
-`func (o *RuleWAFConfig) HasFailoverMode() bool`
-
-HasFailoverMode returns a boolean if a field has been set.
-
-### GetFailoverOriginTtfb
-
-`func (o *RuleWAFConfig) GetFailoverOriginTtfb() int32`
-
-GetFailoverOriginTtfb returns the FailoverOriginTtfb field if non-nil, zero value otherwise.
-
-### GetFailoverOriginTtfbOk
-
-`func (o *RuleWAFConfig) GetFailoverOriginTtfbOk() (*int32, bool)`
-
-GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverOriginTtfb
-
-`func (o *RuleWAFConfig) SetFailoverOriginTtfb(v int32)`
-
-SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
-
-### HasFailoverOriginTtfb
-
-`func (o *RuleWAFConfig) HasFailoverOriginTtfb() bool`
-
-HasFailoverOriginTtfb returns a boolean if a field has been set.
-
-### GetFailoverOriginStatusCode
-
-`func (o *RuleWAFConfig) GetFailoverOriginStatusCode() int32`
-
-GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field if non-nil, zero value otherwise.
-
-### GetFailoverOriginStatusCodeOk
-
-`func (o *RuleWAFConfig) GetFailoverOriginStatusCodeOk() (*int32, bool)`
-
-GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverOriginStatusCode
-
-`func (o *RuleWAFConfig) SetFailoverOriginStatusCode(v int32)`
-
-SetFailoverOriginStatusCode sets FailoverOriginStatusCode field to given value.
-
-### HasFailoverOriginStatusCode
-
-`func (o *RuleWAFConfig) HasFailoverOriginStatusCode() bool`
-
-HasFailoverOriginStatusCode returns a boolean if a field has been set.
-
-### GetFailoverLifetime
-
-`func (o *RuleWAFConfig) GetFailoverLifetime() int32`
-
-GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
-
-### GetFailoverLifetimeOk
-
-`func (o *RuleWAFConfig) GetFailoverLifetimeOk() (*int32, bool)`
-
-GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverLifetime
-
-`func (o *RuleWAFConfig) SetFailoverLifetime(v int32)`
-
-SetFailoverLifetime sets FailoverLifetime field to given value.
-
-### HasFailoverLifetime
-
-`func (o *RuleWAFConfig) HasFailoverLifetime() bool`
-
-HasFailoverLifetime returns a boolean if a field has been set.
-
-### GetNotify
-
-`func (o *RuleWAFConfig) GetNotify() string`
-
-GetNotify returns the Notify field if non-nil, zero value otherwise.
-
-### GetNotifyOk
-
-`func (o *RuleWAFConfig) GetNotifyOk() (*string, bool)`
-
-GetNotifyOk returns a tuple with the Notify field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotify
-
-`func (o *RuleWAFConfig) SetNotify(v string)`
-
-SetNotify sets Notify field to given value.
-
-### HasNotify
-
-`func (o *RuleWAFConfig) HasNotify() bool`
-
-HasNotify returns a boolean if a field has been set.
-
-### GetNotifyConfig
-
-`func (o *RuleWAFConfig) GetNotifyConfig() ProxyNotifyConfig`
-
-GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
-
-### GetNotifyConfigOk
-
-`func (o *RuleWAFConfig) GetNotifyConfigOk() (*ProxyNotifyConfig, bool)`
-
-GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotifyConfig
-
-`func (o *RuleWAFConfig) SetNotifyConfig(v ProxyNotifyConfig)`
-
-SetNotifyConfig sets NotifyConfig field to given value.
-
-### HasNotifyConfig
-
-`func (o *RuleWAFConfig) HasNotifyConfig() bool`
-
-HasNotifyConfig returns a boolean if a field has been set.
-
-### GetInjectHeaders
-
-`func (o *RuleWAFConfig) GetInjectHeaders() []string`
-
-GetInjectHeaders returns the InjectHeaders field if non-nil, zero value otherwise.
-
-### GetInjectHeadersOk
-
-`func (o *RuleWAFConfig) GetInjectHeadersOk() (*[]string, bool)`
-
-GetInjectHeadersOk returns a tuple with the InjectHeaders field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInjectHeaders
-
-`func (o *RuleWAFConfig) SetInjectHeaders(v []string)`
-
-SetInjectHeaders sets InjectHeaders field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

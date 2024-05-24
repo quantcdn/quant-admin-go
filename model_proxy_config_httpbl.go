@@ -22,10 +22,11 @@ var _ MappedNullable = &ProxyConfigHttpbl{}
 // ProxyConfigHttpbl struct for ProxyConfigHttpbl
 type ProxyConfigHttpbl struct {
 	HttpblEnabled bool `json:"httpbl_enabled"`
+	ApiKey *string `json:"api_key,omitempty"`
 	BlockSuspicious bool `json:"block_suspicious"`
 	BlockHarvester bool `json:"block_harvester"`
 	BlockSpam bool `json:"block_spam"`
-	BlockSearchEnginer bool `json:"block_search_enginer"`
+	BlockSearchEngine bool `json:"block_search_engine"`
 }
 
 type _ProxyConfigHttpbl ProxyConfigHttpbl
@@ -34,13 +35,13 @@ type _ProxyConfigHttpbl ProxyConfigHttpbl
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProxyConfigHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, blockSpam bool, blockSearchEnginer bool) *ProxyConfigHttpbl {
+func NewProxyConfigHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, blockSpam bool, blockSearchEngine bool) *ProxyConfigHttpbl {
 	this := ProxyConfigHttpbl{}
 	this.HttpblEnabled = httpblEnabled
 	this.BlockSuspicious = blockSuspicious
 	this.BlockHarvester = blockHarvester
 	this.BlockSpam = blockSpam
-	this.BlockSearchEnginer = blockSearchEnginer
+	this.BlockSearchEngine = blockSearchEngine
 	return &this
 }
 
@@ -57,8 +58,8 @@ func NewProxyConfigHttpblWithDefaults() *ProxyConfigHttpbl {
 	this.BlockHarvester = blockHarvester
 	var blockSpam bool = false
 	this.BlockSpam = blockSpam
-	var blockSearchEnginer bool = false
-	this.BlockSearchEnginer = blockSearchEnginer
+	var blockSearchEngine bool = false
+	this.BlockSearchEngine = blockSearchEngine
 	return &this
 }
 
@@ -84,6 +85,38 @@ func (o *ProxyConfigHttpbl) GetHttpblEnabledOk() (*bool, bool) {
 // SetHttpblEnabled sets field value
 func (o *ProxyConfigHttpbl) SetHttpblEnabled(v bool) {
 	o.HttpblEnabled = v
+}
+
+// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+func (o *ProxyConfigHttpbl) GetApiKey() string {
+	if o == nil || IsNil(o.ApiKey) {
+		var ret string
+		return ret
+	}
+	return *o.ApiKey
+}
+
+// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProxyConfigHttpbl) GetApiKeyOk() (*string, bool) {
+	if o == nil || IsNil(o.ApiKey) {
+		return nil, false
+	}
+	return o.ApiKey, true
+}
+
+// HasApiKey returns a boolean if a field has been set.
+func (o *ProxyConfigHttpbl) HasApiKey() bool {
+	if o != nil && !IsNil(o.ApiKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
+func (o *ProxyConfigHttpbl) SetApiKey(v string) {
+	o.ApiKey = &v
 }
 
 // GetBlockSuspicious returns the BlockSuspicious field value
@@ -158,28 +191,28 @@ func (o *ProxyConfigHttpbl) SetBlockSpam(v bool) {
 	o.BlockSpam = v
 }
 
-// GetBlockSearchEnginer returns the BlockSearchEnginer field value
-func (o *ProxyConfigHttpbl) GetBlockSearchEnginer() bool {
+// GetBlockSearchEngine returns the BlockSearchEngine field value
+func (o *ProxyConfigHttpbl) GetBlockSearchEngine() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.BlockSearchEnginer
+	return o.BlockSearchEngine
 }
 
-// GetBlockSearchEnginerOk returns a tuple with the BlockSearchEnginer field value
+// GetBlockSearchEngineOk returns a tuple with the BlockSearchEngine field value
 // and a boolean to check if the value has been set.
-func (o *ProxyConfigHttpbl) GetBlockSearchEnginerOk() (*bool, bool) {
+func (o *ProxyConfigHttpbl) GetBlockSearchEngineOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.BlockSearchEnginer, true
+	return &o.BlockSearchEngine, true
 }
 
-// SetBlockSearchEnginer sets field value
-func (o *ProxyConfigHttpbl) SetBlockSearchEnginer(v bool) {
-	o.BlockSearchEnginer = v
+// SetBlockSearchEngine sets field value
+func (o *ProxyConfigHttpbl) SetBlockSearchEngine(v bool) {
+	o.BlockSearchEngine = v
 }
 
 func (o ProxyConfigHttpbl) MarshalJSON() ([]byte, error) {
@@ -193,10 +226,13 @@ func (o ProxyConfigHttpbl) MarshalJSON() ([]byte, error) {
 func (o ProxyConfigHttpbl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["httpbl_enabled"] = o.HttpblEnabled
+	if !IsNil(o.ApiKey) {
+		toSerialize["api_key"] = o.ApiKey
+	}
 	toSerialize["block_suspicious"] = o.BlockSuspicious
 	toSerialize["block_harvester"] = o.BlockHarvester
 	toSerialize["block_spam"] = o.BlockSpam
-	toSerialize["block_search_enginer"] = o.BlockSearchEnginer
+	toSerialize["block_search_engine"] = o.BlockSearchEngine
 	return toSerialize, nil
 }
 
@@ -209,7 +245,7 @@ func (o *ProxyConfigHttpbl) UnmarshalJSON(data []byte) (err error) {
 		"block_suspicious",
 		"block_harvester",
 		"block_spam",
-		"block_search_enginer",
+		"block_search_engine",
 	}
 
 	allProperties := make(map[string]interface{})

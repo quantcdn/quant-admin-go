@@ -28,19 +28,23 @@ type RuleWAFConfig struct {
 	BlockIp []string `json:"block_ip,omitempty"`
 	BlockUa []string `json:"block_ua,omitempty"`
 	BlockReferer []string `json:"block_referer,omitempty"`
+	BlockBadBots *bool `json:"block_bad_bots,omitempty"`
+	BlockBadReferers *bool `json:"block_bad_referers,omitempty"`
+	BlockBadIps *bool `json:"block_bad_ips,omitempty"`
+	Httpbl *ProxyConfigHttpbl `json:"httpbl,omitempty"`
+	IpRatelimitMode *string `json:"ip_ratelimit_mode,omitempty"`
+	IpRatelimitRps *int32 `json:"ip_ratelimit_rps,omitempty"`
+	IpRatelimitCooldown *int32 `json:"ip_ratelimit_cooldown,omitempty"`
+	RequestHeaderRatelimitMode *string `json:"request_header_ratelimit_mode,omitempty"`
+	RequestHeaderName *string `json:"request_header_name,omitempty"`
+	RequestHeaderRatelimitRps *int32 `json:"request_header_ratelimit_rps,omitempty"`
+	RequestHeaderRatelimitCooldown *int32 `json:"request_header_ratelimit_cooldown,omitempty"`
+	WafRatelimitMode *string `json:"waf_ratelimit_mode,omitempty"`
+	WafRatelimitHits *int32 `json:"waf_ratelimit_hits,omitempty"`
+	WafRatelimitRps *int32 `json:"waf_ratelimit_rps,omitempty"`
+	WafRatelimitCooldown *int32 `json:"waf_ratelimit_cooldown,omitempty"`
 	NotifySlack *string `json:"notify_slack,omitempty"`
 	NotifySlackHistRpm *int32 `json:"notify_slack_hist_rpm,omitempty"`
-	NotifyEmail string `json:"notify_email"`
-	Httpbl *ProxyConfigHttpbl `json:"httpbl,omitempty"`
-	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
-	OriginTimeout int32 `json:"origin_timeout"`
-	FailoverMode *bool `json:"failover_mode,omitempty"`
-	FailoverOriginTtfb *int32 `json:"failover_origin_ttfb,omitempty"`
-	FailoverOriginStatusCode *int32 `json:"failover_origin_status_code,omitempty"`
-	FailoverLifetime *int32 `json:"failover_lifetime,omitempty"`
-	Notify *string `json:"notify,omitempty"`
-	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
-	InjectHeaders []string `json:"inject_headers"`
 }
 
 type _RuleWAFConfig RuleWAFConfig
@@ -49,14 +53,37 @@ type _RuleWAFConfig RuleWAFConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleWAFConfig(mode string, notifyEmail string, originTimeout int32, injectHeaders []string) *RuleWAFConfig {
+func NewRuleWAFConfig(mode string) *RuleWAFConfig {
 	this := RuleWAFConfig{}
 	this.Mode = mode
 	var paranoiaLevel int32 = 1
 	this.ParanoiaLevel = &paranoiaLevel
-	this.NotifyEmail = notifyEmail
-	this.OriginTimeout = originTimeout
-	this.InjectHeaders = injectHeaders
+	var blockBadBots bool = false
+	this.BlockBadBots = &blockBadBots
+	var blockBadReferers bool = false
+	this.BlockBadReferers = &blockBadReferers
+	var blockBadIps bool = false
+	this.BlockBadIps = &blockBadIps
+	var ipRatelimitMode string = "disabled"
+	this.IpRatelimitMode = &ipRatelimitMode
+	var ipRatelimitRps int32 = 5
+	this.IpRatelimitRps = &ipRatelimitRps
+	var ipRatelimitCooldown int32 = 30
+	this.IpRatelimitCooldown = &ipRatelimitCooldown
+	var requestHeaderRatelimitMode string = "disabled"
+	this.RequestHeaderRatelimitMode = &requestHeaderRatelimitMode
+	var requestHeaderRatelimitRps int32 = 5
+	this.RequestHeaderRatelimitRps = &requestHeaderRatelimitRps
+	var requestHeaderRatelimitCooldown int32 = 30
+	this.RequestHeaderRatelimitCooldown = &requestHeaderRatelimitCooldown
+	var wafRatelimitMode string = "disabled"
+	this.WafRatelimitMode = &wafRatelimitMode
+	var wafRatelimitHits int32 = 10
+	this.WafRatelimitHits = &wafRatelimitHits
+	var wafRatelimitRps int32 = 5
+	this.WafRatelimitRps = &wafRatelimitRps
+	var wafRatelimitCooldown int32 = 300
+	this.WafRatelimitCooldown = &wafRatelimitCooldown
 	return &this
 }
 
@@ -67,8 +94,32 @@ func NewRuleWAFConfigWithDefaults() *RuleWAFConfig {
 	this := RuleWAFConfig{}
 	var paranoiaLevel int32 = 1
 	this.ParanoiaLevel = &paranoiaLevel
-	var originTimeout int32 = 30
-	this.OriginTimeout = originTimeout
+	var blockBadBots bool = false
+	this.BlockBadBots = &blockBadBots
+	var blockBadReferers bool = false
+	this.BlockBadReferers = &blockBadReferers
+	var blockBadIps bool = false
+	this.BlockBadIps = &blockBadIps
+	var ipRatelimitMode string = "disabled"
+	this.IpRatelimitMode = &ipRatelimitMode
+	var ipRatelimitRps int32 = 5
+	this.IpRatelimitRps = &ipRatelimitRps
+	var ipRatelimitCooldown int32 = 30
+	this.IpRatelimitCooldown = &ipRatelimitCooldown
+	var requestHeaderRatelimitMode string = "disabled"
+	this.RequestHeaderRatelimitMode = &requestHeaderRatelimitMode
+	var requestHeaderRatelimitRps int32 = 5
+	this.RequestHeaderRatelimitRps = &requestHeaderRatelimitRps
+	var requestHeaderRatelimitCooldown int32 = 30
+	this.RequestHeaderRatelimitCooldown = &requestHeaderRatelimitCooldown
+	var wafRatelimitMode string = "disabled"
+	this.WafRatelimitMode = &wafRatelimitMode
+	var wafRatelimitHits int32 = 10
+	this.WafRatelimitHits = &wafRatelimitHits
+	var wafRatelimitRps int32 = 5
+	this.WafRatelimitRps = &wafRatelimitRps
+	var wafRatelimitCooldown int32 = 300
+	this.WafRatelimitCooldown = &wafRatelimitCooldown
 	return &this
 }
 
@@ -288,6 +339,486 @@ func (o *RuleWAFConfig) SetBlockReferer(v []string) {
 	o.BlockReferer = v
 }
 
+// GetBlockBadBots returns the BlockBadBots field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetBlockBadBots() bool {
+	if o == nil || IsNil(o.BlockBadBots) {
+		var ret bool
+		return ret
+	}
+	return *o.BlockBadBots
+}
+
+// GetBlockBadBotsOk returns a tuple with the BlockBadBots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetBlockBadBotsOk() (*bool, bool) {
+	if o == nil || IsNil(o.BlockBadBots) {
+		return nil, false
+	}
+	return o.BlockBadBots, true
+}
+
+// HasBlockBadBots returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasBlockBadBots() bool {
+	if o != nil && !IsNil(o.BlockBadBots) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockBadBots gets a reference to the given bool and assigns it to the BlockBadBots field.
+func (o *RuleWAFConfig) SetBlockBadBots(v bool) {
+	o.BlockBadBots = &v
+}
+
+// GetBlockBadReferers returns the BlockBadReferers field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetBlockBadReferers() bool {
+	if o == nil || IsNil(o.BlockBadReferers) {
+		var ret bool
+		return ret
+	}
+	return *o.BlockBadReferers
+}
+
+// GetBlockBadReferersOk returns a tuple with the BlockBadReferers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetBlockBadReferersOk() (*bool, bool) {
+	if o == nil || IsNil(o.BlockBadReferers) {
+		return nil, false
+	}
+	return o.BlockBadReferers, true
+}
+
+// HasBlockBadReferers returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasBlockBadReferers() bool {
+	if o != nil && !IsNil(o.BlockBadReferers) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockBadReferers gets a reference to the given bool and assigns it to the BlockBadReferers field.
+func (o *RuleWAFConfig) SetBlockBadReferers(v bool) {
+	o.BlockBadReferers = &v
+}
+
+// GetBlockBadIps returns the BlockBadIps field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetBlockBadIps() bool {
+	if o == nil || IsNil(o.BlockBadIps) {
+		var ret bool
+		return ret
+	}
+	return *o.BlockBadIps
+}
+
+// GetBlockBadIpsOk returns a tuple with the BlockBadIps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetBlockBadIpsOk() (*bool, bool) {
+	if o == nil || IsNil(o.BlockBadIps) {
+		return nil, false
+	}
+	return o.BlockBadIps, true
+}
+
+// HasBlockBadIps returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasBlockBadIps() bool {
+	if o != nil && !IsNil(o.BlockBadIps) {
+		return true
+	}
+
+	return false
+}
+
+// SetBlockBadIps gets a reference to the given bool and assigns it to the BlockBadIps field.
+func (o *RuleWAFConfig) SetBlockBadIps(v bool) {
+	o.BlockBadIps = &v
+}
+
+// GetHttpbl returns the Httpbl field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetHttpbl() ProxyConfigHttpbl {
+	if o == nil || IsNil(o.Httpbl) {
+		var ret ProxyConfigHttpbl
+		return ret
+	}
+	return *o.Httpbl
+}
+
+// GetHttpblOk returns a tuple with the Httpbl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetHttpblOk() (*ProxyConfigHttpbl, bool) {
+	if o == nil || IsNil(o.Httpbl) {
+		return nil, false
+	}
+	return o.Httpbl, true
+}
+
+// HasHttpbl returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasHttpbl() bool {
+	if o != nil && !IsNil(o.Httpbl) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpbl gets a reference to the given ProxyConfigHttpbl and assigns it to the Httpbl field.
+func (o *RuleWAFConfig) SetHttpbl(v ProxyConfigHttpbl) {
+	o.Httpbl = &v
+}
+
+// GetIpRatelimitMode returns the IpRatelimitMode field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetIpRatelimitMode() string {
+	if o == nil || IsNil(o.IpRatelimitMode) {
+		var ret string
+		return ret
+	}
+	return *o.IpRatelimitMode
+}
+
+// GetIpRatelimitModeOk returns a tuple with the IpRatelimitMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetIpRatelimitModeOk() (*string, bool) {
+	if o == nil || IsNil(o.IpRatelimitMode) {
+		return nil, false
+	}
+	return o.IpRatelimitMode, true
+}
+
+// HasIpRatelimitMode returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasIpRatelimitMode() bool {
+	if o != nil && !IsNil(o.IpRatelimitMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpRatelimitMode gets a reference to the given string and assigns it to the IpRatelimitMode field.
+func (o *RuleWAFConfig) SetIpRatelimitMode(v string) {
+	o.IpRatelimitMode = &v
+}
+
+// GetIpRatelimitRps returns the IpRatelimitRps field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetIpRatelimitRps() int32 {
+	if o == nil || IsNil(o.IpRatelimitRps) {
+		var ret int32
+		return ret
+	}
+	return *o.IpRatelimitRps
+}
+
+// GetIpRatelimitRpsOk returns a tuple with the IpRatelimitRps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetIpRatelimitRpsOk() (*int32, bool) {
+	if o == nil || IsNil(o.IpRatelimitRps) {
+		return nil, false
+	}
+	return o.IpRatelimitRps, true
+}
+
+// HasIpRatelimitRps returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasIpRatelimitRps() bool {
+	if o != nil && !IsNil(o.IpRatelimitRps) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpRatelimitRps gets a reference to the given int32 and assigns it to the IpRatelimitRps field.
+func (o *RuleWAFConfig) SetIpRatelimitRps(v int32) {
+	o.IpRatelimitRps = &v
+}
+
+// GetIpRatelimitCooldown returns the IpRatelimitCooldown field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetIpRatelimitCooldown() int32 {
+	if o == nil || IsNil(o.IpRatelimitCooldown) {
+		var ret int32
+		return ret
+	}
+	return *o.IpRatelimitCooldown
+}
+
+// GetIpRatelimitCooldownOk returns a tuple with the IpRatelimitCooldown field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetIpRatelimitCooldownOk() (*int32, bool) {
+	if o == nil || IsNil(o.IpRatelimitCooldown) {
+		return nil, false
+	}
+	return o.IpRatelimitCooldown, true
+}
+
+// HasIpRatelimitCooldown returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasIpRatelimitCooldown() bool {
+	if o != nil && !IsNil(o.IpRatelimitCooldown) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpRatelimitCooldown gets a reference to the given int32 and assigns it to the IpRatelimitCooldown field.
+func (o *RuleWAFConfig) SetIpRatelimitCooldown(v int32) {
+	o.IpRatelimitCooldown = &v
+}
+
+// GetRequestHeaderRatelimitMode returns the RequestHeaderRatelimitMode field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetRequestHeaderRatelimitMode() string {
+	if o == nil || IsNil(o.RequestHeaderRatelimitMode) {
+		var ret string
+		return ret
+	}
+	return *o.RequestHeaderRatelimitMode
+}
+
+// GetRequestHeaderRatelimitModeOk returns a tuple with the RequestHeaderRatelimitMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetRequestHeaderRatelimitModeOk() (*string, bool) {
+	if o == nil || IsNil(o.RequestHeaderRatelimitMode) {
+		return nil, false
+	}
+	return o.RequestHeaderRatelimitMode, true
+}
+
+// HasRequestHeaderRatelimitMode returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasRequestHeaderRatelimitMode() bool {
+	if o != nil && !IsNil(o.RequestHeaderRatelimitMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestHeaderRatelimitMode gets a reference to the given string and assigns it to the RequestHeaderRatelimitMode field.
+func (o *RuleWAFConfig) SetRequestHeaderRatelimitMode(v string) {
+	o.RequestHeaderRatelimitMode = &v
+}
+
+// GetRequestHeaderName returns the RequestHeaderName field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetRequestHeaderName() string {
+	if o == nil || IsNil(o.RequestHeaderName) {
+		var ret string
+		return ret
+	}
+	return *o.RequestHeaderName
+}
+
+// GetRequestHeaderNameOk returns a tuple with the RequestHeaderName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetRequestHeaderNameOk() (*string, bool) {
+	if o == nil || IsNil(o.RequestHeaderName) {
+		return nil, false
+	}
+	return o.RequestHeaderName, true
+}
+
+// HasRequestHeaderName returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasRequestHeaderName() bool {
+	if o != nil && !IsNil(o.RequestHeaderName) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestHeaderName gets a reference to the given string and assigns it to the RequestHeaderName field.
+func (o *RuleWAFConfig) SetRequestHeaderName(v string) {
+	o.RequestHeaderName = &v
+}
+
+// GetRequestHeaderRatelimitRps returns the RequestHeaderRatelimitRps field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetRequestHeaderRatelimitRps() int32 {
+	if o == nil || IsNil(o.RequestHeaderRatelimitRps) {
+		var ret int32
+		return ret
+	}
+	return *o.RequestHeaderRatelimitRps
+}
+
+// GetRequestHeaderRatelimitRpsOk returns a tuple with the RequestHeaderRatelimitRps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetRequestHeaderRatelimitRpsOk() (*int32, bool) {
+	if o == nil || IsNil(o.RequestHeaderRatelimitRps) {
+		return nil, false
+	}
+	return o.RequestHeaderRatelimitRps, true
+}
+
+// HasRequestHeaderRatelimitRps returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasRequestHeaderRatelimitRps() bool {
+	if o != nil && !IsNil(o.RequestHeaderRatelimitRps) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestHeaderRatelimitRps gets a reference to the given int32 and assigns it to the RequestHeaderRatelimitRps field.
+func (o *RuleWAFConfig) SetRequestHeaderRatelimitRps(v int32) {
+	o.RequestHeaderRatelimitRps = &v
+}
+
+// GetRequestHeaderRatelimitCooldown returns the RequestHeaderRatelimitCooldown field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetRequestHeaderRatelimitCooldown() int32 {
+	if o == nil || IsNil(o.RequestHeaderRatelimitCooldown) {
+		var ret int32
+		return ret
+	}
+	return *o.RequestHeaderRatelimitCooldown
+}
+
+// GetRequestHeaderRatelimitCooldownOk returns a tuple with the RequestHeaderRatelimitCooldown field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetRequestHeaderRatelimitCooldownOk() (*int32, bool) {
+	if o == nil || IsNil(o.RequestHeaderRatelimitCooldown) {
+		return nil, false
+	}
+	return o.RequestHeaderRatelimitCooldown, true
+}
+
+// HasRequestHeaderRatelimitCooldown returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasRequestHeaderRatelimitCooldown() bool {
+	if o != nil && !IsNil(o.RequestHeaderRatelimitCooldown) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestHeaderRatelimitCooldown gets a reference to the given int32 and assigns it to the RequestHeaderRatelimitCooldown field.
+func (o *RuleWAFConfig) SetRequestHeaderRatelimitCooldown(v int32) {
+	o.RequestHeaderRatelimitCooldown = &v
+}
+
+// GetWafRatelimitMode returns the WafRatelimitMode field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetWafRatelimitMode() string {
+	if o == nil || IsNil(o.WafRatelimitMode) {
+		var ret string
+		return ret
+	}
+	return *o.WafRatelimitMode
+}
+
+// GetWafRatelimitModeOk returns a tuple with the WafRatelimitMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetWafRatelimitModeOk() (*string, bool) {
+	if o == nil || IsNil(o.WafRatelimitMode) {
+		return nil, false
+	}
+	return o.WafRatelimitMode, true
+}
+
+// HasWafRatelimitMode returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasWafRatelimitMode() bool {
+	if o != nil && !IsNil(o.WafRatelimitMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetWafRatelimitMode gets a reference to the given string and assigns it to the WafRatelimitMode field.
+func (o *RuleWAFConfig) SetWafRatelimitMode(v string) {
+	o.WafRatelimitMode = &v
+}
+
+// GetWafRatelimitHits returns the WafRatelimitHits field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetWafRatelimitHits() int32 {
+	if o == nil || IsNil(o.WafRatelimitHits) {
+		var ret int32
+		return ret
+	}
+	return *o.WafRatelimitHits
+}
+
+// GetWafRatelimitHitsOk returns a tuple with the WafRatelimitHits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetWafRatelimitHitsOk() (*int32, bool) {
+	if o == nil || IsNil(o.WafRatelimitHits) {
+		return nil, false
+	}
+	return o.WafRatelimitHits, true
+}
+
+// HasWafRatelimitHits returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasWafRatelimitHits() bool {
+	if o != nil && !IsNil(o.WafRatelimitHits) {
+		return true
+	}
+
+	return false
+}
+
+// SetWafRatelimitHits gets a reference to the given int32 and assigns it to the WafRatelimitHits field.
+func (o *RuleWAFConfig) SetWafRatelimitHits(v int32) {
+	o.WafRatelimitHits = &v
+}
+
+// GetWafRatelimitRps returns the WafRatelimitRps field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetWafRatelimitRps() int32 {
+	if o == nil || IsNil(o.WafRatelimitRps) {
+		var ret int32
+		return ret
+	}
+	return *o.WafRatelimitRps
+}
+
+// GetWafRatelimitRpsOk returns a tuple with the WafRatelimitRps field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetWafRatelimitRpsOk() (*int32, bool) {
+	if o == nil || IsNil(o.WafRatelimitRps) {
+		return nil, false
+	}
+	return o.WafRatelimitRps, true
+}
+
+// HasWafRatelimitRps returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasWafRatelimitRps() bool {
+	if o != nil && !IsNil(o.WafRatelimitRps) {
+		return true
+	}
+
+	return false
+}
+
+// SetWafRatelimitRps gets a reference to the given int32 and assigns it to the WafRatelimitRps field.
+func (o *RuleWAFConfig) SetWafRatelimitRps(v int32) {
+	o.WafRatelimitRps = &v
+}
+
+// GetWafRatelimitCooldown returns the WafRatelimitCooldown field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetWafRatelimitCooldown() int32 {
+	if o == nil || IsNil(o.WafRatelimitCooldown) {
+		var ret int32
+		return ret
+	}
+	return *o.WafRatelimitCooldown
+}
+
+// GetWafRatelimitCooldownOk returns a tuple with the WafRatelimitCooldown field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetWafRatelimitCooldownOk() (*int32, bool) {
+	if o == nil || IsNil(o.WafRatelimitCooldown) {
+		return nil, false
+	}
+	return o.WafRatelimitCooldown, true
+}
+
+// HasWafRatelimitCooldown returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasWafRatelimitCooldown() bool {
+	if o != nil && !IsNil(o.WafRatelimitCooldown) {
+		return true
+	}
+
+	return false
+}
+
+// SetWafRatelimitCooldown gets a reference to the given int32 and assigns it to the WafRatelimitCooldown field.
+func (o *RuleWAFConfig) SetWafRatelimitCooldown(v int32) {
+	o.WafRatelimitCooldown = &v
+}
+
 // GetNotifySlack returns the NotifySlack field value if set, zero value otherwise.
 func (o *RuleWAFConfig) GetNotifySlack() string {
 	if o == nil || IsNil(o.NotifySlack) {
@@ -352,334 +883,6 @@ func (o *RuleWAFConfig) SetNotifySlackHistRpm(v int32) {
 	o.NotifySlackHistRpm = &v
 }
 
-// GetNotifyEmail returns the NotifyEmail field value
-func (o *RuleWAFConfig) GetNotifyEmail() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.NotifyEmail
-}
-
-// GetNotifyEmailOk returns a tuple with the NotifyEmail field value
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetNotifyEmailOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.NotifyEmail, true
-}
-
-// SetNotifyEmail sets field value
-func (o *RuleWAFConfig) SetNotifyEmail(v string) {
-	o.NotifyEmail = v
-}
-
-// GetHttpbl returns the Httpbl field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetHttpbl() ProxyConfigHttpbl {
-	if o == nil || IsNil(o.Httpbl) {
-		var ret ProxyConfigHttpbl
-		return ret
-	}
-	return *o.Httpbl
-}
-
-// GetHttpblOk returns a tuple with the Httpbl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetHttpblOk() (*ProxyConfigHttpbl, bool) {
-	if o == nil || IsNil(o.Httpbl) {
-		return nil, false
-	}
-	return o.Httpbl, true
-}
-
-// HasHttpbl returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasHttpbl() bool {
-	if o != nil && !IsNil(o.Httpbl) {
-		return true
-	}
-
-	return false
-}
-
-// SetHttpbl gets a reference to the given ProxyConfigHttpbl and assigns it to the Httpbl field.
-func (o *RuleWAFConfig) SetHttpbl(v ProxyConfigHttpbl) {
-	o.Httpbl = &v
-}
-
-// GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetProxyAlertEnabled() bool {
-	if o == nil || IsNil(o.ProxyAlertEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.ProxyAlertEnabled
-}
-
-// GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetProxyAlertEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.ProxyAlertEnabled) {
-		return nil, false
-	}
-	return o.ProxyAlertEnabled, true
-}
-
-// HasProxyAlertEnabled returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasProxyAlertEnabled() bool {
-	if o != nil && !IsNil(o.ProxyAlertEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxyAlertEnabled gets a reference to the given bool and assigns it to the ProxyAlertEnabled field.
-func (o *RuleWAFConfig) SetProxyAlertEnabled(v bool) {
-	o.ProxyAlertEnabled = &v
-}
-
-// GetOriginTimeout returns the OriginTimeout field value
-func (o *RuleWAFConfig) GetOriginTimeout() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.OriginTimeout
-}
-
-// GetOriginTimeoutOk returns a tuple with the OriginTimeout field value
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetOriginTimeoutOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OriginTimeout, true
-}
-
-// SetOriginTimeout sets field value
-func (o *RuleWAFConfig) SetOriginTimeout(v int32) {
-	o.OriginTimeout = v
-}
-
-// GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetFailoverMode() bool {
-	if o == nil || IsNil(o.FailoverMode) {
-		var ret bool
-		return ret
-	}
-	return *o.FailoverMode
-}
-
-// GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetFailoverModeOk() (*bool, bool) {
-	if o == nil || IsNil(o.FailoverMode) {
-		return nil, false
-	}
-	return o.FailoverMode, true
-}
-
-// HasFailoverMode returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasFailoverMode() bool {
-	if o != nil && !IsNil(o.FailoverMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
-func (o *RuleWAFConfig) SetFailoverMode(v bool) {
-	o.FailoverMode = &v
-}
-
-// GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetFailoverOriginTtfb() int32 {
-	if o == nil || IsNil(o.FailoverOriginTtfb) {
-		var ret int32
-		return ret
-	}
-	return *o.FailoverOriginTtfb
-}
-
-// GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetFailoverOriginTtfbOk() (*int32, bool) {
-	if o == nil || IsNil(o.FailoverOriginTtfb) {
-		return nil, false
-	}
-	return o.FailoverOriginTtfb, true
-}
-
-// HasFailoverOriginTtfb returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasFailoverOriginTtfb() bool {
-	if o != nil && !IsNil(o.FailoverOriginTtfb) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverOriginTtfb gets a reference to the given int32 and assigns it to the FailoverOriginTtfb field.
-func (o *RuleWAFConfig) SetFailoverOriginTtfb(v int32) {
-	o.FailoverOriginTtfb = &v
-}
-
-// GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetFailoverOriginStatusCode() int32 {
-	if o == nil || IsNil(o.FailoverOriginStatusCode) {
-		var ret int32
-		return ret
-	}
-	return *o.FailoverOriginStatusCode
-}
-
-// GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetFailoverOriginStatusCodeOk() (*int32, bool) {
-	if o == nil || IsNil(o.FailoverOriginStatusCode) {
-		return nil, false
-	}
-	return o.FailoverOriginStatusCode, true
-}
-
-// HasFailoverOriginStatusCode returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasFailoverOriginStatusCode() bool {
-	if o != nil && !IsNil(o.FailoverOriginStatusCode) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverOriginStatusCode gets a reference to the given int32 and assigns it to the FailoverOriginStatusCode field.
-func (o *RuleWAFConfig) SetFailoverOriginStatusCode(v int32) {
-	o.FailoverOriginStatusCode = &v
-}
-
-// GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetFailoverLifetime() int32 {
-	if o == nil || IsNil(o.FailoverLifetime) {
-		var ret int32
-		return ret
-	}
-	return *o.FailoverLifetime
-}
-
-// GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetFailoverLifetimeOk() (*int32, bool) {
-	if o == nil || IsNil(o.FailoverLifetime) {
-		return nil, false
-	}
-	return o.FailoverLifetime, true
-}
-
-// HasFailoverLifetime returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasFailoverLifetime() bool {
-	if o != nil && !IsNil(o.FailoverLifetime) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverLifetime gets a reference to the given int32 and assigns it to the FailoverLifetime field.
-func (o *RuleWAFConfig) SetFailoverLifetime(v int32) {
-	o.FailoverLifetime = &v
-}
-
-// GetNotify returns the Notify field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetNotify() string {
-	if o == nil || IsNil(o.Notify) {
-		var ret string
-		return ret
-	}
-	return *o.Notify
-}
-
-// GetNotifyOk returns a tuple with the Notify field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetNotifyOk() (*string, bool) {
-	if o == nil || IsNil(o.Notify) {
-		return nil, false
-	}
-	return o.Notify, true
-}
-
-// HasNotify returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasNotify() bool {
-	if o != nil && !IsNil(o.Notify) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotify gets a reference to the given string and assigns it to the Notify field.
-func (o *RuleWAFConfig) SetNotify(v string) {
-	o.Notify = &v
-}
-
-// GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetNotifyConfig() ProxyNotifyConfig {
-	if o == nil || IsNil(o.NotifyConfig) {
-		var ret ProxyNotifyConfig
-		return ret
-	}
-	return *o.NotifyConfig
-}
-
-// GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetNotifyConfigOk() (*ProxyNotifyConfig, bool) {
-	if o == nil || IsNil(o.NotifyConfig) {
-		return nil, false
-	}
-	return o.NotifyConfig, true
-}
-
-// HasNotifyConfig returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasNotifyConfig() bool {
-	if o != nil && !IsNil(o.NotifyConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotifyConfig gets a reference to the given ProxyNotifyConfig and assigns it to the NotifyConfig field.
-func (o *RuleWAFConfig) SetNotifyConfig(v ProxyNotifyConfig) {
-	o.NotifyConfig = &v
-}
-
-// GetInjectHeaders returns the InjectHeaders field value
-func (o *RuleWAFConfig) GetInjectHeaders() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.InjectHeaders
-}
-
-// GetInjectHeadersOk returns a tuple with the InjectHeaders field value
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetInjectHeadersOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.InjectHeaders, true
-}
-
-// SetInjectHeaders sets field value
-func (o *RuleWAFConfig) SetInjectHeaders(v []string) {
-	o.InjectHeaders = v
-}
-
 func (o RuleWAFConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -709,39 +912,57 @@ func (o RuleWAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BlockReferer) {
 		toSerialize["block_referer"] = o.BlockReferer
 	}
+	if !IsNil(o.BlockBadBots) {
+		toSerialize["block_bad_bots"] = o.BlockBadBots
+	}
+	if !IsNil(o.BlockBadReferers) {
+		toSerialize["block_bad_referers"] = o.BlockBadReferers
+	}
+	if !IsNil(o.BlockBadIps) {
+		toSerialize["block_bad_ips"] = o.BlockBadIps
+	}
+	if !IsNil(o.Httpbl) {
+		toSerialize["httpbl"] = o.Httpbl
+	}
+	if !IsNil(o.IpRatelimitMode) {
+		toSerialize["ip_ratelimit_mode"] = o.IpRatelimitMode
+	}
+	if !IsNil(o.IpRatelimitRps) {
+		toSerialize["ip_ratelimit_rps"] = o.IpRatelimitRps
+	}
+	if !IsNil(o.IpRatelimitCooldown) {
+		toSerialize["ip_ratelimit_cooldown"] = o.IpRatelimitCooldown
+	}
+	if !IsNil(o.RequestHeaderRatelimitMode) {
+		toSerialize["request_header_ratelimit_mode"] = o.RequestHeaderRatelimitMode
+	}
+	if !IsNil(o.RequestHeaderName) {
+		toSerialize["request_header_name"] = o.RequestHeaderName
+	}
+	if !IsNil(o.RequestHeaderRatelimitRps) {
+		toSerialize["request_header_ratelimit_rps"] = o.RequestHeaderRatelimitRps
+	}
+	if !IsNil(o.RequestHeaderRatelimitCooldown) {
+		toSerialize["request_header_ratelimit_cooldown"] = o.RequestHeaderRatelimitCooldown
+	}
+	if !IsNil(o.WafRatelimitMode) {
+		toSerialize["waf_ratelimit_mode"] = o.WafRatelimitMode
+	}
+	if !IsNil(o.WafRatelimitHits) {
+		toSerialize["waf_ratelimit_hits"] = o.WafRatelimitHits
+	}
+	if !IsNil(o.WafRatelimitRps) {
+		toSerialize["waf_ratelimit_rps"] = o.WafRatelimitRps
+	}
+	if !IsNil(o.WafRatelimitCooldown) {
+		toSerialize["waf_ratelimit_cooldown"] = o.WafRatelimitCooldown
+	}
 	if !IsNil(o.NotifySlack) {
 		toSerialize["notify_slack"] = o.NotifySlack
 	}
 	if !IsNil(o.NotifySlackHistRpm) {
 		toSerialize["notify_slack_hist_rpm"] = o.NotifySlackHistRpm
 	}
-	toSerialize["notify_email"] = o.NotifyEmail
-	if !IsNil(o.Httpbl) {
-		toSerialize["httpbl"] = o.Httpbl
-	}
-	if !IsNil(o.ProxyAlertEnabled) {
-		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
-	}
-	toSerialize["origin_timeout"] = o.OriginTimeout
-	if !IsNil(o.FailoverMode) {
-		toSerialize["failover_mode"] = o.FailoverMode
-	}
-	if !IsNil(o.FailoverOriginTtfb) {
-		toSerialize["failover_origin_ttfb"] = o.FailoverOriginTtfb
-	}
-	if !IsNil(o.FailoverOriginStatusCode) {
-		toSerialize["failover_origin_status_code"] = o.FailoverOriginStatusCode
-	}
-	if !IsNil(o.FailoverLifetime) {
-		toSerialize["failover_lifetime"] = o.FailoverLifetime
-	}
-	if !IsNil(o.Notify) {
-		toSerialize["notify"] = o.Notify
-	}
-	if !IsNil(o.NotifyConfig) {
-		toSerialize["notify_config"] = o.NotifyConfig
-	}
-	toSerialize["inject_headers"] = o.InjectHeaders
 	return toSerialize, nil
 }
 
@@ -751,9 +972,6 @@ func (o *RuleWAFConfig) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"mode",
-		"notify_email",
-		"origin_timeout",
-		"inject_headers",
 	}
 
 	allProperties := make(map[string]interface{})

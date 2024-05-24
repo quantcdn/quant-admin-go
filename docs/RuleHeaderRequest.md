@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
+**OnlyWithCookie** | Pointer to **bool** |  | [optional] [default to false]
+**CookieName** | Pointer to **string** |  | [optional] 
 **Headers** | **map[string]string** |  | 
 
 ## Methods
@@ -352,6 +354,56 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleHeaderRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetOnlyWithCookie
+
+`func (o *RuleHeaderRequest) GetOnlyWithCookie() bool`
+
+GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
+
+### GetOnlyWithCookieOk
+
+`func (o *RuleHeaderRequest) GetOnlyWithCookieOk() (*bool, bool)`
+
+GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnlyWithCookie
+
+`func (o *RuleHeaderRequest) SetOnlyWithCookie(v bool)`
+
+SetOnlyWithCookie sets OnlyWithCookie field to given value.
+
+### HasOnlyWithCookie
+
+`func (o *RuleHeaderRequest) HasOnlyWithCookie() bool`
+
+HasOnlyWithCookie returns a boolean if a field has been set.
+
+### GetCookieName
+
+`func (o *RuleHeaderRequest) GetCookieName() string`
+
+GetCookieName returns the CookieName field if non-nil, zero value otherwise.
+
+### GetCookieNameOk
+
+`func (o *RuleHeaderRequest) GetCookieNameOk() (*string, bool)`
+
+GetCookieNameOk returns a tuple with the CookieName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCookieName
+
+`func (o *RuleHeaderRequest) SetCookieName(v string)`
+
+SetCookieName sets CookieName field to given value.
+
+### HasCookieName
+
+`func (o *RuleHeaderRequest) HasCookieName() bool`
+
+HasCookieName returns a boolean if a field has been set.
 
 ### GetHeaders
 

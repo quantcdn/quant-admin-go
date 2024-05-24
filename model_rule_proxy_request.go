@@ -34,6 +34,8 @@ type RuleProxyRequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	OnlyWithCookie *bool `json:"only_with_cookie,omitempty"`
+	CookieName *string `json:"cookie_name,omitempty"`
 	To string `json:"to"`
 	Host *string `json:"host,omitempty"`
 	AuthUser *string `json:"auth_user,omitempty"`
@@ -41,7 +43,15 @@ type RuleProxyRequest struct {
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
 	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
+	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	StripHeaders []string `json:"strip_headers,omitempty"`
+	StripResponseHeaders []string `json:"strip_response_headers,omitempty"`
+	FailoverMode *bool `json:"failover_mode,omitempty"`
+	FailoverOriginTtfb *int32 `json:"failover_origin_ttfb,omitempty"`
+	FailoverOriginStatusCode []string `json:"failover_origin_status_code,omitempty"`
+	FailoverLifetime *int32 `json:"failover_lifetime,omitempty"`
+	Notify *string `json:"notify,omitempty"`
+	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
 	WafConfig *RuleWAFConfig `json:"waf_config,omitempty"`
 }
@@ -56,7 +66,15 @@ func NewRuleProxyRequest(domain string, disabled bool, to string) *RuleProxyRequ
 	this := RuleProxyRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	var onlyWithCookie bool = false
+	this.OnlyWithCookie = &onlyWithCookie
 	this.To = to
+	var failoverOriginTtfb int32 = 2000
+	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var notify string = "none"
+	this.Notify = &notify
+	var wafEnabled bool = false
+	this.WafEnabled = &wafEnabled
 	return &this
 }
 
@@ -69,6 +87,14 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	this.Domain = domain
 	var disabled bool = false
 	this.Disabled = disabled
+	var onlyWithCookie bool = false
+	this.OnlyWithCookie = &onlyWithCookie
+	var failoverOriginTtfb int32 = 2000
+	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var notify string = "none"
+	this.Notify = &notify
+	var wafEnabled bool = false
+	this.WafEnabled = &wafEnabled
 	return &this
 }
 
@@ -472,6 +498,70 @@ func (o *RuleProxyRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetOnlyWithCookie() bool {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		var ret bool
+		return ret
+	}
+	return *o.OnlyWithCookie
+}
+
+// GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetOnlyWithCookieOk() (*bool, bool) {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		return nil, false
+	}
+	return o.OnlyWithCookie, true
+}
+
+// HasOnlyWithCookie returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasOnlyWithCookie() bool {
+	if o != nil && !IsNil(o.OnlyWithCookie) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnlyWithCookie gets a reference to the given bool and assigns it to the OnlyWithCookie field.
+func (o *RuleProxyRequest) SetOnlyWithCookie(v bool) {
+	o.OnlyWithCookie = &v
+}
+
+// GetCookieName returns the CookieName field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetCookieName() string {
+	if o == nil || IsNil(o.CookieName) {
+		var ret string
+		return ret
+	}
+	return *o.CookieName
+}
+
+// GetCookieNameOk returns a tuple with the CookieName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetCookieNameOk() (*string, bool) {
+	if o == nil || IsNil(o.CookieName) {
+		return nil, false
+	}
+	return o.CookieName, true
+}
+
+// HasCookieName returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasCookieName() bool {
+	if o != nil && !IsNil(o.CookieName) {
+		return true
+	}
+
+	return false
+}
+
+// SetCookieName gets a reference to the given string and assigns it to the CookieName field.
+func (o *RuleProxyRequest) SetCookieName(v string) {
+	o.CookieName = &v
+}
+
 // GetTo returns the To field value
 func (o *RuleProxyRequest) GetTo() string {
 	if o == nil {
@@ -688,6 +778,38 @@ func (o *RuleProxyRequest) SetOnlyProxy404(v bool) {
 	o.OnlyProxy404 = &v
 }
 
+// GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetInjectHeaders() map[string]string {
+	if o == nil || IsNil(o.InjectHeaders) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.InjectHeaders
+}
+
+// GetInjectHeadersOk returns a tuple with the InjectHeaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetInjectHeadersOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.InjectHeaders) {
+		return nil, false
+	}
+	return o.InjectHeaders, true
+}
+
+// HasInjectHeaders returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasInjectHeaders() bool {
+	if o != nil && !IsNil(o.InjectHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetInjectHeaders gets a reference to the given map[string]string and assigns it to the InjectHeaders field.
+func (o *RuleProxyRequest) SetInjectHeaders(v map[string]string) {
+	o.InjectHeaders = &v
+}
+
 // GetStripHeaders returns the StripHeaders field value if set, zero value otherwise.
 func (o *RuleProxyRequest) GetStripHeaders() []string {
 	if o == nil || IsNil(o.StripHeaders) {
@@ -718,6 +840,230 @@ func (o *RuleProxyRequest) HasStripHeaders() bool {
 // SetStripHeaders gets a reference to the given []string and assigns it to the StripHeaders field.
 func (o *RuleProxyRequest) SetStripHeaders(v []string) {
 	o.StripHeaders = v
+}
+
+// GetStripResponseHeaders returns the StripResponseHeaders field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetStripResponseHeaders() []string {
+	if o == nil || IsNil(o.StripResponseHeaders) {
+		var ret []string
+		return ret
+	}
+	return o.StripResponseHeaders
+}
+
+// GetStripResponseHeadersOk returns a tuple with the StripResponseHeaders field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetStripResponseHeadersOk() ([]string, bool) {
+	if o == nil || IsNil(o.StripResponseHeaders) {
+		return nil, false
+	}
+	return o.StripResponseHeaders, true
+}
+
+// HasStripResponseHeaders returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasStripResponseHeaders() bool {
+	if o != nil && !IsNil(o.StripResponseHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetStripResponseHeaders gets a reference to the given []string and assigns it to the StripResponseHeaders field.
+func (o *RuleProxyRequest) SetStripResponseHeaders(v []string) {
+	o.StripResponseHeaders = v
+}
+
+// GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetFailoverMode() bool {
+	if o == nil || IsNil(o.FailoverMode) {
+		var ret bool
+		return ret
+	}
+	return *o.FailoverMode
+}
+
+// GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetFailoverModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.FailoverMode) {
+		return nil, false
+	}
+	return o.FailoverMode, true
+}
+
+// HasFailoverMode returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasFailoverMode() bool {
+	if o != nil && !IsNil(o.FailoverMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
+func (o *RuleProxyRequest) SetFailoverMode(v bool) {
+	o.FailoverMode = &v
+}
+
+// GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetFailoverOriginTtfb() int32 {
+	if o == nil || IsNil(o.FailoverOriginTtfb) {
+		var ret int32
+		return ret
+	}
+	return *o.FailoverOriginTtfb
+}
+
+// GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetFailoverOriginTtfbOk() (*int32, bool) {
+	if o == nil || IsNil(o.FailoverOriginTtfb) {
+		return nil, false
+	}
+	return o.FailoverOriginTtfb, true
+}
+
+// HasFailoverOriginTtfb returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasFailoverOriginTtfb() bool {
+	if o != nil && !IsNil(o.FailoverOriginTtfb) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverOriginTtfb gets a reference to the given int32 and assigns it to the FailoverOriginTtfb field.
+func (o *RuleProxyRequest) SetFailoverOriginTtfb(v int32) {
+	o.FailoverOriginTtfb = &v
+}
+
+// GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetFailoverOriginStatusCode() []string {
+	if o == nil || IsNil(o.FailoverOriginStatusCode) {
+		var ret []string
+		return ret
+	}
+	return o.FailoverOriginStatusCode
+}
+
+// GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetFailoverOriginStatusCodeOk() ([]string, bool) {
+	if o == nil || IsNil(o.FailoverOriginStatusCode) {
+		return nil, false
+	}
+	return o.FailoverOriginStatusCode, true
+}
+
+// HasFailoverOriginStatusCode returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasFailoverOriginStatusCode() bool {
+	if o != nil && !IsNil(o.FailoverOriginStatusCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverOriginStatusCode gets a reference to the given []string and assigns it to the FailoverOriginStatusCode field.
+func (o *RuleProxyRequest) SetFailoverOriginStatusCode(v []string) {
+	o.FailoverOriginStatusCode = v
+}
+
+// GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetFailoverLifetime() int32 {
+	if o == nil || IsNil(o.FailoverLifetime) {
+		var ret int32
+		return ret
+	}
+	return *o.FailoverLifetime
+}
+
+// GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetFailoverLifetimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.FailoverLifetime) {
+		return nil, false
+	}
+	return o.FailoverLifetime, true
+}
+
+// HasFailoverLifetime returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasFailoverLifetime() bool {
+	if o != nil && !IsNil(o.FailoverLifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverLifetime gets a reference to the given int32 and assigns it to the FailoverLifetime field.
+func (o *RuleProxyRequest) SetFailoverLifetime(v int32) {
+	o.FailoverLifetime = &v
+}
+
+// GetNotify returns the Notify field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetNotify() string {
+	if o == nil || IsNil(o.Notify) {
+		var ret string
+		return ret
+	}
+	return *o.Notify
+}
+
+// GetNotifyOk returns a tuple with the Notify field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetNotifyOk() (*string, bool) {
+	if o == nil || IsNil(o.Notify) {
+		return nil, false
+	}
+	return o.Notify, true
+}
+
+// HasNotify returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasNotify() bool {
+	if o != nil && !IsNil(o.Notify) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotify gets a reference to the given string and assigns it to the Notify field.
+func (o *RuleProxyRequest) SetNotify(v string) {
+	o.Notify = &v
+}
+
+// GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetNotifyConfig() ProxyNotifyConfig {
+	if o == nil || IsNil(o.NotifyConfig) {
+		var ret ProxyNotifyConfig
+		return ret
+	}
+	return *o.NotifyConfig
+}
+
+// GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetNotifyConfigOk() (*ProxyNotifyConfig, bool) {
+	if o == nil || IsNil(o.NotifyConfig) {
+		return nil, false
+	}
+	return o.NotifyConfig, true
+}
+
+// HasNotifyConfig returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasNotifyConfig() bool {
+	if o != nil && !IsNil(o.NotifyConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifyConfig gets a reference to the given ProxyNotifyConfig and assigns it to the NotifyConfig field.
+func (o *RuleProxyRequest) SetNotifyConfig(v ProxyNotifyConfig) {
+	o.NotifyConfig = &v
 }
 
 // GetWafEnabled returns the WafEnabled field value if set, zero value otherwise.
@@ -829,6 +1175,12 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
+	if !IsNil(o.OnlyWithCookie) {
+		toSerialize["only_with_cookie"] = o.OnlyWithCookie
+	}
+	if !IsNil(o.CookieName) {
+		toSerialize["cookie_name"] = o.CookieName
+	}
 	toSerialize["to"] = o.To
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
@@ -848,8 +1200,32 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OnlyProxy404) {
 		toSerialize["only_proxy_404"] = o.OnlyProxy404
 	}
+	if !IsNil(o.InjectHeaders) {
+		toSerialize["inject_headers"] = o.InjectHeaders
+	}
 	if !IsNil(o.StripHeaders) {
 		toSerialize["strip_headers"] = o.StripHeaders
+	}
+	if !IsNil(o.StripResponseHeaders) {
+		toSerialize["strip_response_headers"] = o.StripResponseHeaders
+	}
+	if !IsNil(o.FailoverMode) {
+		toSerialize["failover_mode"] = o.FailoverMode
+	}
+	if !IsNil(o.FailoverOriginTtfb) {
+		toSerialize["failover_origin_ttfb"] = o.FailoverOriginTtfb
+	}
+	if !IsNil(o.FailoverOriginStatusCode) {
+		toSerialize["failover_origin_status_code"] = o.FailoverOriginStatusCode
+	}
+	if !IsNil(o.FailoverLifetime) {
+		toSerialize["failover_lifetime"] = o.FailoverLifetime
+	}
+	if !IsNil(o.Notify) {
+		toSerialize["notify"] = o.Notify
+	}
+	if !IsNil(o.NotifyConfig) {
+		toSerialize["notify_config"] = o.NotifyConfig
 	}
 	if !IsNil(o.WafEnabled) {
 		toSerialize["waf_enabled"] = o.WafEnabled

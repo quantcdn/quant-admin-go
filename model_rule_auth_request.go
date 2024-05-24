@@ -34,6 +34,8 @@ type RuleAuthRequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	OnlyWithCookie *bool `json:"only_with_cookie,omitempty"`
+	CookieName *string `json:"cookie_name,omitempty"`
 	AuthUser string `json:"auth_user"`
 	AuthPass string `json:"auth_pass"`
 }
@@ -48,6 +50,8 @@ func NewRuleAuthRequest(domain string, disabled bool, authUser string, authPass 
 	this := RuleAuthRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	var onlyWithCookie bool = false
+	this.OnlyWithCookie = &onlyWithCookie
 	this.AuthUser = authUser
 	this.AuthPass = authPass
 	return &this
@@ -62,6 +66,8 @@ func NewRuleAuthRequestWithDefaults() *RuleAuthRequest {
 	this.Domain = domain
 	var disabled bool = false
 	this.Disabled = disabled
+	var onlyWithCookie bool = false
+	this.OnlyWithCookie = &onlyWithCookie
 	return &this
 }
 
@@ -465,6 +471,70 @@ func (o *RuleAuthRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
+func (o *RuleAuthRequest) GetOnlyWithCookie() bool {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		var ret bool
+		return ret
+	}
+	return *o.OnlyWithCookie
+}
+
+// GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleAuthRequest) GetOnlyWithCookieOk() (*bool, bool) {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		return nil, false
+	}
+	return o.OnlyWithCookie, true
+}
+
+// HasOnlyWithCookie returns a boolean if a field has been set.
+func (o *RuleAuthRequest) HasOnlyWithCookie() bool {
+	if o != nil && !IsNil(o.OnlyWithCookie) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnlyWithCookie gets a reference to the given bool and assigns it to the OnlyWithCookie field.
+func (o *RuleAuthRequest) SetOnlyWithCookie(v bool) {
+	o.OnlyWithCookie = &v
+}
+
+// GetCookieName returns the CookieName field value if set, zero value otherwise.
+func (o *RuleAuthRequest) GetCookieName() string {
+	if o == nil || IsNil(o.CookieName) {
+		var ret string
+		return ret
+	}
+	return *o.CookieName
+}
+
+// GetCookieNameOk returns a tuple with the CookieName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleAuthRequest) GetCookieNameOk() (*string, bool) {
+	if o == nil || IsNil(o.CookieName) {
+		return nil, false
+	}
+	return o.CookieName, true
+}
+
+// HasCookieName returns a boolean if a field has been set.
+func (o *RuleAuthRequest) HasCookieName() bool {
+	if o != nil && !IsNil(o.CookieName) {
+		return true
+	}
+
+	return false
+}
+
+// SetCookieName gets a reference to the given string and assigns it to the CookieName field.
+func (o *RuleAuthRequest) SetCookieName(v string) {
+	o.CookieName = &v
+}
+
 // GetAuthUser returns the AuthUser field value
 func (o *RuleAuthRequest) GetAuthUser() string {
 	if o == nil {
@@ -557,6 +627,12 @@ func (o RuleAuthRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
+	}
+	if !IsNil(o.OnlyWithCookie) {
+		toSerialize["only_with_cookie"] = o.OnlyWithCookie
+	}
+	if !IsNil(o.CookieName) {
+		toSerialize["cookie_name"] = o.CookieName
 	}
 	toSerialize["auth_user"] = o.AuthUser
 	toSerialize["auth_pass"] = o.AuthPass

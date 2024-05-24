@@ -34,6 +34,8 @@ type RuleCustomResponseRequest struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
+	OnlyWithCookie *bool `json:"only_with_cookie,omitempty"`
+	CookieName *string `json:"cookie_name,omitempty"`
 	CustomResponseStatusCode int32 `json:"custom_response_status_code"`
 	CustomResponseBody string `json:"custom_response_body"`
 }
@@ -48,6 +50,8 @@ func NewRuleCustomResponseRequest(domain string, disabled bool, customResponseSt
 	this := RuleCustomResponseRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	var onlyWithCookie bool = false
+	this.OnlyWithCookie = &onlyWithCookie
 	this.CustomResponseStatusCode = customResponseStatusCode
 	this.CustomResponseBody = customResponseBody
 	return &this
@@ -62,6 +66,8 @@ func NewRuleCustomResponseRequestWithDefaults() *RuleCustomResponseRequest {
 	this.Domain = domain
 	var disabled bool = false
 	this.Disabled = disabled
+	var onlyWithCookie bool = false
+	this.OnlyWithCookie = &onlyWithCookie
 	var customResponseStatusCode int32 = 200
 	this.CustomResponseStatusCode = customResponseStatusCode
 	return &this
@@ -467,6 +473,70 @@ func (o *RuleCustomResponseRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
+// GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetOnlyWithCookie() bool {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		var ret bool
+		return ret
+	}
+	return *o.OnlyWithCookie
+}
+
+// GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetOnlyWithCookieOk() (*bool, bool) {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		return nil, false
+	}
+	return o.OnlyWithCookie, true
+}
+
+// HasOnlyWithCookie returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasOnlyWithCookie() bool {
+	if o != nil && !IsNil(o.OnlyWithCookie) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnlyWithCookie gets a reference to the given bool and assigns it to the OnlyWithCookie field.
+func (o *RuleCustomResponseRequest) SetOnlyWithCookie(v bool) {
+	o.OnlyWithCookie = &v
+}
+
+// GetCookieName returns the CookieName field value if set, zero value otherwise.
+func (o *RuleCustomResponseRequest) GetCookieName() string {
+	if o == nil || IsNil(o.CookieName) {
+		var ret string
+		return ret
+	}
+	return *o.CookieName
+}
+
+// GetCookieNameOk returns a tuple with the CookieName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleCustomResponseRequest) GetCookieNameOk() (*string, bool) {
+	if o == nil || IsNil(o.CookieName) {
+		return nil, false
+	}
+	return o.CookieName, true
+}
+
+// HasCookieName returns a boolean if a field has been set.
+func (o *RuleCustomResponseRequest) HasCookieName() bool {
+	if o != nil && !IsNil(o.CookieName) {
+		return true
+	}
+
+	return false
+}
+
+// SetCookieName gets a reference to the given string and assigns it to the CookieName field.
+func (o *RuleCustomResponseRequest) SetCookieName(v string) {
+	o.CookieName = &v
+}
+
 // GetCustomResponseStatusCode returns the CustomResponseStatusCode field value
 func (o *RuleCustomResponseRequest) GetCustomResponseStatusCode() int32 {
 	if o == nil {
@@ -559,6 +629,12 @@ func (o RuleCustomResponseRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
+	}
+	if !IsNil(o.OnlyWithCookie) {
+		toSerialize["only_with_cookie"] = o.OnlyWithCookie
+	}
+	if !IsNil(o.CookieName) {
+		toSerialize["cookie_name"] = o.CookieName
 	}
 	toSerialize["custom_response_status_code"] = o.CustomResponseStatusCode
 	toSerialize["custom_response_body"] = o.CustomResponseBody
