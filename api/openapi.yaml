@@ -1831,8 +1831,6 @@ components:
       type: object
     Error:
       example:
-        data:
-          key: ""
         message: message
         error: true
       properties:
@@ -1840,9 +1838,6 @@ components:
           type: string
         error:
           type: boolean
-        data:
-          additionalProperties: {}
-          type: object
       required:
       - error
       - message

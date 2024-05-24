@@ -23,7 +23,6 @@ var _ MappedNullable = &Error{}
 type Error struct {
 	Message string `json:"message"`
 	Error bool `json:"error"`
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type _Error Error
@@ -95,38 +94,6 @@ func (o *Error) SetError(v bool) {
 	o.Error = v
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
-func (o *Error) GetData() map[string]interface{} {
-	if o == nil || IsNil(o.Data) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Data
-}
-
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Error) GetDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Data) {
-		return map[string]interface{}{}, false
-	}
-	return o.Data, true
-}
-
-// HasData returns a boolean if a field has been set.
-func (o *Error) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
-		return true
-	}
-
-	return false
-}
-
-// SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
-func (o *Error) SetData(v map[string]interface{}) {
-	o.Data = v
-}
-
 func (o Error) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -139,9 +106,6 @@ func (o Error) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["error"] = o.Error
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
-	}
 	return toSerialize, nil
 }
 

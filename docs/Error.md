@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Message** | **string** |  | 
 **Error** | **bool** |  | 
-**Data** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
@@ -66,31 +65,6 @@ and a boolean to check if the value has been set.
 
 SetError sets Error field to given value.
 
-
-### GetData
-
-`func (o *Error) GetData() map[string]interface{}`
-
-GetData returns the Data field if non-nil, zero value otherwise.
-
-### GetDataOk
-
-`func (o *Error) GetDataOk() (*map[string]interface{}, bool)`
-
-GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetData
-
-`func (o *Error) SetData(v map[string]interface{})`
-
-SetData sets Data field to given value.
-
-### HasData
-
-`func (o *Error) HasData() bool`
-
-HasData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
