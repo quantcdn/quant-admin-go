@@ -34,7 +34,7 @@ type Rule struct {
 	Method *string `json:"method,omitempty"`
 	MethodIs []string `json:"method_is,omitempty"`
 	MethodIsNot []string `json:"method_is_not,omitempty"`
-	OnlyWithCookie []string `json:"only_with_cookie,omitempty"`
+	OnlyWithCookie *string `json:"only_with_cookie,omitempty"`
 	Disabled *bool `json:"disabled,omitempty"`
 	Action string `json:"action"`
 	ActionConfig map[string]string `json:"action_config"`
@@ -457,17 +457,17 @@ func (o *Rule) SetMethodIsNot(v []string) {
 }
 
 // GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
-func (o *Rule) GetOnlyWithCookie() []string {
+func (o *Rule) GetOnlyWithCookie() string {
 	if o == nil || IsNil(o.OnlyWithCookie) {
-		var ret []string
+		var ret string
 		return ret
 	}
-	return o.OnlyWithCookie
+	return *o.OnlyWithCookie
 }
 
 // GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Rule) GetOnlyWithCookieOk() ([]string, bool) {
+func (o *Rule) GetOnlyWithCookieOk() (*string, bool) {
 	if o == nil || IsNil(o.OnlyWithCookie) {
 		return nil, false
 	}
@@ -483,9 +483,9 @@ func (o *Rule) HasOnlyWithCookie() bool {
 	return false
 }
 
-// SetOnlyWithCookie gets a reference to the given []string and assigns it to the OnlyWithCookie field.
-func (o *Rule) SetOnlyWithCookie(v []string) {
-	o.OnlyWithCookie = v
+// SetOnlyWithCookie gets a reference to the given string and assigns it to the OnlyWithCookie field.
+func (o *Rule) SetOnlyWithCookie(v string) {
+	o.OnlyWithCookie = &v
 }
 
 // GetDisabled returns the Disabled field value if set, zero value otherwise.

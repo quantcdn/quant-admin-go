@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** |  | [optional] 
 **MethodIs** | Pointer to **[]string** |  | [optional] 
 **MethodIsNot** | Pointer to **[]string** |  | [optional] 
-**OnlyWithCookie** | Pointer to **[]string** |  | [optional] 
+**OnlyWithCookie** | Pointer to **string** |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
 **Action** | **string** |  | 
 **ActionConfig** | **map[string]string** |  | 
@@ -353,20 +353,20 @@ HasMethodIsNot returns a boolean if a field has been set.
 
 ### GetOnlyWithCookie
 
-`func (o *Rule) GetOnlyWithCookie() []string`
+`func (o *Rule) GetOnlyWithCookie() string`
 
 GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
 
 ### GetOnlyWithCookieOk
 
-`func (o *Rule) GetOnlyWithCookieOk() (*[]string, bool)`
+`func (o *Rule) GetOnlyWithCookieOk() (*string, bool)`
 
 GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOnlyWithCookie
 
-`func (o *Rule) SetOnlyWithCookie(v []string)`
+`func (o *Rule) SetOnlyWithCookie(v string)`
 
 SetOnlyWithCookie sets OnlyWithCookie field to given value.
 
