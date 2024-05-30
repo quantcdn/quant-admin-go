@@ -24,7 +24,7 @@ type RuleHeaderRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
-	Urls []string `json:"urls,omitempty"`
+	Url string `json:"url"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -45,10 +45,11 @@ type _RuleHeaderRequest RuleHeaderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleHeaderRequest(domain string, disabled bool, headers map[string]string) *RuleHeaderRequest {
+func NewRuleHeaderRequest(domain string, disabled bool, url string, headers map[string]string) *RuleHeaderRequest {
 	this := RuleHeaderRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
+	this.Url = url
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
 	this.Headers = headers
@@ -149,36 +150,28 @@ func (o *RuleHeaderRequest) SetDisabled(v bool) {
 	o.Disabled = v
 }
 
-// GetUrls returns the Urls field value if set, zero value otherwise.
-func (o *RuleHeaderRequest) GetUrls() []string {
-	if o == nil || IsNil(o.Urls) {
-		var ret []string
+// GetUrl returns the Url field value
+func (o *RuleHeaderRequest) GetUrl() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return o.Urls
+
+	return o.Url
 }
 
-// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *RuleHeaderRequest) GetUrlsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Urls) {
+func (o *RuleHeaderRequest) GetUrlOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Urls, true
+	return &o.Url, true
 }
 
-// HasUrls returns a boolean if a field has been set.
-func (o *RuleHeaderRequest) HasUrls() bool {
-	if o != nil && !IsNil(o.Urls) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrls gets a reference to the given []string and assigns it to the Urls field.
-func (o *RuleHeaderRequest) SetUrls(v []string) {
-	o.Urls = v
+// SetUrl sets field value
+func (o *RuleHeaderRequest) SetUrl(v string) {
+	o.Url = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
@@ -572,9 +565,7 @@ func (o RuleHeaderRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["disabled"] = o.Disabled
-	if !IsNil(o.Urls) {
-		toSerialize["urls"] = o.Urls
-	}
+	toSerialize["url"] = o.Url
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
@@ -619,6 +610,7 @@ func (o *RuleHeaderRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"domain",
 		"disabled",
+		"url",
 		"headers",
 	}
 

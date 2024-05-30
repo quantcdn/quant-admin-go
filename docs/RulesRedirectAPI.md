@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, "RedirectTo_example", int32(123)) // RuleRedirectRequest | 
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, "Url_example", "RedirectTo_example", int32(123)) // RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, "RedirectTo_example", int32(123)) // RuleRedirectRequest | 
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, "Url_example", "RedirectTo_example", int32(123)) // RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

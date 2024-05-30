@@ -2028,22 +2028,19 @@ components:
       type: object
     Rule:
       example:
-        urls:
-        - urls
-        - urls
         uuid: uuid
-        config: config
+        action_config: action_config
+        url: url
       properties:
         uuid:
           type: string
-        config:
+        action_config:
           type: string
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
       required:
-      - config
+      - action_config
+      - url
       - uuid
       type: object
     RuleAuthRequest:
@@ -2064,13 +2061,11 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        url: url
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        urls:
-        - urls
-        - urls
         auth_user: auth_user
         domain: any
         name: name
@@ -2088,10 +2083,8 @@ components:
         disabled:
           default: false
           type: boolean
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
         country:
           enum:
           - country_is
@@ -2145,6 +2138,7 @@ components:
       - auth_user
       - disabled
       - domain
+      - url
       type: object
     RuleCustomResponseRequest:
       example:
@@ -2166,13 +2160,11 @@ components:
         - method_is_not
         - method_is_not
         custom_response_body: custom_response_body
+        url: url
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        urls:
-        - urls
-        - urls
         domain: any
         name: name
         ip_is:
@@ -2188,10 +2180,8 @@ components:
         disabled:
           default: false
           type: boolean
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
         country:
           enum:
           - country_is
@@ -2247,6 +2237,7 @@ components:
       - custom_response_status_code
       - disabled
       - domain
+      - url
       type: object
     RuleHeaderRequest:
       example:
@@ -2268,13 +2259,11 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        url: url
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        urls:
-        - urls
-        - urls
         domain: any
         name: name
         ip_is:
@@ -2290,10 +2279,8 @@ components:
         disabled:
           default: false
           type: boolean
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
         country:
           enum:
           - country_is
@@ -2346,6 +2333,7 @@ components:
       - disabled
       - domain
       - headers
+      - url
       type: object
     RuleProxyRequest:
       example:
@@ -2368,9 +2356,6 @@ components:
         country_is_not:
         - country_is_not
         - country_is_not
-        urls:
-        - urls
-        - urls
         auth_user: auth_user
         host: host
         waf_enabled: false
@@ -2396,6 +2381,7 @@ components:
         country_is:
         - country_is
         - country_is
+        url: url
         only_proxy_404: true
         inject_headers:
           key: inject_headers
@@ -2457,10 +2443,8 @@ components:
         disabled:
           default: false
           type: boolean
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
         country:
           enum:
           - country_is
@@ -2568,6 +2552,7 @@ components:
       - disabled
       - domain
       - to
+      - url
       type: object
     RuleRedirectRequest:
       allOf:
@@ -2590,14 +2575,12 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        url: url
         cookie_name: cookie_name
         redirect_to: redirect_to
         country_is_not:
         - country_is_not
         - country_is_not
-        urls:
-        - urls
-        - urls
         domain: any
         name: name
         ip_is:
@@ -2613,10 +2596,8 @@ components:
         disabled:
           default: false
           type: boolean
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
         country:
           enum:
           - country_is
@@ -2671,6 +2652,7 @@ components:
       - domain
       - redirect_code
       - redirect_to
+      - url
       type: object
     RuleRequest:
       properties:
@@ -2682,10 +2664,8 @@ components:
         disabled:
           default: false
           type: boolean
-        urls:
-          items:
-            type: string
-          type: array
+        url:
+          type: string
         country:
           enum:
           - country_is
@@ -2733,6 +2713,7 @@ components:
       required:
       - disabled
       - domain
+      - url
       type: object
     RuleWAFConfig:
       example:

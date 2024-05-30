@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, "To_example") // RuleProxyRequest | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, "Url_example", "To_example") // RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, "To_example") // RuleProxyRequest | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, "Url_example", "To_example") // RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

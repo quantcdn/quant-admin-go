@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "Url_example", "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "Url_example", "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, "Url_example", map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, "Url_example", map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

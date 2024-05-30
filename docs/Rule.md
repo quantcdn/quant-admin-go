@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | **string** |  | 
-**Config** | **string** |  | 
-**Urls** | Pointer to **[]string** |  | [optional] 
+**ActionConfig** | **string** |  | 
+**Url** | **string** |  | 
 
 ## Methods
 
 ### NewRule
 
-`func NewRule(uuid string, config string, ) *Rule`
+`func NewRule(uuid string, actionConfig string, url string, ) *Rule`
 
 NewRule instantiates a new Rule object
 This constructor will assign default values to properties that have it defined,
@@ -47,50 +47,45 @@ and a boolean to check if the value has been set.
 SetUuid sets Uuid field to given value.
 
 
-### GetConfig
+### GetActionConfig
 
-`func (o *Rule) GetConfig() string`
+`func (o *Rule) GetActionConfig() string`
 
-GetConfig returns the Config field if non-nil, zero value otherwise.
+GetActionConfig returns the ActionConfig field if non-nil, zero value otherwise.
 
-### GetConfigOk
+### GetActionConfigOk
 
-`func (o *Rule) GetConfigOk() (*string, bool)`
+`func (o *Rule) GetActionConfigOk() (*string, bool)`
 
-GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
+GetActionConfigOk returns a tuple with the ActionConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfig
+### SetActionConfig
 
-`func (o *Rule) SetConfig(v string)`
+`func (o *Rule) SetActionConfig(v string)`
 
-SetConfig sets Config field to given value.
+SetActionConfig sets ActionConfig field to given value.
 
 
-### GetUrls
+### GetUrl
 
-`func (o *Rule) GetUrls() []string`
+`func (o *Rule) GetUrl() string`
 
-GetUrls returns the Urls field if non-nil, zero value otherwise.
+GetUrl returns the Url field if non-nil, zero value otherwise.
 
-### GetUrlsOk
+### GetUrlOk
 
-`func (o *Rule) GetUrlsOk() (*[]string, bool)`
+`func (o *Rule) GetUrlOk() (*string, bool)`
 
-GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUrls
+### SetUrl
 
-`func (o *Rule) SetUrls(v []string)`
+`func (o *Rule) SetUrl(v string)`
 
-SetUrls sets Urls field to given value.
+SetUrl sets Url field to given value.
 
-### HasUrls
-
-`func (o *Rule) HasUrls() bool`
-
-HasUrls returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

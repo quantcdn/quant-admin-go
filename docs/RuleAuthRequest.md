@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
-**Urls** | Pointer to **[]string** |  | [optional] 
+**Url** | **string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewRuleAuthRequest
 
-`func NewRuleAuthRequest(domain string, disabled bool, authUser string, authPass string, ) *RuleAuthRequest`
+`func NewRuleAuthRequest(domain string, disabled bool, url string, authUser string, authPass string, ) *RuleAuthRequest`
 
 NewRuleAuthRequest instantiates a new RuleAuthRequest object
 This constructor will assign default values to properties that have it defined,
@@ -106,30 +106,25 @@ and a boolean to check if the value has been set.
 SetDisabled sets Disabled field to given value.
 
 
-### GetUrls
+### GetUrl
 
-`func (o *RuleAuthRequest) GetUrls() []string`
+`func (o *RuleAuthRequest) GetUrl() string`
 
-GetUrls returns the Urls field if non-nil, zero value otherwise.
+GetUrl returns the Url field if non-nil, zero value otherwise.
 
-### GetUrlsOk
+### GetUrlOk
 
-`func (o *RuleAuthRequest) GetUrlsOk() (*[]string, bool)`
+`func (o *RuleAuthRequest) GetUrlOk() (*string, bool)`
 
-GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUrls
+### SetUrl
 
-`func (o *RuleAuthRequest) SetUrls(v []string)`
+`func (o *RuleAuthRequest) SetUrl(v string)`
 
-SetUrls sets Urls field to given value.
+SetUrl sets Url field to given value.
 
-### HasUrls
-
-`func (o *RuleAuthRequest) HasUrls() bool`
-
-HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 

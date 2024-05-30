@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
-**Urls** | Pointer to **[]string** |  | [optional] 
+**Url** | **string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -42,7 +42,7 @@ Name | Type | Description | Notes
 
 ### NewRuleProxyRequest
 
-`func NewRuleProxyRequest(domain string, disabled bool, to string, ) *RuleProxyRequest`
+`func NewRuleProxyRequest(domain string, disabled bool, url string, to string, ) *RuleProxyRequest`
 
 NewRuleProxyRequest instantiates a new RuleProxyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -122,30 +122,25 @@ and a boolean to check if the value has been set.
 SetDisabled sets Disabled field to given value.
 
 
-### GetUrls
+### GetUrl
 
-`func (o *RuleProxyRequest) GetUrls() []string`
+`func (o *RuleProxyRequest) GetUrl() string`
 
-GetUrls returns the Urls field if non-nil, zero value otherwise.
+GetUrl returns the Url field if non-nil, zero value otherwise.
 
-### GetUrlsOk
+### GetUrlOk
 
-`func (o *RuleProxyRequest) GetUrlsOk() (*[]string, bool)`
+`func (o *RuleProxyRequest) GetUrlOk() (*string, bool)`
 
-GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUrls
+### SetUrl
 
-`func (o *RuleProxyRequest) SetUrls(v []string)`
+`func (o *RuleProxyRequest) SetUrl(v string)`
 
-SetUrls sets Urls field to given value.
+SetUrl sets Url field to given value.
 
-### HasUrls
-
-`func (o *RuleProxyRequest) HasUrls() bool`
-
-HasUrls returns a boolean if a field has been set.
 
 ### GetCountry
 
