@@ -22,8 +22,22 @@ var _ MappedNullable = &Rule{}
 // Rule struct for Rule
 type Rule struct {
 	Uuid string `json:"uuid"`
-	ActionConfig string `json:"action_config"`
+	Name string `json:"name"`
 	Url string `json:"url"`
+	Domain *string `json:"domain,omitempty"`
+	Country *string `json:"country,omitempty"`
+	CountryIs []string `json:"country_is,omitempty"`
+	CoutnryIsNot []string `json:"coutnry_is_not,omitempty"`
+	Ip *string `json:"ip,omitempty"`
+	IpIs []string `json:"ip_is,omitempty"`
+	IpIsNot []string `json:"ip_is_not,omitempty"`
+	Method *string `json:"method,omitempty"`
+	MethodIs []string `json:"method_is,omitempty"`
+	MethodIsNot []string `json:"method_is_not,omitempty"`
+	OnlyWithCookie []string `json:"only_with_cookie,omitempty"`
+	Disabled *bool `json:"disabled,omitempty"`
+	Action string `json:"action"`
+	ActionConfig map[string]string `json:"action_config"`
 }
 
 type _Rule Rule
@@ -32,11 +46,13 @@ type _Rule Rule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRule(uuid string, actionConfig string, url string) *Rule {
+func NewRule(uuid string, name string, url string, action string, actionConfig map[string]string) *Rule {
 	this := Rule{}
 	this.Uuid = uuid
-	this.ActionConfig = actionConfig
+	this.Name = name
 	this.Url = url
+	this.Action = action
+	this.ActionConfig = actionConfig
 	return &this
 }
 
@@ -72,28 +88,28 @@ func (o *Rule) SetUuid(v string) {
 	o.Uuid = v
 }
 
-// GetActionConfig returns the ActionConfig field value
-func (o *Rule) GetActionConfig() string {
+// GetName returns the Name field value
+func (o *Rule) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ActionConfig
+	return o.Name
 }
 
-// GetActionConfigOk returns a tuple with the ActionConfig field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *Rule) GetActionConfigOk() (*string, bool) {
+func (o *Rule) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ActionConfig, true
+	return &o.Name, true
 }
 
-// SetActionConfig sets field value
-func (o *Rule) SetActionConfig(v string) {
-	o.ActionConfig = v
+// SetName sets field value
+func (o *Rule) SetName(v string) {
+	o.Name = v
 }
 
 // GetUrl returns the Url field value
@@ -120,6 +136,438 @@ func (o *Rule) SetUrl(v string) {
 	o.Url = v
 }
 
+// GetDomain returns the Domain field value if set, zero value otherwise.
+func (o *Rule) GetDomain() string {
+	if o == nil || IsNil(o.Domain) {
+		var ret string
+		return ret
+	}
+	return *o.Domain
+}
+
+// GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetDomainOk() (*string, bool) {
+	if o == nil || IsNil(o.Domain) {
+		return nil, false
+	}
+	return o.Domain, true
+}
+
+// HasDomain returns a boolean if a field has been set.
+func (o *Rule) HasDomain() bool {
+	if o != nil && !IsNil(o.Domain) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomain gets a reference to the given string and assigns it to the Domain field.
+func (o *Rule) SetDomain(v string) {
+	o.Domain = &v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise.
+func (o *Rule) GetCountry() string {
+	if o == nil || IsNil(o.Country) {
+		var ret string
+		return ret
+	}
+	return *o.Country
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetCountryOk() (*string, bool) {
+	if o == nil || IsNil(o.Country) {
+		return nil, false
+	}
+	return o.Country, true
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *Rule) HasCountry() bool {
+	if o != nil && !IsNil(o.Country) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given string and assigns it to the Country field.
+func (o *Rule) SetCountry(v string) {
+	o.Country = &v
+}
+
+// GetCountryIs returns the CountryIs field value if set, zero value otherwise.
+func (o *Rule) GetCountryIs() []string {
+	if o == nil || IsNil(o.CountryIs) {
+		var ret []string
+		return ret
+	}
+	return o.CountryIs
+}
+
+// GetCountryIsOk returns a tuple with the CountryIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetCountryIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.CountryIs) {
+		return nil, false
+	}
+	return o.CountryIs, true
+}
+
+// HasCountryIs returns a boolean if a field has been set.
+func (o *Rule) HasCountryIs() bool {
+	if o != nil && !IsNil(o.CountryIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryIs gets a reference to the given []string and assigns it to the CountryIs field.
+func (o *Rule) SetCountryIs(v []string) {
+	o.CountryIs = v
+}
+
+// GetCoutnryIsNot returns the CoutnryIsNot field value if set, zero value otherwise.
+func (o *Rule) GetCoutnryIsNot() []string {
+	if o == nil || IsNil(o.CoutnryIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.CoutnryIsNot
+}
+
+// GetCoutnryIsNotOk returns a tuple with the CoutnryIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetCoutnryIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.CoutnryIsNot) {
+		return nil, false
+	}
+	return o.CoutnryIsNot, true
+}
+
+// HasCoutnryIsNot returns a boolean if a field has been set.
+func (o *Rule) HasCoutnryIsNot() bool {
+	if o != nil && !IsNil(o.CoutnryIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetCoutnryIsNot gets a reference to the given []string and assigns it to the CoutnryIsNot field.
+func (o *Rule) SetCoutnryIsNot(v []string) {
+	o.CoutnryIsNot = v
+}
+
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *Rule) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *Rule) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *Rule) SetIp(v string) {
+	o.Ip = &v
+}
+
+// GetIpIs returns the IpIs field value if set, zero value otherwise.
+func (o *Rule) GetIpIs() []string {
+	if o == nil || IsNil(o.IpIs) {
+		var ret []string
+		return ret
+	}
+	return o.IpIs
+}
+
+// GetIpIsOk returns a tuple with the IpIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetIpIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.IpIs) {
+		return nil, false
+	}
+	return o.IpIs, true
+}
+
+// HasIpIs returns a boolean if a field has been set.
+func (o *Rule) HasIpIs() bool {
+	if o != nil && !IsNil(o.IpIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpIs gets a reference to the given []string and assigns it to the IpIs field.
+func (o *Rule) SetIpIs(v []string) {
+	o.IpIs = v
+}
+
+// GetIpIsNot returns the IpIsNot field value if set, zero value otherwise.
+func (o *Rule) GetIpIsNot() []string {
+	if o == nil || IsNil(o.IpIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.IpIsNot
+}
+
+// GetIpIsNotOk returns a tuple with the IpIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetIpIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.IpIsNot) {
+		return nil, false
+	}
+	return o.IpIsNot, true
+}
+
+// HasIpIsNot returns a boolean if a field has been set.
+func (o *Rule) HasIpIsNot() bool {
+	if o != nil && !IsNil(o.IpIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpIsNot gets a reference to the given []string and assigns it to the IpIsNot field.
+func (o *Rule) SetIpIsNot(v []string) {
+	o.IpIsNot = v
+}
+
+// GetMethod returns the Method field value if set, zero value otherwise.
+func (o *Rule) GetMethod() string {
+	if o == nil || IsNil(o.Method) {
+		var ret string
+		return ret
+	}
+	return *o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetMethodOk() (*string, bool) {
+	if o == nil || IsNil(o.Method) {
+		return nil, false
+	}
+	return o.Method, true
+}
+
+// HasMethod returns a boolean if a field has been set.
+func (o *Rule) HasMethod() bool {
+	if o != nil && !IsNil(o.Method) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *Rule) SetMethod(v string) {
+	o.Method = &v
+}
+
+// GetMethodIs returns the MethodIs field value if set, zero value otherwise.
+func (o *Rule) GetMethodIs() []string {
+	if o == nil || IsNil(o.MethodIs) {
+		var ret []string
+		return ret
+	}
+	return o.MethodIs
+}
+
+// GetMethodIsOk returns a tuple with the MethodIs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetMethodIsOk() ([]string, bool) {
+	if o == nil || IsNil(o.MethodIs) {
+		return nil, false
+	}
+	return o.MethodIs, true
+}
+
+// HasMethodIs returns a boolean if a field has been set.
+func (o *Rule) HasMethodIs() bool {
+	if o != nil && !IsNil(o.MethodIs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethodIs gets a reference to the given []string and assigns it to the MethodIs field.
+func (o *Rule) SetMethodIs(v []string) {
+	o.MethodIs = v
+}
+
+// GetMethodIsNot returns the MethodIsNot field value if set, zero value otherwise.
+func (o *Rule) GetMethodIsNot() []string {
+	if o == nil || IsNil(o.MethodIsNot) {
+		var ret []string
+		return ret
+	}
+	return o.MethodIsNot
+}
+
+// GetMethodIsNotOk returns a tuple with the MethodIsNot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetMethodIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.MethodIsNot) {
+		return nil, false
+	}
+	return o.MethodIsNot, true
+}
+
+// HasMethodIsNot returns a boolean if a field has been set.
+func (o *Rule) HasMethodIsNot() bool {
+	if o != nil && !IsNil(o.MethodIsNot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMethodIsNot gets a reference to the given []string and assigns it to the MethodIsNot field.
+func (o *Rule) SetMethodIsNot(v []string) {
+	o.MethodIsNot = v
+}
+
+// GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
+func (o *Rule) GetOnlyWithCookie() []string {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		var ret []string
+		return ret
+	}
+	return o.OnlyWithCookie
+}
+
+// GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetOnlyWithCookieOk() ([]string, bool) {
+	if o == nil || IsNil(o.OnlyWithCookie) {
+		return nil, false
+	}
+	return o.OnlyWithCookie, true
+}
+
+// HasOnlyWithCookie returns a boolean if a field has been set.
+func (o *Rule) HasOnlyWithCookie() bool {
+	if o != nil && !IsNil(o.OnlyWithCookie) {
+		return true
+	}
+
+	return false
+}
+
+// SetOnlyWithCookie gets a reference to the given []string and assigns it to the OnlyWithCookie field.
+func (o *Rule) SetOnlyWithCookie(v []string) {
+	o.OnlyWithCookie = v
+}
+
+// GetDisabled returns the Disabled field value if set, zero value otherwise.
+func (o *Rule) GetDisabled() bool {
+	if o == nil || IsNil(o.Disabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Disabled
+}
+
+// GetDisabledOk returns a tuple with the Disabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetDisabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Disabled) {
+		return nil, false
+	}
+	return o.Disabled, true
+}
+
+// HasDisabled returns a boolean if a field has been set.
+func (o *Rule) HasDisabled() bool {
+	if o != nil && !IsNil(o.Disabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
+func (o *Rule) SetDisabled(v bool) {
+	o.Disabled = &v
+}
+
+// GetAction returns the Action field value
+func (o *Rule) GetAction() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value
+// and a boolean to check if the value has been set.
+func (o *Rule) GetActionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Action, true
+}
+
+// SetAction sets field value
+func (o *Rule) SetAction(v string) {
+	o.Action = v
+}
+
+// GetActionConfig returns the ActionConfig field value
+func (o *Rule) GetActionConfig() map[string]string {
+	if o == nil {
+		var ret map[string]string
+		return ret
+	}
+
+	return o.ActionConfig
+}
+
+// GetActionConfigOk returns a tuple with the ActionConfig field value
+// and a boolean to check if the value has been set.
+func (o *Rule) GetActionConfigOk() (*map[string]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ActionConfig, true
+}
+
+// SetActionConfig sets field value
+func (o *Rule) SetActionConfig(v map[string]string) {
+	o.ActionConfig = v
+}
+
 func (o Rule) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -131,8 +579,46 @@ func (o Rule) MarshalJSON() ([]byte, error) {
 func (o Rule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["uuid"] = o.Uuid
-	toSerialize["action_config"] = o.ActionConfig
+	toSerialize["name"] = o.Name
 	toSerialize["url"] = o.Url
+	if !IsNil(o.Domain) {
+		toSerialize["domain"] = o.Domain
+	}
+	if !IsNil(o.Country) {
+		toSerialize["country"] = o.Country
+	}
+	if !IsNil(o.CountryIs) {
+		toSerialize["country_is"] = o.CountryIs
+	}
+	if !IsNil(o.CoutnryIsNot) {
+		toSerialize["coutnry_is_not"] = o.CoutnryIsNot
+	}
+	if !IsNil(o.Ip) {
+		toSerialize["ip"] = o.Ip
+	}
+	if !IsNil(o.IpIs) {
+		toSerialize["ip_is"] = o.IpIs
+	}
+	if !IsNil(o.IpIsNot) {
+		toSerialize["ip_is_not"] = o.IpIsNot
+	}
+	if !IsNil(o.Method) {
+		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.MethodIs) {
+		toSerialize["method_is"] = o.MethodIs
+	}
+	if !IsNil(o.MethodIsNot) {
+		toSerialize["method_is_not"] = o.MethodIsNot
+	}
+	if !IsNil(o.OnlyWithCookie) {
+		toSerialize["only_with_cookie"] = o.OnlyWithCookie
+	}
+	if !IsNil(o.Disabled) {
+		toSerialize["disabled"] = o.Disabled
+	}
+	toSerialize["action"] = o.Action
+	toSerialize["action_config"] = o.ActionConfig
 	return toSerialize, nil
 }
 
@@ -142,8 +628,10 @@ func (o *Rule) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"uuid",
-		"action_config",
+		"name",
 		"url",
+		"action",
+		"action_config",
 	}
 
 	allProperties := make(map[string]interface{})

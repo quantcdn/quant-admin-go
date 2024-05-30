@@ -2028,18 +2028,93 @@ components:
       type: object
     Rule:
       example:
+        country: country
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        ip: ip
+        method_is:
+        - method_is
+        - method_is
+        only_with_cookie:
+        - only_with_cookie
+        - only_with_cookie
+        country_is:
+        - country_is
+        - country_is
+        coutnry_is_not:
+        - coutnry_is_not
+        - coutnry_is_not
+        method_is_not:
+        - method_is_not
+        - method_is_not
         uuid: uuid
-        action_config: action_config
         url: url
+        domain: domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        action: action
+        disabled: true
+        action_config:
+          key: action_config
       properties:
         uuid:
           type: string
-        action_config:
+        name:
           type: string
         url:
           type: string
+        domain:
+          type: string
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        coutnry_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          items:
+            type: string
+          type: array
+        disabled:
+          type: boolean
+        action:
+          type: string
+        action_config:
+          additionalProperties:
+            type: string
+          type: object
       required:
+      - action
       - action_config
+      - name
       - url
       - uuid
       type: object
