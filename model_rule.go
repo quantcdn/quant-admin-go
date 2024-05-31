@@ -36,8 +36,8 @@ type Rule struct {
 	MethodIsNot []string `json:"method_is_not,omitempty"`
 	OnlyWithCookie *string `json:"only_with_cookie,omitempty"`
 	Disabled *bool `json:"disabled,omitempty"`
-	Action string `json:"action"`
-	ActionConfig map[string]string `json:"action_config"`
+	Action *string `json:"action,omitempty"`
+	ActionConfig map[string]interface{} `json:"action_config,omitempty"`
 }
 
 type _Rule Rule
@@ -46,13 +46,11 @@ type _Rule Rule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRule(uuid string, name string, url string, action string, actionConfig map[string]string) *Rule {
+func NewRule(uuid string, name string, url string) *Rule {
 	this := Rule{}
 	this.Uuid = uuid
 	this.Name = name
 	this.Url = url
-	this.Action = action
-	this.ActionConfig = actionConfig
 	return &this
 }
 
@@ -520,51 +518,67 @@ func (o *Rule) SetDisabled(v bool) {
 	o.Disabled = &v
 }
 
-// GetAction returns the Action field value
+// GetAction returns the Action field value if set, zero value otherwise.
 func (o *Rule) GetAction() string {
-	if o == nil {
+	if o == nil || IsNil(o.Action) {
 		var ret string
 		return ret
 	}
-
-	return o.Action
+	return *o.Action
 }
 
-// GetActionOk returns a tuple with the Action field value
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Rule) GetActionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Action) {
 		return nil, false
 	}
-	return &o.Action, true
+	return o.Action, true
 }
 
-// SetAction sets field value
-func (o *Rule) SetAction(v string) {
-	o.Action = v
-}
-
-// GetActionConfig returns the ActionConfig field value
-func (o *Rule) GetActionConfig() map[string]string {
-	if o == nil {
-		var ret map[string]string
-		return ret
+// HasAction returns a boolean if a field has been set.
+func (o *Rule) HasAction() bool {
+	if o != nil && !IsNil(o.Action) {
+		return true
 	}
 
+	return false
+}
+
+// SetAction gets a reference to the given string and assigns it to the Action field.
+func (o *Rule) SetAction(v string) {
+	o.Action = &v
+}
+
+// GetActionConfig returns the ActionConfig field value if set, zero value otherwise.
+func (o *Rule) GetActionConfig() map[string]interface{} {
+	if o == nil || IsNil(o.ActionConfig) {
+		var ret map[string]interface{}
+		return ret
+	}
 	return o.ActionConfig
 }
 
-// GetActionConfigOk returns a tuple with the ActionConfig field value
+// GetActionConfigOk returns a tuple with the ActionConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Rule) GetActionConfigOk() (*map[string]string, bool) {
-	if o == nil {
-		return nil, false
+func (o *Rule) GetActionConfigOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ActionConfig) {
+		return map[string]interface{}{}, false
 	}
-	return &o.ActionConfig, true
+	return o.ActionConfig, true
 }
 
-// SetActionConfig sets field value
-func (o *Rule) SetActionConfig(v map[string]string) {
+// HasActionConfig returns a boolean if a field has been set.
+func (o *Rule) HasActionConfig() bool {
+	if o != nil && !IsNil(o.ActionConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetActionConfig gets a reference to the given map[string]interface{} and assigns it to the ActionConfig field.
+func (o *Rule) SetActionConfig(v map[string]interface{}) {
 	o.ActionConfig = v
 }
 
@@ -617,8 +631,12 @@ func (o Rule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Disabled) {
 		toSerialize["disabled"] = o.Disabled
 	}
-	toSerialize["action"] = o.Action
-	toSerialize["action_config"] = o.ActionConfig
+	if !IsNil(o.Action) {
+		toSerialize["action"] = o.Action
+	}
+	if !IsNil(o.ActionConfig) {
+		toSerialize["action_config"] = o.ActionConfig
+	}
 	return toSerialize, nil
 }
 
@@ -630,8 +648,6 @@ func (o *Rule) UnmarshalJSON(data []byte) (err error) {
 		"uuid",
 		"name",
 		"url",
-		"action",
-		"action_config",
 	}
 
 	allProperties := make(map[string]interface{})

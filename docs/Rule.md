@@ -19,14 +19,14 @@ Name | Type | Description | Notes
 **MethodIsNot** | Pointer to **[]string** |  | [optional] 
 **OnlyWithCookie** | Pointer to **string** |  | [optional] 
 **Disabled** | Pointer to **bool** |  | [optional] 
-**Action** | **string** |  | 
-**ActionConfig** | **map[string]string** |  | 
+**Action** | Pointer to **string** |  | [optional] 
+**ActionConfig** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewRule
 
-`func NewRule(uuid string, name string, url string, action string, actionConfig map[string]string, ) *Rule`
+`func NewRule(uuid string, name string, url string, ) *Rule`
 
 NewRule instantiates a new Rule object
 This constructor will assign default values to properties that have it defined,
@@ -420,26 +420,36 @@ and a boolean to check if the value has been set.
 
 SetAction sets Action field to given value.
 
+### HasAction
+
+`func (o *Rule) HasAction() bool`
+
+HasAction returns a boolean if a field has been set.
 
 ### GetActionConfig
 
-`func (o *Rule) GetActionConfig() map[string]string`
+`func (o *Rule) GetActionConfig() map[string]interface{}`
 
 GetActionConfig returns the ActionConfig field if non-nil, zero value otherwise.
 
 ### GetActionConfigOk
 
-`func (o *Rule) GetActionConfigOk() (*map[string]string, bool)`
+`func (o *Rule) GetActionConfigOk() (*map[string]interface{}, bool)`
 
 GetActionConfigOk returns a tuple with the ActionConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActionConfig
 
-`func (o *Rule) SetActionConfig(v map[string]string)`
+`func (o *Rule) SetActionConfig(v map[string]interface{})`
 
 SetActionConfig sets ActionConfig field to given value.
 
+### HasActionConfig
+
+`func (o *Rule) HasActionConfig() bool`
+
+HasActionConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

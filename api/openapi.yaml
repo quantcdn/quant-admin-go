@@ -2057,7 +2057,7 @@ components:
         action: action
         disabled: true
         action_config:
-          key: action_config
+          key: ""
       properties:
         uuid:
           type: string
@@ -2104,12 +2104,9 @@ components:
         action:
           type: string
         action_config:
-          additionalProperties:
-            type: string
+          additionalProperties: {}
           type: object
       required:
-      - action
-      - action_config
       - name
       - url
       - uuid
