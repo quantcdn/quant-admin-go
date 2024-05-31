@@ -12,7 +12,6 @@ tags:
 - name: Projects
 - name: Crawlers
 - name: Domains
-- name: Rules
 - name: Rules__Redirect
 - name: Rules__Proxy
 - name: Rules__Auth
@@ -639,42 +638,6 @@ paths:
             syntax.
       tags:
       - Domains
-  /organizations/{organization}/projects/{project}/rules:
-    get:
-      operationId: Rules_list
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Rule'
-                type: array
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules
   /organizations/{organization}/projects/{project}/rules/auth:
     get:
       operationId: RulesAuth_list
@@ -1305,7 +1268,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Rule'
+                  $ref: '#/components/schemas/RuleProxy'
                 type: array
           description: The request has succeeded.
         "400":
@@ -1345,7 +1308,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleProxy'
           description: The request has succeeded.
         "400":
           content:
@@ -1386,7 +1349,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleProxy'
           description: The request has succeeded.
         "400":
           content:
@@ -1426,7 +1389,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleProxy'
           description: The request has succeeded.
         "400":
           content:
@@ -1472,7 +1435,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleProxy'
           description: The request has succeeded.
         "400":
           content:
@@ -2005,11 +1968,11 @@ components:
       type: object
     ProxyNotifyConfig:
       example:
-        period: 5
+        period: 1
         slack_webhook: slack_webhook
         origin_status_code:
-        - 5
-        - 5
+        - 1
+        - 1
       properties:
         origin_status_code:
           items:
@@ -2403,6 +2366,283 @@ components:
       - headers
       - url
       type: object
+    RuleProxy:
+      example:
+        country: country
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        only_with_cookie: true
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url: url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain: domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        action: proxy
+        disabled: false
+        action_config:
+          origin_timeout: 0
+          cache_lifetime: 1
+          failover_origin_ttfb: 6
+          proxy_strip_headers:
+          - proxy_strip_headers
+          - proxy_strip_headers
+          notify_config:
+            period: 1
+            slack_webhook: slack_webhook
+            origin_status_code:
+            - 1
+            - 1
+          notify: notify
+          only_proxy_404: true
+          inject_headers:
+            key: inject_headers
+          host: host
+          waf_enabled: false
+          auth_pass: auth_pass
+          to: to
+          failover_lifetime: 1
+          waf_config:
+            allow_rules:
+            - allow_rules
+            - allow_rules
+            block_bad_bots: false
+            waf_ratelimit_cooldown: 4
+            httpbl:
+              block_harvester: false
+              httpbl_enabled: false
+              api_key: api_key
+              block_spam: false
+              block_search_engine: false
+              block_suspicious: false
+            notify_slack_hist_rpm: 7
+            request_header_ratelimit_mode: disabled
+            ip_ratelimit_cooldown: 2
+            block_bad_referers: false
+            request_header_ratelimit_cooldown: 9
+            block_bad_ips: false
+            allow_ip:
+            - allow_ip
+            - allow_ip
+            request_header_name: request_header_name
+            mode: block
+            request_header_ratelimit_rps: 7
+            waf_ratelimit_hits: 3
+            ip_ratelimit_mode: disabled
+            ip_ratelimit_rps: 5
+            waf_ratelimit_rps: 2
+            block_ip:
+            - block_ip
+            - block_ip
+            block_referer:
+            - block_referer
+            - block_referer
+            waf_ratelimit_mode: disabled
+            block_ua:
+            - block_ua
+            - block_ua
+            notify_slack: notify_slack
+            paranoia_level: 5
+          disable_ssl_verify: true
+          failover_origin_status_code:
+          - failover_origin_status_code
+          - failover_origin_status_code
+          proxy_alert_enabled: true
+          failover_mode: true
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+        url:
+          type: string
+        domain:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: boolean
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        action:
+          default: proxy
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleProxyAction'
+      required:
+      - action
+      - action_config
+      - disabled
+      - name
+      - uuid
+      type: object
+    RuleProxyAction:
+      example:
+        origin_timeout: 0
+        cache_lifetime: 1
+        failover_origin_ttfb: 6
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
+        notify_config:
+          period: 1
+          slack_webhook: slack_webhook
+          origin_status_code:
+          - 1
+          - 1
+        notify: notify
+        only_proxy_404: true
+        inject_headers:
+          key: inject_headers
+        host: host
+        waf_enabled: false
+        auth_pass: auth_pass
+        to: to
+        failover_lifetime: 1
+        waf_config:
+          allow_rules:
+          - allow_rules
+          - allow_rules
+          block_bad_bots: false
+          waf_ratelimit_cooldown: 4
+          httpbl:
+            block_harvester: false
+            httpbl_enabled: false
+            api_key: api_key
+            block_spam: false
+            block_search_engine: false
+            block_suspicious: false
+          notify_slack_hist_rpm: 7
+          request_header_ratelimit_mode: disabled
+          ip_ratelimit_cooldown: 2
+          block_bad_referers: false
+          request_header_ratelimit_cooldown: 9
+          block_bad_ips: false
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          request_header_name: request_header_name
+          mode: block
+          request_header_ratelimit_rps: 7
+          waf_ratelimit_hits: 3
+          ip_ratelimit_mode: disabled
+          ip_ratelimit_rps: 5
+          waf_ratelimit_rps: 2
+          block_ip:
+          - block_ip
+          - block_ip
+          block_referer:
+          - block_referer
+          - block_referer
+          waf_ratelimit_mode: disabled
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: notify_slack
+          paranoia_level: 5
+        disable_ssl_verify: true
+        failover_origin_status_code:
+        - failover_origin_status_code
+        - failover_origin_status_code
+        proxy_alert_enabled: true
+        failover_mode: true
+      properties:
+        host:
+          type: string
+        waf_enabled:
+          default: false
+          type: boolean
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        auth_pass:
+          type: string
+        origin_timeout:
+          format: int32
+          type: integer
+        proxy_alert_enabled:
+          type: boolean
+        notify:
+          type: string
+        failover_origin_status_code:
+          items:
+            type: string
+          type: array
+        failover_origin_ttfb:
+          format: int32
+          type: integer
+        failover_lifetime:
+          format: int32
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        waf_config:
+          $ref: '#/components/schemas/RuleWAFConfig'
+        to:
+          type: string
+        cache_lifetime:
+          format: int32
+          type: integer
+        failover_mode:
+          type: boolean
+        disable_ssl_verify:
+          type: boolean
+        notify_config:
+          $ref: '#/components/schemas/ProxyNotifyConfig'
+      required:
+      - notify_config
+      - waf_enabled
+      type: object
     RuleProxyRequest:
       example:
         country: country_is
@@ -2414,11 +2654,11 @@ components:
         - method_is_not
         - method_is_not
         notify_config:
-          period: 5
+          period: 1
           slack_webhook: slack_webhook
           origin_status_code:
-          - 5
-          - 5
+          - 1
+          - 1
         notify: none
         cookie_name: cookie_name
         country_is_not:
@@ -2466,7 +2706,7 @@ components:
           - allow_rules
           - allow_rules
           block_bad_bots: false
-          waf_ratelimit_cooldown: 1
+          waf_ratelimit_cooldown: 4
           httpbl:
             block_harvester: false
             httpbl_enabled: false
@@ -2474,22 +2714,22 @@ components:
             block_spam: false
             block_search_engine: false
             block_suspicious: false
-          notify_slack_hist_rpm: 1
+          notify_slack_hist_rpm: 7
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 9
+          ip_ratelimit_cooldown: 2
           block_bad_referers: false
-          request_header_ratelimit_cooldown: 2
+          request_header_ratelimit_cooldown: 9
           block_bad_ips: false
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 3
-          waf_ratelimit_hits: 4
+          request_header_ratelimit_rps: 7
+          waf_ratelimit_hits: 3
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 7
-          waf_ratelimit_rps: 7
+          ip_ratelimit_rps: 5
+          waf_ratelimit_rps: 2
           block_ip:
           - block_ip
           - block_ip
@@ -2501,7 +2741,7 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 2
+          paranoia_level: 5
       properties:
         domain:
           default: any
@@ -2623,8 +2863,6 @@ components:
       - url
       type: object
     RuleRedirectRequest:
-      allOf:
-      - $ref: '#/components/schemas/RuleRequest'
       example:
         country: country_is
         method: method_is
@@ -2722,74 +2960,13 @@ components:
       - redirect_to
       - url
       type: object
-    RuleRequest:
-      properties:
-        domain:
-          default: any
-          type: string
-        name:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        url:
-          type: string
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          default: false
-          type: boolean
-        cookie_name:
-          type: string
-      required:
-      - disabled
-      - domain
-      - url
-      type: object
     RuleWAFConfig:
       example:
         allow_rules:
         - allow_rules
         - allow_rules
         block_bad_bots: false
-        waf_ratelimit_cooldown: 1
+        waf_ratelimit_cooldown: 4
         httpbl:
           block_harvester: false
           httpbl_enabled: false
@@ -2797,22 +2974,22 @@ components:
           block_spam: false
           block_search_engine: false
           block_suspicious: false
-        notify_slack_hist_rpm: 1
+        notify_slack_hist_rpm: 7
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 9
+        ip_ratelimit_cooldown: 2
         block_bad_referers: false
-        request_header_ratelimit_cooldown: 2
+        request_header_ratelimit_cooldown: 9
         block_bad_ips: false
         allow_ip:
         - allow_ip
         - allow_ip
         request_header_name: request_header_name
         mode: block
-        request_header_ratelimit_rps: 3
-        waf_ratelimit_hits: 4
+        request_header_ratelimit_rps: 7
+        waf_ratelimit_hits: 3
         ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 7
-        waf_ratelimit_rps: 7
+        ip_ratelimit_rps: 5
+        waf_ratelimit_rps: 2
         block_ip:
         - block_ip
         - block_ip
@@ -2824,7 +3001,7 @@ components:
         - block_ua
         - block_ua
         notify_slack: notify_slack
-        paranoia_level: 2
+        paranoia_level: 5
       properties:
         mode:
           enum:

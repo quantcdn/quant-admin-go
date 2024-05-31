@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## RulesProxyCreate
 
-> Rule RulesProxyCreate(ctx, organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
+> RuleProxy RulesProxyCreate(ctx, organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
 
 
 
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesProxyCreate`: Rule
+	// response from `RulesProxyCreate`: RuleProxy
 	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyCreate`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleProxy**](RuleProxy.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## RulesProxyDelete
 
-> Rule RulesProxyDelete(ctx, organization, project, rule).Execute()
+> RuleProxy RulesProxyDelete(ctx, organization, project, rule).Execute()
 
 
 
@@ -115,7 +115,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesProxyDelete`: Rule
+	// response from `RulesProxyDelete`: RuleProxy
 	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyDelete`: %v\n", resp)
 }
 ```
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleProxy**](RuleProxy.md)
 
 ### Authorization
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ## RulesProxyList
 
-> []Rule RulesProxyList(ctx, organization, project).Execute()
+> []RuleProxy RulesProxyList(ctx, organization, project).Execute()
 
 
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesProxyList`: []Rule
+	// response from `RulesProxyList`: []RuleProxy
 	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyList`: %v\n", resp)
 }
 ```
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Rule**](Rule.md)
+[**[]RuleProxy**](RuleProxy.md)
 
 ### Authorization
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## RulesProxyRead
 
-> Rule RulesProxyRead(ctx, organization, project, rule).Execute()
+> RuleProxy RulesProxyRead(ctx, organization, project, rule).Execute()
 
 
 
@@ -260,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesProxyRead`: Rule
+	// response from `RulesProxyRead`: RuleProxy
 	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyRead`: %v\n", resp)
 }
 ```
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleProxy**](RuleProxy.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesProxyUpdate
 
-> Rule RulesProxyUpdate(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+> RuleProxy RulesProxyUpdate(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
 
 
 
@@ -335,7 +335,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesProxyUpdate`: Rule
+	// response from `RulesProxyUpdate`: RuleProxy
 	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyUpdate`: %v\n", resp)
 }
 ```
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleProxy**](RuleProxy.md)
 
 ### Authorization
 

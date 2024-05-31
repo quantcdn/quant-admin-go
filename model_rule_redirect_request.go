@@ -53,6 +53,8 @@ func NewRuleRedirectRequest(domain string, disabled bool, url string, redirectTo
 	this.Url = url
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
+	this.RedirectTo = redirectTo
+	this.RedirectCode = redirectCode
 	return &this
 }
 

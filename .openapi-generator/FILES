@@ -6,7 +6,6 @@ api_crawlers.go
 api_domains.go
 api_organizations.go
 api_projects.go
-api_rules.go
 api_rules_auth.go
 api_rules_custom_response.go
 api_rules_headers.go
@@ -32,11 +31,11 @@ docs/Rule.md
 docs/RuleAuthRequest.md
 docs/RuleCustomResponseRequest.md
 docs/RuleHeaderRequest.md
+docs/RuleProxy.md
+docs/RuleProxyAction.md
 docs/RuleProxyRequest.md
 docs/RuleRedirectRequest.md
-docs/RuleRequest.md
 docs/RuleWAFConfig.md
-docs/RulesAPI.md
 docs/RulesAuthAPI.md
 docs/RulesCustomResponseAPI.md
 docs/RulesHeadersAPI.md
@@ -59,9 +58,10 @@ model_rule.go
 model_rule_auth_request.go
 model_rule_custom_response_request.go
 model_rule_header_request.go
+model_rule_proxy.go
+model_rule_proxy_action.go
 model_rule_proxy_request.go
 model_rule_redirect_request.go
-model_rule_request.go
 model_rule_waf_config.go
 response.go
 utils.go

@@ -36,7 +36,7 @@ func (r ApiRulesProxyCreateRequest) RuleProxyRequest(ruleProxyRequest RuleProxyR
 	return r
 }
 
-func (r ApiRulesProxyCreateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesProxyCreateRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyCreateExecute(r)
 }
 
@@ -58,13 +58,13 @@ func (a *RulesProxyAPIService) RulesProxyCreate(ctx context.Context, organizatio
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesProxyAPIService) RulesProxyCreateExecute(r ApiRulesProxyCreateRequest) (*Rule, *http.Response, error) {
+//  @return RuleProxy
+func (a *RulesProxyAPIService) RulesProxyCreateExecute(r ApiRulesProxyCreateRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleProxy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesProxyAPIService.RulesProxyCreate")
@@ -157,7 +157,7 @@ type ApiRulesProxyDeleteRequest struct {
 	rule string
 }
 
-func (r ApiRulesProxyDeleteRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesProxyDeleteRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyDeleteExecute(r)
 }
 
@@ -181,13 +181,13 @@ func (a *RulesProxyAPIService) RulesProxyDelete(ctx context.Context, organizatio
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r ApiRulesProxyDeleteRequest) (*Rule, *http.Response, error) {
+//  @return RuleProxy
+func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r ApiRulesProxyDeleteRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleProxy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesProxyAPIService.RulesProxyDelete")
@@ -275,7 +275,7 @@ type ApiRulesProxyListRequest struct {
 	project string
 }
 
-func (r ApiRulesProxyListRequest) Execute() ([]Rule, *http.Response, error) {
+func (r ApiRulesProxyListRequest) Execute() ([]RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyListExecute(r)
 }
 
@@ -297,13 +297,13 @@ func (a *RulesProxyAPIService) RulesProxyList(ctx context.Context, organization 
 }
 
 // Execute executes the request
-//  @return []Rule
-func (a *RulesProxyAPIService) RulesProxyListExecute(r ApiRulesProxyListRequest) ([]Rule, *http.Response, error) {
+//  @return []RuleProxy
+func (a *RulesProxyAPIService) RulesProxyListExecute(r ApiRulesProxyListRequest) ([]RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Rule
+		localVarReturnValue  []RuleProxy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesProxyAPIService.RulesProxyList")
@@ -391,7 +391,7 @@ type ApiRulesProxyReadRequest struct {
 	rule string
 }
 
-func (r ApiRulesProxyReadRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesProxyReadRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyReadExecute(r)
 }
 
@@ -415,13 +415,13 @@ func (a *RulesProxyAPIService) RulesProxyRead(ctx context.Context, organization 
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesProxyAPIService) RulesProxyReadExecute(r ApiRulesProxyReadRequest) (*Rule, *http.Response, error) {
+//  @return RuleProxy
+func (a *RulesProxyAPIService) RulesProxyReadExecute(r ApiRulesProxyReadRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleProxy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesProxyAPIService.RulesProxyRead")
@@ -516,7 +516,7 @@ func (r ApiRulesProxyUpdateRequest) RuleProxyRequest(ruleProxyRequest RuleProxyR
 	return r
 }
 
-func (r ApiRulesProxyUpdateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesProxyUpdateRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyUpdateExecute(r)
 }
 
@@ -540,13 +540,13 @@ func (a *RulesProxyAPIService) RulesProxyUpdate(ctx context.Context, organizatio
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r ApiRulesProxyUpdateRequest) (*Rule, *http.Response, error) {
+//  @return RuleProxy
+func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r ApiRulesProxyUpdateRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleProxy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesProxyAPIService.RulesProxyUpdate")

@@ -95,7 +95,6 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsList**](docs/ProjectsAPI.md#projectslist) | **Get** /organizations/{organization}/projects | 
 *ProjectsAPI* | [**ProjectsRead**](docs/ProjectsAPI.md#projectsread) | **Get** /organizations/{organization}/projects/{project} | 
 *ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Put** /organizations/{organization}/projects/{project} | 
-*RulesAPI* | [**RulesList**](docs/RulesAPI.md#ruleslist) | **Get** /organizations/{organization}/projects/{project}/rules | 
 *RulesAuthAPI* | [**RulesAuthCreate**](docs/RulesAuthAPI.md#rulesauthcreate) | **Post** /organizations/{organization}/projects/{project}/rules/auth | 
 *RulesAuthAPI* | [**RulesAuthDelete**](docs/RulesAuthAPI.md#rulesauthdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
 *RulesAuthAPI* | [**RulesAuthList**](docs/RulesAuthAPI.md#rulesauthlist) | **Get** /organizations/{organization}/projects/{project}/rules/auth | 
@@ -139,9 +138,10 @@ Class | Method | HTTP request | Description
  - [RuleAuthRequest](docs/RuleAuthRequest.md)
  - [RuleCustomResponseRequest](docs/RuleCustomResponseRequest.md)
  - [RuleHeaderRequest](docs/RuleHeaderRequest.md)
+ - [RuleProxy](docs/RuleProxy.md)
+ - [RuleProxyAction](docs/RuleProxyAction.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
- - [RuleRequest](docs/RuleRequest.md)
  - [RuleWAFConfig](docs/RuleWAFConfig.md)
 
 

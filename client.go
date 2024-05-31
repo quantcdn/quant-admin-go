@@ -57,8 +57,6 @@ type APIClient struct {
 
 	ProjectsAPI *ProjectsAPIService
 
-	RulesAPI *RulesAPIService
-
 	RulesAuthAPI *RulesAuthAPIService
 
 	RulesCustomResponseAPI *RulesCustomResponseAPIService
@@ -90,7 +88,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DomainsAPI = (*DomainsAPIService)(&c.common)
 	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
-	c.RulesAPI = (*RulesAPIService)(&c.common)
 	c.RulesAuthAPI = (*RulesAuthAPIService)(&c.common)
 	c.RulesCustomResponseAPI = (*RulesCustomResponseAPIService)(&c.common)
 	c.RulesHeadersAPI = (*RulesHeadersAPIService)(&c.common)
