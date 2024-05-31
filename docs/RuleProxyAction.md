@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **ProxyAlertEnabled** | Pointer to **string** |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] 
 **NotifyConfig** | Pointer to [**ProxyNotifyConfig**](ProxyNotifyConfig.md) |  | [optional] 
-**ProxyStripRequestHeaders** | **[]string** |  | 
+**ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] 
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] 
 **FailoverMode** | Pointer to **string** |  | [optional] 
@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewRuleProxyAction
 
-`func NewRuleProxyAction(wafEnabled bool, proxyStripRequestHeaders []string, to string, ) *RuleProxyAction`
+`func NewRuleProxyAction(wafEnabled bool, to string, ) *RuleProxyAction`
 
 NewRuleProxyAction instantiates a new RuleProxyAction object
 This constructor will assign default values to properties that have it defined,
@@ -283,6 +283,11 @@ and a boolean to check if the value has been set.
 
 SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 
+### HasProxyStripRequestHeaders
+
+`func (o *RuleProxyAction) HasProxyStripRequestHeaders() bool`
+
+HasProxyStripRequestHeaders returns a boolean if a field has been set.
 
 ### GetFailoverOriginStatusCodes
 

@@ -30,7 +30,7 @@ type RuleProxyAction struct {
 	ProxyAlertEnabled *string `json:"proxy_alert_enabled,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
-	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers"`
+	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverMode *string `json:"failover_mode,omitempty"`
@@ -49,10 +49,9 @@ type _RuleProxyAction RuleProxyAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxyAction(wafEnabled bool, proxyStripRequestHeaders []string, to string) *RuleProxyAction {
+func NewRuleProxyAction(wafEnabled bool, to string) *RuleProxyAction {
 	this := RuleProxyAction{}
 	this.WafEnabled = wafEnabled
-	this.ProxyStripRequestHeaders = proxyStripRequestHeaders
 	this.To = to
 	return &this
 }
@@ -347,26 +346,34 @@ func (o *RuleProxyAction) SetNotifyConfig(v ProxyNotifyConfig) {
 	o.NotifyConfig = &v
 }
 
-// GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field value
+// GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field value if set, zero value otherwise.
 func (o *RuleProxyAction) GetProxyStripRequestHeaders() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
 		var ret []string
 		return ret
 	}
-
 	return o.ProxyStripRequestHeaders
 }
 
-// GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field value
+// GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RuleProxyAction) GetProxyStripRequestHeadersOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
 		return nil, false
 	}
 	return o.ProxyStripRequestHeaders, true
 }
 
-// SetProxyStripRequestHeaders sets field value
+// HasProxyStripRequestHeaders returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasProxyStripRequestHeaders() bool {
+	if o != nil && !IsNil(o.ProxyStripRequestHeaders) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyStripRequestHeaders gets a reference to the given []string and assigns it to the ProxyStripRequestHeaders field.
 func (o *RuleProxyAction) SetProxyStripRequestHeaders(v []string) {
 	o.ProxyStripRequestHeaders = v
 }
@@ -718,7 +725,9 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotifyConfig) {
 		toSerialize["notify_config"] = o.NotifyConfig
 	}
-	toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
+	if !IsNil(o.ProxyStripRequestHeaders) {
+		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
+	}
 	if !IsNil(o.FailoverOriginStatusCodes) {
 		toSerialize["failover_origin_status_codes"] = o.FailoverOriginStatusCodes
 	}
@@ -756,7 +765,6 @@ func (o *RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"waf_enabled",
-		"proxy_strip_request_headers",
 		"to",
 	}
 

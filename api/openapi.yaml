@@ -2655,7 +2655,6 @@ components:
         waf_config:
           $ref: '#/components/schemas/RuleWAFConfig'
       required:
-      - proxy_strip_request_headers
       - to
       - waf_enabled
       type: object
