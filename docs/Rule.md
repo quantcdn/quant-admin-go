@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Domain** | Pointer to **string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
-**CoutnryIsNot** | Pointer to **[]string** |  | [optional] 
+**CountryIsNot** | Pointer to **[]string** |  | [optional] 
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
@@ -176,30 +176,30 @@ SetCountryIs sets CountryIs field to given value.
 
 HasCountryIs returns a boolean if a field has been set.
 
-### GetCoutnryIsNot
+### GetCountryIsNot
 
-`func (o *Rule) GetCoutnryIsNot() []string`
+`func (o *Rule) GetCountryIsNot() []string`
 
-GetCoutnryIsNot returns the CoutnryIsNot field if non-nil, zero value otherwise.
+GetCountryIsNot returns the CountryIsNot field if non-nil, zero value otherwise.
 
-### GetCoutnryIsNotOk
+### GetCountryIsNotOk
 
-`func (o *Rule) GetCoutnryIsNotOk() (*[]string, bool)`
+`func (o *Rule) GetCountryIsNotOk() (*[]string, bool)`
 
-GetCoutnryIsNotOk returns a tuple with the CoutnryIsNot field if it's non-nil, zero value otherwise
+GetCountryIsNotOk returns a tuple with the CountryIsNot field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCoutnryIsNot
+### SetCountryIsNot
 
-`func (o *Rule) SetCoutnryIsNot(v []string)`
+`func (o *Rule) SetCountryIsNot(v []string)`
 
-SetCoutnryIsNot sets CoutnryIsNot field to given value.
+SetCountryIsNot sets CountryIsNot field to given value.
 
-### HasCoutnryIsNot
+### HasCountryIsNot
 
-`func (o *Rule) HasCoutnryIsNot() bool`
+`func (o *Rule) HasCountryIsNot() bool`
 
-HasCoutnryIsNot returns a boolean if a field has been set.
+HasCountryIsNot returns a boolean if a field has been set.
 
 ### GetIp
 

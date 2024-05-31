@@ -2041,14 +2041,14 @@ components:
         country_is:
         - country_is
         - country_is
-        coutnry_is_not:
-        - coutnry_is_not
-        - coutnry_is_not
         method_is_not:
         - method_is_not
         - method_is_not
         uuid: uuid
         url: url
+        country_is_not:
+        - country_is_not
+        - country_is_not
         domain: domain
         name: name
         ip_is:
@@ -2073,7 +2073,7 @@ components:
           items:
             type: string
           type: array
-        coutnry_is_not:
+        country_is_not:
           items:
             type: string
           type: array

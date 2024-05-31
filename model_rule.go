@@ -27,7 +27,7 @@ type Rule struct {
 	Domain *string `json:"domain,omitempty"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
-	CoutnryIsNot []string `json:"coutnry_is_not,omitempty"`
+	CountryIsNot []string `json:"country_is_not,omitempty"`
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
@@ -232,36 +232,36 @@ func (o *Rule) SetCountryIs(v []string) {
 	o.CountryIs = v
 }
 
-// GetCoutnryIsNot returns the CoutnryIsNot field value if set, zero value otherwise.
-func (o *Rule) GetCoutnryIsNot() []string {
-	if o == nil || IsNil(o.CoutnryIsNot) {
+// GetCountryIsNot returns the CountryIsNot field value if set, zero value otherwise.
+func (o *Rule) GetCountryIsNot() []string {
+	if o == nil || IsNil(o.CountryIsNot) {
 		var ret []string
 		return ret
 	}
-	return o.CoutnryIsNot
+	return o.CountryIsNot
 }
 
-// GetCoutnryIsNotOk returns a tuple with the CoutnryIsNot field value if set, nil otherwise
+// GetCountryIsNotOk returns a tuple with the CountryIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Rule) GetCoutnryIsNotOk() ([]string, bool) {
-	if o == nil || IsNil(o.CoutnryIsNot) {
+func (o *Rule) GetCountryIsNotOk() ([]string, bool) {
+	if o == nil || IsNil(o.CountryIsNot) {
 		return nil, false
 	}
-	return o.CoutnryIsNot, true
+	return o.CountryIsNot, true
 }
 
-// HasCoutnryIsNot returns a boolean if a field has been set.
-func (o *Rule) HasCoutnryIsNot() bool {
-	if o != nil && !IsNil(o.CoutnryIsNot) {
+// HasCountryIsNot returns a boolean if a field has been set.
+func (o *Rule) HasCountryIsNot() bool {
+	if o != nil && !IsNil(o.CountryIsNot) {
 		return true
 	}
 
 	return false
 }
 
-// SetCoutnryIsNot gets a reference to the given []string and assigns it to the CoutnryIsNot field.
-func (o *Rule) SetCoutnryIsNot(v []string) {
-	o.CoutnryIsNot = v
+// SetCountryIsNot gets a reference to the given []string and assigns it to the CountryIsNot field.
+func (o *Rule) SetCountryIsNot(v []string) {
+	o.CountryIsNot = v
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
@@ -590,8 +590,8 @@ func (o Rule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CountryIs) {
 		toSerialize["country_is"] = o.CountryIs
 	}
-	if !IsNil(o.CoutnryIsNot) {
-		toSerialize["coutnry_is_not"] = o.CoutnryIsNot
+	if !IsNil(o.CountryIsNot) {
+		toSerialize["country_is_not"] = o.CountryIsNot
 	}
 	if !IsNil(o.Ip) {
 		toSerialize["ip"] = o.Ip
