@@ -1968,11 +1968,11 @@ components:
       type: object
     ProxyNotifyConfig:
       example:
-        period: 1
+        period: 6
         slack_webhook: slack_webhook
         origin_status_code:
-        - 1
-        - 1
+        - 0
+        - 0
       properties:
         origin_status_code:
           items:
@@ -1987,7 +1987,6 @@ components:
       required:
       - origin_status_code
       - period
-      - slack_webhook
       type: object
     Rule:
       example:
@@ -2373,7 +2372,7 @@ components:
         ip_is_not:
         - ip_is_not
         - ip_is_not
-        only_with_cookie: true
+        only_with_cookie: only_with_cookie
         method_is:
         - method_is
         - method_is
@@ -2385,7 +2384,9 @@ components:
         - method_is_not
         - method_is_not
         uuid: uuid
-        url: url
+        url:
+        - url
+        - url
         country_is_not:
         - country_is_not
         - country_is_not
@@ -2397,33 +2398,42 @@ components:
         action: proxy
         disabled: false
         action_config:
-          origin_timeout: 0
-          cache_lifetime: 1
-          failover_origin_ttfb: 6
+          origin_timeout: origin_timeout
+          proxy_strip_request_headers:
+          - proxy_strip_request_headers
+          - proxy_strip_request_headers
+          cache_lifetime: cache_lifetime
+          failover_origin_ttfb: failover_origin_ttfb
           proxy_strip_headers:
           - proxy_strip_headers
           - proxy_strip_headers
           notify_config:
-            period: 1
+            period: 6
             slack_webhook: slack_webhook
             origin_status_code:
-            - 1
-            - 1
+            - 0
+            - 0
           notify: notify
           only_proxy_404: true
           inject_headers:
             key: inject_headers
+          auth_user: auth_user
           host: host
           waf_enabled: false
           auth_pass: auth_pass
           to: to
-          failover_lifetime: 1
+          failover_lifetime: failover_lifetime
+          disable_ssl_verify: disable_ssl_verify
           waf_config:
+            block_lists:
+              referer: false
+              ip: false
+              user_agent: false
             allow_rules:
             - allow_rules
             - allow_rules
-            block_bad_bots: false
-            waf_ratelimit_cooldown: 4
+            waf_ratelimit_cooldown: 2
+            notify_slack_rpm: 4
             httpbl:
               block_harvester: false
               httpbl_enabled: false
@@ -2431,22 +2441,19 @@ components:
               block_spam: false
               block_search_engine: false
               block_suspicious: false
-            notify_slack_hist_rpm: 7
             request_header_ratelimit_mode: disabled
-            ip_ratelimit_cooldown: 2
-            block_bad_referers: false
-            request_header_ratelimit_cooldown: 9
-            block_bad_ips: false
+            ip_ratelimit_cooldown: 5
+            request_header_ratelimit_cooldown: 7
             allow_ip:
             - allow_ip
             - allow_ip
             request_header_name: request_header_name
             mode: block
-            request_header_ratelimit_rps: 7
-            waf_ratelimit_hits: 3
+            request_header_ratelimit_rps: 2
+            waf_ratelimit_hits: 9
             ip_ratelimit_mode: disabled
             ip_ratelimit_rps: 5
-            waf_ratelimit_rps: 2
+            waf_ratelimit_rps: 3
             block_ip:
             - block_ip
             - block_ip
@@ -2458,27 +2465,28 @@ components:
             - block_ua
             - block_ua
             notify_slack: notify_slack
-            paranoia_level: 5
-          disable_ssl_verify: true
-          failover_origin_status_code:
-          - failover_origin_status_code
-          - failover_origin_status_code
-          proxy_alert_enabled: true
-          failover_mode: true
+            paranoia_level: 1
+          failover_origin_status_codes:
+          - failover_origin_status_codes
+          - failover_origin_status_codes
+          proxy_alert_enabled: proxy_alert_enabled
+          failover_mode: failover_mode
       properties:
         name:
           type: string
         uuid:
           type: string
         url:
-          type: string
+          items:
+            type: string
+          type: array
         domain:
           type: string
         disabled:
           default: false
           type: boolean
         only_with_cookie:
-          type: boolean
+          type: string
         method:
           type: string
         method_is:
@@ -2523,33 +2531,42 @@ components:
       type: object
     RuleProxyAction:
       example:
-        origin_timeout: 0
-        cache_lifetime: 1
-        failover_origin_ttfb: 6
+        origin_timeout: origin_timeout
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
+        cache_lifetime: cache_lifetime
+        failover_origin_ttfb: failover_origin_ttfb
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
         notify_config:
-          period: 1
+          period: 6
           slack_webhook: slack_webhook
           origin_status_code:
-          - 1
-          - 1
+          - 0
+          - 0
         notify: notify
         only_proxy_404: true
         inject_headers:
           key: inject_headers
+        auth_user: auth_user
         host: host
         waf_enabled: false
         auth_pass: auth_pass
         to: to
-        failover_lifetime: 1
+        failover_lifetime: failover_lifetime
+        disable_ssl_verify: disable_ssl_verify
         waf_config:
+          block_lists:
+            referer: false
+            ip: false
+            user_agent: false
           allow_rules:
           - allow_rules
           - allow_rules
-          block_bad_bots: false
-          waf_ratelimit_cooldown: 4
+          waf_ratelimit_cooldown: 2
+          notify_slack_rpm: 4
           httpbl:
             block_harvester: false
             httpbl_enabled: false
@@ -2557,22 +2574,19 @@ components:
             block_spam: false
             block_search_engine: false
             block_suspicious: false
-          notify_slack_hist_rpm: 7
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 2
-          block_bad_referers: false
-          request_header_ratelimit_cooldown: 9
-          block_bad_ips: false
+          ip_ratelimit_cooldown: 5
+          request_header_ratelimit_cooldown: 7
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 7
-          waf_ratelimit_hits: 3
+          request_header_ratelimit_rps: 2
+          waf_ratelimit_hits: 9
           ip_ratelimit_mode: disabled
           ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 2
+          waf_ratelimit_rps: 3
           block_ip:
           - block_ip
           - block_ip
@@ -2584,13 +2598,12 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 5
-        disable_ssl_verify: true
-        failover_origin_status_code:
-        - failover_origin_status_code
-        - failover_origin_status_code
-        proxy_alert_enabled: true
-        failover_mode: true
+          paranoia_level: 1
+        failover_origin_status_codes:
+        - failover_origin_status_codes
+        - failover_origin_status_codes
+        proxy_alert_enabled: proxy_alert_enabled
+        failover_mode: failover_mode
       properties:
         host:
           type: string
@@ -2601,64 +2614,73 @@ components:
           items:
             type: string
           type: array
+        auth_user:
+          type: string
         auth_pass:
           type: string
         origin_timeout:
-          format: int32
-          type: integer
+          type: string
         proxy_alert_enabled:
-          type: boolean
+          type: string
         notify:
           type: string
-        failover_origin_status_code:
+        notify_config:
+          $ref: '#/components/schemas/ProxyNotifyConfig'
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+        failover_origin_status_codes:
           items:
             type: string
           type: array
         failover_origin_ttfb:
-          format: int32
-          type: integer
+          type: string
+        failover_mode:
+          type: string
         failover_lifetime:
-          format: int32
-          type: integer
+          type: string
         only_proxy_404:
           type: boolean
         inject_headers:
           additionalProperties:
             type: string
           type: object
-        waf_config:
-          $ref: '#/components/schemas/RuleWAFConfig'
         to:
           type: string
         cache_lifetime:
-          format: int32
-          type: integer
-        failover_mode:
-          type: boolean
+          type: string
         disable_ssl_verify:
-          type: boolean
-        notify_config:
-          $ref: '#/components/schemas/ProxyNotifyConfig'
+          type: string
+        waf_config:
+          $ref: '#/components/schemas/RuleWAFConfig'
       required:
-      - notify_config
+      - proxy_strip_request_headers
+      - to
       - waf_enabled
       type: object
     RuleProxyRequest:
       example:
         country: country_is
-        cache_lifetime: 0
+        cache_lifetime: cache_lifetime
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
         method_is:
         - method_is
         - method_is
         method_is_not:
         - method_is_not
         - method_is_not
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
         notify_config:
-          period: 1
+          period: 6
           slack_webhook: slack_webhook
           origin_status_code:
-          - 1
-          - 1
+          - 0
+          - 0
         notify: none
         cookie_name: cookie_name
         country_is_not:
@@ -2669,27 +2691,20 @@ components:
         waf_enabled: false
         auth_pass: auth_pass
         disabled: false
-        failover_origin_status_code:
-        - failover_origin_status_code
-        - failover_origin_status_code
-        failover_mode: true
-        strip_response_headers:
-        - strip_response_headers
-        - strip_response_headers
+        failover_mode: failover_mode
         method: method_is
         ip_is_not:
         - ip_is_not
         - ip_is_not
-        strip_headers:
-        - strip_headers
-        - strip_headers
-        failover_origin_ttfb: 6
+        failover_origin_ttfb: "2000"
         ip: ip_is
         only_with_cookie: false
         country_is:
         - country_is
         - country_is
-        url: url
+        url:
+        - url
+        - url
         only_proxy_404: true
         inject_headers:
           key: inject_headers
@@ -2700,13 +2715,17 @@ components:
         - ip_is
         to: to
         disable_ssl_verify: true
-        failover_lifetime: 1
+        failover_lifetime: "300"
         waf_config:
+          block_lists:
+            referer: false
+            ip: false
+            user_agent: false
           allow_rules:
           - allow_rules
           - allow_rules
-          block_bad_bots: false
-          waf_ratelimit_cooldown: 4
+          waf_ratelimit_cooldown: 2
+          notify_slack_rpm: 4
           httpbl:
             block_harvester: false
             httpbl_enabled: false
@@ -2714,22 +2733,19 @@ components:
             block_spam: false
             block_search_engine: false
             block_suspicious: false
-          notify_slack_hist_rpm: 7
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 2
-          block_bad_referers: false
-          request_header_ratelimit_cooldown: 9
-          block_bad_ips: false
+          ip_ratelimit_cooldown: 5
+          request_header_ratelimit_cooldown: 7
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 7
-          waf_ratelimit_hits: 3
+          request_header_ratelimit_rps: 2
+          waf_ratelimit_hits: 9
           ip_ratelimit_mode: disabled
           ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 2
+          waf_ratelimit_rps: 3
           block_ip:
           - block_ip
           - block_ip
@@ -2741,7 +2757,10 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 5
+          paranoia_level: 1
+        failover_origin_status_codes:
+        - failover_origin_status_codes
+        - failover_origin_status_codes
       properties:
         domain:
           default: any
@@ -2752,7 +2771,9 @@ components:
           default: false
           type: boolean
         url:
-          type: string
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is
@@ -2808,29 +2829,27 @@ components:
         disable_ssl_verify:
           type: boolean
         cache_lifetime:
-          format: int32
-          type: integer
+          type: string
         only_proxy_404:
           type: boolean
         inject_headers:
           additionalProperties:
             type: string
           type: object
-        strip_headers:
+        proxy_strip_headers:
           items:
             type: string
           type: array
-        strip_response_headers:
+        proxy_strip_request_headers:
           items:
             type: string
           type: array
         failover_mode:
-          type: boolean
+          type: string
         failover_origin_ttfb:
-          default: 2000
-          format: int32
-          type: integer
-        failover_origin_status_code:
+          default: "2000"
+          type: string
+        failover_origin_status_codes:
           default:
           - "200"
           - "404"
@@ -2841,8 +2860,8 @@ components:
             type: string
           type: array
         failover_lifetime:
-          format: int32
-          type: integer
+          default: "300"
+          type: string
         notify:
           default: none
           enum:
@@ -2962,11 +2981,15 @@ components:
       type: object
     RuleWAFConfig:
       example:
+        block_lists:
+          referer: false
+          ip: false
+          user_agent: false
         allow_rules:
         - allow_rules
         - allow_rules
-        block_bad_bots: false
-        waf_ratelimit_cooldown: 4
+        waf_ratelimit_cooldown: 2
+        notify_slack_rpm: 4
         httpbl:
           block_harvester: false
           httpbl_enabled: false
@@ -2974,22 +2997,19 @@ components:
           block_spam: false
           block_search_engine: false
           block_suspicious: false
-        notify_slack_hist_rpm: 7
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 2
-        block_bad_referers: false
-        request_header_ratelimit_cooldown: 9
-        block_bad_ips: false
+        ip_ratelimit_cooldown: 5
+        request_header_ratelimit_cooldown: 7
         allow_ip:
         - allow_ip
         - allow_ip
         request_header_name: request_header_name
         mode: block
-        request_header_ratelimit_rps: 7
-        waf_ratelimit_hits: 3
+        request_header_ratelimit_rps: 2
+        waf_ratelimit_hits: 9
         ip_ratelimit_mode: disabled
         ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 2
+        waf_ratelimit_rps: 3
         block_ip:
         - block_ip
         - block_ip
@@ -3001,7 +3021,7 @@ components:
         - block_ua
         - block_ua
         notify_slack: notify_slack
-        paranoia_level: 5
+        paranoia_level: 1
       properties:
         mode:
           enum:
@@ -3031,15 +3051,8 @@ components:
           items:
             type: string
           type: array
-        block_bad_bots:
-          default: false
-          type: boolean
-        block_bad_referers:
-          default: false
-          type: boolean
-        block_bad_ips:
-          default: false
-          type: boolean
+        block_lists:
+          $ref: '#/components/schemas/WafConfigBlockLists'
         httpbl:
           $ref: '#/components/schemas/ProxyConfigHttpbl'
         ip_ratelimit_mode:
@@ -3088,11 +3101,27 @@ components:
           type: integer
         notify_slack:
           type: string
-        notify_slack_hist_rpm:
+        notify_slack_rpm:
           format: int32
           type: integer
       required:
       - mode
+      type: object
+    WafConfigBlockLists:
+      example:
+        referer: false
+        ip: false
+        user_agent: false
+      properties:
+        referer:
+          default: false
+          type: boolean
+        ip:
+          default: false
+          type: boolean
+        user_agent:
+          default: false
+          type: boolean
       type: object
   securitySchemes:
     BearerAuth:

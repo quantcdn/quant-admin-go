@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OriginStatusCode** | **[]int32** |  | 
 **Period** | **int32** |  | 
-**SlackWebhook** | **string** |  | 
+**SlackWebhook** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewProxyNotifyConfig
 
-`func NewProxyNotifyConfig(originStatusCode []int32, period int32, slackWebhook string, ) *ProxyNotifyConfig`
+`func NewProxyNotifyConfig(originStatusCode []int32, period int32, ) *ProxyNotifyConfig`
 
 NewProxyNotifyConfig instantiates a new ProxyNotifyConfig object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +86,11 @@ and a boolean to check if the value has been set.
 
 SetSlackWebhook sets SlackWebhook field to given value.
 
+### HasSlackWebhook
+
+`func (o *ProxyNotifyConfig) HasSlackWebhook() bool`
+
+HasSlackWebhook returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

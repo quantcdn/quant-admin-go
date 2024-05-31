@@ -23,7 +23,7 @@ var _ MappedNullable = &ProxyNotifyConfig{}
 type ProxyNotifyConfig struct {
 	OriginStatusCode []int32 `json:"origin_status_code"`
 	Period int32 `json:"period"`
-	SlackWebhook string `json:"slack_webhook"`
+	SlackWebhook *string `json:"slack_webhook,omitempty"`
 }
 
 type _ProxyNotifyConfig ProxyNotifyConfig
@@ -32,11 +32,10 @@ type _ProxyNotifyConfig ProxyNotifyConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProxyNotifyConfig(originStatusCode []int32, period int32, slackWebhook string) *ProxyNotifyConfig {
+func NewProxyNotifyConfig(originStatusCode []int32, period int32) *ProxyNotifyConfig {
 	this := ProxyNotifyConfig{}
 	this.OriginStatusCode = originStatusCode
 	this.Period = period
-	this.SlackWebhook = slackWebhook
 	return &this
 }
 
@@ -96,28 +95,36 @@ func (o *ProxyNotifyConfig) SetPeriod(v int32) {
 	o.Period = v
 }
 
-// GetSlackWebhook returns the SlackWebhook field value
+// GetSlackWebhook returns the SlackWebhook field value if set, zero value otherwise.
 func (o *ProxyNotifyConfig) GetSlackWebhook() string {
-	if o == nil {
+	if o == nil || IsNil(o.SlackWebhook) {
 		var ret string
 		return ret
 	}
-
-	return o.SlackWebhook
+	return *o.SlackWebhook
 }
 
-// GetSlackWebhookOk returns a tuple with the SlackWebhook field value
+// GetSlackWebhookOk returns a tuple with the SlackWebhook field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProxyNotifyConfig) GetSlackWebhookOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SlackWebhook) {
 		return nil, false
 	}
-	return &o.SlackWebhook, true
+	return o.SlackWebhook, true
 }
 
-// SetSlackWebhook sets field value
+// HasSlackWebhook returns a boolean if a field has been set.
+func (o *ProxyNotifyConfig) HasSlackWebhook() bool {
+	if o != nil && !IsNil(o.SlackWebhook) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlackWebhook gets a reference to the given string and assigns it to the SlackWebhook field.
 func (o *ProxyNotifyConfig) SetSlackWebhook(v string) {
-	o.SlackWebhook = v
+	o.SlackWebhook = &v
 }
 
 func (o ProxyNotifyConfig) MarshalJSON() ([]byte, error) {
@@ -132,7 +139,9 @@ func (o ProxyNotifyConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["origin_status_code"] = o.OriginStatusCode
 	toSerialize["period"] = o.Period
-	toSerialize["slack_webhook"] = o.SlackWebhook
+	if !IsNil(o.SlackWebhook) {
+		toSerialize["slack_webhook"] = o.SlackWebhook
+	}
 	return toSerialize, nil
 }
 
@@ -143,7 +152,6 @@ func (o *ProxyNotifyConfig) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"origin_status_code",
 		"period",
-		"slack_webhook",
 	}
 
 	allProperties := make(map[string]interface{})

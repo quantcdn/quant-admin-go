@@ -24,7 +24,7 @@ type RuleProxyRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
-	Url string `json:"url"`
+	Url []string `json:"url"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -41,15 +41,15 @@ type RuleProxyRequest struct {
 	AuthUser *string `json:"auth_user,omitempty"`
 	AuthPass *string `json:"auth_pass,omitempty"`
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
-	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
+	CacheLifetime *string `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
-	StripHeaders []string `json:"strip_headers,omitempty"`
-	StripResponseHeaders []string `json:"strip_response_headers,omitempty"`
-	FailoverMode *bool `json:"failover_mode,omitempty"`
-	FailoverOriginTtfb *int32 `json:"failover_origin_ttfb,omitempty"`
-	FailoverOriginStatusCode []string `json:"failover_origin_status_code,omitempty"`
-	FailoverLifetime *int32 `json:"failover_lifetime,omitempty"`
+	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
+	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
+	FailoverMode *string `json:"failover_mode,omitempty"`
+	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
+	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
+	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
@@ -62,7 +62,7 @@ type _RuleProxyRequest RuleProxyRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxyRequest(domain string, disabled bool, url string, to string) *RuleProxyRequest {
+func NewRuleProxyRequest(domain string, disabled bool, url []string, to string) *RuleProxyRequest {
 	this := RuleProxyRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -70,8 +70,10 @@ func NewRuleProxyRequest(domain string, disabled bool, url string, to string) *R
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
 	this.To = to
-	var failoverOriginTtfb int32 = 2000
+	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var failoverLifetime string = "300"
+	this.FailoverLifetime = &failoverLifetime
 	var notify string = "none"
 	this.Notify = &notify
 	var wafEnabled bool = false
@@ -90,8 +92,10 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	this.Disabled = disabled
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
-	var failoverOriginTtfb int32 = 2000
+	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var failoverLifetime string = "300"
+	this.FailoverLifetime = &failoverLifetime
 	var notify string = "none"
 	this.Notify = &notify
 	var wafEnabled bool = false
@@ -180,9 +184,9 @@ func (o *RuleProxyRequest) SetDisabled(v bool) {
 }
 
 // GetUrl returns the Url field value
-func (o *RuleProxyRequest) GetUrl() string {
+func (o *RuleProxyRequest) GetUrl() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -191,15 +195,15 @@ func (o *RuleProxyRequest) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetUrlOk() (*string, bool) {
+func (o *RuleProxyRequest) GetUrlOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url, true
 }
 
 // SetUrl sets field value
-func (o *RuleProxyRequest) SetUrl(v string) {
+func (o *RuleProxyRequest) SetUrl(v []string) {
 	o.Url = v
 }
 
@@ -708,9 +712,9 @@ func (o *RuleProxyRequest) SetDisableSslVerify(v bool) {
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCacheLifetime() int32 {
+func (o *RuleProxyRequest) GetCacheLifetime() string {
 	if o == nil || IsNil(o.CacheLifetime) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.CacheLifetime
@@ -718,7 +722,7 @@ func (o *RuleProxyRequest) GetCacheLifetime() int32 {
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCacheLifetimeOk() (*int32, bool) {
+func (o *RuleProxyRequest) GetCacheLifetimeOk() (*string, bool) {
 	if o == nil || IsNil(o.CacheLifetime) {
 		return nil, false
 	}
@@ -734,8 +738,8 @@ func (o *RuleProxyRequest) HasCacheLifetime() bool {
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
-func (o *RuleProxyRequest) SetCacheLifetime(v int32) {
+// SetCacheLifetime gets a reference to the given string and assigns it to the CacheLifetime field.
+func (o *RuleProxyRequest) SetCacheLifetime(v string) {
 	o.CacheLifetime = &v
 }
 
@@ -803,74 +807,74 @@ func (o *RuleProxyRequest) SetInjectHeaders(v map[string]string) {
 	o.InjectHeaders = &v
 }
 
-// GetStripHeaders returns the StripHeaders field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetStripHeaders() []string {
-	if o == nil || IsNil(o.StripHeaders) {
+// GetProxyStripHeaders returns the ProxyStripHeaders field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetProxyStripHeaders() []string {
+	if o == nil || IsNil(o.ProxyStripHeaders) {
 		var ret []string
 		return ret
 	}
-	return o.StripHeaders
+	return o.ProxyStripHeaders
 }
 
-// GetStripHeadersOk returns a tuple with the StripHeaders field value if set, nil otherwise
+// GetProxyStripHeadersOk returns a tuple with the ProxyStripHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetStripHeadersOk() ([]string, bool) {
-	if o == nil || IsNil(o.StripHeaders) {
+func (o *RuleProxyRequest) GetProxyStripHeadersOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProxyStripHeaders) {
 		return nil, false
 	}
-	return o.StripHeaders, true
+	return o.ProxyStripHeaders, true
 }
 
-// HasStripHeaders returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasStripHeaders() bool {
-	if o != nil && !IsNil(o.StripHeaders) {
+// HasProxyStripHeaders returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasProxyStripHeaders() bool {
+	if o != nil && !IsNil(o.ProxyStripHeaders) {
 		return true
 	}
 
 	return false
 }
 
-// SetStripHeaders gets a reference to the given []string and assigns it to the StripHeaders field.
-func (o *RuleProxyRequest) SetStripHeaders(v []string) {
-	o.StripHeaders = v
+// SetProxyStripHeaders gets a reference to the given []string and assigns it to the ProxyStripHeaders field.
+func (o *RuleProxyRequest) SetProxyStripHeaders(v []string) {
+	o.ProxyStripHeaders = v
 }
 
-// GetStripResponseHeaders returns the StripResponseHeaders field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetStripResponseHeaders() []string {
-	if o == nil || IsNil(o.StripResponseHeaders) {
+// GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetProxyStripRequestHeaders() []string {
+	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
 		var ret []string
 		return ret
 	}
-	return o.StripResponseHeaders
+	return o.ProxyStripRequestHeaders
 }
 
-// GetStripResponseHeadersOk returns a tuple with the StripResponseHeaders field value if set, nil otherwise
+// GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetStripResponseHeadersOk() ([]string, bool) {
-	if o == nil || IsNil(o.StripResponseHeaders) {
+func (o *RuleProxyRequest) GetProxyStripRequestHeadersOk() ([]string, bool) {
+	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
 		return nil, false
 	}
-	return o.StripResponseHeaders, true
+	return o.ProxyStripRequestHeaders, true
 }
 
-// HasStripResponseHeaders returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasStripResponseHeaders() bool {
-	if o != nil && !IsNil(o.StripResponseHeaders) {
+// HasProxyStripRequestHeaders returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool {
+	if o != nil && !IsNil(o.ProxyStripRequestHeaders) {
 		return true
 	}
 
 	return false
 }
 
-// SetStripResponseHeaders gets a reference to the given []string and assigns it to the StripResponseHeaders field.
-func (o *RuleProxyRequest) SetStripResponseHeaders(v []string) {
-	o.StripResponseHeaders = v
+// SetProxyStripRequestHeaders gets a reference to the given []string and assigns it to the ProxyStripRequestHeaders field.
+func (o *RuleProxyRequest) SetProxyStripRequestHeaders(v []string) {
+	o.ProxyStripRequestHeaders = v
 }
 
 // GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverMode() bool {
+func (o *RuleProxyRequest) GetFailoverMode() string {
 	if o == nil || IsNil(o.FailoverMode) {
-		var ret bool
+		var ret string
 		return ret
 	}
 	return *o.FailoverMode
@@ -878,7 +882,7 @@ func (o *RuleProxyRequest) GetFailoverMode() bool {
 
 // GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverModeOk() (*bool, bool) {
+func (o *RuleProxyRequest) GetFailoverModeOk() (*string, bool) {
 	if o == nil || IsNil(o.FailoverMode) {
 		return nil, false
 	}
@@ -894,15 +898,15 @@ func (o *RuleProxyRequest) HasFailoverMode() bool {
 	return false
 }
 
-// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
-func (o *RuleProxyRequest) SetFailoverMode(v bool) {
+// SetFailoverMode gets a reference to the given string and assigns it to the FailoverMode field.
+func (o *RuleProxyRequest) SetFailoverMode(v string) {
 	o.FailoverMode = &v
 }
 
 // GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverOriginTtfb() int32 {
+func (o *RuleProxyRequest) GetFailoverOriginTtfb() string {
 	if o == nil || IsNil(o.FailoverOriginTtfb) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.FailoverOriginTtfb
@@ -910,7 +914,7 @@ func (o *RuleProxyRequest) GetFailoverOriginTtfb() int32 {
 
 // GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverOriginTtfbOk() (*int32, bool) {
+func (o *RuleProxyRequest) GetFailoverOriginTtfbOk() (*string, bool) {
 	if o == nil || IsNil(o.FailoverOriginTtfb) {
 		return nil, false
 	}
@@ -926,47 +930,47 @@ func (o *RuleProxyRequest) HasFailoverOriginTtfb() bool {
 	return false
 }
 
-// SetFailoverOriginTtfb gets a reference to the given int32 and assigns it to the FailoverOriginTtfb field.
-func (o *RuleProxyRequest) SetFailoverOriginTtfb(v int32) {
+// SetFailoverOriginTtfb gets a reference to the given string and assigns it to the FailoverOriginTtfb field.
+func (o *RuleProxyRequest) SetFailoverOriginTtfb(v string) {
 	o.FailoverOriginTtfb = &v
 }
 
-// GetFailoverOriginStatusCode returns the FailoverOriginStatusCode field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverOriginStatusCode() []string {
-	if o == nil || IsNil(o.FailoverOriginStatusCode) {
+// GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetFailoverOriginStatusCodes() []string {
+	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
 		var ret []string
 		return ret
 	}
-	return o.FailoverOriginStatusCode
+	return o.FailoverOriginStatusCodes
 }
 
-// GetFailoverOriginStatusCodeOk returns a tuple with the FailoverOriginStatusCode field value if set, nil otherwise
+// GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverOriginStatusCodeOk() ([]string, bool) {
-	if o == nil || IsNil(o.FailoverOriginStatusCode) {
+func (o *RuleProxyRequest) GetFailoverOriginStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
 		return nil, false
 	}
-	return o.FailoverOriginStatusCode, true
+	return o.FailoverOriginStatusCodes, true
 }
 
-// HasFailoverOriginStatusCode returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasFailoverOriginStatusCode() bool {
-	if o != nil && !IsNil(o.FailoverOriginStatusCode) {
+// HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasFailoverOriginStatusCodes() bool {
+	if o != nil && !IsNil(o.FailoverOriginStatusCodes) {
 		return true
 	}
 
 	return false
 }
 
-// SetFailoverOriginStatusCode gets a reference to the given []string and assigns it to the FailoverOriginStatusCode field.
-func (o *RuleProxyRequest) SetFailoverOriginStatusCode(v []string) {
-	o.FailoverOriginStatusCode = v
+// SetFailoverOriginStatusCodes gets a reference to the given []string and assigns it to the FailoverOriginStatusCodes field.
+func (o *RuleProxyRequest) SetFailoverOriginStatusCodes(v []string) {
+	o.FailoverOriginStatusCodes = v
 }
 
 // GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverLifetime() int32 {
+func (o *RuleProxyRequest) GetFailoverLifetime() string {
 	if o == nil || IsNil(o.FailoverLifetime) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.FailoverLifetime
@@ -974,7 +978,7 @@ func (o *RuleProxyRequest) GetFailoverLifetime() int32 {
 
 // GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverLifetimeOk() (*int32, bool) {
+func (o *RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool) {
 	if o == nil || IsNil(o.FailoverLifetime) {
 		return nil, false
 	}
@@ -990,8 +994,8 @@ func (o *RuleProxyRequest) HasFailoverLifetime() bool {
 	return false
 }
 
-// SetFailoverLifetime gets a reference to the given int32 and assigns it to the FailoverLifetime field.
-func (o *RuleProxyRequest) SetFailoverLifetime(v int32) {
+// SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
+func (o *RuleProxyRequest) SetFailoverLifetime(v string) {
 	o.FailoverLifetime = &v
 }
 
@@ -1194,11 +1198,11 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InjectHeaders) {
 		toSerialize["inject_headers"] = o.InjectHeaders
 	}
-	if !IsNil(o.StripHeaders) {
-		toSerialize["strip_headers"] = o.StripHeaders
+	if !IsNil(o.ProxyStripHeaders) {
+		toSerialize["proxy_strip_headers"] = o.ProxyStripHeaders
 	}
-	if !IsNil(o.StripResponseHeaders) {
-		toSerialize["strip_response_headers"] = o.StripResponseHeaders
+	if !IsNil(o.ProxyStripRequestHeaders) {
+		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
 	}
 	if !IsNil(o.FailoverMode) {
 		toSerialize["failover_mode"] = o.FailoverMode
@@ -1206,8 +1210,8 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailoverOriginTtfb) {
 		toSerialize["failover_origin_ttfb"] = o.FailoverOriginTtfb
 	}
-	if !IsNil(o.FailoverOriginStatusCode) {
-		toSerialize["failover_origin_status_code"] = o.FailoverOriginStatusCode
+	if !IsNil(o.FailoverOriginStatusCodes) {
+		toSerialize["failover_origin_status_codes"] = o.FailoverOriginStatusCodes
 	}
 	if !IsNil(o.FailoverLifetime) {
 		toSerialize["failover_lifetime"] = o.FailoverLifetime

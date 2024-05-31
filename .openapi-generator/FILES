@@ -41,6 +41,7 @@ docs/RulesCustomResponseAPI.md
 docs/RulesHeadersAPI.md
 docs/RulesProxyAPI.md
 docs/RulesRedirectAPI.md
+docs/WafConfigBlockLists.md
 git_push.sh
 go.mod
 go.sum
@@ -63,5 +64,6 @@ model_rule_proxy_action.go
 model_rule_proxy_request.go
 model_rule_redirect_request.go
 model_rule_waf_config.go
+model_waf_config_block_lists.go
 response.go
 utils.go

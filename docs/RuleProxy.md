@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | 
 **Uuid** | **string** |  | 
-**Url** | Pointer to **string** |  | [optional] 
+**Url** | Pointer to **[]string** |  | [optional] 
 **Domain** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
-**OnlyWithCookie** | Pointer to **bool** |  | [optional] 
+**OnlyWithCookie** | Pointer to **string** |  | [optional] 
 **Method** | Pointer to **string** |  | [optional] 
 **MethodIs** | Pointer to **[]string** |  | [optional] 
 **MethodIsNot** | Pointer to **[]string** |  | [optional] 
@@ -83,20 +83,20 @@ SetUuid sets Uuid field to given value.
 
 ### GetUrl
 
-`func (o *RuleProxy) GetUrl() string`
+`func (o *RuleProxy) GetUrl() []string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *RuleProxy) GetUrlOk() (*string, bool)`
+`func (o *RuleProxy) GetUrlOk() (*[]string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *RuleProxy) SetUrl(v string)`
+`func (o *RuleProxy) SetUrl(v []string)`
 
 SetUrl sets Url field to given value.
 
@@ -153,20 +153,20 @@ SetDisabled sets Disabled field to given value.
 
 ### GetOnlyWithCookie
 
-`func (o *RuleProxy) GetOnlyWithCookie() bool`
+`func (o *RuleProxy) GetOnlyWithCookie() string`
 
 GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
 
 ### GetOnlyWithCookieOk
 
-`func (o *RuleProxy) GetOnlyWithCookieOk() (*bool, bool)`
+`func (o *RuleProxy) GetOnlyWithCookieOk() (*string, bool)`
 
 GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOnlyWithCookie
 
-`func (o *RuleProxy) SetOnlyWithCookie(v bool)`
+`func (o *RuleProxy) SetOnlyWithCookie(v string)`
 
 SetOnlyWithCookie sets OnlyWithCookie field to given value.
 

@@ -143,6 +143,7 @@ Class | Method | HTTP request | Description
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
  - [RuleWAFConfig](docs/RuleWAFConfig.md)
+ - [WafConfigBlockLists](docs/WafConfigBlockLists.md)
 
 
 ## Documentation For Authorization

@@ -23,10 +23,10 @@ var _ MappedNullable = &RuleProxy{}
 type RuleProxy struct {
 	Name string `json:"name"`
 	Uuid string `json:"uuid"`
-	Url *string `json:"url,omitempty"`
+	Url []string `json:"url,omitempty"`
 	Domain *string `json:"domain,omitempty"`
 	Disabled bool `json:"disabled"`
-	OnlyWithCookie *bool `json:"only_with_cookie,omitempty"`
+	OnlyWithCookie *string `json:"only_with_cookie,omitempty"`
 	Method *string `json:"method,omitempty"`
 	MethodIs []string `json:"method_is,omitempty"`
 	MethodIsNot []string `json:"method_is_not,omitempty"`
@@ -117,17 +117,17 @@ func (o *RuleProxy) SetUuid(v string) {
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
-func (o *RuleProxy) GetUrl() string {
+func (o *RuleProxy) GetUrl() []string {
 	if o == nil || IsNil(o.Url) {
-		var ret string
+		var ret []string
 		return ret
 	}
-	return *o.Url
+	return o.Url
 }
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetUrlOk() (*string, bool) {
+func (o *RuleProxy) GetUrlOk() ([]string, bool) {
 	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
@@ -143,9 +143,9 @@ func (o *RuleProxy) HasUrl() bool {
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *RuleProxy) SetUrl(v string) {
-	o.Url = &v
+// SetUrl gets a reference to the given []string and assigns it to the Url field.
+func (o *RuleProxy) SetUrl(v []string) {
+	o.Url = v
 }
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
@@ -205,9 +205,9 @@ func (o *RuleProxy) SetDisabled(v bool) {
 }
 
 // GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
-func (o *RuleProxy) GetOnlyWithCookie() bool {
+func (o *RuleProxy) GetOnlyWithCookie() string {
 	if o == nil || IsNil(o.OnlyWithCookie) {
-		var ret bool
+		var ret string
 		return ret
 	}
 	return *o.OnlyWithCookie
@@ -215,7 +215,7 @@ func (o *RuleProxy) GetOnlyWithCookie() bool {
 
 // GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetOnlyWithCookieOk() (*bool, bool) {
+func (o *RuleProxy) GetOnlyWithCookieOk() (*string, bool) {
 	if o == nil || IsNil(o.OnlyWithCookie) {
 		return nil, false
 	}
@@ -231,8 +231,8 @@ func (o *RuleProxy) HasOnlyWithCookie() bool {
 	return false
 }
 
-// SetOnlyWithCookie gets a reference to the given bool and assigns it to the OnlyWithCookie field.
-func (o *RuleProxy) SetOnlyWithCookie(v bool) {
+// SetOnlyWithCookie gets a reference to the given string and assigns it to the OnlyWithCookie field.
+func (o *RuleProxy) SetOnlyWithCookie(v string) {
 	o.OnlyWithCookie = &v
 }
 

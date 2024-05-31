@@ -28,9 +28,7 @@ type RuleWAFConfig struct {
 	BlockIp []string `json:"block_ip,omitempty"`
 	BlockUa []string `json:"block_ua,omitempty"`
 	BlockReferer []string `json:"block_referer,omitempty"`
-	BlockBadBots *bool `json:"block_bad_bots,omitempty"`
-	BlockBadReferers *bool `json:"block_bad_referers,omitempty"`
-	BlockBadIps *bool `json:"block_bad_ips,omitempty"`
+	BlockLists *WafConfigBlockLists `json:"block_lists,omitempty"`
 	Httpbl *ProxyConfigHttpbl `json:"httpbl,omitempty"`
 	IpRatelimitMode *string `json:"ip_ratelimit_mode,omitempty"`
 	IpRatelimitRps *int32 `json:"ip_ratelimit_rps,omitempty"`
@@ -44,7 +42,7 @@ type RuleWAFConfig struct {
 	WafRatelimitRps *int32 `json:"waf_ratelimit_rps,omitempty"`
 	WafRatelimitCooldown *int32 `json:"waf_ratelimit_cooldown,omitempty"`
 	NotifySlack *string `json:"notify_slack,omitempty"`
-	NotifySlackHistRpm *int32 `json:"notify_slack_hist_rpm,omitempty"`
+	NotifySlackRpm *int32 `json:"notify_slack_rpm,omitempty"`
 }
 
 type _RuleWAFConfig RuleWAFConfig
@@ -58,12 +56,6 @@ func NewRuleWAFConfig(mode string) *RuleWAFConfig {
 	this.Mode = mode
 	var paranoiaLevel int32 = 1
 	this.ParanoiaLevel = &paranoiaLevel
-	var blockBadBots bool = false
-	this.BlockBadBots = &blockBadBots
-	var blockBadReferers bool = false
-	this.BlockBadReferers = &blockBadReferers
-	var blockBadIps bool = false
-	this.BlockBadIps = &blockBadIps
 	var ipRatelimitMode string = "disabled"
 	this.IpRatelimitMode = &ipRatelimitMode
 	var ipRatelimitRps int32 = 5
@@ -94,12 +86,6 @@ func NewRuleWAFConfigWithDefaults() *RuleWAFConfig {
 	this := RuleWAFConfig{}
 	var paranoiaLevel int32 = 1
 	this.ParanoiaLevel = &paranoiaLevel
-	var blockBadBots bool = false
-	this.BlockBadBots = &blockBadBots
-	var blockBadReferers bool = false
-	this.BlockBadReferers = &blockBadReferers
-	var blockBadIps bool = false
-	this.BlockBadIps = &blockBadIps
 	var ipRatelimitMode string = "disabled"
 	this.IpRatelimitMode = &ipRatelimitMode
 	var ipRatelimitRps int32 = 5
@@ -339,100 +325,36 @@ func (o *RuleWAFConfig) SetBlockReferer(v []string) {
 	o.BlockReferer = v
 }
 
-// GetBlockBadBots returns the BlockBadBots field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetBlockBadBots() bool {
-	if o == nil || IsNil(o.BlockBadBots) {
-		var ret bool
+// GetBlockLists returns the BlockLists field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetBlockLists() WafConfigBlockLists {
+	if o == nil || IsNil(o.BlockLists) {
+		var ret WafConfigBlockLists
 		return ret
 	}
-	return *o.BlockBadBots
+	return *o.BlockLists
 }
 
-// GetBlockBadBotsOk returns a tuple with the BlockBadBots field value if set, nil otherwise
+// GetBlockListsOk returns a tuple with the BlockLists field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetBlockBadBotsOk() (*bool, bool) {
-	if o == nil || IsNil(o.BlockBadBots) {
+func (o *RuleWAFConfig) GetBlockListsOk() (*WafConfigBlockLists, bool) {
+	if o == nil || IsNil(o.BlockLists) {
 		return nil, false
 	}
-	return o.BlockBadBots, true
+	return o.BlockLists, true
 }
 
-// HasBlockBadBots returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasBlockBadBots() bool {
-	if o != nil && !IsNil(o.BlockBadBots) {
+// HasBlockLists returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasBlockLists() bool {
+	if o != nil && !IsNil(o.BlockLists) {
 		return true
 	}
 
 	return false
 }
 
-// SetBlockBadBots gets a reference to the given bool and assigns it to the BlockBadBots field.
-func (o *RuleWAFConfig) SetBlockBadBots(v bool) {
-	o.BlockBadBots = &v
-}
-
-// GetBlockBadReferers returns the BlockBadReferers field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetBlockBadReferers() bool {
-	if o == nil || IsNil(o.BlockBadReferers) {
-		var ret bool
-		return ret
-	}
-	return *o.BlockBadReferers
-}
-
-// GetBlockBadReferersOk returns a tuple with the BlockBadReferers field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetBlockBadReferersOk() (*bool, bool) {
-	if o == nil || IsNil(o.BlockBadReferers) {
-		return nil, false
-	}
-	return o.BlockBadReferers, true
-}
-
-// HasBlockBadReferers returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasBlockBadReferers() bool {
-	if o != nil && !IsNil(o.BlockBadReferers) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlockBadReferers gets a reference to the given bool and assigns it to the BlockBadReferers field.
-func (o *RuleWAFConfig) SetBlockBadReferers(v bool) {
-	o.BlockBadReferers = &v
-}
-
-// GetBlockBadIps returns the BlockBadIps field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetBlockBadIps() bool {
-	if o == nil || IsNil(o.BlockBadIps) {
-		var ret bool
-		return ret
-	}
-	return *o.BlockBadIps
-}
-
-// GetBlockBadIpsOk returns a tuple with the BlockBadIps field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetBlockBadIpsOk() (*bool, bool) {
-	if o == nil || IsNil(o.BlockBadIps) {
-		return nil, false
-	}
-	return o.BlockBadIps, true
-}
-
-// HasBlockBadIps returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasBlockBadIps() bool {
-	if o != nil && !IsNil(o.BlockBadIps) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlockBadIps gets a reference to the given bool and assigns it to the BlockBadIps field.
-func (o *RuleWAFConfig) SetBlockBadIps(v bool) {
-	o.BlockBadIps = &v
+// SetBlockLists gets a reference to the given WafConfigBlockLists and assigns it to the BlockLists field.
+func (o *RuleWAFConfig) SetBlockLists(v WafConfigBlockLists) {
+	o.BlockLists = &v
 }
 
 // GetHttpbl returns the Httpbl field value if set, zero value otherwise.
@@ -851,36 +773,36 @@ func (o *RuleWAFConfig) SetNotifySlack(v string) {
 	o.NotifySlack = &v
 }
 
-// GetNotifySlackHistRpm returns the NotifySlackHistRpm field value if set, zero value otherwise.
-func (o *RuleWAFConfig) GetNotifySlackHistRpm() int32 {
-	if o == nil || IsNil(o.NotifySlackHistRpm) {
+// GetNotifySlackRpm returns the NotifySlackRpm field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetNotifySlackRpm() int32 {
+	if o == nil || IsNil(o.NotifySlackRpm) {
 		var ret int32
 		return ret
 	}
-	return *o.NotifySlackHistRpm
+	return *o.NotifySlackRpm
 }
 
-// GetNotifySlackHistRpmOk returns a tuple with the NotifySlackHistRpm field value if set, nil otherwise
+// GetNotifySlackRpmOk returns a tuple with the NotifySlackRpm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleWAFConfig) GetNotifySlackHistRpmOk() (*int32, bool) {
-	if o == nil || IsNil(o.NotifySlackHistRpm) {
+func (o *RuleWAFConfig) GetNotifySlackRpmOk() (*int32, bool) {
+	if o == nil || IsNil(o.NotifySlackRpm) {
 		return nil, false
 	}
-	return o.NotifySlackHistRpm, true
+	return o.NotifySlackRpm, true
 }
 
-// HasNotifySlackHistRpm returns a boolean if a field has been set.
-func (o *RuleWAFConfig) HasNotifySlackHistRpm() bool {
-	if o != nil && !IsNil(o.NotifySlackHistRpm) {
+// HasNotifySlackRpm returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasNotifySlackRpm() bool {
+	if o != nil && !IsNil(o.NotifySlackRpm) {
 		return true
 	}
 
 	return false
 }
 
-// SetNotifySlackHistRpm gets a reference to the given int32 and assigns it to the NotifySlackHistRpm field.
-func (o *RuleWAFConfig) SetNotifySlackHistRpm(v int32) {
-	o.NotifySlackHistRpm = &v
+// SetNotifySlackRpm gets a reference to the given int32 and assigns it to the NotifySlackRpm field.
+func (o *RuleWAFConfig) SetNotifySlackRpm(v int32) {
+	o.NotifySlackRpm = &v
 }
 
 func (o RuleWAFConfig) MarshalJSON() ([]byte, error) {
@@ -912,14 +834,8 @@ func (o RuleWAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BlockReferer) {
 		toSerialize["block_referer"] = o.BlockReferer
 	}
-	if !IsNil(o.BlockBadBots) {
-		toSerialize["block_bad_bots"] = o.BlockBadBots
-	}
-	if !IsNil(o.BlockBadReferers) {
-		toSerialize["block_bad_referers"] = o.BlockBadReferers
-	}
-	if !IsNil(o.BlockBadIps) {
-		toSerialize["block_bad_ips"] = o.BlockBadIps
+	if !IsNil(o.BlockLists) {
+		toSerialize["block_lists"] = o.BlockLists
 	}
 	if !IsNil(o.Httpbl) {
 		toSerialize["httpbl"] = o.Httpbl
@@ -960,8 +876,8 @@ func (o RuleWAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotifySlack) {
 		toSerialize["notify_slack"] = o.NotifySlack
 	}
-	if !IsNil(o.NotifySlackHistRpm) {
-		toSerialize["notify_slack_hist_rpm"] = o.NotifySlackHistRpm
+	if !IsNil(o.NotifySlackRpm) {
+		toSerialize["notify_slack_rpm"] = o.NotifySlackRpm
 	}
 	return toSerialize, nil
 }
