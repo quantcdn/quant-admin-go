@@ -27,19 +27,20 @@ type RuleProxyAction struct {
 	AuthUser *string `json:"auth_user,omitempty"`
 	AuthPass *string `json:"auth_pass,omitempty"`
 	OriginTimeout *string `json:"origin_timeout,omitempty"`
-	ProxyAlertEnabled *string `json:"proxy_alert_enabled,omitempty"`
+	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
-	FailoverMode *string `json:"failover_mode,omitempty"`
-	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
+	FailoverMode *bool `json:"failover_mode,omitempty"`
+	FailoverLifetime *int32 `json:"failover_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	To string `json:"to"`
-	CacheLifetime *string `json:"cache_lifetime,omitempty"`
-	DisableSslVerify *string `json:"disable_ssl_verify,omitempty"`
+	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
+	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
+	NotifyEmail *string `json:"notify_email,omitempty"`
 	WafConfig *RuleWAFConfig `json:"waf_config,omitempty"`
 }
 
@@ -53,6 +54,10 @@ func NewRuleProxyAction(wafEnabled bool, to string) *RuleProxyAction {
 	this := RuleProxyAction{}
 	this.WafEnabled = wafEnabled
 	this.To = to
+	var cacheLifetime int32 = 0
+	this.CacheLifetime = &cacheLifetime
+	var disableSslVerify bool = true
+	this.DisableSslVerify = &disableSslVerify
 	return &this
 }
 
@@ -63,6 +68,10 @@ func NewRuleProxyActionWithDefaults() *RuleProxyAction {
 	this := RuleProxyAction{}
 	var wafEnabled bool = false
 	this.WafEnabled = wafEnabled
+	var cacheLifetime int32 = 0
+	this.CacheLifetime = &cacheLifetime
+	var disableSslVerify bool = true
+	this.DisableSslVerify = &disableSslVerify
 	return &this
 }
 
@@ -251,9 +260,9 @@ func (o *RuleProxyAction) SetOriginTimeout(v string) {
 }
 
 // GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetProxyAlertEnabled() string {
+func (o *RuleProxyAction) GetProxyAlertEnabled() bool {
 	if o == nil || IsNil(o.ProxyAlertEnabled) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.ProxyAlertEnabled
@@ -261,7 +270,7 @@ func (o *RuleProxyAction) GetProxyAlertEnabled() string {
 
 // GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetProxyAlertEnabledOk() (*string, bool) {
+func (o *RuleProxyAction) GetProxyAlertEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.ProxyAlertEnabled) {
 		return nil, false
 	}
@@ -277,8 +286,8 @@ func (o *RuleProxyAction) HasProxyAlertEnabled() bool {
 	return false
 }
 
-// SetProxyAlertEnabled gets a reference to the given string and assigns it to the ProxyAlertEnabled field.
-func (o *RuleProxyAction) SetProxyAlertEnabled(v string) {
+// SetProxyAlertEnabled gets a reference to the given bool and assigns it to the ProxyAlertEnabled field.
+func (o *RuleProxyAction) SetProxyAlertEnabled(v bool) {
 	o.ProxyAlertEnabled = &v
 }
 
@@ -443,9 +452,9 @@ func (o *RuleProxyAction) SetFailoverOriginTtfb(v string) {
 }
 
 // GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetFailoverMode() string {
+func (o *RuleProxyAction) GetFailoverMode() bool {
 	if o == nil || IsNil(o.FailoverMode) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.FailoverMode
@@ -453,7 +462,7 @@ func (o *RuleProxyAction) GetFailoverMode() string {
 
 // GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetFailoverModeOk() (*string, bool) {
+func (o *RuleProxyAction) GetFailoverModeOk() (*bool, bool) {
 	if o == nil || IsNil(o.FailoverMode) {
 		return nil, false
 	}
@@ -469,15 +478,15 @@ func (o *RuleProxyAction) HasFailoverMode() bool {
 	return false
 }
 
-// SetFailoverMode gets a reference to the given string and assigns it to the FailoverMode field.
-func (o *RuleProxyAction) SetFailoverMode(v string) {
+// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
+func (o *RuleProxyAction) SetFailoverMode(v bool) {
 	o.FailoverMode = &v
 }
 
 // GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetFailoverLifetime() string {
+func (o *RuleProxyAction) GetFailoverLifetime() int32 {
 	if o == nil || IsNil(o.FailoverLifetime) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.FailoverLifetime
@@ -485,7 +494,7 @@ func (o *RuleProxyAction) GetFailoverLifetime() string {
 
 // GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetFailoverLifetimeOk() (*string, bool) {
+func (o *RuleProxyAction) GetFailoverLifetimeOk() (*int32, bool) {
 	if o == nil || IsNil(o.FailoverLifetime) {
 		return nil, false
 	}
@@ -501,8 +510,8 @@ func (o *RuleProxyAction) HasFailoverLifetime() bool {
 	return false
 }
 
-// SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
-func (o *RuleProxyAction) SetFailoverLifetime(v string) {
+// SetFailoverLifetime gets a reference to the given int32 and assigns it to the FailoverLifetime field.
+func (o *RuleProxyAction) SetFailoverLifetime(v int32) {
 	o.FailoverLifetime = &v
 }
 
@@ -595,9 +604,9 @@ func (o *RuleProxyAction) SetTo(v string) {
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetCacheLifetime() string {
+func (o *RuleProxyAction) GetCacheLifetime() int32 {
 	if o == nil || IsNil(o.CacheLifetime) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.CacheLifetime
@@ -605,7 +614,7 @@ func (o *RuleProxyAction) GetCacheLifetime() string {
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool) {
+func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool) {
 	if o == nil || IsNil(o.CacheLifetime) {
 		return nil, false
 	}
@@ -621,15 +630,15 @@ func (o *RuleProxyAction) HasCacheLifetime() bool {
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given string and assigns it to the CacheLifetime field.
-func (o *RuleProxyAction) SetCacheLifetime(v string) {
+// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
+func (o *RuleProxyAction) SetCacheLifetime(v int32) {
 	o.CacheLifetime = &v
 }
 
 // GetDisableSslVerify returns the DisableSslVerify field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetDisableSslVerify() string {
+func (o *RuleProxyAction) GetDisableSslVerify() bool {
 	if o == nil || IsNil(o.DisableSslVerify) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.DisableSslVerify
@@ -637,7 +646,7 @@ func (o *RuleProxyAction) GetDisableSslVerify() string {
 
 // GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetDisableSslVerifyOk() (*string, bool) {
+func (o *RuleProxyAction) GetDisableSslVerifyOk() (*bool, bool) {
 	if o == nil || IsNil(o.DisableSslVerify) {
 		return nil, false
 	}
@@ -653,9 +662,41 @@ func (o *RuleProxyAction) HasDisableSslVerify() bool {
 	return false
 }
 
-// SetDisableSslVerify gets a reference to the given string and assigns it to the DisableSslVerify field.
-func (o *RuleProxyAction) SetDisableSslVerify(v string) {
+// SetDisableSslVerify gets a reference to the given bool and assigns it to the DisableSslVerify field.
+func (o *RuleProxyAction) SetDisableSslVerify(v bool) {
 	o.DisableSslVerify = &v
+}
+
+// GetNotifyEmail returns the NotifyEmail field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetNotifyEmail() string {
+	if o == nil || IsNil(o.NotifyEmail) {
+		var ret string
+		return ret
+	}
+	return *o.NotifyEmail
+}
+
+// GetNotifyEmailOk returns a tuple with the NotifyEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetNotifyEmailOk() (*string, bool) {
+	if o == nil || IsNil(o.NotifyEmail) {
+		return nil, false
+	}
+	return o.NotifyEmail, true
+}
+
+// HasNotifyEmail returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasNotifyEmail() bool {
+	if o != nil && !IsNil(o.NotifyEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifyEmail gets a reference to the given string and assigns it to the NotifyEmail field.
+func (o *RuleProxyAction) SetNotifyEmail(v string) {
+	o.NotifyEmail = &v
 }
 
 // GetWafConfig returns the WafConfig field value if set, zero value otherwise.
@@ -752,6 +793,9 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DisableSslVerify) {
 		toSerialize["disable_ssl_verify"] = o.DisableSslVerify
+	}
+	if !IsNil(o.NotifyEmail) {
+		toSerialize["notify_email"] = o.NotifyEmail
 	}
 	if !IsNil(o.WafConfig) {
 		toSerialize["waf_config"] = o.WafConfig

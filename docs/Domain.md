@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** |  | 
 **Domain** | **string** |  | 
-**ProjectId** | **int32** |  | 
-**InSection** | **int32** |  | 
+**ProjectId** | Pointer to **int32** |  | [optional] 
+**InSection** | Pointer to **int32** |  | [optional] 
 **DnsEngaged** | **int32** |  | 
 **SectionMessage** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewDomain
 
-`func NewDomain(id int32, domain string, projectId int32, inSection int32, dnsEngaged int32, ) *Domain`
+`func NewDomain(id int32, domain string, dnsEngaged int32, ) *Domain`
 
 NewDomain instantiates a new Domain object
 This constructor will assign default values to properties that have it defined,
@@ -92,6 +92,11 @@ and a boolean to check if the value has been set.
 
 SetProjectId sets ProjectId field to given value.
 
+### HasProjectId
+
+`func (o *Domain) HasProjectId() bool`
+
+HasProjectId returns a boolean if a field has been set.
 
 ### GetInSection
 
@@ -112,6 +117,11 @@ and a boolean to check if the value has been set.
 
 SetInSection sets InSection field to given value.
 
+### HasInSection
+
+`func (o *Domain) HasInSection() bool`
+
+HasInSection returns a boolean if a field has been set.
 
 ### GetDnsEngaged
 

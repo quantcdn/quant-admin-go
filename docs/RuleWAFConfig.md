@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **BlockReferer** | Pointer to **[]string** |  | [optional] 
 **BlockLists** | Pointer to [**WafConfigBlockLists**](WafConfigBlockLists.md) |  | [optional] 
 **Httpbl** | Pointer to [**ProxyConfigHttpbl**](ProxyConfigHttpbl.md) |  | [optional] 
+**Thresholds** | Pointer to **[]map[string]interface{}** |  | [optional] 
+**HttpblEnabled** | Pointer to **map[string]bool** |  | [optional] 
+**NotifySlackHitsRpm** | Pointer to **int32** |  | [optional] 
 **IpRatelimitMode** | Pointer to **string** |  | [optional] [default to "disabled"]
 **IpRatelimitRps** | Pointer to **int32** |  | [optional] [default to 5]
 **IpRatelimitCooldown** | Pointer to **int32** |  | [optional] [default to 30]
@@ -24,6 +27,7 @@ Name | Type | Description | Notes
 **WafRatelimitHits** | Pointer to **int32** |  | [optional] [default to 10]
 **WafRatelimitRps** | Pointer to **int32** |  | [optional] [default to 5]
 **WafRatelimitCooldown** | Pointer to **int32** |  | [optional] [default to 300]
+**NotifyEmail** | Pointer to **[]string** |  | [optional] 
 **NotifySlack** | Pointer to **string** |  | [optional] 
 **NotifySlackRpm** | Pointer to **int32** |  | [optional] 
 
@@ -265,6 +269,81 @@ SetHttpbl sets Httpbl field to given value.
 `func (o *RuleWAFConfig) HasHttpbl() bool`
 
 HasHttpbl returns a boolean if a field has been set.
+
+### GetThresholds
+
+`func (o *RuleWAFConfig) GetThresholds() []map[string]interface{}`
+
+GetThresholds returns the Thresholds field if non-nil, zero value otherwise.
+
+### GetThresholdsOk
+
+`func (o *RuleWAFConfig) GetThresholdsOk() (*[]map[string]interface{}, bool)`
+
+GetThresholdsOk returns a tuple with the Thresholds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThresholds
+
+`func (o *RuleWAFConfig) SetThresholds(v []map[string]interface{})`
+
+SetThresholds sets Thresholds field to given value.
+
+### HasThresholds
+
+`func (o *RuleWAFConfig) HasThresholds() bool`
+
+HasThresholds returns a boolean if a field has been set.
+
+### GetHttpblEnabled
+
+`func (o *RuleWAFConfig) GetHttpblEnabled() map[string]bool`
+
+GetHttpblEnabled returns the HttpblEnabled field if non-nil, zero value otherwise.
+
+### GetHttpblEnabledOk
+
+`func (o *RuleWAFConfig) GetHttpblEnabledOk() (*map[string]bool, bool)`
+
+GetHttpblEnabledOk returns a tuple with the HttpblEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHttpblEnabled
+
+`func (o *RuleWAFConfig) SetHttpblEnabled(v map[string]bool)`
+
+SetHttpblEnabled sets HttpblEnabled field to given value.
+
+### HasHttpblEnabled
+
+`func (o *RuleWAFConfig) HasHttpblEnabled() bool`
+
+HasHttpblEnabled returns a boolean if a field has been set.
+
+### GetNotifySlackHitsRpm
+
+`func (o *RuleWAFConfig) GetNotifySlackHitsRpm() int32`
+
+GetNotifySlackHitsRpm returns the NotifySlackHitsRpm field if non-nil, zero value otherwise.
+
+### GetNotifySlackHitsRpmOk
+
+`func (o *RuleWAFConfig) GetNotifySlackHitsRpmOk() (*int32, bool)`
+
+GetNotifySlackHitsRpmOk returns a tuple with the NotifySlackHitsRpm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotifySlackHitsRpm
+
+`func (o *RuleWAFConfig) SetNotifySlackHitsRpm(v int32)`
+
+SetNotifySlackHitsRpm sets NotifySlackHitsRpm field to given value.
+
+### HasNotifySlackHitsRpm
+
+`func (o *RuleWAFConfig) HasNotifySlackHitsRpm() bool`
+
+HasNotifySlackHitsRpm returns a boolean if a field has been set.
 
 ### GetIpRatelimitMode
 
@@ -540,6 +619,31 @@ SetWafRatelimitCooldown sets WafRatelimitCooldown field to given value.
 `func (o *RuleWAFConfig) HasWafRatelimitCooldown() bool`
 
 HasWafRatelimitCooldown returns a boolean if a field has been set.
+
+### GetNotifyEmail
+
+`func (o *RuleWAFConfig) GetNotifyEmail() []string`
+
+GetNotifyEmail returns the NotifyEmail field if non-nil, zero value otherwise.
+
+### GetNotifyEmailOk
+
+`func (o *RuleWAFConfig) GetNotifyEmailOk() (*[]string, bool)`
+
+GetNotifyEmailOk returns a tuple with the NotifyEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotifyEmail
+
+`func (o *RuleWAFConfig) SetNotifyEmail(v []string)`
+
+SetNotifyEmail sets NotifyEmail field to given value.
+
+### HasNotifyEmail
+
+`func (o *RuleWAFConfig) HasNotifyEmail() bool`
+
+HasNotifyEmail returns a boolean if a field has been set.
 
 ### GetNotifySlack
 

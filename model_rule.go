@@ -22,8 +22,8 @@ var _ MappedNullable = &Rule{}
 // Rule struct for Rule
 type Rule struct {
 	Uuid string `json:"uuid"`
-	Name string `json:"name"`
 	Url string `json:"url"`
+	Name *string `json:"name,omitempty"`
 	Domain *string `json:"domain,omitempty"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
@@ -46,10 +46,9 @@ type _Rule Rule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRule(uuid string, name string, url string) *Rule {
+func NewRule(uuid string, url string) *Rule {
 	this := Rule{}
 	this.Uuid = uuid
-	this.Name = name
 	this.Url = url
 	return &this
 }
@@ -86,30 +85,6 @@ func (o *Rule) SetUuid(v string) {
 	o.Uuid = v
 }
 
-// GetName returns the Name field value
-func (o *Rule) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *Rule) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *Rule) SetName(v string) {
-	o.Name = v
-}
-
 // GetUrl returns the Url field value
 func (o *Rule) GetUrl() string {
 	if o == nil {
@@ -132,6 +107,38 @@ func (o *Rule) GetUrlOk() (*string, bool) {
 // SetUrl sets field value
 func (o *Rule) SetUrl(v string) {
 	o.Url = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *Rule) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Rule) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *Rule) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *Rule) SetName(v string) {
+	o.Name = &v
 }
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
@@ -593,8 +600,10 @@ func (o Rule) MarshalJSON() ([]byte, error) {
 func (o Rule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["uuid"] = o.Uuid
-	toSerialize["name"] = o.Name
 	toSerialize["url"] = o.Url
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.Domain) {
 		toSerialize["domain"] = o.Domain
 	}
@@ -646,7 +655,6 @@ func (o *Rule) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"uuid",
-		"name",
 		"url",
 	}
 

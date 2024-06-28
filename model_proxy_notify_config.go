@@ -12,8 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ProxyNotifyConfig type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,21 @@ var _ MappedNullable = &ProxyNotifyConfig{}
 
 // ProxyNotifyConfig struct for ProxyNotifyConfig
 type ProxyNotifyConfig struct {
-	OriginStatusCode []int32 `json:"origin_status_code"`
-	Period int32 `json:"period"`
+	OriginStatusCodes []string `json:"origin_status_codes,omitempty"`
+	Period *string `json:"period,omitempty"`
 	SlackWebhook *string `json:"slack_webhook,omitempty"`
 }
-
-type _ProxyNotifyConfig ProxyNotifyConfig
 
 // NewProxyNotifyConfig instantiates a new ProxyNotifyConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProxyNotifyConfig(originStatusCode []int32, period int32) *ProxyNotifyConfig {
+func NewProxyNotifyConfig() *ProxyNotifyConfig {
 	this := ProxyNotifyConfig{}
-	this.OriginStatusCode = originStatusCode
-	this.Period = period
+	var period string = "60"
+	this.Period = &period
+	var slackWebhook string = ""
+	this.SlackWebhook = &slackWebhook
 	return &this
 }
 
@@ -44,55 +42,75 @@ func NewProxyNotifyConfig(originStatusCode []int32, period int32) *ProxyNotifyCo
 // but it doesn't guarantee that properties required by API are set
 func NewProxyNotifyConfigWithDefaults() *ProxyNotifyConfig {
 	this := ProxyNotifyConfig{}
+	var period string = "60"
+	this.Period = &period
+	var slackWebhook string = ""
+	this.SlackWebhook = &slackWebhook
 	return &this
 }
 
-// GetOriginStatusCode returns the OriginStatusCode field value
-func (o *ProxyNotifyConfig) GetOriginStatusCode() []int32 {
-	if o == nil {
-		var ret []int32
+// GetOriginStatusCodes returns the OriginStatusCodes field value if set, zero value otherwise.
+func (o *ProxyNotifyConfig) GetOriginStatusCodes() []string {
+	if o == nil || IsNil(o.OriginStatusCodes) {
+		var ret []string
 		return ret
 	}
-
-	return o.OriginStatusCode
+	return o.OriginStatusCodes
 }
 
-// GetOriginStatusCodeOk returns a tuple with the OriginStatusCode field value
+// GetOriginStatusCodesOk returns a tuple with the OriginStatusCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProxyNotifyConfig) GetOriginStatusCodeOk() ([]int32, bool) {
-	if o == nil {
+func (o *ProxyNotifyConfig) GetOriginStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.OriginStatusCodes) {
 		return nil, false
 	}
-	return o.OriginStatusCode, true
+	return o.OriginStatusCodes, true
 }
 
-// SetOriginStatusCode sets field value
-func (o *ProxyNotifyConfig) SetOriginStatusCode(v []int32) {
-	o.OriginStatusCode = v
+// HasOriginStatusCodes returns a boolean if a field has been set.
+func (o *ProxyNotifyConfig) HasOriginStatusCodes() bool {
+	if o != nil && !IsNil(o.OriginStatusCodes) {
+		return true
+	}
+
+	return false
 }
 
-// GetPeriod returns the Period field value
-func (o *ProxyNotifyConfig) GetPeriod() int32 {
-	if o == nil {
-		var ret int32
+// SetOriginStatusCodes gets a reference to the given []string and assigns it to the OriginStatusCodes field.
+func (o *ProxyNotifyConfig) SetOriginStatusCodes(v []string) {
+	o.OriginStatusCodes = v
+}
+
+// GetPeriod returns the Period field value if set, zero value otherwise.
+func (o *ProxyNotifyConfig) GetPeriod() string {
+	if o == nil || IsNil(o.Period) {
+		var ret string
 		return ret
 	}
-
-	return o.Period
+	return *o.Period
 }
 
-// GetPeriodOk returns a tuple with the Period field value
+// GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProxyNotifyConfig) GetPeriodOk() (*int32, bool) {
-	if o == nil {
+func (o *ProxyNotifyConfig) GetPeriodOk() (*string, bool) {
+	if o == nil || IsNil(o.Period) {
 		return nil, false
 	}
-	return &o.Period, true
+	return o.Period, true
 }
 
-// SetPeriod sets field value
-func (o *ProxyNotifyConfig) SetPeriod(v int32) {
-	o.Period = v
+// HasPeriod returns a boolean if a field has been set.
+func (o *ProxyNotifyConfig) HasPeriod() bool {
+	if o != nil && !IsNil(o.Period) {
+		return true
+	}
+
+	return false
+}
+
+// SetPeriod gets a reference to the given string and assigns it to the Period field.
+func (o *ProxyNotifyConfig) SetPeriod(v string) {
+	o.Period = &v
 }
 
 // GetSlackWebhook returns the SlackWebhook field value if set, zero value otherwise.
@@ -137,50 +155,16 @@ func (o ProxyNotifyConfig) MarshalJSON() ([]byte, error) {
 
 func (o ProxyNotifyConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["origin_status_code"] = o.OriginStatusCode
-	toSerialize["period"] = o.Period
+	if !IsNil(o.OriginStatusCodes) {
+		toSerialize["origin_status_codes"] = o.OriginStatusCodes
+	}
+	if !IsNil(o.Period) {
+		toSerialize["period"] = o.Period
+	}
 	if !IsNil(o.SlackWebhook) {
 		toSerialize["slack_webhook"] = o.SlackWebhook
 	}
 	return toSerialize, nil
-}
-
-func (o *ProxyNotifyConfig) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"origin_status_code",
-		"period",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varProxyNotifyConfig := _ProxyNotifyConfig{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProxyNotifyConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ProxyNotifyConfig(varProxyNotifyConfig)
-
-	return err
 }
 
 type NullableProxyNotifyConfig struct {

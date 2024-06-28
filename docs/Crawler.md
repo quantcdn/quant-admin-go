@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | Pointer to **string** |  | [optional] 
 **Id** | **int32** |  | 
 **ProjectId** | **int32** |  | 
 **Uuid** | **string** |  | 
 **Config** | **string** |  | 
 **Domain** | **string** |  | 
-**DomainVerified** | **int32** |  | 
+**DomainVerified** | Pointer to **int32** |  | [optional] [default to 0]
+**UrlsList** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
 **DeletedAt** | Pointer to **string** |  | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewCrawler
 
-`func NewCrawler(id int32, projectId int32, uuid string, config string, domain string, domainVerified int32, ) *Crawler`
+`func NewCrawler(id int32, projectId int32, uuid string, config string, domain string, ) *Crawler`
 
 NewCrawler instantiates a new Crawler object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,31 @@ will change when the set of required properties is changed
 NewCrawlerWithDefaults instantiates a new Crawler object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *Crawler) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *Crawler) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *Crawler) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *Crawler) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetId
 
@@ -152,6 +179,36 @@ and a boolean to check if the value has been set.
 
 SetDomainVerified sets DomainVerified field to given value.
 
+### HasDomainVerified
+
+`func (o *Crawler) HasDomainVerified() bool`
+
+HasDomainVerified returns a boolean if a field has been set.
+
+### GetUrlsList
+
+`func (o *Crawler) GetUrlsList() string`
+
+GetUrlsList returns the UrlsList field if non-nil, zero value otherwise.
+
+### GetUrlsListOk
+
+`func (o *Crawler) GetUrlsListOk() (*string, bool)`
+
+GetUrlsListOk returns a tuple with the UrlsList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrlsList
+
+`func (o *Crawler) SetUrlsList(v string)`
+
+SetUrlsList sets UrlsList field to given value.
+
+### HasUrlsList
+
+`func (o *Crawler) HasUrlsList() bool`
+
+HasUrlsList returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

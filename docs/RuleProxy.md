@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
+**Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
 **Url** | Pointer to **[]string** |  | [optional] 
 **Domain** | Pointer to **string** |  | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewRuleProxy
 
-`func NewRuleProxy(name string, uuid string, disabled bool, action string, actionConfig RuleProxyAction, ) *RuleProxy`
+`func NewRuleProxy(uuid string, disabled bool, action string, actionConfig RuleProxyAction, ) *RuleProxy`
 
 NewRuleProxy instantiates a new RuleProxy object
 This constructor will assign default values to properties that have it defined,
@@ -60,6 +60,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *RuleProxy) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetUuid
 

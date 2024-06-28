@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OriginStatusCode** | **[]int32** |  | 
-**Period** | **int32** |  | 
-**SlackWebhook** | Pointer to **string** |  | [optional] 
+**OriginStatusCodes** | Pointer to **[]string** |  | [optional] 
+**Period** | Pointer to **string** |  | [optional] [default to "60"]
+**SlackWebhook** | Pointer to **string** |  | [optional] [default to ""]
 
 ## Methods
 
 ### NewProxyNotifyConfig
 
-`func NewProxyNotifyConfig(originStatusCode []int32, period int32, ) *ProxyNotifyConfig`
+`func NewProxyNotifyConfig() *ProxyNotifyConfig`
 
 NewProxyNotifyConfig instantiates a new ProxyNotifyConfig object
 This constructor will assign default values to properties that have it defined,
@@ -27,45 +27,55 @@ NewProxyNotifyConfigWithDefaults instantiates a new ProxyNotifyConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOriginStatusCode
+### GetOriginStatusCodes
 
-`func (o *ProxyNotifyConfig) GetOriginStatusCode() []int32`
+`func (o *ProxyNotifyConfig) GetOriginStatusCodes() []string`
 
-GetOriginStatusCode returns the OriginStatusCode field if non-nil, zero value otherwise.
+GetOriginStatusCodes returns the OriginStatusCodes field if non-nil, zero value otherwise.
 
-### GetOriginStatusCodeOk
+### GetOriginStatusCodesOk
 
-`func (o *ProxyNotifyConfig) GetOriginStatusCodeOk() (*[]int32, bool)`
+`func (o *ProxyNotifyConfig) GetOriginStatusCodesOk() (*[]string, bool)`
 
-GetOriginStatusCodeOk returns a tuple with the OriginStatusCode field if it's non-nil, zero value otherwise
+GetOriginStatusCodesOk returns a tuple with the OriginStatusCodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOriginStatusCode
+### SetOriginStatusCodes
 
-`func (o *ProxyNotifyConfig) SetOriginStatusCode(v []int32)`
+`func (o *ProxyNotifyConfig) SetOriginStatusCodes(v []string)`
 
-SetOriginStatusCode sets OriginStatusCode field to given value.
+SetOriginStatusCodes sets OriginStatusCodes field to given value.
 
+### HasOriginStatusCodes
+
+`func (o *ProxyNotifyConfig) HasOriginStatusCodes() bool`
+
+HasOriginStatusCodes returns a boolean if a field has been set.
 
 ### GetPeriod
 
-`func (o *ProxyNotifyConfig) GetPeriod() int32`
+`func (o *ProxyNotifyConfig) GetPeriod() string`
 
 GetPeriod returns the Period field if non-nil, zero value otherwise.
 
 ### GetPeriodOk
 
-`func (o *ProxyNotifyConfig) GetPeriodOk() (*int32, bool)`
+`func (o *ProxyNotifyConfig) GetPeriodOk() (*string, bool)`
 
 GetPeriodOk returns a tuple with the Period field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPeriod
 
-`func (o *ProxyNotifyConfig) SetPeriod(v int32)`
+`func (o *ProxyNotifyConfig) SetPeriod(v string)`
 
 SetPeriod sets Period field to given value.
 
+### HasPeriod
+
+`func (o *ProxyNotifyConfig) HasPeriod() bool`
+
+HasPeriod returns a boolean if a field has been set.
 
 ### GetSlackWebhook
 

@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | **string** |  | 
-**Name** | **string** |  | 
 **Url** | **string** |  | 
+**Name** | Pointer to **string** |  | [optional] 
 **Domain** | Pointer to **string** |  | [optional] 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewRule
 
-`func NewRule(uuid string, name string, url string, ) *Rule`
+`func NewRule(uuid string, url string, ) *Rule`
 
 NewRule instantiates a new Rule object
 This constructor will assign default values to properties that have it defined,
@@ -61,26 +61,6 @@ and a boolean to check if the value has been set.
 SetUuid sets Uuid field to given value.
 
 
-### GetName
-
-`func (o *Rule) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *Rule) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *Rule) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
 ### GetUrl
 
 `func (o *Rule) GetUrl() string`
@@ -100,6 +80,31 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
+
+### GetName
+
+`func (o *Rule) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *Rule) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *Rule) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *Rule) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetDomain
 

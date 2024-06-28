@@ -21,12 +21,14 @@ var _ MappedNullable = &Crawler{}
 
 // Crawler struct for Crawler
 type Crawler struct {
+	Name *string `json:"name,omitempty"`
 	Id int32 `json:"id"`
 	ProjectId int32 `json:"project_id"`
 	Uuid string `json:"uuid"`
 	Config string `json:"config"`
 	Domain string `json:"domain"`
-	DomainVerified int32 `json:"domain_verified"`
+	DomainVerified *int32 `json:"domain_verified,omitempty"`
+	UrlsList *string `json:"urls_list,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
@@ -38,14 +40,15 @@ type _Crawler Crawler
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCrawler(id int32, projectId int32, uuid string, config string, domain string, domainVerified int32) *Crawler {
+func NewCrawler(id int32, projectId int32, uuid string, config string, domain string) *Crawler {
 	this := Crawler{}
 	this.Id = id
 	this.ProjectId = projectId
 	this.Uuid = uuid
 	this.Config = config
 	this.Domain = domain
-	this.DomainVerified = domainVerified
+	var domainVerified int32 = 0
+	this.DomainVerified = &domainVerified
 	return &this
 }
 
@@ -54,7 +57,41 @@ func NewCrawler(id int32, projectId int32, uuid string, config string, domain st
 // but it doesn't guarantee that properties required by API are set
 func NewCrawlerWithDefaults() *Crawler {
 	this := Crawler{}
+	var domainVerified int32 = 0
+	this.DomainVerified = &domainVerified
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *Crawler) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Crawler) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *Crawler) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *Crawler) SetName(v string) {
+	o.Name = &v
 }
 
 // GetId returns the Id field value
@@ -177,28 +214,68 @@ func (o *Crawler) SetDomain(v string) {
 	o.Domain = v
 }
 
-// GetDomainVerified returns the DomainVerified field value
+// GetDomainVerified returns the DomainVerified field value if set, zero value otherwise.
 func (o *Crawler) GetDomainVerified() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.DomainVerified) {
 		var ret int32
 		return ret
 	}
-
-	return o.DomainVerified
+	return *o.DomainVerified
 }
 
-// GetDomainVerifiedOk returns a tuple with the DomainVerified field value
+// GetDomainVerifiedOk returns a tuple with the DomainVerified field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Crawler) GetDomainVerifiedOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DomainVerified) {
 		return nil, false
 	}
-	return &o.DomainVerified, true
+	return o.DomainVerified, true
 }
 
-// SetDomainVerified sets field value
+// HasDomainVerified returns a boolean if a field has been set.
+func (o *Crawler) HasDomainVerified() bool {
+	if o != nil && !IsNil(o.DomainVerified) {
+		return true
+	}
+
+	return false
+}
+
+// SetDomainVerified gets a reference to the given int32 and assigns it to the DomainVerified field.
 func (o *Crawler) SetDomainVerified(v int32) {
-	o.DomainVerified = v
+	o.DomainVerified = &v
+}
+
+// GetUrlsList returns the UrlsList field value if set, zero value otherwise.
+func (o *Crawler) GetUrlsList() string {
+	if o == nil || IsNil(o.UrlsList) {
+		var ret string
+		return ret
+	}
+	return *o.UrlsList
+}
+
+// GetUrlsListOk returns a tuple with the UrlsList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Crawler) GetUrlsListOk() (*string, bool) {
+	if o == nil || IsNil(o.UrlsList) {
+		return nil, false
+	}
+	return o.UrlsList, true
+}
+
+// HasUrlsList returns a boolean if a field has been set.
+func (o *Crawler) HasUrlsList() bool {
+	if o != nil && !IsNil(o.UrlsList) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrlsList gets a reference to the given string and assigns it to the UrlsList field.
+func (o *Crawler) SetUrlsList(v string) {
+	o.UrlsList = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -307,12 +384,20 @@ func (o Crawler) MarshalJSON() ([]byte, error) {
 
 func (o Crawler) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["id"] = o.Id
 	toSerialize["project_id"] = o.ProjectId
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["config"] = o.Config
 	toSerialize["domain"] = o.Domain
-	toSerialize["domain_verified"] = o.DomainVerified
+	if !IsNil(o.DomainVerified) {
+		toSerialize["domain_verified"] = o.DomainVerified
+	}
+	if !IsNil(o.UrlsList) {
+		toSerialize["urls_list"] = o.UrlsList
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -335,7 +420,6 @@ func (o *Crawler) UnmarshalJSON(data []byte) (err error) {
 		"uuid",
 		"config",
 		"domain",
-		"domain_verified",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -30,6 +30,9 @@ type RuleWAFConfig struct {
 	BlockReferer []string `json:"block_referer,omitempty"`
 	BlockLists *WafConfigBlockLists `json:"block_lists,omitempty"`
 	Httpbl *ProxyConfigHttpbl `json:"httpbl,omitempty"`
+	Thresholds []map[string]interface{} `json:"thresholds,omitempty"`
+	HttpblEnabled *map[string]bool `json:"httpbl_enabled,omitempty"`
+	NotifySlackHitsRpm *int32 `json:"notify_slack_hits_rpm,omitempty"`
 	IpRatelimitMode *string `json:"ip_ratelimit_mode,omitempty"`
 	IpRatelimitRps *int32 `json:"ip_ratelimit_rps,omitempty"`
 	IpRatelimitCooldown *int32 `json:"ip_ratelimit_cooldown,omitempty"`
@@ -41,6 +44,7 @@ type RuleWAFConfig struct {
 	WafRatelimitHits *int32 `json:"waf_ratelimit_hits,omitempty"`
 	WafRatelimitRps *int32 `json:"waf_ratelimit_rps,omitempty"`
 	WafRatelimitCooldown *int32 `json:"waf_ratelimit_cooldown,omitempty"`
+	NotifyEmail []string `json:"notify_email,omitempty"`
 	NotifySlack *string `json:"notify_slack,omitempty"`
 	NotifySlackRpm *int32 `json:"notify_slack_rpm,omitempty"`
 }
@@ -387,6 +391,102 @@ func (o *RuleWAFConfig) HasHttpbl() bool {
 // SetHttpbl gets a reference to the given ProxyConfigHttpbl and assigns it to the Httpbl field.
 func (o *RuleWAFConfig) SetHttpbl(v ProxyConfigHttpbl) {
 	o.Httpbl = &v
+}
+
+// GetThresholds returns the Thresholds field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetThresholds() []map[string]interface{} {
+	if o == nil || IsNil(o.Thresholds) {
+		var ret []map[string]interface{}
+		return ret
+	}
+	return o.Thresholds
+}
+
+// GetThresholdsOk returns a tuple with the Thresholds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetThresholdsOk() ([]map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Thresholds) {
+		return nil, false
+	}
+	return o.Thresholds, true
+}
+
+// HasThresholds returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasThresholds() bool {
+	if o != nil && !IsNil(o.Thresholds) {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholds gets a reference to the given []map[string]interface{} and assigns it to the Thresholds field.
+func (o *RuleWAFConfig) SetThresholds(v []map[string]interface{}) {
+	o.Thresholds = v
+}
+
+// GetHttpblEnabled returns the HttpblEnabled field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetHttpblEnabled() map[string]bool {
+	if o == nil || IsNil(o.HttpblEnabled) {
+		var ret map[string]bool
+		return ret
+	}
+	return *o.HttpblEnabled
+}
+
+// GetHttpblEnabledOk returns a tuple with the HttpblEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetHttpblEnabledOk() (*map[string]bool, bool) {
+	if o == nil || IsNil(o.HttpblEnabled) {
+		return nil, false
+	}
+	return o.HttpblEnabled, true
+}
+
+// HasHttpblEnabled returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasHttpblEnabled() bool {
+	if o != nil && !IsNil(o.HttpblEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpblEnabled gets a reference to the given map[string]bool and assigns it to the HttpblEnabled field.
+func (o *RuleWAFConfig) SetHttpblEnabled(v map[string]bool) {
+	o.HttpblEnabled = &v
+}
+
+// GetNotifySlackHitsRpm returns the NotifySlackHitsRpm field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetNotifySlackHitsRpm() int32 {
+	if o == nil || IsNil(o.NotifySlackHitsRpm) {
+		var ret int32
+		return ret
+	}
+	return *o.NotifySlackHitsRpm
+}
+
+// GetNotifySlackHitsRpmOk returns a tuple with the NotifySlackHitsRpm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetNotifySlackHitsRpmOk() (*int32, bool) {
+	if o == nil || IsNil(o.NotifySlackHitsRpm) {
+		return nil, false
+	}
+	return o.NotifySlackHitsRpm, true
+}
+
+// HasNotifySlackHitsRpm returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasNotifySlackHitsRpm() bool {
+	if o != nil && !IsNil(o.NotifySlackHitsRpm) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifySlackHitsRpm gets a reference to the given int32 and assigns it to the NotifySlackHitsRpm field.
+func (o *RuleWAFConfig) SetNotifySlackHitsRpm(v int32) {
+	o.NotifySlackHitsRpm = &v
 }
 
 // GetIpRatelimitMode returns the IpRatelimitMode field value if set, zero value otherwise.
@@ -741,6 +841,38 @@ func (o *RuleWAFConfig) SetWafRatelimitCooldown(v int32) {
 	o.WafRatelimitCooldown = &v
 }
 
+// GetNotifyEmail returns the NotifyEmail field value if set, zero value otherwise.
+func (o *RuleWAFConfig) GetNotifyEmail() []string {
+	if o == nil || IsNil(o.NotifyEmail) {
+		var ret []string
+		return ret
+	}
+	return o.NotifyEmail
+}
+
+// GetNotifyEmailOk returns a tuple with the NotifyEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleWAFConfig) GetNotifyEmailOk() ([]string, bool) {
+	if o == nil || IsNil(o.NotifyEmail) {
+		return nil, false
+	}
+	return o.NotifyEmail, true
+}
+
+// HasNotifyEmail returns a boolean if a field has been set.
+func (o *RuleWAFConfig) HasNotifyEmail() bool {
+	if o != nil && !IsNil(o.NotifyEmail) {
+		return true
+	}
+
+	return false
+}
+
+// SetNotifyEmail gets a reference to the given []string and assigns it to the NotifyEmail field.
+func (o *RuleWAFConfig) SetNotifyEmail(v []string) {
+	o.NotifyEmail = v
+}
+
 // GetNotifySlack returns the NotifySlack field value if set, zero value otherwise.
 func (o *RuleWAFConfig) GetNotifySlack() string {
 	if o == nil || IsNil(o.NotifySlack) {
@@ -840,6 +972,15 @@ func (o RuleWAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Httpbl) {
 		toSerialize["httpbl"] = o.Httpbl
 	}
+	if !IsNil(o.Thresholds) {
+		toSerialize["thresholds"] = o.Thresholds
+	}
+	if !IsNil(o.HttpblEnabled) {
+		toSerialize["httpbl_enabled"] = o.HttpblEnabled
+	}
+	if !IsNil(o.NotifySlackHitsRpm) {
+		toSerialize["notify_slack_hits_rpm"] = o.NotifySlackHitsRpm
+	}
 	if !IsNil(o.IpRatelimitMode) {
 		toSerialize["ip_ratelimit_mode"] = o.IpRatelimitMode
 	}
@@ -872,6 +1013,9 @@ func (o RuleWAFConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.WafRatelimitCooldown) {
 		toSerialize["waf_ratelimit_cooldown"] = o.WafRatelimitCooldown
+	}
+	if !IsNil(o.NotifyEmail) {
+		toSerialize["notify_email"] = o.NotifyEmail
 	}
 	if !IsNil(o.NotifySlack) {
 		toSerialize["notify_slack"] = o.NotifySlack

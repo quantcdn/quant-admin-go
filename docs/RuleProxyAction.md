@@ -10,19 +10,20 @@ Name | Type | Description | Notes
 **AuthUser** | Pointer to **string** |  | [optional] 
 **AuthPass** | Pointer to **string** |  | [optional] 
 **OriginTimeout** | Pointer to **string** |  | [optional] 
-**ProxyAlertEnabled** | Pointer to **string** |  | [optional] 
+**ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] 
 **NotifyConfig** | Pointer to [**ProxyNotifyConfig**](ProxyNotifyConfig.md) |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] 
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] 
-**FailoverMode** | Pointer to **string** |  | [optional] 
-**FailoverLifetime** | Pointer to **string** |  | [optional] 
+**FailoverMode** | Pointer to **bool** |  | [optional] 
+**FailoverLifetime** | Pointer to **int32** |  | [optional] 
 **OnlyProxy404** | Pointer to **bool** |  | [optional] 
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **To** | **string** |  | 
-**CacheLifetime** | Pointer to **string** |  | [optional] 
-**DisableSslVerify** | Pointer to **string** |  | [optional] 
+**CacheLifetime** | Pointer to **int32** |  | [optional] [default to 0]
+**DisableSslVerify** | Pointer to **bool** |  | [optional] [default to true]
+**NotifyEmail** | Pointer to **string** |  | [optional] 
 **WafConfig** | Pointer to [**RuleWAFConfig**](RuleWAFConfig.md) |  | [optional] 
 
 ## Methods
@@ -191,20 +192,20 @@ HasOriginTimeout returns a boolean if a field has been set.
 
 ### GetProxyAlertEnabled
 
-`func (o *RuleProxyAction) GetProxyAlertEnabled() string`
+`func (o *RuleProxyAction) GetProxyAlertEnabled() bool`
 
 GetProxyAlertEnabled returns the ProxyAlertEnabled field if non-nil, zero value otherwise.
 
 ### GetProxyAlertEnabledOk
 
-`func (o *RuleProxyAction) GetProxyAlertEnabledOk() (*string, bool)`
+`func (o *RuleProxyAction) GetProxyAlertEnabledOk() (*bool, bool)`
 
 GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProxyAlertEnabled
 
-`func (o *RuleProxyAction) SetProxyAlertEnabled(v string)`
+`func (o *RuleProxyAction) SetProxyAlertEnabled(v bool)`
 
 SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
 
@@ -341,20 +342,20 @@ HasFailoverOriginTtfb returns a boolean if a field has been set.
 
 ### GetFailoverMode
 
-`func (o *RuleProxyAction) GetFailoverMode() string`
+`func (o *RuleProxyAction) GetFailoverMode() bool`
 
 GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
 
 ### GetFailoverModeOk
 
-`func (o *RuleProxyAction) GetFailoverModeOk() (*string, bool)`
+`func (o *RuleProxyAction) GetFailoverModeOk() (*bool, bool)`
 
 GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverMode
 
-`func (o *RuleProxyAction) SetFailoverMode(v string)`
+`func (o *RuleProxyAction) SetFailoverMode(v bool)`
 
 SetFailoverMode sets FailoverMode field to given value.
 
@@ -366,20 +367,20 @@ HasFailoverMode returns a boolean if a field has been set.
 
 ### GetFailoverLifetime
 
-`func (o *RuleProxyAction) GetFailoverLifetime() string`
+`func (o *RuleProxyAction) GetFailoverLifetime() int32`
 
 GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
 
 ### GetFailoverLifetimeOk
 
-`func (o *RuleProxyAction) GetFailoverLifetimeOk() (*string, bool)`
+`func (o *RuleProxyAction) GetFailoverLifetimeOk() (*int32, bool)`
 
 GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverLifetime
 
-`func (o *RuleProxyAction) SetFailoverLifetime(v string)`
+`func (o *RuleProxyAction) SetFailoverLifetime(v int32)`
 
 SetFailoverLifetime sets FailoverLifetime field to given value.
 
@@ -461,20 +462,20 @@ SetTo sets To field to given value.
 
 ### GetCacheLifetime
 
-`func (o *RuleProxyAction) GetCacheLifetime() string`
+`func (o *RuleProxyAction) GetCacheLifetime() int32`
 
 GetCacheLifetime returns the CacheLifetime field if non-nil, zero value otherwise.
 
 ### GetCacheLifetimeOk
 
-`func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool)`
+`func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool)`
 
 GetCacheLifetimeOk returns a tuple with the CacheLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCacheLifetime
 
-`func (o *RuleProxyAction) SetCacheLifetime(v string)`
+`func (o *RuleProxyAction) SetCacheLifetime(v int32)`
 
 SetCacheLifetime sets CacheLifetime field to given value.
 
@@ -486,20 +487,20 @@ HasCacheLifetime returns a boolean if a field has been set.
 
 ### GetDisableSslVerify
 
-`func (o *RuleProxyAction) GetDisableSslVerify() string`
+`func (o *RuleProxyAction) GetDisableSslVerify() bool`
 
 GetDisableSslVerify returns the DisableSslVerify field if non-nil, zero value otherwise.
 
 ### GetDisableSslVerifyOk
 
-`func (o *RuleProxyAction) GetDisableSslVerifyOk() (*string, bool)`
+`func (o *RuleProxyAction) GetDisableSslVerifyOk() (*bool, bool)`
 
 GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisableSslVerify
 
-`func (o *RuleProxyAction) SetDisableSslVerify(v string)`
+`func (o *RuleProxyAction) SetDisableSslVerify(v bool)`
 
 SetDisableSslVerify sets DisableSslVerify field to given value.
 
@@ -508,6 +509,31 @@ SetDisableSslVerify sets DisableSslVerify field to given value.
 `func (o *RuleProxyAction) HasDisableSslVerify() bool`
 
 HasDisableSslVerify returns a boolean if a field has been set.
+
+### GetNotifyEmail
+
+`func (o *RuleProxyAction) GetNotifyEmail() string`
+
+GetNotifyEmail returns the NotifyEmail field if non-nil, zero value otherwise.
+
+### GetNotifyEmailOk
+
+`func (o *RuleProxyAction) GetNotifyEmailOk() (*string, bool)`
+
+GetNotifyEmailOk returns a tuple with the NotifyEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotifyEmail
+
+`func (o *RuleProxyAction) SetNotifyEmail(v string)`
+
+SetNotifyEmail sets NotifyEmail field to given value.
+
+### HasNotifyEmail
+
+`func (o *RuleProxyAction) HasNotifyEmail() bool`
+
+HasNotifyEmail returns a boolean if a field has been set.
 
 ### GetWafConfig
 
