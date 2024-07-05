@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
+**Uuid** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
 **Url** | **[]string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
@@ -84,6 +85,31 @@ SetName sets Name field to given value.
 `func (o *RuleHeaderRequest) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetUuid
+
+`func (o *RuleHeaderRequest) GetUuid() string`
+
+GetUuid returns the Uuid field if non-nil, zero value otherwise.
+
+### GetUuidOk
+
+`func (o *RuleHeaderRequest) GetUuidOk() (*string, bool)`
+
+GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUuid
+
+`func (o *RuleHeaderRequest) SetUuid(v string)`
+
+SetUuid sets Uuid field to given value.
+
+### HasUuid
+
+`func (o *RuleHeaderRequest) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
 
 ### GetDisabled
 

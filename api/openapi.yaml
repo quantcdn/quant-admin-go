@@ -2131,6 +2131,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        uuid: uuid
         url:
         - url
         - url
@@ -2151,6 +2152,8 @@ components:
           default: any
           type: string
         name:
+          type: string
+        uuid:
           type: string
         disabled:
           default: false
@@ -2339,6 +2342,7 @@ components:
         - method_is_not
         - method_is_not
         custom_response_body: custom_response_body
+        uuid: uuid
         url:
         - url
         - url
@@ -2357,6 +2361,8 @@ components:
           default: any
           type: string
         name:
+          type: string
+        uuid:
           type: string
         disabled:
           default: false
@@ -2545,6 +2551,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        uuid: uuid
         url:
         - url
         - url
@@ -2563,6 +2570,8 @@ components:
           default: any
           type: string
         name:
+          type: string
+        uuid:
           type: string
         disabled:
           default: false
@@ -2723,9 +2732,6 @@ components:
             notify_slack_rpm: 2
             notify_slack_hits_rpm: 6
             request_header_name: request_header_name
-            thresholds:
-            - key: ""
-            - key: ""
             request_header_ratelimit_rps: 5
             waf_ratelimit_hits: 7
             httpbl_enabled:
@@ -2865,9 +2871,6 @@ components:
           notify_slack_rpm: 2
           notify_slack_hits_rpm: 6
           request_header_name: request_header_name
-          thresholds:
-          - key: ""
-          - key: ""
           request_header_ratelimit_rps: 5
           waf_ratelimit_hits: 7
           httpbl_enabled:
@@ -2958,6 +2961,7 @@ components:
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
+        uuid: uuid
         notify_config:
           period: "60"
           slack_webhook: ""
@@ -3037,9 +3041,6 @@ components:
           notify_slack_rpm: 2
           notify_slack_hits_rpm: 6
           request_header_name: request_header_name
-          thresholds:
-          - key: ""
-          - key: ""
           request_header_ratelimit_rps: 5
           waf_ratelimit_hits: 7
           httpbl_enabled:
@@ -3059,6 +3060,8 @@ components:
           default: any
           type: string
         name:
+          type: string
+        uuid:
           type: string
         disabled:
           default: false
@@ -3297,6 +3300,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        uuid: uuid
         url:
         - url
         - url
@@ -3316,6 +3320,8 @@ components:
           default: any
           type: string
         name:
+          type: string
+        uuid:
           type: string
         disabled:
           default: false
@@ -3419,9 +3425,6 @@ components:
         notify_slack_rpm: 2
         notify_slack_hits_rpm: 6
         request_header_name: request_header_name
-        thresholds:
-        - key: ""
-        - key: ""
         request_header_ratelimit_rps: 5
         waf_ratelimit_hits: 7
         httpbl_enabled:
@@ -3466,11 +3469,6 @@ components:
           $ref: '#/components/schemas/BlockLists'
         httpbl:
           $ref: '#/components/schemas/Httpbl'
-        thresholds:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
         httpbl_enabled:
           additionalProperties:
             type: boolean

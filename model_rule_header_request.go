@@ -23,6 +23,7 @@ var _ MappedNullable = &RuleHeaderRequest{}
 type RuleHeaderRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
+	Uuid *string `json:"uuid,omitempty"`
 	Disabled bool `json:"disabled"`
 	Url []string `json:"url"`
 	Country *string `json:"country,omitempty"`
@@ -124,6 +125,38 @@ func (o *RuleHeaderRequest) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *RuleHeaderRequest) SetName(v string) {
 	o.Name = &v
+}
+
+// GetUuid returns the Uuid field value if set, zero value otherwise.
+func (o *RuleHeaderRequest) GetUuid() string {
+	if o == nil || IsNil(o.Uuid) {
+		var ret string
+		return ret
+	}
+	return *o.Uuid
+}
+
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleHeaderRequest) GetUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.Uuid) {
+		return nil, false
+	}
+	return o.Uuid, true
+}
+
+// HasUuid returns a boolean if a field has been set.
+func (o *RuleHeaderRequest) HasUuid() bool {
+	if o != nil && !IsNil(o.Uuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+func (o *RuleHeaderRequest) SetUuid(v string) {
+	o.Uuid = &v
 }
 
 // GetDisabled returns the Disabled field value
@@ -563,6 +596,9 @@ func (o RuleHeaderRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Uuid) {
+		toSerialize["uuid"] = o.Uuid
 	}
 	toSerialize["disabled"] = o.Disabled
 	toSerialize["url"] = o.Url
