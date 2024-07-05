@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## RulesRedirectCreate
 
-> Rule RulesRedirectCreate(ctx, organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> RuleRedirect RulesRedirectCreate(ctx, organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 
 
@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, "Url_example", "RedirectTo_example", int32(123)) // RuleRedirectRequest | 
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, []string{"Url_example"}, "RedirectTo_example", "RedirectCode_example") // RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesRedirectCreate`: Rule
+	// response from `RulesRedirectCreate`: RuleRedirect
 	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectCreate`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## RulesRedirectDelete
 
-> Rule RulesRedirectDelete(ctx, organization, project, rule).Execute()
+> RuleRedirect RulesRedirectDelete(ctx, organization, project, rule).Execute()
 
 
 
@@ -115,7 +115,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesRedirectDelete`: Rule
+	// response from `RulesRedirectDelete`: RuleRedirect
 	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectDelete`: %v\n", resp)
 }
 ```
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ## RulesRedirectList
 
-> []Rule RulesRedirectList(ctx, organization, project).Execute()
+> []RuleRedirect RulesRedirectList(ctx, organization, project).Execute()
 
 
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesRedirectList`: []Rule
+	// response from `RulesRedirectList`: []RuleRedirect
 	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectList`: %v\n", resp)
 }
 ```
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Rule**](Rule.md)
+[**[]RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## RulesRedirectRead
 
-> Rule RulesRedirectRead(ctx, organization, project, rule).Execute()
+> RuleRedirect RulesRedirectRead(ctx, organization, project, rule).Execute()
 
 
 
@@ -260,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesRedirectRead`: Rule
+	// response from `RulesRedirectRead`: RuleRedirect
 	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectRead`: %v\n", resp)
 }
 ```
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesRedirectUpdate
 
-> Rule RulesRedirectUpdate(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> RuleRedirect RulesRedirectUpdate(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 
 
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, "Url_example", "RedirectTo_example", int32(123)) // RuleRedirectRequest | 
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest("Domain_example", false, []string{"Url_example"}, "RedirectTo_example", "RedirectCode_example") // RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesRedirectUpdate`: Rule
+	// response from `RulesRedirectUpdate`: RuleRedirect
 	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectUpdate`: %v\n", resp)
 }
 ```
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## RulesHeadersCreate
 
-> Rule RulesHeadersCreate(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
+> RuleHeader RulesHeadersCreate(ctx, organization, project).RuleHeaderRequest(ruleHeaderRequest).Execute()
 
 
 
@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, "Url_example", map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, []string{"Url_example"}, map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesHeadersAPI.RulesHeadersCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesHeadersCreate`: Rule
+	// response from `RulesHeadersCreate`: RuleHeader
 	fmt.Fprintf(os.Stdout, "Response from `RulesHeadersAPI.RulesHeadersCreate`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleHeader**](RuleHeader.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## RulesHeadersDelete
 
-> Rule RulesHeadersDelete(ctx, organization, project, rule).Execute()
+> RuleHeader RulesHeadersDelete(ctx, organization, project, rule).Execute()
 
 
 
@@ -115,7 +115,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesHeadersAPI.RulesHeadersDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesHeadersDelete`: Rule
+	// response from `RulesHeadersDelete`: RuleHeader
 	fmt.Fprintf(os.Stdout, "Response from `RulesHeadersAPI.RulesHeadersDelete`: %v\n", resp)
 }
 ```
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleHeader**](RuleHeader.md)
 
 ### Authorization
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ## RulesHeadersList
 
-> []Rule RulesHeadersList(ctx, organization, project).Execute()
+> []RuleHeader RulesHeadersList(ctx, organization, project).Execute()
 
 
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesHeadersAPI.RulesHeadersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesHeadersList`: []Rule
+	// response from `RulesHeadersList`: []RuleHeader
 	fmt.Fprintf(os.Stdout, "Response from `RulesHeadersAPI.RulesHeadersList`: %v\n", resp)
 }
 ```
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Rule**](Rule.md)
+[**[]RuleHeader**](RuleHeader.md)
 
 ### Authorization
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## RulesHeadersRead
 
-> Rule RulesHeadersRead(ctx, organization, project, rule).Execute()
+> RuleHeader RulesHeadersRead(ctx, organization, project, rule).Execute()
 
 
 
@@ -260,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesHeadersAPI.RulesHeadersRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesHeadersRead`: Rule
+	// response from `RulesHeadersRead`: RuleHeader
 	fmt.Fprintf(os.Stdout, "Response from `RulesHeadersAPI.RulesHeadersRead`: %v\n", resp)
 }
 ```
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleHeader**](RuleHeader.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesHeadersUpdate
 
-> Rule RulesHeadersUpdate(ctx, organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
+> RuleHeader RulesHeadersUpdate(ctx, organization, project, rule).RuleHeaderRequest(ruleHeaderRequest).Execute()
 
 
 
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, "Url_example", map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
+	ruleHeaderRequest := *openapiclient.NewRuleHeaderRequest("Domain_example", false, []string{"Url_example"}, map[string]string{"key": "Inner_example"}) // RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesHeadersAPI.RulesHeadersUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesHeadersUpdate`: Rule
+	// response from `RulesHeadersUpdate`: RuleHeader
 	fmt.Fprintf(os.Stdout, "Response from `RulesHeadersAPI.RulesHeadersUpdate`: %v\n", resp)
 }
 ```
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleHeader**](RuleHeader.md)
 
 ### Authorization
 

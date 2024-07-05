@@ -29,19 +29,19 @@ type RuleProxyAction struct {
 	OriginTimeout *string `json:"origin_timeout,omitempty"`
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	Notify *string `json:"notify,omitempty"`
-	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
+	NotifyConfig *NotifyConfig `json:"notify_config,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverMode *bool `json:"failover_mode,omitempty"`
-	FailoverLifetime *int32 `json:"failover_lifetime,omitempty"`
+	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	To string `json:"to"`
-	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
+	CacheLifetime *string `json:"cache_lifetime,omitempty"`
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
 	NotifyEmail *string `json:"notify_email,omitempty"`
-	WafConfig *RuleWAFConfig `json:"waf_config,omitempty"`
+	WafConfig *WAFConfig `json:"waf_config,omitempty"`
 }
 
 type _RuleProxyAction RuleProxyAction
@@ -54,7 +54,7 @@ func NewRuleProxyAction(wafEnabled bool, to string) *RuleProxyAction {
 	this := RuleProxyAction{}
 	this.WafEnabled = wafEnabled
 	this.To = to
-	var cacheLifetime int32 = 0
+	var cacheLifetime string = "0"
 	this.CacheLifetime = &cacheLifetime
 	var disableSslVerify bool = true
 	this.DisableSslVerify = &disableSslVerify
@@ -68,7 +68,7 @@ func NewRuleProxyActionWithDefaults() *RuleProxyAction {
 	this := RuleProxyAction{}
 	var wafEnabled bool = false
 	this.WafEnabled = wafEnabled
-	var cacheLifetime int32 = 0
+	var cacheLifetime string = "0"
 	this.CacheLifetime = &cacheLifetime
 	var disableSslVerify bool = true
 	this.DisableSslVerify = &disableSslVerify
@@ -324,9 +324,9 @@ func (o *RuleProxyAction) SetNotify(v string) {
 }
 
 // GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetNotifyConfig() ProxyNotifyConfig {
+func (o *RuleProxyAction) GetNotifyConfig() NotifyConfig {
 	if o == nil || IsNil(o.NotifyConfig) {
-		var ret ProxyNotifyConfig
+		var ret NotifyConfig
 		return ret
 	}
 	return *o.NotifyConfig
@@ -334,7 +334,7 @@ func (o *RuleProxyAction) GetNotifyConfig() ProxyNotifyConfig {
 
 // GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetNotifyConfigOk() (*ProxyNotifyConfig, bool) {
+func (o *RuleProxyAction) GetNotifyConfigOk() (*NotifyConfig, bool) {
 	if o == nil || IsNil(o.NotifyConfig) {
 		return nil, false
 	}
@@ -350,8 +350,8 @@ func (o *RuleProxyAction) HasNotifyConfig() bool {
 	return false
 }
 
-// SetNotifyConfig gets a reference to the given ProxyNotifyConfig and assigns it to the NotifyConfig field.
-func (o *RuleProxyAction) SetNotifyConfig(v ProxyNotifyConfig) {
+// SetNotifyConfig gets a reference to the given NotifyConfig and assigns it to the NotifyConfig field.
+func (o *RuleProxyAction) SetNotifyConfig(v NotifyConfig) {
 	o.NotifyConfig = &v
 }
 
@@ -484,9 +484,9 @@ func (o *RuleProxyAction) SetFailoverMode(v bool) {
 }
 
 // GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetFailoverLifetime() int32 {
+func (o *RuleProxyAction) GetFailoverLifetime() string {
 	if o == nil || IsNil(o.FailoverLifetime) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.FailoverLifetime
@@ -494,7 +494,7 @@ func (o *RuleProxyAction) GetFailoverLifetime() int32 {
 
 // GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetFailoverLifetimeOk() (*int32, bool) {
+func (o *RuleProxyAction) GetFailoverLifetimeOk() (*string, bool) {
 	if o == nil || IsNil(o.FailoverLifetime) {
 		return nil, false
 	}
@@ -510,8 +510,8 @@ func (o *RuleProxyAction) HasFailoverLifetime() bool {
 	return false
 }
 
-// SetFailoverLifetime gets a reference to the given int32 and assigns it to the FailoverLifetime field.
-func (o *RuleProxyAction) SetFailoverLifetime(v int32) {
+// SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
+func (o *RuleProxyAction) SetFailoverLifetime(v string) {
 	o.FailoverLifetime = &v
 }
 
@@ -604,9 +604,9 @@ func (o *RuleProxyAction) SetTo(v string) {
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetCacheLifetime() int32 {
+func (o *RuleProxyAction) GetCacheLifetime() string {
 	if o == nil || IsNil(o.CacheLifetime) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.CacheLifetime
@@ -614,7 +614,7 @@ func (o *RuleProxyAction) GetCacheLifetime() int32 {
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool) {
+func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool) {
 	if o == nil || IsNil(o.CacheLifetime) {
 		return nil, false
 	}
@@ -630,8 +630,8 @@ func (o *RuleProxyAction) HasCacheLifetime() bool {
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
-func (o *RuleProxyAction) SetCacheLifetime(v int32) {
+// SetCacheLifetime gets a reference to the given string and assigns it to the CacheLifetime field.
+func (o *RuleProxyAction) SetCacheLifetime(v string) {
 	o.CacheLifetime = &v
 }
 
@@ -700,9 +700,9 @@ func (o *RuleProxyAction) SetNotifyEmail(v string) {
 }
 
 // GetWafConfig returns the WafConfig field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetWafConfig() RuleWAFConfig {
+func (o *RuleProxyAction) GetWafConfig() WAFConfig {
 	if o == nil || IsNil(o.WafConfig) {
-		var ret RuleWAFConfig
+		var ret WAFConfig
 		return ret
 	}
 	return *o.WafConfig
@@ -710,7 +710,7 @@ func (o *RuleProxyAction) GetWafConfig() RuleWAFConfig {
 
 // GetWafConfigOk returns a tuple with the WafConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetWafConfigOk() (*RuleWAFConfig, bool) {
+func (o *RuleProxyAction) GetWafConfigOk() (*WAFConfig, bool) {
 	if o == nil || IsNil(o.WafConfig) {
 		return nil, false
 	}
@@ -726,8 +726,8 @@ func (o *RuleProxyAction) HasWafConfig() bool {
 	return false
 }
 
-// SetWafConfig gets a reference to the given RuleWAFConfig and assigns it to the WafConfig field.
-func (o *RuleProxyAction) SetWafConfig(v RuleWAFConfig) {
+// SetWafConfig gets a reference to the given WAFConfig and assigns it to the WafConfig field.
+func (o *RuleProxyAction) SetWafConfig(v WAFConfig) {
 	o.WafConfig = &v
 }
 

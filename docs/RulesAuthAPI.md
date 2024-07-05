@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## RulesAuthCreate
 
-> Rule RulesAuthCreate(ctx, organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
+> RuleAuth RulesAuthCreate(ctx, organization, project).RuleAuthRequest(ruleAuthRequest).Execute()
 
 
 
@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "Url_example", "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, []string{"Url_example"}, "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -42,7 +42,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesAuthAPI.RulesAuthCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesAuthCreate`: Rule
+	// response from `RulesAuthCreate`: RuleAuth
 	fmt.Fprintf(os.Stdout, "Response from `RulesAuthAPI.RulesAuthCreate`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleAuth**](RuleAuth.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## RulesAuthDelete
 
-> Rule RulesAuthDelete(ctx, organization, project, rule).Execute()
+> RuleAuth RulesAuthDelete(ctx, organization, project, rule).Execute()
 
 
 
@@ -115,7 +115,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesAuthAPI.RulesAuthDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesAuthDelete`: Rule
+	// response from `RulesAuthDelete`: RuleAuth
 	fmt.Fprintf(os.Stdout, "Response from `RulesAuthAPI.RulesAuthDelete`: %v\n", resp)
 }
 ```
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleAuth**](RuleAuth.md)
 
 ### Authorization
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ## RulesAuthList
 
-> []Rule RulesAuthList(ctx, organization, project).Execute()
+> []RuleAuth RulesAuthList(ctx, organization, project).Execute()
 
 
 
@@ -188,7 +188,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesAuthAPI.RulesAuthList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesAuthList`: []Rule
+	// response from `RulesAuthList`: []RuleAuth
 	fmt.Fprintf(os.Stdout, "Response from `RulesAuthAPI.RulesAuthList`: %v\n", resp)
 }
 ```
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Rule**](Rule.md)
+[**[]RuleAuth**](RuleAuth.md)
 
 ### Authorization
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## RulesAuthRead
 
-> Rule RulesAuthRead(ctx, organization, project, rule).Execute()
+> RuleAuth RulesAuthRead(ctx, organization, project, rule).Execute()
 
 
 
@@ -260,7 +260,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesAuthAPI.RulesAuthRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesAuthRead`: Rule
+	// response from `RulesAuthRead`: RuleAuth
 	fmt.Fprintf(os.Stdout, "Response from `RulesAuthAPI.RulesAuthRead`: %v\n", resp)
 }
 ```
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleAuth**](RuleAuth.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesAuthUpdate
 
-> Rule RulesAuthUpdate(ctx, organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
+> RuleAuth RulesAuthUpdate(ctx, organization, project, rule).RuleAuthRequest(ruleAuthRequest).Execute()
 
 
 
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, "Url_example", "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
+	ruleAuthRequest := *openapiclient.NewRuleAuthRequest("Domain_example", false, []string{"Url_example"}, "AuthUser_example", "AuthPass_example") // RuleAuthRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -335,7 +335,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesAuthAPI.RulesAuthUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesAuthUpdate`: Rule
+	// response from `RulesAuthUpdate`: RuleAuth
 	fmt.Fprintf(os.Stdout, "Response from `RulesAuthAPI.RulesAuthUpdate`: %v\n", resp)
 }
 ```
@@ -364,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rule**](Rule.md)
+[**RuleAuth**](RuleAuth.md)
 
 ### Authorization
 

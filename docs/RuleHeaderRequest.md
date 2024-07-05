@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
-**Url** | **string** |  | 
+**Url** | **[]string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewRuleHeaderRequest
 
-`func NewRuleHeaderRequest(domain string, disabled bool, url string, headers map[string]string, ) *RuleHeaderRequest`
+`func NewRuleHeaderRequest(domain string, disabled bool, url []string, headers map[string]string, ) *RuleHeaderRequest`
 
 NewRuleHeaderRequest instantiates a new RuleHeaderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -107,20 +107,20 @@ SetDisabled sets Disabled field to given value.
 
 ### GetUrl
 
-`func (o *RuleHeaderRequest) GetUrl() string`
+`func (o *RuleHeaderRequest) GetUrl() []string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *RuleHeaderRequest) GetUrlOk() (*string, bool)`
+`func (o *RuleHeaderRequest) GetUrlOk() (*[]string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *RuleHeaderRequest) SetUrl(v string)`
+`func (o *RuleHeaderRequest) SetUrl(v []string)`
 
 SetUrl sets Url field to given value.
 

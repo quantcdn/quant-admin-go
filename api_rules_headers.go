@@ -36,7 +36,7 @@ func (r ApiRulesHeadersCreateRequest) RuleHeaderRequest(ruleHeaderRequest RuleHe
 	return r
 }
 
-func (r ApiRulesHeadersCreateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesHeadersCreateRequest) Execute() (*RuleHeader, *http.Response, error) {
 	return r.ApiService.RulesHeadersCreateExecute(r)
 }
 
@@ -58,13 +58,13 @@ func (a *RulesHeadersAPIService) RulesHeadersCreate(ctx context.Context, organiz
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesHeadersAPIService) RulesHeadersCreateExecute(r ApiRulesHeadersCreateRequest) (*Rule, *http.Response, error) {
+//  @return RuleHeader
+func (a *RulesHeadersAPIService) RulesHeadersCreateExecute(r ApiRulesHeadersCreateRequest) (*RuleHeader, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleHeader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesHeadersAPIService.RulesHeadersCreate")
@@ -157,7 +157,7 @@ type ApiRulesHeadersDeleteRequest struct {
 	rule string
 }
 
-func (r ApiRulesHeadersDeleteRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesHeadersDeleteRequest) Execute() (*RuleHeader, *http.Response, error) {
 	return r.ApiService.RulesHeadersDeleteExecute(r)
 }
 
@@ -181,13 +181,13 @@ func (a *RulesHeadersAPIService) RulesHeadersDelete(ctx context.Context, organiz
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesHeadersAPIService) RulesHeadersDeleteExecute(r ApiRulesHeadersDeleteRequest) (*Rule, *http.Response, error) {
+//  @return RuleHeader
+func (a *RulesHeadersAPIService) RulesHeadersDeleteExecute(r ApiRulesHeadersDeleteRequest) (*RuleHeader, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleHeader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesHeadersAPIService.RulesHeadersDelete")
@@ -275,7 +275,7 @@ type ApiRulesHeadersListRequest struct {
 	project string
 }
 
-func (r ApiRulesHeadersListRequest) Execute() ([]Rule, *http.Response, error) {
+func (r ApiRulesHeadersListRequest) Execute() ([]RuleHeader, *http.Response, error) {
 	return r.ApiService.RulesHeadersListExecute(r)
 }
 
@@ -297,13 +297,13 @@ func (a *RulesHeadersAPIService) RulesHeadersList(ctx context.Context, organizat
 }
 
 // Execute executes the request
-//  @return []Rule
-func (a *RulesHeadersAPIService) RulesHeadersListExecute(r ApiRulesHeadersListRequest) ([]Rule, *http.Response, error) {
+//  @return []RuleHeader
+func (a *RulesHeadersAPIService) RulesHeadersListExecute(r ApiRulesHeadersListRequest) ([]RuleHeader, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Rule
+		localVarReturnValue  []RuleHeader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesHeadersAPIService.RulesHeadersList")
@@ -391,7 +391,7 @@ type ApiRulesHeadersReadRequest struct {
 	rule string
 }
 
-func (r ApiRulesHeadersReadRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesHeadersReadRequest) Execute() (*RuleHeader, *http.Response, error) {
 	return r.ApiService.RulesHeadersReadExecute(r)
 }
 
@@ -415,13 +415,13 @@ func (a *RulesHeadersAPIService) RulesHeadersRead(ctx context.Context, organizat
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesHeadersAPIService) RulesHeadersReadExecute(r ApiRulesHeadersReadRequest) (*Rule, *http.Response, error) {
+//  @return RuleHeader
+func (a *RulesHeadersAPIService) RulesHeadersReadExecute(r ApiRulesHeadersReadRequest) (*RuleHeader, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleHeader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesHeadersAPIService.RulesHeadersRead")
@@ -516,7 +516,7 @@ func (r ApiRulesHeadersUpdateRequest) RuleHeaderRequest(ruleHeaderRequest RuleHe
 	return r
 }
 
-func (r ApiRulesHeadersUpdateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesHeadersUpdateRequest) Execute() (*RuleHeader, *http.Response, error) {
 	return r.ApiService.RulesHeadersUpdateExecute(r)
 }
 
@@ -540,13 +540,13 @@ func (a *RulesHeadersAPIService) RulesHeadersUpdate(ctx context.Context, organiz
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesHeadersAPIService) RulesHeadersUpdateExecute(r ApiRulesHeadersUpdateRequest) (*Rule, *http.Response, error) {
+//  @return RuleHeader
+func (a *RulesHeadersAPIService) RulesHeadersUpdateExecute(r ApiRulesHeadersUpdateRequest) (*RuleHeader, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleHeader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesHeadersAPIService.RulesHeadersUpdate")

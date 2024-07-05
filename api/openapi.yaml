@@ -662,7 +662,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Rule'
+                  $ref: '#/components/schemas/RuleAuth'
                 type: array
           description: The request has succeeded.
         "400":
@@ -702,7 +702,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleAuth'
           description: The request has succeeded.
         "400":
           content:
@@ -743,7 +743,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleAuth'
           description: The request has succeeded.
         "400":
           content:
@@ -783,7 +783,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleAuth'
           description: The request has succeeded.
         "400":
           content:
@@ -829,7 +829,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleAuth'
           description: The request has succeeded.
         "400":
           content:
@@ -864,7 +864,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Rule'
+                  $ref: '#/components/schemas/RuleCustomResponse'
                 type: array
           description: The request has succeeded.
         "400":
@@ -904,7 +904,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleCustomResponse'
           description: The request has succeeded.
         "400":
           content:
@@ -945,7 +945,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleCustomResponse'
           description: The request has succeeded.
         "400":
           content:
@@ -985,7 +985,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleCustomResponse'
           description: The request has succeeded.
         "400":
           content:
@@ -1031,7 +1031,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleCustomResponse'
           description: The request has succeeded.
         "400":
           content:
@@ -1066,7 +1066,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Rule'
+                  $ref: '#/components/schemas/RuleHeader'
                 type: array
           description: The request has succeeded.
         "400":
@@ -1106,7 +1106,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleHeader'
           description: The request has succeeded.
         "400":
           content:
@@ -1147,7 +1147,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleHeader'
           description: The request has succeeded.
         "400":
           content:
@@ -1187,7 +1187,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleHeader'
           description: The request has succeeded.
         "400":
           content:
@@ -1233,7 +1233,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleHeader'
           description: The request has succeeded.
         "400":
           content:
@@ -1470,7 +1470,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Rule'
+                  $ref: '#/components/schemas/RuleRedirect'
                 type: array
           description: The request has succeeded.
         "400":
@@ -1510,7 +1510,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleRedirect'
           description: The request has succeeded.
         "400":
           content:
@@ -1551,7 +1551,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleRedirect'
           description: The request has succeeded.
         "400":
           content:
@@ -1591,7 +1591,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleRedirect'
           description: The request has succeeded.
         "400":
           content:
@@ -1637,7 +1637,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/RuleRedirect'
           description: The request has succeeded.
         "400":
           content:
@@ -1667,6 +1667,26 @@ components:
         type: string
       style: simple
   schemas:
+    BlockLists:
+      example:
+        referer: false
+        ip: false
+        ai: false
+        user_agent: false
+      properties:
+        referer:
+          default: false
+          type: boolean
+        ip:
+          default: false
+          type: boolean
+        user_agent:
+          default: false
+          type: boolean
+        ai:
+          default: false
+          type: boolean
+      type: object
     Crawler:
       example:
         urls_list: urls_list
@@ -1809,6 +1829,58 @@ components:
       - error
       - message
       type: object
+    Httpbl:
+      example:
+        block_harvester: false
+        httpbl_enabled: false
+        api_key: api_key
+        block_spam: false
+        block_search_engine: false
+        block_suspicious: false
+      properties:
+        httpbl_enabled:
+          default: false
+          type: boolean
+        api_key:
+          type: string
+        block_suspicious:
+          default: false
+          type: boolean
+        block_harvester:
+          default: false
+          type: boolean
+        block_spam:
+          default: false
+          type: boolean
+        block_search_engine:
+          default: false
+          type: boolean
+      required:
+      - block_harvester
+      - block_search_engine
+      - block_spam
+      - block_suspicious
+      - httpbl_enabled
+      type: object
+    NotifyConfig:
+      example:
+        period: "60"
+        slack_webhook: ""
+        origin_status_codes:
+        - origin_status_codes
+        - origin_status_codes
+      properties:
+        origin_status_codes:
+          items:
+            type: string
+          type: array
+        period:
+          default: "60"
+          type: string
+        slack_webhook:
+          default: ""
+          type: string
+      type: object
     Organization:
       example:
         updated_at: updated_at
@@ -1937,70 +2009,18 @@ components:
       - name
       - region
       type: object
-    ProxyConfigHttpbl:
-      example:
-        block_harvester: false
-        httpbl_enabled: false
-        api_key: api_key
-        block_spam: false
-        block_search_engine: false
-        block_suspicious: false
-      properties:
-        httpbl_enabled:
-          default: false
-          type: boolean
-        api_key:
-          type: string
-        block_suspicious:
-          default: false
-          type: boolean
-        block_harvester:
-          default: false
-          type: boolean
-        block_spam:
-          default: false
-          type: boolean
-        block_search_engine:
-          default: false
-          type: boolean
-      required:
-      - block_harvester
-      - block_search_engine
-      - block_spam
-      - block_suspicious
-      - httpbl_enabled
-      type: object
-    ProxyNotifyConfig:
-      example:
-        period: "60"
-        slack_webhook: ""
-        origin_status_codes:
-        - origin_status_codes
-        - origin_status_codes
-      properties:
-        origin_status_codes:
-          items:
-            type: string
-          type: array
-        period:
-          default: "60"
-          type: string
-        slack_webhook:
-          default: ""
-          type: string
-      type: object
-    Rule:
+    RuleAuth:
       example:
         country: country
         method: method
         ip_is_not:
         - ip_is_not
         - ip_is_not
-        ip: ip
+        only_with_cookie: only_with_cookie
         method_is:
         - method_is
         - method_is
-        only_with_cookie: only_with_cookie
+        ip: ip
         country_is:
         - country_is
         - country_is
@@ -2008,7 +2028,9 @@ components:
         - method_is_not
         - method_is_not
         uuid: uuid
-        url: url
+        url:
+        - url
+        - url
         country_is_not:
         - country_is_not
         - country_is_not
@@ -2018,25 +2040,33 @@ components:
         - ip_is
         - ip_is
         action: action
-        disabled: true
+        disabled: false
         action_config:
-          key: ""
+          auth_user: auth_user
+          auth_pass: auth_pass
       properties:
+        name:
+          type: string
         uuid:
           type: string
         url:
-          type: string
-        name:
-          type: string
-        domain:
-          type: string
-        country:
-          type: string
-        country_is:
           items:
             type: string
           type: array
-        country_is_not:
+        domain:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: string
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
           items:
             type: string
           type: array
@@ -2050,28 +2080,38 @@ components:
           items:
             type: string
           type: array
-        method:
+        country:
           type: string
-        method_is:
+        country_is:
           items:
             type: string
           type: array
-        method_is_not:
+        country_is_not:
           items:
             type: string
           type: array
-        only_with_cookie:
-          type: string
-        disabled:
-          type: boolean
         action:
           type: string
         action_config:
-          additionalProperties: {}
-          type: object
+          $ref: '#/components/schemas/RuleAuthAction'
       required:
-      - url
+      - action
+      - action_config
+      - disabled
       - uuid
+      type: object
+    RuleAuthAction:
+      example:
+        auth_user: auth_user
+        auth_pass: auth_pass
+      properties:
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+      required:
+      - auth_pass
+      - auth_user
       type: object
     RuleAuthRequest:
       example:
@@ -2091,7 +2131,9 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
@@ -2114,7 +2156,9 @@ components:
           default: false
           type: boolean
         url:
-          type: string
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is
@@ -2170,6 +2214,111 @@ components:
       - domain
       - url
       type: object
+    RuleCustomResponse:
+      example:
+        country: country
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        only_with_cookie: only_with_cookie
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain: domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        action: action
+        disabled: false
+        action_config:
+          custom_response_status_code: 0
+          custom_response_body: custom_response_body
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+        url:
+          items:
+            type: string
+          type: array
+        domain:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: string
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        action:
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleCustomResponseAction'
+      required:
+      - action
+      - disabled
+      - uuid
+      type: object
+    RuleCustomResponseAction:
+      example:
+        custom_response_status_code: 0
+        custom_response_body: custom_response_body
+      properties:
+        custom_response_body:
+          type: string
+        custom_response_status_code:
+          default: 200
+          format: int32
+          type: integer
+      required:
+      - custom_response_body
+      - custom_response_status_code
+      type: object
     RuleCustomResponseRequest:
       example:
         country: country_is
@@ -2190,7 +2339,9 @@ components:
         - method_is_not
         - method_is_not
         custom_response_body: custom_response_body
-        url: url
+        url:
+        - url
+        - url
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
@@ -2211,7 +2362,9 @@ components:
           default: false
           type: boolean
         url:
-          type: string
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is
@@ -2256,18 +2409,121 @@ components:
           type: boolean
         cookie_name:
           type: string
+        custom_response_body:
+          type: string
         custom_response_status_code:
           default: 200
           format: int32
           type: integer
-        custom_response_body:
-          type: string
       required:
       - custom_response_body
       - custom_response_status_code
       - disabled
       - domain
       - url
+      type: object
+    RuleHeader:
+      example:
+        country: country
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        only_with_cookie: only_with_cookie
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain: domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        action: action
+        disabled: false
+        action_config:
+          headers:
+            key: headers
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+        url:
+          items:
+            type: string
+          type: array
+        domain:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: string
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        action:
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleHeaderAction'
+      required:
+      - action
+      - action_config
+      - disabled
+      - uuid
+      type: object
+    RuleHeaderAction:
+      example:
+        headers:
+          key: headers
+      properties:
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - headers
       type: object
     RuleHeaderRequest:
       example:
@@ -2289,7 +2545,9 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
@@ -2310,7 +2568,9 @@ components:
           default: false
           type: boolean
         url:
-          type: string
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is
@@ -2395,14 +2655,14 @@ components:
         ip_is:
         - ip_is
         - ip_is
-        action: proxy
+        action: action
         disabled: false
         action_config:
           origin_timeout: origin_timeout
           proxy_strip_request_headers:
           - proxy_strip_request_headers
           - proxy_strip_request_headers
-          cache_lifetime: 6
+          cache_lifetime: "0"
           failover_origin_ttfb: failover_origin_ttfb
           proxy_strip_headers:
           - proxy_strip_headers
@@ -2423,7 +2683,7 @@ components:
           auth_pass: auth_pass
           notify_email: notify_email
           to: to
-          failover_lifetime: 0
+          failover_lifetime: failover_lifetime
           disable_ssl_verify: true
           waf_config:
             allow_rules:
@@ -2437,15 +2697,15 @@ components:
               block_search_engine: false
               block_suspicious: false
             request_header_ratelimit_mode: disabled
-            ip_ratelimit_cooldown: 2
-            request_header_ratelimit_cooldown: 9
+            ip_ratelimit_cooldown: 5
+            request_header_ratelimit_cooldown: 2
             allow_ip:
             - allow_ip
             - allow_ip
             mode: block
             ip_ratelimit_mode: disabled
-            ip_ratelimit_rps: 5
-            waf_ratelimit_rps: 2
+            ip_ratelimit_rps: 1
+            waf_ratelimit_rps: 9
             notify_email:
             - notify_email
             - notify_email
@@ -2457,16 +2717,17 @@ components:
             block_lists:
               referer: false
               ip: false
+              ai: false
               user_agent: false
-            waf_ratelimit_cooldown: 4
-            notify_slack_rpm: 7
-            notify_slack_hits_rpm: 5
+            waf_ratelimit_cooldown: 3
+            notify_slack_rpm: 2
+            notify_slack_hits_rpm: 6
             request_header_name: request_header_name
             thresholds:
             - key: ""
             - key: ""
-            request_header_ratelimit_rps: 7
-            waf_ratelimit_hits: 3
+            request_header_ratelimit_rps: 5
+            waf_ratelimit_hits: 7
             httpbl_enabled:
               key: true
             block_ip:
@@ -2475,7 +2736,7 @@ components:
             block_referer:
             - block_referer
             - block_referer
-            paranoia_level: 1
+            paranoia_level: 0
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
@@ -2528,7 +2789,6 @@ components:
             type: string
           type: array
         action:
-          default: proxy
           type: string
         action_config:
           $ref: '#/components/schemas/RuleProxyAction'
@@ -2544,7 +2804,7 @@ components:
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
-        cache_lifetime: 6
+        cache_lifetime: "0"
         failover_origin_ttfb: failover_origin_ttfb
         proxy_strip_headers:
         - proxy_strip_headers
@@ -2565,7 +2825,7 @@ components:
         auth_pass: auth_pass
         notify_email: notify_email
         to: to
-        failover_lifetime: 0
+        failover_lifetime: failover_lifetime
         disable_ssl_verify: true
         waf_config:
           allow_rules:
@@ -2579,15 +2839,15 @@ components:
             block_search_engine: false
             block_suspicious: false
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 2
-          request_header_ratelimit_cooldown: 9
+          ip_ratelimit_cooldown: 5
+          request_header_ratelimit_cooldown: 2
           allow_ip:
           - allow_ip
           - allow_ip
           mode: block
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 2
+          ip_ratelimit_rps: 1
+          waf_ratelimit_rps: 9
           notify_email:
           - notify_email
           - notify_email
@@ -2599,16 +2859,17 @@ components:
           block_lists:
             referer: false
             ip: false
+            ai: false
             user_agent: false
-          waf_ratelimit_cooldown: 4
-          notify_slack_rpm: 7
-          notify_slack_hits_rpm: 5
+          waf_ratelimit_cooldown: 3
+          notify_slack_rpm: 2
+          notify_slack_hits_rpm: 6
           request_header_name: request_header_name
           thresholds:
           - key: ""
           - key: ""
-          request_header_ratelimit_rps: 7
-          waf_ratelimit_hits: 3
+          request_header_ratelimit_rps: 5
+          waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
           block_ip:
@@ -2617,7 +2878,7 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          paranoia_level: 1
+          paranoia_level: 0
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -2644,7 +2905,7 @@ components:
         notify:
           type: string
         notify_config:
-          $ref: '#/components/schemas/ProxyNotifyConfig'
+          $ref: '#/components/schemas/NotifyConfig'
         proxy_strip_request_headers:
           items:
             type: string
@@ -2658,8 +2919,7 @@ components:
         failover_mode:
           type: boolean
         failover_lifetime:
-          format: int32
-          type: integer
+          type: string
         only_proxy_404:
           type: boolean
         inject_headers:
@@ -2669,16 +2929,15 @@ components:
         to:
           type: string
         cache_lifetime:
-          default: 0
-          format: int32
-          type: integer
+          default: "0"
+          type: string
         disable_ssl_verify:
           default: true
           type: boolean
         notify_email:
           type: string
         waf_config:
-          $ref: '#/components/schemas/RuleWAFConfig'
+          $ref: '#/components/schemas/WAFConfig'
       required:
       - to
       - waf_enabled
@@ -2752,15 +3011,15 @@ components:
             block_search_engine: false
             block_suspicious: false
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 2
-          request_header_ratelimit_cooldown: 9
+          ip_ratelimit_cooldown: 5
+          request_header_ratelimit_cooldown: 2
           allow_ip:
           - allow_ip
           - allow_ip
           mode: block
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 2
+          ip_ratelimit_rps: 1
+          waf_ratelimit_rps: 9
           notify_email:
           - notify_email
           - notify_email
@@ -2772,16 +3031,17 @@ components:
           block_lists:
             referer: false
             ip: false
+            ai: false
             user_agent: false
-          waf_ratelimit_cooldown: 4
-          notify_slack_rpm: 7
-          notify_slack_hits_rpm: 5
+          waf_ratelimit_cooldown: 3
+          notify_slack_rpm: 2
+          notify_slack_hits_rpm: 6
           request_header_name: request_header_name
           thresholds:
           - key: ""
           - key: ""
-          request_header_ratelimit_rps: 7
-          waf_ratelimit_hits: 3
+          request_header_ratelimit_rps: 5
+          waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
           block_ip:
@@ -2790,7 +3050,7 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          paranoia_level: 1
+          paranoia_level: 0
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -2902,17 +3162,121 @@ components:
           - slack
           type: string
         notify_config:
-          $ref: '#/components/schemas/ProxyNotifyConfig'
+          $ref: '#/components/schemas/NotifyConfig'
         waf_enabled:
           default: false
           type: boolean
         waf_config:
-          $ref: '#/components/schemas/RuleWAFConfig'
+          $ref: '#/components/schemas/WAFConfig'
       required:
       - disabled
       - domain
       - to
       - url
+      type: object
+    RuleRedirect:
+      example:
+        country: country
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        only_with_cookie: only_with_cookie
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain: domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        action: action
+        disabled: false
+        action_config:
+          redirect_code: "301"
+          redirect_to: redirect_to
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+        url:
+          items:
+            type: string
+          type: array
+        domain:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: string
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        action:
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleRedirectAction'
+      required:
+      - action
+      - disabled
+      - uuid
+      type: object
+    RuleRedirectAction:
+      example:
+        redirect_code: "301"
+        redirect_to: redirect_to
+      properties:
+        redirect_to:
+          type: string
+        redirect_code:
+          default: "301"
+          type: string
+      required:
+      - redirect_code
+      - redirect_to
       type: object
     RuleRedirectRequest:
       example:
@@ -2926,14 +3290,16 @@ components:
         - method_is
         ip: ip_is
         only_with_cookie: false
-        redirect_code: 0
+        redirect_code: "301"
         country_is:
         - country_is
         - country_is
         method_is_not:
         - method_is_not
         - method_is_not
-        url: url
+        url:
+        - url
+        - url
         cookie_name: cookie_name
         redirect_to: redirect_to
         country_is_not:
@@ -2955,7 +3321,9 @@ components:
           default: false
           type: boolean
         url:
-          type: string
+          items:
+            type: string
+          type: array
         country:
           enum:
           - country_is
@@ -3003,8 +3371,8 @@ components:
         redirect_to:
           type: string
         redirect_code:
-          default: 301
-          type: integer
+          default: "301"
+          type: string
       required:
       - disabled
       - domain
@@ -3012,7 +3380,7 @@ components:
       - redirect_to
       - url
       type: object
-    RuleWAFConfig:
+    WAFConfig:
       example:
         allow_rules:
         - allow_rules
@@ -3025,15 +3393,15 @@ components:
           block_search_engine: false
           block_suspicious: false
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 2
-        request_header_ratelimit_cooldown: 9
+        ip_ratelimit_cooldown: 5
+        request_header_ratelimit_cooldown: 2
         allow_ip:
         - allow_ip
         - allow_ip
         mode: block
         ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 2
+        ip_ratelimit_rps: 1
+        waf_ratelimit_rps: 9
         notify_email:
         - notify_email
         - notify_email
@@ -3045,16 +3413,17 @@ components:
         block_lists:
           referer: false
           ip: false
+          ai: false
           user_agent: false
-        waf_ratelimit_cooldown: 4
-        notify_slack_rpm: 7
-        notify_slack_hits_rpm: 5
+        waf_ratelimit_cooldown: 3
+        notify_slack_rpm: 2
+        notify_slack_hits_rpm: 6
         request_header_name: request_header_name
         thresholds:
         - key: ""
         - key: ""
-        request_header_ratelimit_rps: 7
-        waf_ratelimit_hits: 3
+        request_header_ratelimit_rps: 5
+        waf_ratelimit_hits: 7
         httpbl_enabled:
           key: true
         block_ip:
@@ -3063,7 +3432,7 @@ components:
         block_referer:
         - block_referer
         - block_referer
-        paranoia_level: 1
+        paranoia_level: 0
       properties:
         mode:
           enum:
@@ -3094,9 +3463,9 @@ components:
             type: string
           type: array
         block_lists:
-          $ref: '#/components/schemas/WafConfigBlockLists'
+          $ref: '#/components/schemas/BlockLists'
         httpbl:
-          $ref: '#/components/schemas/ProxyConfigHttpbl'
+          $ref: '#/components/schemas/Httpbl'
         thresholds:
           items:
             additionalProperties: {}
@@ -3164,22 +3533,6 @@ components:
           type: integer
       required:
       - mode
-      type: object
-    WafConfigBlockLists:
-      example:
-        referer: false
-        ip: false
-        user_agent: false
-      properties:
-        referer:
-          default: false
-          type: boolean
-        ip:
-          default: false
-          type: boolean
-        user_agent:
-          default: false
-          type: boolean
       type: object
   securitySchemes:
     BearerAuth:

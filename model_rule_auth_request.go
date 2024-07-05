@@ -24,7 +24,7 @@ type RuleAuthRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
-	Url string `json:"url"`
+	Url []string `json:"url"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -46,7 +46,7 @@ type _RuleAuthRequest RuleAuthRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleAuthRequest(domain string, disabled bool, url string, authUser string, authPass string) *RuleAuthRequest {
+func NewRuleAuthRequest(domain string, disabled bool, url []string, authUser string, authPass string) *RuleAuthRequest {
 	this := RuleAuthRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -153,9 +153,9 @@ func (o *RuleAuthRequest) SetDisabled(v bool) {
 }
 
 // GetUrl returns the Url field value
-func (o *RuleAuthRequest) GetUrl() string {
+func (o *RuleAuthRequest) GetUrl() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -164,15 +164,15 @@ func (o *RuleAuthRequest) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *RuleAuthRequest) GetUrlOk() (*string, bool) {
+func (o *RuleAuthRequest) GetUrlOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url, true
 }
 
 // SetUrl sets field value
-func (o *RuleAuthRequest) SetUrl(v string) {
+func (o *RuleAuthRequest) SetUrl(v []string) {
 	o.Url = v
 }
 

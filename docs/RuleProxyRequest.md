@@ -34,9 +34,9 @@ Name | Type | Description | Notes
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
 **FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
-**NotifyConfig** | Pointer to [**ProxyNotifyConfig**](ProxyNotifyConfig.md) |  | [optional] 
+**NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
 **WafEnabled** | Pointer to **bool** |  | [optional] [default to false]
-**WafConfig** | Pointer to [**RuleWAFConfig**](RuleWAFConfig.md) |  | [optional] 
+**WafConfig** | Pointer to [**WAFConfig**](WAFConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -789,20 +789,20 @@ HasNotify returns a boolean if a field has been set.
 
 ### GetNotifyConfig
 
-`func (o *RuleProxyRequest) GetNotifyConfig() ProxyNotifyConfig`
+`func (o *RuleProxyRequest) GetNotifyConfig() NotifyConfig`
 
 GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
 
 ### GetNotifyConfigOk
 
-`func (o *RuleProxyRequest) GetNotifyConfigOk() (*ProxyNotifyConfig, bool)`
+`func (o *RuleProxyRequest) GetNotifyConfigOk() (*NotifyConfig, bool)`
 
 GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifyConfig
 
-`func (o *RuleProxyRequest) SetNotifyConfig(v ProxyNotifyConfig)`
+`func (o *RuleProxyRequest) SetNotifyConfig(v NotifyConfig)`
 
 SetNotifyConfig sets NotifyConfig field to given value.
 
@@ -839,20 +839,20 @@ HasWafEnabled returns a boolean if a field has been set.
 
 ### GetWafConfig
 
-`func (o *RuleProxyRequest) GetWafConfig() RuleWAFConfig`
+`func (o *RuleProxyRequest) GetWafConfig() WAFConfig`
 
 GetWafConfig returns the WafConfig field if non-nil, zero value otherwise.
 
 ### GetWafConfigOk
 
-`func (o *RuleProxyRequest) GetWafConfigOk() (*RuleWAFConfig, bool)`
+`func (o *RuleProxyRequest) GetWafConfigOk() (*WAFConfig, bool)`
 
 GetWafConfigOk returns a tuple with the WafConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWafConfig
 
-`func (o *RuleProxyRequest) SetWafConfig(v RuleWAFConfig)`
+`func (o *RuleProxyRequest) SetWafConfig(v WAFConfig)`
 
 SetWafConfig sets WafConfig field to given value.
 

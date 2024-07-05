@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **string** |  | [default to "any"]
 **Name** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
-**Url** | **string** |  | 
+**Url** | **[]string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
@@ -19,14 +19,14 @@ Name | Type | Description | Notes
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
 **OnlyWithCookie** | Pointer to **bool** |  | [optional] [default to false]
 **CookieName** | Pointer to **string** |  | [optional] 
-**CustomResponseStatusCode** | **int32** |  | [default to 200]
 **CustomResponseBody** | **string** |  | 
+**CustomResponseStatusCode** | **int32** |  | [default to 200]
 
 ## Methods
 
 ### NewRuleCustomResponseRequest
 
-`func NewRuleCustomResponseRequest(domain string, disabled bool, url string, customResponseStatusCode int32, customResponseBody string, ) *RuleCustomResponseRequest`
+`func NewRuleCustomResponseRequest(domain string, disabled bool, url []string, customResponseBody string, customResponseStatusCode int32, ) *RuleCustomResponseRequest`
 
 NewRuleCustomResponseRequest instantiates a new RuleCustomResponseRequest object
 This constructor will assign default values to properties that have it defined,
@@ -108,20 +108,20 @@ SetDisabled sets Disabled field to given value.
 
 ### GetUrl
 
-`func (o *RuleCustomResponseRequest) GetUrl() string`
+`func (o *RuleCustomResponseRequest) GetUrl() []string`
 
 GetUrl returns the Url field if non-nil, zero value otherwise.
 
 ### GetUrlOk
 
-`func (o *RuleCustomResponseRequest) GetUrlOk() (*string, bool)`
+`func (o *RuleCustomResponseRequest) GetUrlOk() (*[]string, bool)`
 
 GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUrl
 
-`func (o *RuleCustomResponseRequest) SetUrl(v string)`
+`func (o *RuleCustomResponseRequest) SetUrl(v []string)`
 
 SetUrl sets Url field to given value.
 
@@ -401,26 +401,6 @@ SetCookieName sets CookieName field to given value.
 
 HasCookieName returns a boolean if a field has been set.
 
-### GetCustomResponseStatusCode
-
-`func (o *RuleCustomResponseRequest) GetCustomResponseStatusCode() int32`
-
-GetCustomResponseStatusCode returns the CustomResponseStatusCode field if non-nil, zero value otherwise.
-
-### GetCustomResponseStatusCodeOk
-
-`func (o *RuleCustomResponseRequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
-
-GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomResponseStatusCode
-
-`func (o *RuleCustomResponseRequest) SetCustomResponseStatusCode(v int32)`
-
-SetCustomResponseStatusCode sets CustomResponseStatusCode field to given value.
-
-
 ### GetCustomResponseBody
 
 `func (o *RuleCustomResponseRequest) GetCustomResponseBody() string`
@@ -439,6 +419,26 @@ and a boolean to check if the value has been set.
 `func (o *RuleCustomResponseRequest) SetCustomResponseBody(v string)`
 
 SetCustomResponseBody sets CustomResponseBody field to given value.
+
+
+### GetCustomResponseStatusCode
+
+`func (o *RuleCustomResponseRequest) GetCustomResponseStatusCode() int32`
+
+GetCustomResponseStatusCode returns the CustomResponseStatusCode field if non-nil, zero value otherwise.
+
+### GetCustomResponseStatusCodeOk
+
+`func (o *RuleCustomResponseRequest) GetCustomResponseStatusCodeOk() (*int32, bool)`
+
+GetCustomResponseStatusCodeOk returns a tuple with the CustomResponseStatusCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomResponseStatusCode
+
+`func (o *RuleCustomResponseRequest) SetCustomResponseStatusCode(v int32)`
+
+SetCustomResponseStatusCode sets CustomResponseStatusCode field to given value.
 
 
 

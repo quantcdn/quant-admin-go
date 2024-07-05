@@ -124,26 +124,33 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [BlockLists](docs/BlockLists.md)
  - [Crawler](docs/Crawler.md)
  - [CrawlerRequest](docs/CrawlerRequest.md)
  - [Domain](docs/Domain.md)
  - [DomainRequest](docs/DomainRequest.md)
  - [Error](docs/Error.md)
+ - [Httpbl](docs/Httpbl.md)
+ - [NotifyConfig](docs/NotifyConfig.md)
  - [Organization](docs/Organization.md)
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
- - [ProxyConfigHttpbl](docs/ProxyConfigHttpbl.md)
- - [ProxyNotifyConfig](docs/ProxyNotifyConfig.md)
- - [Rule](docs/Rule.md)
+ - [RuleAuth](docs/RuleAuth.md)
+ - [RuleAuthAction](docs/RuleAuthAction.md)
  - [RuleAuthRequest](docs/RuleAuthRequest.md)
+ - [RuleCustomResponse](docs/RuleCustomResponse.md)
+ - [RuleCustomResponseAction](docs/RuleCustomResponseAction.md)
  - [RuleCustomResponseRequest](docs/RuleCustomResponseRequest.md)
+ - [RuleHeader](docs/RuleHeader.md)
+ - [RuleHeaderAction](docs/RuleHeaderAction.md)
  - [RuleHeaderRequest](docs/RuleHeaderRequest.md)
  - [RuleProxy](docs/RuleProxy.md)
  - [RuleProxyAction](docs/RuleProxyAction.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
+ - [RuleRedirect](docs/RuleRedirect.md)
+ - [RuleRedirectAction](docs/RuleRedirectAction.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
- - [RuleWAFConfig](docs/RuleWAFConfig.md)
- - [WafConfigBlockLists](docs/WafConfigBlockLists.md)
+ - [WAFConfig](docs/WAFConfig.md)
 
 
 ## Documentation For Authorization

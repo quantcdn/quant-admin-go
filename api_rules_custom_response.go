@@ -36,7 +36,7 @@ func (r ApiRulesCustomResponseCreateRequest) RuleCustomResponseRequest(ruleCusto
 	return r
 }
 
-func (r ApiRulesCustomResponseCreateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesCustomResponseCreateRequest) Execute() (*RuleCustomResponse, *http.Response, error) {
 	return r.ApiService.RulesCustomResponseCreateExecute(r)
 }
 
@@ -58,13 +58,13 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseCreate(ctx context.Co
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesCustomResponseAPIService) RulesCustomResponseCreateExecute(r ApiRulesCustomResponseCreateRequest) (*Rule, *http.Response, error) {
+//  @return RuleCustomResponse
+func (a *RulesCustomResponseAPIService) RulesCustomResponseCreateExecute(r ApiRulesCustomResponseCreateRequest) (*RuleCustomResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleCustomResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesCustomResponseAPIService.RulesCustomResponseCreate")
@@ -157,7 +157,7 @@ type ApiRulesCustomResponseDeleteRequest struct {
 	rule string
 }
 
-func (r ApiRulesCustomResponseDeleteRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesCustomResponseDeleteRequest) Execute() (*RuleCustomResponse, *http.Response, error) {
 	return r.ApiService.RulesCustomResponseDeleteExecute(r)
 }
 
@@ -181,13 +181,13 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseDelete(ctx context.Co
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesCustomResponseAPIService) RulesCustomResponseDeleteExecute(r ApiRulesCustomResponseDeleteRequest) (*Rule, *http.Response, error) {
+//  @return RuleCustomResponse
+func (a *RulesCustomResponseAPIService) RulesCustomResponseDeleteExecute(r ApiRulesCustomResponseDeleteRequest) (*RuleCustomResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleCustomResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesCustomResponseAPIService.RulesCustomResponseDelete")
@@ -275,7 +275,7 @@ type ApiRulesCustomResponseListRequest struct {
 	project string
 }
 
-func (r ApiRulesCustomResponseListRequest) Execute() ([]Rule, *http.Response, error) {
+func (r ApiRulesCustomResponseListRequest) Execute() ([]RuleCustomResponse, *http.Response, error) {
 	return r.ApiService.RulesCustomResponseListExecute(r)
 }
 
@@ -297,13 +297,13 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseList(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return []Rule
-func (a *RulesCustomResponseAPIService) RulesCustomResponseListExecute(r ApiRulesCustomResponseListRequest) ([]Rule, *http.Response, error) {
+//  @return []RuleCustomResponse
+func (a *RulesCustomResponseAPIService) RulesCustomResponseListExecute(r ApiRulesCustomResponseListRequest) ([]RuleCustomResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Rule
+		localVarReturnValue  []RuleCustomResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesCustomResponseAPIService.RulesCustomResponseList")
@@ -391,7 +391,7 @@ type ApiRulesCustomResponseReadRequest struct {
 	rule string
 }
 
-func (r ApiRulesCustomResponseReadRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesCustomResponseReadRequest) Execute() (*RuleCustomResponse, *http.Response, error) {
 	return r.ApiService.RulesCustomResponseReadExecute(r)
 }
 
@@ -415,13 +415,13 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseRead(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesCustomResponseAPIService) RulesCustomResponseReadExecute(r ApiRulesCustomResponseReadRequest) (*Rule, *http.Response, error) {
+//  @return RuleCustomResponse
+func (a *RulesCustomResponseAPIService) RulesCustomResponseReadExecute(r ApiRulesCustomResponseReadRequest) (*RuleCustomResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleCustomResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesCustomResponseAPIService.RulesCustomResponseRead")
@@ -516,7 +516,7 @@ func (r ApiRulesCustomResponseUpdateRequest) RuleCustomResponseRequest(ruleCusto
 	return r
 }
 
-func (r ApiRulesCustomResponseUpdateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesCustomResponseUpdateRequest) Execute() (*RuleCustomResponse, *http.Response, error) {
 	return r.ApiService.RulesCustomResponseUpdateExecute(r)
 }
 
@@ -540,13 +540,13 @@ func (a *RulesCustomResponseAPIService) RulesCustomResponseUpdate(ctx context.Co
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesCustomResponseAPIService) RulesCustomResponseUpdateExecute(r ApiRulesCustomResponseUpdateRequest) (*Rule, *http.Response, error) {
+//  @return RuleCustomResponse
+func (a *RulesCustomResponseAPIService) RulesCustomResponseUpdateExecute(r ApiRulesCustomResponseUpdateRequest) (*RuleCustomResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleCustomResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesCustomResponseAPIService.RulesCustomResponseUpdate")

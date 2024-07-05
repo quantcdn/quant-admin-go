@@ -36,7 +36,7 @@ func (r ApiRulesRedirectCreateRequest) RuleRedirectRequest(ruleRedirectRequest R
 	return r
 }
 
-func (r ApiRulesRedirectCreateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesRedirectCreateRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectCreateExecute(r)
 }
 
@@ -58,13 +58,13 @@ func (a *RulesRedirectAPIService) RulesRedirectCreate(ctx context.Context, organ
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesRedirectAPIService) RulesRedirectCreateExecute(r ApiRulesRedirectCreateRequest) (*Rule, *http.Response, error) {
+//  @return RuleRedirect
+func (a *RulesRedirectAPIService) RulesRedirectCreateExecute(r ApiRulesRedirectCreateRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleRedirect
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesRedirectAPIService.RulesRedirectCreate")
@@ -157,7 +157,7 @@ type ApiRulesRedirectDeleteRequest struct {
 	rule string
 }
 
-func (r ApiRulesRedirectDeleteRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesRedirectDeleteRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectDeleteExecute(r)
 }
 
@@ -181,13 +181,13 @@ func (a *RulesRedirectAPIService) RulesRedirectDelete(ctx context.Context, organ
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesRedirectAPIService) RulesRedirectDeleteExecute(r ApiRulesRedirectDeleteRequest) (*Rule, *http.Response, error) {
+//  @return RuleRedirect
+func (a *RulesRedirectAPIService) RulesRedirectDeleteExecute(r ApiRulesRedirectDeleteRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleRedirect
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesRedirectAPIService.RulesRedirectDelete")
@@ -275,7 +275,7 @@ type ApiRulesRedirectListRequest struct {
 	project string
 }
 
-func (r ApiRulesRedirectListRequest) Execute() ([]Rule, *http.Response, error) {
+func (r ApiRulesRedirectListRequest) Execute() ([]RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectListExecute(r)
 }
 
@@ -297,13 +297,13 @@ func (a *RulesRedirectAPIService) RulesRedirectList(ctx context.Context, organiz
 }
 
 // Execute executes the request
-//  @return []Rule
-func (a *RulesRedirectAPIService) RulesRedirectListExecute(r ApiRulesRedirectListRequest) ([]Rule, *http.Response, error) {
+//  @return []RuleRedirect
+func (a *RulesRedirectAPIService) RulesRedirectListExecute(r ApiRulesRedirectListRequest) ([]RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Rule
+		localVarReturnValue  []RuleRedirect
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesRedirectAPIService.RulesRedirectList")
@@ -391,7 +391,7 @@ type ApiRulesRedirectReadRequest struct {
 	rule string
 }
 
-func (r ApiRulesRedirectReadRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesRedirectReadRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectReadExecute(r)
 }
 
@@ -415,13 +415,13 @@ func (a *RulesRedirectAPIService) RulesRedirectRead(ctx context.Context, organiz
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesRedirectAPIService) RulesRedirectReadExecute(r ApiRulesRedirectReadRequest) (*Rule, *http.Response, error) {
+//  @return RuleRedirect
+func (a *RulesRedirectAPIService) RulesRedirectReadExecute(r ApiRulesRedirectReadRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleRedirect
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesRedirectAPIService.RulesRedirectRead")
@@ -516,7 +516,7 @@ func (r ApiRulesRedirectUpdateRequest) RuleRedirectRequest(ruleRedirectRequest R
 	return r
 }
 
-func (r ApiRulesRedirectUpdateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesRedirectUpdateRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectUpdateExecute(r)
 }
 
@@ -540,13 +540,13 @@ func (a *RulesRedirectAPIService) RulesRedirectUpdate(ctx context.Context, organ
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r ApiRulesRedirectUpdateRequest) (*Rule, *http.Response, error) {
+//  @return RuleRedirect
+func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r ApiRulesRedirectUpdateRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleRedirect
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesRedirectAPIService.RulesRedirectUpdate")

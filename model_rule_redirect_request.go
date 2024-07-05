@@ -24,7 +24,7 @@ type RuleRedirectRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
-	Url string `json:"url"`
+	Url []string `json:"url"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -37,7 +37,7 @@ type RuleRedirectRequest struct {
 	OnlyWithCookie *bool `json:"only_with_cookie,omitempty"`
 	CookieName *string `json:"cookie_name,omitempty"`
 	RedirectTo string `json:"redirect_to"`
-	RedirectCode int32 `json:"redirect_code"`
+	RedirectCode string `json:"redirect_code"`
 }
 
 type _RuleRedirectRequest RuleRedirectRequest
@@ -46,7 +46,7 @@ type _RuleRedirectRequest RuleRedirectRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleRedirectRequest(domain string, disabled bool, url string, redirectTo string, redirectCode int32) *RuleRedirectRequest {
+func NewRuleRedirectRequest(domain string, disabled bool, url []string, redirectTo string, redirectCode string) *RuleRedirectRequest {
 	this := RuleRedirectRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -69,7 +69,7 @@ func NewRuleRedirectRequestWithDefaults() *RuleRedirectRequest {
 	this.Disabled = disabled
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
-	var redirectCode int32 = 301
+	var redirectCode string = "301"
 	this.RedirectCode = redirectCode
 	return &this
 }
@@ -155,9 +155,9 @@ func (o *RuleRedirectRequest) SetDisabled(v bool) {
 }
 
 // GetUrl returns the Url field value
-func (o *RuleRedirectRequest) GetUrl() string {
+func (o *RuleRedirectRequest) GetUrl() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -166,15 +166,15 @@ func (o *RuleRedirectRequest) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *RuleRedirectRequest) GetUrlOk() (*string, bool) {
+func (o *RuleRedirectRequest) GetUrlOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url, true
 }
 
 // SetUrl sets field value
-func (o *RuleRedirectRequest) SetUrl(v string) {
+func (o *RuleRedirectRequest) SetUrl(v []string) {
 	o.Url = v
 }
 
@@ -555,9 +555,9 @@ func (o *RuleRedirectRequest) SetRedirectTo(v string) {
 }
 
 // GetRedirectCode returns the RedirectCode field value
-func (o *RuleRedirectRequest) GetRedirectCode() int32 {
+func (o *RuleRedirectRequest) GetRedirectCode() string {
 	if o == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 
@@ -566,7 +566,7 @@ func (o *RuleRedirectRequest) GetRedirectCode() int32 {
 
 // GetRedirectCodeOk returns a tuple with the RedirectCode field value
 // and a boolean to check if the value has been set.
-func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool) {
+func (o *RuleRedirectRequest) GetRedirectCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -574,7 +574,7 @@ func (o *RuleRedirectRequest) GetRedirectCodeOk() (*int32, bool) {
 }
 
 // SetRedirectCode sets field value
-func (o *RuleRedirectRequest) SetRedirectCode(v int32) {
+func (o *RuleRedirectRequest) SetRedirectCode(v string) {
 	o.RedirectCode = v
 }
 

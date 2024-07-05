@@ -36,7 +36,7 @@ func (r ApiRulesAuthCreateRequest) RuleAuthRequest(ruleAuthRequest RuleAuthReque
 	return r
 }
 
-func (r ApiRulesAuthCreateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesAuthCreateRequest) Execute() (*RuleAuth, *http.Response, error) {
 	return r.ApiService.RulesAuthCreateExecute(r)
 }
 
@@ -58,13 +58,13 @@ func (a *RulesAuthAPIService) RulesAuthCreate(ctx context.Context, organization 
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesAuthAPIService) RulesAuthCreateExecute(r ApiRulesAuthCreateRequest) (*Rule, *http.Response, error) {
+//  @return RuleAuth
+func (a *RulesAuthAPIService) RulesAuthCreateExecute(r ApiRulesAuthCreateRequest) (*RuleAuth, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleAuth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAuthAPIService.RulesAuthCreate")
@@ -157,7 +157,7 @@ type ApiRulesAuthDeleteRequest struct {
 	rule string
 }
 
-func (r ApiRulesAuthDeleteRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesAuthDeleteRequest) Execute() (*RuleAuth, *http.Response, error) {
 	return r.ApiService.RulesAuthDeleteExecute(r)
 }
 
@@ -181,13 +181,13 @@ func (a *RulesAuthAPIService) RulesAuthDelete(ctx context.Context, organization 
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesAuthAPIService) RulesAuthDeleteExecute(r ApiRulesAuthDeleteRequest) (*Rule, *http.Response, error) {
+//  @return RuleAuth
+func (a *RulesAuthAPIService) RulesAuthDeleteExecute(r ApiRulesAuthDeleteRequest) (*RuleAuth, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleAuth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAuthAPIService.RulesAuthDelete")
@@ -275,7 +275,7 @@ type ApiRulesAuthListRequest struct {
 	project string
 }
 
-func (r ApiRulesAuthListRequest) Execute() ([]Rule, *http.Response, error) {
+func (r ApiRulesAuthListRequest) Execute() ([]RuleAuth, *http.Response, error) {
 	return r.ApiService.RulesAuthListExecute(r)
 }
 
@@ -297,13 +297,13 @@ func (a *RulesAuthAPIService) RulesAuthList(ctx context.Context, organization st
 }
 
 // Execute executes the request
-//  @return []Rule
-func (a *RulesAuthAPIService) RulesAuthListExecute(r ApiRulesAuthListRequest) ([]Rule, *http.Response, error) {
+//  @return []RuleAuth
+func (a *RulesAuthAPIService) RulesAuthListExecute(r ApiRulesAuthListRequest) ([]RuleAuth, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Rule
+		localVarReturnValue  []RuleAuth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAuthAPIService.RulesAuthList")
@@ -391,7 +391,7 @@ type ApiRulesAuthReadRequest struct {
 	rule string
 }
 
-func (r ApiRulesAuthReadRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesAuthReadRequest) Execute() (*RuleAuth, *http.Response, error) {
 	return r.ApiService.RulesAuthReadExecute(r)
 }
 
@@ -415,13 +415,13 @@ func (a *RulesAuthAPIService) RulesAuthRead(ctx context.Context, organization st
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesAuthAPIService) RulesAuthReadExecute(r ApiRulesAuthReadRequest) (*Rule, *http.Response, error) {
+//  @return RuleAuth
+func (a *RulesAuthAPIService) RulesAuthReadExecute(r ApiRulesAuthReadRequest) (*RuleAuth, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleAuth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAuthAPIService.RulesAuthRead")
@@ -516,7 +516,7 @@ func (r ApiRulesAuthUpdateRequest) RuleAuthRequest(ruleAuthRequest RuleAuthReque
 	return r
 }
 
-func (r ApiRulesAuthUpdateRequest) Execute() (*Rule, *http.Response, error) {
+func (r ApiRulesAuthUpdateRequest) Execute() (*RuleAuth, *http.Response, error) {
 	return r.ApiService.RulesAuthUpdateExecute(r)
 }
 
@@ -540,13 +540,13 @@ func (a *RulesAuthAPIService) RulesAuthUpdate(ctx context.Context, organization 
 }
 
 // Execute executes the request
-//  @return Rule
-func (a *RulesAuthAPIService) RulesAuthUpdateExecute(r ApiRulesAuthUpdateRequest) (*Rule, *http.Response, error) {
+//  @return RuleAuth
+func (a *RulesAuthAPIService) RulesAuthUpdateExecute(r ApiRulesAuthUpdateRequest) (*RuleAuth, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Rule
+		localVarReturnValue  *RuleAuth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesAuthAPIService.RulesAuthUpdate")

@@ -24,7 +24,7 @@ type RuleHeaderRequest struct {
 	Domain string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Disabled bool `json:"disabled"`
-	Url string `json:"url"`
+	Url []string `json:"url"`
 	Country *string `json:"country,omitempty"`
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
@@ -45,7 +45,7 @@ type _RuleHeaderRequest RuleHeaderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleHeaderRequest(domain string, disabled bool, url string, headers map[string]string) *RuleHeaderRequest {
+func NewRuleHeaderRequest(domain string, disabled bool, url []string, headers map[string]string) *RuleHeaderRequest {
 	this := RuleHeaderRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -151,9 +151,9 @@ func (o *RuleHeaderRequest) SetDisabled(v bool) {
 }
 
 // GetUrl returns the Url field value
-func (o *RuleHeaderRequest) GetUrl() string {
+func (o *RuleHeaderRequest) GetUrl() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -162,15 +162,15 @@ func (o *RuleHeaderRequest) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *RuleHeaderRequest) GetUrlOk() (*string, bool) {
+func (o *RuleHeaderRequest) GetUrlOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Url, true
+	return o.Url, true
 }
 
 // SetUrl sets field value
-func (o *RuleHeaderRequest) SetUrl(v string) {
+func (o *RuleHeaderRequest) SetUrl(v []string) {
 	o.Url = v
 }
 

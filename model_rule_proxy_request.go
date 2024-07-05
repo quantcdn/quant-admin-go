@@ -51,9 +51,9 @@ type RuleProxyRequest struct {
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	Notify *string `json:"notify,omitempty"`
-	NotifyConfig *ProxyNotifyConfig `json:"notify_config,omitempty"`
+	NotifyConfig *NotifyConfig `json:"notify_config,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
-	WafConfig *RuleWAFConfig `json:"waf_config,omitempty"`
+	WafConfig *WAFConfig `json:"waf_config,omitempty"`
 }
 
 type _RuleProxyRequest RuleProxyRequest
@@ -1032,9 +1032,9 @@ func (o *RuleProxyRequest) SetNotify(v string) {
 }
 
 // GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetNotifyConfig() ProxyNotifyConfig {
+func (o *RuleProxyRequest) GetNotifyConfig() NotifyConfig {
 	if o == nil || IsNil(o.NotifyConfig) {
-		var ret ProxyNotifyConfig
+		var ret NotifyConfig
 		return ret
 	}
 	return *o.NotifyConfig
@@ -1042,7 +1042,7 @@ func (o *RuleProxyRequest) GetNotifyConfig() ProxyNotifyConfig {
 
 // GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetNotifyConfigOk() (*ProxyNotifyConfig, bool) {
+func (o *RuleProxyRequest) GetNotifyConfigOk() (*NotifyConfig, bool) {
 	if o == nil || IsNil(o.NotifyConfig) {
 		return nil, false
 	}
@@ -1058,8 +1058,8 @@ func (o *RuleProxyRequest) HasNotifyConfig() bool {
 	return false
 }
 
-// SetNotifyConfig gets a reference to the given ProxyNotifyConfig and assigns it to the NotifyConfig field.
-func (o *RuleProxyRequest) SetNotifyConfig(v ProxyNotifyConfig) {
+// SetNotifyConfig gets a reference to the given NotifyConfig and assigns it to the NotifyConfig field.
+func (o *RuleProxyRequest) SetNotifyConfig(v NotifyConfig) {
 	o.NotifyConfig = &v
 }
 
@@ -1096,9 +1096,9 @@ func (o *RuleProxyRequest) SetWafEnabled(v bool) {
 }
 
 // GetWafConfig returns the WafConfig field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetWafConfig() RuleWAFConfig {
+func (o *RuleProxyRequest) GetWafConfig() WAFConfig {
 	if o == nil || IsNil(o.WafConfig) {
-		var ret RuleWAFConfig
+		var ret WAFConfig
 		return ret
 	}
 	return *o.WafConfig
@@ -1106,7 +1106,7 @@ func (o *RuleProxyRequest) GetWafConfig() RuleWAFConfig {
 
 // GetWafConfigOk returns a tuple with the WafConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetWafConfigOk() (*RuleWAFConfig, bool) {
+func (o *RuleProxyRequest) GetWafConfigOk() (*WAFConfig, bool) {
 	if o == nil || IsNil(o.WafConfig) {
 		return nil, false
 	}
@@ -1122,8 +1122,8 @@ func (o *RuleProxyRequest) HasWafConfig() bool {
 	return false
 }
 
-// SetWafConfig gets a reference to the given RuleWAFConfig and assigns it to the WafConfig field.
-func (o *RuleProxyRequest) SetWafConfig(v RuleWAFConfig) {
+// SetWafConfig gets a reference to the given WAFConfig and assigns it to the WafConfig field.
+func (o *RuleProxyRequest) SetWafConfig(v WAFConfig) {
 	o.WafConfig = &v
 }
 

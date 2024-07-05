@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the RuleProxy type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RuleProxy{}
+// checks if the RuleAuth type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleAuth{}
 
-// RuleProxy struct for RuleProxy
-type RuleProxy struct {
+// RuleAuth struct for RuleAuth
+type RuleAuth struct {
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
 	Url []string `json:"url,omitempty"`
@@ -37,17 +37,17 @@ type RuleProxy struct {
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	Action string `json:"action"`
-	ActionConfig RuleProxyAction `json:"action_config"`
+	ActionConfig RuleAuthAction `json:"action_config"`
 }
 
-type _RuleProxy RuleProxy
+type _RuleAuth RuleAuth
 
-// NewRuleProxy instantiates a new RuleProxy object
+// NewRuleAuth instantiates a new RuleAuth object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxy(uuid string, disabled bool, action string, actionConfig RuleProxyAction) *RuleProxy {
-	this := RuleProxy{}
+func NewRuleAuth(uuid string, disabled bool, action string, actionConfig RuleAuthAction) *RuleAuth {
+	this := RuleAuth{}
 	this.Uuid = uuid
 	this.Disabled = disabled
 	this.Action = action
@@ -55,18 +55,18 @@ func NewRuleProxy(uuid string, disabled bool, action string, actionConfig RulePr
 	return &this
 }
 
-// NewRuleProxyWithDefaults instantiates a new RuleProxy object
+// NewRuleAuthWithDefaults instantiates a new RuleAuth object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRuleProxyWithDefaults() *RuleProxy {
-	this := RuleProxy{}
+func NewRuleAuthWithDefaults() *RuleAuth {
+	this := RuleAuth{}
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *RuleProxy) GetName() string {
+func (o *RuleAuth) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -76,7 +76,7 @@ func (o *RuleProxy) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetNameOk() (*string, bool) {
+func (o *RuleAuth) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (o *RuleProxy) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *RuleProxy) HasName() bool {
+func (o *RuleAuth) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -93,12 +93,12 @@ func (o *RuleProxy) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *RuleProxy) SetName(v string) {
+func (o *RuleAuth) SetName(v string) {
 	o.Name = &v
 }
 
 // GetUuid returns the Uuid field value
-func (o *RuleProxy) GetUuid() string {
+func (o *RuleAuth) GetUuid() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -109,7 +109,7 @@ func (o *RuleProxy) GetUuid() string {
 
 // GetUuidOk returns a tuple with the Uuid field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetUuidOk() (*string, bool) {
+func (o *RuleAuth) GetUuidOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -117,12 +117,12 @@ func (o *RuleProxy) GetUuidOk() (*string, bool) {
 }
 
 // SetUuid sets field value
-func (o *RuleProxy) SetUuid(v string) {
+func (o *RuleAuth) SetUuid(v string) {
 	o.Uuid = v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
-func (o *RuleProxy) GetUrl() []string {
+func (o *RuleAuth) GetUrl() []string {
 	if o == nil || IsNil(o.Url) {
 		var ret []string
 		return ret
@@ -132,7 +132,7 @@ func (o *RuleProxy) GetUrl() []string {
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetUrlOk() ([]string, bool) {
+func (o *RuleAuth) GetUrlOk() ([]string, bool) {
 	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
@@ -140,7 +140,7 @@ func (o *RuleProxy) GetUrlOk() ([]string, bool) {
 }
 
 // HasUrl returns a boolean if a field has been set.
-func (o *RuleProxy) HasUrl() bool {
+func (o *RuleAuth) HasUrl() bool {
 	if o != nil && !IsNil(o.Url) {
 		return true
 	}
@@ -149,12 +149,12 @@ func (o *RuleProxy) HasUrl() bool {
 }
 
 // SetUrl gets a reference to the given []string and assigns it to the Url field.
-func (o *RuleProxy) SetUrl(v []string) {
+func (o *RuleAuth) SetUrl(v []string) {
 	o.Url = v
 }
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
-func (o *RuleProxy) GetDomain() string {
+func (o *RuleAuth) GetDomain() string {
 	if o == nil || IsNil(o.Domain) {
 		var ret string
 		return ret
@@ -164,7 +164,7 @@ func (o *RuleProxy) GetDomain() string {
 
 // GetDomainOk returns a tuple with the Domain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetDomainOk() (*string, bool) {
+func (o *RuleAuth) GetDomainOk() (*string, bool) {
 	if o == nil || IsNil(o.Domain) {
 		return nil, false
 	}
@@ -172,7 +172,7 @@ func (o *RuleProxy) GetDomainOk() (*string, bool) {
 }
 
 // HasDomain returns a boolean if a field has been set.
-func (o *RuleProxy) HasDomain() bool {
+func (o *RuleAuth) HasDomain() bool {
 	if o != nil && !IsNil(o.Domain) {
 		return true
 	}
@@ -181,12 +181,12 @@ func (o *RuleProxy) HasDomain() bool {
 }
 
 // SetDomain gets a reference to the given string and assigns it to the Domain field.
-func (o *RuleProxy) SetDomain(v string) {
+func (o *RuleAuth) SetDomain(v string) {
 	o.Domain = &v
 }
 
 // GetDisabled returns the Disabled field value
-func (o *RuleProxy) GetDisabled() bool {
+func (o *RuleAuth) GetDisabled() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -197,7 +197,7 @@ func (o *RuleProxy) GetDisabled() bool {
 
 // GetDisabledOk returns a tuple with the Disabled field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetDisabledOk() (*bool, bool) {
+func (o *RuleAuth) GetDisabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -205,12 +205,12 @@ func (o *RuleProxy) GetDisabledOk() (*bool, bool) {
 }
 
 // SetDisabled sets field value
-func (o *RuleProxy) SetDisabled(v bool) {
+func (o *RuleAuth) SetDisabled(v bool) {
 	o.Disabled = v
 }
 
 // GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
-func (o *RuleProxy) GetOnlyWithCookie() string {
+func (o *RuleAuth) GetOnlyWithCookie() string {
 	if o == nil || IsNil(o.OnlyWithCookie) {
 		var ret string
 		return ret
@@ -220,7 +220,7 @@ func (o *RuleProxy) GetOnlyWithCookie() string {
 
 // GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetOnlyWithCookieOk() (*string, bool) {
+func (o *RuleAuth) GetOnlyWithCookieOk() (*string, bool) {
 	if o == nil || IsNil(o.OnlyWithCookie) {
 		return nil, false
 	}
@@ -228,7 +228,7 @@ func (o *RuleProxy) GetOnlyWithCookieOk() (*string, bool) {
 }
 
 // HasOnlyWithCookie returns a boolean if a field has been set.
-func (o *RuleProxy) HasOnlyWithCookie() bool {
+func (o *RuleAuth) HasOnlyWithCookie() bool {
 	if o != nil && !IsNil(o.OnlyWithCookie) {
 		return true
 	}
@@ -237,12 +237,12 @@ func (o *RuleProxy) HasOnlyWithCookie() bool {
 }
 
 // SetOnlyWithCookie gets a reference to the given string and assigns it to the OnlyWithCookie field.
-func (o *RuleProxy) SetOnlyWithCookie(v string) {
+func (o *RuleAuth) SetOnlyWithCookie(v string) {
 	o.OnlyWithCookie = &v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *RuleProxy) GetMethod() string {
+func (o *RuleAuth) GetMethod() string {
 	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
@@ -252,7 +252,7 @@ func (o *RuleProxy) GetMethod() string {
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetMethodOk() (*string, bool) {
+func (o *RuleAuth) GetMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -260,7 +260,7 @@ func (o *RuleProxy) GetMethodOk() (*string, bool) {
 }
 
 // HasMethod returns a boolean if a field has been set.
-func (o *RuleProxy) HasMethod() bool {
+func (o *RuleAuth) HasMethod() bool {
 	if o != nil && !IsNil(o.Method) {
 		return true
 	}
@@ -269,12 +269,12 @@ func (o *RuleProxy) HasMethod() bool {
 }
 
 // SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *RuleProxy) SetMethod(v string) {
+func (o *RuleAuth) SetMethod(v string) {
 	o.Method = &v
 }
 
 // GetMethodIs returns the MethodIs field value if set, zero value otherwise.
-func (o *RuleProxy) GetMethodIs() []string {
+func (o *RuleAuth) GetMethodIs() []string {
 	if o == nil || IsNil(o.MethodIs) {
 		var ret []string
 		return ret
@@ -284,7 +284,7 @@ func (o *RuleProxy) GetMethodIs() []string {
 
 // GetMethodIsOk returns a tuple with the MethodIs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetMethodIsOk() ([]string, bool) {
+func (o *RuleAuth) GetMethodIsOk() ([]string, bool) {
 	if o == nil || IsNil(o.MethodIs) {
 		return nil, false
 	}
@@ -292,7 +292,7 @@ func (o *RuleProxy) GetMethodIsOk() ([]string, bool) {
 }
 
 // HasMethodIs returns a boolean if a field has been set.
-func (o *RuleProxy) HasMethodIs() bool {
+func (o *RuleAuth) HasMethodIs() bool {
 	if o != nil && !IsNil(o.MethodIs) {
 		return true
 	}
@@ -301,12 +301,12 @@ func (o *RuleProxy) HasMethodIs() bool {
 }
 
 // SetMethodIs gets a reference to the given []string and assigns it to the MethodIs field.
-func (o *RuleProxy) SetMethodIs(v []string) {
+func (o *RuleAuth) SetMethodIs(v []string) {
 	o.MethodIs = v
 }
 
 // GetMethodIsNot returns the MethodIsNot field value if set, zero value otherwise.
-func (o *RuleProxy) GetMethodIsNot() []string {
+func (o *RuleAuth) GetMethodIsNot() []string {
 	if o == nil || IsNil(o.MethodIsNot) {
 		var ret []string
 		return ret
@@ -316,7 +316,7 @@ func (o *RuleProxy) GetMethodIsNot() []string {
 
 // GetMethodIsNotOk returns a tuple with the MethodIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetMethodIsNotOk() ([]string, bool) {
+func (o *RuleAuth) GetMethodIsNotOk() ([]string, bool) {
 	if o == nil || IsNil(o.MethodIsNot) {
 		return nil, false
 	}
@@ -324,7 +324,7 @@ func (o *RuleProxy) GetMethodIsNotOk() ([]string, bool) {
 }
 
 // HasMethodIsNot returns a boolean if a field has been set.
-func (o *RuleProxy) HasMethodIsNot() bool {
+func (o *RuleAuth) HasMethodIsNot() bool {
 	if o != nil && !IsNil(o.MethodIsNot) {
 		return true
 	}
@@ -333,12 +333,12 @@ func (o *RuleProxy) HasMethodIsNot() bool {
 }
 
 // SetMethodIsNot gets a reference to the given []string and assigns it to the MethodIsNot field.
-func (o *RuleProxy) SetMethodIsNot(v []string) {
+func (o *RuleAuth) SetMethodIsNot(v []string) {
 	o.MethodIsNot = v
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
-func (o *RuleProxy) GetIp() string {
+func (o *RuleAuth) GetIp() string {
 	if o == nil || IsNil(o.Ip) {
 		var ret string
 		return ret
@@ -348,7 +348,7 @@ func (o *RuleProxy) GetIp() string {
 
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetIpOk() (*string, bool) {
+func (o *RuleAuth) GetIpOk() (*string, bool) {
 	if o == nil || IsNil(o.Ip) {
 		return nil, false
 	}
@@ -356,7 +356,7 @@ func (o *RuleProxy) GetIpOk() (*string, bool) {
 }
 
 // HasIp returns a boolean if a field has been set.
-func (o *RuleProxy) HasIp() bool {
+func (o *RuleAuth) HasIp() bool {
 	if o != nil && !IsNil(o.Ip) {
 		return true
 	}
@@ -365,12 +365,12 @@ func (o *RuleProxy) HasIp() bool {
 }
 
 // SetIp gets a reference to the given string and assigns it to the Ip field.
-func (o *RuleProxy) SetIp(v string) {
+func (o *RuleAuth) SetIp(v string) {
 	o.Ip = &v
 }
 
 // GetIpIs returns the IpIs field value if set, zero value otherwise.
-func (o *RuleProxy) GetIpIs() []string {
+func (o *RuleAuth) GetIpIs() []string {
 	if o == nil || IsNil(o.IpIs) {
 		var ret []string
 		return ret
@@ -380,7 +380,7 @@ func (o *RuleProxy) GetIpIs() []string {
 
 // GetIpIsOk returns a tuple with the IpIs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetIpIsOk() ([]string, bool) {
+func (o *RuleAuth) GetIpIsOk() ([]string, bool) {
 	if o == nil || IsNil(o.IpIs) {
 		return nil, false
 	}
@@ -388,7 +388,7 @@ func (o *RuleProxy) GetIpIsOk() ([]string, bool) {
 }
 
 // HasIpIs returns a boolean if a field has been set.
-func (o *RuleProxy) HasIpIs() bool {
+func (o *RuleAuth) HasIpIs() bool {
 	if o != nil && !IsNil(o.IpIs) {
 		return true
 	}
@@ -397,12 +397,12 @@ func (o *RuleProxy) HasIpIs() bool {
 }
 
 // SetIpIs gets a reference to the given []string and assigns it to the IpIs field.
-func (o *RuleProxy) SetIpIs(v []string) {
+func (o *RuleAuth) SetIpIs(v []string) {
 	o.IpIs = v
 }
 
 // GetIpIsNot returns the IpIsNot field value if set, zero value otherwise.
-func (o *RuleProxy) GetIpIsNot() []string {
+func (o *RuleAuth) GetIpIsNot() []string {
 	if o == nil || IsNil(o.IpIsNot) {
 		var ret []string
 		return ret
@@ -412,7 +412,7 @@ func (o *RuleProxy) GetIpIsNot() []string {
 
 // GetIpIsNotOk returns a tuple with the IpIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetIpIsNotOk() ([]string, bool) {
+func (o *RuleAuth) GetIpIsNotOk() ([]string, bool) {
 	if o == nil || IsNil(o.IpIsNot) {
 		return nil, false
 	}
@@ -420,7 +420,7 @@ func (o *RuleProxy) GetIpIsNotOk() ([]string, bool) {
 }
 
 // HasIpIsNot returns a boolean if a field has been set.
-func (o *RuleProxy) HasIpIsNot() bool {
+func (o *RuleAuth) HasIpIsNot() bool {
 	if o != nil && !IsNil(o.IpIsNot) {
 		return true
 	}
@@ -429,12 +429,12 @@ func (o *RuleProxy) HasIpIsNot() bool {
 }
 
 // SetIpIsNot gets a reference to the given []string and assigns it to the IpIsNot field.
-func (o *RuleProxy) SetIpIsNot(v []string) {
+func (o *RuleAuth) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
-func (o *RuleProxy) GetCountry() string {
+func (o *RuleAuth) GetCountry() string {
 	if o == nil || IsNil(o.Country) {
 		var ret string
 		return ret
@@ -444,7 +444,7 @@ func (o *RuleProxy) GetCountry() string {
 
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetCountryOk() (*string, bool) {
+func (o *RuleAuth) GetCountryOk() (*string, bool) {
 	if o == nil || IsNil(o.Country) {
 		return nil, false
 	}
@@ -452,7 +452,7 @@ func (o *RuleProxy) GetCountryOk() (*string, bool) {
 }
 
 // HasCountry returns a boolean if a field has been set.
-func (o *RuleProxy) HasCountry() bool {
+func (o *RuleAuth) HasCountry() bool {
 	if o != nil && !IsNil(o.Country) {
 		return true
 	}
@@ -461,12 +461,12 @@ func (o *RuleProxy) HasCountry() bool {
 }
 
 // SetCountry gets a reference to the given string and assigns it to the Country field.
-func (o *RuleProxy) SetCountry(v string) {
+func (o *RuleAuth) SetCountry(v string) {
 	o.Country = &v
 }
 
 // GetCountryIs returns the CountryIs field value if set, zero value otherwise.
-func (o *RuleProxy) GetCountryIs() []string {
+func (o *RuleAuth) GetCountryIs() []string {
 	if o == nil || IsNil(o.CountryIs) {
 		var ret []string
 		return ret
@@ -476,7 +476,7 @@ func (o *RuleProxy) GetCountryIs() []string {
 
 // GetCountryIsOk returns a tuple with the CountryIs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetCountryIsOk() ([]string, bool) {
+func (o *RuleAuth) GetCountryIsOk() ([]string, bool) {
 	if o == nil || IsNil(o.CountryIs) {
 		return nil, false
 	}
@@ -484,7 +484,7 @@ func (o *RuleProxy) GetCountryIsOk() ([]string, bool) {
 }
 
 // HasCountryIs returns a boolean if a field has been set.
-func (o *RuleProxy) HasCountryIs() bool {
+func (o *RuleAuth) HasCountryIs() bool {
 	if o != nil && !IsNil(o.CountryIs) {
 		return true
 	}
@@ -493,12 +493,12 @@ func (o *RuleProxy) HasCountryIs() bool {
 }
 
 // SetCountryIs gets a reference to the given []string and assigns it to the CountryIs field.
-func (o *RuleProxy) SetCountryIs(v []string) {
+func (o *RuleAuth) SetCountryIs(v []string) {
 	o.CountryIs = v
 }
 
 // GetCountryIsNot returns the CountryIsNot field value if set, zero value otherwise.
-func (o *RuleProxy) GetCountryIsNot() []string {
+func (o *RuleAuth) GetCountryIsNot() []string {
 	if o == nil || IsNil(o.CountryIsNot) {
 		var ret []string
 		return ret
@@ -508,7 +508,7 @@ func (o *RuleProxy) GetCountryIsNot() []string {
 
 // GetCountryIsNotOk returns a tuple with the CountryIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetCountryIsNotOk() ([]string, bool) {
+func (o *RuleAuth) GetCountryIsNotOk() ([]string, bool) {
 	if o == nil || IsNil(o.CountryIsNot) {
 		return nil, false
 	}
@@ -516,7 +516,7 @@ func (o *RuleProxy) GetCountryIsNotOk() ([]string, bool) {
 }
 
 // HasCountryIsNot returns a boolean if a field has been set.
-func (o *RuleProxy) HasCountryIsNot() bool {
+func (o *RuleAuth) HasCountryIsNot() bool {
 	if o != nil && !IsNil(o.CountryIsNot) {
 		return true
 	}
@@ -525,12 +525,12 @@ func (o *RuleProxy) HasCountryIsNot() bool {
 }
 
 // SetCountryIsNot gets a reference to the given []string and assigns it to the CountryIsNot field.
-func (o *RuleProxy) SetCountryIsNot(v []string) {
+func (o *RuleAuth) SetCountryIsNot(v []string) {
 	o.CountryIsNot = v
 }
 
 // GetAction returns the Action field value
-func (o *RuleProxy) GetAction() string {
+func (o *RuleAuth) GetAction() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -541,7 +541,7 @@ func (o *RuleProxy) GetAction() string {
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetActionOk() (*string, bool) {
+func (o *RuleAuth) GetActionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -549,14 +549,14 @@ func (o *RuleProxy) GetActionOk() (*string, bool) {
 }
 
 // SetAction sets field value
-func (o *RuleProxy) SetAction(v string) {
+func (o *RuleAuth) SetAction(v string) {
 	o.Action = v
 }
 
 // GetActionConfig returns the ActionConfig field value
-func (o *RuleProxy) GetActionConfig() RuleProxyAction {
+func (o *RuleAuth) GetActionConfig() RuleAuthAction {
 	if o == nil {
-		var ret RuleProxyAction
+		var ret RuleAuthAction
 		return ret
 	}
 
@@ -565,7 +565,7 @@ func (o *RuleProxy) GetActionConfig() RuleProxyAction {
 
 // GetActionConfigOk returns a tuple with the ActionConfig field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxy) GetActionConfigOk() (*RuleProxyAction, bool) {
+func (o *RuleAuth) GetActionConfigOk() (*RuleAuthAction, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -573,11 +573,11 @@ func (o *RuleProxy) GetActionConfigOk() (*RuleProxyAction, bool) {
 }
 
 // SetActionConfig sets field value
-func (o *RuleProxy) SetActionConfig(v RuleProxyAction) {
+func (o *RuleAuth) SetActionConfig(v RuleAuthAction) {
 	o.ActionConfig = v
 }
 
-func (o RuleProxy) MarshalJSON() ([]byte, error) {
+func (o RuleAuth) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -585,7 +585,7 @@ func (o RuleProxy) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RuleProxy) ToMap() (map[string]interface{}, error) {
+func (o RuleAuth) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -633,7 +633,7 @@ func (o RuleProxy) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RuleProxy) UnmarshalJSON(data []byte) (err error) {
+func (o *RuleAuth) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -658,53 +658,53 @@ func (o *RuleProxy) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRuleProxy := _RuleProxy{}
+	varRuleAuth := _RuleAuth{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleProxy)
+	err = decoder.Decode(&varRuleAuth)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RuleProxy(varRuleProxy)
+	*o = RuleAuth(varRuleAuth)
 
 	return err
 }
 
-type NullableRuleProxy struct {
-	value *RuleProxy
+type NullableRuleAuth struct {
+	value *RuleAuth
 	isSet bool
 }
 
-func (v NullableRuleProxy) Get() *RuleProxy {
+func (v NullableRuleAuth) Get() *RuleAuth {
 	return v.value
 }
 
-func (v *NullableRuleProxy) Set(val *RuleProxy) {
+func (v *NullableRuleAuth) Set(val *RuleAuth) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRuleProxy) IsSet() bool {
+func (v NullableRuleAuth) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRuleProxy) Unset() {
+func (v *NullableRuleAuth) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRuleProxy(val *RuleProxy) *NullableRuleProxy {
-	return &NullableRuleProxy{value: val, isSet: true}
+func NewNullableRuleAuth(val *RuleAuth) *NullableRuleAuth {
+	return &NullableRuleAuth{value: val, isSet: true}
 }
 
-func (v NullableRuleProxy) MarshalJSON() ([]byte, error) {
+func (v NullableRuleAuth) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRuleProxy) UnmarshalJSON(src []byte) error {
+func (v *NullableRuleAuth) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
