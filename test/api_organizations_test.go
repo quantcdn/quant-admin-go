@@ -1,5 +1,5 @@
 /*
-Quant administration API
+QuantCDN Admin API
 
 Testing OrganizationsAPIService
 
@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_openapi_OrganizationsAPIService(t *testing.T) {
@@ -22,13 +22,11 @@ func Test_openapi_OrganizationsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test OrganizationsAPIService GetOrganization", func(t *testing.T) {
+	t.Run("Test OrganizationsAPIService OrganizationsList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var organization string
-
-		resp, httpRes, err := apiClient.OrganizationsAPI.GetOrganization(context.Background(), organization).Execute()
+		resp, httpRes, err := apiClient.OrganizationsAPI.OrganizationsList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,11 +34,13 @@ func Test_openapi_OrganizationsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test OrganizationsAPIService ListOrganizations", func(t *testing.T) {
+	t.Run("Test OrganizationsAPIService OrganizationsRead", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.OrganizationsAPI.ListOrganizations(context.Background()).Execute()
+		var organization string
+
+		resp, httpRes, err := apiClient.OrganizationsAPI.OrganizationsRead(context.Background(), organization).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

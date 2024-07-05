@@ -1,5 +1,5 @@
 /*
-Quant administration API
+QuantCDN Admin API
 
 Testing ProjectsAPIService
 
@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_openapi_ProjectsAPIService(t *testing.T) {
@@ -22,13 +22,13 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ProjectsAPIService CreateProject", func(t *testing.T) {
+	t.Run("Test ProjectsAPIService ProjectsCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 
-		resp, httpRes, err := apiClient.ProjectsAPI.CreateProject(context.Background(), organization).Execute()
+		resp, httpRes, err := apiClient.ProjectsAPI.ProjectsCreate(context.Background(), organization).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,14 +36,14 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProjectsAPIService DeleteProject", func(t *testing.T) {
+	t.Run("Test ProjectsAPIService ProjectsDelete", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.ProjectsAPI.DeleteProject(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.ProjectsAPI.ProjectsDelete(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -51,14 +51,28 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProjectsAPIService GetProject", func(t *testing.T) {
+	t.Run("Test ProjectsAPIService ProjectsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+
+		resp, httpRes, err := apiClient.ProjectsAPI.ProjectsList(context.Background(), organization).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ProjectsAPIService ProjectsRead", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.ProjectsAPI.GetProject(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.ProjectsAPI.ProjectsRead(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -66,28 +80,14 @@ func Test_openapi_ProjectsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProjectsAPIService ListProjects", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var organization string
-
-		resp, httpRes, err := apiClient.ProjectsAPI.ListProjects(context.Background(), organization).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ProjectsAPIService UpdateProject", func(t *testing.T) {
+	t.Run("Test ProjectsAPIService ProjectsUpdate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.ProjectsAPI.UpdateProject(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.ProjectsAPI.ProjectsUpdate(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

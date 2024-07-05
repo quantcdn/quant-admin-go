@@ -80,4 +80,13 @@ model_rule_redirect_action.go
 model_rule_redirect_request.go
 model_waf_config.go
 response.go
+test/api_crawlers_test.go
+test/api_domains_test.go
+test/api_organizations_test.go
+test/api_projects_test.go
+test/api_rules_auth_test.go
+test/api_rules_custom_response_test.go
+test/api_rules_headers_test.go
+test/api_rules_proxy_test.go
+test/api_rules_redirect_test.go
 utils.go

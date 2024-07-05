@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_openapi_RulesHeadersAPIService(t *testing.T) {
@@ -77,6 +77,22 @@ func Test_openapi_RulesHeadersAPIService(t *testing.T) {
 		var rule string
 
 		resp, httpRes, err := apiClient.RulesHeadersAPI.RulesHeadersRead(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesHeadersAPIService RulesHeadersUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesHeadersAPI.RulesHeadersUpdate(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
