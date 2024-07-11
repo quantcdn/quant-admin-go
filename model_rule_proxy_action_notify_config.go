@@ -14,22 +14,22 @@ import (
 	"encoding/json"
 )
 
-// checks if the NotifyConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &NotifyConfig{}
+// checks if the RuleProxyActionNotifyConfig type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleProxyActionNotifyConfig{}
 
-// NotifyConfig struct for NotifyConfig
-type NotifyConfig struct {
+// RuleProxyActionNotifyConfig struct for RuleProxyActionNotifyConfig
+type RuleProxyActionNotifyConfig struct {
 	OriginStatusCodes []string `json:"origin_status_codes,omitempty"`
 	Period *string `json:"period,omitempty"`
 	SlackWebhook *string `json:"slack_webhook,omitempty"`
 }
 
-// NewNotifyConfig instantiates a new NotifyConfig object
+// NewRuleProxyActionNotifyConfig instantiates a new RuleProxyActionNotifyConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotifyConfig() *NotifyConfig {
-	this := NotifyConfig{}
+func NewRuleProxyActionNotifyConfig() *RuleProxyActionNotifyConfig {
+	this := RuleProxyActionNotifyConfig{}
 	var period string = "60"
 	this.Period = &period
 	var slackWebhook string = ""
@@ -37,11 +37,11 @@ func NewNotifyConfig() *NotifyConfig {
 	return &this
 }
 
-// NewNotifyConfigWithDefaults instantiates a new NotifyConfig object
+// NewRuleProxyActionNotifyConfigWithDefaults instantiates a new RuleProxyActionNotifyConfig object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNotifyConfigWithDefaults() *NotifyConfig {
-	this := NotifyConfig{}
+func NewRuleProxyActionNotifyConfigWithDefaults() *RuleProxyActionNotifyConfig {
+	this := RuleProxyActionNotifyConfig{}
 	var period string = "60"
 	this.Period = &period
 	var slackWebhook string = ""
@@ -50,7 +50,7 @@ func NewNotifyConfigWithDefaults() *NotifyConfig {
 }
 
 // GetOriginStatusCodes returns the OriginStatusCodes field value if set, zero value otherwise.
-func (o *NotifyConfig) GetOriginStatusCodes() []string {
+func (o *RuleProxyActionNotifyConfig) GetOriginStatusCodes() []string {
 	if o == nil || IsNil(o.OriginStatusCodes) {
 		var ret []string
 		return ret
@@ -60,7 +60,7 @@ func (o *NotifyConfig) GetOriginStatusCodes() []string {
 
 // GetOriginStatusCodesOk returns a tuple with the OriginStatusCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotifyConfig) GetOriginStatusCodesOk() ([]string, bool) {
+func (o *RuleProxyActionNotifyConfig) GetOriginStatusCodesOk() ([]string, bool) {
 	if o == nil || IsNil(o.OriginStatusCodes) {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *NotifyConfig) GetOriginStatusCodesOk() ([]string, bool) {
 }
 
 // HasOriginStatusCodes returns a boolean if a field has been set.
-func (o *NotifyConfig) HasOriginStatusCodes() bool {
+func (o *RuleProxyActionNotifyConfig) HasOriginStatusCodes() bool {
 	if o != nil && !IsNil(o.OriginStatusCodes) {
 		return true
 	}
@@ -77,12 +77,12 @@ func (o *NotifyConfig) HasOriginStatusCodes() bool {
 }
 
 // SetOriginStatusCodes gets a reference to the given []string and assigns it to the OriginStatusCodes field.
-func (o *NotifyConfig) SetOriginStatusCodes(v []string) {
+func (o *RuleProxyActionNotifyConfig) SetOriginStatusCodes(v []string) {
 	o.OriginStatusCodes = v
 }
 
 // GetPeriod returns the Period field value if set, zero value otherwise.
-func (o *NotifyConfig) GetPeriod() string {
+func (o *RuleProxyActionNotifyConfig) GetPeriod() string {
 	if o == nil || IsNil(o.Period) {
 		var ret string
 		return ret
@@ -92,7 +92,7 @@ func (o *NotifyConfig) GetPeriod() string {
 
 // GetPeriodOk returns a tuple with the Period field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotifyConfig) GetPeriodOk() (*string, bool) {
+func (o *RuleProxyActionNotifyConfig) GetPeriodOk() (*string, bool) {
 	if o == nil || IsNil(o.Period) {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *NotifyConfig) GetPeriodOk() (*string, bool) {
 }
 
 // HasPeriod returns a boolean if a field has been set.
-func (o *NotifyConfig) HasPeriod() bool {
+func (o *RuleProxyActionNotifyConfig) HasPeriod() bool {
 	if o != nil && !IsNil(o.Period) {
 		return true
 	}
@@ -109,12 +109,12 @@ func (o *NotifyConfig) HasPeriod() bool {
 }
 
 // SetPeriod gets a reference to the given string and assigns it to the Period field.
-func (o *NotifyConfig) SetPeriod(v string) {
+func (o *RuleProxyActionNotifyConfig) SetPeriod(v string) {
 	o.Period = &v
 }
 
 // GetSlackWebhook returns the SlackWebhook field value if set, zero value otherwise.
-func (o *NotifyConfig) GetSlackWebhook() string {
+func (o *RuleProxyActionNotifyConfig) GetSlackWebhook() string {
 	if o == nil || IsNil(o.SlackWebhook) {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *NotifyConfig) GetSlackWebhook() string {
 
 // GetSlackWebhookOk returns a tuple with the SlackWebhook field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotifyConfig) GetSlackWebhookOk() (*string, bool) {
+func (o *RuleProxyActionNotifyConfig) GetSlackWebhookOk() (*string, bool) {
 	if o == nil || IsNil(o.SlackWebhook) {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *NotifyConfig) GetSlackWebhookOk() (*string, bool) {
 }
 
 // HasSlackWebhook returns a boolean if a field has been set.
-func (o *NotifyConfig) HasSlackWebhook() bool {
+func (o *RuleProxyActionNotifyConfig) HasSlackWebhook() bool {
 	if o != nil && !IsNil(o.SlackWebhook) {
 		return true
 	}
@@ -141,11 +141,11 @@ func (o *NotifyConfig) HasSlackWebhook() bool {
 }
 
 // SetSlackWebhook gets a reference to the given string and assigns it to the SlackWebhook field.
-func (o *NotifyConfig) SetSlackWebhook(v string) {
+func (o *RuleProxyActionNotifyConfig) SetSlackWebhook(v string) {
 	o.SlackWebhook = &v
 }
 
-func (o NotifyConfig) MarshalJSON() ([]byte, error) {
+func (o RuleProxyActionNotifyConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -153,7 +153,7 @@ func (o NotifyConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NotifyConfig) ToMap() (map[string]interface{}, error) {
+func (o RuleProxyActionNotifyConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.OriginStatusCodes) {
 		toSerialize["origin_status_codes"] = o.OriginStatusCodes
@@ -167,38 +167,38 @@ func (o NotifyConfig) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableNotifyConfig struct {
-	value *NotifyConfig
+type NullableRuleProxyActionNotifyConfig struct {
+	value *RuleProxyActionNotifyConfig
 	isSet bool
 }
 
-func (v NullableNotifyConfig) Get() *NotifyConfig {
+func (v NullableRuleProxyActionNotifyConfig) Get() *RuleProxyActionNotifyConfig {
 	return v.value
 }
 
-func (v *NullableNotifyConfig) Set(val *NotifyConfig) {
+func (v *NullableRuleProxyActionNotifyConfig) Set(val *RuleProxyActionNotifyConfig) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNotifyConfig) IsSet() bool {
+func (v NullableRuleProxyActionNotifyConfig) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNotifyConfig) Unset() {
+func (v *NullableRuleProxyActionNotifyConfig) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNotifyConfig(val *NotifyConfig) *NullableNotifyConfig {
-	return &NullableNotifyConfig{value: val, isSet: true}
+func NewNullableRuleProxyActionNotifyConfig(val *RuleProxyActionNotifyConfig) *NullableRuleProxyActionNotifyConfig {
+	return &NullableRuleProxyActionNotifyConfig{value: val, isSet: true}
 }
 
-func (v NullableNotifyConfig) MarshalJSON() ([]byte, error) {
+func (v NullableRuleProxyActionNotifyConfig) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNotifyConfig) UnmarshalJSON(src []byte) error {
+func (v *NullableRuleProxyActionNotifyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

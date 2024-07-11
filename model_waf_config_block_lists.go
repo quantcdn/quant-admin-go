@@ -14,23 +14,23 @@ import (
 	"encoding/json"
 )
 
-// checks if the BlockLists type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &BlockLists{}
+// checks if the WAFConfigBlockLists type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WAFConfigBlockLists{}
 
-// BlockLists struct for BlockLists
-type BlockLists struct {
+// WAFConfigBlockLists struct for WAFConfigBlockLists
+type WAFConfigBlockLists struct {
 	Referer *bool `json:"referer,omitempty"`
 	Ip *bool `json:"ip,omitempty"`
 	UserAgent *bool `json:"user_agent,omitempty"`
 	Ai *bool `json:"ai,omitempty"`
 }
 
-// NewBlockLists instantiates a new BlockLists object
+// NewWAFConfigBlockLists instantiates a new WAFConfigBlockLists object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBlockLists() *BlockLists {
-	this := BlockLists{}
+func NewWAFConfigBlockLists() *WAFConfigBlockLists {
+	this := WAFConfigBlockLists{}
 	var referer bool = false
 	this.Referer = &referer
 	var ip bool = false
@@ -42,11 +42,11 @@ func NewBlockLists() *BlockLists {
 	return &this
 }
 
-// NewBlockListsWithDefaults instantiates a new BlockLists object
+// NewWAFConfigBlockListsWithDefaults instantiates a new WAFConfigBlockLists object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBlockListsWithDefaults() *BlockLists {
-	this := BlockLists{}
+func NewWAFConfigBlockListsWithDefaults() *WAFConfigBlockLists {
+	this := WAFConfigBlockLists{}
 	var referer bool = false
 	this.Referer = &referer
 	var ip bool = false
@@ -59,7 +59,7 @@ func NewBlockListsWithDefaults() *BlockLists {
 }
 
 // GetReferer returns the Referer field value if set, zero value otherwise.
-func (o *BlockLists) GetReferer() bool {
+func (o *WAFConfigBlockLists) GetReferer() bool {
 	if o == nil || IsNil(o.Referer) {
 		var ret bool
 		return ret
@@ -69,7 +69,7 @@ func (o *BlockLists) GetReferer() bool {
 
 // GetRefererOk returns a tuple with the Referer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BlockLists) GetRefererOk() (*bool, bool) {
+func (o *WAFConfigBlockLists) GetRefererOk() (*bool, bool) {
 	if o == nil || IsNil(o.Referer) {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *BlockLists) GetRefererOk() (*bool, bool) {
 }
 
 // HasReferer returns a boolean if a field has been set.
-func (o *BlockLists) HasReferer() bool {
+func (o *WAFConfigBlockLists) HasReferer() bool {
 	if o != nil && !IsNil(o.Referer) {
 		return true
 	}
@@ -86,12 +86,12 @@ func (o *BlockLists) HasReferer() bool {
 }
 
 // SetReferer gets a reference to the given bool and assigns it to the Referer field.
-func (o *BlockLists) SetReferer(v bool) {
+func (o *WAFConfigBlockLists) SetReferer(v bool) {
 	o.Referer = &v
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
-func (o *BlockLists) GetIp() bool {
+func (o *WAFConfigBlockLists) GetIp() bool {
 	if o == nil || IsNil(o.Ip) {
 		var ret bool
 		return ret
@@ -101,7 +101,7 @@ func (o *BlockLists) GetIp() bool {
 
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BlockLists) GetIpOk() (*bool, bool) {
+func (o *WAFConfigBlockLists) GetIpOk() (*bool, bool) {
 	if o == nil || IsNil(o.Ip) {
 		return nil, false
 	}
@@ -109,7 +109,7 @@ func (o *BlockLists) GetIpOk() (*bool, bool) {
 }
 
 // HasIp returns a boolean if a field has been set.
-func (o *BlockLists) HasIp() bool {
+func (o *WAFConfigBlockLists) HasIp() bool {
 	if o != nil && !IsNil(o.Ip) {
 		return true
 	}
@@ -118,12 +118,12 @@ func (o *BlockLists) HasIp() bool {
 }
 
 // SetIp gets a reference to the given bool and assigns it to the Ip field.
-func (o *BlockLists) SetIp(v bool) {
+func (o *WAFConfigBlockLists) SetIp(v bool) {
 	o.Ip = &v
 }
 
 // GetUserAgent returns the UserAgent field value if set, zero value otherwise.
-func (o *BlockLists) GetUserAgent() bool {
+func (o *WAFConfigBlockLists) GetUserAgent() bool {
 	if o == nil || IsNil(o.UserAgent) {
 		var ret bool
 		return ret
@@ -133,7 +133,7 @@ func (o *BlockLists) GetUserAgent() bool {
 
 // GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BlockLists) GetUserAgentOk() (*bool, bool) {
+func (o *WAFConfigBlockLists) GetUserAgentOk() (*bool, bool) {
 	if o == nil || IsNil(o.UserAgent) {
 		return nil, false
 	}
@@ -141,7 +141,7 @@ func (o *BlockLists) GetUserAgentOk() (*bool, bool) {
 }
 
 // HasUserAgent returns a boolean if a field has been set.
-func (o *BlockLists) HasUserAgent() bool {
+func (o *WAFConfigBlockLists) HasUserAgent() bool {
 	if o != nil && !IsNil(o.UserAgent) {
 		return true
 	}
@@ -150,12 +150,12 @@ func (o *BlockLists) HasUserAgent() bool {
 }
 
 // SetUserAgent gets a reference to the given bool and assigns it to the UserAgent field.
-func (o *BlockLists) SetUserAgent(v bool) {
+func (o *WAFConfigBlockLists) SetUserAgent(v bool) {
 	o.UserAgent = &v
 }
 
 // GetAi returns the Ai field value if set, zero value otherwise.
-func (o *BlockLists) GetAi() bool {
+func (o *WAFConfigBlockLists) GetAi() bool {
 	if o == nil || IsNil(o.Ai) {
 		var ret bool
 		return ret
@@ -165,7 +165,7 @@ func (o *BlockLists) GetAi() bool {
 
 // GetAiOk returns a tuple with the Ai field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BlockLists) GetAiOk() (*bool, bool) {
+func (o *WAFConfigBlockLists) GetAiOk() (*bool, bool) {
 	if o == nil || IsNil(o.Ai) {
 		return nil, false
 	}
@@ -173,7 +173,7 @@ func (o *BlockLists) GetAiOk() (*bool, bool) {
 }
 
 // HasAi returns a boolean if a field has been set.
-func (o *BlockLists) HasAi() bool {
+func (o *WAFConfigBlockLists) HasAi() bool {
 	if o != nil && !IsNil(o.Ai) {
 		return true
 	}
@@ -182,11 +182,11 @@ func (o *BlockLists) HasAi() bool {
 }
 
 // SetAi gets a reference to the given bool and assigns it to the Ai field.
-func (o *BlockLists) SetAi(v bool) {
+func (o *WAFConfigBlockLists) SetAi(v bool) {
 	o.Ai = &v
 }
 
-func (o BlockLists) MarshalJSON() ([]byte, error) {
+func (o WAFConfigBlockLists) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -194,7 +194,7 @@ func (o BlockLists) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BlockLists) ToMap() (map[string]interface{}, error) {
+func (o WAFConfigBlockLists) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Referer) {
 		toSerialize["referer"] = o.Referer
@@ -211,38 +211,38 @@ func (o BlockLists) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableBlockLists struct {
-	value *BlockLists
+type NullableWAFConfigBlockLists struct {
+	value *WAFConfigBlockLists
 	isSet bool
 }
 
-func (v NullableBlockLists) Get() *BlockLists {
+func (v NullableWAFConfigBlockLists) Get() *WAFConfigBlockLists {
 	return v.value
 }
 
-func (v *NullableBlockLists) Set(val *BlockLists) {
+func (v *NullableWAFConfigBlockLists) Set(val *WAFConfigBlockLists) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBlockLists) IsSet() bool {
+func (v NullableWAFConfigBlockLists) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBlockLists) Unset() {
+func (v *NullableWAFConfigBlockLists) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBlockLists(val *BlockLists) *NullableBlockLists {
-	return &NullableBlockLists{value: val, isSet: true}
+func NewNullableWAFConfigBlockLists(val *WAFConfigBlockLists) *NullableWAFConfigBlockLists {
+	return &NullableWAFConfigBlockLists{value: val, isSet: true}
 }
 
-func (v NullableBlockLists) MarshalJSON() ([]byte, error) {
+func (v NullableWAFConfigBlockLists) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBlockLists) UnmarshalJSON(src []byte) error {
+func (v *NullableWAFConfigBlockLists) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

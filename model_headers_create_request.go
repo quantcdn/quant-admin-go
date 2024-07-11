@@ -16,36 +16,36 @@ import (
 	"fmt"
 )
 
-// checks if the RuleHeaderAction type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RuleHeaderAction{}
+// checks if the HeadersCreateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HeadersCreateRequest{}
 
-// RuleHeaderAction struct for RuleHeaderAction
-type RuleHeaderAction struct {
+// HeadersCreateRequest struct for HeadersCreateRequest
+type HeadersCreateRequest struct {
 	Headers map[string]string `json:"headers"`
 }
 
-type _RuleHeaderAction RuleHeaderAction
+type _HeadersCreateRequest HeadersCreateRequest
 
-// NewRuleHeaderAction instantiates a new RuleHeaderAction object
+// NewHeadersCreateRequest instantiates a new HeadersCreateRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleHeaderAction(headers map[string]string) *RuleHeaderAction {
-	this := RuleHeaderAction{}
+func NewHeadersCreateRequest(headers map[string]string) *HeadersCreateRequest {
+	this := HeadersCreateRequest{}
 	this.Headers = headers
 	return &this
 }
 
-// NewRuleHeaderActionWithDefaults instantiates a new RuleHeaderAction object
+// NewHeadersCreateRequestWithDefaults instantiates a new HeadersCreateRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRuleHeaderActionWithDefaults() *RuleHeaderAction {
-	this := RuleHeaderAction{}
+func NewHeadersCreateRequestWithDefaults() *HeadersCreateRequest {
+	this := HeadersCreateRequest{}
 	return &this
 }
 
 // GetHeaders returns the Headers field value
-func (o *RuleHeaderAction) GetHeaders() map[string]string {
+func (o *HeadersCreateRequest) GetHeaders() map[string]string {
 	if o == nil {
 		var ret map[string]string
 		return ret
@@ -56,7 +56,7 @@ func (o *RuleHeaderAction) GetHeaders() map[string]string {
 
 // GetHeadersOk returns a tuple with the Headers field value
 // and a boolean to check if the value has been set.
-func (o *RuleHeaderAction) GetHeadersOk() (*map[string]string, bool) {
+func (o *HeadersCreateRequest) GetHeadersOk() (*map[string]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *RuleHeaderAction) GetHeadersOk() (*map[string]string, bool) {
 }
 
 // SetHeaders sets field value
-func (o *RuleHeaderAction) SetHeaders(v map[string]string) {
+func (o *HeadersCreateRequest) SetHeaders(v map[string]string) {
 	o.Headers = v
 }
 
-func (o RuleHeaderAction) MarshalJSON() ([]byte, error) {
+func (o HeadersCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,13 +76,13 @@ func (o RuleHeaderAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RuleHeaderAction) ToMap() (map[string]interface{}, error) {
+func (o HeadersCreateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["headers"] = o.Headers
 	return toSerialize, nil
 }
 
-func (o *RuleHeaderAction) UnmarshalJSON(data []byte) (err error) {
+func (o *HeadersCreateRequest) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -104,53 +104,53 @@ func (o *RuleHeaderAction) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRuleHeaderAction := _RuleHeaderAction{}
+	varHeadersCreateRequest := _HeadersCreateRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleHeaderAction)
+	err = decoder.Decode(&varHeadersCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RuleHeaderAction(varRuleHeaderAction)
+	*o = HeadersCreateRequest(varHeadersCreateRequest)
 
 	return err
 }
 
-type NullableRuleHeaderAction struct {
-	value *RuleHeaderAction
+type NullableHeadersCreateRequest struct {
+	value *HeadersCreateRequest
 	isSet bool
 }
 
-func (v NullableRuleHeaderAction) Get() *RuleHeaderAction {
+func (v NullableHeadersCreateRequest) Get() *HeadersCreateRequest {
 	return v.value
 }
 
-func (v *NullableRuleHeaderAction) Set(val *RuleHeaderAction) {
+func (v *NullableHeadersCreateRequest) Set(val *HeadersCreateRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRuleHeaderAction) IsSet() bool {
+func (v NullableHeadersCreateRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRuleHeaderAction) Unset() {
+func (v *NullableHeadersCreateRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRuleHeaderAction(val *RuleHeaderAction) *NullableRuleHeaderAction {
-	return &NullableRuleHeaderAction{value: val, isSet: true}
+func NewNullableHeadersCreateRequest(val *HeadersCreateRequest) *NullableHeadersCreateRequest {
+	return &NullableHeadersCreateRequest{value: val, isSet: true}
 }
 
-func (v NullableRuleHeaderAction) MarshalJSON() ([]byte, error) {
+func (v NullableHeadersCreateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRuleHeaderAction) UnmarshalJSON(src []byte) error {
+func (v *NullableHeadersCreateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the Httpbl type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Httpbl{}
+// checks if the WAFConfigHttpbl type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WAFConfigHttpbl{}
 
-// Httpbl struct for Httpbl
-type Httpbl struct {
+// WAFConfigHttpbl struct for WAFConfigHttpbl
+type WAFConfigHttpbl struct {
 	HttpblEnabled bool `json:"httpbl_enabled"`
 	ApiKey *string `json:"api_key,omitempty"`
 	BlockSuspicious bool `json:"block_suspicious"`
@@ -29,14 +29,14 @@ type Httpbl struct {
 	BlockSearchEngine bool `json:"block_search_engine"`
 }
 
-type _Httpbl Httpbl
+type _WAFConfigHttpbl WAFConfigHttpbl
 
-// NewHttpbl instantiates a new Httpbl object
+// NewWAFConfigHttpbl instantiates a new WAFConfigHttpbl object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, blockSpam bool, blockSearchEngine bool) *Httpbl {
-	this := Httpbl{}
+func NewWAFConfigHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, blockSpam bool, blockSearchEngine bool) *WAFConfigHttpbl {
+	this := WAFConfigHttpbl{}
 	this.HttpblEnabled = httpblEnabled
 	this.BlockSuspicious = blockSuspicious
 	this.BlockHarvester = blockHarvester
@@ -45,11 +45,11 @@ func NewHttpbl(httpblEnabled bool, blockSuspicious bool, blockHarvester bool, bl
 	return &this
 }
 
-// NewHttpblWithDefaults instantiates a new Httpbl object
+// NewWAFConfigHttpblWithDefaults instantiates a new WAFConfigHttpbl object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHttpblWithDefaults() *Httpbl {
-	this := Httpbl{}
+func NewWAFConfigHttpblWithDefaults() *WAFConfigHttpbl {
+	this := WAFConfigHttpbl{}
 	var httpblEnabled bool = false
 	this.HttpblEnabled = httpblEnabled
 	var blockSuspicious bool = false
@@ -64,7 +64,7 @@ func NewHttpblWithDefaults() *Httpbl {
 }
 
 // GetHttpblEnabled returns the HttpblEnabled field value
-func (o *Httpbl) GetHttpblEnabled() bool {
+func (o *WAFConfigHttpbl) GetHttpblEnabled() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -75,7 +75,7 @@ func (o *Httpbl) GetHttpblEnabled() bool {
 
 // GetHttpblEnabledOk returns a tuple with the HttpblEnabled field value
 // and a boolean to check if the value has been set.
-func (o *Httpbl) GetHttpblEnabledOk() (*bool, bool) {
+func (o *WAFConfigHttpbl) GetHttpblEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -83,12 +83,12 @@ func (o *Httpbl) GetHttpblEnabledOk() (*bool, bool) {
 }
 
 // SetHttpblEnabled sets field value
-func (o *Httpbl) SetHttpblEnabled(v bool) {
+func (o *WAFConfigHttpbl) SetHttpblEnabled(v bool) {
 	o.HttpblEnabled = v
 }
 
 // GetApiKey returns the ApiKey field value if set, zero value otherwise.
-func (o *Httpbl) GetApiKey() string {
+func (o *WAFConfigHttpbl) GetApiKey() string {
 	if o == nil || IsNil(o.ApiKey) {
 		var ret string
 		return ret
@@ -98,7 +98,7 @@ func (o *Httpbl) GetApiKey() string {
 
 // GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Httpbl) GetApiKeyOk() (*string, bool) {
+func (o *WAFConfigHttpbl) GetApiKeyOk() (*string, bool) {
 	if o == nil || IsNil(o.ApiKey) {
 		return nil, false
 	}
@@ -106,7 +106,7 @@ func (o *Httpbl) GetApiKeyOk() (*string, bool) {
 }
 
 // HasApiKey returns a boolean if a field has been set.
-func (o *Httpbl) HasApiKey() bool {
+func (o *WAFConfigHttpbl) HasApiKey() bool {
 	if o != nil && !IsNil(o.ApiKey) {
 		return true
 	}
@@ -115,12 +115,12 @@ func (o *Httpbl) HasApiKey() bool {
 }
 
 // SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
-func (o *Httpbl) SetApiKey(v string) {
+func (o *WAFConfigHttpbl) SetApiKey(v string) {
 	o.ApiKey = &v
 }
 
 // GetBlockSuspicious returns the BlockSuspicious field value
-func (o *Httpbl) GetBlockSuspicious() bool {
+func (o *WAFConfigHttpbl) GetBlockSuspicious() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -131,7 +131,7 @@ func (o *Httpbl) GetBlockSuspicious() bool {
 
 // GetBlockSuspiciousOk returns a tuple with the BlockSuspicious field value
 // and a boolean to check if the value has been set.
-func (o *Httpbl) GetBlockSuspiciousOk() (*bool, bool) {
+func (o *WAFConfigHttpbl) GetBlockSuspiciousOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -139,12 +139,12 @@ func (o *Httpbl) GetBlockSuspiciousOk() (*bool, bool) {
 }
 
 // SetBlockSuspicious sets field value
-func (o *Httpbl) SetBlockSuspicious(v bool) {
+func (o *WAFConfigHttpbl) SetBlockSuspicious(v bool) {
 	o.BlockSuspicious = v
 }
 
 // GetBlockHarvester returns the BlockHarvester field value
-func (o *Httpbl) GetBlockHarvester() bool {
+func (o *WAFConfigHttpbl) GetBlockHarvester() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -155,7 +155,7 @@ func (o *Httpbl) GetBlockHarvester() bool {
 
 // GetBlockHarvesterOk returns a tuple with the BlockHarvester field value
 // and a boolean to check if the value has been set.
-func (o *Httpbl) GetBlockHarvesterOk() (*bool, bool) {
+func (o *WAFConfigHttpbl) GetBlockHarvesterOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -163,12 +163,12 @@ func (o *Httpbl) GetBlockHarvesterOk() (*bool, bool) {
 }
 
 // SetBlockHarvester sets field value
-func (o *Httpbl) SetBlockHarvester(v bool) {
+func (o *WAFConfigHttpbl) SetBlockHarvester(v bool) {
 	o.BlockHarvester = v
 }
 
 // GetBlockSpam returns the BlockSpam field value
-func (o *Httpbl) GetBlockSpam() bool {
+func (o *WAFConfigHttpbl) GetBlockSpam() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -179,7 +179,7 @@ func (o *Httpbl) GetBlockSpam() bool {
 
 // GetBlockSpamOk returns a tuple with the BlockSpam field value
 // and a boolean to check if the value has been set.
-func (o *Httpbl) GetBlockSpamOk() (*bool, bool) {
+func (o *WAFConfigHttpbl) GetBlockSpamOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -187,12 +187,12 @@ func (o *Httpbl) GetBlockSpamOk() (*bool, bool) {
 }
 
 // SetBlockSpam sets field value
-func (o *Httpbl) SetBlockSpam(v bool) {
+func (o *WAFConfigHttpbl) SetBlockSpam(v bool) {
 	o.BlockSpam = v
 }
 
 // GetBlockSearchEngine returns the BlockSearchEngine field value
-func (o *Httpbl) GetBlockSearchEngine() bool {
+func (o *WAFConfigHttpbl) GetBlockSearchEngine() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -203,7 +203,7 @@ func (o *Httpbl) GetBlockSearchEngine() bool {
 
 // GetBlockSearchEngineOk returns a tuple with the BlockSearchEngine field value
 // and a boolean to check if the value has been set.
-func (o *Httpbl) GetBlockSearchEngineOk() (*bool, bool) {
+func (o *WAFConfigHttpbl) GetBlockSearchEngineOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -211,11 +211,11 @@ func (o *Httpbl) GetBlockSearchEngineOk() (*bool, bool) {
 }
 
 // SetBlockSearchEngine sets field value
-func (o *Httpbl) SetBlockSearchEngine(v bool) {
+func (o *WAFConfigHttpbl) SetBlockSearchEngine(v bool) {
 	o.BlockSearchEngine = v
 }
 
-func (o Httpbl) MarshalJSON() ([]byte, error) {
+func (o WAFConfigHttpbl) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -223,7 +223,7 @@ func (o Httpbl) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Httpbl) ToMap() (map[string]interface{}, error) {
+func (o WAFConfigHttpbl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["httpbl_enabled"] = o.HttpblEnabled
 	if !IsNil(o.ApiKey) {
@@ -236,7 +236,7 @@ func (o Httpbl) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Httpbl) UnmarshalJSON(data []byte) (err error) {
+func (o *WAFConfigHttpbl) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -262,53 +262,53 @@ func (o *Httpbl) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varHttpbl := _Httpbl{}
+	varWAFConfigHttpbl := _WAFConfigHttpbl{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHttpbl)
+	err = decoder.Decode(&varWAFConfigHttpbl)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Httpbl(varHttpbl)
+	*o = WAFConfigHttpbl(varWAFConfigHttpbl)
 
 	return err
 }
 
-type NullableHttpbl struct {
-	value *Httpbl
+type NullableWAFConfigHttpbl struct {
+	value *WAFConfigHttpbl
 	isSet bool
 }
 
-func (v NullableHttpbl) Get() *Httpbl {
+func (v NullableWAFConfigHttpbl) Get() *WAFConfigHttpbl {
 	return v.value
 }
 
-func (v *NullableHttpbl) Set(val *Httpbl) {
+func (v *NullableWAFConfigHttpbl) Set(val *WAFConfigHttpbl) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHttpbl) IsSet() bool {
+func (v NullableWAFConfigHttpbl) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHttpbl) Unset() {
+func (v *NullableWAFConfigHttpbl) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHttpbl(val *Httpbl) *NullableHttpbl {
-	return &NullableHttpbl{value: val, isSet: true}
+func NewNullableWAFConfigHttpbl(val *WAFConfigHttpbl) *NullableWAFConfigHttpbl {
+	return &NullableWAFConfigHttpbl{value: val, isSet: true}
 }
 
-func (v NullableHttpbl) MarshalJSON() ([]byte, error) {
+func (v NullableWAFConfigHttpbl) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHttpbl) UnmarshalJSON(src []byte) error {
+func (v *NullableWAFConfigHttpbl) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

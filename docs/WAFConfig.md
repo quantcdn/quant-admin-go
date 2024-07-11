@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **BlockIp** | Pointer to **[]string** |  | [optional] 
 **BlockUa** | Pointer to **[]string** |  | [optional] 
 **BlockReferer** | Pointer to **[]string** |  | [optional] 
-**BlockLists** | Pointer to [**BlockLists**](BlockLists.md) |  | [optional] 
-**Httpbl** | Pointer to [**Httpbl**](Httpbl.md) |  | [optional] 
+**BlockLists** | Pointer to [**WAFConfigBlockLists**](WAFConfigBlockLists.md) |  | [optional] 
+**Httpbl** | Pointer to [**WAFConfigHttpbl**](WAFConfigHttpbl.md) |  | [optional] 
 **HttpblEnabled** | Pointer to **map[string]bool** |  | [optional] 
 **NotifySlackHitsRpm** | Pointer to **int32** |  | [optional] 
 **IpRatelimitMode** | Pointer to **string** |  | [optional] [default to "disabled"]
@@ -221,20 +221,20 @@ HasBlockReferer returns a boolean if a field has been set.
 
 ### GetBlockLists
 
-`func (o *WAFConfig) GetBlockLists() BlockLists`
+`func (o *WAFConfig) GetBlockLists() WAFConfigBlockLists`
 
 GetBlockLists returns the BlockLists field if non-nil, zero value otherwise.
 
 ### GetBlockListsOk
 
-`func (o *WAFConfig) GetBlockListsOk() (*BlockLists, bool)`
+`func (o *WAFConfig) GetBlockListsOk() (*WAFConfigBlockLists, bool)`
 
 GetBlockListsOk returns a tuple with the BlockLists field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBlockLists
 
-`func (o *WAFConfig) SetBlockLists(v BlockLists)`
+`func (o *WAFConfig) SetBlockLists(v WAFConfigBlockLists)`
 
 SetBlockLists sets BlockLists field to given value.
 
@@ -246,20 +246,20 @@ HasBlockLists returns a boolean if a field has been set.
 
 ### GetHttpbl
 
-`func (o *WAFConfig) GetHttpbl() Httpbl`
+`func (o *WAFConfig) GetHttpbl() WAFConfigHttpbl`
 
 GetHttpbl returns the Httpbl field if non-nil, zero value otherwise.
 
 ### GetHttpblOk
 
-`func (o *WAFConfig) GetHttpblOk() (*Httpbl, bool)`
+`func (o *WAFConfig) GetHttpblOk() (*WAFConfigHttpbl, bool)`
 
 GetHttpblOk returns a tuple with the Httpbl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHttpbl
 
-`func (o *WAFConfig) SetHttpbl(v Httpbl)`
+`func (o *WAFConfig) SetHttpbl(v WAFConfigHttpbl)`
 
 SetHttpbl sets Httpbl field to given value.
 

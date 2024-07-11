@@ -28,8 +28,8 @@ type WAFConfig struct {
 	BlockIp []string `json:"block_ip,omitempty"`
 	BlockUa []string `json:"block_ua,omitempty"`
 	BlockReferer []string `json:"block_referer,omitempty"`
-	BlockLists *BlockLists `json:"block_lists,omitempty"`
-	Httpbl *Httpbl `json:"httpbl,omitempty"`
+	BlockLists *WAFConfigBlockLists `json:"block_lists,omitempty"`
+	Httpbl *WAFConfigHttpbl `json:"httpbl,omitempty"`
 	HttpblEnabled *map[string]bool `json:"httpbl_enabled,omitempty"`
 	NotifySlackHitsRpm *int32 `json:"notify_slack_hits_rpm,omitempty"`
 	IpRatelimitMode *string `json:"ip_ratelimit_mode,omitempty"`
@@ -329,9 +329,9 @@ func (o *WAFConfig) SetBlockReferer(v []string) {
 }
 
 // GetBlockLists returns the BlockLists field value if set, zero value otherwise.
-func (o *WAFConfig) GetBlockLists() BlockLists {
+func (o *WAFConfig) GetBlockLists() WAFConfigBlockLists {
 	if o == nil || IsNil(o.BlockLists) {
-		var ret BlockLists
+		var ret WAFConfigBlockLists
 		return ret
 	}
 	return *o.BlockLists
@@ -339,7 +339,7 @@ func (o *WAFConfig) GetBlockLists() BlockLists {
 
 // GetBlockListsOk returns a tuple with the BlockLists field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WAFConfig) GetBlockListsOk() (*BlockLists, bool) {
+func (o *WAFConfig) GetBlockListsOk() (*WAFConfigBlockLists, bool) {
 	if o == nil || IsNil(o.BlockLists) {
 		return nil, false
 	}
@@ -355,15 +355,15 @@ func (o *WAFConfig) HasBlockLists() bool {
 	return false
 }
 
-// SetBlockLists gets a reference to the given BlockLists and assigns it to the BlockLists field.
-func (o *WAFConfig) SetBlockLists(v BlockLists) {
+// SetBlockLists gets a reference to the given WAFConfigBlockLists and assigns it to the BlockLists field.
+func (o *WAFConfig) SetBlockLists(v WAFConfigBlockLists) {
 	o.BlockLists = &v
 }
 
 // GetHttpbl returns the Httpbl field value if set, zero value otherwise.
-func (o *WAFConfig) GetHttpbl() Httpbl {
+func (o *WAFConfig) GetHttpbl() WAFConfigHttpbl {
 	if o == nil || IsNil(o.Httpbl) {
-		var ret Httpbl
+		var ret WAFConfigHttpbl
 		return ret
 	}
 	return *o.Httpbl
@@ -371,7 +371,7 @@ func (o *WAFConfig) GetHttpbl() Httpbl {
 
 // GetHttpblOk returns a tuple with the Httpbl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WAFConfig) GetHttpblOk() (*Httpbl, bool) {
+func (o *WAFConfig) GetHttpblOk() (*WAFConfigHttpbl, bool) {
 	if o == nil || IsNil(o.Httpbl) {
 		return nil, false
 	}
@@ -387,8 +387,8 @@ func (o *WAFConfig) HasHttpbl() bool {
 	return false
 }
 
-// SetHttpbl gets a reference to the given Httpbl and assigns it to the Httpbl field.
-func (o *WAFConfig) SetHttpbl(v Httpbl) {
+// SetHttpbl gets a reference to the given WAFConfigHttpbl and assigns it to the Httpbl field.
+func (o *WAFConfig) SetHttpbl(v WAFConfigHttpbl) {
 	o.Httpbl = &v
 }
 

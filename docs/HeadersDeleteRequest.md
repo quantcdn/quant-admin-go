@@ -1,46 +1,46 @@
-# RuleHeaderAction
+# HeadersDeleteRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Headers** | **map[string]string** |  | 
+**Headers** | **[]string** |  | 
 
 ## Methods
 
-### NewRuleHeaderAction
+### NewHeadersDeleteRequest
 
-`func NewRuleHeaderAction(headers map[string]string, ) *RuleHeaderAction`
+`func NewHeadersDeleteRequest(headers []string, ) *HeadersDeleteRequest`
 
-NewRuleHeaderAction instantiates a new RuleHeaderAction object
+NewHeadersDeleteRequest instantiates a new HeadersDeleteRequest object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRuleHeaderActionWithDefaults
+### NewHeadersDeleteRequestWithDefaults
 
-`func NewRuleHeaderActionWithDefaults() *RuleHeaderAction`
+`func NewHeadersDeleteRequestWithDefaults() *HeadersDeleteRequest`
 
-NewRuleHeaderActionWithDefaults instantiates a new RuleHeaderAction object
+NewHeadersDeleteRequestWithDefaults instantiates a new HeadersDeleteRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetHeaders
 
-`func (o *RuleHeaderAction) GetHeaders() map[string]string`
+`func (o *HeadersDeleteRequest) GetHeaders() []string`
 
 GetHeaders returns the Headers field if non-nil, zero value otherwise.
 
 ### GetHeadersOk
 
-`func (o *RuleHeaderAction) GetHeadersOk() (*map[string]string, bool)`
+`func (o *HeadersDeleteRequest) GetHeadersOk() (*[]string, bool)`
 
 GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHeaders
 
-`func (o *RuleHeaderAction) SetHeaders(v map[string]string)`
+`func (o *HeadersDeleteRequest) SetHeaders(v []string)`
 
 SetHeaders sets Headers field to given value.
 

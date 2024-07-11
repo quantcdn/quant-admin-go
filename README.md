@@ -88,6 +88,9 @@ Class | Method | HTTP request | Description
 *DomainsAPI* | [**DomainsList**](docs/DomainsAPI.md#domainslist) | **Get** /organizations/{organization}/projects/{project}/domains | 
 *DomainsAPI* | [**DomainsRead**](docs/DomainsAPI.md#domainsread) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
 *DomainsAPI* | [**DomainsUpdate**](docs/DomainsAPI.md#domainsupdate) | **Put** /organizations/{organization}/projects/{project}/domains/{domain} | 
+*HeadersAPI* | [**HeadersCreate**](docs/HeadersAPI.md#headerscreate) | **Post** /organizations/{organization}/projects/{project}/custom-headers | 
+*HeadersAPI* | [**HeadersDelete**](docs/HeadersAPI.md#headersdelete) | **Delete** /organizations/{organization}/projects/{project}/custom-headers | 
+*HeadersAPI* | [**HeadersList**](docs/HeadersAPI.md#headerslist) | **Get** /organizations/{organization}/projects/{project}/custom-headers | 
 *OrganizationsAPI* | [**OrganizationsList**](docs/OrganizationsAPI.md#organizationslist) | **Get** /organizations | 
 *OrganizationsAPI* | [**OrganizationsRead**](docs/OrganizationsAPI.md#organizationsread) | **Get** /organizations/{organization} | 
 *ProjectsAPI* | [**ProjectsCreate**](docs/ProjectsAPI.md#projectscreate) | **Post** /organizations/{organization}/projects | 
@@ -95,62 +98,32 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsList**](docs/ProjectsAPI.md#projectslist) | **Get** /organizations/{organization}/projects | 
 *ProjectsAPI* | [**ProjectsRead**](docs/ProjectsAPI.md#projectsread) | **Get** /organizations/{organization}/projects/{project} | 
 *ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Put** /organizations/{organization}/projects/{project} | 
-*RulesAuthAPI* | [**RulesAuthCreate**](docs/RulesAuthAPI.md#rulesauthcreate) | **Post** /organizations/{organization}/projects/{project}/rules/auth | 
-*RulesAuthAPI* | [**RulesAuthDelete**](docs/RulesAuthAPI.md#rulesauthdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
-*RulesAuthAPI* | [**RulesAuthList**](docs/RulesAuthAPI.md#rulesauthlist) | **Get** /organizations/{organization}/projects/{project}/rules/auth | 
-*RulesAuthAPI* | [**RulesAuthRead**](docs/RulesAuthAPI.md#rulesauthread) | **Get** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
-*RulesAuthAPI* | [**RulesAuthUpdate**](docs/RulesAuthAPI.md#rulesauthupdate) | **Put** /organizations/{organization}/projects/{project}/rules/auth/{rule} | 
-*RulesCustomResponseAPI* | [**RulesCustomResponseCreate**](docs/RulesCustomResponseAPI.md#rulescustomresponsecreate) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | 
-*RulesCustomResponseAPI* | [**RulesCustomResponseDelete**](docs/RulesCustomResponseAPI.md#rulescustomresponsedelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
-*RulesCustomResponseAPI* | [**RulesCustomResponseList**](docs/RulesCustomResponseAPI.md#rulescustomresponselist) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response | 
-*RulesCustomResponseAPI* | [**RulesCustomResponseRead**](docs/RulesCustomResponseAPI.md#rulescustomresponseread) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
-*RulesCustomResponseAPI* | [**RulesCustomResponseUpdate**](docs/RulesCustomResponseAPI.md#rulescustomresponseupdate) | **Put** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
-*RulesHeadersAPI* | [**RulesHeadersCreate**](docs/RulesHeadersAPI.md#rulesheaderscreate) | **Post** /organizations/{organization}/projects/{project}/rules/headers | 
-*RulesHeadersAPI* | [**RulesHeadersDelete**](docs/RulesHeadersAPI.md#rulesheadersdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
-*RulesHeadersAPI* | [**RulesHeadersList**](docs/RulesHeadersAPI.md#rulesheaderslist) | **Get** /organizations/{organization}/projects/{project}/rules/headers | 
-*RulesHeadersAPI* | [**RulesHeadersRead**](docs/RulesHeadersAPI.md#rulesheadersread) | **Get** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
-*RulesHeadersAPI* | [**RulesHeadersUpdate**](docs/RulesHeadersAPI.md#rulesheadersupdate) | **Put** /organizations/{organization}/projects/{project}/rules/headers/{rule} | 
 *RulesProxyAPI* | [**RulesProxyCreate**](docs/RulesProxyAPI.md#rulesproxycreate) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyDelete**](docs/RulesProxyAPI.md#rulesproxydelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyList**](docs/RulesProxyAPI.md#rulesproxylist) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyRead**](docs/RulesProxyAPI.md#rulesproxyread) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyUpdate**](docs/RulesProxyAPI.md#rulesproxyupdate) | **Put** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
-*RulesRedirectAPI* | [**RulesRedirectCreate**](docs/RulesRedirectAPI.md#rulesredirectcreate) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
-*RulesRedirectAPI* | [**RulesRedirectDelete**](docs/RulesRedirectAPI.md#rulesredirectdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-*RulesRedirectAPI* | [**RulesRedirectList**](docs/RulesRedirectAPI.md#rulesredirectlist) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
-*RulesRedirectAPI* | [**RulesRedirectRead**](docs/RulesRedirectAPI.md#rulesredirectread) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-*RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Put** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 ## Documentation For Models
 
- - [BlockLists](docs/BlockLists.md)
  - [Crawler](docs/Crawler.md)
  - [CrawlerRequest](docs/CrawlerRequest.md)
  - [Domain](docs/Domain.md)
  - [DomainRequest](docs/DomainRequest.md)
  - [Error](docs/Error.md)
- - [Httpbl](docs/Httpbl.md)
- - [NotifyConfig](docs/NotifyConfig.md)
+ - [HeadersCreateRequest](docs/HeadersCreateRequest.md)
+ - [HeadersDeleteRequest](docs/HeadersDeleteRequest.md)
  - [Organization](docs/Organization.md)
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
- - [RuleAuth](docs/RuleAuth.md)
- - [RuleAuthAction](docs/RuleAuthAction.md)
- - [RuleAuthRequest](docs/RuleAuthRequest.md)
- - [RuleCustomResponse](docs/RuleCustomResponse.md)
- - [RuleCustomResponseAction](docs/RuleCustomResponseAction.md)
- - [RuleCustomResponseRequest](docs/RuleCustomResponseRequest.md)
- - [RuleHeader](docs/RuleHeader.md)
- - [RuleHeaderAction](docs/RuleHeaderAction.md)
- - [RuleHeaderRequest](docs/RuleHeaderRequest.md)
  - [RuleProxy](docs/RuleProxy.md)
  - [RuleProxyAction](docs/RuleProxyAction.md)
+ - [RuleProxyActionNotifyConfig](docs/RuleProxyActionNotifyConfig.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
- - [RuleRedirect](docs/RuleRedirect.md)
- - [RuleRedirectAction](docs/RuleRedirectAction.md)
- - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
  - [WAFConfig](docs/WAFConfig.md)
+ - [WAFConfigBlockLists](docs/WAFConfigBlockLists.md)
+ - [WAFConfigHttpbl](docs/WAFConfigHttpbl.md)
 
 
 ## Documentation For Authorization

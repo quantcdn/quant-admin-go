@@ -29,7 +29,7 @@ type RuleProxyAction struct {
 	OriginTimeout *string `json:"origin_timeout,omitempty"`
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	Notify *string `json:"notify,omitempty"`
-	NotifyConfig *NotifyConfig `json:"notify_config,omitempty"`
+	NotifyConfig *RuleProxyActionNotifyConfig `json:"notify_config,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
@@ -324,9 +324,9 @@ func (o *RuleProxyAction) SetNotify(v string) {
 }
 
 // GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetNotifyConfig() NotifyConfig {
+func (o *RuleProxyAction) GetNotifyConfig() RuleProxyActionNotifyConfig {
 	if o == nil || IsNil(o.NotifyConfig) {
-		var ret NotifyConfig
+		var ret RuleProxyActionNotifyConfig
 		return ret
 	}
 	return *o.NotifyConfig
@@ -334,7 +334,7 @@ func (o *RuleProxyAction) GetNotifyConfig() NotifyConfig {
 
 // GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetNotifyConfigOk() (*NotifyConfig, bool) {
+func (o *RuleProxyAction) GetNotifyConfigOk() (*RuleProxyActionNotifyConfig, bool) {
 	if o == nil || IsNil(o.NotifyConfig) {
 		return nil, false
 	}
@@ -350,8 +350,8 @@ func (o *RuleProxyAction) HasNotifyConfig() bool {
 	return false
 }
 
-// SetNotifyConfig gets a reference to the given NotifyConfig and assigns it to the NotifyConfig field.
-func (o *RuleProxyAction) SetNotifyConfig(v NotifyConfig) {
+// SetNotifyConfig gets a reference to the given RuleProxyActionNotifyConfig and assigns it to the NotifyConfig field.
+func (o *RuleProxyAction) SetNotifyConfig(v RuleProxyActionNotifyConfig) {
 	o.NotifyConfig = &v
 }
 

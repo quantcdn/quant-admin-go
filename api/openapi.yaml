@@ -12,11 +12,8 @@ tags:
 - name: Projects
 - name: Crawlers
 - name: Domains
-- name: Rules__Redirect
+- name: Headers
 - name: Rules__Proxy
-- name: Rules__Auth
-- name: Rules__Headers
-- name: Rules__CustomResponse
 paths:
   /organizations:
     get:
@@ -436,6 +433,124 @@ paths:
             syntax.
       tags:
       - Crawlers
+  /organizations/{organization}/projects/{project}/custom-headers:
+    delete:
+      operationId: Headers_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Headers_delete_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Headers
+    get:
+      operationId: Headers_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Headers
+    post:
+      operationId: Headers_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Headers_create_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Headers
   /organizations/{organization}/projects/{project}/domains:
     get:
       operationId: Domains_list
@@ -638,612 +753,6 @@ paths:
             syntax.
       tags:
       - Domains
-  /organizations/{organization}/projects/{project}/rules/auth:
-    get:
-      operationId: RulesAuth_list
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/RuleAuth'
-                type: array
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Auth
-    post:
-      operationId: RulesAuth_create
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleAuthRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleAuth'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Auth
-  /organizations/{organization}/projects/{project}/rules/auth/{rule}:
-    delete:
-      operationId: RulesAuth_delete
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleAuth'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Auth
-    get:
-      operationId: RulesAuth_read
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleAuth'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Auth
-    put:
-      operationId: RulesAuth_update
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleAuthRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleAuth'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Auth
-  /organizations/{organization}/projects/{project}/rules/custom-response:
-    get:
-      operationId: RulesCustomResponse_list
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/RuleCustomResponse'
-                type: array
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__CustomResponse
-    post:
-      operationId: RulesCustomResponse_create
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleCustomResponseRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleCustomResponse'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__CustomResponse
-  /organizations/{organization}/projects/{project}/rules/custom-response/{rule}:
-    delete:
-      operationId: RulesCustomResponse_delete
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleCustomResponse'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__CustomResponse
-    get:
-      operationId: RulesCustomResponse_read
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleCustomResponse'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__CustomResponse
-    put:
-      operationId: RulesCustomResponse_update
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleCustomResponseRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleCustomResponse'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__CustomResponse
-  /organizations/{organization}/projects/{project}/rules/headers:
-    get:
-      operationId: RulesHeaders_list
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/RuleHeader'
-                type: array
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Headers
-    post:
-      operationId: RulesHeaders_create
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleHeaderRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleHeader'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Headers
-  /organizations/{organization}/projects/{project}/rules/headers/{rule}:
-    delete:
-      operationId: RulesHeaders_delete
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleHeader'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Headers
-    get:
-      operationId: RulesHeaders_read
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleHeader'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Headers
-    put:
-      operationId: RulesHeaders_update
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleHeaderRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleHeader'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Headers
   /organizations/{organization}/projects/{project}/rules/proxy:
     get:
       operationId: RulesProxy_list
@@ -1446,208 +955,6 @@ paths:
             syntax.
       tags:
       - Rules__Proxy
-  /organizations/{organization}/projects/{project}/rules/redirect:
-    get:
-      operationId: RulesRedirect_list
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/RuleRedirect'
-                type: array
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Redirect
-    post:
-      operationId: RulesRedirect_create
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleRedirectRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleRedirect'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Redirect
-  /organizations/{organization}/projects/{project}/rules/redirect/{rule}:
-    delete:
-      operationId: RulesRedirect_delete
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleRedirect'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Redirect
-    get:
-      operationId: RulesRedirect_read
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleRedirect'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Redirect
-    put:
-      operationId: RulesRedirect_update
-      parameters:
-      - explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RuleRedirectRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleRedirect'
-          description: The request has succeeded.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-      tags:
-      - Rules__Redirect
 components:
   parameters:
     ResourceURLParameters.organization:
@@ -1667,26 +974,6 @@ components:
         type: string
       style: simple
   schemas:
-    BlockLists:
-      example:
-        referer: false
-        ip: false
-        ai: false
-        user_agent: false
-      properties:
-        referer:
-          default: false
-          type: boolean
-        ip:
-          default: false
-          type: boolean
-        user_agent:
-          default: false
-          type: boolean
-        ai:
-          default: false
-          type: boolean
-      type: object
     Crawler:
       example:
         urls_list: urls_list
@@ -1829,58 +1116,6 @@ components:
       - error
       - message
       type: object
-    Httpbl:
-      example:
-        block_harvester: false
-        httpbl_enabled: false
-        api_key: api_key
-        block_spam: false
-        block_search_engine: false
-        block_suspicious: false
-      properties:
-        httpbl_enabled:
-          default: false
-          type: boolean
-        api_key:
-          type: string
-        block_suspicious:
-          default: false
-          type: boolean
-        block_harvester:
-          default: false
-          type: boolean
-        block_spam:
-          default: false
-          type: boolean
-        block_search_engine:
-          default: false
-          type: boolean
-      required:
-      - block_harvester
-      - block_search_engine
-      - block_spam
-      - block_suspicious
-      - httpbl_enabled
-      type: object
-    NotifyConfig:
-      example:
-        period: "60"
-        slack_webhook: ""
-        origin_status_codes:
-        - origin_status_codes
-        - origin_status_codes
-      properties:
-        origin_status_codes:
-          items:
-            type: string
-          type: array
-        period:
-          default: "60"
-          type: string
-        slack_webhook:
-          default: ""
-          type: string
-      type: object
     Organization:
       example:
         updated_at: updated_at
@@ -2008,631 +1243,6 @@ components:
       required:
       - name
       - region
-      type: object
-    RuleAuth:
-      example:
-        country: country
-        method: method
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        only_with_cookie: only_with_cookie
-        method_is:
-        - method_is
-        - method_is
-        ip: ip
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        action: action
-        disabled: false
-        action_config:
-          auth_user: auth_user
-          auth_pass: auth_pass
-      properties:
-        name:
-          type: string
-        uuid:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        domain:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        only_with_cookie:
-          type: string
-        method:
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        country:
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        action:
-          type: string
-        action_config:
-          $ref: '#/components/schemas/RuleAuthAction'
-      required:
-      - action
-      - action_config
-      - disabled
-      - uuid
-      type: object
-    RuleAuthAction:
-      example:
-        auth_user: auth_user
-        auth_pass: auth_pass
-      properties:
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-      required:
-      - auth_pass
-      - auth_user
-      type: object
-    RuleAuthRequest:
-      example:
-        country: country_is
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: false
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        cookie_name: cookie_name
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        auth_user: auth_user
-        domain: any
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        auth_pass: auth_pass
-        disabled: false
-      properties:
-        domain:
-          default: any
-          type: string
-        name:
-          type: string
-        uuid:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        url:
-          items:
-            type: string
-          type: array
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          default: false
-          type: boolean
-        cookie_name:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-      required:
-      - auth_pass
-      - auth_user
-      - disabled
-      - domain
-      - url
-      type: object
-    RuleCustomResponse:
-      example:
-        country: country
-        method: method
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        only_with_cookie: only_with_cookie
-        method_is:
-        - method_is
-        - method_is
-        ip: ip
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        action: action
-        disabled: false
-        action_config:
-          custom_response_status_code: 0
-          custom_response_body: custom_response_body
-      properties:
-        name:
-          type: string
-        uuid:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        domain:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        only_with_cookie:
-          type: string
-        method:
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        country:
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        action:
-          type: string
-        action_config:
-          $ref: '#/components/schemas/RuleCustomResponseAction'
-      required:
-      - action
-      - disabled
-      - uuid
-      type: object
-    RuleCustomResponseAction:
-      example:
-        custom_response_status_code: 0
-        custom_response_body: custom_response_body
-      properties:
-        custom_response_body:
-          type: string
-        custom_response_status_code:
-          default: 200
-          format: int32
-          type: integer
-      required:
-      - custom_response_body
-      - custom_response_status_code
-      type: object
-    RuleCustomResponseRequest:
-      example:
-        country: country_is
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        custom_response_status_code: 0
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: false
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        custom_response_body: custom_response_body
-        uuid: uuid
-        url:
-        - url
-        - url
-        cookie_name: cookie_name
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: any
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        disabled: false
-      properties:
-        domain:
-          default: any
-          type: string
-        name:
-          type: string
-        uuid:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        url:
-          items:
-            type: string
-          type: array
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          default: false
-          type: boolean
-        cookie_name:
-          type: string
-        custom_response_body:
-          type: string
-        custom_response_status_code:
-          default: 200
-          format: int32
-          type: integer
-      required:
-      - custom_response_body
-      - custom_response_status_code
-      - disabled
-      - domain
-      - url
-      type: object
-    RuleHeader:
-      example:
-        country: country
-        method: method
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        only_with_cookie: only_with_cookie
-        method_is:
-        - method_is
-        - method_is
-        ip: ip
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        action: action
-        disabled: false
-        action_config:
-          headers:
-            key: headers
-      properties:
-        name:
-          type: string
-        uuid:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        domain:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        only_with_cookie:
-          type: string
-        method:
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        country:
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        action:
-          type: string
-        action_config:
-          $ref: '#/components/schemas/RuleHeaderAction'
-      required:
-      - action
-      - action_config
-      - disabled
-      - uuid
-      type: object
-    RuleHeaderAction:
-      example:
-        headers:
-          key: headers
-      properties:
-        headers:
-          additionalProperties:
-            type: string
-          type: object
-      required:
-      - headers
-      type: object
-    RuleHeaderRequest:
-      example:
-        country: country_is
-        headers:
-          key: headers
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: false
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        cookie_name: cookie_name
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: any
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        disabled: false
-      properties:
-        domain:
-          default: any
-          type: string
-        name:
-          type: string
-        uuid:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        url:
-          items:
-            type: string
-          type: array
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          default: false
-          type: boolean
-        cookie_name:
-          type: string
-        headers:
-          additionalProperties:
-            type: string
-          type: object
-      required:
-      - disabled
-      - domain
-      - headers
-      - url
       type: object
     RuleProxy:
       example:
@@ -2908,7 +1518,7 @@ components:
         notify:
           type: string
         notify_config:
-          $ref: '#/components/schemas/NotifyConfig'
+          $ref: '#/components/schemas/RuleProxyAction_notify_config'
         proxy_strip_request_headers:
           items:
             type: string
@@ -3165,7 +1775,7 @@ components:
           - slack
           type: string
         notify_config:
-          $ref: '#/components/schemas/NotifyConfig'
+          $ref: '#/components/schemas/RuleProxyAction_notify_config'
         waf_enabled:
           default: false
           type: boolean
@@ -3175,215 +1785,6 @@ components:
       - disabled
       - domain
       - to
-      - url
-      type: object
-    RuleRedirect:
-      example:
-        country: country
-        method: method
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        only_with_cookie: only_with_cookie
-        method_is:
-        - method_is
-        - method_is
-        ip: ip
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        action: action
-        disabled: false
-        action_config:
-          redirect_code: "301"
-          redirect_to: redirect_to
-      properties:
-        name:
-          type: string
-        uuid:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        domain:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        only_with_cookie:
-          type: string
-        method:
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        country:
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        action:
-          type: string
-        action_config:
-          $ref: '#/components/schemas/RuleRedirectAction'
-      required:
-      - action
-      - disabled
-      - uuid
-      type: object
-    RuleRedirectAction:
-      example:
-        redirect_code: "301"
-        redirect_to: redirect_to
-      properties:
-        redirect_to:
-          type: string
-        redirect_code:
-          default: "301"
-          type: string
-      required:
-      - redirect_code
-      - redirect_to
-      type: object
-    RuleRedirectRequest:
-      example:
-        country: country_is
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        method_is:
-        - method_is
-        - method_is
-        ip: ip_is
-        only_with_cookie: false
-        redirect_code: "301"
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        cookie_name: cookie_name
-        redirect_to: redirect_to
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain: any
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        disabled: false
-      properties:
-        domain:
-          default: any
-          type: string
-        name:
-          type: string
-        uuid:
-          type: string
-        disabled:
-          default: false
-          type: boolean
-        url:
-          items:
-            type: string
-          type: array
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        only_with_cookie:
-          default: false
-          type: boolean
-        cookie_name:
-          type: string
-        redirect_to:
-          type: string
-        redirect_code:
-          default: "301"
-          type: string
-      required:
-      - disabled
-      - domain
-      - redirect_code
-      - redirect_to
       - url
       type: object
     WAFConfig:
@@ -3466,9 +1867,9 @@ components:
             type: string
           type: array
         block_lists:
-          $ref: '#/components/schemas/BlockLists'
+          $ref: '#/components/schemas/WAFConfig_block_lists'
         httpbl:
-          $ref: '#/components/schemas/Httpbl'
+          $ref: '#/components/schemas/WAFConfig_httpbl'
         httpbl_enabled:
           additionalProperties:
             type: boolean
@@ -3531,6 +1932,96 @@ components:
           type: integer
       required:
       - mode
+      type: object
+    Headers_create_request:
+      properties:
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - headers
+      type: object
+    Headers_delete_request:
+      properties:
+        headers:
+          items:
+            type: string
+          type: array
+      required:
+      - headers
+      type: object
+    RuleProxyAction_notify_config:
+      example:
+        period: "60"
+        slack_webhook: ""
+        origin_status_codes:
+        - origin_status_codes
+        - origin_status_codes
+      properties:
+        origin_status_codes:
+          items:
+            type: string
+          type: array
+        period:
+          default: "60"
+          type: string
+        slack_webhook:
+          default: ""
+          type: string
+      type: object
+    WAFConfig_block_lists:
+      example:
+        referer: false
+        ip: false
+        ai: false
+        user_agent: false
+      properties:
+        referer:
+          default: false
+          type: boolean
+        ip:
+          default: false
+          type: boolean
+        user_agent:
+          default: false
+          type: boolean
+        ai:
+          default: false
+          type: boolean
+      type: object
+    WAFConfig_httpbl:
+      example:
+        block_harvester: false
+        httpbl_enabled: false
+        api_key: api_key
+        block_spam: false
+        block_search_engine: false
+        block_suspicious: false
+      properties:
+        httpbl_enabled:
+          default: false
+          type: boolean
+        api_key:
+          type: string
+        block_suspicious:
+          default: false
+          type: boolean
+        block_harvester:
+          default: false
+          type: boolean
+        block_spam:
+          default: false
+          type: boolean
+        block_search_engine:
+          default: false
+          type: boolean
+      required:
+      - block_harvester
+      - block_search_engine
+      - block_spam
+      - block_suspicious
+      - httpbl_enabled
       type: object
   securitySchemes:
     BearerAuth:

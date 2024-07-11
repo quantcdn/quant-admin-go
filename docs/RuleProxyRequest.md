@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
 **FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
-**NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
+**NotifyConfig** | Pointer to [**RuleProxyActionNotifyConfig**](RuleProxyActionNotifyConfig.md) |  | [optional] 
 **WafEnabled** | Pointer to **bool** |  | [optional] [default to false]
 **WafConfig** | Pointer to [**WAFConfig**](WAFConfig.md) |  | [optional] 
 
@@ -815,20 +815,20 @@ HasNotify returns a boolean if a field has been set.
 
 ### GetNotifyConfig
 
-`func (o *RuleProxyRequest) GetNotifyConfig() NotifyConfig`
+`func (o *RuleProxyRequest) GetNotifyConfig() RuleProxyActionNotifyConfig`
 
 GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
 
 ### GetNotifyConfigOk
 
-`func (o *RuleProxyRequest) GetNotifyConfigOk() (*NotifyConfig, bool)`
+`func (o *RuleProxyRequest) GetNotifyConfigOk() (*RuleProxyActionNotifyConfig, bool)`
 
 GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifyConfig
 
-`func (o *RuleProxyRequest) SetNotifyConfig(v NotifyConfig)`
+`func (o *RuleProxyRequest) SetNotifyConfig(v RuleProxyActionNotifyConfig)`
 
 SetNotifyConfig sets NotifyConfig field to given value.
 

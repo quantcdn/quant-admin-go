@@ -53,19 +53,13 @@ type APIClient struct {
 
 	DomainsAPI *DomainsAPIService
 
+	HeadersAPI *HeadersAPIService
+
 	OrganizationsAPI *OrganizationsAPIService
 
 	ProjectsAPI *ProjectsAPIService
 
-	RulesAuthAPI *RulesAuthAPIService
-
-	RulesCustomResponseAPI *RulesCustomResponseAPIService
-
-	RulesHeadersAPI *RulesHeadersAPIService
-
 	RulesProxyAPI *RulesProxyAPIService
-
-	RulesRedirectAPI *RulesRedirectAPIService
 }
 
 type service struct {
@@ -86,13 +80,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.CrawlersAPI = (*CrawlersAPIService)(&c.common)
 	c.DomainsAPI = (*DomainsAPIService)(&c.common)
+	c.HeadersAPI = (*HeadersAPIService)(&c.common)
 	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
-	c.RulesAuthAPI = (*RulesAuthAPIService)(&c.common)
-	c.RulesCustomResponseAPI = (*RulesCustomResponseAPIService)(&c.common)
-	c.RulesHeadersAPI = (*RulesHeadersAPIService)(&c.common)
 	c.RulesProxyAPI = (*RulesProxyAPIService)(&c.common)
-	c.RulesRedirectAPI = (*RulesRedirectAPIService)(&c.common)
 
 	return c
 }

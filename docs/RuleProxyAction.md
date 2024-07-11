@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **OriginTimeout** | Pointer to **string** |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] 
-**NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
+**NotifyConfig** | Pointer to [**RuleProxyActionNotifyConfig**](RuleProxyActionNotifyConfig.md) |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] 
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] 
@@ -242,20 +242,20 @@ HasNotify returns a boolean if a field has been set.
 
 ### GetNotifyConfig
 
-`func (o *RuleProxyAction) GetNotifyConfig() NotifyConfig`
+`func (o *RuleProxyAction) GetNotifyConfig() RuleProxyActionNotifyConfig`
 
 GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
 
 ### GetNotifyConfigOk
 
-`func (o *RuleProxyAction) GetNotifyConfigOk() (*NotifyConfig, bool)`
+`func (o *RuleProxyAction) GetNotifyConfigOk() (*RuleProxyActionNotifyConfig, bool)`
 
 GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifyConfig
 
-`func (o *RuleProxyAction) SetNotifyConfig(v NotifyConfig)`
+`func (o *RuleProxyAction) SetNotifyConfig(v RuleProxyActionNotifyConfig)`
 
 SetNotifyConfig sets NotifyConfig field to given value.
 
