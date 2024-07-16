@@ -8,6 +8,7 @@ api_headers.go
 api_organizations.go
 api_projects.go
 api_rules_proxy.go
+api_rules_redirect.go
 client.go
 configuration.go
 docs/Crawler.md
@@ -29,7 +30,12 @@ docs/RuleProxy.md
 docs/RuleProxyAction.md
 docs/RuleProxyActionNotifyConfig.md
 docs/RuleProxyRequest.md
+docs/RuleRedirect.md
+docs/RuleRedirectAction.md
+docs/RuleRedirectRequest.md
 docs/RulesProxyAPI.md
+docs/RulesRedirectAPI.md
+docs/Threshold.md
 docs/WAFConfig.md
 docs/WAFConfigBlockLists.md
 docs/WAFConfigHttpbl.md
@@ -50,6 +56,10 @@ model_rule_proxy.go
 model_rule_proxy_action.go
 model_rule_proxy_action_notify_config.go
 model_rule_proxy_request.go
+model_rule_redirect.go
+model_rule_redirect_action.go
+model_rule_redirect_request.go
+model_threshold.go
 model_waf_config.go
 model_waf_config_block_lists.go
 model_waf_config_httpbl.go
@@ -60,4 +70,5 @@ test/api_headers_test.go
 test/api_organizations_test.go
 test/api_projects_test.go
 test/api_rules_proxy_test.go
+test/api_rules_redirect_test.go
 utils.go

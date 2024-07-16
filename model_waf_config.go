@@ -30,6 +30,7 @@ type WAFConfig struct {
 	BlockReferer []string `json:"block_referer,omitempty"`
 	BlockLists *WAFConfigBlockLists `json:"block_lists,omitempty"`
 	Httpbl *WAFConfigHttpbl `json:"httpbl,omitempty"`
+	Thresholds []Threshold `json:"thresholds,omitempty"`
 	HttpblEnabled *map[string]bool `json:"httpbl_enabled,omitempty"`
 	NotifySlackHitsRpm *int32 `json:"notify_slack_hits_rpm,omitempty"`
 	IpRatelimitMode *string `json:"ip_ratelimit_mode,omitempty"`
@@ -390,6 +391,38 @@ func (o *WAFConfig) HasHttpbl() bool {
 // SetHttpbl gets a reference to the given WAFConfigHttpbl and assigns it to the Httpbl field.
 func (o *WAFConfig) SetHttpbl(v WAFConfigHttpbl) {
 	o.Httpbl = &v
+}
+
+// GetThresholds returns the Thresholds field value if set, zero value otherwise.
+func (o *WAFConfig) GetThresholds() []Threshold {
+	if o == nil || IsNil(o.Thresholds) {
+		var ret []Threshold
+		return ret
+	}
+	return o.Thresholds
+}
+
+// GetThresholdsOk returns a tuple with the Thresholds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WAFConfig) GetThresholdsOk() ([]Threshold, bool) {
+	if o == nil || IsNil(o.Thresholds) {
+		return nil, false
+	}
+	return o.Thresholds, true
+}
+
+// HasThresholds returns a boolean if a field has been set.
+func (o *WAFConfig) HasThresholds() bool {
+	if o != nil && !IsNil(o.Thresholds) {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholds gets a reference to the given []Threshold and assigns it to the Thresholds field.
+func (o *WAFConfig) SetThresholds(v []Threshold) {
+	o.Thresholds = v
 }
 
 // GetHttpblEnabled returns the HttpblEnabled field value if set, zero value otherwise.
@@ -938,6 +971,9 @@ func (o WAFConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Httpbl) {
 		toSerialize["httpbl"] = o.Httpbl
+	}
+	if !IsNil(o.Thresholds) {
+		toSerialize["thresholds"] = o.Thresholds
 	}
 	if !IsNil(o.HttpblEnabled) {
 		toSerialize["httpbl_enabled"] = o.HttpblEnabled

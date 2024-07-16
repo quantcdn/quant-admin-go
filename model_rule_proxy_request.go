@@ -21,7 +21,7 @@ var _ MappedNullable = &RuleProxyRequest{}
 
 // RuleProxyRequest struct for RuleProxyRequest
 type RuleProxyRequest struct {
-	Domain string `json:"domain"`
+	Domain []string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
 	Disabled bool `json:"disabled"`
@@ -42,7 +42,7 @@ type RuleProxyRequest struct {
 	AuthUser *string `json:"auth_user,omitempty"`
 	AuthPass *string `json:"auth_pass,omitempty"`
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
-	CacheLifetime *string `json:"cache_lifetime,omitempty"`
+	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
@@ -63,7 +63,7 @@ type _RuleProxyRequest RuleProxyRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxyRequest(domain string, disabled bool, url []string, to string) *RuleProxyRequest {
+func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string) *RuleProxyRequest {
 	this := RuleProxyRequest{}
 	this.Domain = domain
 	this.Disabled = disabled
@@ -87,8 +87,6 @@ func NewRuleProxyRequest(domain string, disabled bool, url []string, to string) 
 // but it doesn't guarantee that properties required by API are set
 func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	this := RuleProxyRequest{}
-	var domain string = "any"
-	this.Domain = domain
 	var disabled bool = false
 	this.Disabled = disabled
 	var onlyWithCookie bool = false
@@ -105,9 +103,9 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 }
 
 // GetDomain returns the Domain field value
-func (o *RuleProxyRequest) GetDomain() string {
+func (o *RuleProxyRequest) GetDomain() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -116,15 +114,15 @@ func (o *RuleProxyRequest) GetDomain() string {
 
 // GetDomainOk returns a tuple with the Domain field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetDomainOk() (*string, bool) {
+func (o *RuleProxyRequest) GetDomainOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Domain, true
+	return o.Domain, true
 }
 
 // SetDomain sets field value
-func (o *RuleProxyRequest) SetDomain(v string) {
+func (o *RuleProxyRequest) SetDomain(v []string) {
 	o.Domain = v
 }
 
@@ -745,9 +743,9 @@ func (o *RuleProxyRequest) SetDisableSslVerify(v bool) {
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCacheLifetime() string {
+func (o *RuleProxyRequest) GetCacheLifetime() int32 {
 	if o == nil || IsNil(o.CacheLifetime) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.CacheLifetime
@@ -755,7 +753,7 @@ func (o *RuleProxyRequest) GetCacheLifetime() string {
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCacheLifetimeOk() (*string, bool) {
+func (o *RuleProxyRequest) GetCacheLifetimeOk() (*int32, bool) {
 	if o == nil || IsNil(o.CacheLifetime) {
 		return nil, false
 	}
@@ -771,8 +769,8 @@ func (o *RuleProxyRequest) HasCacheLifetime() bool {
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given string and assigns it to the CacheLifetime field.
-func (o *RuleProxyRequest) SetCacheLifetime(v string) {
+// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
+func (o *RuleProxyRequest) SetCacheLifetime(v int32) {
 	o.CacheLifetime = &v
 }
 

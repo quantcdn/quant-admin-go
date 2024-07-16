@@ -1,6 +1,6 @@
 # \RulesProxyAPI
 
-All URIs are relative to *https://portal.stage.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -326,7 +326,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest("Domain_example", false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

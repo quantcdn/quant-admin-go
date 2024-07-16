@@ -1,6 +1,6 @@
 # \CrawlersAPI
 
-All URIs are relative to *https://portal.stage.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

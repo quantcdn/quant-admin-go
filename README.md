@@ -74,7 +74,7 @@ ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVari
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://portal.stage.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -103,6 +103,11 @@ Class | Method | HTTP request | Description
 *RulesProxyAPI* | [**RulesProxyList**](docs/RulesProxyAPI.md#rulesproxylist) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyRead**](docs/RulesProxyAPI.md#rulesproxyread) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyUpdate**](docs/RulesProxyAPI.md#rulesproxyupdate) | **Put** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+*RulesRedirectAPI* | [**RulesRedirectCreate**](docs/RulesRedirectAPI.md#rulesredirectcreate) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
+*RulesRedirectAPI* | [**RulesRedirectDelete**](docs/RulesRedirectAPI.md#rulesredirectdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+*RulesRedirectAPI* | [**RulesRedirectList**](docs/RulesRedirectAPI.md#rulesredirectlist) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
+*RulesRedirectAPI* | [**RulesRedirectRead**](docs/RulesRedirectAPI.md#rulesredirectread) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+*RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Put** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 ## Documentation For Models
@@ -121,6 +126,10 @@ Class | Method | HTTP request | Description
  - [RuleProxyAction](docs/RuleProxyAction.md)
  - [RuleProxyActionNotifyConfig](docs/RuleProxyActionNotifyConfig.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
+ - [RuleRedirect](docs/RuleRedirect.md)
+ - [RuleRedirectAction](docs/RuleRedirectAction.md)
+ - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
+ - [Threshold](docs/Threshold.md)
  - [WAFConfig](docs/WAFConfig.md)
  - [WAFConfigBlockLists](docs/WAFConfigBlockLists.md)
  - [WAFConfigHttpbl](docs/WAFConfigHttpbl.md)

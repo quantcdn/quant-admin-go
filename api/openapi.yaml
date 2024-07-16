@@ -3,8 +3,8 @@ info:
   title: QuantCDN Admin API
   version: 0.0.0
 servers:
-- description: Staging Dashboard
-  url: https://portal.stage.quantcdn.io/api/v2
+- description: Admin API
+  url: https://dashboard.quantcdn.io/api/v2
 security:
 - BearerAuth: []
 tags:
@@ -14,6 +14,7 @@ tags:
 - name: Domains
 - name: Headers
 - name: Rules__Proxy
+- name: Rules__Redirect
 paths:
   /organizations:
     get:
@@ -955,6 +956,208 @@ paths:
             syntax.
       tags:
       - Rules__Proxy
+  /organizations/{organization}/projects/{project}/rules/redirect:
+    get:
+      operationId: RulesRedirect_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleRedirect'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+    post:
+      operationId: RulesRedirect_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleRedirectRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleRedirect'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+  /organizations/{organization}/projects/{project}/rules/redirect/{rule}:
+    delete:
+      operationId: RulesRedirect_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleRedirect'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+    get:
+      operationId: RulesRedirect_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleRedirect'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
+    put:
+      operationId: RulesRedirect_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleRedirectRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleRedirect'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Rules__Redirect
 components:
   parameters:
     ResourceURLParameters.organization:
@@ -1269,7 +1472,9 @@ components:
         country_is_not:
         - country_is_not
         - country_is_not
-        domain: domain
+        domain:
+        - domain
+        - domain
         name: name
         ip_is:
         - ip_is
@@ -1281,7 +1486,7 @@ components:
           proxy_strip_request_headers:
           - proxy_strip_request_headers
           - proxy_strip_request_headers
-          cache_lifetime: "0"
+          cache_lifetime: 0
           failover_origin_ttfb: failover_origin_ttfb
           proxy_strip_headers:
           - proxy_strip_headers
@@ -1316,15 +1521,15 @@ components:
               block_search_engine: false
               block_suspicious: false
             request_header_ratelimit_mode: disabled
-            ip_ratelimit_cooldown: 5
-            request_header_ratelimit_cooldown: 2
+            ip_ratelimit_cooldown: 3
+            request_header_ratelimit_cooldown: 4
             allow_ip:
             - allow_ip
             - allow_ip
             mode: block
             ip_ratelimit_mode: disabled
-            ip_ratelimit_rps: 1
-            waf_ratelimit_rps: 9
+            ip_ratelimit_rps: 9
+            waf_ratelimit_rps: 1
             notify_email:
             - notify_email
             - notify_email
@@ -1338,11 +1543,28 @@ components:
               ip: false
               ai: false
               user_agent: false
-            waf_ratelimit_cooldown: 3
-            notify_slack_rpm: 2
-            notify_slack_hits_rpm: 6
+            waf_ratelimit_cooldown: 1
+            notify_slack_rpm: 1
+            notify_slack_hits_rpm: 7
             request_header_name: request_header_name
-            request_header_ratelimit_rps: 5
+            thresholds:
+            - mode: disabled
+              hits: 5
+              rps: 5
+              minutes: 2
+              cooldown: 1
+              type: type
+              value: value
+              notify_slack: notify_slack
+            - mode: disabled
+              hits: 5
+              rps: 5
+              minutes: 2
+              cooldown: 1
+              type: type
+              value: value
+              notify_slack: notify_slack
+            request_header_ratelimit_rps: 2
             waf_ratelimit_hits: 7
             httpbl_enabled:
               key: true
@@ -1352,7 +1574,7 @@ components:
             block_referer:
             - block_referer
             - block_referer
-            paranoia_level: 0
+            paranoia_level: 6
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
@@ -1368,7 +1590,9 @@ components:
             type: string
           type: array
         domain:
-          type: string
+          items:
+            type: string
+          type: array
         disabled:
           default: false
           type: boolean
@@ -1420,7 +1644,7 @@ components:
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
-        cache_lifetime: "0"
+        cache_lifetime: 0
         failover_origin_ttfb: failover_origin_ttfb
         proxy_strip_headers:
         - proxy_strip_headers
@@ -1455,15 +1679,15 @@ components:
             block_search_engine: false
             block_suspicious: false
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 2
+          ip_ratelimit_cooldown: 3
+          request_header_ratelimit_cooldown: 4
           allow_ip:
           - allow_ip
           - allow_ip
           mode: block
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 1
-          waf_ratelimit_rps: 9
+          ip_ratelimit_rps: 9
+          waf_ratelimit_rps: 1
           notify_email:
           - notify_email
           - notify_email
@@ -1477,11 +1701,28 @@ components:
             ip: false
             ai: false
             user_agent: false
-          waf_ratelimit_cooldown: 3
-          notify_slack_rpm: 2
-          notify_slack_hits_rpm: 6
+          waf_ratelimit_cooldown: 1
+          notify_slack_rpm: 1
+          notify_slack_hits_rpm: 7
           request_header_name: request_header_name
-          request_header_ratelimit_rps: 5
+          thresholds:
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          request_header_ratelimit_rps: 2
           waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
@@ -1491,7 +1732,7 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          paranoia_level: 0
+          paranoia_level: 6
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -1542,8 +1783,8 @@ components:
         to:
           type: string
         cache_lifetime:
-          default: "0"
-          type: string
+          default: 0
+          type: integer
         disable_ssl_verify:
           default: true
           type: boolean
@@ -1558,7 +1799,7 @@ components:
     RuleProxyRequest:
       example:
         country: country_is
-        cache_lifetime: cache_lifetime
+        cache_lifetime: 0
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
@@ -1605,7 +1846,9 @@ components:
         only_proxy_404: true
         inject_headers:
           key: inject_headers
-        domain: any
+        domain:
+        - domain
+        - domain
         name: name
         ip_is:
         - ip_is
@@ -1625,15 +1868,15 @@ components:
             block_search_engine: false
             block_suspicious: false
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 2
+          ip_ratelimit_cooldown: 3
+          request_header_ratelimit_cooldown: 4
           allow_ip:
           - allow_ip
           - allow_ip
           mode: block
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 1
-          waf_ratelimit_rps: 9
+          ip_ratelimit_rps: 9
+          waf_ratelimit_rps: 1
           notify_email:
           - notify_email
           - notify_email
@@ -1647,11 +1890,28 @@ components:
             ip: false
             ai: false
             user_agent: false
-          waf_ratelimit_cooldown: 3
-          notify_slack_rpm: 2
-          notify_slack_hits_rpm: 6
+          waf_ratelimit_cooldown: 1
+          notify_slack_rpm: 1
+          notify_slack_hits_rpm: 7
           request_header_name: request_header_name
-          request_header_ratelimit_rps: 5
+          thresholds:
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          request_header_ratelimit_rps: 2
           waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
@@ -1661,14 +1921,17 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          paranoia_level: 0
+          paranoia_level: 6
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
       properties:
         domain:
-          default: any
-          type: string
+          default:
+          - any
+          items:
+            type: string
+          type: array
         name:
           type: string
         uuid:
@@ -1735,7 +1998,7 @@ components:
         disable_ssl_verify:
           type: boolean
         cache_lifetime:
-          type: string
+          type: integer
         only_proxy_404:
           type: boolean
         inject_headers:
@@ -1787,6 +2050,253 @@ components:
       - to
       - url
       type: object
+    RuleRedirect:
+      example:
+        country: country
+        method: method
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        only_with_cookie: only_with_cookie
+        method_is:
+        - method_is
+        - method_is
+        ip: ip
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        action: action
+        disabled: false
+        action_config:
+          status_code: "301"
+          to: to
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+        url:
+          items:
+            type: string
+          type: array
+        domain:
+          items:
+            type: string
+          type: array
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: string
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        action:
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleRedirectAction'
+      required:
+      - action
+      - disabled
+      - uuid
+      type: object
+    RuleRedirectAction:
+      example:
+        status_code: "301"
+        to: to
+      properties:
+        to:
+          type: string
+        status_code:
+          default: "301"
+          type: string
+      required:
+      - status_code
+      - to
+      type: object
+    RuleRedirectRequest:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        only_with_cookie: false
+        redirect_code: "301"
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        cookie_name: cookie_name
+        redirect_to: redirect_to
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          default: false
+          type: boolean
+        cookie_name:
+          type: string
+        redirect_to:
+          type: string
+        redirect_code:
+          default: "301"
+          type: string
+      required:
+      - disabled
+      - domain
+      - redirect_code
+      - redirect_to
+      - url
+      type: object
+    Threshold:
+      example:
+        mode: disabled
+        hits: 5
+        rps: 5
+        minutes: 2
+        cooldown: 1
+        type: type
+        value: value
+        notify_slack: notify_slack
+      properties:
+        value:
+          type: string
+        cooldown:
+          type: integer
+        mode:
+          default: disabled
+          type: string
+        rps:
+          type: integer
+        notify_slack:
+          type: string
+        type:
+          type: string
+        hits:
+          type: integer
+        minutes:
+          type: integer
+      type: object
     WAFConfig:
       example:
         allow_rules:
@@ -1800,15 +2310,15 @@ components:
           block_search_engine: false
           block_suspicious: false
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 5
-        request_header_ratelimit_cooldown: 2
+        ip_ratelimit_cooldown: 3
+        request_header_ratelimit_cooldown: 4
         allow_ip:
         - allow_ip
         - allow_ip
         mode: block
         ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 1
-        waf_ratelimit_rps: 9
+        ip_ratelimit_rps: 9
+        waf_ratelimit_rps: 1
         notify_email:
         - notify_email
         - notify_email
@@ -1822,11 +2332,28 @@ components:
           ip: false
           ai: false
           user_agent: false
-        waf_ratelimit_cooldown: 3
-        notify_slack_rpm: 2
-        notify_slack_hits_rpm: 6
+        waf_ratelimit_cooldown: 1
+        notify_slack_rpm: 1
+        notify_slack_hits_rpm: 7
         request_header_name: request_header_name
-        request_header_ratelimit_rps: 5
+        thresholds:
+        - mode: disabled
+          hits: 5
+          rps: 5
+          minutes: 2
+          cooldown: 1
+          type: type
+          value: value
+          notify_slack: notify_slack
+        - mode: disabled
+          hits: 5
+          rps: 5
+          minutes: 2
+          cooldown: 1
+          type: type
+          value: value
+          notify_slack: notify_slack
+        request_header_ratelimit_rps: 2
         waf_ratelimit_hits: 7
         httpbl_enabled:
           key: true
@@ -1836,7 +2363,7 @@ components:
         block_referer:
         - block_referer
         - block_referer
-        paranoia_level: 0
+        paranoia_level: 6
       properties:
         mode:
           enum:
@@ -1870,12 +2397,15 @@ components:
           $ref: '#/components/schemas/WAFConfig_block_lists'
         httpbl:
           $ref: '#/components/schemas/WAFConfig_httpbl'
+        thresholds:
+          items:
+            $ref: '#/components/schemas/Threshold'
+          type: array
         httpbl_enabled:
           additionalProperties:
             type: boolean
           type: object
         notify_slack_hits_rpm:
-          format: int32
           type: integer
         ip_ratelimit_mode:
           default: disabled

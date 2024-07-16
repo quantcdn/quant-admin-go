@@ -38,7 +38,7 @@ type RuleProxyAction struct {
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	To string `json:"to"`
-	CacheLifetime *string `json:"cache_lifetime,omitempty"`
+	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
 	NotifyEmail *string `json:"notify_email,omitempty"`
 	WafConfig *WAFConfig `json:"waf_config,omitempty"`
@@ -54,7 +54,7 @@ func NewRuleProxyAction(wafEnabled bool, to string) *RuleProxyAction {
 	this := RuleProxyAction{}
 	this.WafEnabled = wafEnabled
 	this.To = to
-	var cacheLifetime string = "0"
+	var cacheLifetime int32 = 0
 	this.CacheLifetime = &cacheLifetime
 	var disableSslVerify bool = true
 	this.DisableSslVerify = &disableSslVerify
@@ -68,7 +68,7 @@ func NewRuleProxyActionWithDefaults() *RuleProxyAction {
 	this := RuleProxyAction{}
 	var wafEnabled bool = false
 	this.WafEnabled = wafEnabled
-	var cacheLifetime string = "0"
+	var cacheLifetime int32 = 0
 	this.CacheLifetime = &cacheLifetime
 	var disableSslVerify bool = true
 	this.DisableSslVerify = &disableSslVerify
@@ -604,9 +604,9 @@ func (o *RuleProxyAction) SetTo(v string) {
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetCacheLifetime() string {
+func (o *RuleProxyAction) GetCacheLifetime() int32 {
 	if o == nil || IsNil(o.CacheLifetime) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.CacheLifetime
@@ -614,7 +614,7 @@ func (o *RuleProxyAction) GetCacheLifetime() string {
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool) {
+func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool) {
 	if o == nil || IsNil(o.CacheLifetime) {
 		return nil, false
 	}
@@ -630,8 +630,8 @@ func (o *RuleProxyAction) HasCacheLifetime() bool {
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given string and assigns it to the CacheLifetime field.
-func (o *RuleProxyAction) SetCacheLifetime(v string) {
+// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
+func (o *RuleProxyAction) SetCacheLifetime(v int32) {
 	o.CacheLifetime = &v
 }
 

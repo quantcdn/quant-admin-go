@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Domain** | **string** |  | [default to "any"]
+**Domain** | **[]string** |  | [default to ["any"]]
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **AuthUser** | Pointer to **string** |  | [optional] 
 **AuthPass** | Pointer to **string** |  | [optional] 
 **DisableSslVerify** | Pointer to **bool** |  | [optional] 
-**CacheLifetime** | Pointer to **string** |  | [optional] 
+**CacheLifetime** | Pointer to **int32** |  | [optional] 
 **OnlyProxy404** | Pointer to **bool** |  | [optional] 
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
@@ -43,7 +43,7 @@ Name | Type | Description | Notes
 
 ### NewRuleProxyRequest
 
-`func NewRuleProxyRequest(domain string, disabled bool, url []string, to string, ) *RuleProxyRequest`
+`func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string, ) *RuleProxyRequest`
 
 NewRuleProxyRequest instantiates a new RuleProxyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -60,20 +60,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDomain
 
-`func (o *RuleProxyRequest) GetDomain() string`
+`func (o *RuleProxyRequest) GetDomain() []string`
 
 GetDomain returns the Domain field if non-nil, zero value otherwise.
 
 ### GetDomainOk
 
-`func (o *RuleProxyRequest) GetDomainOk() (*string, bool)`
+`func (o *RuleProxyRequest) GetDomainOk() (*[]string, bool)`
 
 GetDomainOk returns a tuple with the Domain field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDomain
 
-`func (o *RuleProxyRequest) SetDomain(v string)`
+`func (o *RuleProxyRequest) SetDomain(v []string)`
 
 SetDomain sets Domain field to given value.
 
@@ -565,20 +565,20 @@ HasDisableSslVerify returns a boolean if a field has been set.
 
 ### GetCacheLifetime
 
-`func (o *RuleProxyRequest) GetCacheLifetime() string`
+`func (o *RuleProxyRequest) GetCacheLifetime() int32`
 
 GetCacheLifetime returns the CacheLifetime field if non-nil, zero value otherwise.
 
 ### GetCacheLifetimeOk
 
-`func (o *RuleProxyRequest) GetCacheLifetimeOk() (*string, bool)`
+`func (o *RuleProxyRequest) GetCacheLifetimeOk() (*int32, bool)`
 
 GetCacheLifetimeOk returns a tuple with the CacheLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCacheLifetime
 
-`func (o *RuleProxyRequest) SetCacheLifetime(v string)`
+`func (o *RuleProxyRequest) SetCacheLifetime(v int32)`
 
 SetCacheLifetime sets CacheLifetime field to given value.
 

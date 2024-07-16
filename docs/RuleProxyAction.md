@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **OnlyProxy404** | Pointer to **bool** |  | [optional] 
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **To** | **string** |  | 
-**CacheLifetime** | Pointer to **string** |  | [optional] [default to "0"]
+**CacheLifetime** | Pointer to **int32** |  | [optional] [default to 0]
 **DisableSslVerify** | Pointer to **bool** |  | [optional] [default to true]
 **NotifyEmail** | Pointer to **string** |  | [optional] 
 **WafConfig** | Pointer to [**WAFConfig**](WAFConfig.md) |  | [optional] 
@@ -462,20 +462,20 @@ SetTo sets To field to given value.
 
 ### GetCacheLifetime
 
-`func (o *RuleProxyAction) GetCacheLifetime() string`
+`func (o *RuleProxyAction) GetCacheLifetime() int32`
 
 GetCacheLifetime returns the CacheLifetime field if non-nil, zero value otherwise.
 
 ### GetCacheLifetimeOk
 
-`func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool)`
+`func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool)`
 
 GetCacheLifetimeOk returns a tuple with the CacheLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCacheLifetime
 
-`func (o *RuleProxyAction) SetCacheLifetime(v string)`
+`func (o *RuleProxyAction) SetCacheLifetime(v int32)`
 
 SetCacheLifetime sets CacheLifetime field to given value.
 

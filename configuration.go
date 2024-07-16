@@ -93,8 +93,8 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://portal.stage.quantcdn.io/api/v2",
-				Description: "Staging Dashboard",
+				URL: "https://dashboard.quantcdn.io/api/v2",
+				Description: "Admin API",
 			},
 		},
 		OperationServers: map[string]ServerConfigurations{

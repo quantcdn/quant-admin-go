@@ -1,20 +1,20 @@
-# \ProjectsAPI
+# \RulesRedirectAPI
 
 All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ProjectsCreate**](ProjectsAPI.md#ProjectsCreate) | **Post** /organizations/{organization}/projects | 
-[**ProjectsDelete**](ProjectsAPI.md#ProjectsDelete) | **Delete** /organizations/{organization}/projects/{project} | 
-[**ProjectsList**](ProjectsAPI.md#ProjectsList) | **Get** /organizations/{organization}/projects | 
-[**ProjectsRead**](ProjectsAPI.md#ProjectsRead) | **Get** /organizations/{organization}/projects/{project} | 
-[**ProjectsUpdate**](ProjectsAPI.md#ProjectsUpdate) | **Put** /organizations/{organization}/projects/{project} | 
+[**RulesRedirectCreate**](RulesRedirectAPI.md#RulesRedirectCreate) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
+[**RulesRedirectDelete**](RulesRedirectAPI.md#RulesRedirectDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+[**RulesRedirectList**](RulesRedirectAPI.md#RulesRedirectList) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
+[**RulesRedirectRead**](RulesRedirectAPI.md#RulesRedirectRead) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+[**RulesRedirectUpdate**](RulesRedirectAPI.md#RulesRedirectUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 
-## ProjectsCreate
+## RulesRedirectCreate
 
-> Project ProjectsCreate(ctx, organization).ProjectRequest(projectRequest).Execute()
+> RuleRedirect RulesRedirectCreate(ctx, organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 
 
@@ -32,17 +32,18 @@ import (
 
 func main() {
 	organization := "organization_example" // string | 
-	projectRequest := *openapiclient.NewProjectRequest("Name_example", "Region_example") // ProjectRequest | 
+	project := "project_example" // string | 
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "RedirectTo_example", "RedirectCode_example") // RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsCreate(context.Background(), organization).ProjectRequest(projectRequest).Execute()
+	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectCreate(context.Background(), organization, project).RuleRedirectRequest(ruleRedirectRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsCreate`: Project
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsCreate`: %v\n", resp)
+	// response from `RulesRedirectCreate`: RuleRedirect
+	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectCreate`: %v\n", resp)
 }
 ```
 
@@ -53,20 +54,22 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
+**project** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiProjectsCreateRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesRedirectCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  | 
+
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
 
 ### Return type
 
-[**Project**](Project.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -82,9 +85,83 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ProjectsDelete
+## RulesRedirectDelete
 
-> Project ProjectsDelete(ctx, organization, project).Execute()
+> RuleRedirect RulesRedirectDelete(ctx, organization, project, rule).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	rule := "rule_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectDelete(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesRedirectDelete`: RuleRedirect
+	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectDelete`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**rule** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesRedirectDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**RuleRedirect**](RuleRedirect.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesRedirectList
+
+> []RuleRedirect RulesRedirectList(ctx, organization, project).Execute()
 
 
 
@@ -106,13 +183,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsDelete(context.Background(), organization, project).Execute()
+	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectList(context.Background(), organization, project).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsDelete`: Project
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsDelete`: %v\n", resp)
+	// response from `RulesRedirectList`: []RuleRedirect
+	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectList`: %v\n", resp)
 }
 ```
 
@@ -127,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiProjectsDeleteRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesRedirectListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -137,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Project**](Project.md)
+[**[]RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -153,77 +230,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ProjectsList
+## RulesRedirectRead
 
-> []Project ProjectsList(ctx, organization).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-	organization := "organization_example" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsList(context.Background(), organization).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ProjectsList`: []Project
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiProjectsListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**[]Project**](Project.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ProjectsRead
-
-> Project ProjectsRead(ctx, organization, project).Execute()
+> RuleRedirect RulesRedirectRead(ctx, organization, project, rule).Execute()
 
 
 
@@ -242,16 +251,17 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsRead(context.Background(), organization, project).Execute()
+	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectRead(context.Background(), organization, project, rule).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsRead`: Project
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsRead`: %v\n", resp)
+	// response from `RulesRedirectRead`: RuleRedirect
+	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectRead`: %v\n", resp)
 }
 ```
 
@@ -263,10 +273,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiProjectsReadRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesRedirectReadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -274,9 +285,10 @@ Name | Type | Description  | Notes
 
 
 
+
 ### Return type
 
-[**Project**](Project.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
@@ -292,9 +304,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ProjectsUpdate
+## RulesRedirectUpdate
 
-> Project ProjectsUpdate(ctx, organization, project).ProjectRequest(projectRequest).Execute()
+> RuleRedirect RulesRedirectUpdate(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 
 
 
@@ -313,17 +325,18 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	projectRequest := *openapiclient.NewProjectRequest("Name_example", "Region_example") // ProjectRequest | 
+	rule := "rule_example" // string | 
+	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "RedirectTo_example", "RedirectCode_example") // RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsUpdate(context.Background(), organization, project).ProjectRequest(projectRequest).Execute()
+	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectUpdate(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsUpdate`: Project
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsUpdate`: %v\n", resp)
+	// response from `RulesRedirectUpdate`: RuleRedirect
+	fmt.Fprintf(os.Stdout, "Response from `RulesRedirectAPI.RulesRedirectUpdate`: %v\n", resp)
 }
 ```
 
@@ -335,21 +348,23 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiProjectsUpdateRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesRedirectUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  | 
+
+ **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
 
 ### Return type
 
-[**Project**](Project.md)
+[**RuleRedirect**](RuleRedirect.md)
 
 ### Authorization
 
