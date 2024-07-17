@@ -193,7 +193,7 @@ paths:
             syntax.
       tags:
       - Projects
-    put:
+    patch:
       operationId: Projects_update
       parameters:
       - explode: false
@@ -214,7 +214,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectRequest'
+              $ref: '#/components/schemas/ProjectRequestUpdate'
         required: true
       responses:
         "200":
@@ -388,7 +388,7 @@ paths:
             syntax.
       tags:
       - Crawlers
-    put:
+    patch:
       operationId: Crawlers_update
       parameters:
       - explode: false
@@ -416,7 +416,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CrawlerRequest'
+              $ref: '#/components/schemas/CrawlerRequestUpdate'
         required: true
       responses:
         "200":
@@ -708,7 +708,7 @@ paths:
             syntax.
       tags:
       - Domains
-    put:
+    patch:
       operationId: Domains_update
       parameters:
       - explode: false
@@ -736,7 +736,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DomainRequest'
+              $ref: '#/components/schemas/DomainRequestUpdate'
         required: true
       responses:
         "200":
@@ -910,7 +910,7 @@ paths:
             syntax.
       tags:
       - Rules__Proxy
-    put:
+    patch:
       operationId: RulesProxy_update
       parameters:
       - explode: false
@@ -938,7 +938,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleProxyRequest'
+              $ref: '#/components/schemas/RuleProxyRequestUpdate'
         required: true
       responses:
         "200":
@@ -1112,7 +1112,7 @@ paths:
             syntax.
       tags:
       - Rules__Redirect
-    put:
+    patch:
       operationId: RulesRedirect_update
       parameters:
       - explode: false
@@ -1140,7 +1140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleRedirectRequest'
+              $ref: '#/components/schemas/RuleRedirectRequestUpdate'
         required: true
       responses:
         "200":
@@ -1254,6 +1254,32 @@ components:
       - headers
       - url_list
       type: object
+    CrawlerRequestUpdate:
+      example:
+        headers:
+          key: headers
+        url_list:
+        - url_list
+        - url_list
+        domain: domain
+        name: name
+        browser_mode: true
+      properties:
+        name:
+          type: string
+        domain:
+          type: string
+        browser_mode:
+          type: boolean
+        url_list:
+          items:
+            type: string
+          type: array
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     Domain:
       example:
         updated_at: updated_at
@@ -1305,6 +1331,16 @@ components:
       required:
       - domain
       - name
+      type: object
+    DomainRequestUpdate:
+      example:
+        domain: domain
+        name: name
+      properties:
+        name:
+          type: string
+        domain:
+          type: string
       type: object
     Error:
       example:
@@ -1446,6 +1482,41 @@ components:
       required:
       - name
       - region
+      type: object
+    ProjectRequestUpdate:
+      example:
+        basic_auth_preview_only: basic_auth_preview_only
+        allow_query_params: true
+        basic_auth_password: basic_auth_password
+        custom_s3_sync_region: custom_s3_sync_region
+        custom_s3_sync_access_key: custom_s3_sync_access_key
+        name: name
+        basic_auth_username: basic_auth_username
+        region: au
+        custom_s3_sync_secret_key: custom_s3_sync_secret_key
+        custom_s3_sync_bucket: custom_s3_sync_bucket
+      properties:
+        name:
+          type: string
+        region:
+          default: au
+          type: string
+        allow_query_params:
+          type: boolean
+        basic_auth_username:
+          type: string
+        basic_auth_password:
+          type: string
+        basic_auth_preview_only:
+          type: string
+        custom_s3_sync_bucket:
+          type: string
+        custom_s3_sync_region:
+          type: string
+        custom_s3_sync_access_key:
+          type: string
+        custom_s3_sync_secret_key:
+          type: string
       type: object
     RuleProxy:
       example:
@@ -2050,6 +2121,255 @@ components:
       - to
       - url
       type: object
+    RuleProxyRequestUpdate:
+      example:
+        country: country_is
+        cache_lifetime: 0
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
+        method_is:
+        - method_is
+        - method_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
+        uuid: uuid
+        notify_config:
+          period: "60"
+          slack_webhook: ""
+          origin_status_codes:
+          - origin_status_codes
+          - origin_status_codes
+        notify: none
+        cookie_name: cookie_name
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        auth_user: auth_user
+        host: host
+        waf_enabled: false
+        auth_pass: auth_pass
+        disabled: false
+        failover_mode: failover_mode
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        failover_origin_ttfb: "2000"
+        ip: ip_is
+        only_with_cookie: false
+        country_is:
+        - country_is
+        - country_is
+        url:
+        - url
+        - url
+        only_proxy_404: true
+        inject_headers:
+          key: inject_headers
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        to: to
+        disable_ssl_verify: true
+        failover_lifetime: "300"
+        waf_config:
+          allow_rules:
+          - allow_rules
+          - allow_rules
+          httpbl:
+            block_harvester: false
+            httpbl_enabled: false
+            api_key: api_key
+            block_spam: false
+            block_search_engine: false
+            block_suspicious: false
+          request_header_ratelimit_mode: disabled
+          ip_ratelimit_cooldown: 5
+          request_header_ratelimit_cooldown: 7
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          mode: block
+          ip_ratelimit_mode: disabled
+          ip_ratelimit_rps: 5
+          waf_ratelimit_rps: 3
+          notify_email:
+          - notify_email
+          - notify_email
+          waf_ratelimit_mode: disabled
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: notify_slack
+          block_lists:
+            referer: false
+            ip: false
+            ai: false
+            user_agent: false
+          waf_ratelimit_cooldown: 2
+          notify_slack_rpm: 4
+          notify_slack_hits_rpm: 1
+          request_header_name: request_header_name
+          thresholds:
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          request_header_ratelimit_rps: 2
+          waf_ratelimit_hits: 9
+          httpbl_enabled:
+            key: true
+          block_ip:
+          - block_ip
+          - block_ip
+          block_referer:
+          - block_referer
+          - block_referer
+          paranoia_level: 6
+        failover_origin_status_codes:
+        - failover_origin_status_codes
+        - failover_origin_status_codes
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          default: false
+          type: boolean
+        cookie_name:
+          type: string
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+        failover_mode:
+          type: string
+        failover_origin_ttfb:
+          default: "2000"
+          type: string
+        failover_origin_status_codes:
+          default:
+          - "200"
+          - "404"
+          - "301"
+          - "302"
+          - "304"
+          items:
+            type: string
+          type: array
+        failover_lifetime:
+          default: "300"
+          type: string
+        notify:
+          default: none
+          enum:
+          - none
+          - slack
+          type: string
+        notify_config:
+          $ref: '#/components/schemas/RuleProxyAction_notify_config'
+        waf_enabled:
+          default: false
+          type: boolean
+        waf_config:
+          $ref: '#/components/schemas/WAFConfigUpdate'
+      type: object
     RuleRedirect:
       example:
         country: country
@@ -2268,6 +2588,110 @@ components:
       - redirect_to
       - url
       type: object
+    RuleRedirectRequestUpdate:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        only_with_cookie: false
+        redirect_code: "301"
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        cookie_name: cookie_name
+        redirect_to: redirect_to
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        only_with_cookie:
+          default: false
+          type: boolean
+        cookie_name:
+          type: string
+        redirect_to:
+          type: string
+        redirect_code:
+          default: "301"
+          type: string
+      type: object
     Threshold:
       example:
         mode: disabled
@@ -2463,6 +2887,170 @@ components:
       required:
       - mode
       type: object
+    WAFConfigUpdate:
+      example:
+        allow_rules:
+        - allow_rules
+        - allow_rules
+        httpbl:
+          block_harvester: false
+          httpbl_enabled: false
+          api_key: api_key
+          block_spam: false
+          block_search_engine: false
+          block_suspicious: false
+        request_header_ratelimit_mode: disabled
+        ip_ratelimit_cooldown: 5
+        request_header_ratelimit_cooldown: 7
+        allow_ip:
+        - allow_ip
+        - allow_ip
+        mode: block
+        ip_ratelimit_mode: disabled
+        ip_ratelimit_rps: 5
+        waf_ratelimit_rps: 3
+        notify_email:
+        - notify_email
+        - notify_email
+        waf_ratelimit_mode: disabled
+        block_ua:
+        - block_ua
+        - block_ua
+        notify_slack: notify_slack
+        block_lists:
+          referer: false
+          ip: false
+          ai: false
+          user_agent: false
+        waf_ratelimit_cooldown: 2
+        notify_slack_rpm: 4
+        notify_slack_hits_rpm: 1
+        request_header_name: request_header_name
+        thresholds:
+        - mode: disabled
+          hits: 5
+          rps: 5
+          minutes: 2
+          cooldown: 1
+          type: type
+          value: value
+          notify_slack: notify_slack
+        - mode: disabled
+          hits: 5
+          rps: 5
+          minutes: 2
+          cooldown: 1
+          type: type
+          value: value
+          notify_slack: notify_slack
+        request_header_ratelimit_rps: 2
+        waf_ratelimit_hits: 9
+        httpbl_enabled:
+          key: true
+        block_ip:
+        - block_ip
+        - block_ip
+        block_referer:
+        - block_referer
+        - block_referer
+        paranoia_level: 6
+      properties:
+        mode:
+          enum:
+          - block
+          - report
+          type: string
+        paranoia_level:
+          default: 1
+          type: integer
+        allow_rules:
+          items:
+            type: string
+          type: array
+        allow_ip:
+          items:
+            type: string
+          type: array
+        block_ip:
+          items:
+            type: string
+          type: array
+        block_ua:
+          items:
+            type: string
+          type: array
+        block_referer:
+          items:
+            type: string
+          type: array
+        block_lists:
+          $ref: '#/components/schemas/WAFConfig_block_lists'
+        httpbl:
+          $ref: '#/components/schemas/WAFConfigUpdate_httpbl'
+        thresholds:
+          items:
+            $ref: '#/components/schemas/Threshold'
+          type: array
+        httpbl_enabled:
+          additionalProperties:
+            type: boolean
+          type: object
+        notify_slack_hits_rpm:
+          type: integer
+        ip_ratelimit_mode:
+          default: disabled
+          enum:
+          - disabled
+          - block
+          - report
+          type: string
+        ip_ratelimit_rps:
+          default: 5
+          type: integer
+        ip_ratelimit_cooldown:
+          default: 30
+          type: integer
+        request_header_ratelimit_mode:
+          default: disabled
+          enum:
+          - disabled
+          - block
+          - report
+          type: string
+        request_header_name:
+          type: string
+        request_header_ratelimit_rps:
+          default: 5
+          type: integer
+        request_header_ratelimit_cooldown:
+          default: 30
+          type: integer
+        waf_ratelimit_mode:
+          default: disabled
+          enum:
+          - disabled
+          - block
+          - report
+          type: string
+        waf_ratelimit_hits:
+          default: 10
+          type: integer
+        waf_ratelimit_rps:
+          default: 5
+          type: integer
+        waf_ratelimit_cooldown:
+          default: 300
+          type: integer
+        notify_email:
+          items:
+            type: string
+          type: array
+        notify_slack:
+          type: string
+        notify_slack_rpm:
+          format: int32
+          type: integer
+      type: object
     Headers_create_request:
       properties:
         headers:
@@ -2552,6 +3140,33 @@ components:
       - block_spam
       - block_suspicious
       - httpbl_enabled
+      type: object
+    WAFConfigUpdate_httpbl:
+      example:
+        block_harvester: false
+        httpbl_enabled: false
+        api_key: api_key
+        block_spam: false
+        block_search_engine: false
+        block_suspicious: false
+      properties:
+        httpbl_enabled:
+          default: false
+          type: boolean
+        api_key:
+          type: string
+        block_suspicious:
+          default: false
+          type: boolean
+        block_harvester:
+          default: false
+          type: boolean
+        block_spam:
+          default: false
+          type: boolean
+        block_search_engine:
+          default: false
+          type: boolean
       type: object
   securitySchemes:
     BearerAuth:

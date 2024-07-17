@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**RulesRedirectDelete**](RulesRedirectAPI.md#RulesRedirectDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 [**RulesRedirectList**](RulesRedirectAPI.md#RulesRedirectList) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
 [**RulesRedirectRead**](RulesRedirectAPI.md#RulesRedirectRead) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-[**RulesRedirectUpdate**](RulesRedirectAPI.md#RulesRedirectUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+[**RulesRedirectUpdate**](RulesRedirectAPI.md#RulesRedirectUpdate) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesRedirectUpdate
 
-> RuleRedirect RulesRedirectUpdate(ctx, organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+> RuleRedirect RulesRedirectUpdate(ctx, organization, project, rule).RuleRedirectRequestUpdate(ruleRedirectRequestUpdate).Execute()
 
 
 
@@ -326,11 +326,11 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleRedirectRequest := *openapiclient.NewRuleRedirectRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "RedirectTo_example", "RedirectCode_example") // RuleRedirectRequest | 
+	ruleRedirectRequestUpdate := *openapiclient.NewRuleRedirectRequestUpdate() // RuleRedirectRequestUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectUpdate(context.Background(), organization, project, rule).RuleRedirectRequest(ruleRedirectRequest).Execute()
+	resp, r, err := apiClient.RulesRedirectAPI.RulesRedirectUpdate(context.Background(), organization, project, rule).RuleRedirectRequestUpdate(ruleRedirectRequestUpdate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesRedirectAPI.RulesRedirectUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleRedirectRequest** | [**RuleRedirectRequest**](RuleRedirectRequest.md) |  | 
+ **ruleRedirectRequestUpdate** | [**RuleRedirectRequestUpdate**](RuleRedirectRequestUpdate.md) |  | 
 
 ### Return type
 

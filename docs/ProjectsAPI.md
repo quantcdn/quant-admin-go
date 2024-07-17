@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**ProjectsDelete**](ProjectsAPI.md#ProjectsDelete) | **Delete** /organizations/{organization}/projects/{project} | 
 [**ProjectsList**](ProjectsAPI.md#ProjectsList) | **Get** /organizations/{organization}/projects | 
 [**ProjectsRead**](ProjectsAPI.md#ProjectsRead) | **Get** /organizations/{organization}/projects/{project} | 
-[**ProjectsUpdate**](ProjectsAPI.md#ProjectsUpdate) | **Put** /organizations/{organization}/projects/{project} | 
+[**ProjectsUpdate**](ProjectsAPI.md#ProjectsUpdate) | **Patch** /organizations/{organization}/projects/{project} | 
 
 
 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## ProjectsUpdate
 
-> Project ProjectsUpdate(ctx, organization, project).ProjectRequest(projectRequest).Execute()
+> Project ProjectsUpdate(ctx, organization, project).ProjectRequestUpdate(projectRequestUpdate).Execute()
 
 
 
@@ -313,11 +313,11 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	projectRequest := *openapiclient.NewProjectRequest("Name_example", "Region_example") // ProjectRequest | 
+	projectRequestUpdate := *openapiclient.NewProjectRequestUpdate() // ProjectRequestUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsUpdate(context.Background(), organization, project).ProjectRequest(projectRequest).Execute()
+	resp, r, err := apiClient.ProjectsAPI.ProjectsUpdate(context.Background(), organization, project).ProjectRequestUpdate(projectRequestUpdate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  | 
+ **projectRequestUpdate** | [**ProjectRequestUpdate**](ProjectRequestUpdate.md) |  | 
 
 ### Return type
 

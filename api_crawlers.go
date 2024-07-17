@@ -508,11 +508,11 @@ type ApiCrawlersUpdateRequest struct {
 	organization string
 	project string
 	crawler string
-	crawlerRequest *CrawlerRequest
+	crawlerRequestUpdate *CrawlerRequestUpdate
 }
 
-func (r ApiCrawlersUpdateRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiCrawlersUpdateRequest {
-	r.crawlerRequest = &crawlerRequest
+func (r ApiCrawlersUpdateRequest) CrawlerRequestUpdate(crawlerRequestUpdate CrawlerRequestUpdate) ApiCrawlersUpdateRequest {
+	r.crawlerRequestUpdate = &crawlerRequestUpdate
 	return r
 }
 
@@ -543,7 +543,7 @@ func (a *CrawlersAPIService) CrawlersUpdate(ctx context.Context, organization st
 //  @return Crawler
 func (a *CrawlersAPIService) CrawlersUpdateExecute(r ApiCrawlersUpdateRequest) (*Crawler, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *Crawler
@@ -562,8 +562,8 @@ func (a *CrawlersAPIService) CrawlersUpdateExecute(r ApiCrawlersUpdateRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.crawlerRequest == nil {
-		return localVarReturnValue, nil, reportError("crawlerRequest is required and must be specified")
+	if r.crawlerRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("crawlerRequestUpdate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -584,7 +584,7 @@ func (a *CrawlersAPIService) CrawlersUpdateExecute(r ApiCrawlersUpdateRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.crawlerRequest
+	localVarPostBody = r.crawlerRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

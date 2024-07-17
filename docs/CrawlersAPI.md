@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**CrawlersDelete**](CrawlersAPI.md#CrawlersDelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 [**CrawlersList**](CrawlersAPI.md#CrawlersList) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
 [**CrawlersRead**](CrawlersAPI.md#CrawlersRead) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-[**CrawlersUpdate**](CrawlersAPI.md#CrawlersUpdate) | **Put** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
+[**CrawlersUpdate**](CrawlersAPI.md#CrawlersUpdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 
 
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## CrawlersUpdate
 
-> Crawler CrawlersUpdate(ctx, organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
+> Crawler CrawlersUpdate(ctx, organization, project, crawler).CrawlerRequestUpdate(crawlerRequestUpdate).Execute()
 
 
 
@@ -326,11 +326,11 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	crawler := "crawler_example" // string | 
-	crawlerRequest := *openapiclient.NewCrawlerRequest("Domain_example", []string{"UrlList_example"}, map[string]string{"key": "Inner_example"}) // CrawlerRequest | 
+	crawlerRequestUpdate := *openapiclient.NewCrawlerRequestUpdate() // CrawlerRequestUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.CrawlersUpdate(context.Background(), organization, project, crawler).CrawlerRequest(crawlerRequest).Execute()
+	resp, r, err := apiClient.CrawlersAPI.CrawlersUpdate(context.Background(), organization, project, crawler).CrawlerRequestUpdate(crawlerRequestUpdate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 
 
- **crawlerRequest** | [**CrawlerRequest**](CrawlerRequest.md) |  | 
+ **crawlerRequestUpdate** | [**CrawlerRequestUpdate**](CrawlerRequestUpdate.md) |  | 
 
 ### Return type
 

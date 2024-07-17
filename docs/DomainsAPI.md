@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DomainsDelete**](DomainsAPI.md#DomainsDelete) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
 [**DomainsList**](DomainsAPI.md#DomainsList) | **Get** /organizations/{organization}/projects/{project}/domains | 
 [**DomainsRead**](DomainsAPI.md#DomainsRead) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
-[**DomainsUpdate**](DomainsAPI.md#DomainsUpdate) | **Put** /organizations/{organization}/projects/{project}/domains/{domain} | 
+[**DomainsUpdate**](DomainsAPI.md#DomainsUpdate) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} | 
 
 
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## DomainsUpdate
 
-> Domain DomainsUpdate(ctx, organization, project, domain).DomainRequest(domainRequest).Execute()
+> Domain DomainsUpdate(ctx, organization, project, domain).DomainRequestUpdate(domainRequestUpdate).Execute()
 
 
 
@@ -326,11 +326,11 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	domain := "domain_example" // string | 
-	domainRequest := *openapiclient.NewDomainRequest("Name_example", "Domain_example") // DomainRequest | 
+	domainRequestUpdate := *openapiclient.NewDomainRequestUpdate() // DomainRequestUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.DomainsUpdate(context.Background(), organization, project, domain).DomainRequest(domainRequest).Execute()
+	resp, r, err := apiClient.DomainsAPI.DomainsUpdate(context.Background(), organization, project, domain).DomainRequestUpdate(domainRequestUpdate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
+ **domainRequestUpdate** | [**DomainRequestUpdate**](DomainRequestUpdate.md) |  | 
 
 ### Return type
 

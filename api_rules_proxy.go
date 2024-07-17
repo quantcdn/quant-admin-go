@@ -508,11 +508,11 @@ type ApiRulesProxyUpdateRequest struct {
 	organization string
 	project string
 	rule string
-	ruleProxyRequest *RuleProxyRequest
+	ruleProxyRequestUpdate *RuleProxyRequestUpdate
 }
 
-func (r ApiRulesProxyUpdateRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiRulesProxyUpdateRequest {
-	r.ruleProxyRequest = &ruleProxyRequest
+func (r ApiRulesProxyUpdateRequest) RuleProxyRequestUpdate(ruleProxyRequestUpdate RuleProxyRequestUpdate) ApiRulesProxyUpdateRequest {
+	r.ruleProxyRequestUpdate = &ruleProxyRequestUpdate
 	return r
 }
 
@@ -543,7 +543,7 @@ func (a *RulesProxyAPIService) RulesProxyUpdate(ctx context.Context, organizatio
 //  @return RuleProxy
 func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r ApiRulesProxyUpdateRequest) (*RuleProxy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *RuleProxy
@@ -562,8 +562,8 @@ func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r ApiRulesProxyUpdateRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ruleProxyRequest == nil {
-		return localVarReturnValue, nil, reportError("ruleProxyRequest is required and must be specified")
+	if r.ruleProxyRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("ruleProxyRequestUpdate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -584,7 +584,7 @@ func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r ApiRulesProxyUpdateRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ruleProxyRequest
+	localVarPostBody = r.ruleProxyRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

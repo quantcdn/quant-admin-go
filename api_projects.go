@@ -491,11 +491,11 @@ type ApiProjectsUpdateRequest struct {
 	ApiService *ProjectsAPIService
 	organization string
 	project string
-	projectRequest *ProjectRequest
+	projectRequestUpdate *ProjectRequestUpdate
 }
 
-func (r ApiProjectsUpdateRequest) ProjectRequest(projectRequest ProjectRequest) ApiProjectsUpdateRequest {
-	r.projectRequest = &projectRequest
+func (r ApiProjectsUpdateRequest) ProjectRequestUpdate(projectRequestUpdate ProjectRequestUpdate) ApiProjectsUpdateRequest {
+	r.projectRequestUpdate = &projectRequestUpdate
 	return r
 }
 
@@ -524,7 +524,7 @@ func (a *ProjectsAPIService) ProjectsUpdate(ctx context.Context, organization st
 //  @return Project
 func (a *ProjectsAPIService) ProjectsUpdateExecute(r ApiProjectsUpdateRequest) (*Project, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *Project
@@ -542,8 +542,8 @@ func (a *ProjectsAPIService) ProjectsUpdateExecute(r ApiProjectsUpdateRequest) (
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.projectRequest == nil {
-		return localVarReturnValue, nil, reportError("projectRequest is required and must be specified")
+	if r.projectRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("projectRequestUpdate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -564,7 +564,7 @@ func (a *ProjectsAPIService) ProjectsUpdateExecute(r ApiProjectsUpdateRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.projectRequest
+	localVarPostBody = r.projectRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

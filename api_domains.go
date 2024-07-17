@@ -508,11 +508,11 @@ type ApiDomainsUpdateRequest struct {
 	organization string
 	project string
 	domain string
-	domainRequest *DomainRequest
+	domainRequestUpdate *DomainRequestUpdate
 }
 
-func (r ApiDomainsUpdateRequest) DomainRequest(domainRequest DomainRequest) ApiDomainsUpdateRequest {
-	r.domainRequest = &domainRequest
+func (r ApiDomainsUpdateRequest) DomainRequestUpdate(domainRequestUpdate DomainRequestUpdate) ApiDomainsUpdateRequest {
+	r.domainRequestUpdate = &domainRequestUpdate
 	return r
 }
 
@@ -543,7 +543,7 @@ func (a *DomainsAPIService) DomainsUpdate(ctx context.Context, organization stri
 //  @return Domain
 func (a *DomainsAPIService) DomainsUpdateExecute(r ApiDomainsUpdateRequest) (*Domain, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *Domain
@@ -562,8 +562,8 @@ func (a *DomainsAPIService) DomainsUpdateExecute(r ApiDomainsUpdateRequest) (*Do
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.domainRequest == nil {
-		return localVarReturnValue, nil, reportError("domainRequest is required and must be specified")
+	if r.domainRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("domainRequestUpdate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -584,7 +584,7 @@ func (a *DomainsAPIService) DomainsUpdateExecute(r ApiDomainsUpdateRequest) (*Do
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domainRequest
+	localVarPostBody = r.domainRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

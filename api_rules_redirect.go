@@ -508,11 +508,11 @@ type ApiRulesRedirectUpdateRequest struct {
 	organization string
 	project string
 	rule string
-	ruleRedirectRequest *RuleRedirectRequest
+	ruleRedirectRequestUpdate *RuleRedirectRequestUpdate
 }
 
-func (r ApiRulesRedirectUpdateRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiRulesRedirectUpdateRequest {
-	r.ruleRedirectRequest = &ruleRedirectRequest
+func (r ApiRulesRedirectUpdateRequest) RuleRedirectRequestUpdate(ruleRedirectRequestUpdate RuleRedirectRequestUpdate) ApiRulesRedirectUpdateRequest {
+	r.ruleRedirectRequestUpdate = &ruleRedirectRequestUpdate
 	return r
 }
 
@@ -543,7 +543,7 @@ func (a *RulesRedirectAPIService) RulesRedirectUpdate(ctx context.Context, organ
 //  @return RuleRedirect
 func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r ApiRulesRedirectUpdateRequest) (*RuleRedirect, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *RuleRedirect
@@ -562,8 +562,8 @@ func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r ApiRulesRedirectU
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ruleRedirectRequest == nil {
-		return localVarReturnValue, nil, reportError("ruleRedirectRequest is required and must be specified")
+	if r.ruleRedirectRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("ruleRedirectRequestUpdate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -584,7 +584,7 @@ func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r ApiRulesRedirectU
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ruleRedirectRequest
+	localVarPostBody = r.ruleRedirectRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

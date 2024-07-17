@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**RulesProxyDelete**](RulesProxyAPI.md#RulesProxyDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 [**RulesProxyList**](RulesProxyAPI.md#RulesProxyList) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
 [**RulesProxyRead**](RulesProxyAPI.md#RulesProxyRead) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
-[**RulesProxyUpdate**](RulesProxyAPI.md#RulesProxyUpdate) | **Put** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+[**RulesProxyUpdate**](RulesProxyAPI.md#RulesProxyUpdate) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 
 
 
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## RulesProxyUpdate
 
-> RuleProxy RulesProxyUpdate(ctx, organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+> RuleProxy RulesProxyUpdate(ctx, organization, project, rule).RuleProxyRequestUpdate(ruleProxyRequestUpdate).Execute()
 
 
 
@@ -326,11 +326,11 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
+	ruleProxyRequestUpdate := *openapiclient.NewRuleProxyRequestUpdate() // RuleProxyRequestUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RulesProxyAPI.RulesProxyUpdate(context.Background(), organization, project, rule).RuleProxyRequest(ruleProxyRequest).Execute()
+	resp, r, err := apiClient.RulesProxyAPI.RulesProxyUpdate(context.Background(), organization, project, rule).RuleProxyRequestUpdate(ruleProxyRequestUpdate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,7 +360,7 @@ Name | Type | Description  | Notes
 
 
 
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
+ **ruleProxyRequestUpdate** | [**RuleProxyRequestUpdate**](RuleProxyRequestUpdate.md) |  | 
 
 ### Return type
 

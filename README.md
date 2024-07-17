@@ -82,12 +82,12 @@ Class | Method | HTTP request | Description
 *CrawlersAPI* | [**CrawlersDelete**](docs/CrawlersAPI.md#crawlersdelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 *CrawlersAPI* | [**CrawlersList**](docs/CrawlersAPI.md#crawlerslist) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
 *CrawlersAPI* | [**CrawlersRead**](docs/CrawlersAPI.md#crawlersread) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
-*CrawlersAPI* | [**CrawlersUpdate**](docs/CrawlersAPI.md#crawlersupdate) | **Put** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
+*CrawlersAPI* | [**CrawlersUpdate**](docs/CrawlersAPI.md#crawlersupdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 *DomainsAPI* | [**DomainsCreate**](docs/DomainsAPI.md#domainscreate) | **Post** /organizations/{organization}/projects/{project}/domains | 
 *DomainsAPI* | [**DomainsDelete**](docs/DomainsAPI.md#domainsdelete) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
 *DomainsAPI* | [**DomainsList**](docs/DomainsAPI.md#domainslist) | **Get** /organizations/{organization}/projects/{project}/domains | 
 *DomainsAPI* | [**DomainsRead**](docs/DomainsAPI.md#domainsread) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
-*DomainsAPI* | [**DomainsUpdate**](docs/DomainsAPI.md#domainsupdate) | **Put** /organizations/{organization}/projects/{project}/domains/{domain} | 
+*DomainsAPI* | [**DomainsUpdate**](docs/DomainsAPI.md#domainsupdate) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} | 
 *HeadersAPI* | [**HeadersCreate**](docs/HeadersAPI.md#headerscreate) | **Post** /organizations/{organization}/projects/{project}/custom-headers | 
 *HeadersAPI* | [**HeadersDelete**](docs/HeadersAPI.md#headersdelete) | **Delete** /organizations/{organization}/projects/{project}/custom-headers | 
 *HeadersAPI* | [**HeadersList**](docs/HeadersAPI.md#headerslist) | **Get** /organizations/{organization}/projects/{project}/custom-headers | 
@@ -97,42 +97,49 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsDelete**](docs/ProjectsAPI.md#projectsdelete) | **Delete** /organizations/{organization}/projects/{project} | 
 *ProjectsAPI* | [**ProjectsList**](docs/ProjectsAPI.md#projectslist) | **Get** /organizations/{organization}/projects | 
 *ProjectsAPI* | [**ProjectsRead**](docs/ProjectsAPI.md#projectsread) | **Get** /organizations/{organization}/projects/{project} | 
-*ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Put** /organizations/{organization}/projects/{project} | 
+*ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Patch** /organizations/{organization}/projects/{project} | 
 *RulesProxyAPI* | [**RulesProxyCreate**](docs/RulesProxyAPI.md#rulesproxycreate) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyDelete**](docs/RulesProxyAPI.md#rulesproxydelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyList**](docs/RulesProxyAPI.md#rulesproxylist) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyRead**](docs/RulesProxyAPI.md#rulesproxyread) | **Get** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
-*RulesProxyAPI* | [**RulesProxyUpdate**](docs/RulesProxyAPI.md#rulesproxyupdate) | **Put** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
+*RulesProxyAPI* | [**RulesProxyUpdate**](docs/RulesProxyAPI.md#rulesproxyupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesRedirectAPI* | [**RulesRedirectCreate**](docs/RulesRedirectAPI.md#rulesredirectcreate) | **Post** /organizations/{organization}/projects/{project}/rules/redirect | 
 *RulesRedirectAPI* | [**RulesRedirectDelete**](docs/RulesRedirectAPI.md#rulesredirectdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 *RulesRedirectAPI* | [**RulesRedirectList**](docs/RulesRedirectAPI.md#rulesredirectlist) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
 *RulesRedirectAPI* | [**RulesRedirectRead**](docs/RulesRedirectAPI.md#rulesredirectread) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-*RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Put** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+*RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 
 
 ## Documentation For Models
 
  - [Crawler](docs/Crawler.md)
  - [CrawlerRequest](docs/CrawlerRequest.md)
+ - [CrawlerRequestUpdate](docs/CrawlerRequestUpdate.md)
  - [Domain](docs/Domain.md)
  - [DomainRequest](docs/DomainRequest.md)
+ - [DomainRequestUpdate](docs/DomainRequestUpdate.md)
  - [Error](docs/Error.md)
  - [HeadersCreateRequest](docs/HeadersCreateRequest.md)
  - [HeadersDeleteRequest](docs/HeadersDeleteRequest.md)
  - [Organization](docs/Organization.md)
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
+ - [ProjectRequestUpdate](docs/ProjectRequestUpdate.md)
  - [RuleProxy](docs/RuleProxy.md)
  - [RuleProxyAction](docs/RuleProxyAction.md)
  - [RuleProxyActionNotifyConfig](docs/RuleProxyActionNotifyConfig.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
+ - [RuleProxyRequestUpdate](docs/RuleProxyRequestUpdate.md)
  - [RuleRedirect](docs/RuleRedirect.md)
  - [RuleRedirectAction](docs/RuleRedirectAction.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
+ - [RuleRedirectRequestUpdate](docs/RuleRedirectRequestUpdate.md)
  - [Threshold](docs/Threshold.md)
  - [WAFConfig](docs/WAFConfig.md)
  - [WAFConfigBlockLists](docs/WAFConfigBlockLists.md)
  - [WAFConfigHttpbl](docs/WAFConfigHttpbl.md)
+ - [WAFConfigUpdate](docs/WAFConfigUpdate.md)
+ - [WAFConfigUpdateHttpbl](docs/WAFConfigUpdateHttpbl.md)
 
 
 ## Documentation For Authorization
