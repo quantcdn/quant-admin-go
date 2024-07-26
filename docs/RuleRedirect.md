@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
+**RuleId** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **[]string** |  | [optional] 
 **Domain** | Pointer to **[]string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
@@ -85,6 +86,31 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
+
+### GetRuleId
+
+`func (o *RuleRedirect) GetRuleId() string`
+
+GetRuleId returns the RuleId field if non-nil, zero value otherwise.
+
+### GetRuleIdOk
+
+`func (o *RuleRedirect) GetRuleIdOk() (*string, bool)`
+
+GetRuleIdOk returns a tuple with the RuleId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRuleId
+
+`func (o *RuleRedirect) SetRuleId(v string)`
+
+SetRuleId sets RuleId field to given value.
+
+### HasRuleId
+
+`func (o *RuleRedirect) HasRuleId() bool`
+
+HasRuleId returns a boolean if a field has been set.
 
 ### GetUrl
 

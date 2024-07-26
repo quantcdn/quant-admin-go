@@ -36,6 +36,8 @@ Name | Type | Description | Notes
 **FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
 **NotifyConfig** | Pointer to [**RuleProxyActionNotifyConfig**](RuleProxyActionNotifyConfig.md) |  | [optional] 
+**StaticErrorPage** | Pointer to **string** |  | [optional] [default to ""]
+**StaticErrorPageStatusCodes** | Pointer to **[]string** |  | [optional] 
 **WafEnabled** | Pointer to **bool** |  | [optional] [default to false]
 **WafConfig** | Pointer to [**WAFConfig**](WAFConfig.md) |  | [optional] 
 
@@ -837,6 +839,56 @@ SetNotifyConfig sets NotifyConfig field to given value.
 `func (o *RuleProxyRequest) HasNotifyConfig() bool`
 
 HasNotifyConfig returns a boolean if a field has been set.
+
+### GetStaticErrorPage
+
+`func (o *RuleProxyRequest) GetStaticErrorPage() string`
+
+GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageOk
+
+`func (o *RuleProxyRequest) GetStaticErrorPageOk() (*string, bool)`
+
+GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPage
+
+`func (o *RuleProxyRequest) SetStaticErrorPage(v string)`
+
+SetStaticErrorPage sets StaticErrorPage field to given value.
+
+### HasStaticErrorPage
+
+`func (o *RuleProxyRequest) HasStaticErrorPage() bool`
+
+HasStaticErrorPage returns a boolean if a field has been set.
+
+### GetStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequest) GetStaticErrorPageStatusCodes() []string`
+
+GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageStatusCodesOk
+
+`func (o *RuleProxyRequest) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
+
+GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string)`
+
+SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
+
+### HasStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequest) HasStaticErrorPageStatusCodes() bool`
+
+HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
 
 ### GetWafEnabled
 

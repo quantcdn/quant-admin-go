@@ -1540,6 +1540,7 @@ components:
         url:
         - url
         - url
+        rule_id: rule_id
         country_is_not:
         - country_is_not
         - country_is_not
@@ -1655,6 +1656,8 @@ components:
         name:
           type: string
         uuid:
+          type: string
+        rule_id:
           type: string
         url:
           items:
@@ -1880,6 +1883,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        static_error_page: ""
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
@@ -1900,6 +1904,9 @@ components:
         waf_enabled: false
         auth_pass: auth_pass
         disabled: false
+        static_error_page_status_codes:
+        - static_error_page_status_codes
+        - static_error_page_status_codes
         failover_mode: failover_mode
         method: method_is
         ip_is_not:
@@ -2110,6 +2117,13 @@ components:
           type: string
         notify_config:
           $ref: '#/components/schemas/RuleProxyAction_notify_config'
+        static_error_page:
+          default: ""
+          type: string
+        static_error_page_status_codes:
+          items:
+            type: string
+          type: array
         waf_enabled:
           default: false
           type: boolean
@@ -2134,6 +2148,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        static_error_page: ""
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
@@ -2154,6 +2169,9 @@ components:
         waf_enabled: false
         auth_pass: auth_pass
         disabled: false
+        static_error_page_status_codes:
+        - static_error_page_status_codes
+        - static_error_page_status_codes
         failover_mode: failover_mode
         method: method_is
         ip_is_not:
@@ -2364,6 +2382,13 @@ components:
           type: string
         notify_config:
           $ref: '#/components/schemas/RuleProxyAction_notify_config'
+        static_error_page:
+          default: ""
+          type: string
+        static_error_page_status_codes:
+          items:
+            type: string
+          type: array
         waf_enabled:
           default: false
           type: boolean
@@ -2392,6 +2417,7 @@ components:
         url:
         - url
         - url
+        rule_id: rule_id
         country_is_not:
         - country_is_not
         - country_is_not
@@ -2411,6 +2437,8 @@ components:
         name:
           type: string
         uuid:
+          type: string
+        rule_id:
           type: string
         url:
           items:

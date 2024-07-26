@@ -53,6 +53,8 @@ type RuleProxyRequest struct {
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *RuleProxyActionNotifyConfig `json:"notify_config,omitempty"`
+	StaticErrorPage *string `json:"static_error_page,omitempty"`
+	StaticErrorPageStatusCodes []string `json:"static_error_page_status_codes,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
 	WafConfig *WAFConfig `json:"waf_config,omitempty"`
 }
@@ -77,6 +79,8 @@ func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string
 	this.FailoverLifetime = &failoverLifetime
 	var notify string = "none"
 	this.Notify = &notify
+	var staticErrorPage string = ""
+	this.StaticErrorPage = &staticErrorPage
 	var wafEnabled bool = false
 	this.WafEnabled = &wafEnabled
 	return &this
@@ -97,6 +101,8 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	this.FailoverLifetime = &failoverLifetime
 	var notify string = "none"
 	this.Notify = &notify
+	var staticErrorPage string = ""
+	this.StaticErrorPage = &staticErrorPage
 	var wafEnabled bool = false
 	this.WafEnabled = &wafEnabled
 	return &this
@@ -1094,6 +1100,70 @@ func (o *RuleProxyRequest) SetNotifyConfig(v RuleProxyActionNotifyConfig) {
 	o.NotifyConfig = &v
 }
 
+// GetStaticErrorPage returns the StaticErrorPage field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetStaticErrorPage() string {
+	if o == nil || IsNil(o.StaticErrorPage) {
+		var ret string
+		return ret
+	}
+	return *o.StaticErrorPage
+}
+
+// GetStaticErrorPageOk returns a tuple with the StaticErrorPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetStaticErrorPageOk() (*string, bool) {
+	if o == nil || IsNil(o.StaticErrorPage) {
+		return nil, false
+	}
+	return o.StaticErrorPage, true
+}
+
+// HasStaticErrorPage returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasStaticErrorPage() bool {
+	if o != nil && !IsNil(o.StaticErrorPage) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPage gets a reference to the given string and assigns it to the StaticErrorPage field.
+func (o *RuleProxyRequest) SetStaticErrorPage(v string) {
+	o.StaticErrorPage = &v
+}
+
+// GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetStaticErrorPageStatusCodes() []string {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.StaticErrorPageStatusCodes
+}
+
+// GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetStaticErrorPageStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		return nil, false
+	}
+	return o.StaticErrorPageStatusCodes, true
+}
+
+// HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasStaticErrorPageStatusCodes() bool {
+	if o != nil && !IsNil(o.StaticErrorPageStatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPageStatusCodes gets a reference to the given []string and assigns it to the StaticErrorPageStatusCodes field.
+func (o *RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string) {
+	o.StaticErrorPageStatusCodes = v
+}
+
 // GetWafEnabled returns the WafEnabled field value if set, zero value otherwise.
 func (o *RuleProxyRequest) GetWafEnabled() bool {
 	if o == nil || IsNil(o.WafEnabled) {
@@ -1255,6 +1325,12 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NotifyConfig) {
 		toSerialize["notify_config"] = o.NotifyConfig
+	}
+	if !IsNil(o.StaticErrorPage) {
+		toSerialize["static_error_page"] = o.StaticErrorPage
+	}
+	if !IsNil(o.StaticErrorPageStatusCodes) {
+		toSerialize["static_error_page_status_codes"] = o.StaticErrorPageStatusCodes
 	}
 	if !IsNil(o.WafEnabled) {
 		toSerialize["waf_enabled"] = o.WafEnabled

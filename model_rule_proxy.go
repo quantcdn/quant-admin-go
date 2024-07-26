@@ -23,6 +23,7 @@ var _ MappedNullable = &RuleProxy{}
 type RuleProxy struct {
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
+	RuleId *string `json:"rule_id,omitempty"`
 	Url []string `json:"url,omitempty"`
 	Domain []string `json:"domain,omitempty"`
 	Disabled bool `json:"disabled"`
@@ -119,6 +120,38 @@ func (o *RuleProxy) GetUuidOk() (*string, bool) {
 // SetUuid sets field value
 func (o *RuleProxy) SetUuid(v string) {
 	o.Uuid = v
+}
+
+// GetRuleId returns the RuleId field value if set, zero value otherwise.
+func (o *RuleProxy) GetRuleId() string {
+	if o == nil || IsNil(o.RuleId) {
+		var ret string
+		return ret
+	}
+	return *o.RuleId
+}
+
+// GetRuleIdOk returns a tuple with the RuleId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxy) GetRuleIdOk() (*string, bool) {
+	if o == nil || IsNil(o.RuleId) {
+		return nil, false
+	}
+	return o.RuleId, true
+}
+
+// HasRuleId returns a boolean if a field has been set.
+func (o *RuleProxy) HasRuleId() bool {
+	if o != nil && !IsNil(o.RuleId) {
+		return true
+	}
+
+	return false
+}
+
+// SetRuleId gets a reference to the given string and assigns it to the RuleId field.
+func (o *RuleProxy) SetRuleId(v string) {
+	o.RuleId = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -591,6 +624,9 @@ func (o RuleProxy) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["uuid"] = o.Uuid
+	if !IsNil(o.RuleId) {
+		toSerialize["rule_id"] = o.RuleId
+	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
