@@ -20,23 +20,99 @@ import (
 )
 
 
+type RulesProxyAPI interface {
+
+	/*
+	RulesProxyCreate Method for RulesProxyCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return RulesProxyAPIRulesProxyCreateRequest
+	*/
+	RulesProxyCreate(ctx context.Context, organization string, project string) RulesProxyAPIRulesProxyCreateRequest
+
+	// RulesProxyCreateExecute executes the request
+	//  @return RuleProxy
+	RulesProxyCreateExecute(r RulesProxyAPIRulesProxyCreateRequest) (*RuleProxy, *http.Response, error)
+
+	/*
+	RulesProxyDelete Method for RulesProxyDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesProxyAPIRulesProxyDeleteRequest
+	*/
+	RulesProxyDelete(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyDeleteRequest
+
+	// RulesProxyDeleteExecute executes the request
+	//  @return RuleProxy
+	RulesProxyDeleteExecute(r RulesProxyAPIRulesProxyDeleteRequest) (*RuleProxy, *http.Response, error)
+
+	/*
+	RulesProxyList Method for RulesProxyList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return RulesProxyAPIRulesProxyListRequest
+	*/
+	RulesProxyList(ctx context.Context, organization string, project string) RulesProxyAPIRulesProxyListRequest
+
+	// RulesProxyListExecute executes the request
+	//  @return []RuleProxy
+	RulesProxyListExecute(r RulesProxyAPIRulesProxyListRequest) ([]RuleProxy, *http.Response, error)
+
+	/*
+	RulesProxyRead Method for RulesProxyRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesProxyAPIRulesProxyReadRequest
+	*/
+	RulesProxyRead(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyReadRequest
+
+	// RulesProxyReadExecute executes the request
+	//  @return RuleProxy
+	RulesProxyReadExecute(r RulesProxyAPIRulesProxyReadRequest) (*RuleProxy, *http.Response, error)
+
+	/*
+	RulesProxyUpdate Method for RulesProxyUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesProxyAPIRulesProxyUpdateRequest
+	*/
+	RulesProxyUpdate(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyUpdateRequest
+
+	// RulesProxyUpdateExecute executes the request
+	//  @return RuleProxy
+	RulesProxyUpdateExecute(r RulesProxyAPIRulesProxyUpdateRequest) (*RuleProxy, *http.Response, error)
+}
+
 // RulesProxyAPIService RulesProxyAPI service
 type RulesProxyAPIService service
 
-type ApiRulesProxyCreateRequest struct {
+type RulesProxyAPIRulesProxyCreateRequest struct {
 	ctx context.Context
-	ApiService *RulesProxyAPIService
+	ApiService RulesProxyAPI
 	organization string
 	project string
 	ruleProxyRequest *RuleProxyRequest
 }
 
-func (r ApiRulesProxyCreateRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) ApiRulesProxyCreateRequest {
+func (r RulesProxyAPIRulesProxyCreateRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) RulesProxyAPIRulesProxyCreateRequest {
 	r.ruleProxyRequest = &ruleProxyRequest
 	return r
 }
 
-func (r ApiRulesProxyCreateRequest) Execute() (*RuleProxy, *http.Response, error) {
+func (r RulesProxyAPIRulesProxyCreateRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyCreateExecute(r)
 }
 
@@ -46,10 +122,10 @@ RulesProxyCreate Method for RulesProxyCreate
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiRulesProxyCreateRequest
+ @return RulesProxyAPIRulesProxyCreateRequest
 */
-func (a *RulesProxyAPIService) RulesProxyCreate(ctx context.Context, organization string, project string) ApiRulesProxyCreateRequest {
-	return ApiRulesProxyCreateRequest{
+func (a *RulesProxyAPIService) RulesProxyCreate(ctx context.Context, organization string, project string) RulesProxyAPIRulesProxyCreateRequest {
+	return RulesProxyAPIRulesProxyCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -59,7 +135,7 @@ func (a *RulesProxyAPIService) RulesProxyCreate(ctx context.Context, organizatio
 
 // Execute executes the request
 //  @return RuleProxy
-func (a *RulesProxyAPIService) RulesProxyCreateExecute(r ApiRulesProxyCreateRequest) (*RuleProxy, *http.Response, error) {
+func (a *RulesProxyAPIService) RulesProxyCreateExecute(r RulesProxyAPIRulesProxyCreateRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -149,15 +225,15 @@ func (a *RulesProxyAPIService) RulesProxyCreateExecute(r ApiRulesProxyCreateRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesProxyDeleteRequest struct {
+type RulesProxyAPIRulesProxyDeleteRequest struct {
 	ctx context.Context
-	ApiService *RulesProxyAPIService
+	ApiService RulesProxyAPI
 	organization string
 	project string
 	rule string
 }
 
-func (r ApiRulesProxyDeleteRequest) Execute() (*RuleProxy, *http.Response, error) {
+func (r RulesProxyAPIRulesProxyDeleteRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyDeleteExecute(r)
 }
 
@@ -168,10 +244,10 @@ RulesProxyDelete Method for RulesProxyDelete
  @param organization
  @param project
  @param rule
- @return ApiRulesProxyDeleteRequest
+ @return RulesProxyAPIRulesProxyDeleteRequest
 */
-func (a *RulesProxyAPIService) RulesProxyDelete(ctx context.Context, organization string, project string, rule string) ApiRulesProxyDeleteRequest {
-	return ApiRulesProxyDeleteRequest{
+func (a *RulesProxyAPIService) RulesProxyDelete(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyDeleteRequest {
+	return RulesProxyAPIRulesProxyDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -182,7 +258,7 @@ func (a *RulesProxyAPIService) RulesProxyDelete(ctx context.Context, organizatio
 
 // Execute executes the request
 //  @return RuleProxy
-func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r ApiRulesProxyDeleteRequest) (*RuleProxy, *http.Response, error) {
+func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r RulesProxyAPIRulesProxyDeleteRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -268,14 +344,14 @@ func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r ApiRulesProxyDeleteRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesProxyListRequest struct {
+type RulesProxyAPIRulesProxyListRequest struct {
 	ctx context.Context
-	ApiService *RulesProxyAPIService
+	ApiService RulesProxyAPI
 	organization string
 	project string
 }
 
-func (r ApiRulesProxyListRequest) Execute() ([]RuleProxy, *http.Response, error) {
+func (r RulesProxyAPIRulesProxyListRequest) Execute() ([]RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyListExecute(r)
 }
 
@@ -285,10 +361,10 @@ RulesProxyList Method for RulesProxyList
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiRulesProxyListRequest
+ @return RulesProxyAPIRulesProxyListRequest
 */
-func (a *RulesProxyAPIService) RulesProxyList(ctx context.Context, organization string, project string) ApiRulesProxyListRequest {
-	return ApiRulesProxyListRequest{
+func (a *RulesProxyAPIService) RulesProxyList(ctx context.Context, organization string, project string) RulesProxyAPIRulesProxyListRequest {
+	return RulesProxyAPIRulesProxyListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -298,7 +374,7 @@ func (a *RulesProxyAPIService) RulesProxyList(ctx context.Context, organization 
 
 // Execute executes the request
 //  @return []RuleProxy
-func (a *RulesProxyAPIService) RulesProxyListExecute(r ApiRulesProxyListRequest) ([]RuleProxy, *http.Response, error) {
+func (a *RulesProxyAPIService) RulesProxyListExecute(r RulesProxyAPIRulesProxyListRequest) ([]RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -383,15 +459,15 @@ func (a *RulesProxyAPIService) RulesProxyListExecute(r ApiRulesProxyListRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesProxyReadRequest struct {
+type RulesProxyAPIRulesProxyReadRequest struct {
 	ctx context.Context
-	ApiService *RulesProxyAPIService
+	ApiService RulesProxyAPI
 	organization string
 	project string
 	rule string
 }
 
-func (r ApiRulesProxyReadRequest) Execute() (*RuleProxy, *http.Response, error) {
+func (r RulesProxyAPIRulesProxyReadRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyReadExecute(r)
 }
 
@@ -402,10 +478,10 @@ RulesProxyRead Method for RulesProxyRead
  @param organization
  @param project
  @param rule
- @return ApiRulesProxyReadRequest
+ @return RulesProxyAPIRulesProxyReadRequest
 */
-func (a *RulesProxyAPIService) RulesProxyRead(ctx context.Context, organization string, project string, rule string) ApiRulesProxyReadRequest {
-	return ApiRulesProxyReadRequest{
+func (a *RulesProxyAPIService) RulesProxyRead(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyReadRequest {
+	return RulesProxyAPIRulesProxyReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -416,7 +492,7 @@ func (a *RulesProxyAPIService) RulesProxyRead(ctx context.Context, organization 
 
 // Execute executes the request
 //  @return RuleProxy
-func (a *RulesProxyAPIService) RulesProxyReadExecute(r ApiRulesProxyReadRequest) (*RuleProxy, *http.Response, error) {
+func (a *RulesProxyAPIService) RulesProxyReadExecute(r RulesProxyAPIRulesProxyReadRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -502,21 +578,21 @@ func (a *RulesProxyAPIService) RulesProxyReadExecute(r ApiRulesProxyReadRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesProxyUpdateRequest struct {
+type RulesProxyAPIRulesProxyUpdateRequest struct {
 	ctx context.Context
-	ApiService *RulesProxyAPIService
+	ApiService RulesProxyAPI
 	organization string
 	project string
 	rule string
 	ruleProxyRequestUpdate *RuleProxyRequestUpdate
 }
 
-func (r ApiRulesProxyUpdateRequest) RuleProxyRequestUpdate(ruleProxyRequestUpdate RuleProxyRequestUpdate) ApiRulesProxyUpdateRequest {
+func (r RulesProxyAPIRulesProxyUpdateRequest) RuleProxyRequestUpdate(ruleProxyRequestUpdate RuleProxyRequestUpdate) RulesProxyAPIRulesProxyUpdateRequest {
 	r.ruleProxyRequestUpdate = &ruleProxyRequestUpdate
 	return r
 }
 
-func (r ApiRulesProxyUpdateRequest) Execute() (*RuleProxy, *http.Response, error) {
+func (r RulesProxyAPIRulesProxyUpdateRequest) Execute() (*RuleProxy, *http.Response, error) {
 	return r.ApiService.RulesProxyUpdateExecute(r)
 }
 
@@ -527,10 +603,10 @@ RulesProxyUpdate Method for RulesProxyUpdate
  @param organization
  @param project
  @param rule
- @return ApiRulesProxyUpdateRequest
+ @return RulesProxyAPIRulesProxyUpdateRequest
 */
-func (a *RulesProxyAPIService) RulesProxyUpdate(ctx context.Context, organization string, project string, rule string) ApiRulesProxyUpdateRequest {
-	return ApiRulesProxyUpdateRequest{
+func (a *RulesProxyAPIService) RulesProxyUpdate(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyUpdateRequest {
+	return RulesProxyAPIRulesProxyUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -541,7 +617,7 @@ func (a *RulesProxyAPIService) RulesProxyUpdate(ctx context.Context, organizatio
 
 // Execute executes the request
 //  @return RuleProxy
-func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r ApiRulesProxyUpdateRequest) (*RuleProxy, *http.Response, error) {
+func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r RulesProxyAPIRulesProxyUpdateRequest) (*RuleProxy, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

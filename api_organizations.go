@@ -20,15 +20,43 @@ import (
 )
 
 
+type OrganizationsAPI interface {
+
+	/*
+	OrganizationsList Method for OrganizationsList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return OrganizationsAPIOrganizationsListRequest
+	*/
+	OrganizationsList(ctx context.Context) OrganizationsAPIOrganizationsListRequest
+
+	// OrganizationsListExecute executes the request
+	//  @return []Organization
+	OrganizationsListExecute(r OrganizationsAPIOrganizationsListRequest) ([]Organization, *http.Response, error)
+
+	/*
+	OrganizationsRead Method for OrganizationsRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@return OrganizationsAPIOrganizationsReadRequest
+	*/
+	OrganizationsRead(ctx context.Context, organization string) OrganizationsAPIOrganizationsReadRequest
+
+	// OrganizationsReadExecute executes the request
+	//  @return Organization
+	OrganizationsReadExecute(r OrganizationsAPIOrganizationsReadRequest) (*Organization, *http.Response, error)
+}
+
 // OrganizationsAPIService OrganizationsAPI service
 type OrganizationsAPIService service
 
-type ApiOrganizationsListRequest struct {
+type OrganizationsAPIOrganizationsListRequest struct {
 	ctx context.Context
-	ApiService *OrganizationsAPIService
+	ApiService OrganizationsAPI
 }
 
-func (r ApiOrganizationsListRequest) Execute() ([]Organization, *http.Response, error) {
+func (r OrganizationsAPIOrganizationsListRequest) Execute() ([]Organization, *http.Response, error) {
 	return r.ApiService.OrganizationsListExecute(r)
 }
 
@@ -36,10 +64,10 @@ func (r ApiOrganizationsListRequest) Execute() ([]Organization, *http.Response, 
 OrganizationsList Method for OrganizationsList
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOrganizationsListRequest
+ @return OrganizationsAPIOrganizationsListRequest
 */
-func (a *OrganizationsAPIService) OrganizationsList(ctx context.Context) ApiOrganizationsListRequest {
-	return ApiOrganizationsListRequest{
+func (a *OrganizationsAPIService) OrganizationsList(ctx context.Context) OrganizationsAPIOrganizationsListRequest {
+	return OrganizationsAPIOrganizationsListRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -47,7 +75,7 @@ func (a *OrganizationsAPIService) OrganizationsList(ctx context.Context) ApiOrga
 
 // Execute executes the request
 //  @return []Organization
-func (a *OrganizationsAPIService) OrganizationsListExecute(r ApiOrganizationsListRequest) ([]Organization, *http.Response, error) {
+func (a *OrganizationsAPIService) OrganizationsListExecute(r OrganizationsAPIOrganizationsListRequest) ([]Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -130,13 +158,13 @@ func (a *OrganizationsAPIService) OrganizationsListExecute(r ApiOrganizationsLis
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationsReadRequest struct {
+type OrganizationsAPIOrganizationsReadRequest struct {
 	ctx context.Context
-	ApiService *OrganizationsAPIService
+	ApiService OrganizationsAPI
 	organization string
 }
 
-func (r ApiOrganizationsReadRequest) Execute() (*Organization, *http.Response, error) {
+func (r OrganizationsAPIOrganizationsReadRequest) Execute() (*Organization, *http.Response, error) {
 	return r.ApiService.OrganizationsReadExecute(r)
 }
 
@@ -145,10 +173,10 @@ OrganizationsRead Method for OrganizationsRead
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
- @return ApiOrganizationsReadRequest
+ @return OrganizationsAPIOrganizationsReadRequest
 */
-func (a *OrganizationsAPIService) OrganizationsRead(ctx context.Context, organization string) ApiOrganizationsReadRequest {
-	return ApiOrganizationsReadRequest{
+func (a *OrganizationsAPIService) OrganizationsRead(ctx context.Context, organization string) OrganizationsAPIOrganizationsReadRequest {
+	return OrganizationsAPIOrganizationsReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -157,7 +185,7 @@ func (a *OrganizationsAPIService) OrganizationsRead(ctx context.Context, organiz
 
 // Execute executes the request
 //  @return Organization
-func (a *OrganizationsAPIService) OrganizationsReadExecute(r ApiOrganizationsReadRequest) (*Organization, *http.Response, error) {
+func (a *OrganizationsAPIService) OrganizationsReadExecute(r OrganizationsAPIOrganizationsReadRequest) (*Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}

@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **DisableSslVerify** | Pointer to **bool** |  | [optional] [default to true]
 **NotifyEmail** | Pointer to **string** |  | [optional] 
 **WafConfig** | Pointer to [**WAFConfig**](WAFConfig.md) |  | [optional] 
+**ProxyInlineFnEnabled** | Pointer to **bool** |  | [optional] [default to false]
 
 ## Methods
 
@@ -559,6 +560,31 @@ SetWafConfig sets WafConfig field to given value.
 `func (o *RuleProxyAction) HasWafConfig() bool`
 
 HasWafConfig returns a boolean if a field has been set.
+
+### GetProxyInlineFnEnabled
+
+`func (o *RuleProxyAction) GetProxyInlineFnEnabled() bool`
+
+GetProxyInlineFnEnabled returns the ProxyInlineFnEnabled field if non-nil, zero value otherwise.
+
+### GetProxyInlineFnEnabledOk
+
+`func (o *RuleProxyAction) GetProxyInlineFnEnabledOk() (*bool, bool)`
+
+GetProxyInlineFnEnabledOk returns a tuple with the ProxyInlineFnEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyInlineFnEnabled
+
+`func (o *RuleProxyAction) SetProxyInlineFnEnabled(v bool)`
+
+SetProxyInlineFnEnabled sets ProxyInlineFnEnabled field to given value.
+
+### HasProxyInlineFnEnabled
+
+`func (o *RuleProxyAction) HasProxyInlineFnEnabled() bool`
+
+HasProxyInlineFnEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

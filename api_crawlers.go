@@ -20,23 +20,99 @@ import (
 )
 
 
+type CrawlersAPI interface {
+
+	/*
+	CrawlersCreate Method for CrawlersCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return CrawlersAPICrawlersCreateRequest
+	*/
+	CrawlersCreate(ctx context.Context, organization string, project string) CrawlersAPICrawlersCreateRequest
+
+	// CrawlersCreateExecute executes the request
+	//  @return Crawler
+	CrawlersCreateExecute(r CrawlersAPICrawlersCreateRequest) (*Crawler, *http.Response, error)
+
+	/*
+	CrawlersDelete Method for CrawlersDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param crawler
+	@return CrawlersAPICrawlersDeleteRequest
+	*/
+	CrawlersDelete(ctx context.Context, organization string, project string, crawler string) CrawlersAPICrawlersDeleteRequest
+
+	// CrawlersDeleteExecute executes the request
+	//  @return Crawler
+	CrawlersDeleteExecute(r CrawlersAPICrawlersDeleteRequest) (*Crawler, *http.Response, error)
+
+	/*
+	CrawlersList Method for CrawlersList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return CrawlersAPICrawlersListRequest
+	*/
+	CrawlersList(ctx context.Context, organization string, project string) CrawlersAPICrawlersListRequest
+
+	// CrawlersListExecute executes the request
+	//  @return []Crawler
+	CrawlersListExecute(r CrawlersAPICrawlersListRequest) ([]Crawler, *http.Response, error)
+
+	/*
+	CrawlersRead Method for CrawlersRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param crawler
+	@return CrawlersAPICrawlersReadRequest
+	*/
+	CrawlersRead(ctx context.Context, organization string, project string, crawler string) CrawlersAPICrawlersReadRequest
+
+	// CrawlersReadExecute executes the request
+	//  @return Crawler
+	CrawlersReadExecute(r CrawlersAPICrawlersReadRequest) (*Crawler, *http.Response, error)
+
+	/*
+	CrawlersUpdate Method for CrawlersUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param crawler
+	@return CrawlersAPICrawlersUpdateRequest
+	*/
+	CrawlersUpdate(ctx context.Context, organization string, project string, crawler string) CrawlersAPICrawlersUpdateRequest
+
+	// CrawlersUpdateExecute executes the request
+	//  @return Crawler
+	CrawlersUpdateExecute(r CrawlersAPICrawlersUpdateRequest) (*Crawler, *http.Response, error)
+}
+
 // CrawlersAPIService CrawlersAPI service
 type CrawlersAPIService service
 
-type ApiCrawlersCreateRequest struct {
+type CrawlersAPICrawlersCreateRequest struct {
 	ctx context.Context
-	ApiService *CrawlersAPIService
+	ApiService CrawlersAPI
 	organization string
 	project string
 	crawlerRequest *CrawlerRequest
 }
 
-func (r ApiCrawlersCreateRequest) CrawlerRequest(crawlerRequest CrawlerRequest) ApiCrawlersCreateRequest {
+func (r CrawlersAPICrawlersCreateRequest) CrawlerRequest(crawlerRequest CrawlerRequest) CrawlersAPICrawlersCreateRequest {
 	r.crawlerRequest = &crawlerRequest
 	return r
 }
 
-func (r ApiCrawlersCreateRequest) Execute() (*Crawler, *http.Response, error) {
+func (r CrawlersAPICrawlersCreateRequest) Execute() (*Crawler, *http.Response, error) {
 	return r.ApiService.CrawlersCreateExecute(r)
 }
 
@@ -46,10 +122,10 @@ CrawlersCreate Method for CrawlersCreate
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiCrawlersCreateRequest
+ @return CrawlersAPICrawlersCreateRequest
 */
-func (a *CrawlersAPIService) CrawlersCreate(ctx context.Context, organization string, project string) ApiCrawlersCreateRequest {
-	return ApiCrawlersCreateRequest{
+func (a *CrawlersAPIService) CrawlersCreate(ctx context.Context, organization string, project string) CrawlersAPICrawlersCreateRequest {
+	return CrawlersAPICrawlersCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -59,7 +135,7 @@ func (a *CrawlersAPIService) CrawlersCreate(ctx context.Context, organization st
 
 // Execute executes the request
 //  @return Crawler
-func (a *CrawlersAPIService) CrawlersCreateExecute(r ApiCrawlersCreateRequest) (*Crawler, *http.Response, error) {
+func (a *CrawlersAPIService) CrawlersCreateExecute(r CrawlersAPICrawlersCreateRequest) (*Crawler, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -149,15 +225,15 @@ func (a *CrawlersAPIService) CrawlersCreateExecute(r ApiCrawlersCreateRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCrawlersDeleteRequest struct {
+type CrawlersAPICrawlersDeleteRequest struct {
 	ctx context.Context
-	ApiService *CrawlersAPIService
+	ApiService CrawlersAPI
 	organization string
 	project string
 	crawler string
 }
 
-func (r ApiCrawlersDeleteRequest) Execute() (*Crawler, *http.Response, error) {
+func (r CrawlersAPICrawlersDeleteRequest) Execute() (*Crawler, *http.Response, error) {
 	return r.ApiService.CrawlersDeleteExecute(r)
 }
 
@@ -168,10 +244,10 @@ CrawlersDelete Method for CrawlersDelete
  @param organization
  @param project
  @param crawler
- @return ApiCrawlersDeleteRequest
+ @return CrawlersAPICrawlersDeleteRequest
 */
-func (a *CrawlersAPIService) CrawlersDelete(ctx context.Context, organization string, project string, crawler string) ApiCrawlersDeleteRequest {
-	return ApiCrawlersDeleteRequest{
+func (a *CrawlersAPIService) CrawlersDelete(ctx context.Context, organization string, project string, crawler string) CrawlersAPICrawlersDeleteRequest {
+	return CrawlersAPICrawlersDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -182,7 +258,7 @@ func (a *CrawlersAPIService) CrawlersDelete(ctx context.Context, organization st
 
 // Execute executes the request
 //  @return Crawler
-func (a *CrawlersAPIService) CrawlersDeleteExecute(r ApiCrawlersDeleteRequest) (*Crawler, *http.Response, error) {
+func (a *CrawlersAPIService) CrawlersDeleteExecute(r CrawlersAPICrawlersDeleteRequest) (*Crawler, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -268,14 +344,14 @@ func (a *CrawlersAPIService) CrawlersDeleteExecute(r ApiCrawlersDeleteRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCrawlersListRequest struct {
+type CrawlersAPICrawlersListRequest struct {
 	ctx context.Context
-	ApiService *CrawlersAPIService
+	ApiService CrawlersAPI
 	organization string
 	project string
 }
 
-func (r ApiCrawlersListRequest) Execute() ([]Crawler, *http.Response, error) {
+func (r CrawlersAPICrawlersListRequest) Execute() ([]Crawler, *http.Response, error) {
 	return r.ApiService.CrawlersListExecute(r)
 }
 
@@ -285,10 +361,10 @@ CrawlersList Method for CrawlersList
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiCrawlersListRequest
+ @return CrawlersAPICrawlersListRequest
 */
-func (a *CrawlersAPIService) CrawlersList(ctx context.Context, organization string, project string) ApiCrawlersListRequest {
-	return ApiCrawlersListRequest{
+func (a *CrawlersAPIService) CrawlersList(ctx context.Context, organization string, project string) CrawlersAPICrawlersListRequest {
+	return CrawlersAPICrawlersListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -298,7 +374,7 @@ func (a *CrawlersAPIService) CrawlersList(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return []Crawler
-func (a *CrawlersAPIService) CrawlersListExecute(r ApiCrawlersListRequest) ([]Crawler, *http.Response, error) {
+func (a *CrawlersAPIService) CrawlersListExecute(r CrawlersAPICrawlersListRequest) ([]Crawler, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -383,15 +459,15 @@ func (a *CrawlersAPIService) CrawlersListExecute(r ApiCrawlersListRequest) ([]Cr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCrawlersReadRequest struct {
+type CrawlersAPICrawlersReadRequest struct {
 	ctx context.Context
-	ApiService *CrawlersAPIService
+	ApiService CrawlersAPI
 	organization string
 	project string
 	crawler string
 }
 
-func (r ApiCrawlersReadRequest) Execute() (*Crawler, *http.Response, error) {
+func (r CrawlersAPICrawlersReadRequest) Execute() (*Crawler, *http.Response, error) {
 	return r.ApiService.CrawlersReadExecute(r)
 }
 
@@ -402,10 +478,10 @@ CrawlersRead Method for CrawlersRead
  @param organization
  @param project
  @param crawler
- @return ApiCrawlersReadRequest
+ @return CrawlersAPICrawlersReadRequest
 */
-func (a *CrawlersAPIService) CrawlersRead(ctx context.Context, organization string, project string, crawler string) ApiCrawlersReadRequest {
-	return ApiCrawlersReadRequest{
+func (a *CrawlersAPIService) CrawlersRead(ctx context.Context, organization string, project string, crawler string) CrawlersAPICrawlersReadRequest {
+	return CrawlersAPICrawlersReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -416,7 +492,7 @@ func (a *CrawlersAPIService) CrawlersRead(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return Crawler
-func (a *CrawlersAPIService) CrawlersReadExecute(r ApiCrawlersReadRequest) (*Crawler, *http.Response, error) {
+func (a *CrawlersAPIService) CrawlersReadExecute(r CrawlersAPICrawlersReadRequest) (*Crawler, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -502,21 +578,21 @@ func (a *CrawlersAPIService) CrawlersReadExecute(r ApiCrawlersReadRequest) (*Cra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCrawlersUpdateRequest struct {
+type CrawlersAPICrawlersUpdateRequest struct {
 	ctx context.Context
-	ApiService *CrawlersAPIService
+	ApiService CrawlersAPI
 	organization string
 	project string
 	crawler string
 	crawlerRequestUpdate *CrawlerRequestUpdate
 }
 
-func (r ApiCrawlersUpdateRequest) CrawlerRequestUpdate(crawlerRequestUpdate CrawlerRequestUpdate) ApiCrawlersUpdateRequest {
+func (r CrawlersAPICrawlersUpdateRequest) CrawlerRequestUpdate(crawlerRequestUpdate CrawlerRequestUpdate) CrawlersAPICrawlersUpdateRequest {
 	r.crawlerRequestUpdate = &crawlerRequestUpdate
 	return r
 }
 
-func (r ApiCrawlersUpdateRequest) Execute() (*Crawler, *http.Response, error) {
+func (r CrawlersAPICrawlersUpdateRequest) Execute() (*Crawler, *http.Response, error) {
 	return r.ApiService.CrawlersUpdateExecute(r)
 }
 
@@ -527,10 +603,10 @@ CrawlersUpdate Method for CrawlersUpdate
  @param organization
  @param project
  @param crawler
- @return ApiCrawlersUpdateRequest
+ @return CrawlersAPICrawlersUpdateRequest
 */
-func (a *CrawlersAPIService) CrawlersUpdate(ctx context.Context, organization string, project string, crawler string) ApiCrawlersUpdateRequest {
-	return ApiCrawlersUpdateRequest{
+func (a *CrawlersAPIService) CrawlersUpdate(ctx context.Context, organization string, project string, crawler string) CrawlersAPICrawlersUpdateRequest {
+	return CrawlersAPICrawlersUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -541,7 +617,7 @@ func (a *CrawlersAPIService) CrawlersUpdate(ctx context.Context, organization st
 
 // Execute executes the request
 //  @return Crawler
-func (a *CrawlersAPIService) CrawlersUpdateExecute(r ApiCrawlersUpdateRequest) (*Crawler, *http.Response, error) {
+func (a *CrawlersAPIService) CrawlersUpdateExecute(r CrawlersAPICrawlersUpdateRequest) (*Crawler, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

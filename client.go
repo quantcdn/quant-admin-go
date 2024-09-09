@@ -49,19 +49,19 @@ type APIClient struct {
 
 	// API Services
 
-	CrawlersAPI *CrawlersAPIService
+	CrawlersAPI CrawlersAPI
 
-	DomainsAPI *DomainsAPIService
+	DomainsAPI DomainsAPI
 
-	HeadersAPI *HeadersAPIService
+	HeadersAPI HeadersAPI
 
-	OrganizationsAPI *OrganizationsAPIService
+	OrganizationsAPI OrganizationsAPI
 
-	ProjectsAPI *ProjectsAPIService
+	ProjectsAPI ProjectsAPI
 
-	RulesProxyAPI *RulesProxyAPIService
+	RulesProxyAPI RulesProxyAPI
 
-	RulesRedirectAPI *RulesRedirectAPIService
+	RulesRedirectAPI RulesRedirectAPI
 }
 
 type service struct {

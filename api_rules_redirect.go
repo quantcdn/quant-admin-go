@@ -20,23 +20,99 @@ import (
 )
 
 
+type RulesRedirectAPI interface {
+
+	/*
+	RulesRedirectCreate Method for RulesRedirectCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return RulesRedirectAPIRulesRedirectCreateRequest
+	*/
+	RulesRedirectCreate(ctx context.Context, organization string, project string) RulesRedirectAPIRulesRedirectCreateRequest
+
+	// RulesRedirectCreateExecute executes the request
+	//  @return RuleRedirect
+	RulesRedirectCreateExecute(r RulesRedirectAPIRulesRedirectCreateRequest) (*RuleRedirect, *http.Response, error)
+
+	/*
+	RulesRedirectDelete Method for RulesRedirectDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesRedirectAPIRulesRedirectDeleteRequest
+	*/
+	RulesRedirectDelete(ctx context.Context, organization string, project string, rule string) RulesRedirectAPIRulesRedirectDeleteRequest
+
+	// RulesRedirectDeleteExecute executes the request
+	//  @return RuleRedirect
+	RulesRedirectDeleteExecute(r RulesRedirectAPIRulesRedirectDeleteRequest) (*RuleRedirect, *http.Response, error)
+
+	/*
+	RulesRedirectList Method for RulesRedirectList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return RulesRedirectAPIRulesRedirectListRequest
+	*/
+	RulesRedirectList(ctx context.Context, organization string, project string) RulesRedirectAPIRulesRedirectListRequest
+
+	// RulesRedirectListExecute executes the request
+	//  @return []RuleRedirect
+	RulesRedirectListExecute(r RulesRedirectAPIRulesRedirectListRequest) ([]RuleRedirect, *http.Response, error)
+
+	/*
+	RulesRedirectRead Method for RulesRedirectRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesRedirectAPIRulesRedirectReadRequest
+	*/
+	RulesRedirectRead(ctx context.Context, organization string, project string, rule string) RulesRedirectAPIRulesRedirectReadRequest
+
+	// RulesRedirectReadExecute executes the request
+	//  @return RuleRedirect
+	RulesRedirectReadExecute(r RulesRedirectAPIRulesRedirectReadRequest) (*RuleRedirect, *http.Response, error)
+
+	/*
+	RulesRedirectUpdate Method for RulesRedirectUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesRedirectAPIRulesRedirectUpdateRequest
+	*/
+	RulesRedirectUpdate(ctx context.Context, organization string, project string, rule string) RulesRedirectAPIRulesRedirectUpdateRequest
+
+	// RulesRedirectUpdateExecute executes the request
+	//  @return RuleRedirect
+	RulesRedirectUpdateExecute(r RulesRedirectAPIRulesRedirectUpdateRequest) (*RuleRedirect, *http.Response, error)
+}
+
 // RulesRedirectAPIService RulesRedirectAPI service
 type RulesRedirectAPIService service
 
-type ApiRulesRedirectCreateRequest struct {
+type RulesRedirectAPIRulesRedirectCreateRequest struct {
 	ctx context.Context
-	ApiService *RulesRedirectAPIService
+	ApiService RulesRedirectAPI
 	organization string
 	project string
 	ruleRedirectRequest *RuleRedirectRequest
 }
 
-func (r ApiRulesRedirectCreateRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) ApiRulesRedirectCreateRequest {
+func (r RulesRedirectAPIRulesRedirectCreateRequest) RuleRedirectRequest(ruleRedirectRequest RuleRedirectRequest) RulesRedirectAPIRulesRedirectCreateRequest {
 	r.ruleRedirectRequest = &ruleRedirectRequest
 	return r
 }
 
-func (r ApiRulesRedirectCreateRequest) Execute() (*RuleRedirect, *http.Response, error) {
+func (r RulesRedirectAPIRulesRedirectCreateRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectCreateExecute(r)
 }
 
@@ -46,10 +122,10 @@ RulesRedirectCreate Method for RulesRedirectCreate
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiRulesRedirectCreateRequest
+ @return RulesRedirectAPIRulesRedirectCreateRequest
 */
-func (a *RulesRedirectAPIService) RulesRedirectCreate(ctx context.Context, organization string, project string) ApiRulesRedirectCreateRequest {
-	return ApiRulesRedirectCreateRequest{
+func (a *RulesRedirectAPIService) RulesRedirectCreate(ctx context.Context, organization string, project string) RulesRedirectAPIRulesRedirectCreateRequest {
+	return RulesRedirectAPIRulesRedirectCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -59,7 +135,7 @@ func (a *RulesRedirectAPIService) RulesRedirectCreate(ctx context.Context, organ
 
 // Execute executes the request
 //  @return RuleRedirect
-func (a *RulesRedirectAPIService) RulesRedirectCreateExecute(r ApiRulesRedirectCreateRequest) (*RuleRedirect, *http.Response, error) {
+func (a *RulesRedirectAPIService) RulesRedirectCreateExecute(r RulesRedirectAPIRulesRedirectCreateRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -149,15 +225,15 @@ func (a *RulesRedirectAPIService) RulesRedirectCreateExecute(r ApiRulesRedirectC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesRedirectDeleteRequest struct {
+type RulesRedirectAPIRulesRedirectDeleteRequest struct {
 	ctx context.Context
-	ApiService *RulesRedirectAPIService
+	ApiService RulesRedirectAPI
 	organization string
 	project string
 	rule string
 }
 
-func (r ApiRulesRedirectDeleteRequest) Execute() (*RuleRedirect, *http.Response, error) {
+func (r RulesRedirectAPIRulesRedirectDeleteRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectDeleteExecute(r)
 }
 
@@ -168,10 +244,10 @@ RulesRedirectDelete Method for RulesRedirectDelete
  @param organization
  @param project
  @param rule
- @return ApiRulesRedirectDeleteRequest
+ @return RulesRedirectAPIRulesRedirectDeleteRequest
 */
-func (a *RulesRedirectAPIService) RulesRedirectDelete(ctx context.Context, organization string, project string, rule string) ApiRulesRedirectDeleteRequest {
-	return ApiRulesRedirectDeleteRequest{
+func (a *RulesRedirectAPIService) RulesRedirectDelete(ctx context.Context, organization string, project string, rule string) RulesRedirectAPIRulesRedirectDeleteRequest {
+	return RulesRedirectAPIRulesRedirectDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -182,7 +258,7 @@ func (a *RulesRedirectAPIService) RulesRedirectDelete(ctx context.Context, organ
 
 // Execute executes the request
 //  @return RuleRedirect
-func (a *RulesRedirectAPIService) RulesRedirectDeleteExecute(r ApiRulesRedirectDeleteRequest) (*RuleRedirect, *http.Response, error) {
+func (a *RulesRedirectAPIService) RulesRedirectDeleteExecute(r RulesRedirectAPIRulesRedirectDeleteRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -268,14 +344,14 @@ func (a *RulesRedirectAPIService) RulesRedirectDeleteExecute(r ApiRulesRedirectD
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesRedirectListRequest struct {
+type RulesRedirectAPIRulesRedirectListRequest struct {
 	ctx context.Context
-	ApiService *RulesRedirectAPIService
+	ApiService RulesRedirectAPI
 	organization string
 	project string
 }
 
-func (r ApiRulesRedirectListRequest) Execute() ([]RuleRedirect, *http.Response, error) {
+func (r RulesRedirectAPIRulesRedirectListRequest) Execute() ([]RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectListExecute(r)
 }
 
@@ -285,10 +361,10 @@ RulesRedirectList Method for RulesRedirectList
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiRulesRedirectListRequest
+ @return RulesRedirectAPIRulesRedirectListRequest
 */
-func (a *RulesRedirectAPIService) RulesRedirectList(ctx context.Context, organization string, project string) ApiRulesRedirectListRequest {
-	return ApiRulesRedirectListRequest{
+func (a *RulesRedirectAPIService) RulesRedirectList(ctx context.Context, organization string, project string) RulesRedirectAPIRulesRedirectListRequest {
+	return RulesRedirectAPIRulesRedirectListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -298,7 +374,7 @@ func (a *RulesRedirectAPIService) RulesRedirectList(ctx context.Context, organiz
 
 // Execute executes the request
 //  @return []RuleRedirect
-func (a *RulesRedirectAPIService) RulesRedirectListExecute(r ApiRulesRedirectListRequest) ([]RuleRedirect, *http.Response, error) {
+func (a *RulesRedirectAPIService) RulesRedirectListExecute(r RulesRedirectAPIRulesRedirectListRequest) ([]RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -383,15 +459,15 @@ func (a *RulesRedirectAPIService) RulesRedirectListExecute(r ApiRulesRedirectLis
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesRedirectReadRequest struct {
+type RulesRedirectAPIRulesRedirectReadRequest struct {
 	ctx context.Context
-	ApiService *RulesRedirectAPIService
+	ApiService RulesRedirectAPI
 	organization string
 	project string
 	rule string
 }
 
-func (r ApiRulesRedirectReadRequest) Execute() (*RuleRedirect, *http.Response, error) {
+func (r RulesRedirectAPIRulesRedirectReadRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectReadExecute(r)
 }
 
@@ -402,10 +478,10 @@ RulesRedirectRead Method for RulesRedirectRead
  @param organization
  @param project
  @param rule
- @return ApiRulesRedirectReadRequest
+ @return RulesRedirectAPIRulesRedirectReadRequest
 */
-func (a *RulesRedirectAPIService) RulesRedirectRead(ctx context.Context, organization string, project string, rule string) ApiRulesRedirectReadRequest {
-	return ApiRulesRedirectReadRequest{
+func (a *RulesRedirectAPIService) RulesRedirectRead(ctx context.Context, organization string, project string, rule string) RulesRedirectAPIRulesRedirectReadRequest {
+	return RulesRedirectAPIRulesRedirectReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -416,7 +492,7 @@ func (a *RulesRedirectAPIService) RulesRedirectRead(ctx context.Context, organiz
 
 // Execute executes the request
 //  @return RuleRedirect
-func (a *RulesRedirectAPIService) RulesRedirectReadExecute(r ApiRulesRedirectReadRequest) (*RuleRedirect, *http.Response, error) {
+func (a *RulesRedirectAPIService) RulesRedirectReadExecute(r RulesRedirectAPIRulesRedirectReadRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -502,21 +578,21 @@ func (a *RulesRedirectAPIService) RulesRedirectReadExecute(r ApiRulesRedirectRea
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRulesRedirectUpdateRequest struct {
+type RulesRedirectAPIRulesRedirectUpdateRequest struct {
 	ctx context.Context
-	ApiService *RulesRedirectAPIService
+	ApiService RulesRedirectAPI
 	organization string
 	project string
 	rule string
 	ruleRedirectRequestUpdate *RuleRedirectRequestUpdate
 }
 
-func (r ApiRulesRedirectUpdateRequest) RuleRedirectRequestUpdate(ruleRedirectRequestUpdate RuleRedirectRequestUpdate) ApiRulesRedirectUpdateRequest {
+func (r RulesRedirectAPIRulesRedirectUpdateRequest) RuleRedirectRequestUpdate(ruleRedirectRequestUpdate RuleRedirectRequestUpdate) RulesRedirectAPIRulesRedirectUpdateRequest {
 	r.ruleRedirectRequestUpdate = &ruleRedirectRequestUpdate
 	return r
 }
 
-func (r ApiRulesRedirectUpdateRequest) Execute() (*RuleRedirect, *http.Response, error) {
+func (r RulesRedirectAPIRulesRedirectUpdateRequest) Execute() (*RuleRedirect, *http.Response, error) {
 	return r.ApiService.RulesRedirectUpdateExecute(r)
 }
 
@@ -527,10 +603,10 @@ RulesRedirectUpdate Method for RulesRedirectUpdate
  @param organization
  @param project
  @param rule
- @return ApiRulesRedirectUpdateRequest
+ @return RulesRedirectAPIRulesRedirectUpdateRequest
 */
-func (a *RulesRedirectAPIService) RulesRedirectUpdate(ctx context.Context, organization string, project string, rule string) ApiRulesRedirectUpdateRequest {
-	return ApiRulesRedirectUpdateRequest{
+func (a *RulesRedirectAPIService) RulesRedirectUpdate(ctx context.Context, organization string, project string, rule string) RulesRedirectAPIRulesRedirectUpdateRequest {
+	return RulesRedirectAPIRulesRedirectUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -541,7 +617,7 @@ func (a *RulesRedirectAPIService) RulesRedirectUpdate(ctx context.Context, organ
 
 // Execute executes the request
 //  @return RuleRedirect
-func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r ApiRulesRedirectUpdateRequest) (*RuleRedirect, *http.Response, error) {
+func (a *RulesRedirectAPIService) RulesRedirectUpdateExecute(r RulesRedirectAPIRulesRedirectUpdateRequest) (*RuleRedirect, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

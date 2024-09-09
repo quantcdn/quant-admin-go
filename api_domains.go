@@ -20,23 +20,99 @@ import (
 )
 
 
+type DomainsAPI interface {
+
+	/*
+	DomainsCreate Method for DomainsCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return DomainsAPIDomainsCreateRequest
+	*/
+	DomainsCreate(ctx context.Context, organization string, project string) DomainsAPIDomainsCreateRequest
+
+	// DomainsCreateExecute executes the request
+	//  @return Domain
+	DomainsCreateExecute(r DomainsAPIDomainsCreateRequest) (*Domain, *http.Response, error)
+
+	/*
+	DomainsDelete Method for DomainsDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param domain
+	@return DomainsAPIDomainsDeleteRequest
+	*/
+	DomainsDelete(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsDeleteRequest
+
+	// DomainsDeleteExecute executes the request
+	//  @return Domain
+	DomainsDeleteExecute(r DomainsAPIDomainsDeleteRequest) (*Domain, *http.Response, error)
+
+	/*
+	DomainsList Method for DomainsList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return DomainsAPIDomainsListRequest
+	*/
+	DomainsList(ctx context.Context, organization string, project string) DomainsAPIDomainsListRequest
+
+	// DomainsListExecute executes the request
+	//  @return []Domain
+	DomainsListExecute(r DomainsAPIDomainsListRequest) ([]Domain, *http.Response, error)
+
+	/*
+	DomainsRead Method for DomainsRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param domain
+	@return DomainsAPIDomainsReadRequest
+	*/
+	DomainsRead(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsReadRequest
+
+	// DomainsReadExecute executes the request
+	//  @return Domain
+	DomainsReadExecute(r DomainsAPIDomainsReadRequest) (*Domain, *http.Response, error)
+
+	/*
+	DomainsUpdate Method for DomainsUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param domain
+	@return DomainsAPIDomainsUpdateRequest
+	*/
+	DomainsUpdate(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsUpdateRequest
+
+	// DomainsUpdateExecute executes the request
+	//  @return Domain
+	DomainsUpdateExecute(r DomainsAPIDomainsUpdateRequest) (*Domain, *http.Response, error)
+}
+
 // DomainsAPIService DomainsAPI service
 type DomainsAPIService service
 
-type ApiDomainsCreateRequest struct {
+type DomainsAPIDomainsCreateRequest struct {
 	ctx context.Context
-	ApiService *DomainsAPIService
+	ApiService DomainsAPI
 	organization string
 	project string
 	domainRequest *DomainRequest
 }
 
-func (r ApiDomainsCreateRequest) DomainRequest(domainRequest DomainRequest) ApiDomainsCreateRequest {
+func (r DomainsAPIDomainsCreateRequest) DomainRequest(domainRequest DomainRequest) DomainsAPIDomainsCreateRequest {
 	r.domainRequest = &domainRequest
 	return r
 }
 
-func (r ApiDomainsCreateRequest) Execute() (*Domain, *http.Response, error) {
+func (r DomainsAPIDomainsCreateRequest) Execute() (*Domain, *http.Response, error) {
 	return r.ApiService.DomainsCreateExecute(r)
 }
 
@@ -46,10 +122,10 @@ DomainsCreate Method for DomainsCreate
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiDomainsCreateRequest
+ @return DomainsAPIDomainsCreateRequest
 */
-func (a *DomainsAPIService) DomainsCreate(ctx context.Context, organization string, project string) ApiDomainsCreateRequest {
-	return ApiDomainsCreateRequest{
+func (a *DomainsAPIService) DomainsCreate(ctx context.Context, organization string, project string) DomainsAPIDomainsCreateRequest {
+	return DomainsAPIDomainsCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -59,7 +135,7 @@ func (a *DomainsAPIService) DomainsCreate(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return Domain
-func (a *DomainsAPIService) DomainsCreateExecute(r ApiDomainsCreateRequest) (*Domain, *http.Response, error) {
+func (a *DomainsAPIService) DomainsCreateExecute(r DomainsAPIDomainsCreateRequest) (*Domain, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -149,15 +225,15 @@ func (a *DomainsAPIService) DomainsCreateExecute(r ApiDomainsCreateRequest) (*Do
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDomainsDeleteRequest struct {
+type DomainsAPIDomainsDeleteRequest struct {
 	ctx context.Context
-	ApiService *DomainsAPIService
+	ApiService DomainsAPI
 	organization string
 	project string
 	domain string
 }
 
-func (r ApiDomainsDeleteRequest) Execute() (*Domain, *http.Response, error) {
+func (r DomainsAPIDomainsDeleteRequest) Execute() (*Domain, *http.Response, error) {
 	return r.ApiService.DomainsDeleteExecute(r)
 }
 
@@ -168,10 +244,10 @@ DomainsDelete Method for DomainsDelete
  @param organization
  @param project
  @param domain
- @return ApiDomainsDeleteRequest
+ @return DomainsAPIDomainsDeleteRequest
 */
-func (a *DomainsAPIService) DomainsDelete(ctx context.Context, organization string, project string, domain string) ApiDomainsDeleteRequest {
-	return ApiDomainsDeleteRequest{
+func (a *DomainsAPIService) DomainsDelete(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsDeleteRequest {
+	return DomainsAPIDomainsDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -182,7 +258,7 @@ func (a *DomainsAPIService) DomainsDelete(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return Domain
-func (a *DomainsAPIService) DomainsDeleteExecute(r ApiDomainsDeleteRequest) (*Domain, *http.Response, error) {
+func (a *DomainsAPIService) DomainsDeleteExecute(r DomainsAPIDomainsDeleteRequest) (*Domain, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -268,14 +344,14 @@ func (a *DomainsAPIService) DomainsDeleteExecute(r ApiDomainsDeleteRequest) (*Do
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDomainsListRequest struct {
+type DomainsAPIDomainsListRequest struct {
 	ctx context.Context
-	ApiService *DomainsAPIService
+	ApiService DomainsAPI
 	organization string
 	project string
 }
 
-func (r ApiDomainsListRequest) Execute() ([]Domain, *http.Response, error) {
+func (r DomainsAPIDomainsListRequest) Execute() ([]Domain, *http.Response, error) {
 	return r.ApiService.DomainsListExecute(r)
 }
 
@@ -285,10 +361,10 @@ DomainsList Method for DomainsList
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiDomainsListRequest
+ @return DomainsAPIDomainsListRequest
 */
-func (a *DomainsAPIService) DomainsList(ctx context.Context, organization string, project string) ApiDomainsListRequest {
-	return ApiDomainsListRequest{
+func (a *DomainsAPIService) DomainsList(ctx context.Context, organization string, project string) DomainsAPIDomainsListRequest {
+	return DomainsAPIDomainsListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -298,7 +374,7 @@ func (a *DomainsAPIService) DomainsList(ctx context.Context, organization string
 
 // Execute executes the request
 //  @return []Domain
-func (a *DomainsAPIService) DomainsListExecute(r ApiDomainsListRequest) ([]Domain, *http.Response, error) {
+func (a *DomainsAPIService) DomainsListExecute(r DomainsAPIDomainsListRequest) ([]Domain, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -383,15 +459,15 @@ func (a *DomainsAPIService) DomainsListExecute(r ApiDomainsListRequest) ([]Domai
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDomainsReadRequest struct {
+type DomainsAPIDomainsReadRequest struct {
 	ctx context.Context
-	ApiService *DomainsAPIService
+	ApiService DomainsAPI
 	organization string
 	project string
 	domain string
 }
 
-func (r ApiDomainsReadRequest) Execute() (*Domain, *http.Response, error) {
+func (r DomainsAPIDomainsReadRequest) Execute() (*Domain, *http.Response, error) {
 	return r.ApiService.DomainsReadExecute(r)
 }
 
@@ -402,10 +478,10 @@ DomainsRead Method for DomainsRead
  @param organization
  @param project
  @param domain
- @return ApiDomainsReadRequest
+ @return DomainsAPIDomainsReadRequest
 */
-func (a *DomainsAPIService) DomainsRead(ctx context.Context, organization string, project string, domain string) ApiDomainsReadRequest {
-	return ApiDomainsReadRequest{
+func (a *DomainsAPIService) DomainsRead(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsReadRequest {
+	return DomainsAPIDomainsReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -416,7 +492,7 @@ func (a *DomainsAPIService) DomainsRead(ctx context.Context, organization string
 
 // Execute executes the request
 //  @return Domain
-func (a *DomainsAPIService) DomainsReadExecute(r ApiDomainsReadRequest) (*Domain, *http.Response, error) {
+func (a *DomainsAPIService) DomainsReadExecute(r DomainsAPIDomainsReadRequest) (*Domain, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -502,21 +578,21 @@ func (a *DomainsAPIService) DomainsReadExecute(r ApiDomainsReadRequest) (*Domain
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDomainsUpdateRequest struct {
+type DomainsAPIDomainsUpdateRequest struct {
 	ctx context.Context
-	ApiService *DomainsAPIService
+	ApiService DomainsAPI
 	organization string
 	project string
 	domain string
 	domainRequestUpdate *DomainRequestUpdate
 }
 
-func (r ApiDomainsUpdateRequest) DomainRequestUpdate(domainRequestUpdate DomainRequestUpdate) ApiDomainsUpdateRequest {
+func (r DomainsAPIDomainsUpdateRequest) DomainRequestUpdate(domainRequestUpdate DomainRequestUpdate) DomainsAPIDomainsUpdateRequest {
 	r.domainRequestUpdate = &domainRequestUpdate
 	return r
 }
 
-func (r ApiDomainsUpdateRequest) Execute() (*Domain, *http.Response, error) {
+func (r DomainsAPIDomainsUpdateRequest) Execute() (*Domain, *http.Response, error) {
 	return r.ApiService.DomainsUpdateExecute(r)
 }
 
@@ -527,10 +603,10 @@ DomainsUpdate Method for DomainsUpdate
  @param organization
  @param project
  @param domain
- @return ApiDomainsUpdateRequest
+ @return DomainsAPIDomainsUpdateRequest
 */
-func (a *DomainsAPIService) DomainsUpdate(ctx context.Context, organization string, project string, domain string) ApiDomainsUpdateRequest {
-	return ApiDomainsUpdateRequest{
+func (a *DomainsAPIService) DomainsUpdate(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsUpdateRequest {
+	return DomainsAPIDomainsUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -541,7 +617,7 @@ func (a *DomainsAPIService) DomainsUpdate(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return Domain
-func (a *DomainsAPIService) DomainsUpdateExecute(r ApiDomainsUpdateRequest) (*Domain, *http.Response, error) {
+func (a *DomainsAPIService) DomainsUpdateExecute(r DomainsAPIDomainsUpdateRequest) (*Domain, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

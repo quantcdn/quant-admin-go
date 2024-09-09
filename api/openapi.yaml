@@ -1576,6 +1576,7 @@ components:
           auth_user: auth_user
           host: host
           waf_enabled: false
+          proxy_inline_fn_enabled: false
           auth_pass: auth_pass
           notify_email: notify_email
           to: to
@@ -1736,6 +1737,7 @@ components:
         auth_user: auth_user
         host: host
         waf_enabled: false
+        proxy_inline_fn_enabled: false
         auth_pass: auth_pass
         notify_email: notify_email
         to: to
@@ -1866,6 +1868,9 @@ components:
           type: string
         waf_config:
           $ref: '#/components/schemas/WAFConfig'
+        proxy_inline_fn_enabled:
+          default: false
+          type: boolean
       required:
       - to
       - waf_enabled

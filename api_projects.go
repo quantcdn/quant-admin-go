@@ -20,22 +20,93 @@ import (
 )
 
 
+type ProjectsAPI interface {
+
+	/*
+	ProjectsCreate Method for ProjectsCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@return ProjectsAPIProjectsCreateRequest
+	*/
+	ProjectsCreate(ctx context.Context, organization string) ProjectsAPIProjectsCreateRequest
+
+	// ProjectsCreateExecute executes the request
+	//  @return Project
+	ProjectsCreateExecute(r ProjectsAPIProjectsCreateRequest) (*Project, *http.Response, error)
+
+	/*
+	ProjectsDelete Method for ProjectsDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return ProjectsAPIProjectsDeleteRequest
+	*/
+	ProjectsDelete(ctx context.Context, organization string, project string) ProjectsAPIProjectsDeleteRequest
+
+	// ProjectsDeleteExecute executes the request
+	//  @return Project
+	ProjectsDeleteExecute(r ProjectsAPIProjectsDeleteRequest) (*Project, *http.Response, error)
+
+	/*
+	ProjectsList Method for ProjectsList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@return ProjectsAPIProjectsListRequest
+	*/
+	ProjectsList(ctx context.Context, organization string) ProjectsAPIProjectsListRequest
+
+	// ProjectsListExecute executes the request
+	//  @return []Project
+	ProjectsListExecute(r ProjectsAPIProjectsListRequest) ([]Project, *http.Response, error)
+
+	/*
+	ProjectsRead Method for ProjectsRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return ProjectsAPIProjectsReadRequest
+	*/
+	ProjectsRead(ctx context.Context, organization string, project string) ProjectsAPIProjectsReadRequest
+
+	// ProjectsReadExecute executes the request
+	//  @return Project
+	ProjectsReadExecute(r ProjectsAPIProjectsReadRequest) (*Project, *http.Response, error)
+
+	/*
+	ProjectsUpdate Method for ProjectsUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return ProjectsAPIProjectsUpdateRequest
+	*/
+	ProjectsUpdate(ctx context.Context, organization string, project string) ProjectsAPIProjectsUpdateRequest
+
+	// ProjectsUpdateExecute executes the request
+	//  @return Project
+	ProjectsUpdateExecute(r ProjectsAPIProjectsUpdateRequest) (*Project, *http.Response, error)
+}
+
 // ProjectsAPIService ProjectsAPI service
 type ProjectsAPIService service
 
-type ApiProjectsCreateRequest struct {
+type ProjectsAPIProjectsCreateRequest struct {
 	ctx context.Context
-	ApiService *ProjectsAPIService
+	ApiService ProjectsAPI
 	organization string
 	projectRequest *ProjectRequest
 }
 
-func (r ApiProjectsCreateRequest) ProjectRequest(projectRequest ProjectRequest) ApiProjectsCreateRequest {
+func (r ProjectsAPIProjectsCreateRequest) ProjectRequest(projectRequest ProjectRequest) ProjectsAPIProjectsCreateRequest {
 	r.projectRequest = &projectRequest
 	return r
 }
 
-func (r ApiProjectsCreateRequest) Execute() (*Project, *http.Response, error) {
+func (r ProjectsAPIProjectsCreateRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.ProjectsCreateExecute(r)
 }
 
@@ -44,10 +115,10 @@ ProjectsCreate Method for ProjectsCreate
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
- @return ApiProjectsCreateRequest
+ @return ProjectsAPIProjectsCreateRequest
 */
-func (a *ProjectsAPIService) ProjectsCreate(ctx context.Context, organization string) ApiProjectsCreateRequest {
-	return ApiProjectsCreateRequest{
+func (a *ProjectsAPIService) ProjectsCreate(ctx context.Context, organization string) ProjectsAPIProjectsCreateRequest {
+	return ProjectsAPIProjectsCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -56,7 +127,7 @@ func (a *ProjectsAPIService) ProjectsCreate(ctx context.Context, organization st
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectsAPIService) ProjectsCreateExecute(r ApiProjectsCreateRequest) (*Project, *http.Response, error) {
+func (a *ProjectsAPIService) ProjectsCreateExecute(r ProjectsAPIProjectsCreateRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -145,14 +216,14 @@ func (a *ProjectsAPIService) ProjectsCreateExecute(r ApiProjectsCreateRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProjectsDeleteRequest struct {
+type ProjectsAPIProjectsDeleteRequest struct {
 	ctx context.Context
-	ApiService *ProjectsAPIService
+	ApiService ProjectsAPI
 	organization string
 	project string
 }
 
-func (r ApiProjectsDeleteRequest) Execute() (*Project, *http.Response, error) {
+func (r ProjectsAPIProjectsDeleteRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.ProjectsDeleteExecute(r)
 }
 
@@ -162,10 +233,10 @@ ProjectsDelete Method for ProjectsDelete
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiProjectsDeleteRequest
+ @return ProjectsAPIProjectsDeleteRequest
 */
-func (a *ProjectsAPIService) ProjectsDelete(ctx context.Context, organization string, project string) ApiProjectsDeleteRequest {
-	return ApiProjectsDeleteRequest{
+func (a *ProjectsAPIService) ProjectsDelete(ctx context.Context, organization string, project string) ProjectsAPIProjectsDeleteRequest {
+	return ProjectsAPIProjectsDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -175,7 +246,7 @@ func (a *ProjectsAPIService) ProjectsDelete(ctx context.Context, organization st
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectsAPIService) ProjectsDeleteExecute(r ApiProjectsDeleteRequest) (*Project, *http.Response, error) {
+func (a *ProjectsAPIService) ProjectsDeleteExecute(r ProjectsAPIProjectsDeleteRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -260,13 +331,13 @@ func (a *ProjectsAPIService) ProjectsDeleteExecute(r ApiProjectsDeleteRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProjectsListRequest struct {
+type ProjectsAPIProjectsListRequest struct {
 	ctx context.Context
-	ApiService *ProjectsAPIService
+	ApiService ProjectsAPI
 	organization string
 }
 
-func (r ApiProjectsListRequest) Execute() ([]Project, *http.Response, error) {
+func (r ProjectsAPIProjectsListRequest) Execute() ([]Project, *http.Response, error) {
 	return r.ApiService.ProjectsListExecute(r)
 }
 
@@ -275,10 +346,10 @@ ProjectsList Method for ProjectsList
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
- @return ApiProjectsListRequest
+ @return ProjectsAPIProjectsListRequest
 */
-func (a *ProjectsAPIService) ProjectsList(ctx context.Context, organization string) ApiProjectsListRequest {
-	return ApiProjectsListRequest{
+func (a *ProjectsAPIService) ProjectsList(ctx context.Context, organization string) ProjectsAPIProjectsListRequest {
+	return ProjectsAPIProjectsListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -287,7 +358,7 @@ func (a *ProjectsAPIService) ProjectsList(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return []Project
-func (a *ProjectsAPIService) ProjectsListExecute(r ApiProjectsListRequest) ([]Project, *http.Response, error) {
+func (a *ProjectsAPIService) ProjectsListExecute(r ProjectsAPIProjectsListRequest) ([]Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -371,14 +442,14 @@ func (a *ProjectsAPIService) ProjectsListExecute(r ApiProjectsListRequest) ([]Pr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProjectsReadRequest struct {
+type ProjectsAPIProjectsReadRequest struct {
 	ctx context.Context
-	ApiService *ProjectsAPIService
+	ApiService ProjectsAPI
 	organization string
 	project string
 }
 
-func (r ApiProjectsReadRequest) Execute() (*Project, *http.Response, error) {
+func (r ProjectsAPIProjectsReadRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.ProjectsReadExecute(r)
 }
 
@@ -388,10 +459,10 @@ ProjectsRead Method for ProjectsRead
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiProjectsReadRequest
+ @return ProjectsAPIProjectsReadRequest
 */
-func (a *ProjectsAPIService) ProjectsRead(ctx context.Context, organization string, project string) ApiProjectsReadRequest {
-	return ApiProjectsReadRequest{
+func (a *ProjectsAPIService) ProjectsRead(ctx context.Context, organization string, project string) ProjectsAPIProjectsReadRequest {
+	return ProjectsAPIProjectsReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -401,7 +472,7 @@ func (a *ProjectsAPIService) ProjectsRead(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectsAPIService) ProjectsReadExecute(r ApiProjectsReadRequest) (*Project, *http.Response, error) {
+func (a *ProjectsAPIService) ProjectsReadExecute(r ProjectsAPIProjectsReadRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -486,20 +557,20 @@ func (a *ProjectsAPIService) ProjectsReadExecute(r ApiProjectsReadRequest) (*Pro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProjectsUpdateRequest struct {
+type ProjectsAPIProjectsUpdateRequest struct {
 	ctx context.Context
-	ApiService *ProjectsAPIService
+	ApiService ProjectsAPI
 	organization string
 	project string
 	projectRequestUpdate *ProjectRequestUpdate
 }
 
-func (r ApiProjectsUpdateRequest) ProjectRequestUpdate(projectRequestUpdate ProjectRequestUpdate) ApiProjectsUpdateRequest {
+func (r ProjectsAPIProjectsUpdateRequest) ProjectRequestUpdate(projectRequestUpdate ProjectRequestUpdate) ProjectsAPIProjectsUpdateRequest {
 	r.projectRequestUpdate = &projectRequestUpdate
 	return r
 }
 
-func (r ApiProjectsUpdateRequest) Execute() (*Project, *http.Response, error) {
+func (r ProjectsAPIProjectsUpdateRequest) Execute() (*Project, *http.Response, error) {
 	return r.ApiService.ProjectsUpdateExecute(r)
 }
 
@@ -509,10 +580,10 @@ ProjectsUpdate Method for ProjectsUpdate
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiProjectsUpdateRequest
+ @return ProjectsAPIProjectsUpdateRequest
 */
-func (a *ProjectsAPIService) ProjectsUpdate(ctx context.Context, organization string, project string) ApiProjectsUpdateRequest {
-	return ApiProjectsUpdateRequest{
+func (a *ProjectsAPIService) ProjectsUpdate(ctx context.Context, organization string, project string) ProjectsAPIProjectsUpdateRequest {
+	return ProjectsAPIProjectsUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -522,7 +593,7 @@ func (a *ProjectsAPIService) ProjectsUpdate(ctx context.Context, organization st
 
 // Execute executes the request
 //  @return Project
-func (a *ProjectsAPIService) ProjectsUpdateExecute(r ApiProjectsUpdateRequest) (*Project, *http.Response, error) {
+func (a *ProjectsAPIService) ProjectsUpdateExecute(r ProjectsAPIProjectsUpdateRequest) (*Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}

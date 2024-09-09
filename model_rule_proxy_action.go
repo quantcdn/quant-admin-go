@@ -42,6 +42,7 @@ type RuleProxyAction struct {
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
 	NotifyEmail *string `json:"notify_email,omitempty"`
 	WafConfig *WAFConfig `json:"waf_config,omitempty"`
+	ProxyInlineFnEnabled *bool `json:"proxy_inline_fn_enabled,omitempty"`
 }
 
 type _RuleProxyAction RuleProxyAction
@@ -58,6 +59,8 @@ func NewRuleProxyAction(wafEnabled bool, to string) *RuleProxyAction {
 	this.CacheLifetime = &cacheLifetime
 	var disableSslVerify bool = true
 	this.DisableSslVerify = &disableSslVerify
+	var proxyInlineFnEnabled bool = false
+	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
 	return &this
 }
 
@@ -72,6 +75,8 @@ func NewRuleProxyActionWithDefaults() *RuleProxyAction {
 	this.CacheLifetime = &cacheLifetime
 	var disableSslVerify bool = true
 	this.DisableSslVerify = &disableSslVerify
+	var proxyInlineFnEnabled bool = false
+	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
 	return &this
 }
 
@@ -731,6 +736,38 @@ func (o *RuleProxyAction) SetWafConfig(v WAFConfig) {
 	o.WafConfig = &v
 }
 
+// GetProxyInlineFnEnabled returns the ProxyInlineFnEnabled field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetProxyInlineFnEnabled() bool {
+	if o == nil || IsNil(o.ProxyInlineFnEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.ProxyInlineFnEnabled
+}
+
+// GetProxyInlineFnEnabledOk returns a tuple with the ProxyInlineFnEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetProxyInlineFnEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.ProxyInlineFnEnabled) {
+		return nil, false
+	}
+	return o.ProxyInlineFnEnabled, true
+}
+
+// HasProxyInlineFnEnabled returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasProxyInlineFnEnabled() bool {
+	if o != nil && !IsNil(o.ProxyInlineFnEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyInlineFnEnabled gets a reference to the given bool and assigns it to the ProxyInlineFnEnabled field.
+func (o *RuleProxyAction) SetProxyInlineFnEnabled(v bool) {
+	o.ProxyInlineFnEnabled = &v
+}
+
 func (o RuleProxyAction) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -799,6 +836,9 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.WafConfig) {
 		toSerialize["waf_config"] = o.WafConfig
+	}
+	if !IsNil(o.ProxyInlineFnEnabled) {
+		toSerialize["proxy_inline_fn_enabled"] = o.ProxyInlineFnEnabled
 	}
 	return toSerialize, nil
 }

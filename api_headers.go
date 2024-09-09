@@ -20,23 +20,68 @@ import (
 )
 
 
+type HeadersAPI interface {
+
+	/*
+	HeadersCreate Method for HeadersCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return HeadersAPIHeadersCreateRequest
+	*/
+	HeadersCreate(ctx context.Context, organization string, project string) HeadersAPIHeadersCreateRequest
+
+	// HeadersCreateExecute executes the request
+	//  @return map[string]string
+	HeadersCreateExecute(r HeadersAPIHeadersCreateRequest) (map[string]string, *http.Response, error)
+
+	/*
+	HeadersDelete Method for HeadersDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return HeadersAPIHeadersDeleteRequest
+	*/
+	HeadersDelete(ctx context.Context, organization string, project string) HeadersAPIHeadersDeleteRequest
+
+	// HeadersDeleteExecute executes the request
+	//  @return map[string]string
+	HeadersDeleteExecute(r HeadersAPIHeadersDeleteRequest) (map[string]string, *http.Response, error)
+
+	/*
+	HeadersList Method for HeadersList
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return HeadersAPIHeadersListRequest
+	*/
+	HeadersList(ctx context.Context, organization string, project string) HeadersAPIHeadersListRequest
+
+	// HeadersListExecute executes the request
+	//  @return map[string]string
+	HeadersListExecute(r HeadersAPIHeadersListRequest) (map[string]string, *http.Response, error)
+}
+
 // HeadersAPIService HeadersAPI service
 type HeadersAPIService service
 
-type ApiHeadersCreateRequest struct {
+type HeadersAPIHeadersCreateRequest struct {
 	ctx context.Context
-	ApiService *HeadersAPIService
+	ApiService HeadersAPI
 	organization string
 	project string
 	headersCreateRequest *HeadersCreateRequest
 }
 
-func (r ApiHeadersCreateRequest) HeadersCreateRequest(headersCreateRequest HeadersCreateRequest) ApiHeadersCreateRequest {
+func (r HeadersAPIHeadersCreateRequest) HeadersCreateRequest(headersCreateRequest HeadersCreateRequest) HeadersAPIHeadersCreateRequest {
 	r.headersCreateRequest = &headersCreateRequest
 	return r
 }
 
-func (r ApiHeadersCreateRequest) Execute() (map[string]string, *http.Response, error) {
+func (r HeadersAPIHeadersCreateRequest) Execute() (map[string]string, *http.Response, error) {
 	return r.ApiService.HeadersCreateExecute(r)
 }
 
@@ -46,10 +91,10 @@ HeadersCreate Method for HeadersCreate
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiHeadersCreateRequest
+ @return HeadersAPIHeadersCreateRequest
 */
-func (a *HeadersAPIService) HeadersCreate(ctx context.Context, organization string, project string) ApiHeadersCreateRequest {
-	return ApiHeadersCreateRequest{
+func (a *HeadersAPIService) HeadersCreate(ctx context.Context, organization string, project string) HeadersAPIHeadersCreateRequest {
+	return HeadersAPIHeadersCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -59,7 +104,7 @@ func (a *HeadersAPIService) HeadersCreate(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return map[string]string
-func (a *HeadersAPIService) HeadersCreateExecute(r ApiHeadersCreateRequest) (map[string]string, *http.Response, error) {
+func (a *HeadersAPIService) HeadersCreateExecute(r HeadersAPIHeadersCreateRequest) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -149,20 +194,20 @@ func (a *HeadersAPIService) HeadersCreateExecute(r ApiHeadersCreateRequest) (map
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiHeadersDeleteRequest struct {
+type HeadersAPIHeadersDeleteRequest struct {
 	ctx context.Context
-	ApiService *HeadersAPIService
+	ApiService HeadersAPI
 	organization string
 	project string
 	headersDeleteRequest *HeadersDeleteRequest
 }
 
-func (r ApiHeadersDeleteRequest) HeadersDeleteRequest(headersDeleteRequest HeadersDeleteRequest) ApiHeadersDeleteRequest {
+func (r HeadersAPIHeadersDeleteRequest) HeadersDeleteRequest(headersDeleteRequest HeadersDeleteRequest) HeadersAPIHeadersDeleteRequest {
 	r.headersDeleteRequest = &headersDeleteRequest
 	return r
 }
 
-func (r ApiHeadersDeleteRequest) Execute() (map[string]string, *http.Response, error) {
+func (r HeadersAPIHeadersDeleteRequest) Execute() (map[string]string, *http.Response, error) {
 	return r.ApiService.HeadersDeleteExecute(r)
 }
 
@@ -172,10 +217,10 @@ HeadersDelete Method for HeadersDelete
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiHeadersDeleteRequest
+ @return HeadersAPIHeadersDeleteRequest
 */
-func (a *HeadersAPIService) HeadersDelete(ctx context.Context, organization string, project string) ApiHeadersDeleteRequest {
-	return ApiHeadersDeleteRequest{
+func (a *HeadersAPIService) HeadersDelete(ctx context.Context, organization string, project string) HeadersAPIHeadersDeleteRequest {
+	return HeadersAPIHeadersDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -185,7 +230,7 @@ func (a *HeadersAPIService) HeadersDelete(ctx context.Context, organization stri
 
 // Execute executes the request
 //  @return map[string]string
-func (a *HeadersAPIService) HeadersDeleteExecute(r ApiHeadersDeleteRequest) (map[string]string, *http.Response, error) {
+func (a *HeadersAPIService) HeadersDeleteExecute(r HeadersAPIHeadersDeleteRequest) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -275,14 +320,14 @@ func (a *HeadersAPIService) HeadersDeleteExecute(r ApiHeadersDeleteRequest) (map
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiHeadersListRequest struct {
+type HeadersAPIHeadersListRequest struct {
 	ctx context.Context
-	ApiService *HeadersAPIService
+	ApiService HeadersAPI
 	organization string
 	project string
 }
 
-func (r ApiHeadersListRequest) Execute() (map[string]string, *http.Response, error) {
+func (r HeadersAPIHeadersListRequest) Execute() (map[string]string, *http.Response, error) {
 	return r.ApiService.HeadersListExecute(r)
 }
 
@@ -292,10 +337,10 @@ HeadersList Method for HeadersList
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return ApiHeadersListRequest
+ @return HeadersAPIHeadersListRequest
 */
-func (a *HeadersAPIService) HeadersList(ctx context.Context, organization string, project string) ApiHeadersListRequest {
-	return ApiHeadersListRequest{
+func (a *HeadersAPIService) HeadersList(ctx context.Context, organization string, project string) HeadersAPIHeadersListRequest {
+	return HeadersAPIHeadersListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -305,7 +350,7 @@ func (a *HeadersAPIService) HeadersList(ctx context.Context, organization string
 
 // Execute executes the request
 //  @return map[string]string
-func (a *HeadersAPIService) HeadersListExecute(r ApiHeadersListRequest) (map[string]string, *http.Response, error) {
+func (a *HeadersAPIService) HeadersListExecute(r HeadersAPIHeadersListRequest) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
