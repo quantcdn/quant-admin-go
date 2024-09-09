@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsList**](docs/ProjectsAPI.md#projectslist) | **Get** /organizations/{organization}/projects | 
 *ProjectsAPI* | [**ProjectsRead**](docs/ProjectsAPI.md#projectsread) | **Get** /organizations/{organization}/projects/{project} | 
 *ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Patch** /organizations/{organization}/projects/{project} | 
+*PurgeAPI* | [**PurgeCreate**](docs/PurgeAPI.md#purgecreate) | **Post** /organizations/{organization}/projects/{project}/purge | 
 *RulesProxyAPI* | [**RulesProxyCreate**](docs/RulesProxyAPI.md#rulesproxycreate) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyDelete**](docs/RulesProxyAPI.md#rulesproxydelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyList**](docs/RulesProxyAPI.md#rulesproxylist) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
@@ -125,6 +126,7 @@ Class | Method | HTTP request | Description
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
  - [ProjectRequestUpdate](docs/ProjectRequestUpdate.md)
+ - [PurgeRequest](docs/PurgeRequest.md)
  - [RuleProxy](docs/RuleProxy.md)
  - [RuleProxyAction](docs/RuleProxyAction.md)
  - [RuleProxyActionNotifyConfig](docs/RuleProxyActionNotifyConfig.md)

@@ -10,6 +10,7 @@ security:
 tags:
 - name: Organizations
 - name: Projects
+- name: Purge
 - name: Crawlers
 - name: Domains
 - name: Headers
@@ -754,6 +755,46 @@ paths:
             syntax.
       tags:
       - Domains
+  /organizations/{organization}/projects/{project}/purge:
+    post:
+      operationId: Purge_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurgeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Purge
   /organizations/{organization}/projects/{project}/rules/proxy:
     get:
       operationId: RulesProxy_list
@@ -1517,6 +1558,27 @@ components:
           type: string
         custom_s3_sync_secret_key:
           type: string
+      type: object
+    PurgeRequest:
+      example:
+        cache_keys:
+        - cache_keys
+        - cache_keys
+        scope: project
+      properties:
+        cache_keys:
+          items:
+            type: string
+          type: array
+        scope:
+          default: project
+          enum:
+          - org
+          - project
+          type: string
+      required:
+      - cache_keys
+      - scope
       type: object
     RuleProxy:
       example:

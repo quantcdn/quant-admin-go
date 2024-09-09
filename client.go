@@ -59,6 +59,8 @@ type APIClient struct {
 
 	ProjectsAPI ProjectsAPI
 
+	PurgeAPI PurgeAPI
+
 	RulesProxyAPI RulesProxyAPI
 
 	RulesRedirectAPI RulesRedirectAPI
@@ -85,6 +87,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.HeadersAPI = (*HeadersAPIService)(&c.common)
 	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
+	c.PurgeAPI = (*PurgeAPIService)(&c.common)
 	c.RulesProxyAPI = (*RulesProxyAPIService)(&c.common)
 	c.RulesRedirectAPI = (*RulesRedirectAPIService)(&c.common)
 

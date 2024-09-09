@@ -8,6 +8,7 @@ api_domains.go
 api_headers.go
 api_organizations.go
 api_projects.go
+api_purge.go
 api_rules_proxy.go
 api_rules_redirect.go
 client.go
@@ -30,6 +31,8 @@ docs/Project.md
 docs/ProjectRequest.md
 docs/ProjectRequestUpdate.md
 docs/ProjectsAPI.md
+docs/PurgeAPI.md
+docs/PurgeRequest.md
 docs/RuleProxy.md
 docs/RuleProxyAction.md
 docs/RuleProxyActionNotifyConfig.md
@@ -63,6 +66,7 @@ model_organization.go
 model_project.go
 model_project_request.go
 model_project_request_update.go
+model_purge_request.go
 model_rule_proxy.go
 model_rule_proxy_action.go
 model_rule_proxy_action_notify_config.go
@@ -84,6 +88,7 @@ test/api_domains_test.go
 test/api_headers_test.go
 test/api_organizations_test.go
 test/api_projects_test.go
+test/api_purge_test.go
 test/api_rules_proxy_test.go
 test/api_rules_redirect_test.go
 utils.go
