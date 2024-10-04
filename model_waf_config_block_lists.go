@@ -23,7 +23,10 @@ type WAFConfigBlockLists struct {
 	Ip *bool `json:"ip,omitempty"`
 	UserAgent *bool `json:"user_agent,omitempty"`
 	Ai *bool `json:"ai,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WAFConfigBlockLists WAFConfigBlockLists
 
 // NewWAFConfigBlockLists instantiates a new WAFConfigBlockLists object
 // This constructor will assign default values to properties that have it defined,
@@ -208,7 +211,36 @@ func (o WAFConfigBlockLists) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Ai) {
 		toSerialize["ai"] = o.Ai
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WAFConfigBlockLists) UnmarshalJSON(data []byte) (err error) {
+	varWAFConfigBlockLists := _WAFConfigBlockLists{}
+
+	err = json.Unmarshal(data, &varWAFConfigBlockLists)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WAFConfigBlockLists(varWAFConfigBlockLists)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "referer")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "user_agent")
+		delete(additionalProperties, "ai")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWAFConfigBlockLists struct {

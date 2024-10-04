@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type RuleRedirect struct {
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	Action string `json:"action"`
 	ActionConfig *RuleRedirectAction `json:"action_config,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleRedirect RuleRedirect
@@ -675,6 +675,11 @@ func (o RuleRedirect) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ActionConfig) {
 		toSerialize["action_config"] = o.ActionConfig
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -704,15 +709,37 @@ func (o *RuleRedirect) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleRedirect := _RuleRedirect{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleRedirect)
+	err = json.Unmarshal(data, &varRuleRedirect)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleRedirect(varRuleRedirect)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "rule_id")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "only_with_cookie")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "method_is")
+		delete(additionalProperties, "method_is_not")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "ip_is")
+		delete(additionalProperties, "ip_is_not")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "country_is")
+		delete(additionalProperties, "country_is_not")
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "action_config")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

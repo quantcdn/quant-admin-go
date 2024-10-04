@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -43,6 +42,7 @@ type RuleProxyAction struct {
 	NotifyEmail *string `json:"notify_email,omitempty"`
 	WafConfig *WAFConfig `json:"waf_config,omitempty"`
 	ProxyInlineFnEnabled *bool `json:"proxy_inline_fn_enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleProxyAction RuleProxyAction
@@ -840,6 +840,11 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProxyInlineFnEnabled) {
 		toSerialize["proxy_inline_fn_enabled"] = o.ProxyInlineFnEnabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -868,15 +873,41 @@ func (o *RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleProxyAction := _RuleProxyAction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleProxyAction)
+	err = json.Unmarshal(data, &varRuleProxyAction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleProxyAction(varRuleProxyAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "waf_enabled")
+		delete(additionalProperties, "proxy_strip_headers")
+		delete(additionalProperties, "auth_user")
+		delete(additionalProperties, "auth_pass")
+		delete(additionalProperties, "origin_timeout")
+		delete(additionalProperties, "proxy_alert_enabled")
+		delete(additionalProperties, "notify")
+		delete(additionalProperties, "notify_config")
+		delete(additionalProperties, "proxy_strip_request_headers")
+		delete(additionalProperties, "failover_origin_status_codes")
+		delete(additionalProperties, "failover_origin_ttfb")
+		delete(additionalProperties, "failover_mode")
+		delete(additionalProperties, "failover_lifetime")
+		delete(additionalProperties, "only_proxy_404")
+		delete(additionalProperties, "inject_headers")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "cache_lifetime")
+		delete(additionalProperties, "disable_ssl_verify")
+		delete(additionalProperties, "notify_email")
+		delete(additionalProperties, "waf_config")
+		delete(additionalProperties, "proxy_inline_fn_enabled")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

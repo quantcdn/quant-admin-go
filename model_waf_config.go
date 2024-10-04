@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -47,6 +46,7 @@ type WAFConfig struct {
 	NotifyEmail []string `json:"notify_email,omitempty"`
 	NotifySlack *string `json:"notify_slack,omitempty"`
 	NotifySlackRpm *int32 `json:"notify_slack_rpm,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WAFConfig WAFConfig
@@ -1023,6 +1023,11 @@ func (o WAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotifySlackRpm) {
 		toSerialize["notify_slack_rpm"] = o.NotifySlackRpm
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1050,15 +1055,45 @@ func (o *WAFConfig) UnmarshalJSON(data []byte) (err error) {
 
 	varWAFConfig := _WAFConfig{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWAFConfig)
+	err = json.Unmarshal(data, &varWAFConfig)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WAFConfig(varWAFConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mode")
+		delete(additionalProperties, "paranoia_level")
+		delete(additionalProperties, "allow_rules")
+		delete(additionalProperties, "allow_ip")
+		delete(additionalProperties, "block_ip")
+		delete(additionalProperties, "block_ua")
+		delete(additionalProperties, "block_referer")
+		delete(additionalProperties, "block_lists")
+		delete(additionalProperties, "httpbl")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "httpbl_enabled")
+		delete(additionalProperties, "notify_slack_hits_rpm")
+		delete(additionalProperties, "ip_ratelimit_mode")
+		delete(additionalProperties, "ip_ratelimit_rps")
+		delete(additionalProperties, "ip_ratelimit_cooldown")
+		delete(additionalProperties, "request_header_ratelimit_mode")
+		delete(additionalProperties, "request_header_name")
+		delete(additionalProperties, "request_header_ratelimit_rps")
+		delete(additionalProperties, "request_header_ratelimit_cooldown")
+		delete(additionalProperties, "waf_ratelimit_mode")
+		delete(additionalProperties, "waf_ratelimit_hits")
+		delete(additionalProperties, "waf_ratelimit_rps")
+		delete(additionalProperties, "waf_ratelimit_cooldown")
+		delete(additionalProperties, "notify_email")
+		delete(additionalProperties, "notify_slack")
+		delete(additionalProperties, "notify_slack_rpm")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -22,7 +22,10 @@ type RuleProxyActionNotifyConfig struct {
 	OriginStatusCodes []string `json:"origin_status_codes,omitempty"`
 	Period *string `json:"period,omitempty"`
 	SlackWebhook *string `json:"slack_webhook,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleProxyActionNotifyConfig RuleProxyActionNotifyConfig
 
 // NewRuleProxyActionNotifyConfig instantiates a new RuleProxyActionNotifyConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -164,7 +167,35 @@ func (o RuleProxyActionNotifyConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SlackWebhook) {
 		toSerialize["slack_webhook"] = o.SlackWebhook
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleProxyActionNotifyConfig) UnmarshalJSON(data []byte) (err error) {
+	varRuleProxyActionNotifyConfig := _RuleProxyActionNotifyConfig{}
+
+	err = json.Unmarshal(data, &varRuleProxyActionNotifyConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleProxyActionNotifyConfig(varRuleProxyActionNotifyConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "origin_status_codes")
+		delete(additionalProperties, "period")
+		delete(additionalProperties, "slack_webhook")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleProxyActionNotifyConfig struct {

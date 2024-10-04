@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &HeadersCreateRequest{}
 // HeadersCreateRequest struct for HeadersCreateRequest
 type HeadersCreateRequest struct {
 	Headers map[string]string `json:"headers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HeadersCreateRequest HeadersCreateRequest
@@ -79,6 +79,11 @@ func (o HeadersCreateRequest) MarshalJSON() ([]byte, error) {
 func (o HeadersCreateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["headers"] = o.Headers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *HeadersCreateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varHeadersCreateRequest := _HeadersCreateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHeadersCreateRequest)
+	err = json.Unmarshal(data, &varHeadersCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HeadersCreateRequest(varHeadersCreateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "headers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

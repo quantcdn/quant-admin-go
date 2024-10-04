@@ -21,7 +21,10 @@ var _ MappedNullable = &DomainRequestUpdate{}
 type DomainRequestUpdate struct {
 	Name *string `json:"name,omitempty"`
 	Domain *string `json:"domain,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DomainRequestUpdate DomainRequestUpdate
 
 // NewDomainRequestUpdate instantiates a new DomainRequestUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o DomainRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Domain) {
 		toSerialize["domain"] = o.Domain
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DomainRequestUpdate) UnmarshalJSON(data []byte) (err error) {
+	varDomainRequestUpdate := _DomainRequestUpdate{}
+
+	err = json.Unmarshal(data, &varDomainRequestUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DomainRequestUpdate(varDomainRequestUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "domain")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDomainRequestUpdate struct {

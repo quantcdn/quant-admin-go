@@ -25,7 +25,10 @@ type WAFConfigUpdateHttpbl struct {
 	BlockHarvester *bool `json:"block_harvester,omitempty"`
 	BlockSpam *bool `json:"block_spam,omitempty"`
 	BlockSearchEngine *bool `json:"block_search_engine,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WAFConfigUpdateHttpbl WAFConfigUpdateHttpbl
 
 // NewWAFConfigUpdateHttpbl instantiates a new WAFConfigUpdateHttpbl object
 // This constructor will assign default values to properties that have it defined,
@@ -284,7 +287,38 @@ func (o WAFConfigUpdateHttpbl) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BlockSearchEngine) {
 		toSerialize["block_search_engine"] = o.BlockSearchEngine
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WAFConfigUpdateHttpbl) UnmarshalJSON(data []byte) (err error) {
+	varWAFConfigUpdateHttpbl := _WAFConfigUpdateHttpbl{}
+
+	err = json.Unmarshal(data, &varWAFConfigUpdateHttpbl)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WAFConfigUpdateHttpbl(varWAFConfigUpdateHttpbl)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "httpbl_enabled")
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "block_suspicious")
+		delete(additionalProperties, "block_harvester")
+		delete(additionalProperties, "block_spam")
+		delete(additionalProperties, "block_search_engine")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWAFConfigUpdateHttpbl struct {

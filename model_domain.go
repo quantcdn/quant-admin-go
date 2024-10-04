@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type Domain struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Domain Domain
@@ -349,6 +349,11 @@ func (o Domain) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeletedAt) {
 		toSerialize["deleted_at"] = o.DeletedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -378,15 +383,28 @@ func (o *Domain) UnmarshalJSON(data []byte) (err error) {
 
 	varDomain := _Domain{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDomain)
+	err = json.Unmarshal(data, &varDomain)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Domain(varDomain)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "in_section")
+		delete(additionalProperties, "dns_engaged")
+		delete(additionalProperties, "section_message")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

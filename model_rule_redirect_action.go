@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RuleRedirectAction{}
 type RuleRedirectAction struct {
 	To string `json:"to"`
 	StatusCode string `json:"status_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleRedirectAction RuleRedirectAction
@@ -108,6 +108,11 @@ func (o RuleRedirectAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["to"] = o.To
 	toSerialize["status_code"] = o.StatusCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *RuleRedirectAction) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleRedirectAction := _RuleRedirectAction{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleRedirectAction)
+	err = json.Unmarshal(data, &varRuleRedirectAction)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleRedirectAction(varRuleRedirectAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "status_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

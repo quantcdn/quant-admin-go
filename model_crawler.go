@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type Crawler struct {
 	CreatedAt *string `json:"created_at,omitempty"`
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Crawler Crawler
@@ -407,6 +407,11 @@ func (o Crawler) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeletedAt) {
 		toSerialize["deleted_at"] = o.DeletedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -438,15 +443,30 @@ func (o *Crawler) UnmarshalJSON(data []byte) (err error) {
 
 	varCrawler := _Crawler{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCrawler)
+	err = json.Unmarshal(data, &varCrawler)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Crawler(varCrawler)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "project_id")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "config")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "domain_verified")
+		delete(additionalProperties, "urls_list")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

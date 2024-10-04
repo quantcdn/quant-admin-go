@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &PurgeRequest{}
 type PurgeRequest struct {
 	CacheKeys []string `json:"cache_keys"`
 	Scope string `json:"scope"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PurgeRequest PurgeRequest
@@ -108,6 +108,11 @@ func (o PurgeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cache_keys"] = o.CacheKeys
 	toSerialize["scope"] = o.Scope
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PurgeRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPurgeRequest := _PurgeRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPurgeRequest)
+	err = json.Unmarshal(data, &varPurgeRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PurgeRequest(varPurgeRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cache_keys")
+		delete(additionalProperties, "scope")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

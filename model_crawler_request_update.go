@@ -24,7 +24,10 @@ type CrawlerRequestUpdate struct {
 	BrowserMode *bool `json:"browser_mode,omitempty"`
 	UrlList []string `json:"url_list,omitempty"`
 	Headers *map[string]string `json:"headers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CrawlerRequestUpdate CrawlerRequestUpdate
 
 // NewCrawlerRequestUpdate instantiates a new CrawlerRequestUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o CrawlerRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Headers) {
 		toSerialize["headers"] = o.Headers
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CrawlerRequestUpdate) UnmarshalJSON(data []byte) (err error) {
+	varCrawlerRequestUpdate := _CrawlerRequestUpdate{}
+
+	err = json.Unmarshal(data, &varCrawlerRequestUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CrawlerRequestUpdate(varCrawlerRequestUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "browser_mode")
+		delete(additionalProperties, "url_list")
+		delete(additionalProperties, "headers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCrawlerRequestUpdate struct {

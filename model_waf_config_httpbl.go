@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type WAFConfigHttpbl struct {
 	BlockHarvester bool `json:"block_harvester"`
 	BlockSpam bool `json:"block_spam"`
 	BlockSearchEngine bool `json:"block_search_engine"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WAFConfigHttpbl WAFConfigHttpbl
@@ -233,6 +233,11 @@ func (o WAFConfigHttpbl) ToMap() (map[string]interface{}, error) {
 	toSerialize["block_harvester"] = o.BlockHarvester
 	toSerialize["block_spam"] = o.BlockSpam
 	toSerialize["block_search_engine"] = o.BlockSearchEngine
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -264,15 +269,25 @@ func (o *WAFConfigHttpbl) UnmarshalJSON(data []byte) (err error) {
 
 	varWAFConfigHttpbl := _WAFConfigHttpbl{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWAFConfigHttpbl)
+	err = json.Unmarshal(data, &varWAFConfigHttpbl)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WAFConfigHttpbl(varWAFConfigHttpbl)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "httpbl_enabled")
+		delete(additionalProperties, "api_key")
+		delete(additionalProperties, "block_suspicious")
+		delete(additionalProperties, "block_harvester")
+		delete(additionalProperties, "block_spam")
+		delete(additionalProperties, "block_search_engine")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CrawlerRequest struct {
 	BrowserMode *bool `json:"browser_mode,omitempty"`
 	UrlList []string `json:"url_list"`
 	Headers map[string]string `json:"headers"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CrawlerRequest CrawlerRequest
@@ -205,6 +205,11 @@ func (o CrawlerRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["url_list"] = o.UrlList
 	toSerialize["headers"] = o.Headers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -234,15 +239,24 @@ func (o *CrawlerRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCrawlerRequest := _CrawlerRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCrawlerRequest)
+	err = json.Unmarshal(data, &varCrawlerRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CrawlerRequest(varCrawlerRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "browser_mode")
+		delete(additionalProperties, "url_list")
+		delete(additionalProperties, "headers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

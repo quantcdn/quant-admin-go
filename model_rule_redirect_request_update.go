@@ -37,7 +37,10 @@ type RuleRedirectRequestUpdate struct {
 	CookieName *string `json:"cookie_name,omitempty"`
 	RedirectTo *string `json:"redirect_to,omitempty"`
 	RedirectCode *string `json:"redirect_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleRedirectRequestUpdate RuleRedirectRequestUpdate
 
 // NewRuleRedirectRequestUpdate instantiates a new RuleRedirectRequestUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -708,7 +711,50 @@ func (o RuleRedirectRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RedirectCode) {
 		toSerialize["redirect_code"] = o.RedirectCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleRedirectRequestUpdate) UnmarshalJSON(data []byte) (err error) {
+	varRuleRedirectRequestUpdate := _RuleRedirectRequestUpdate{}
+
+	err = json.Unmarshal(data, &varRuleRedirectRequestUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleRedirectRequestUpdate(varRuleRedirectRequestUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "country_is")
+		delete(additionalProperties, "country_is_not")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "method_is")
+		delete(additionalProperties, "method_is_not")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "ip_is")
+		delete(additionalProperties, "ip_is_not")
+		delete(additionalProperties, "only_with_cookie")
+		delete(additionalProperties, "cookie_name")
+		delete(additionalProperties, "redirect_to")
+		delete(additionalProperties, "redirect_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleRedirectRequestUpdate struct {

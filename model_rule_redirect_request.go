@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type RuleRedirectRequest struct {
 	CookieName *string `json:"cookie_name,omitempty"`
 	RedirectTo string `json:"redirect_to"`
 	RedirectCode string `json:"redirect_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleRedirectRequest RuleRedirectRequest
@@ -663,6 +663,11 @@ func (o RuleRedirectRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["redirect_to"] = o.RedirectTo
 	toSerialize["redirect_code"] = o.RedirectCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -694,15 +699,37 @@ func (o *RuleRedirectRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleRedirectRequest := _RuleRedirectRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleRedirectRequest)
+	err = json.Unmarshal(data, &varRuleRedirectRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleRedirectRequest(varRuleRedirectRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "country_is")
+		delete(additionalProperties, "country_is_not")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "method_is")
+		delete(additionalProperties, "method_is_not")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "ip_is")
+		delete(additionalProperties, "ip_is_not")
+		delete(additionalProperties, "only_with_cookie")
+		delete(additionalProperties, "cookie_name")
+		delete(additionalProperties, "redirect_to")
+		delete(additionalProperties, "redirect_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type RuleProxy struct {
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	Action string `json:"action"`
 	ActionConfig RuleProxyAction `json:"action_config"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RuleProxy RuleProxy
@@ -666,6 +666,11 @@ func (o RuleProxy) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["action"] = o.Action
 	toSerialize["action_config"] = o.ActionConfig
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -696,15 +701,37 @@ func (o *RuleProxy) UnmarshalJSON(data []byte) (err error) {
 
 	varRuleProxy := _RuleProxy{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRuleProxy)
+	err = json.Unmarshal(data, &varRuleProxy)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RuleProxy(varRuleProxy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "rule_id")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "only_with_cookie")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "method_is")
+		delete(additionalProperties, "method_is_not")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "ip_is")
+		delete(additionalProperties, "ip_is_not")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "country_is")
+		delete(additionalProperties, "country_is_not")
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "action_config")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

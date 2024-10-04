@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type Project struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
 	FastlyMigrated *int32 `json:"fastly_migrated,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Project Project
@@ -546,6 +546,11 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FastlyMigrated) {
 		toSerialize["fastly_migrated"] = o.FastlyMigrated
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -574,15 +579,33 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 
 	varProject := _Project{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProject)
+	err = json.Unmarshal(data, &varProject)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Project(varProject)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "machine_name")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "organization_id")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "project_type")
+		delete(additionalProperties, "git_url")
+		delete(additionalProperties, "security_score")
+		delete(additionalProperties, "parent_project_id")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "fastly_migrated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

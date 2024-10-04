@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &DomainRequest{}
 type DomainRequest struct {
 	Name string `json:"name"`
 	Domain string `json:"domain"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DomainRequest DomainRequest
@@ -106,6 +106,11 @@ func (o DomainRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["domain"] = o.Domain
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *DomainRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDomainRequest := _DomainRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDomainRequest)
+	err = json.Unmarshal(data, &varDomainRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DomainRequest(varDomainRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "domain")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

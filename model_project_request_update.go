@@ -29,7 +29,10 @@ type ProjectRequestUpdate struct {
 	CustomS3SyncRegion *string `json:"custom_s3_sync_region,omitempty"`
 	CustomS3SyncAccessKey *string `json:"custom_s3_sync_access_key,omitempty"`
 	CustomS3SyncSecretKey *string `json:"custom_s3_sync_secret_key,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProjectRequestUpdate ProjectRequestUpdate
 
 // NewProjectRequestUpdate instantiates a new ProjectRequestUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -412,7 +415,42 @@ func (o ProjectRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomS3SyncSecretKey) {
 		toSerialize["custom_s3_sync_secret_key"] = o.CustomS3SyncSecretKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProjectRequestUpdate) UnmarshalJSON(data []byte) (err error) {
+	varProjectRequestUpdate := _ProjectRequestUpdate{}
+
+	err = json.Unmarshal(data, &varProjectRequestUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProjectRequestUpdate(varProjectRequestUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "allow_query_params")
+		delete(additionalProperties, "basic_auth_username")
+		delete(additionalProperties, "basic_auth_password")
+		delete(additionalProperties, "basic_auth_preview_only")
+		delete(additionalProperties, "custom_s3_sync_bucket")
+		delete(additionalProperties, "custom_s3_sync_region")
+		delete(additionalProperties, "custom_s3_sync_access_key")
+		delete(additionalProperties, "custom_s3_sync_secret_key")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProjectRequestUpdate struct {

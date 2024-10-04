@@ -55,7 +55,10 @@ type RuleProxyRequestUpdate struct {
 	StaticErrorPageStatusCodes []string `json:"static_error_page_status_codes,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
 	WafConfig *WAFConfigUpdate `json:"waf_config,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleProxyRequestUpdate RuleProxyRequestUpdate
 
 // NewRuleProxyRequestUpdate instantiates a new RuleProxyRequestUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -1372,7 +1375,68 @@ func (o RuleProxyRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WafConfig) {
 		toSerialize["waf_config"] = o.WafConfig
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleProxyRequestUpdate) UnmarshalJSON(data []byte) (err error) {
+	varRuleProxyRequestUpdate := _RuleProxyRequestUpdate{}
+
+	err = json.Unmarshal(data, &varRuleProxyRequestUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleProxyRequestUpdate(varRuleProxyRequestUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "domain")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "country_is")
+		delete(additionalProperties, "country_is_not")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "method_is")
+		delete(additionalProperties, "method_is_not")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "ip_is")
+		delete(additionalProperties, "ip_is_not")
+		delete(additionalProperties, "only_with_cookie")
+		delete(additionalProperties, "cookie_name")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "auth_user")
+		delete(additionalProperties, "auth_pass")
+		delete(additionalProperties, "disable_ssl_verify")
+		delete(additionalProperties, "cache_lifetime")
+		delete(additionalProperties, "only_proxy_404")
+		delete(additionalProperties, "inject_headers")
+		delete(additionalProperties, "proxy_strip_headers")
+		delete(additionalProperties, "proxy_strip_request_headers")
+		delete(additionalProperties, "failover_mode")
+		delete(additionalProperties, "failover_origin_ttfb")
+		delete(additionalProperties, "failover_origin_status_codes")
+		delete(additionalProperties, "failover_lifetime")
+		delete(additionalProperties, "notify")
+		delete(additionalProperties, "notify_config")
+		delete(additionalProperties, "static_error_page")
+		delete(additionalProperties, "static_error_page_status_codes")
+		delete(additionalProperties, "waf_enabled")
+		delete(additionalProperties, "waf_config")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleProxyRequestUpdate struct {

@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ProjectRequest struct {
 	CustomS3SyncRegion *string `json:"custom_s3_sync_region,omitempty"`
 	CustomS3SyncAccessKey *string `json:"custom_s3_sync_access_key,omitempty"`
 	CustomS3SyncSecretKey *string `json:"custom_s3_sync_secret_key,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProjectRequest ProjectRequest
@@ -396,6 +396,11 @@ func (o ProjectRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomS3SyncSecretKey) {
 		toSerialize["custom_s3_sync_secret_key"] = o.CustomS3SyncSecretKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -424,15 +429,29 @@ func (o *ProjectRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varProjectRequest := _ProjectRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProjectRequest)
+	err = json.Unmarshal(data, &varProjectRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProjectRequest(varProjectRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "allow_query_params")
+		delete(additionalProperties, "basic_auth_username")
+		delete(additionalProperties, "basic_auth_password")
+		delete(additionalProperties, "basic_auth_preview_only")
+		delete(additionalProperties, "custom_s3_sync_bucket")
+		delete(additionalProperties, "custom_s3_sync_region")
+		delete(additionalProperties, "custom_s3_sync_access_key")
+		delete(additionalProperties, "custom_s3_sync_secret_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

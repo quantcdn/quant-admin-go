@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Error{}
 type Error struct {
 	Message string `json:"message"`
 	Error bool `json:"error"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Error Error
@@ -106,6 +106,11 @@ func (o Error) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["message"] = o.Message
 	toSerialize["error"] = o.Error
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *Error) UnmarshalJSON(data []byte) (err error) {
 
 	varError := _Error{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varError)
+	err = json.Unmarshal(data, &varError)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Error(varError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "error")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

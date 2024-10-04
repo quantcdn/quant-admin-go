@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type Organization struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	Subscription *string `json:"subscription,omitempty"`
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Organization Organization
@@ -279,6 +279,11 @@ func (o Organization) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -308,15 +313,26 @@ func (o *Organization) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganization := _Organization{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganization)
+	err = json.Unmarshal(data, &varOrganization)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Organization(varOrganization)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "organizations")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "subscription")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
