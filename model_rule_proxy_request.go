@@ -23,6 +23,7 @@ type RuleProxyRequest struct {
 	Domain []string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
+	Weight *int32 `json:"weight,omitempty"`
 	Disabled bool `json:"disabled"`
 	Url []string `json:"url"`
 	Country *string `json:"country,omitempty"`
@@ -194,6 +195,38 @@ func (o *RuleProxyRequest) HasUuid() bool {
 // SetUuid gets a reference to the given string and assigns it to the Uuid field.
 func (o *RuleProxyRequest) SetUuid(v string) {
 	o.Uuid = &v
+}
+
+// GetWeight returns the Weight field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetWeight() int32 {
+	if o == nil || IsNil(o.Weight) {
+		var ret int32
+		return ret
+	}
+	return *o.Weight
+}
+
+// GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetWeightOk() (*int32, bool) {
+	if o == nil || IsNil(o.Weight) {
+		return nil, false
+	}
+	return o.Weight, true
+}
+
+// HasWeight returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasWeight() bool {
+	if o != nil && !IsNil(o.Weight) {
+		return true
+	}
+
+	return false
+}
+
+// SetWeight gets a reference to the given int32 and assigns it to the Weight field.
+func (o *RuleProxyRequest) SetWeight(v int32) {
+	o.Weight = &v
 }
 
 // GetDisabled returns the Disabled field value
@@ -1245,6 +1278,9 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+	if !IsNil(o.Weight) {
+		toSerialize["weight"] = o.Weight
+	}
 	toSerialize["disabled"] = o.Disabled
 	toSerialize["url"] = o.Url
 	if !IsNil(o.Country) {
@@ -1387,6 +1423,7 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")
+		delete(additionalProperties, "weight")
 		delete(additionalProperties, "disabled")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "country")

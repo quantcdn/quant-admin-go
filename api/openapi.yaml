@@ -16,6 +16,9 @@ tags:
 - name: Headers
 - name: Rules__Proxy
 - name: Rules__Redirect
+- name: KV
+- name: KV__Items
+- name: Secrets
 paths:
   /organizations:
     get:
@@ -755,6 +758,445 @@ paths:
             syntax.
       tags:
       - Domains
+  /organizations/{organization}/projects/{project}/kv:
+    get:
+      operationId: KV_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Store'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV
+    post:
+      operationId: KV_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV
+  /organizations/{organization}/projects/{project}/kv/{store}:
+    delete:
+      operationId: KV_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV
+    get:
+      operationId: KV_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV
+    patch:
+      operationId: KV_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV
+  /organizations/{organization}/projects/{project}/kv/{store}/items:
+    get:
+      operationId: KVItems_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StoreItem'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV__Items
+    post:
+      operationId: KVItems_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreItem'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreItem'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV__Items
+  /organizations/{organization}/projects/{project}/kv/{store}/items/{item}:
+    delete:
+      operationId: KVItems_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: item
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreItem'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV__Items
+    get:
+      operationId: KVItems_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: item
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreItem'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV__Items
+    patch:
+      operationId: KVItems_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: item
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreItemUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreItem'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - KV__Items
   /organizations/{organization}/projects/{project}/purge:
     post:
       operationId: Purge_create
@@ -1199,6 +1641,208 @@ paths:
             syntax.
       tags:
       - Rules__Redirect
+  /organizations/{organization}/projects/{project}/secrets:
+    get:
+      operationId: Secrets_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Store'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Secrets
+    post:
+      operationId: Secrets_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Secrets
+  /organizations/{organization}/projects/{project}/secrets/{store}:
+    delete:
+      operationId: Secrets_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Secrets
+    get:
+      operationId: Secrets_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Secrets
+    patch:
+      operationId: Secrets_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: store
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+      tags:
+      - Secrets
 components:
   parameters:
     ResourceURLParameters.organization:
@@ -1940,7 +2584,7 @@ components:
     RuleProxyRequest:
       example:
         country: country_is
-        cache_lifetime: 0
+        cache_lifetime: 6
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
@@ -1982,6 +2626,7 @@ components:
         failover_origin_ttfb: "2000"
         ip: ip_is
         only_with_cookie: false
+        weight: 0
         country_is:
         - country_is
         - country_is
@@ -2081,6 +2726,8 @@ components:
           type: string
         uuid:
           type: string
+        weight:
+          type: integer
         disabled:
           default: false
           type: boolean
@@ -2205,7 +2852,7 @@ components:
     RuleProxyRequestUpdate:
       example:
         country: country_is
-        cache_lifetime: 0
+        cache_lifetime: 6
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
@@ -2247,6 +2894,7 @@ components:
         failover_origin_ttfb: "2000"
         ip: ip_is
         only_with_cookie: false
+        weight: 0
         country_is:
         - country_is
         - country_is
@@ -2278,15 +2926,15 @@ components:
             block_search_engine: false
             block_suspicious: false
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 7
+          ip_ratelimit_cooldown: 2
+          request_header_ratelimit_cooldown: 9
           allow_ip:
           - allow_ip
           - allow_ip
           mode: block
           ip_ratelimit_mode: disabled
           ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 3
+          waf_ratelimit_rps: 2
           notify_email:
           - notify_email
           - notify_email
@@ -2300,9 +2948,9 @@ components:
             ip: false
             ai: false
             user_agent: false
-          waf_ratelimit_cooldown: 2
-          notify_slack_rpm: 4
-          notify_slack_hits_rpm: 1
+          waf_ratelimit_cooldown: 4
+          notify_slack_rpm: 7
+          notify_slack_hits_rpm: 5
           request_header_name: request_header_name
           thresholds:
           - mode: disabled
@@ -2321,8 +2969,8 @@ components:
             type: type
             value: value
             notify_slack: notify_slack
-          request_header_ratelimit_rps: 2
-          waf_ratelimit_hits: 9
+          request_header_ratelimit_rps: 7
+          waf_ratelimit_hits: 3
           httpbl_enabled:
             key: true
           block_ip:
@@ -2331,7 +2979,7 @@ components:
           block_referer:
           - block_referer
           - block_referer
-          paranoia_level: 6
+          paranoia_level: 1
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -2346,6 +2994,8 @@ components:
           type: string
         uuid:
           type: string
+        weight:
+          type: integer
         disabled:
           default: false
           type: boolean
@@ -2586,6 +3236,7 @@ components:
         ip: ip_is
         only_with_cookie: false
         redirect_code: "301"
+        weight: 0
         country_is:
         - country_is
         - country_is
@@ -2620,6 +3271,8 @@ components:
           type: string
         uuid:
           type: string
+        weight:
+          type: integer
         disabled:
           default: false
           type: boolean
@@ -2696,6 +3349,7 @@ components:
         ip: ip_is
         only_with_cookie: false
         redirect_code: "301"
+        weight: 0
         country_is:
         - country_is
         - country_is
@@ -2730,6 +3384,8 @@ components:
           type: string
         uuid:
           type: string
+        weight:
+          type: integer
         disabled:
           default: false
           type: boolean
@@ -2785,6 +3441,45 @@ components:
           type: string
         redirect_code:
           default: "301"
+          type: string
+      type: object
+    Store:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    StoreItem:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    StoreItemUpdate:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    StoreUpdate:
+      example:
+        name: name
+      properties:
+        name:
           type: string
       type: object
     Threshold:
@@ -2995,15 +3690,15 @@ components:
           block_search_engine: false
           block_suspicious: false
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 5
-        request_header_ratelimit_cooldown: 7
+        ip_ratelimit_cooldown: 2
+        request_header_ratelimit_cooldown: 9
         allow_ip:
         - allow_ip
         - allow_ip
         mode: block
         ip_ratelimit_mode: disabled
         ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 3
+        waf_ratelimit_rps: 2
         notify_email:
         - notify_email
         - notify_email
@@ -3017,9 +3712,9 @@ components:
           ip: false
           ai: false
           user_agent: false
-        waf_ratelimit_cooldown: 2
-        notify_slack_rpm: 4
-        notify_slack_hits_rpm: 1
+        waf_ratelimit_cooldown: 4
+        notify_slack_rpm: 7
+        notify_slack_hits_rpm: 5
         request_header_name: request_header_name
         thresholds:
         - mode: disabled
@@ -3038,8 +3733,8 @@ components:
           type: type
           value: value
           notify_slack: notify_slack
-        request_header_ratelimit_rps: 2
-        waf_ratelimit_hits: 9
+        request_header_ratelimit_rps: 7
+        waf_ratelimit_hits: 3
         httpbl_enabled:
           key: true
         block_ip:
@@ -3048,7 +3743,7 @@ components:
         block_referer:
         - block_referer
         - block_referer
-        paranoia_level: 6
+        paranoia_level: 1
       properties:
         mode:
           enum:

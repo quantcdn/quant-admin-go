@@ -91,6 +91,16 @@ Class | Method | HTTP request | Description
 *HeadersAPI* | [**HeadersCreate**](docs/HeadersAPI.md#headerscreate) | **Post** /organizations/{organization}/projects/{project}/custom-headers | 
 *HeadersAPI* | [**HeadersDelete**](docs/HeadersAPI.md#headersdelete) | **Delete** /organizations/{organization}/projects/{project}/custom-headers | 
 *HeadersAPI* | [**HeadersList**](docs/HeadersAPI.md#headerslist) | **Get** /organizations/{organization}/projects/{project}/custom-headers | 
+*KVAPI* | [**KVCreate**](docs/KVAPI.md#kvcreate) | **Post** /organizations/{organization}/projects/{project}/kv | 
+*KVAPI* | [**KVDelete**](docs/KVAPI.md#kvdelete) | **Delete** /organizations/{organization}/projects/{project}/kv/{store} | 
+*KVAPI* | [**KVList**](docs/KVAPI.md#kvlist) | **Get** /organizations/{organization}/projects/{project}/kv | 
+*KVAPI* | [**KVRead**](docs/KVAPI.md#kvread) | **Get** /organizations/{organization}/projects/{project}/kv/{store} | 
+*KVAPI* | [**KVUpdate**](docs/KVAPI.md#kvupdate) | **Patch** /organizations/{organization}/projects/{project}/kv/{store} | 
+*KVItemsAPI* | [**KVItemsCreate**](docs/KVItemsAPI.md#kvitemscreate) | **Post** /organizations/{organization}/projects/{project}/kv/{store}/items | 
+*KVItemsAPI* | [**KVItemsDelete**](docs/KVItemsAPI.md#kvitemsdelete) | **Delete** /organizations/{organization}/projects/{project}/kv/{store}/items/{item} | 
+*KVItemsAPI* | [**KVItemsList**](docs/KVItemsAPI.md#kvitemslist) | **Get** /organizations/{organization}/projects/{project}/kv/{store}/items | 
+*KVItemsAPI* | [**KVItemsRead**](docs/KVItemsAPI.md#kvitemsread) | **Get** /organizations/{organization}/projects/{project}/kv/{store}/items/{item} | 
+*KVItemsAPI* | [**KVItemsUpdate**](docs/KVItemsAPI.md#kvitemsupdate) | **Patch** /organizations/{organization}/projects/{project}/kv/{store}/items/{item} | 
 *OrganizationsAPI* | [**OrganizationsList**](docs/OrganizationsAPI.md#organizationslist) | **Get** /organizations | 
 *OrganizationsAPI* | [**OrganizationsRead**](docs/OrganizationsAPI.md#organizationsread) | **Get** /organizations/{organization} | 
 *ProjectsAPI* | [**ProjectsCreate**](docs/ProjectsAPI.md#projectscreate) | **Post** /organizations/{organization}/projects | 
@@ -109,6 +119,11 @@ Class | Method | HTTP request | Description
 *RulesRedirectAPI* | [**RulesRedirectList**](docs/RulesRedirectAPI.md#rulesredirectlist) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
 *RulesRedirectAPI* | [**RulesRedirectRead**](docs/RulesRedirectAPI.md#rulesredirectread) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 *RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
+*SecretsAPI* | [**SecretsCreate**](docs/SecretsAPI.md#secretscreate) | **Post** /organizations/{organization}/projects/{project}/secrets | 
+*SecretsAPI* | [**SecretsDelete**](docs/SecretsAPI.md#secretsdelete) | **Delete** /organizations/{organization}/projects/{project}/secrets/{store} | 
+*SecretsAPI* | [**SecretsList**](docs/SecretsAPI.md#secretslist) | **Get** /organizations/{organization}/projects/{project}/secrets | 
+*SecretsAPI* | [**SecretsRead**](docs/SecretsAPI.md#secretsread) | **Get** /organizations/{organization}/projects/{project}/secrets/{store} | 
+*SecretsAPI* | [**SecretsUpdate**](docs/SecretsAPI.md#secretsupdate) | **Patch** /organizations/{organization}/projects/{project}/secrets/{store} | 
 
 
 ## Documentation For Models
@@ -136,6 +151,10 @@ Class | Method | HTTP request | Description
  - [RuleRedirectAction](docs/RuleRedirectAction.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
  - [RuleRedirectRequestUpdate](docs/RuleRedirectRequestUpdate.md)
+ - [Store](docs/Store.md)
+ - [StoreItem](docs/StoreItem.md)
+ - [StoreItemUpdate](docs/StoreItemUpdate.md)
+ - [StoreUpdate](docs/StoreUpdate.md)
  - [Threshold](docs/Threshold.md)
  - [WAFConfig](docs/WAFConfig.md)
  - [WAFConfigBlockLists](docs/WAFConfigBlockLists.md)
