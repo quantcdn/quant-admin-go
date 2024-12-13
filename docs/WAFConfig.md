@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **BlockIp** | Pointer to **[]string** |  | [optional] 
 **BlockUa** | Pointer to **[]string** |  | [optional] 
 **BlockReferer** | Pointer to **[]string** |  | [optional] 
-**BlockLists** | Pointer to [**WAFConfigBlockLists**](WAFConfigBlockLists.md) |  | [optional] 
-**Httpbl** | Pointer to [**WAFConfigHttpbl**](WAFConfigHttpbl.md) |  | [optional] 
 **Thresholds** | Pointer to [**[]Threshold**](Threshold.md) |  | [optional] 
 **HttpblEnabled** | Pointer to **map[string]bool** |  | [optional] 
 **NotifySlackHitsRpm** | Pointer to **int32** |  | [optional] 
@@ -219,56 +217,6 @@ SetBlockReferer sets BlockReferer field to given value.
 `func (o *WAFConfig) HasBlockReferer() bool`
 
 HasBlockReferer returns a boolean if a field has been set.
-
-### GetBlockLists
-
-`func (o *WAFConfig) GetBlockLists() WAFConfigBlockLists`
-
-GetBlockLists returns the BlockLists field if non-nil, zero value otherwise.
-
-### GetBlockListsOk
-
-`func (o *WAFConfig) GetBlockListsOk() (*WAFConfigBlockLists, bool)`
-
-GetBlockListsOk returns a tuple with the BlockLists field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBlockLists
-
-`func (o *WAFConfig) SetBlockLists(v WAFConfigBlockLists)`
-
-SetBlockLists sets BlockLists field to given value.
-
-### HasBlockLists
-
-`func (o *WAFConfig) HasBlockLists() bool`
-
-HasBlockLists returns a boolean if a field has been set.
-
-### GetHttpbl
-
-`func (o *WAFConfig) GetHttpbl() WAFConfigHttpbl`
-
-GetHttpbl returns the Httpbl field if non-nil, zero value otherwise.
-
-### GetHttpblOk
-
-`func (o *WAFConfig) GetHttpblOk() (*WAFConfigHttpbl, bool)`
-
-GetHttpblOk returns a tuple with the Httpbl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpbl
-
-`func (o *WAFConfig) SetHttpbl(v WAFConfigHttpbl)`
-
-SetHttpbl sets Httpbl field to given value.
-
-### HasHttpbl
-
-`func (o *WAFConfig) HasHttpbl() bool`
-
-HasHttpbl returns a boolean if a field has been set.
 
 ### GetThresholds
 

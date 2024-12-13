@@ -20,6 +20,8 @@ var _ MappedNullable = &RuleProxy{}
 
 // RuleProxy struct for RuleProxy
 type RuleProxy struct {
+	Kind string `json:"kind"`
+	ActionConfig RuleProxyAction `json:"action_config"`
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
 	RuleId *string `json:"rule_id,omitempty"`
@@ -37,7 +39,6 @@ type RuleProxy struct {
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	Action string `json:"action"`
-	ActionConfig RuleProxyAction `json:"action_config"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,12 +48,11 @@ type _RuleProxy RuleProxy
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxy(uuid string, disabled bool, action string, actionConfig RuleProxyAction) *RuleProxy {
+func NewRuleProxy(kind string, actionConfig RuleProxyAction, uuid string, disabled bool, action string) *RuleProxy {
 	this := RuleProxy{}
 	this.Uuid = uuid
 	this.Disabled = disabled
 	this.Action = action
-	this.ActionConfig = actionConfig
 	return &this
 }
 
@@ -64,6 +64,54 @@ func NewRuleProxyWithDefaults() *RuleProxy {
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
+}
+
+// GetKind returns the Kind field value
+func (o *RuleProxy) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *RuleProxy) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *RuleProxy) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetActionConfig returns the ActionConfig field value
+func (o *RuleProxy) GetActionConfig() RuleProxyAction {
+	if o == nil {
+		var ret RuleProxyAction
+		return ret
+	}
+
+	return o.ActionConfig
+}
+
+// GetActionConfigOk returns a tuple with the ActionConfig field value
+// and a boolean to check if the value has been set.
+func (o *RuleProxy) GetActionConfigOk() (*RuleProxyAction, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ActionConfig, true
+}
+
+// SetActionConfig sets field value
+func (o *RuleProxy) SetActionConfig(v RuleProxyAction) {
+	o.ActionConfig = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -586,30 +634,6 @@ func (o *RuleProxy) SetAction(v string) {
 	o.Action = v
 }
 
-// GetActionConfig returns the ActionConfig field value
-func (o *RuleProxy) GetActionConfig() RuleProxyAction {
-	if o == nil {
-		var ret RuleProxyAction
-		return ret
-	}
-
-	return o.ActionConfig
-}
-
-// GetActionConfigOk returns a tuple with the ActionConfig field value
-// and a boolean to check if the value has been set.
-func (o *RuleProxy) GetActionConfigOk() (*RuleProxyAction, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ActionConfig, true
-}
-
-// SetActionConfig sets field value
-func (o *RuleProxy) SetActionConfig(v RuleProxyAction) {
-	o.ActionConfig = v
-}
-
 func (o RuleProxy) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -620,6 +644,8 @@ func (o RuleProxy) MarshalJSON() ([]byte, error) {
 
 func (o RuleProxy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["kind"] = o.Kind
+	toSerialize["action_config"] = o.ActionConfig
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -665,7 +691,6 @@ func (o RuleProxy) ToMap() (map[string]interface{}, error) {
 		toSerialize["country_is_not"] = o.CountryIsNot
 	}
 	toSerialize["action"] = o.Action
-	toSerialize["action_config"] = o.ActionConfig
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -679,10 +704,11 @@ func (o *RuleProxy) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"kind",
+		"action_config",
 		"uuid",
 		"disabled",
 		"action",
-		"action_config",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -712,6 +738,8 @@ func (o *RuleProxy) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "action_config")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")
 		delete(additionalProperties, "rule_id")
@@ -729,7 +757,6 @@ func (o *RuleProxy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "country_is")
 		delete(additionalProperties, "country_is_not")
 		delete(additionalProperties, "action")
-		delete(additionalProperties, "action_config")
 		o.AdditionalProperties = additionalProperties
 	}
 

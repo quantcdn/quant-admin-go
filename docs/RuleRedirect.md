@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Kind** | **string** |  | 
+**ActionConfig** | Pointer to [**RuleRedirectAction**](RuleRedirectAction.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
 **RuleId** | Pointer to **string** |  | [optional] 
@@ -21,13 +23,12 @@ Name | Type | Description | Notes
 **CountryIs** | Pointer to **[]string** |  | [optional] 
 **CountryIsNot** | Pointer to **[]string** |  | [optional] 
 **Action** | **string** |  | 
-**ActionConfig** | Pointer to [**RuleRedirectAction**](RuleRedirectAction.md) |  | [optional] 
 
 ## Methods
 
 ### NewRuleRedirect
 
-`func NewRuleRedirect(uuid string, disabled bool, action string, ) *RuleRedirect`
+`func NewRuleRedirect(kind string, uuid string, disabled bool, action string, ) *RuleRedirect`
 
 NewRuleRedirect instantiates a new RuleRedirect object
 This constructor will assign default values to properties that have it defined,
@@ -41,6 +42,51 @@ will change when the set of required properties is changed
 NewRuleRedirectWithDefaults instantiates a new RuleRedirect object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetKind
+
+`func (o *RuleRedirect) GetKind() string`
+
+GetKind returns the Kind field if non-nil, zero value otherwise.
+
+### GetKindOk
+
+`func (o *RuleRedirect) GetKindOk() (*string, bool)`
+
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKind
+
+`func (o *RuleRedirect) SetKind(v string)`
+
+SetKind sets Kind field to given value.
+
+
+### GetActionConfig
+
+`func (o *RuleRedirect) GetActionConfig() RuleRedirectAction`
+
+GetActionConfig returns the ActionConfig field if non-nil, zero value otherwise.
+
+### GetActionConfigOk
+
+`func (o *RuleRedirect) GetActionConfigOk() (*RuleRedirectAction, bool)`
+
+GetActionConfigOk returns a tuple with the ActionConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionConfig
+
+`func (o *RuleRedirect) SetActionConfig(v RuleRedirectAction)`
+
+SetActionConfig sets ActionConfig field to given value.
+
+### HasActionConfig
+
+`func (o *RuleRedirect) HasActionConfig() bool`
+
+HasActionConfig returns a boolean if a field has been set.
 
 ### GetName
 
@@ -451,31 +497,6 @@ and a boolean to check if the value has been set.
 
 SetAction sets Action field to given value.
 
-
-### GetActionConfig
-
-`func (o *RuleRedirect) GetActionConfig() RuleRedirectAction`
-
-GetActionConfig returns the ActionConfig field if non-nil, zero value otherwise.
-
-### GetActionConfigOk
-
-`func (o *RuleRedirect) GetActionConfigOk() (*RuleRedirectAction, bool)`
-
-GetActionConfigOk returns a tuple with the ActionConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetActionConfig
-
-`func (o *RuleRedirect) SetActionConfig(v RuleRedirectAction)`
-
-SetActionConfig sets ActionConfig field to given value.
-
-### HasActionConfig
-
-`func (o *RuleRedirect) HasActionConfig() bool`
-
-HasActionConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -78,6 +78,11 @@ All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CrawlerAPI* | [**CrawlerSchedulesCreate**](docs/CrawlerAPI.md#crawlerschedulescreate) | **Post** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule | 
+*CrawlerAPI* | [**CrawlerSchedulesDelete**](docs/CrawlerAPI.md#crawlerschedulesdelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule} | 
+*CrawlerAPI* | [**CrawlerSchedulesList**](docs/CrawlerAPI.md#crawlerscheduleslist) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule | 
+*CrawlerAPI* | [**CrawlerSchedulesRead**](docs/CrawlerAPI.md#crawlerschedulesread) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule} | 
+*CrawlerAPI* | [**CrawlerSchedulesUpdate**](docs/CrawlerAPI.md#crawlerschedulesupdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule} | 
 *CrawlersAPI* | [**CrawlersCreate**](docs/CrawlersAPI.md#crawlerscreate) | **Post** /organizations/{organization}/projects/{project}/crawlers | 
 *CrawlersAPI* | [**CrawlersDelete**](docs/CrawlersAPI.md#crawlersdelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 *CrawlersAPI* | [**CrawlersList**](docs/CrawlersAPI.md#crawlerslist) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
@@ -131,20 +136,33 @@ Class | Method | HTTP request | Description
  - [Crawler](docs/Crawler.md)
  - [CrawlerRequest](docs/CrawlerRequest.md)
  - [CrawlerRequestUpdate](docs/CrawlerRequestUpdate.md)
+ - [CrawlerSchedule](docs/CrawlerSchedule.md)
+ - [CrawlerScheduleRequest](docs/CrawlerScheduleRequest.md)
+ - [CrawlerScheduleRequestUpdate](docs/CrawlerScheduleRequestUpdate.md)
  - [Domain](docs/Domain.md)
  - [DomainRequest](docs/DomainRequest.md)
  - [DomainRequestUpdate](docs/DomainRequestUpdate.md)
  - [Error](docs/Error.md)
+ - [FailoverConfig](docs/FailoverConfig.md)
  - [HeadersCreateRequest](docs/HeadersCreateRequest.md)
  - [HeadersDeleteRequest](docs/HeadersDeleteRequest.md)
+ - [NotifyConfig](docs/NotifyConfig.md)
  - [Organization](docs/Organization.md)
  - [Project](docs/Project.md)
  - [ProjectRequest](docs/ProjectRequest.md)
  - [ProjectRequestUpdate](docs/ProjectRequestUpdate.md)
+ - [ProxyConfig](docs/ProxyConfig.md)
+ - [ProxyConfigUpdate](docs/ProxyConfigUpdate.md)
  - [PurgeRequest](docs/PurgeRequest.md)
+ - [Rule](docs/Rule.md)
+ - [RuleAuth](docs/RuleAuth.md)
+ - [RuleAuthAction](docs/RuleAuthAction.md)
+ - [RuleCustomResponse](docs/RuleCustomResponse.md)
+ - [RuleCustomResponseAction](docs/RuleCustomResponseAction.md)
+ - [RuleHeader](docs/RuleHeader.md)
+ - [RuleHeaderAction](docs/RuleHeaderAction.md)
  - [RuleProxy](docs/RuleProxy.md)
  - [RuleProxyAction](docs/RuleProxyAction.md)
- - [RuleProxyActionNotifyConfig](docs/RuleProxyActionNotifyConfig.md)
  - [RuleProxyRequest](docs/RuleProxyRequest.md)
  - [RuleProxyRequestUpdate](docs/RuleProxyRequestUpdate.md)
  - [RuleRedirect](docs/RuleRedirect.md)
@@ -157,10 +175,7 @@ Class | Method | HTTP request | Description
  - [StoreUpdate](docs/StoreUpdate.md)
  - [Threshold](docs/Threshold.md)
  - [WAFConfig](docs/WAFConfig.md)
- - [WAFConfigBlockLists](docs/WAFConfigBlockLists.md)
- - [WAFConfigHttpbl](docs/WAFConfigHttpbl.md)
  - [WAFConfigUpdate](docs/WAFConfigUpdate.md)
- - [WAFConfigUpdateHttpbl](docs/WAFConfigUpdateHttpbl.md)
 
 
 ## Documentation For Authorization

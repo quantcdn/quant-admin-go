@@ -20,6 +20,7 @@ var _ MappedNullable = &Domain{}
 
 // Domain struct for Domain
 type Domain struct {
+	Kind string `json:"kind"`
 	Id int32 `json:"id"`
 	Domain string `json:"domain"`
 	ProjectId *int32 `json:"project_id,omitempty"`
@@ -38,8 +39,9 @@ type _Domain Domain
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDomain(id int32, domain string, dnsEngaged int32) *Domain {
+func NewDomain(kind string, id int32, domain string, dnsEngaged int32) *Domain {
 	this := Domain{}
+	this.Kind = kind
 	this.Id = id
 	this.Domain = domain
 	this.DnsEngaged = dnsEngaged
@@ -52,6 +54,30 @@ func NewDomain(id int32, domain string, dnsEngaged int32) *Domain {
 func NewDomainWithDefaults() *Domain {
 	this := Domain{}
 	return &this
+}
+
+// GetKind returns the Kind field value
+func (o *Domain) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *Domain) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *Domain) SetKind(v string) {
+	o.Kind = v
 }
 
 // GetId returns the Id field value
@@ -328,6 +354,7 @@ func (o Domain) MarshalJSON() ([]byte, error) {
 
 func (o Domain) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["kind"] = o.Kind
 	toSerialize["id"] = o.Id
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.ProjectId) {
@@ -362,6 +389,7 @@ func (o *Domain) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"kind",
 		"id",
 		"domain",
 		"dns_engaged",
@@ -394,6 +422,7 @@ func (o *Domain) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "project_id")

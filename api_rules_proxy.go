@@ -48,8 +48,7 @@ type RulesProxyAPI interface {
 	RulesProxyDelete(ctx context.Context, organization string, project string, rule string) RulesProxyAPIRulesProxyDeleteRequest
 
 	// RulesProxyDeleteExecute executes the request
-	//  @return RuleProxy
-	RulesProxyDeleteExecute(r RulesProxyAPIRulesProxyDeleteRequest) (*RuleProxy, *http.Response, error)
+	RulesProxyDeleteExecute(r RulesProxyAPIRulesProxyDeleteRequest) (*http.Response, error)
 
 	/*
 	RulesProxyList Method for RulesProxyList
@@ -209,6 +208,17 @@ func (a *RulesProxyAPIService) RulesProxyCreateExecute(r RulesProxyAPIRulesProxy
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -233,7 +243,7 @@ type RulesProxyAPIRulesProxyDeleteRequest struct {
 	rule string
 }
 
-func (r RulesProxyAPIRulesProxyDeleteRequest) Execute() (*RuleProxy, *http.Response, error) {
+func (r RulesProxyAPIRulesProxyDeleteRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RulesProxyDeleteExecute(r)
 }
 
@@ -257,18 +267,16 @@ func (a *RulesProxyAPIService) RulesProxyDelete(ctx context.Context, organizatio
 }
 
 // Execute executes the request
-//  @return RuleProxy
-func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r RulesProxyAPIRulesProxyDeleteRequest) (*RuleProxy, *http.Response, error) {
+func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r RulesProxyAPIRulesProxyDeleteRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *RuleProxy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesProxyAPIService.RulesProxyDelete")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/proxy/{rule}"
@@ -299,19 +307,19 @@ func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r RulesProxyAPIRulesProxy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -324,24 +332,26 @@ func (a *RulesProxyAPIService) RulesProxyDeleteExecute(r RulesProxyAPIRulesProxy
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type RulesProxyAPIRulesProxyListRequest struct {
@@ -435,6 +445,17 @@ func (a *RulesProxyAPIService) RulesProxyListExecute(r RulesProxyAPIRulesProxyLi
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -554,6 +575,17 @@ func (a *RulesProxyAPIService) RulesProxyReadExecute(r RulesProxyAPIRulesProxyRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -684,6 +716,17 @@ func (a *RulesProxyAPIService) RulesProxyUpdateExecute(r RulesProxyAPIRulesProxy
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

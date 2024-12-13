@@ -22,8 +22,9 @@ type CrawlerRequestUpdate struct {
 	Name *string `json:"name,omitempty"`
 	Domain *string `json:"domain,omitempty"`
 	BrowserMode *bool `json:"browser_mode,omitempty"`
-	UrlList []string `json:"url_list,omitempty"`
+	Urls []string `json:"urls,omitempty"`
 	Headers *map[string]string `json:"headers,omitempty"`
+	Exclude []string `json:"exclude,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,6 +36,8 @@ type _CrawlerRequestUpdate CrawlerRequestUpdate
 // will change when the set of required properties is changed
 func NewCrawlerRequestUpdate() *CrawlerRequestUpdate {
 	this := CrawlerRequestUpdate{}
+	var browserMode bool = false
+	this.BrowserMode = &browserMode
 	return &this
 }
 
@@ -43,6 +46,8 @@ func NewCrawlerRequestUpdate() *CrawlerRequestUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewCrawlerRequestUpdateWithDefaults() *CrawlerRequestUpdate {
 	this := CrawlerRequestUpdate{}
+	var browserMode bool = false
+	this.BrowserMode = &browserMode
 	return &this
 }
 
@@ -142,36 +147,36 @@ func (o *CrawlerRequestUpdate) SetBrowserMode(v bool) {
 	o.BrowserMode = &v
 }
 
-// GetUrlList returns the UrlList field value if set, zero value otherwise.
-func (o *CrawlerRequestUpdate) GetUrlList() []string {
-	if o == nil || IsNil(o.UrlList) {
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *CrawlerRequestUpdate) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
 		var ret []string
 		return ret
 	}
-	return o.UrlList
+	return o.Urls
 }
 
-// GetUrlListOk returns a tuple with the UrlList field value if set, nil otherwise
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CrawlerRequestUpdate) GetUrlListOk() ([]string, bool) {
-	if o == nil || IsNil(o.UrlList) {
+func (o *CrawlerRequestUpdate) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
 		return nil, false
 	}
-	return o.UrlList, true
+	return o.Urls, true
 }
 
-// HasUrlList returns a boolean if a field has been set.
-func (o *CrawlerRequestUpdate) HasUrlList() bool {
-	if o != nil && !IsNil(o.UrlList) {
+// HasUrls returns a boolean if a field has been set.
+func (o *CrawlerRequestUpdate) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
 		return true
 	}
 
 	return false
 }
 
-// SetUrlList gets a reference to the given []string and assigns it to the UrlList field.
-func (o *CrawlerRequestUpdate) SetUrlList(v []string) {
-	o.UrlList = v
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *CrawlerRequestUpdate) SetUrls(v []string) {
+	o.Urls = v
 }
 
 // GetHeaders returns the Headers field value if set, zero value otherwise.
@@ -206,6 +211,38 @@ func (o *CrawlerRequestUpdate) SetHeaders(v map[string]string) {
 	o.Headers = &v
 }
 
+// GetExclude returns the Exclude field value if set, zero value otherwise.
+func (o *CrawlerRequestUpdate) GetExclude() []string {
+	if o == nil || IsNil(o.Exclude) {
+		var ret []string
+		return ret
+	}
+	return o.Exclude
+}
+
+// GetExcludeOk returns a tuple with the Exclude field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CrawlerRequestUpdate) GetExcludeOk() ([]string, bool) {
+	if o == nil || IsNil(o.Exclude) {
+		return nil, false
+	}
+	return o.Exclude, true
+}
+
+// HasExclude returns a boolean if a field has been set.
+func (o *CrawlerRequestUpdate) HasExclude() bool {
+	if o != nil && !IsNil(o.Exclude) {
+		return true
+	}
+
+	return false
+}
+
+// SetExclude gets a reference to the given []string and assigns it to the Exclude field.
+func (o *CrawlerRequestUpdate) SetExclude(v []string) {
+	o.Exclude = v
+}
+
 func (o CrawlerRequestUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -225,11 +262,14 @@ func (o CrawlerRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BrowserMode) {
 		toSerialize["browser_mode"] = o.BrowserMode
 	}
-	if !IsNil(o.UrlList) {
-		toSerialize["url_list"] = o.UrlList
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
 	}
 	if !IsNil(o.Headers) {
 		toSerialize["headers"] = o.Headers
+	}
+	if !IsNil(o.Exclude) {
+		toSerialize["exclude"] = o.Exclude
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -256,8 +296,9 @@ func (o *CrawlerRequestUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "browser_mode")
-		delete(additionalProperties, "url_list")
+		delete(additionalProperties, "urls")
 		delete(additionalProperties, "headers")
+		delete(additionalProperties, "exclude")
 		o.AdditionalProperties = additionalProperties
 	}
 

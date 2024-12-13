@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## ProjectsDelete
 
-> Project ProjectsDelete(ctx, organization, project).Execute()
+> ProjectsDelete(ctx, organization, project).Execute()
 
 
 
@@ -106,13 +106,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsDelete(context.Background(), organization, project).Execute()
+	r, err := apiClient.ProjectsAPI.ProjectsDelete(context.Background(), organization, project).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsDelete`: Project
-	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsDelete`: %v\n", resp)
 }
 ```
 
@@ -137,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Project**](Project.md)
+ (empty response body)
 
 ### Authorization
 

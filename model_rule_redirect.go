@@ -20,6 +20,8 @@ var _ MappedNullable = &RuleRedirect{}
 
 // RuleRedirect struct for RuleRedirect
 type RuleRedirect struct {
+	Kind string `json:"kind"`
+	ActionConfig *RuleRedirectAction `json:"action_config,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
 	RuleId *string `json:"rule_id,omitempty"`
@@ -37,7 +39,6 @@ type RuleRedirect struct {
 	CountryIs []string `json:"country_is,omitempty"`
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	Action string `json:"action"`
-	ActionConfig *RuleRedirectAction `json:"action_config,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,7 +48,7 @@ type _RuleRedirect RuleRedirect
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleRedirect(uuid string, disabled bool, action string) *RuleRedirect {
+func NewRuleRedirect(kind string, uuid string, disabled bool, action string) *RuleRedirect {
 	this := RuleRedirect{}
 	this.Uuid = uuid
 	this.Disabled = disabled
@@ -63,6 +64,62 @@ func NewRuleRedirectWithDefaults() *RuleRedirect {
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
+}
+
+// GetKind returns the Kind field value
+func (o *RuleRedirect) GetKind() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Kind
+}
+
+// GetKindOk returns a tuple with the Kind field value
+// and a boolean to check if the value has been set.
+func (o *RuleRedirect) GetKindOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Kind, true
+}
+
+// SetKind sets field value
+func (o *RuleRedirect) SetKind(v string) {
+	o.Kind = v
+}
+
+// GetActionConfig returns the ActionConfig field value if set, zero value otherwise.
+func (o *RuleRedirect) GetActionConfig() RuleRedirectAction {
+	if o == nil || IsNil(o.ActionConfig) {
+		var ret RuleRedirectAction
+		return ret
+	}
+	return *o.ActionConfig
+}
+
+// GetActionConfigOk returns a tuple with the ActionConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleRedirect) GetActionConfigOk() (*RuleRedirectAction, bool) {
+	if o == nil || IsNil(o.ActionConfig) {
+		return nil, false
+	}
+	return o.ActionConfig, true
+}
+
+// HasActionConfig returns a boolean if a field has been set.
+func (o *RuleRedirect) HasActionConfig() bool {
+	if o != nil && !IsNil(o.ActionConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetActionConfig gets a reference to the given RuleRedirectAction and assigns it to the ActionConfig field.
+func (o *RuleRedirect) SetActionConfig(v RuleRedirectAction) {
+	o.ActionConfig = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -585,38 +642,6 @@ func (o *RuleRedirect) SetAction(v string) {
 	o.Action = v
 }
 
-// GetActionConfig returns the ActionConfig field value if set, zero value otherwise.
-func (o *RuleRedirect) GetActionConfig() RuleRedirectAction {
-	if o == nil || IsNil(o.ActionConfig) {
-		var ret RuleRedirectAction
-		return ret
-	}
-	return *o.ActionConfig
-}
-
-// GetActionConfigOk returns a tuple with the ActionConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleRedirect) GetActionConfigOk() (*RuleRedirectAction, bool) {
-	if o == nil || IsNil(o.ActionConfig) {
-		return nil, false
-	}
-	return o.ActionConfig, true
-}
-
-// HasActionConfig returns a boolean if a field has been set.
-func (o *RuleRedirect) HasActionConfig() bool {
-	if o != nil && !IsNil(o.ActionConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetActionConfig gets a reference to the given RuleRedirectAction and assigns it to the ActionConfig field.
-func (o *RuleRedirect) SetActionConfig(v RuleRedirectAction) {
-	o.ActionConfig = &v
-}
-
 func (o RuleRedirect) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -627,6 +652,10 @@ func (o RuleRedirect) MarshalJSON() ([]byte, error) {
 
 func (o RuleRedirect) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["kind"] = o.Kind
+	if !IsNil(o.ActionConfig) {
+		toSerialize["action_config"] = o.ActionConfig
+	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -672,9 +701,6 @@ func (o RuleRedirect) ToMap() (map[string]interface{}, error) {
 		toSerialize["country_is_not"] = o.CountryIsNot
 	}
 	toSerialize["action"] = o.Action
-	if !IsNil(o.ActionConfig) {
-		toSerialize["action_config"] = o.ActionConfig
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -688,6 +714,7 @@ func (o *RuleRedirect) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"kind",
 		"uuid",
 		"disabled",
 		"action",
@@ -720,6 +747,8 @@ func (o *RuleRedirect) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "action_config")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")
 		delete(additionalProperties, "rule_id")
@@ -737,7 +766,6 @@ func (o *RuleRedirect) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "country_is")
 		delete(additionalProperties, "country_is_not")
 		delete(additionalProperties, "action")
-		delete(additionalProperties, "action_config")
 		o.AdditionalProperties = additionalProperties
 	}
 

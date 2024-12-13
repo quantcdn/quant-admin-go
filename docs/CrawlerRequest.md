@@ -6,15 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
 **Domain** | **string** |  | 
-**BrowserMode** | Pointer to **bool** |  | [optional] 
-**UrlList** | **[]string** |  | 
-**Headers** | **map[string]string** |  | 
+**BrowserMode** | Pointer to **bool** |  | [optional] [default to false]
+**Urls** | Pointer to **[]string** |  | [optional] [default to []]
+**Headers** | Pointer to **map[string]string** |  | [optional] 
+**Exclude** | Pointer to **[]string** |  | [optional] [default to []]
 
 ## Methods
 
 ### NewCrawlerRequest
 
-`func NewCrawlerRequest(domain string, urlList []string, headers map[string]string, ) *CrawlerRequest`
+`func NewCrawlerRequest(domain string, ) *CrawlerRequest`
 
 NewCrawlerRequest instantiates a new CrawlerRequest object
 This constructor will assign default values to properties that have it defined,
@@ -99,25 +100,30 @@ SetBrowserMode sets BrowserMode field to given value.
 
 HasBrowserMode returns a boolean if a field has been set.
 
-### GetUrlList
+### GetUrls
 
-`func (o *CrawlerRequest) GetUrlList() []string`
+`func (o *CrawlerRequest) GetUrls() []string`
 
-GetUrlList returns the UrlList field if non-nil, zero value otherwise.
+GetUrls returns the Urls field if non-nil, zero value otherwise.
 
-### GetUrlListOk
+### GetUrlsOk
 
-`func (o *CrawlerRequest) GetUrlListOk() (*[]string, bool)`
+`func (o *CrawlerRequest) GetUrlsOk() (*[]string, bool)`
 
-GetUrlListOk returns a tuple with the UrlList field if it's non-nil, zero value otherwise
+GetUrlsOk returns a tuple with the Urls field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUrlList
+### SetUrls
 
-`func (o *CrawlerRequest) SetUrlList(v []string)`
+`func (o *CrawlerRequest) SetUrls(v []string)`
 
-SetUrlList sets UrlList field to given value.
+SetUrls sets Urls field to given value.
 
+### HasUrls
+
+`func (o *CrawlerRequest) HasUrls() bool`
+
+HasUrls returns a boolean if a field has been set.
 
 ### GetHeaders
 
@@ -138,6 +144,36 @@ and a boolean to check if the value has been set.
 
 SetHeaders sets Headers field to given value.
 
+### HasHeaders
+
+`func (o *CrawlerRequest) HasHeaders() bool`
+
+HasHeaders returns a boolean if a field has been set.
+
+### GetExclude
+
+`func (o *CrawlerRequest) GetExclude() []string`
+
+GetExclude returns the Exclude field if non-nil, zero value otherwise.
+
+### GetExcludeOk
+
+`func (o *CrawlerRequest) GetExcludeOk() (*[]string, bool)`
+
+GetExcludeOk returns a tuple with the Exclude field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExclude
+
+`func (o *CrawlerRequest) SetExclude(v []string)`
+
+SetExclude sets Exclude field to given value.
+
+### HasExclude
+
+`func (o *CrawlerRequest) HasExclude() bool`
+
+HasExclude returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

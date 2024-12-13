@@ -12,6 +12,7 @@ tags:
 - name: Projects
 - name: Purge
 - name: Crawlers
+- name: Crawler
 - name: Domains
 - name: Headers
 - name: Rules__Proxy
@@ -40,6 +41,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Organizations
   /organizations/{organization}:
@@ -67,6 +74,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Organizations
   /organizations/{organization}/projects:
@@ -96,6 +109,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Projects
     post:
@@ -115,12 +134,13 @@ paths:
               $ref: '#/components/schemas/ProjectRequest'
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-          description: The request has succeeded.
+          description: The request has succeeded and a new resource has been created
+            as a result.
         "400":
           content:
             application/json:
@@ -128,6 +148,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Projects
   /organizations/{organization}/projects/{project}:
@@ -150,10 +176,6 @@ paths:
         style: simple
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
           description: The request has succeeded.
         "400":
           content:
@@ -162,6 +184,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Projects
     get:
@@ -195,6 +223,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Projects
     patch:
@@ -234,6 +268,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Projects
   /organizations/{organization}/projects/{project}/crawlers:
@@ -270,6 +310,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Crawlers
     post:
@@ -309,6 +355,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Crawlers
   /organizations/{organization}/projects/{project}/crawlers/{crawler}:
@@ -350,6 +402,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Crawlers
     get:
@@ -390,6 +448,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Crawlers
     patch:
@@ -436,8 +500,281 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Crawlers
+  /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule:
+    get:
+      operationId: CrawlerSchedules_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CrawlerSchedule'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Crawler
+    post:
+      operationId: CrawlerSchedules_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrawlerScheduleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlerSchedule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Crawler
+  /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule}:
+    delete:
+      operationId: CrawlerSchedules_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlerSchedule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Crawler
+    get:
+      operationId: CrawlerSchedules_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlerSchedule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Crawler
+    patch:
+      operationId: CrawlerSchedules_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: schedule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrawlerScheduleRequestUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrawlerSchedule'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Crawler
   /organizations/{organization}/projects/{project}/custom-headers:
     delete:
       operationId: Headers_delete
@@ -478,6 +815,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Headers
     get:
@@ -513,6 +856,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Headers
     post:
@@ -554,6 +903,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Headers
   /organizations/{organization}/projects/{project}/domains:
@@ -590,6 +945,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Domains
     post:
@@ -629,6 +990,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Domains
   /organizations/{organization}/projects/{project}/domains/{domain}:
@@ -670,6 +1037,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Domains
     get:
@@ -710,6 +1083,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Domains
     patch:
@@ -756,6 +1135,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Domains
   /organizations/{organization}/projects/{project}/kv:
@@ -792,6 +1177,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV
     post:
@@ -831,6 +1222,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV
   /organizations/{organization}/projects/{project}/kv/{store}:
@@ -872,6 +1269,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV
     get:
@@ -912,6 +1315,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV
     patch:
@@ -958,6 +1367,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV
   /organizations/{organization}/projects/{project}/kv/{store}/items:
@@ -1001,6 +1416,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV__Items
     post:
@@ -1047,6 +1468,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV__Items
   /organizations/{organization}/projects/{project}/kv/{store}/items/{item}:
@@ -1095,6 +1522,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV__Items
     get:
@@ -1142,6 +1575,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV__Items
     patch:
@@ -1195,6 +1634,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - KV__Items
   /organizations/{organization}/projects/{project}/purge:
@@ -1235,6 +1680,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Purge
   /organizations/{organization}/projects/{project}/rules/proxy:
@@ -1271,6 +1722,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Proxy
     post:
@@ -1297,12 +1754,13 @@ paths:
               $ref: '#/components/schemas/RuleProxyRequest'
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RuleProxy'
-          description: The request has succeeded.
+          description: The request has succeeded and a new resource has been created
+            as a result.
         "400":
           content:
             application/json:
@@ -1310,6 +1768,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Proxy
   /organizations/{organization}/projects/{project}/rules/proxy/{rule}:
@@ -1339,10 +1803,6 @@ paths:
         style: simple
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RuleProxy'
           description: The request has succeeded.
         "400":
           content:
@@ -1351,6 +1811,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Proxy
     get:
@@ -1391,6 +1857,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Proxy
     patch:
@@ -1437,6 +1909,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Proxy
   /organizations/{organization}/projects/{project}/rules/redirect:
@@ -1473,6 +1951,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Redirect
     post:
@@ -1512,6 +1996,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Redirect
   /organizations/{organization}/projects/{project}/rules/redirect/{rule}:
@@ -1553,6 +2043,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Redirect
     get:
@@ -1593,6 +2089,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Redirect
     patch:
@@ -1639,6 +2141,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Rules__Redirect
   /organizations/{organization}/projects/{project}/secrets:
@@ -1675,6 +2183,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Secrets
     post:
@@ -1714,6 +2228,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Secrets
   /organizations/{organization}/projects/{project}/secrets/{store}:
@@ -1755,6 +2275,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Secrets
     get:
@@ -1795,6 +2321,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Secrets
     patch:
@@ -1841,6 +2373,12 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
       tags:
       - Secrets
 components:
@@ -1913,20 +2451,25 @@ components:
       example:
         headers:
           key: headers
-        url_list:
-        - url_list
-        - url_list
+        urls:
+        - urls
+        - urls
         domain: domain
         name: name
-        browser_mode: true
+        browser_mode: false
+        exclude:
+        - exclude
+        - exclude
       properties:
         name:
           type: string
         domain:
           type: string
         browser_mode:
+          default: false
           type: boolean
-        url_list:
+        urls:
+          default: []
           items:
             type: string
           type: array
@@ -1934,29 +2477,37 @@ components:
           additionalProperties:
             type: string
           type: object
+        exclude:
+          default: []
+          items:
+            type: string
+          type: array
       required:
       - domain
-      - headers
-      - url_list
       type: object
     CrawlerRequestUpdate:
       example:
         headers:
           key: headers
-        url_list:
-        - url_list
-        - url_list
+        urls:
+        - urls
+        - urls
         domain: domain
         name: name
-        browser_mode: true
+        browser_mode: false
+        exclude:
+        - exclude
+        - exclude
       properties:
         name:
           type: string
         domain:
           type: string
         browser_mode:
+          default: false
           type: boolean
-        url_list:
+        urls:
+          default: []
           items:
             type: string
           type: array
@@ -1964,11 +2515,71 @@ components:
           additionalProperties:
             type: string
           type: object
+        exclude:
+          default: []
+          items:
+            type: string
+          type: array
+      type: object
+    CrawlerSchedule:
+      example:
+        crawler_last_run_id: 5
+        schedule_cron_string: schedule_cron_string
+        updated_at: updated_at
+        project_id: 1
+        crawler_config_id: 6
+        created_at: created_at
+        id: 0
+        deleted_at: deleted_at
+      properties:
+        id:
+          format: int32
+          type: integer
+        crawler_config_id:
+          format: int32
+          type: integer
+        project_id:
+          format: int32
+          type: integer
+        crawler_last_run_id:
+          format: int32
+          type: integer
+        schedule_cron_string:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+      required:
+      - crawler_config_id
+      - crawler_last_run_id
+      - id
+      - project_id
+      - schedule_cron_string
+      type: object
+    CrawlerScheduleRequest:
+      example:
+        schedule_cron_string: schedule_cron_string
+      properties:
+        schedule_cron_string:
+          type: string
+      required:
+      - schedule_cron_string
+      type: object
+    CrawlerScheduleRequestUpdate:
+      example:
+        schedule_cron_string: schedule_cron_string
+      properties:
+        schedule_cron_string:
+          type: string
       type: object
     Domain:
       example:
         updated_at: updated_at
         project_id: 6
+        kind: domain
         domain: domain
         dns_engaged: 5
         created_at: created_at
@@ -1977,6 +2588,10 @@ components:
         deleted_at: deleted_at
         section_message: section_message
       properties:
+        kind:
+          enum:
+          - domain
+          type: string
         id:
           format: int32
           type: integer
@@ -2003,6 +2618,7 @@ components:
       - dns_engaged
       - domain
       - id
+      - kind
       type: object
     DomainRequest:
       example:
@@ -2040,6 +2656,53 @@ components:
       - error
       - message
       type: object
+    FailoverConfig:
+      example:
+        failover_origin_ttfb: "2000"
+        failover_lifetime: "300"
+        failover_origin_status_codes:
+        - failover_origin_status_codes
+        - failover_origin_status_codes
+        failover_mode: failover_mode
+      properties:
+        failover_mode:
+          type: string
+        failover_origin_ttfb:
+          default: "2000"
+          type: string
+        failover_origin_status_codes:
+          default:
+          - "200"
+          - "404"
+          - "301"
+          - "302"
+          - "304"
+          items:
+            type: string
+          type: array
+        failover_lifetime:
+          default: "300"
+          type: string
+      type: object
+    NotifyConfig:
+      example:
+        period: "60"
+        slack_webhook: ""
+        origin_status_codes:
+        - origin_status_codes
+        - origin_status_codes
+      properties:
+        origin_status_codes:
+          items:
+            type: string
+          type: array
+        period:
+          default: "60"
+          type: string
+        slack_webhook:
+          default: ""
+          type: string
+      type: object
     Organization:
       example:
         updated_at: updated_at
@@ -2075,6 +2738,7 @@ components:
       example:
         project_type: normal
         fastly_migrated: 5
+        kind: project
         created_at: created_at
         machine_name: machine_name
         uuid: uuid
@@ -2088,6 +2752,11 @@ components:
         parent_project_id: 1
         region: region
       properties:
+        kind:
+          default: project
+          enum:
+          - project
+          type: string
         id:
           format: int32
           type: integer
@@ -2127,6 +2796,7 @@ components:
           format: int32
           type: integer
       required:
+      - kind
       - machine_name
       - name
       type: object
@@ -2203,6 +2873,98 @@ components:
         custom_s3_sync_secret_key:
           type: string
       type: object
+    ProxyConfig:
+      example:
+        cache_lifetime: 0
+        only_proxy_404: true
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
+        inject_headers:
+          key: inject_headers
+        auth_user: auth_user
+        host: host
+        auth_pass: auth_pass
+        to: to
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
+        disable_ssl_verify: true
+      properties:
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+      required:
+      - to
+      type: object
+    ProxyConfigUpdate:
+      example:
+        cache_lifetime: 6
+        only_proxy_404: true
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
+        inject_headers:
+          key: inject_headers
+        auth_user: auth_user
+        host: host
+        auth_pass: auth_pass
+        to: to
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
+        disable_ssl_verify: true
+      properties:
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+      type: object
     PurgeRequest:
       example:
         cache_keys:
@@ -2224,108 +2986,182 @@ components:
       - cache_keys
       - scope
       type: object
-    RuleProxy:
-      example:
-        country: country
-        method: method
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        only_with_cookie: only_with_cookie
-        method_is:
-        - method_is
-        - method_is
-        ip: ip
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
+    Rule:
+      properties:
+        name:
+          type: string
+        uuid:
+          type: string
+        rule_id:
+          type: string
         url:
-        - url
-        - url
-        rule_id: rule_id
-        country_is_not:
-        - country_is_not
-        - country_is_not
+          items:
+            type: string
+          type: array
         domain:
-        - domain
-        - domain
-        name: name
+          items:
+            type: string
+          type: array
+        disabled:
+          default: false
+          type: boolean
+        only_with_cookie:
+          type: string
+        method:
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          type: string
         ip_is:
-        - ip_is
-        - ip_is
-        action: action
-        disabled: false
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        country:
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        action:
+          type: string
+      required:
+      - action
+      - disabled
+      - uuid
+      type: object
+    RuleAuth:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      properties:
+        kind:
+          enum:
+          - rule_auth
+          type: string
         action_config:
-          origin_timeout: origin_timeout
-          proxy_strip_request_headers:
-          - proxy_strip_request_headers
-          - proxy_strip_request_headers
-          cache_lifetime: 0
-          failover_origin_ttfb: failover_origin_ttfb
-          proxy_strip_headers:
-          - proxy_strip_headers
-          - proxy_strip_headers
-          notify_config:
-            period: "60"
-            slack_webhook: ""
-            origin_status_codes:
-            - origin_status_codes
-            - origin_status_codes
-          notify: notify
-          only_proxy_404: true
-          inject_headers:
-            key: inject_headers
-          auth_user: auth_user
-          host: host
+          $ref: '#/components/schemas/RuleAuthAction'
+      required:
+      - action_config
+      - kind
+      type: object
+    RuleAuthAction:
+      properties:
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+      required:
+      - auth_pass
+      - auth_user
+      type: object
+    RuleCustomResponse:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      properties:
+        kind:
+          enum:
+          - rule_custom_response
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleCustomResponseAction'
+      required:
+      - kind
+      type: object
+    RuleCustomResponseAction:
+      properties:
+        custom_response_body:
+          type: string
+        custom_response_status_code:
+          default: 200
+          format: int32
+          type: integer
+      required:
+      - custom_response_body
+      - custom_response_status_code
+      type: object
+    RuleHeader:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      properties:
+        kind:
+          enum:
+          - rule_header
+          type: string
+        action_config:
+          $ref: '#/components/schemas/RuleHeaderAction'
+      required:
+      - action_config
+      - kind
+      type: object
+    RuleHeaderAction:
+      properties:
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - headers
+      type: object
+    RuleProxy:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      example:
+        kind: rule_proxy
+        action_config:
+          proxy:
+            cache_lifetime: 0
+            only_proxy_404: true
+            proxy_strip_request_headers:
+            - proxy_strip_request_headers
+            - proxy_strip_request_headers
+            inject_headers:
+              key: inject_headers
+            auth_user: auth_user
+            host: host
+            auth_pass: auth_pass
+            to: to
+            proxy_strip_headers:
+            - proxy_strip_headers
+            - proxy_strip_headers
+            disable_ssl_verify: true
+          failover:
+            failover_origin_ttfb: "2000"
+            failover_lifetime: "300"
+            failover_origin_status_codes:
+            - failover_origin_status_codes
+            - failover_origin_status_codes
+            failover_mode: failover_mode
           waf_enabled: false
           proxy_inline_fn_enabled: false
-          auth_pass: auth_pass
-          notify_email: notify_email
-          to: to
-          failover_lifetime: failover_lifetime
-          disable_ssl_verify: true
           waf_config:
             allow_rules:
             - allow_rules
             - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              api_key: api_key
-              block_spam: false
-              block_search_engine: false
-              block_suspicious: false
+            waf_ratelimit_cooldown: 1
+            notify_slack_rpm: 1
             request_header_ratelimit_mode: disabled
             ip_ratelimit_cooldown: 3
             request_header_ratelimit_cooldown: 4
+            notify_slack_hits_rpm: 7
             allow_ip:
             - allow_ip
             - allow_ip
-            mode: block
-            ip_ratelimit_mode: disabled
-            ip_ratelimit_rps: 9
-            waf_ratelimit_rps: 1
-            notify_email:
-            - notify_email
-            - notify_email
-            waf_ratelimit_mode: disabled
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: notify_slack
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            waf_ratelimit_cooldown: 1
-            notify_slack_rpm: 1
-            notify_slack_hits_rpm: 7
             request_header_name: request_header_name
+            mode: block
             thresholds:
             - mode: disabled
               hits: 5
@@ -2347,89 +3183,124 @@ components:
             waf_ratelimit_hits: 7
             httpbl_enabled:
               key: true
+            ip_ratelimit_mode: disabled
+            ip_ratelimit_rps: 9
+            waf_ratelimit_rps: 1
+            notify_email:
+            - notify_email
+            - notify_email
             block_ip:
             - block_ip
             - block_ip
             block_referer:
             - block_referer
             - block_referer
+            waf_ratelimit_mode: disabled
+            block_ua:
+            - block_ua
+            - block_ua
+            notify_slack: notify_slack
             paranoia_level: 6
-          failover_origin_status_codes:
-          - failover_origin_status_codes
-          - failover_origin_status_codes
+          notify_config:
+            period: "60"
+            slack_webhook: ""
+            origin_status_codes:
+            - origin_status_codes
+            - origin_status_codes
+          notify: notify
           proxy_alert_enabled: true
-          failover_mode: true
       properties:
-        name:
-          type: string
-        uuid:
-          type: string
-        rule_id:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        domain:
-          items:
-            type: string
-          type: array
-        disabled:
-          default: false
-          type: boolean
-        only_with_cookie:
-          type: string
-        method:
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        country:
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        action:
+        kind:
+          enum:
+          - rule_proxy
           type: string
         action_config:
           $ref: '#/components/schemas/RuleProxyAction'
       required:
-      - action
       - action_config
-      - disabled
-      - uuid
+      - kind
       type: object
     RuleProxyAction:
       example:
-        origin_timeout: origin_timeout
-        proxy_strip_request_headers:
-        - proxy_strip_request_headers
-        - proxy_strip_request_headers
-        cache_lifetime: 0
-        failover_origin_ttfb: failover_origin_ttfb
-        proxy_strip_headers:
-        - proxy_strip_headers
-        - proxy_strip_headers
+        proxy:
+          cache_lifetime: 0
+          only_proxy_404: true
+          proxy_strip_request_headers:
+          - proxy_strip_request_headers
+          - proxy_strip_request_headers
+          inject_headers:
+            key: inject_headers
+          auth_user: auth_user
+          host: host
+          auth_pass: auth_pass
+          to: to
+          proxy_strip_headers:
+          - proxy_strip_headers
+          - proxy_strip_headers
+          disable_ssl_verify: true
+        failover:
+          failover_origin_ttfb: "2000"
+          failover_lifetime: "300"
+          failover_origin_status_codes:
+          - failover_origin_status_codes
+          - failover_origin_status_codes
+          failover_mode: failover_mode
+        waf_enabled: false
+        proxy_inline_fn_enabled: false
+        waf_config:
+          allow_rules:
+          - allow_rules
+          - allow_rules
+          waf_ratelimit_cooldown: 1
+          notify_slack_rpm: 1
+          request_header_ratelimit_mode: disabled
+          ip_ratelimit_cooldown: 3
+          request_header_ratelimit_cooldown: 4
+          notify_slack_hits_rpm: 7
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          request_header_name: request_header_name
+          mode: block
+          thresholds:
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          - mode: disabled
+            hits: 5
+            rps: 5
+            minutes: 2
+            cooldown: 1
+            type: type
+            value: value
+            notify_slack: notify_slack
+          request_header_ratelimit_rps: 2
+          waf_ratelimit_hits: 7
+          httpbl_enabled:
+            key: true
+          ip_ratelimit_mode: disabled
+          ip_ratelimit_rps: 9
+          waf_ratelimit_rps: 1
+          notify_email:
+          - notify_email
+          - notify_email
+          block_ip:
+          - block_ip
+          - block_ip
+          block_referer:
+          - block_referer
+          - block_referer
+          waf_ratelimit_mode: disabled
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: notify_slack
+          paranoia_level: 6
         notify_config:
           period: "60"
           slack_webhook: ""
@@ -2437,167 +3308,49 @@ components:
           - origin_status_codes
           - origin_status_codes
         notify: notify
-        only_proxy_404: true
-        inject_headers:
-          key: inject_headers
-        auth_user: auth_user
-        host: host
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: auth_pass
-        notify_email: notify_email
-        to: to
-        failover_lifetime: failover_lifetime
-        disable_ssl_verify: true
-        waf_config:
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            api_key: api_key
-            block_spam: false
-            block_search_engine: false
-            block_suspicious: false
-          request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 3
-          request_header_ratelimit_cooldown: 4
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          mode: block
-          ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 9
-          waf_ratelimit_rps: 1
-          notify_email:
-          - notify_email
-          - notify_email
-          waf_ratelimit_mode: disabled
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: notify_slack
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          waf_ratelimit_cooldown: 1
-          notify_slack_rpm: 1
-          notify_slack_hits_rpm: 7
-          request_header_name: request_header_name
-          thresholds:
-          - mode: disabled
-            hits: 5
-            rps: 5
-            minutes: 2
-            cooldown: 1
-            type: type
-            value: value
-            notify_slack: notify_slack
-          - mode: disabled
-            hits: 5
-            rps: 5
-            minutes: 2
-            cooldown: 1
-            type: type
-            value: value
-            notify_slack: notify_slack
-          request_header_ratelimit_rps: 2
-          waf_ratelimit_hits: 7
-          httpbl_enabled:
-            key: true
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          paranoia_level: 6
-        failover_origin_status_codes:
-        - failover_origin_status_codes
-        - failover_origin_status_codes
         proxy_alert_enabled: true
-        failover_mode: true
       properties:
-        host:
-          type: string
-        waf_enabled:
-          default: false
-          type: boolean
-        proxy_strip_headers:
-          items:
-            type: string
-          type: array
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        origin_timeout:
-          type: string
-        proxy_alert_enabled:
-          type: boolean
+        proxy:
+          $ref: '#/components/schemas/ProxyConfig'
+        failover:
+          $ref: '#/components/schemas/FailoverConfig'
         notify:
           type: string
         notify_config:
-          $ref: '#/components/schemas/RuleProxyAction_notify_config'
-        proxy_strip_request_headers:
-          items:
-            type: string
-          type: array
-        failover_origin_status_codes:
-          items:
-            type: string
-          type: array
-        failover_origin_ttfb:
-          type: string
-        failover_mode:
+          $ref: '#/components/schemas/NotifyConfig'
+        waf_enabled:
+          default: false
           type: boolean
-        failover_lifetime:
-          type: string
-        only_proxy_404:
-          type: boolean
-        inject_headers:
-          additionalProperties:
-            type: string
-          type: object
-        to:
-          type: string
-        cache_lifetime:
-          default: 0
-          type: integer
-        disable_ssl_verify:
-          default: true
-          type: boolean
-        notify_email:
-          type: string
         waf_config:
           $ref: '#/components/schemas/WAFConfig'
+        proxy_alert_enabled:
+          type: boolean
         proxy_inline_fn_enabled:
           default: false
           type: boolean
       required:
-      - to
+      - proxy
       - waf_enabled
       type: object
     RuleProxyRequest:
       example:
         country: country_is
-        cache_lifetime: 6
-        proxy_strip_request_headers:
-        - proxy_strip_request_headers
-        - proxy_strip_request_headers
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
         method_is:
         - method_is
         - method_is
+        ip: ip_is
+        only_with_cookie: false
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
         method_is_not:
         - method_is_not
         - method_is_not
-        static_error_page: ""
-        proxy_strip_headers:
-        - proxy_strip_headers
-        - proxy_strip_headers
         uuid: uuid
         notify_config:
           period: "60"
@@ -2605,85 +3358,61 @@ components:
           origin_status_codes:
           - origin_status_codes
           - origin_status_codes
+        url:
+        - url
+        - url
         notify: none
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        auth_user: auth_user
-        host: host
-        waf_enabled: false
-        auth_pass: auth_pass
-        disabled: false
-        static_error_page_status_codes:
-        - static_error_page_status_codes
-        - static_error_page_status_codes
-        failover_mode: failover_mode
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        only_with_cookie: false
-        weight: 0
-        country_is:
-        - country_is
-        - country_is
-        url:
-        - url
-        - url
-        only_proxy_404: true
-        inject_headers:
-          key: inject_headers
+        proxy:
+          cache_lifetime: 0
+          only_proxy_404: true
+          proxy_strip_request_headers:
+          - proxy_strip_request_headers
+          - proxy_strip_request_headers
+          inject_headers:
+            key: inject_headers
+          auth_user: auth_user
+          host: host
+          auth_pass: auth_pass
+          to: to
+          proxy_strip_headers:
+          - proxy_strip_headers
+          - proxy_strip_headers
+          disable_ssl_verify: true
+        failover:
+          failover_origin_ttfb: "2000"
+          failover_lifetime: "300"
+          failover_origin_status_codes:
+          - failover_origin_status_codes
+          - failover_origin_status_codes
+          failover_mode: failover_mode
         domain:
         - domain
         - domain
         name: name
+        waf_enabled: false
         ip_is:
         - ip_is
         - ip_is
-        to: to
-        disable_ssl_verify: true
-        failover_lifetime: "300"
+        disabled: false
         waf_config:
           allow_rules:
           - allow_rules
           - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            api_key: api_key
-            block_spam: false
-            block_search_engine: false
-            block_suspicious: false
+          waf_ratelimit_cooldown: 1
+          notify_slack_rpm: 1
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 3
           request_header_ratelimit_cooldown: 4
+          notify_slack_hits_rpm: 7
           allow_ip:
           - allow_ip
           - allow_ip
-          mode: block
-          ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 9
-          waf_ratelimit_rps: 1
-          notify_email:
-          - notify_email
-          - notify_email
-          waf_ratelimit_mode: disabled
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: notify_slack
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          waf_ratelimit_cooldown: 1
-          notify_slack_rpm: 1
-          notify_slack_hits_rpm: 7
           request_header_name: request_header_name
+          mode: block
           thresholds:
           - mode: disabled
             hits: 5
@@ -2705,16 +3434,24 @@ components:
           waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
+          ip_ratelimit_mode: disabled
+          ip_ratelimit_rps: 9
+          waf_ratelimit_rps: 1
+          notify_email:
+          - notify_email
+          - notify_email
           block_ip:
           - block_ip
           - block_ip
           block_referer:
           - block_referer
           - block_referer
+          waf_ratelimit_mode: disabled
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: notify_slack
           paranoia_level: 6
-        failover_origin_status_codes:
-        - failover_origin_status_codes
-        - failover_origin_status_codes
       properties:
         domain:
           default:
@@ -2779,50 +3516,10 @@ components:
           type: boolean
         cookie_name:
           type: string
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        inject_headers:
-          additionalProperties:
-            type: string
-          type: object
-        proxy_strip_headers:
-          items:
-            type: string
-          type: array
-        proxy_strip_request_headers:
-          items:
-            type: string
-          type: array
-        failover_mode:
-          type: string
-        failover_origin_ttfb:
-          default: "2000"
-          type: string
-        failover_origin_status_codes:
-          default:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          items:
-            type: string
-          type: array
-        failover_lifetime:
-          default: "300"
-          type: string
+        proxy:
+          $ref: '#/components/schemas/ProxyConfig'
+        failover:
+          $ref: '#/components/schemas/FailoverConfig'
         notify:
           default: none
           enum:
@@ -2830,14 +3527,7 @@ components:
           - slack
           type: string
         notify_config:
-          $ref: '#/components/schemas/RuleProxyAction_notify_config'
-        static_error_page:
-          default: ""
-          type: string
-        static_error_page_status_codes:
-          items:
-            type: string
-          type: array
+          $ref: '#/components/schemas/NotifyConfig'
         waf_enabled:
           default: false
           type: boolean
@@ -2846,26 +3536,28 @@ components:
       required:
       - disabled
       - domain
-      - to
+      - proxy
       - url
       type: object
     RuleProxyRequestUpdate:
       example:
         country: country_is
-        cache_lifetime: 6
-        proxy_strip_request_headers:
-        - proxy_strip_request_headers
-        - proxy_strip_request_headers
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
         method_is:
         - method_is
         - method_is
+        ip: ip_is
+        only_with_cookie: false
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
         method_is_not:
         - method_is_not
         - method_is_not
-        static_error_page: ""
-        proxy_strip_headers:
-        - proxy_strip_headers
-        - proxy_strip_headers
         uuid: uuid
         notify_config:
           period: "60"
@@ -2873,85 +3565,61 @@ components:
           origin_status_codes:
           - origin_status_codes
           - origin_status_codes
+        url:
+        - url
+        - url
         notify: none
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        auth_user: auth_user
-        host: host
-        waf_enabled: false
-        auth_pass: auth_pass
-        disabled: false
-        static_error_page_status_codes:
-        - static_error_page_status_codes
-        - static_error_page_status_codes
-        failover_mode: failover_mode
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        only_with_cookie: false
-        weight: 0
-        country_is:
-        - country_is
-        - country_is
-        url:
-        - url
-        - url
-        only_proxy_404: true
-        inject_headers:
-          key: inject_headers
+        proxy:
+          cache_lifetime: 6
+          only_proxy_404: true
+          proxy_strip_request_headers:
+          - proxy_strip_request_headers
+          - proxy_strip_request_headers
+          inject_headers:
+            key: inject_headers
+          auth_user: auth_user
+          host: host
+          auth_pass: auth_pass
+          to: to
+          proxy_strip_headers:
+          - proxy_strip_headers
+          - proxy_strip_headers
+          disable_ssl_verify: true
+        failover:
+          failover_origin_ttfb: "2000"
+          failover_lifetime: "300"
+          failover_origin_status_codes:
+          - failover_origin_status_codes
+          - failover_origin_status_codes
+          failover_mode: failover_mode
         domain:
         - domain
         - domain
         name: name
+        waf_enabled: false
         ip_is:
         - ip_is
         - ip_is
-        to: to
-        disable_ssl_verify: true
-        failover_lifetime: "300"
+        disabled: false
         waf_config:
           allow_rules:
           - allow_rules
           - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            api_key: api_key
-            block_spam: false
-            block_search_engine: false
-            block_suspicious: false
+          waf_ratelimit_cooldown: 4
+          notify_slack_rpm: 7
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 2
           request_header_ratelimit_cooldown: 9
+          notify_slack_hits_rpm: 5
           allow_ip:
           - allow_ip
           - allow_ip
-          mode: block
-          ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 2
-          notify_email:
-          - notify_email
-          - notify_email
-          waf_ratelimit_mode: disabled
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: notify_slack
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          waf_ratelimit_cooldown: 4
-          notify_slack_rpm: 7
-          notify_slack_hits_rpm: 5
           request_header_name: request_header_name
+          mode: block
           thresholds:
           - mode: disabled
             hits: 5
@@ -2973,16 +3641,24 @@ components:
           waf_ratelimit_hits: 3
           httpbl_enabled:
             key: true
+          ip_ratelimit_mode: disabled
+          ip_ratelimit_rps: 5
+          waf_ratelimit_rps: 2
+          notify_email:
+          - notify_email
+          - notify_email
           block_ip:
           - block_ip
           - block_ip
           block_referer:
           - block_referer
           - block_referer
+          waf_ratelimit_mode: disabled
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: notify_slack
           paranoia_level: 1
-        failover_origin_status_codes:
-        - failover_origin_status_codes
-        - failover_origin_status_codes
       properties:
         domain:
           default:
@@ -3047,50 +3723,10 @@ components:
           type: boolean
         cookie_name:
           type: string
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        inject_headers:
-          additionalProperties:
-            type: string
-          type: object
-        proxy_strip_headers:
-          items:
-            type: string
-          type: array
-        proxy_strip_request_headers:
-          items:
-            type: string
-          type: array
-        failover_mode:
-          type: string
-        failover_origin_ttfb:
-          default: "2000"
-          type: string
-        failover_origin_status_codes:
-          default:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          items:
-            type: string
-          type: array
-        failover_lifetime:
-          default: "300"
-          type: string
+        proxy:
+          $ref: '#/components/schemas/ProxyConfigUpdate'
+        failover:
+          $ref: '#/components/schemas/FailoverConfig'
         notify:
           default: none
           enum:
@@ -3098,14 +3734,7 @@ components:
           - slack
           type: string
         notify_config:
-          $ref: '#/components/schemas/RuleProxyAction_notify_config'
-        static_error_page:
-          default: ""
-          type: string
-        static_error_page_status_codes:
-          items:
-            type: string
-          type: array
+          $ref: '#/components/schemas/NotifyConfig'
         waf_enabled:
           default: false
           type: boolean
@@ -3113,101 +3742,22 @@ components:
           $ref: '#/components/schemas/WAFConfigUpdate'
       type: object
     RuleRedirect:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
       example:
-        country: country
-        method: method
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        only_with_cookie: only_with_cookie
-        method_is:
-        - method_is
-        - method_is
-        ip: ip
-        country_is:
-        - country_is
-        - country_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        uuid: uuid
-        url:
-        - url
-        - url
-        rule_id: rule_id
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        domain:
-        - domain
-        - domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        action: action
-        disabled: false
+        kind: rule_redirect
         action_config:
           status_code: "301"
           to: to
       properties:
-        name:
-          type: string
-        uuid:
-          type: string
-        rule_id:
-          type: string
-        url:
-          items:
-            type: string
-          type: array
-        domain:
-          items:
-            type: string
-          type: array
-        disabled:
-          default: false
-          type: boolean
-        only_with_cookie:
-          type: string
-        method:
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        country:
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        action:
+        kind:
+          enum:
+          - rule_redirect
           type: string
         action_config:
           $ref: '#/components/schemas/RuleRedirectAction'
       required:
-      - action
-      - disabled
-      - uuid
+      - kind
       type: object
     RuleRedirectAction:
       example:
@@ -3516,40 +4066,17 @@ components:
         allow_rules:
         - allow_rules
         - allow_rules
-        httpbl:
-          block_harvester: false
-          httpbl_enabled: false
-          api_key: api_key
-          block_spam: false
-          block_search_engine: false
-          block_suspicious: false
+        waf_ratelimit_cooldown: 1
+        notify_slack_rpm: 1
         request_header_ratelimit_mode: disabled
         ip_ratelimit_cooldown: 3
         request_header_ratelimit_cooldown: 4
+        notify_slack_hits_rpm: 7
         allow_ip:
         - allow_ip
         - allow_ip
-        mode: block
-        ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 9
-        waf_ratelimit_rps: 1
-        notify_email:
-        - notify_email
-        - notify_email
-        waf_ratelimit_mode: disabled
-        block_ua:
-        - block_ua
-        - block_ua
-        notify_slack: notify_slack
-        block_lists:
-          referer: false
-          ip: false
-          ai: false
-          user_agent: false
-        waf_ratelimit_cooldown: 1
-        notify_slack_rpm: 1
-        notify_slack_hits_rpm: 7
         request_header_name: request_header_name
+        mode: block
         thresholds:
         - mode: disabled
           hits: 5
@@ -3571,12 +4098,23 @@ components:
         waf_ratelimit_hits: 7
         httpbl_enabled:
           key: true
+        ip_ratelimit_mode: disabled
+        ip_ratelimit_rps: 9
+        waf_ratelimit_rps: 1
+        notify_email:
+        - notify_email
+        - notify_email
         block_ip:
         - block_ip
         - block_ip
         block_referer:
         - block_referer
         - block_referer
+        waf_ratelimit_mode: disabled
+        block_ua:
+        - block_ua
+        - block_ua
+        notify_slack: notify_slack
         paranoia_level: 6
       properties:
         mode:
@@ -3607,10 +4145,6 @@ components:
           items:
             type: string
           type: array
-        block_lists:
-          $ref: '#/components/schemas/WAFConfig_block_lists'
-        httpbl:
-          $ref: '#/components/schemas/WAFConfig_httpbl'
         thresholds:
           items:
             $ref: '#/components/schemas/Threshold'
@@ -3682,40 +4216,17 @@ components:
         allow_rules:
         - allow_rules
         - allow_rules
-        httpbl:
-          block_harvester: false
-          httpbl_enabled: false
-          api_key: api_key
-          block_spam: false
-          block_search_engine: false
-          block_suspicious: false
+        waf_ratelimit_cooldown: 4
+        notify_slack_rpm: 7
         request_header_ratelimit_mode: disabled
         ip_ratelimit_cooldown: 2
         request_header_ratelimit_cooldown: 9
+        notify_slack_hits_rpm: 5
         allow_ip:
         - allow_ip
         - allow_ip
-        mode: block
-        ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 2
-        notify_email:
-        - notify_email
-        - notify_email
-        waf_ratelimit_mode: disabled
-        block_ua:
-        - block_ua
-        - block_ua
-        notify_slack: notify_slack
-        block_lists:
-          referer: false
-          ip: false
-          ai: false
-          user_agent: false
-        waf_ratelimit_cooldown: 4
-        notify_slack_rpm: 7
-        notify_slack_hits_rpm: 5
         request_header_name: request_header_name
+        mode: block
         thresholds:
         - mode: disabled
           hits: 5
@@ -3737,12 +4248,23 @@ components:
         waf_ratelimit_hits: 3
         httpbl_enabled:
           key: true
+        ip_ratelimit_mode: disabled
+        ip_ratelimit_rps: 5
+        waf_ratelimit_rps: 2
+        notify_email:
+        - notify_email
+        - notify_email
         block_ip:
         - block_ip
         - block_ip
         block_referer:
         - block_referer
         - block_referer
+        waf_ratelimit_mode: disabled
+        block_ua:
+        - block_ua
+        - block_ua
+        notify_slack: notify_slack
         paranoia_level: 1
       properties:
         mode:
@@ -3773,10 +4295,6 @@ components:
           items:
             type: string
           type: array
-        block_lists:
-          $ref: '#/components/schemas/WAFConfig_block_lists'
-        httpbl:
-          $ref: '#/components/schemas/WAFConfigUpdate_httpbl'
         thresholds:
           items:
             $ref: '#/components/schemas/Threshold'
@@ -3858,105 +4376,6 @@ components:
           type: array
       required:
       - headers
-      type: object
-    RuleProxyAction_notify_config:
-      example:
-        period: "60"
-        slack_webhook: ""
-        origin_status_codes:
-        - origin_status_codes
-        - origin_status_codes
-      properties:
-        origin_status_codes:
-          items:
-            type: string
-          type: array
-        period:
-          default: "60"
-          type: string
-        slack_webhook:
-          default: ""
-          type: string
-      type: object
-    WAFConfig_block_lists:
-      example:
-        referer: false
-        ip: false
-        ai: false
-        user_agent: false
-      properties:
-        referer:
-          default: false
-          type: boolean
-        ip:
-          default: false
-          type: boolean
-        user_agent:
-          default: false
-          type: boolean
-        ai:
-          default: false
-          type: boolean
-      type: object
-    WAFConfig_httpbl:
-      example:
-        block_harvester: false
-        httpbl_enabled: false
-        api_key: api_key
-        block_spam: false
-        block_search_engine: false
-        block_suspicious: false
-      properties:
-        httpbl_enabled:
-          default: false
-          type: boolean
-        api_key:
-          type: string
-        block_suspicious:
-          default: false
-          type: boolean
-        block_harvester:
-          default: false
-          type: boolean
-        block_spam:
-          default: false
-          type: boolean
-        block_search_engine:
-          default: false
-          type: boolean
-      required:
-      - block_harvester
-      - block_search_engine
-      - block_spam
-      - block_suspicious
-      - httpbl_enabled
-      type: object
-    WAFConfigUpdate_httpbl:
-      example:
-        block_harvester: false
-        httpbl_enabled: false
-        api_key: api_key
-        block_spam: false
-        block_search_engine: false
-        block_suspicious: false
-      properties:
-        httpbl_enabled:
-          default: false
-          type: boolean
-        api_key:
-          type: string
-        block_suspicious:
-          default: false
-          type: boolean
-        block_harvester:
-          default: false
-          type: boolean
-        block_spam:
-          default: false
-          type: boolean
-        block_search_engine:
-          default: false
-          type: boolean
       type: object
   securitySchemes:
     BearerAuth:

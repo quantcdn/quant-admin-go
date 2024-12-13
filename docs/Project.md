@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Kind** | **string** |  | [default to "project"]
 **Id** | Pointer to **int32** |  | [optional] 
 **MachineName** | **string** |  | 
 **Name** | **string** |  | 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewProject
 
-`func NewProject(machineName string, name string, ) *Project`
+`func NewProject(kind string, machineName string, name string, ) *Project`
 
 NewProject instantiates a new Project object
 This constructor will assign default values to properties that have it defined,
@@ -37,6 +38,26 @@ will change when the set of required properties is changed
 NewProjectWithDefaults instantiates a new Project object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetKind
+
+`func (o *Project) GetKind() string`
+
+GetKind returns the Kind field if non-nil, zero value otherwise.
+
+### GetKindOk
+
+`func (o *Project) GetKindOk() (*string, bool)`
+
+GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKind
+
+`func (o *Project) SetKind(v string)`
+
+SetKind sets Kind field to given value.
+
 
 ### GetId
 

@@ -21,24 +21,10 @@ Name | Type | Description | Notes
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
 **OnlyWithCookie** | Pointer to **bool** |  | [optional] [default to false]
 **CookieName** | Pointer to **string** |  | [optional] 
-**To** | Pointer to **string** |  | [optional] 
-**Host** | Pointer to **string** |  | [optional] 
-**AuthUser** | Pointer to **string** |  | [optional] 
-**AuthPass** | Pointer to **string** |  | [optional] 
-**DisableSslVerify** | Pointer to **bool** |  | [optional] 
-**CacheLifetime** | Pointer to **int32** |  | [optional] 
-**OnlyProxy404** | Pointer to **bool** |  | [optional] 
-**InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
-**ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
-**ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
-**FailoverMode** | Pointer to **string** |  | [optional] 
-**FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
-**FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
-**FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
+**Proxy** | Pointer to [**ProxyConfigUpdate**](ProxyConfigUpdate.md) |  | [optional] 
+**Failover** | Pointer to [**FailoverConfig**](FailoverConfig.md) |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
-**NotifyConfig** | Pointer to [**RuleProxyActionNotifyConfig**](RuleProxyActionNotifyConfig.md) |  | [optional] 
-**StaticErrorPage** | Pointer to **string** |  | [optional] [default to ""]
-**StaticErrorPageStatusCodes** | Pointer to **[]string** |  | [optional] 
+**NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
 **WafEnabled** | Pointer to **bool** |  | [optional] [default to false]
 **WafConfig** | Pointer to [**WAFConfigUpdate**](WAFConfigUpdate.md) |  | [optional] 
 
@@ -486,355 +472,55 @@ SetCookieName sets CookieName field to given value.
 
 HasCookieName returns a boolean if a field has been set.
 
-### GetTo
+### GetProxy
 
-`func (o *RuleProxyRequestUpdate) GetTo() string`
+`func (o *RuleProxyRequestUpdate) GetProxy() ProxyConfigUpdate`
 
-GetTo returns the To field if non-nil, zero value otherwise.
+GetProxy returns the Proxy field if non-nil, zero value otherwise.
 
-### GetToOk
+### GetProxyOk
 
-`func (o *RuleProxyRequestUpdate) GetToOk() (*string, bool)`
+`func (o *RuleProxyRequestUpdate) GetProxyOk() (*ProxyConfigUpdate, bool)`
 
-GetToOk returns a tuple with the To field if it's non-nil, zero value otherwise
+GetProxyOk returns a tuple with the Proxy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTo
+### SetProxy
 
-`func (o *RuleProxyRequestUpdate) SetTo(v string)`
+`func (o *RuleProxyRequestUpdate) SetProxy(v ProxyConfigUpdate)`
 
-SetTo sets To field to given value.
+SetProxy sets Proxy field to given value.
 
-### HasTo
+### HasProxy
 
-`func (o *RuleProxyRequestUpdate) HasTo() bool`
+`func (o *RuleProxyRequestUpdate) HasProxy() bool`
 
-HasTo returns a boolean if a field has been set.
+HasProxy returns a boolean if a field has been set.
 
-### GetHost
+### GetFailover
 
-`func (o *RuleProxyRequestUpdate) GetHost() string`
+`func (o *RuleProxyRequestUpdate) GetFailover() FailoverConfig`
 
-GetHost returns the Host field if non-nil, zero value otherwise.
+GetFailover returns the Failover field if non-nil, zero value otherwise.
 
-### GetHostOk
+### GetFailoverOk
 
-`func (o *RuleProxyRequestUpdate) GetHostOk() (*string, bool)`
+`func (o *RuleProxyRequestUpdate) GetFailoverOk() (*FailoverConfig, bool)`
 
-GetHostOk returns a tuple with the Host field if it's non-nil, zero value otherwise
+GetFailoverOk returns a tuple with the Failover field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHost
+### SetFailover
 
-`func (o *RuleProxyRequestUpdate) SetHost(v string)`
+`func (o *RuleProxyRequestUpdate) SetFailover(v FailoverConfig)`
 
-SetHost sets Host field to given value.
+SetFailover sets Failover field to given value.
 
-### HasHost
+### HasFailover
 
-`func (o *RuleProxyRequestUpdate) HasHost() bool`
+`func (o *RuleProxyRequestUpdate) HasFailover() bool`
 
-HasHost returns a boolean if a field has been set.
-
-### GetAuthUser
-
-`func (o *RuleProxyRequestUpdate) GetAuthUser() string`
-
-GetAuthUser returns the AuthUser field if non-nil, zero value otherwise.
-
-### GetAuthUserOk
-
-`func (o *RuleProxyRequestUpdate) GetAuthUserOk() (*string, bool)`
-
-GetAuthUserOk returns a tuple with the AuthUser field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthUser
-
-`func (o *RuleProxyRequestUpdate) SetAuthUser(v string)`
-
-SetAuthUser sets AuthUser field to given value.
-
-### HasAuthUser
-
-`func (o *RuleProxyRequestUpdate) HasAuthUser() bool`
-
-HasAuthUser returns a boolean if a field has been set.
-
-### GetAuthPass
-
-`func (o *RuleProxyRequestUpdate) GetAuthPass() string`
-
-GetAuthPass returns the AuthPass field if non-nil, zero value otherwise.
-
-### GetAuthPassOk
-
-`func (o *RuleProxyRequestUpdate) GetAuthPassOk() (*string, bool)`
-
-GetAuthPassOk returns a tuple with the AuthPass field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthPass
-
-`func (o *RuleProxyRequestUpdate) SetAuthPass(v string)`
-
-SetAuthPass sets AuthPass field to given value.
-
-### HasAuthPass
-
-`func (o *RuleProxyRequestUpdate) HasAuthPass() bool`
-
-HasAuthPass returns a boolean if a field has been set.
-
-### GetDisableSslVerify
-
-`func (o *RuleProxyRequestUpdate) GetDisableSslVerify() bool`
-
-GetDisableSslVerify returns the DisableSslVerify field if non-nil, zero value otherwise.
-
-### GetDisableSslVerifyOk
-
-`func (o *RuleProxyRequestUpdate) GetDisableSslVerifyOk() (*bool, bool)`
-
-GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisableSslVerify
-
-`func (o *RuleProxyRequestUpdate) SetDisableSslVerify(v bool)`
-
-SetDisableSslVerify sets DisableSslVerify field to given value.
-
-### HasDisableSslVerify
-
-`func (o *RuleProxyRequestUpdate) HasDisableSslVerify() bool`
-
-HasDisableSslVerify returns a boolean if a field has been set.
-
-### GetCacheLifetime
-
-`func (o *RuleProxyRequestUpdate) GetCacheLifetime() int32`
-
-GetCacheLifetime returns the CacheLifetime field if non-nil, zero value otherwise.
-
-### GetCacheLifetimeOk
-
-`func (o *RuleProxyRequestUpdate) GetCacheLifetimeOk() (*int32, bool)`
-
-GetCacheLifetimeOk returns a tuple with the CacheLifetime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCacheLifetime
-
-`func (o *RuleProxyRequestUpdate) SetCacheLifetime(v int32)`
-
-SetCacheLifetime sets CacheLifetime field to given value.
-
-### HasCacheLifetime
-
-`func (o *RuleProxyRequestUpdate) HasCacheLifetime() bool`
-
-HasCacheLifetime returns a boolean if a field has been set.
-
-### GetOnlyProxy404
-
-`func (o *RuleProxyRequestUpdate) GetOnlyProxy404() bool`
-
-GetOnlyProxy404 returns the OnlyProxy404 field if non-nil, zero value otherwise.
-
-### GetOnlyProxy404Ok
-
-`func (o *RuleProxyRequestUpdate) GetOnlyProxy404Ok() (*bool, bool)`
-
-GetOnlyProxy404Ok returns a tuple with the OnlyProxy404 field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOnlyProxy404
-
-`func (o *RuleProxyRequestUpdate) SetOnlyProxy404(v bool)`
-
-SetOnlyProxy404 sets OnlyProxy404 field to given value.
-
-### HasOnlyProxy404
-
-`func (o *RuleProxyRequestUpdate) HasOnlyProxy404() bool`
-
-HasOnlyProxy404 returns a boolean if a field has been set.
-
-### GetInjectHeaders
-
-`func (o *RuleProxyRequestUpdate) GetInjectHeaders() map[string]string`
-
-GetInjectHeaders returns the InjectHeaders field if non-nil, zero value otherwise.
-
-### GetInjectHeadersOk
-
-`func (o *RuleProxyRequestUpdate) GetInjectHeadersOk() (*map[string]string, bool)`
-
-GetInjectHeadersOk returns a tuple with the InjectHeaders field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInjectHeaders
-
-`func (o *RuleProxyRequestUpdate) SetInjectHeaders(v map[string]string)`
-
-SetInjectHeaders sets InjectHeaders field to given value.
-
-### HasInjectHeaders
-
-`func (o *RuleProxyRequestUpdate) HasInjectHeaders() bool`
-
-HasInjectHeaders returns a boolean if a field has been set.
-
-### GetProxyStripHeaders
-
-`func (o *RuleProxyRequestUpdate) GetProxyStripHeaders() []string`
-
-GetProxyStripHeaders returns the ProxyStripHeaders field if non-nil, zero value otherwise.
-
-### GetProxyStripHeadersOk
-
-`func (o *RuleProxyRequestUpdate) GetProxyStripHeadersOk() (*[]string, bool)`
-
-GetProxyStripHeadersOk returns a tuple with the ProxyStripHeaders field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProxyStripHeaders
-
-`func (o *RuleProxyRequestUpdate) SetProxyStripHeaders(v []string)`
-
-SetProxyStripHeaders sets ProxyStripHeaders field to given value.
-
-### HasProxyStripHeaders
-
-`func (o *RuleProxyRequestUpdate) HasProxyStripHeaders() bool`
-
-HasProxyStripHeaders returns a boolean if a field has been set.
-
-### GetProxyStripRequestHeaders
-
-`func (o *RuleProxyRequestUpdate) GetProxyStripRequestHeaders() []string`
-
-GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field if non-nil, zero value otherwise.
-
-### GetProxyStripRequestHeadersOk
-
-`func (o *RuleProxyRequestUpdate) GetProxyStripRequestHeadersOk() (*[]string, bool)`
-
-GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProxyStripRequestHeaders
-
-`func (o *RuleProxyRequestUpdate) SetProxyStripRequestHeaders(v []string)`
-
-SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
-
-### HasProxyStripRequestHeaders
-
-`func (o *RuleProxyRequestUpdate) HasProxyStripRequestHeaders() bool`
-
-HasProxyStripRequestHeaders returns a boolean if a field has been set.
-
-### GetFailoverMode
-
-`func (o *RuleProxyRequestUpdate) GetFailoverMode() string`
-
-GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
-
-### GetFailoverModeOk
-
-`func (o *RuleProxyRequestUpdate) GetFailoverModeOk() (*string, bool)`
-
-GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverMode
-
-`func (o *RuleProxyRequestUpdate) SetFailoverMode(v string)`
-
-SetFailoverMode sets FailoverMode field to given value.
-
-### HasFailoverMode
-
-`func (o *RuleProxyRequestUpdate) HasFailoverMode() bool`
-
-HasFailoverMode returns a boolean if a field has been set.
-
-### GetFailoverOriginTtfb
-
-`func (o *RuleProxyRequestUpdate) GetFailoverOriginTtfb() string`
-
-GetFailoverOriginTtfb returns the FailoverOriginTtfb field if non-nil, zero value otherwise.
-
-### GetFailoverOriginTtfbOk
-
-`func (o *RuleProxyRequestUpdate) GetFailoverOriginTtfbOk() (*string, bool)`
-
-GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverOriginTtfb
-
-`func (o *RuleProxyRequestUpdate) SetFailoverOriginTtfb(v string)`
-
-SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
-
-### HasFailoverOriginTtfb
-
-`func (o *RuleProxyRequestUpdate) HasFailoverOriginTtfb() bool`
-
-HasFailoverOriginTtfb returns a boolean if a field has been set.
-
-### GetFailoverOriginStatusCodes
-
-`func (o *RuleProxyRequestUpdate) GetFailoverOriginStatusCodes() []string`
-
-GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field if non-nil, zero value otherwise.
-
-### GetFailoverOriginStatusCodesOk
-
-`func (o *RuleProxyRequestUpdate) GetFailoverOriginStatusCodesOk() (*[]string, bool)`
-
-GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverOriginStatusCodes
-
-`func (o *RuleProxyRequestUpdate) SetFailoverOriginStatusCodes(v []string)`
-
-SetFailoverOriginStatusCodes sets FailoverOriginStatusCodes field to given value.
-
-### HasFailoverOriginStatusCodes
-
-`func (o *RuleProxyRequestUpdate) HasFailoverOriginStatusCodes() bool`
-
-HasFailoverOriginStatusCodes returns a boolean if a field has been set.
-
-### GetFailoverLifetime
-
-`func (o *RuleProxyRequestUpdate) GetFailoverLifetime() string`
-
-GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
-
-### GetFailoverLifetimeOk
-
-`func (o *RuleProxyRequestUpdate) GetFailoverLifetimeOk() (*string, bool)`
-
-GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverLifetime
-
-`func (o *RuleProxyRequestUpdate) SetFailoverLifetime(v string)`
-
-SetFailoverLifetime sets FailoverLifetime field to given value.
-
-### HasFailoverLifetime
-
-`func (o *RuleProxyRequestUpdate) HasFailoverLifetime() bool`
-
-HasFailoverLifetime returns a boolean if a field has been set.
+HasFailover returns a boolean if a field has been set.
 
 ### GetNotify
 
@@ -863,20 +549,20 @@ HasNotify returns a boolean if a field has been set.
 
 ### GetNotifyConfig
 
-`func (o *RuleProxyRequestUpdate) GetNotifyConfig() RuleProxyActionNotifyConfig`
+`func (o *RuleProxyRequestUpdate) GetNotifyConfig() NotifyConfig`
 
 GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
 
 ### GetNotifyConfigOk
 
-`func (o *RuleProxyRequestUpdate) GetNotifyConfigOk() (*RuleProxyActionNotifyConfig, bool)`
+`func (o *RuleProxyRequestUpdate) GetNotifyConfigOk() (*NotifyConfig, bool)`
 
 GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifyConfig
 
-`func (o *RuleProxyRequestUpdate) SetNotifyConfig(v RuleProxyActionNotifyConfig)`
+`func (o *RuleProxyRequestUpdate) SetNotifyConfig(v NotifyConfig)`
 
 SetNotifyConfig sets NotifyConfig field to given value.
 
@@ -885,56 +571,6 @@ SetNotifyConfig sets NotifyConfig field to given value.
 `func (o *RuleProxyRequestUpdate) HasNotifyConfig() bool`
 
 HasNotifyConfig returns a boolean if a field has been set.
-
-### GetStaticErrorPage
-
-`func (o *RuleProxyRequestUpdate) GetStaticErrorPage() string`
-
-GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
-
-### GetStaticErrorPageOk
-
-`func (o *RuleProxyRequestUpdate) GetStaticErrorPageOk() (*string, bool)`
-
-GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStaticErrorPage
-
-`func (o *RuleProxyRequestUpdate) SetStaticErrorPage(v string)`
-
-SetStaticErrorPage sets StaticErrorPage field to given value.
-
-### HasStaticErrorPage
-
-`func (o *RuleProxyRequestUpdate) HasStaticErrorPage() bool`
-
-HasStaticErrorPage returns a boolean if a field has been set.
-
-### GetStaticErrorPageStatusCodes
-
-`func (o *RuleProxyRequestUpdate) GetStaticErrorPageStatusCodes() []string`
-
-GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
-
-### GetStaticErrorPageStatusCodesOk
-
-`func (o *RuleProxyRequestUpdate) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
-
-GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStaticErrorPageStatusCodes
-
-`func (o *RuleProxyRequestUpdate) SetStaticErrorPageStatusCodes(v []string)`
-
-SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
-
-### HasStaticErrorPageStatusCodes
-
-`func (o *RuleProxyRequestUpdate) HasStaticErrorPageStatusCodes() bool`
-
-HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
 
 ### GetWafEnabled
 

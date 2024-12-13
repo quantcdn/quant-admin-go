@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
+	ruleProxyRequest := *openapiclient.NewRuleProxyRequest([]string{"Domain_example"}, false, []string{"Url_example"}, *openapiclient.NewProxyConfig("To_example")) // RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## RulesProxyDelete
 
-> RuleProxy RulesProxyDelete(ctx, organization, project, rule).Execute()
+> RulesProxyDelete(ctx, organization, project, rule).Execute()
 
 
 
@@ -110,13 +110,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RulesProxyAPI.RulesProxyDelete(context.Background(), organization, project, rule).Execute()
+	r, err := apiClient.RulesProxyAPI.RulesProxyDelete(context.Background(), organization, project, rule).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RulesProxyDelete`: RuleProxy
-	fmt.Fprintf(os.Stdout, "Response from `RulesProxyAPI.RulesProxyDelete`: %v\n", resp)
 }
 ```
 
@@ -143,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RuleProxy**](RuleProxy.md)
+ (empty response body)
 
 ### Authorization
 

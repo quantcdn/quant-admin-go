@@ -26,8 +26,6 @@ type WAFConfigUpdate struct {
 	BlockIp []string `json:"block_ip,omitempty"`
 	BlockUa []string `json:"block_ua,omitempty"`
 	BlockReferer []string `json:"block_referer,omitempty"`
-	BlockLists *WAFConfigBlockLists `json:"block_lists,omitempty"`
-	Httpbl *WAFConfigUpdateHttpbl `json:"httpbl,omitempty"`
 	Thresholds []Threshold `json:"thresholds,omitempty"`
 	HttpblEnabled *map[string]bool `json:"httpbl_enabled,omitempty"`
 	NotifySlackHitsRpm *int32 `json:"notify_slack_hits_rpm,omitempty"`
@@ -333,70 +331,6 @@ func (o *WAFConfigUpdate) HasBlockReferer() bool {
 // SetBlockReferer gets a reference to the given []string and assigns it to the BlockReferer field.
 func (o *WAFConfigUpdate) SetBlockReferer(v []string) {
 	o.BlockReferer = v
-}
-
-// GetBlockLists returns the BlockLists field value if set, zero value otherwise.
-func (o *WAFConfigUpdate) GetBlockLists() WAFConfigBlockLists {
-	if o == nil || IsNil(o.BlockLists) {
-		var ret WAFConfigBlockLists
-		return ret
-	}
-	return *o.BlockLists
-}
-
-// GetBlockListsOk returns a tuple with the BlockLists field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WAFConfigUpdate) GetBlockListsOk() (*WAFConfigBlockLists, bool) {
-	if o == nil || IsNil(o.BlockLists) {
-		return nil, false
-	}
-	return o.BlockLists, true
-}
-
-// HasBlockLists returns a boolean if a field has been set.
-func (o *WAFConfigUpdate) HasBlockLists() bool {
-	if o != nil && !IsNil(o.BlockLists) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlockLists gets a reference to the given WAFConfigBlockLists and assigns it to the BlockLists field.
-func (o *WAFConfigUpdate) SetBlockLists(v WAFConfigBlockLists) {
-	o.BlockLists = &v
-}
-
-// GetHttpbl returns the Httpbl field value if set, zero value otherwise.
-func (o *WAFConfigUpdate) GetHttpbl() WAFConfigUpdateHttpbl {
-	if o == nil || IsNil(o.Httpbl) {
-		var ret WAFConfigUpdateHttpbl
-		return ret
-	}
-	return *o.Httpbl
-}
-
-// GetHttpblOk returns a tuple with the Httpbl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WAFConfigUpdate) GetHttpblOk() (*WAFConfigUpdateHttpbl, bool) {
-	if o == nil || IsNil(o.Httpbl) {
-		return nil, false
-	}
-	return o.Httpbl, true
-}
-
-// HasHttpbl returns a boolean if a field has been set.
-func (o *WAFConfigUpdate) HasHttpbl() bool {
-	if o != nil && !IsNil(o.Httpbl) {
-		return true
-	}
-
-	return false
-}
-
-// SetHttpbl gets a reference to the given WAFConfigUpdateHttpbl and assigns it to the Httpbl field.
-func (o *WAFConfigUpdate) SetHttpbl(v WAFConfigUpdateHttpbl) {
-	o.Httpbl = &v
 }
 
 // GetThresholds returns the Thresholds field value if set, zero value otherwise.
@@ -974,12 +908,6 @@ func (o WAFConfigUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BlockReferer) {
 		toSerialize["block_referer"] = o.BlockReferer
 	}
-	if !IsNil(o.BlockLists) {
-		toSerialize["block_lists"] = o.BlockLists
-	}
-	if !IsNil(o.Httpbl) {
-		toSerialize["httpbl"] = o.Httpbl
-	}
 	if !IsNil(o.Thresholds) {
 		toSerialize["thresholds"] = o.Thresholds
 	}
@@ -1060,8 +988,6 @@ func (o *WAFConfigUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "block_ip")
 		delete(additionalProperties, "block_ua")
 		delete(additionalProperties, "block_referer")
-		delete(additionalProperties, "block_lists")
-		delete(additionalProperties, "httpbl")
 		delete(additionalProperties, "thresholds")
 		delete(additionalProperties, "httpbl_enabled")
 		delete(additionalProperties, "notify_slack_hits_rpm")
