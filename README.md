@@ -78,11 +78,11 @@ All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CrawlerAPI* | [**CrawlerSchedulesCreate**](docs/CrawlerAPI.md#crawlerschedulescreate) | **Post** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule | 
-*CrawlerAPI* | [**CrawlerSchedulesDelete**](docs/CrawlerAPI.md#crawlerschedulesdelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule} | 
-*CrawlerAPI* | [**CrawlerSchedulesList**](docs/CrawlerAPI.md#crawlerscheduleslist) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule | 
-*CrawlerAPI* | [**CrawlerSchedulesRead**](docs/CrawlerAPI.md#crawlerschedulesread) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule} | 
-*CrawlerAPI* | [**CrawlerSchedulesUpdate**](docs/CrawlerAPI.md#crawlerschedulesupdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule} | 
+*CrawlerSchedulesAPI* | [**CrawlerSchedulesCreate**](docs/CrawlerSchedulesAPI.md#crawlerschedulescreate) | **Post** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | 
+*CrawlerSchedulesAPI* | [**CrawlerSchedulesDelete**](docs/CrawlerSchedulesAPI.md#crawlerschedulesdelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | 
+*CrawlerSchedulesAPI* | [**CrawlerSchedulesList**](docs/CrawlerSchedulesAPI.md#crawlerscheduleslist) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | 
+*CrawlerSchedulesAPI* | [**CrawlerSchedulesRead**](docs/CrawlerSchedulesAPI.md#crawlerschedulesread) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | 
+*CrawlerSchedulesAPI* | [**CrawlerSchedulesUpdate**](docs/CrawlerSchedulesAPI.md#crawlerschedulesupdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | 
 *CrawlersAPI* | [**CrawlersCreate**](docs/CrawlersAPI.md#crawlerscreate) | **Post** /organizations/{organization}/projects/{project}/crawlers | 
 *CrawlersAPI* | [**CrawlersDelete**](docs/CrawlersAPI.md#crawlersdelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 *CrawlersAPI* | [**CrawlersList**](docs/CrawlersAPI.md#crawlerslist) | **Get** /organizations/{organization}/projects/{project}/crawlers | 

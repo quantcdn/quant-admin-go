@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	CrawlerAPI CrawlerAPI
+	CrawlerSchedulesAPI CrawlerSchedulesAPI
 
 	CrawlersAPI CrawlersAPI
 
@@ -90,7 +90,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.CrawlerAPI = (*CrawlerAPIService)(&c.common)
+	c.CrawlerSchedulesAPI = (*CrawlerSchedulesAPIService)(&c.common)
 	c.CrawlersAPI = (*CrawlersAPIService)(&c.common)
 	c.DomainsAPI = (*DomainsAPIService)(&c.common)
 	c.HeadersAPI = (*HeadersAPIService)(&c.common)

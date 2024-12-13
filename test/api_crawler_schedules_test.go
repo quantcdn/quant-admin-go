@@ -1,7 +1,7 @@
 /*
 QuantCDN Admin API
 
-Testing CrawlerAPIService
+Testing CrawlerSchedulesAPIService
 
 */
 
@@ -17,12 +17,12 @@ import (
 	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
-func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
+func Test_quant-admin-go_CrawlerSchedulesAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test CrawlerAPIService CrawlerSchedulesCreate", func(t *testing.T) {
+	t.Run("Test CrawlerSchedulesAPIService CrawlerSchedulesCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -30,7 +30,7 @@ func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
 		var project string
 		var crawler string
 
-		resp, httpRes, err := apiClient.CrawlerAPI.CrawlerSchedulesCreate(context.Background(), organization, project, crawler).Execute()
+		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesCreate(context.Background(), organization, project, crawler).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -38,16 +38,16 @@ func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlerAPIService CrawlerSchedulesDelete", func(t *testing.T) {
+	t.Run("Test CrawlerSchedulesAPIService CrawlerSchedulesDelete", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 		var crawler string
-		var schedule string
+		var crawlerSchedule string
 
-		resp, httpRes, err := apiClient.CrawlerAPI.CrawlerSchedulesDelete(context.Background(), organization, project, crawler, schedule).Execute()
+		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesDelete(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -55,7 +55,7 @@ func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlerAPIService CrawlerSchedulesList", func(t *testing.T) {
+	t.Run("Test CrawlerSchedulesAPIService CrawlerSchedulesList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -63,7 +63,7 @@ func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
 		var project string
 		var crawler string
 
-		resp, httpRes, err := apiClient.CrawlerAPI.CrawlerSchedulesList(context.Background(), organization, project, crawler).Execute()
+		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesList(context.Background(), organization, project, crawler).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -71,16 +71,16 @@ func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlerAPIService CrawlerSchedulesRead", func(t *testing.T) {
+	t.Run("Test CrawlerSchedulesAPIService CrawlerSchedulesRead", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 		var crawler string
-		var schedule string
+		var crawlerSchedule string
 
-		resp, httpRes, err := apiClient.CrawlerAPI.CrawlerSchedulesRead(context.Background(), organization, project, crawler, schedule).Execute()
+		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesRead(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -88,16 +88,16 @@ func Test_quant-admin-go_CrawlerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test CrawlerAPIService CrawlerSchedulesUpdate", func(t *testing.T) {
+	t.Run("Test CrawlerSchedulesAPIService CrawlerSchedulesUpdate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 		var crawler string
-		var schedule string
+		var crawlerSchedule string
 
-		resp, httpRes, err := apiClient.CrawlerAPI.CrawlerSchedulesUpdate(context.Background(), organization, project, crawler, schedule).Execute()
+		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesUpdate(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

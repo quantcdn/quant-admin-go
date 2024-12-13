@@ -12,7 +12,7 @@ tags:
 - name: Projects
 - name: Purge
 - name: Crawlers
-- name: Crawler
+- name: CrawlerSchedules
 - name: Domains
 - name: Headers
 - name: Rules__Proxy
@@ -508,7 +508,7 @@ paths:
           description: Access is forbidden.
       tags:
       - Crawlers
-  /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule:
+  /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
       operationId: CrawlerSchedules_list
       parameters:
@@ -556,7 +556,7 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
       tags:
-      - Crawler
+      - CrawlerSchedules
     post:
       operationId: CrawlerSchedules_create
       parameters:
@@ -608,8 +608,8 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
       tags:
-      - Crawler
-  /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedule/{schedule}:
+      - CrawlerSchedules
+  /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule}:
     delete:
       operationId: CrawlerSchedules_delete
       parameters:
@@ -636,7 +636,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: schedule
+        name: crawler_schedule
         required: true
         schema:
           type: string
@@ -662,7 +662,7 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
       tags:
-      - Crawler
+      - CrawlerSchedules
     get:
       operationId: CrawlerSchedules_read
       parameters:
@@ -689,7 +689,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: schedule
+        name: crawler_schedule
         required: true
         schema:
           type: string
@@ -715,7 +715,7 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
       tags:
-      - Crawler
+      - CrawlerSchedules
     patch:
       operationId: CrawlerSchedules_update
       parameters:
@@ -742,7 +742,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: schedule
+        name: crawler_schedule
         required: true
         schema:
           type: string
@@ -774,7 +774,7 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
       tags:
-      - Crawler
+      - CrawlerSchedules
   /organizations/{organization}/projects/{project}/custom-headers:
     delete:
       operationId: Headers_delete
