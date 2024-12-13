@@ -21,6 +21,7 @@ var _ MappedNullable = &CrawlerSchedule{}
 // CrawlerSchedule struct for CrawlerSchedule
 type CrawlerSchedule struct {
 	Id int32 `json:"id"`
+	Name *string `json:"name,omitempty"`
 	CrawlerConfigId int32 `json:"crawler_config_id"`
 	ProjectId int32 `json:"project_id"`
 	CrawlerLastRunId int32 `json:"crawler_last_run_id"`
@@ -77,6 +78,38 @@ func (o *CrawlerSchedule) GetIdOk() (*int32, bool) {
 // SetId sets field value
 func (o *CrawlerSchedule) SetId(v int32) {
 	o.Id = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CrawlerSchedule) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CrawlerSchedule) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CrawlerSchedule) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CrawlerSchedule) SetName(v string) {
+	o.Name = &v
 }
 
 // GetCrawlerConfigId returns the CrawlerConfigId field value
@@ -282,6 +315,9 @@ func (o CrawlerSchedule) MarshalJSON() ([]byte, error) {
 func (o CrawlerSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["crawler_config_id"] = o.CrawlerConfigId
 	toSerialize["project_id"] = o.ProjectId
 	toSerialize["crawler_last_run_id"] = o.CrawlerLastRunId
@@ -343,6 +379,7 @@ func (o *CrawlerSchedule) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "crawler_config_id")
 		delete(additionalProperties, "project_id")
 		delete(additionalProperties, "crawler_last_run_id")

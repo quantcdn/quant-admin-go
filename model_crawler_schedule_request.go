@@ -20,6 +20,7 @@ var _ MappedNullable = &CrawlerScheduleRequest{}
 
 // CrawlerScheduleRequest struct for CrawlerScheduleRequest
 type CrawlerScheduleRequest struct {
+	Name *string `json:"name,omitempty"`
 	ScheduleCronString string `json:"schedule_cron_string"`
 	AdditionalProperties map[string]interface{}
 }
@@ -42,6 +43,38 @@ func NewCrawlerScheduleRequest(scheduleCronString string) *CrawlerScheduleReques
 func NewCrawlerScheduleRequestWithDefaults() *CrawlerScheduleRequest {
 	this := CrawlerScheduleRequest{}
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CrawlerScheduleRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CrawlerScheduleRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CrawlerScheduleRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CrawlerScheduleRequest) SetName(v string) {
+	o.Name = &v
 }
 
 // GetScheduleCronString returns the ScheduleCronString field value
@@ -78,6 +111,9 @@ func (o CrawlerScheduleRequest) MarshalJSON() ([]byte, error) {
 
 func (o CrawlerScheduleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["schedule_cron_string"] = o.ScheduleCronString
 
 	for key, value := range o.AdditionalProperties {
@@ -122,6 +158,7 @@ func (o *CrawlerScheduleRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "schedule_cron_string")
 		o.AdditionalProperties = additionalProperties
 	}

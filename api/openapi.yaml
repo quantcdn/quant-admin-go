@@ -2527,6 +2527,7 @@ components:
         schedule_cron_string: schedule_cron_string
         updated_at: updated_at
         project_id: 1
+        name: name
         crawler_config_id: 6
         created_at: created_at
         id: 0
@@ -2535,6 +2536,8 @@ components:
         id:
           format: int32
           type: integer
+        name:
+          type: string
         crawler_config_id:
           format: int32
           type: integer
@@ -2562,7 +2565,10 @@ components:
     CrawlerScheduleRequest:
       example:
         schedule_cron_string: schedule_cron_string
+        name: name
       properties:
+        name:
+          type: string
         schedule_cron_string:
           type: string
       required:
@@ -2571,7 +2577,10 @@ components:
     CrawlerScheduleRequestUpdate:
       example:
         schedule_cron_string: schedule_cron_string
+        name: name
       properties:
+        name:
+          type: string
         schedule_cron_string:
           type: string
       type: object

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** |  | 
+**Name** | Pointer to **string** |  | [optional] 
 **CrawlerConfigId** | **int32** |  | 
 **ProjectId** | **int32** |  | 
 **CrawlerLastRunId** | **int32** |  | 
@@ -51,6 +52,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetName
+
+`func (o *CrawlerSchedule) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *CrawlerSchedule) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *CrawlerSchedule) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *CrawlerSchedule) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetCrawlerConfigId
 

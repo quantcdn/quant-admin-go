@@ -19,6 +19,7 @@ var _ MappedNullable = &CrawlerScheduleRequestUpdate{}
 
 // CrawlerScheduleRequestUpdate struct for CrawlerScheduleRequestUpdate
 type CrawlerScheduleRequestUpdate struct {
+	Name *string `json:"name,omitempty"`
 	ScheduleCronString *string `json:"schedule_cron_string,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -40,6 +41,38 @@ func NewCrawlerScheduleRequestUpdate() *CrawlerScheduleRequestUpdate {
 func NewCrawlerScheduleRequestUpdateWithDefaults() *CrawlerScheduleRequestUpdate {
 	this := CrawlerScheduleRequestUpdate{}
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CrawlerScheduleRequestUpdate) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CrawlerScheduleRequestUpdate) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CrawlerScheduleRequestUpdate) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CrawlerScheduleRequestUpdate) SetName(v string) {
+	o.Name = &v
 }
 
 // GetScheduleCronString returns the ScheduleCronString field value if set, zero value otherwise.
@@ -84,6 +117,9 @@ func (o CrawlerScheduleRequestUpdate) MarshalJSON() ([]byte, error) {
 
 func (o CrawlerScheduleRequestUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.ScheduleCronString) {
 		toSerialize["schedule_cron_string"] = o.ScheduleCronString
 	}
@@ -109,6 +145,7 @@ func (o *CrawlerScheduleRequestUpdate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "schedule_cron_string")
 		o.AdditionalProperties = additionalProperties
 	}
