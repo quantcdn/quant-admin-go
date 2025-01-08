@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **Region** | **string** |  | [default to "au"]
 **AllowQueryParams** | Pointer to **bool** |  | [optional] 
+**DisableRevisions** | Pointer to **bool** |  | [optional] [default to true]
 **BasicAuthUsername** | Pointer to **string** |  | [optional] 
 **BasicAuthPassword** | Pointer to **string** |  | [optional] 
 **BasicAuthPreviewOnly** | Pointer to **string** |  | [optional] 
@@ -98,6 +99,31 @@ SetAllowQueryParams sets AllowQueryParams field to given value.
 `func (o *ProjectRequest) HasAllowQueryParams() bool`
 
 HasAllowQueryParams returns a boolean if a field has been set.
+
+### GetDisableRevisions
+
+`func (o *ProjectRequest) GetDisableRevisions() bool`
+
+GetDisableRevisions returns the DisableRevisions field if non-nil, zero value otherwise.
+
+### GetDisableRevisionsOk
+
+`func (o *ProjectRequest) GetDisableRevisionsOk() (*bool, bool)`
+
+GetDisableRevisionsOk returns a tuple with the DisableRevisions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableRevisions
+
+`func (o *ProjectRequest) SetDisableRevisions(v bool)`
+
+SetDisableRevisions sets DisableRevisions field to given value.
+
+### HasDisableRevisions
+
+`func (o *ProjectRequest) HasDisableRevisions() bool`
+
+HasDisableRevisions returns a boolean if a field has been set.
 
 ### GetBasicAuthUsername
 

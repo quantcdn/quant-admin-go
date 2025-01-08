@@ -22,6 +22,7 @@ type ProjectRequestUpdate struct {
 	Name *string `json:"name,omitempty"`
 	Region *string `json:"region,omitempty"`
 	AllowQueryParams *bool `json:"allow_query_params,omitempty"`
+	DisableRevisions *bool `json:"disable_revisions,omitempty"`
 	BasicAuthUsername *string `json:"basic_auth_username,omitempty"`
 	BasicAuthPassword *string `json:"basic_auth_password,omitempty"`
 	BasicAuthPreviewOnly *string `json:"basic_auth_preview_only,omitempty"`
@@ -42,6 +43,8 @@ func NewProjectRequestUpdate() *ProjectRequestUpdate {
 	this := ProjectRequestUpdate{}
 	var region string = "au"
 	this.Region = &region
+	var disableRevisions bool = true
+	this.DisableRevisions = &disableRevisions
 	return &this
 }
 
@@ -52,6 +55,8 @@ func NewProjectRequestUpdateWithDefaults() *ProjectRequestUpdate {
 	this := ProjectRequestUpdate{}
 	var region string = "au"
 	this.Region = &region
+	var disableRevisions bool = true
+	this.DisableRevisions = &disableRevisions
 	return &this
 }
 
@@ -149,6 +154,38 @@ func (o *ProjectRequestUpdate) HasAllowQueryParams() bool {
 // SetAllowQueryParams gets a reference to the given bool and assigns it to the AllowQueryParams field.
 func (o *ProjectRequestUpdate) SetAllowQueryParams(v bool) {
 	o.AllowQueryParams = &v
+}
+
+// GetDisableRevisions returns the DisableRevisions field value if set, zero value otherwise.
+func (o *ProjectRequestUpdate) GetDisableRevisions() bool {
+	if o == nil || IsNil(o.DisableRevisions) {
+		var ret bool
+		return ret
+	}
+	return *o.DisableRevisions
+}
+
+// GetDisableRevisionsOk returns a tuple with the DisableRevisions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProjectRequestUpdate) GetDisableRevisionsOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisableRevisions) {
+		return nil, false
+	}
+	return o.DisableRevisions, true
+}
+
+// HasDisableRevisions returns a boolean if a field has been set.
+func (o *ProjectRequestUpdate) HasDisableRevisions() bool {
+	if o != nil && !IsNil(o.DisableRevisions) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableRevisions gets a reference to the given bool and assigns it to the DisableRevisions field.
+func (o *ProjectRequestUpdate) SetDisableRevisions(v bool) {
+	o.DisableRevisions = &v
 }
 
 // GetBasicAuthUsername returns the BasicAuthUsername field value if set, zero value otherwise.
@@ -394,6 +431,9 @@ func (o ProjectRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AllowQueryParams) {
 		toSerialize["allow_query_params"] = o.AllowQueryParams
 	}
+	if !IsNil(o.DisableRevisions) {
+		toSerialize["disable_revisions"] = o.DisableRevisions
+	}
 	if !IsNil(o.BasicAuthUsername) {
 		toSerialize["basic_auth_username"] = o.BasicAuthUsername
 	}
@@ -440,6 +480,7 @@ func (o *ProjectRequestUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "region")
 		delete(additionalProperties, "allow_query_params")
+		delete(additionalProperties, "disable_revisions")
 		delete(additionalProperties, "basic_auth_username")
 		delete(additionalProperties, "basic_auth_password")
 		delete(additionalProperties, "basic_auth_preview_only")

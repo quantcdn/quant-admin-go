@@ -2740,6 +2740,7 @@ components:
     Project:
       example:
         project_type: normal
+        disable_revisions: true
         fastly_migrated: 5
         created_at: created_at
         machine_name: machine_name
@@ -2792,12 +2793,16 @@ components:
           default: 1
           format: int32
           type: integer
+        disable_revisions:
+          default: true
+          type: boolean
       required:
       - machine_name
       - name
       type: object
     ProjectRequest:
       example:
+        disable_revisions: true
         basic_auth_preview_only: basic_auth_preview_only
         allow_query_params: true
         basic_auth_password: basic_auth_password
@@ -2815,6 +2820,9 @@ components:
           default: au
           type: string
         allow_query_params:
+          type: boolean
+        disable_revisions:
+          default: true
           type: boolean
         basic_auth_username:
           type: string
@@ -2836,6 +2844,7 @@ components:
       type: object
     ProjectRequestUpdate:
       example:
+        disable_revisions: true
         basic_auth_preview_only: basic_auth_preview_only
         allow_query_params: true
         basic_auth_password: basic_auth_password
@@ -2853,6 +2862,9 @@ components:
           default: au
           type: string
         allow_query_params:
+          type: boolean
+        disable_revisions:
+          default: true
           type: boolean
         basic_auth_username:
           type: string

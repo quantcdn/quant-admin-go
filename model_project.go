@@ -34,6 +34,7 @@ type Project struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 	DeletedAt *string `json:"deleted_at,omitempty"`
 	FastlyMigrated *int32 `json:"fastly_migrated,omitempty"`
+	DisableRevisions *bool `json:"disable_revisions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -51,6 +52,8 @@ func NewProject(machineName string, name string) *Project {
 	this.ProjectType = &projectType
 	var fastlyMigrated int32 = 1
 	this.FastlyMigrated = &fastlyMigrated
+	var disableRevisions bool = true
+	this.DisableRevisions = &disableRevisions
 	return &this
 }
 
@@ -63,6 +66,8 @@ func NewProjectWithDefaults() *Project {
 	this.ProjectType = &projectType
 	var fastlyMigrated int32 = 1
 	this.FastlyMigrated = &fastlyMigrated
+	var disableRevisions bool = true
+	this.DisableRevisions = &disableRevisions
 	return &this
 }
 
@@ -498,6 +503,38 @@ func (o *Project) SetFastlyMigrated(v int32) {
 	o.FastlyMigrated = &v
 }
 
+// GetDisableRevisions returns the DisableRevisions field value if set, zero value otherwise.
+func (o *Project) GetDisableRevisions() bool {
+	if o == nil || IsNil(o.DisableRevisions) {
+		var ret bool
+		return ret
+	}
+	return *o.DisableRevisions
+}
+
+// GetDisableRevisionsOk returns a tuple with the DisableRevisions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Project) GetDisableRevisionsOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisableRevisions) {
+		return nil, false
+	}
+	return o.DisableRevisions, true
+}
+
+// HasDisableRevisions returns a boolean if a field has been set.
+func (o *Project) HasDisableRevisions() bool {
+	if o != nil && !IsNil(o.DisableRevisions) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableRevisions gets a reference to the given bool and assigns it to the DisableRevisions field.
+func (o *Project) SetDisableRevisions(v bool) {
+	o.DisableRevisions = &v
+}
+
 func (o Project) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -545,6 +582,9 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FastlyMigrated) {
 		toSerialize["fastly_migrated"] = o.FastlyMigrated
+	}
+	if !IsNil(o.DisableRevisions) {
+		toSerialize["disable_revisions"] = o.DisableRevisions
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -604,6 +644,7 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "deleted_at")
 		delete(additionalProperties, "fastly_migrated")
+		delete(additionalProperties, "disable_revisions")
 		o.AdditionalProperties = additionalProperties
 	}
 
