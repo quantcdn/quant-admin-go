@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | Pointer to **string** |  | [optional] [default to "rule_auth"]
 **ActionConfig** | [**RuleAuthAction**](RuleAuthAction.md) |  | 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
@@ -42,31 +41,6 @@ will change when the set of required properties is changed
 NewRuleAuthWithDefaults instantiates a new RuleAuth object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetKind
-
-`func (o *RuleAuth) GetKind() string`
-
-GetKind returns the Kind field if non-nil, zero value otherwise.
-
-### GetKindOk
-
-`func (o *RuleAuth) GetKindOk() (*string, bool)`
-
-GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetKind
-
-`func (o *RuleAuth) SetKind(v string)`
-
-SetKind sets Kind field to given value.
-
-### HasKind
-
-`func (o *RuleAuth) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetActionConfig
 

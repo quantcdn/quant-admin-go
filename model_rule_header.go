@@ -20,7 +20,6 @@ var _ MappedNullable = &RuleHeader{}
 
 // RuleHeader struct for RuleHeader
 type RuleHeader struct {
-	Kind *string `json:"kind,omitempty"`
 	ActionConfig RuleHeaderAction `json:"action_config"`
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
@@ -61,43 +60,9 @@ func NewRuleHeader(actionConfig RuleHeaderAction, uuid string, disabled bool, ac
 // but it doesn't guarantee that properties required by API are set
 func NewRuleHeaderWithDefaults() *RuleHeader {
 	this := RuleHeader{}
-	var kind string = "rule_header"
-	this.Kind = &kind
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *RuleHeader) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleHeader) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *RuleHeader) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *RuleHeader) SetKind(v string) {
-	o.Kind = &v
 }
 
 // GetActionConfig returns the ActionConfig field value
@@ -654,9 +619,6 @@ func (o RuleHeader) MarshalJSON() ([]byte, error) {
 
 func (o RuleHeader) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
 	toSerialize["action_config"] = o.ActionConfig
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -749,7 +711,6 @@ func (o *RuleHeader) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
 		delete(additionalProperties, "action_config")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")

@@ -2588,7 +2588,6 @@ components:
       example:
         updated_at: updated_at
         project_id: 6
-        kind: domain
         domain: domain
         dns_engaged: 5
         created_at: created_at
@@ -2597,10 +2596,6 @@ components:
         deleted_at: deleted_at
         section_message: section_message
       properties:
-        kind:
-          enum:
-          - domain
-          type: string
         id:
           format: int32
           type: integer
@@ -2627,7 +2622,6 @@ components:
       - dns_engaged
       - domain
       - id
-      - kind
       type: object
     DomainRequest:
       example:
@@ -3050,11 +3044,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/Rule'
       properties:
-        kind:
-          default: rule_auth
-          enum:
-          - rule_auth
-          type: string
         action_config:
           $ref: '#/components/schemas/RuleAuthAction'
       required:
@@ -3074,11 +3063,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/Rule'
       properties:
-        kind:
-          default: rule_custom_response
-          enum:
-          - rule_custom_response
-          type: string
         action_config:
           $ref: '#/components/schemas/RuleCustomResponseAction'
       type: object
@@ -3098,11 +3082,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/Rule'
       properties:
-        kind:
-          default: rule_header
-          enum:
-          - rule_header
-          type: string
         action_config:
           $ref: '#/components/schemas/RuleHeaderAction'
       required:
@@ -3121,7 +3100,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/Rule'
       example:
-        kind: rule_proxy
         action_config:
           proxy:
             cache_lifetime: 0
@@ -3211,11 +3189,6 @@ components:
           notify: notify
           proxy_alert_enabled: true
       properties:
-        kind:
-          default: rule_proxy
-          enum:
-          - rule_proxy
-          type: string
         action_config:
           $ref: '#/components/schemas/RuleProxyAction'
       required:
@@ -3746,16 +3719,10 @@ components:
       allOf:
       - $ref: '#/components/schemas/Rule'
       example:
-        kind: rule_redirect
         action_config:
           status_code: "301"
           to: to
       properties:
-        kind:
-          default: rule_redirect
-          enum:
-          - rule_redirect
-          type: string
         action_config:
           $ref: '#/components/schemas/RuleRedirectAction'
       type: object

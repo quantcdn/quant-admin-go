@@ -20,7 +20,6 @@ var _ MappedNullable = &RuleCustomResponse{}
 
 // RuleCustomResponse struct for RuleCustomResponse
 type RuleCustomResponse struct {
-	Kind *string `json:"kind,omitempty"`
 	ActionConfig *RuleCustomResponseAction `json:"action_config,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
@@ -61,43 +60,9 @@ func NewRuleCustomResponse(uuid string, disabled bool, action string) *RuleCusto
 // but it doesn't guarantee that properties required by API are set
 func NewRuleCustomResponseWithDefaults() *RuleCustomResponse {
 	this := RuleCustomResponse{}
-	var kind string = "rule_custom_response"
-	this.Kind = &kind
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
-}
-
-// GetKind returns the Kind field value if set, zero value otherwise.
-func (o *RuleCustomResponse) GetKind() string {
-	if o == nil || IsNil(o.Kind) {
-		var ret string
-		return ret
-	}
-	return *o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleCustomResponse) GetKindOk() (*string, bool) {
-	if o == nil || IsNil(o.Kind) {
-		return nil, false
-	}
-	return o.Kind, true
-}
-
-// HasKind returns a boolean if a field has been set.
-func (o *RuleCustomResponse) HasKind() bool {
-	if o != nil && !IsNil(o.Kind) {
-		return true
-	}
-
-	return false
-}
-
-// SetKind gets a reference to the given string and assigns it to the Kind field.
-func (o *RuleCustomResponse) SetKind(v string) {
-	o.Kind = &v
 }
 
 // GetActionConfig returns the ActionConfig field value if set, zero value otherwise.
@@ -662,9 +627,6 @@ func (o RuleCustomResponse) MarshalJSON() ([]byte, error) {
 
 func (o RuleCustomResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Kind) {
-		toSerialize["kind"] = o.Kind
-	}
 	if !IsNil(o.ActionConfig) {
 		toSerialize["action_config"] = o.ActionConfig
 	}
@@ -758,7 +720,6 @@ func (o *RuleCustomResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
 		delete(additionalProperties, "action_config")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")

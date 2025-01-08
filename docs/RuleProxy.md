@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | Pointer to **string** |  | [optional] [default to "rule_proxy"]
 **ActionConfig** | [**RuleProxyAction**](RuleProxyAction.md) |  | 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
@@ -42,31 +41,6 @@ will change when the set of required properties is changed
 NewRuleProxyWithDefaults instantiates a new RuleProxy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetKind
-
-`func (o *RuleProxy) GetKind() string`
-
-GetKind returns the Kind field if non-nil, zero value otherwise.
-
-### GetKindOk
-
-`func (o *RuleProxy) GetKindOk() (*string, bool)`
-
-GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetKind
-
-`func (o *RuleProxy) SetKind(v string)`
-
-SetKind sets Kind field to given value.
-
-### HasKind
-
-`func (o *RuleProxy) HasKind() bool`
-
-HasKind returns a boolean if a field has been set.
 
 ### GetActionConfig
 

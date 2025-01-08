@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
 **Id** | **int32** |  | 
 **Domain** | **string** |  | 
 **ProjectId** | Pointer to **int32** |  | [optional] 
@@ -19,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewDomain
 
-`func NewDomain(kind string, id int32, domain string, dnsEngaged int32, ) *Domain`
+`func NewDomain(id int32, domain string, dnsEngaged int32, ) *Domain`
 
 NewDomain instantiates a new Domain object
 This constructor will assign default values to properties that have it defined,
@@ -33,26 +32,6 @@ will change when the set of required properties is changed
 NewDomainWithDefaults instantiates a new Domain object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetKind
-
-`func (o *Domain) GetKind() string`
-
-GetKind returns the Kind field if non-nil, zero value otherwise.
-
-### GetKindOk
-
-`func (o *Domain) GetKindOk() (*string, bool)`
-
-GetKindOk returns a tuple with the Kind field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetKind
-
-`func (o *Domain) SetKind(v string)`
-
-SetKind sets Kind field to given value.
-
 
 ### GetId
 
