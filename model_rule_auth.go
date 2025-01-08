@@ -20,7 +20,7 @@ var _ MappedNullable = &RuleAuth{}
 
 // RuleAuth struct for RuleAuth
 type RuleAuth struct {
-	Kind string `json:"kind"`
+	Kind *string `json:"kind,omitempty"`
 	ActionConfig RuleAuthAction `json:"action_config"`
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
@@ -48,7 +48,7 @@ type _RuleAuth RuleAuth
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleAuth(kind string, actionConfig RuleAuthAction, uuid string, disabled bool, action string) *RuleAuth {
+func NewRuleAuth(actionConfig RuleAuthAction, uuid string, disabled bool, action string) *RuleAuth {
 	this := RuleAuth{}
 	this.Uuid = uuid
 	this.Disabled = disabled
@@ -61,33 +61,43 @@ func NewRuleAuth(kind string, actionConfig RuleAuthAction, uuid string, disabled
 // but it doesn't guarantee that properties required by API are set
 func NewRuleAuthWithDefaults() *RuleAuth {
 	this := RuleAuth{}
+	var kind string = "rule_auth"
+	this.Kind = &kind
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
 }
 
-// GetKind returns the Kind field value
+// GetKind returns the Kind field value if set, zero value otherwise.
 func (o *RuleAuth) GetKind() string {
-	if o == nil {
+	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
 	}
-
-	return o.Kind
+	return *o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value
+// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RuleAuth) GetKindOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
-	return &o.Kind, true
+	return o.Kind, true
 }
 
-// SetKind sets field value
+// HasKind returns a boolean if a field has been set.
+func (o *RuleAuth) HasKind() bool {
+	if o != nil && !IsNil(o.Kind) {
+		return true
+	}
+
+	return false
+}
+
+// SetKind gets a reference to the given string and assigns it to the Kind field.
 func (o *RuleAuth) SetKind(v string) {
-	o.Kind = v
+	o.Kind = &v
 }
 
 // GetActionConfig returns the ActionConfig field value
@@ -644,7 +654,9 @@ func (o RuleAuth) MarshalJSON() ([]byte, error) {
 
 func (o RuleAuth) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["kind"] = o.Kind
+	if !IsNil(o.Kind) {
+		toSerialize["kind"] = o.Kind
+	}
 	toSerialize["action_config"] = o.ActionConfig
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -704,7 +716,6 @@ func (o *RuleAuth) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"kind",
 		"action_config",
 		"uuid",
 		"disabled",

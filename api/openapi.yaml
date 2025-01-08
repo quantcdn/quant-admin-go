@@ -2747,7 +2747,6 @@ components:
       example:
         project_type: normal
         fastly_migrated: 5
-        kind: project
         created_at: created_at
         machine_name: machine_name
         uuid: uuid
@@ -2761,11 +2760,6 @@ components:
         parent_project_id: 1
         region: region
       properties:
-        kind:
-          default: project
-          enum:
-          - project
-          type: string
         id:
           format: int32
           type: integer
@@ -2805,7 +2799,6 @@ components:
           format: int32
           type: integer
       required:
-      - kind
       - machine_name
       - name
       type: object
@@ -3058,6 +3051,7 @@ components:
       - $ref: '#/components/schemas/Rule'
       properties:
         kind:
+          default: rule_auth
           enum:
           - rule_auth
           type: string
@@ -3065,7 +3059,6 @@ components:
           $ref: '#/components/schemas/RuleAuthAction'
       required:
       - action_config
-      - kind
       type: object
     RuleAuthAction:
       properties:
@@ -3082,13 +3075,12 @@ components:
       - $ref: '#/components/schemas/Rule'
       properties:
         kind:
+          default: rule_custom_response
           enum:
           - rule_custom_response
           type: string
         action_config:
           $ref: '#/components/schemas/RuleCustomResponseAction'
-      required:
-      - kind
       type: object
     RuleCustomResponseAction:
       properties:
@@ -3107,6 +3099,7 @@ components:
       - $ref: '#/components/schemas/Rule'
       properties:
         kind:
+          default: rule_header
           enum:
           - rule_header
           type: string
@@ -3114,7 +3107,6 @@ components:
           $ref: '#/components/schemas/RuleHeaderAction'
       required:
       - action_config
-      - kind
       type: object
     RuleHeaderAction:
       properties:
@@ -3220,6 +3212,7 @@ components:
           proxy_alert_enabled: true
       properties:
         kind:
+          default: rule_proxy
           enum:
           - rule_proxy
           type: string
@@ -3227,7 +3220,6 @@ components:
           $ref: '#/components/schemas/RuleProxyAction'
       required:
       - action_config
-      - kind
       type: object
     RuleProxyAction:
       example:
@@ -3760,13 +3752,12 @@ components:
           to: to
       properties:
         kind:
+          default: rule_redirect
           enum:
           - rule_redirect
           type: string
         action_config:
           $ref: '#/components/schemas/RuleRedirectAction'
-      required:
-      - kind
       type: object
     RuleRedirectAction:
       example:

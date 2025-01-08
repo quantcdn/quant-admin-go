@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | Pointer to **string** |  | [optional] [default to "rule_custom_response"]
 **ActionConfig** | Pointer to [**RuleCustomResponseAction**](RuleCustomResponseAction.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewRuleCustomResponse
 
-`func NewRuleCustomResponse(kind string, uuid string, disabled bool, action string, ) *RuleCustomResponse`
+`func NewRuleCustomResponse(uuid string, disabled bool, action string, ) *RuleCustomResponse`
 
 NewRuleCustomResponse instantiates a new RuleCustomResponse object
 This constructor will assign default values to properties that have it defined,
@@ -62,6 +62,11 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
+### HasKind
+
+`func (o *RuleCustomResponse) HasKind() bool`
+
+HasKind returns a boolean if a field has been set.
 
 ### GetActionConfig
 

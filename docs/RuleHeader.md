@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | Pointer to **string** |  | [optional] [default to "rule_header"]
 **ActionConfig** | [**RuleHeaderAction**](RuleHeaderAction.md) |  | 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewRuleHeader
 
-`func NewRuleHeader(kind string, actionConfig RuleHeaderAction, uuid string, disabled bool, action string, ) *RuleHeader`
+`func NewRuleHeader(actionConfig RuleHeaderAction, uuid string, disabled bool, action string, ) *RuleHeader`
 
 NewRuleHeader instantiates a new RuleHeader object
 This constructor will assign default values to properties that have it defined,
@@ -62,6 +62,11 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
+### HasKind
+
+`func (o *RuleHeader) HasKind() bool`
+
+HasKind returns a boolean if a field has been set.
 
 ### GetActionConfig
 

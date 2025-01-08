@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | Pointer to **string** |  | [optional] [default to "rule_proxy"]
 **ActionConfig** | [**RuleProxyAction**](RuleProxyAction.md) |  | 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewRuleProxy
 
-`func NewRuleProxy(kind string, actionConfig RuleProxyAction, uuid string, disabled bool, action string, ) *RuleProxy`
+`func NewRuleProxy(actionConfig RuleProxyAction, uuid string, disabled bool, action string, ) *RuleProxy`
 
 NewRuleProxy instantiates a new RuleProxy object
 This constructor will assign default values to properties that have it defined,
@@ -62,6 +62,11 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
+### HasKind
+
+`func (o *RuleProxy) HasKind() bool`
+
+HasKind returns a boolean if a field has been set.
 
 ### GetActionConfig
 

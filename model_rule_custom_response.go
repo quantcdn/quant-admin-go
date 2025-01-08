@@ -20,7 +20,7 @@ var _ MappedNullable = &RuleCustomResponse{}
 
 // RuleCustomResponse struct for RuleCustomResponse
 type RuleCustomResponse struct {
-	Kind string `json:"kind"`
+	Kind *string `json:"kind,omitempty"`
 	ActionConfig *RuleCustomResponseAction `json:"action_config,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
@@ -48,7 +48,7 @@ type _RuleCustomResponse RuleCustomResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleCustomResponse(kind string, uuid string, disabled bool, action string) *RuleCustomResponse {
+func NewRuleCustomResponse(uuid string, disabled bool, action string) *RuleCustomResponse {
 	this := RuleCustomResponse{}
 	this.Uuid = uuid
 	this.Disabled = disabled
@@ -61,33 +61,43 @@ func NewRuleCustomResponse(kind string, uuid string, disabled bool, action strin
 // but it doesn't guarantee that properties required by API are set
 func NewRuleCustomResponseWithDefaults() *RuleCustomResponse {
 	this := RuleCustomResponse{}
+	var kind string = "rule_custom_response"
+	this.Kind = &kind
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
 }
 
-// GetKind returns the Kind field value
+// GetKind returns the Kind field value if set, zero value otherwise.
 func (o *RuleCustomResponse) GetKind() string {
-	if o == nil {
+	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
 	}
-
-	return o.Kind
+	return *o.Kind
 }
 
-// GetKindOk returns a tuple with the Kind field value
+// GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RuleCustomResponse) GetKindOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
-	return &o.Kind, true
+	return o.Kind, true
 }
 
-// SetKind sets field value
+// HasKind returns a boolean if a field has been set.
+func (o *RuleCustomResponse) HasKind() bool {
+	if o != nil && !IsNil(o.Kind) {
+		return true
+	}
+
+	return false
+}
+
+// SetKind gets a reference to the given string and assigns it to the Kind field.
 func (o *RuleCustomResponse) SetKind(v string) {
-	o.Kind = v
+	o.Kind = &v
 }
 
 // GetActionConfig returns the ActionConfig field value if set, zero value otherwise.
@@ -652,7 +662,9 @@ func (o RuleCustomResponse) MarshalJSON() ([]byte, error) {
 
 func (o RuleCustomResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["kind"] = o.Kind
+	if !IsNil(o.Kind) {
+		toSerialize["kind"] = o.Kind
+	}
 	if !IsNil(o.ActionConfig) {
 		toSerialize["action_config"] = o.ActionConfig
 	}
@@ -714,7 +726,6 @@ func (o *RuleCustomResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"kind",
 		"uuid",
 		"disabled",
 		"action",

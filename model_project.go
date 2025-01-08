@@ -20,7 +20,6 @@ var _ MappedNullable = &Project{}
 
 // Project struct for Project
 type Project struct {
-	Kind string `json:"kind"`
 	Id *int32 `json:"id,omitempty"`
 	MachineName string `json:"machine_name"`
 	Name string `json:"name"`
@@ -44,9 +43,8 @@ type _Project Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProject(kind string, machineName string, name string) *Project {
+func NewProject(machineName string, name string) *Project {
 	this := Project{}
-	this.Kind = kind
 	this.MachineName = machineName
 	this.Name = name
 	var projectType string = "normal"
@@ -61,37 +59,11 @@ func NewProject(kind string, machineName string, name string) *Project {
 // but it doesn't guarantee that properties required by API are set
 func NewProjectWithDefaults() *Project {
 	this := Project{}
-	var kind string = "project"
-	this.Kind = kind
 	var projectType string = "normal"
 	this.ProjectType = &projectType
 	var fastlyMigrated int32 = 1
 	this.FastlyMigrated = &fastlyMigrated
 	return &this
-}
-
-// GetKind returns the Kind field value
-func (o *Project) GetKind() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Kind
-}
-
-// GetKindOk returns a tuple with the Kind field value
-// and a boolean to check if the value has been set.
-func (o *Project) GetKindOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Kind, true
-}
-
-// SetKind sets field value
-func (o *Project) SetKind(v string) {
-	o.Kind = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -536,7 +508,6 @@ func (o Project) MarshalJSON() ([]byte, error) {
 
 func (o Project) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["kind"] = o.Kind
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -588,7 +559,6 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"kind",
 		"machine_name",
 		"name",
 	}
@@ -620,7 +590,6 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "kind")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "machine_name")
 		delete(additionalProperties, "name")

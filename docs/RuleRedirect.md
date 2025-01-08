@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | **string** |  | 
+**Kind** | Pointer to **string** |  | [optional] [default to "rule_redirect"]
 **ActionConfig** | Pointer to [**RuleRedirectAction**](RuleRedirectAction.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewRuleRedirect
 
-`func NewRuleRedirect(kind string, uuid string, disabled bool, action string, ) *RuleRedirect`
+`func NewRuleRedirect(uuid string, disabled bool, action string, ) *RuleRedirect`
 
 NewRuleRedirect instantiates a new RuleRedirect object
 This constructor will assign default values to properties that have it defined,
@@ -62,6 +62,11 @@ and a boolean to check if the value has been set.
 
 SetKind sets Kind field to given value.
 
+### HasKind
+
+`func (o *RuleRedirect) HasKind() bool`
+
+HasKind returns a boolean if a field has been set.
 
 ### GetActionConfig
 
