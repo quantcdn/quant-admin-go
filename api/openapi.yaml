@@ -17,6 +17,9 @@ tags:
 - name: Headers
 - name: Rules__Proxy
 - name: Rules__Redirect
+- name: Rules__BotChallenge
+- name: Rules__Function
+- name: Rules__ContentFilter
 - name: KV
 - name: KV__Items
 - name: Secrets
@@ -1688,6 +1691,132 @@ paths:
           description: Access is forbidden.
       tags:
       - Purge
+  /organizations/{organization}/projects/{project}/rules/bot-challenge:
+    get:
+      operationId: RulesBotChallenge_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleBotChallenge'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__BotChallenge
+  /organizations/{organization}/projects/{project}/rules/content-filter:
+    get:
+      operationId: RulesContentFilter_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleContentFilter'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__ContentFilter
+  /organizations/{organization}/projects/{project}/rules/function:
+    get:
+      operationId: RulesFunction_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleFunction'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__Function
   /organizations/{organization}/projects/{project}/rules/proxy:
     get:
       operationId: RulesProxy_list
@@ -2881,98 +3010,6 @@ components:
         custom_s3_sync_secret_key:
           type: string
       type: object
-    ProxyConfig:
-      example:
-        cache_lifetime: 0
-        only_proxy_404: true
-        proxy_strip_request_headers:
-        - proxy_strip_request_headers
-        - proxy_strip_request_headers
-        inject_headers:
-          key: inject_headers
-        auth_user: auth_user
-        host: host
-        auth_pass: auth_pass
-        to: to
-        proxy_strip_headers:
-        - proxy_strip_headers
-        - proxy_strip_headers
-        disable_ssl_verify: true
-      properties:
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        inject_headers:
-          additionalProperties:
-            type: string
-          type: object
-        proxy_strip_headers:
-          items:
-            type: string
-          type: array
-        proxy_strip_request_headers:
-          items:
-            type: string
-          type: array
-      required:
-      - to
-      type: object
-    ProxyConfigUpdate:
-      example:
-        cache_lifetime: 6
-        only_proxy_404: true
-        proxy_strip_request_headers:
-        - proxy_strip_request_headers
-        - proxy_strip_request_headers
-        inject_headers:
-          key: inject_headers
-        auth_user: auth_user
-        host: host
-        auth_pass: auth_pass
-        to: to
-        proxy_strip_headers:
-        - proxy_strip_headers
-        - proxy_strip_headers
-        disable_ssl_verify: true
-      properties:
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          type: string
-        auth_pass:
-          type: string
-        disable_ssl_verify:
-          type: boolean
-        cache_lifetime:
-          type: integer
-        only_proxy_404:
-          type: boolean
-        inject_headers:
-          additionalProperties:
-            type: string
-          type: object
-        proxy_strip_headers:
-          items:
-            type: string
-          type: array
-        proxy_strip_request_headers:
-          items:
-            type: string
-          type: array
-      type: object
     PurgeRequest:
       example:
         cache_keys:
@@ -3071,6 +3108,62 @@ components:
       - auth_pass
       - auth_user
       type: object
+    RuleBotChallenge:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      example:
+        action_config:
+          bot_challenge_status_code: 0
+          bot_challenge_body: bot_challenge_body
+      properties:
+        action_config:
+          $ref: '#/components/schemas/RuleBotChallengeAction'
+      required:
+      - action_config
+      type: object
+    RuleBotChallengeAction:
+      example:
+        bot_challenge_status_code: 0
+        bot_challenge_body: bot_challenge_body
+      properties:
+        bot_challenge_body:
+          type: string
+        bot_challenge_status_code:
+          default: 200
+          format: int32
+          type: integer
+      required:
+      - bot_challenge_body
+      - bot_challenge_status_code
+      type: object
+    RuleContentFilter:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      example:
+        action_config:
+          content_filter_body: content_filter_body
+          content_filter_status_code: 0
+      properties:
+        action_config:
+          $ref: '#/components/schemas/RuleContentFilterAction'
+      required:
+      - action_config
+      type: object
+    RuleContentFilterAction:
+      example:
+        content_filter_body: content_filter_body
+        content_filter_status_code: 0
+      properties:
+        content_filter_body:
+          type: string
+        content_filter_status_code:
+          default: 200
+          format: int32
+          type: integer
+      required:
+      - content_filter_body
+      - content_filter_status_code
+      type: object
     RuleCustomResponse:
       allOf:
       - $ref: '#/components/schemas/Rule'
@@ -3089,6 +3182,27 @@ components:
       required:
       - custom_response_body
       - custom_response_status_code
+      type: object
+    RuleFunction:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      example:
+        action_config:
+          function_uuid: function_uuid
+      properties:
+        action_config:
+          $ref: '#/components/schemas/RuleFunctionAction'
+      required:
+      - action_config
+      type: object
+    RuleFunctionAction:
+      example:
+        function_uuid: function_uuid
+      properties:
+        function_uuid:
+          type: string
+      required:
+      - function_uuid
       type: object
     RuleHeader:
       allOf:
@@ -3112,23 +3226,25 @@ components:
       allOf:
       - $ref: '#/components/schemas/Rule'
       example:
+        rule_id: rule_id
         action_config:
-          proxy:
-            cache_lifetime: 0
-            only_proxy_404: true
-            proxy_strip_request_headers:
-            - proxy_strip_request_headers
-            - proxy_strip_request_headers
-            inject_headers:
-              key: inject_headers
-            auth_user: auth_user
-            host: host
-            auth_pass: auth_pass
-            to: to
-            proxy_strip_headers:
-            - proxy_strip_headers
-            - proxy_strip_headers
-            disable_ssl_verify: true
+          cache_lifetime: 0
+          proxy_strip_request_headers:
+          - proxy_strip_request_headers
+          - proxy_strip_request_headers
+          proxy_strip_headers:
+          - proxy_strip_headers
+          - proxy_strip_headers
+          notify_config:
+            period: "60"
+            slack_webhook: ""
+            origin_status_codes:
+            - origin_status_codes
+            - origin_status_codes
+          notify: notify
+          only_proxy_404: true
+          inject_headers:
+            key: inject_headers
           failover:
             failover_origin_ttfb: "2000"
             failover_lifetime: "300"
@@ -3136,8 +3252,13 @@ components:
             - failover_origin_status_codes
             - failover_origin_status_codes
             failover_mode: failover_mode
+          auth_user: auth_user
+          host: host
           waf_enabled: false
           proxy_inline_fn_enabled: false
+          auth_pass: auth_pass
+          to: to
+          disable_ssl_verify: true
           waf_config:
             allow_rules:
             - allow_rules
@@ -3192,15 +3313,10 @@ components:
             - block_ua
             notify_slack: notify_slack
             paranoia_level: 6
-          notify_config:
-            period: "60"
-            slack_webhook: ""
-            origin_status_codes:
-            - origin_status_codes
-            - origin_status_codes
-          notify: notify
           proxy_alert_enabled: true
       properties:
+        rule_id:
+          type: string
         action_config:
           $ref: '#/components/schemas/RuleProxyAction'
       required:
@@ -3208,22 +3324,23 @@ components:
       type: object
     RuleProxyAction:
       example:
-        proxy:
-          cache_lifetime: 0
-          only_proxy_404: true
-          proxy_strip_request_headers:
-          - proxy_strip_request_headers
-          - proxy_strip_request_headers
-          inject_headers:
-            key: inject_headers
-          auth_user: auth_user
-          host: host
-          auth_pass: auth_pass
-          to: to
-          proxy_strip_headers:
-          - proxy_strip_headers
-          - proxy_strip_headers
-          disable_ssl_verify: true
+        cache_lifetime: 0
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
+        notify_config:
+          period: "60"
+          slack_webhook: ""
+          origin_status_codes:
+          - origin_status_codes
+          - origin_status_codes
+        notify: notify
+        only_proxy_404: true
+        inject_headers:
+          key: inject_headers
         failover:
           failover_origin_ttfb: "2000"
           failover_lifetime: "300"
@@ -3231,8 +3348,13 @@ components:
           - failover_origin_status_codes
           - failover_origin_status_codes
           failover_mode: failover_mode
+        auth_user: auth_user
+        host: host
         waf_enabled: false
         proxy_inline_fn_enabled: false
+        auth_pass: auth_pass
+        to: to
+        disable_ssl_verify: true
         waf_config:
           allow_rules:
           - allow_rules
@@ -3287,17 +3409,34 @@ components:
           - block_ua
           notify_slack: notify_slack
           paranoia_level: 6
-        notify_config:
-          period: "60"
-          slack_webhook: ""
-          origin_status_codes:
-          - origin_status_codes
-          - origin_status_codes
-        notify: notify
         proxy_alert_enabled: true
       properties:
-        proxy:
-          $ref: '#/components/schemas/ProxyConfig'
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
         failover:
           $ref: '#/components/schemas/FailoverConfig'
         notify:
@@ -3315,28 +3454,25 @@ components:
           default: false
           type: boolean
       required:
-      - proxy
+      - to
       - waf_enabled
       type: object
     RuleProxyRequest:
       example:
         country: country_is
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
+        cache_lifetime: 6
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
         method_is:
         - method_is
         - method_is
-        ip: ip_is
-        only_with_cookie: false
-        weight: 0
-        country_is:
-        - country_is
-        - country_is
         method_is_not:
         - method_is_not
         - method_is_not
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
         uuid: uuid
         notify_config:
           period: "60"
@@ -3344,30 +3480,32 @@ components:
           origin_status_codes:
           - origin_status_codes
           - origin_status_codes
-        url:
-        - url
-        - url
         notify: none
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        proxy:
-          cache_lifetime: 0
-          only_proxy_404: true
-          proxy_strip_request_headers:
-          - proxy_strip_request_headers
-          - proxy_strip_request_headers
-          inject_headers:
-            key: inject_headers
-          auth_user: auth_user
-          host: host
-          auth_pass: auth_pass
-          to: to
-          proxy_strip_headers:
-          - proxy_strip_headers
-          - proxy_strip_headers
-          disable_ssl_verify: true
+        auth_user: auth_user
+        host: host
+        waf_enabled: false
+        auth_pass: auth_pass
+        disabled: false
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        ip: ip_is
+        only_with_cookie: false
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        url:
+        - url
+        - url
+        only_proxy_404: true
+        inject_headers:
+          key: inject_headers
         failover:
           failover_origin_ttfb: "2000"
           failover_lifetime: "300"
@@ -3379,11 +3517,11 @@ components:
         - domain
         - domain
         name: name
-        waf_enabled: false
         ip_is:
         - ip_is
         - ip_is
-        disabled: false
+        to: to
+        disable_ssl_verify: true
         waf_config:
           allow_rules:
           - allow_rules
@@ -3502,8 +3640,32 @@ components:
           type: boolean
         cookie_name:
           type: string
-        proxy:
-          $ref: '#/components/schemas/ProxyConfig'
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
         failover:
           $ref: '#/components/schemas/FailoverConfig'
         notify:
@@ -3522,28 +3684,25 @@ components:
       required:
       - disabled
       - domain
-      - proxy
+      - to
       - url
       type: object
     RuleProxyRequestUpdate:
       example:
         country: country_is
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
+        cache_lifetime: 6
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
         method_is:
         - method_is
         - method_is
-        ip: ip_is
-        only_with_cookie: false
-        weight: 0
-        country_is:
-        - country_is
-        - country_is
         method_is_not:
         - method_is_not
         - method_is_not
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
         uuid: uuid
         notify_config:
           period: "60"
@@ -3551,30 +3710,32 @@ components:
           origin_status_codes:
           - origin_status_codes
           - origin_status_codes
-        url:
-        - url
-        - url
         notify: none
         cookie_name: cookie_name
         country_is_not:
         - country_is_not
         - country_is_not
-        proxy:
-          cache_lifetime: 6
-          only_proxy_404: true
-          proxy_strip_request_headers:
-          - proxy_strip_request_headers
-          - proxy_strip_request_headers
-          inject_headers:
-            key: inject_headers
-          auth_user: auth_user
-          host: host
-          auth_pass: auth_pass
-          to: to
-          proxy_strip_headers:
-          - proxy_strip_headers
-          - proxy_strip_headers
-          disable_ssl_verify: true
+        auth_user: auth_user
+        host: host
+        waf_enabled: false
+        auth_pass: auth_pass
+        disabled: false
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        ip: ip_is
+        only_with_cookie: false
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        url:
+        - url
+        - url
+        only_proxy_404: true
+        inject_headers:
+          key: inject_headers
         failover:
           failover_origin_ttfb: "2000"
           failover_lifetime: "300"
@@ -3586,11 +3747,11 @@ components:
         - domain
         - domain
         name: name
-        waf_enabled: false
         ip_is:
         - ip_is
         - ip_is
-        disabled: false
+        to: to
+        disable_ssl_verify: true
         waf_config:
           allow_rules:
           - allow_rules
@@ -3709,8 +3870,32 @@ components:
           type: boolean
         cookie_name:
           type: string
-        proxy:
-          $ref: '#/components/schemas/ProxyConfigUpdate'
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          type: string
+        auth_pass:
+          type: string
+        disable_ssl_verify:
+          type: boolean
+        cache_lifetime:
+          type: integer
+        only_proxy_404:
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
         failover:
           $ref: '#/components/schemas/FailoverConfig'
         notify:

@@ -21,7 +21,16 @@ Name | Type | Description | Notes
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
 **OnlyWithCookie** | Pointer to **bool** |  | [optional] [default to false]
 **CookieName** | Pointer to **string** |  | [optional] 
-**Proxy** | [**ProxyConfig**](ProxyConfig.md) |  | 
+**To** | **string** |  | 
+**Host** | Pointer to **string** |  | [optional] 
+**AuthUser** | Pointer to **string** |  | [optional] 
+**AuthPass** | Pointer to **string** |  | [optional] 
+**DisableSslVerify** | Pointer to **bool** |  | [optional] 
+**CacheLifetime** | Pointer to **int32** |  | [optional] 
+**OnlyProxy404** | Pointer to **bool** |  | [optional] 
+**InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
+**ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
+**ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
 **Failover** | Pointer to [**FailoverConfig**](FailoverConfig.md) |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
 **NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
@@ -32,7 +41,7 @@ Name | Type | Description | Notes
 
 ### NewRuleProxyRequest
 
-`func NewRuleProxyRequest(domain []string, disabled bool, url []string, proxy ProxyConfig, ) *RuleProxyRequest`
+`func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string, ) *RuleProxyRequest`
 
 NewRuleProxyRequest instantiates a new RuleProxyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -457,25 +466,250 @@ SetCookieName sets CookieName field to given value.
 
 HasCookieName returns a boolean if a field has been set.
 
-### GetProxy
+### GetTo
 
-`func (o *RuleProxyRequest) GetProxy() ProxyConfig`
+`func (o *RuleProxyRequest) GetTo() string`
 
-GetProxy returns the Proxy field if non-nil, zero value otherwise.
+GetTo returns the To field if non-nil, zero value otherwise.
 
-### GetProxyOk
+### GetToOk
 
-`func (o *RuleProxyRequest) GetProxyOk() (*ProxyConfig, bool)`
+`func (o *RuleProxyRequest) GetToOk() (*string, bool)`
 
-GetProxyOk returns a tuple with the Proxy field if it's non-nil, zero value otherwise
+GetToOk returns a tuple with the To field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProxy
+### SetTo
 
-`func (o *RuleProxyRequest) SetProxy(v ProxyConfig)`
+`func (o *RuleProxyRequest) SetTo(v string)`
 
-SetProxy sets Proxy field to given value.
+SetTo sets To field to given value.
 
+
+### GetHost
+
+`func (o *RuleProxyRequest) GetHost() string`
+
+GetHost returns the Host field if non-nil, zero value otherwise.
+
+### GetHostOk
+
+`func (o *RuleProxyRequest) GetHostOk() (*string, bool)`
+
+GetHostOk returns a tuple with the Host field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHost
+
+`func (o *RuleProxyRequest) SetHost(v string)`
+
+SetHost sets Host field to given value.
+
+### HasHost
+
+`func (o *RuleProxyRequest) HasHost() bool`
+
+HasHost returns a boolean if a field has been set.
+
+### GetAuthUser
+
+`func (o *RuleProxyRequest) GetAuthUser() string`
+
+GetAuthUser returns the AuthUser field if non-nil, zero value otherwise.
+
+### GetAuthUserOk
+
+`func (o *RuleProxyRequest) GetAuthUserOk() (*string, bool)`
+
+GetAuthUserOk returns a tuple with the AuthUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthUser
+
+`func (o *RuleProxyRequest) SetAuthUser(v string)`
+
+SetAuthUser sets AuthUser field to given value.
+
+### HasAuthUser
+
+`func (o *RuleProxyRequest) HasAuthUser() bool`
+
+HasAuthUser returns a boolean if a field has been set.
+
+### GetAuthPass
+
+`func (o *RuleProxyRequest) GetAuthPass() string`
+
+GetAuthPass returns the AuthPass field if non-nil, zero value otherwise.
+
+### GetAuthPassOk
+
+`func (o *RuleProxyRequest) GetAuthPassOk() (*string, bool)`
+
+GetAuthPassOk returns a tuple with the AuthPass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthPass
+
+`func (o *RuleProxyRequest) SetAuthPass(v string)`
+
+SetAuthPass sets AuthPass field to given value.
+
+### HasAuthPass
+
+`func (o *RuleProxyRequest) HasAuthPass() bool`
+
+HasAuthPass returns a boolean if a field has been set.
+
+### GetDisableSslVerify
+
+`func (o *RuleProxyRequest) GetDisableSslVerify() bool`
+
+GetDisableSslVerify returns the DisableSslVerify field if non-nil, zero value otherwise.
+
+### GetDisableSslVerifyOk
+
+`func (o *RuleProxyRequest) GetDisableSslVerifyOk() (*bool, bool)`
+
+GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableSslVerify
+
+`func (o *RuleProxyRequest) SetDisableSslVerify(v bool)`
+
+SetDisableSslVerify sets DisableSslVerify field to given value.
+
+### HasDisableSslVerify
+
+`func (o *RuleProxyRequest) HasDisableSslVerify() bool`
+
+HasDisableSslVerify returns a boolean if a field has been set.
+
+### GetCacheLifetime
+
+`func (o *RuleProxyRequest) GetCacheLifetime() int32`
+
+GetCacheLifetime returns the CacheLifetime field if non-nil, zero value otherwise.
+
+### GetCacheLifetimeOk
+
+`func (o *RuleProxyRequest) GetCacheLifetimeOk() (*int32, bool)`
+
+GetCacheLifetimeOk returns a tuple with the CacheLifetime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCacheLifetime
+
+`func (o *RuleProxyRequest) SetCacheLifetime(v int32)`
+
+SetCacheLifetime sets CacheLifetime field to given value.
+
+### HasCacheLifetime
+
+`func (o *RuleProxyRequest) HasCacheLifetime() bool`
+
+HasCacheLifetime returns a boolean if a field has been set.
+
+### GetOnlyProxy404
+
+`func (o *RuleProxyRequest) GetOnlyProxy404() bool`
+
+GetOnlyProxy404 returns the OnlyProxy404 field if non-nil, zero value otherwise.
+
+### GetOnlyProxy404Ok
+
+`func (o *RuleProxyRequest) GetOnlyProxy404Ok() (*bool, bool)`
+
+GetOnlyProxy404Ok returns a tuple with the OnlyProxy404 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnlyProxy404
+
+`func (o *RuleProxyRequest) SetOnlyProxy404(v bool)`
+
+SetOnlyProxy404 sets OnlyProxy404 field to given value.
+
+### HasOnlyProxy404
+
+`func (o *RuleProxyRequest) HasOnlyProxy404() bool`
+
+HasOnlyProxy404 returns a boolean if a field has been set.
+
+### GetInjectHeaders
+
+`func (o *RuleProxyRequest) GetInjectHeaders() map[string]string`
+
+GetInjectHeaders returns the InjectHeaders field if non-nil, zero value otherwise.
+
+### GetInjectHeadersOk
+
+`func (o *RuleProxyRequest) GetInjectHeadersOk() (*map[string]string, bool)`
+
+GetInjectHeadersOk returns a tuple with the InjectHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInjectHeaders
+
+`func (o *RuleProxyRequest) SetInjectHeaders(v map[string]string)`
+
+SetInjectHeaders sets InjectHeaders field to given value.
+
+### HasInjectHeaders
+
+`func (o *RuleProxyRequest) HasInjectHeaders() bool`
+
+HasInjectHeaders returns a boolean if a field has been set.
+
+### GetProxyStripHeaders
+
+`func (o *RuleProxyRequest) GetProxyStripHeaders() []string`
+
+GetProxyStripHeaders returns the ProxyStripHeaders field if non-nil, zero value otherwise.
+
+### GetProxyStripHeadersOk
+
+`func (o *RuleProxyRequest) GetProxyStripHeadersOk() (*[]string, bool)`
+
+GetProxyStripHeadersOk returns a tuple with the ProxyStripHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyStripHeaders
+
+`func (o *RuleProxyRequest) SetProxyStripHeaders(v []string)`
+
+SetProxyStripHeaders sets ProxyStripHeaders field to given value.
+
+### HasProxyStripHeaders
+
+`func (o *RuleProxyRequest) HasProxyStripHeaders() bool`
+
+HasProxyStripHeaders returns a boolean if a field has been set.
+
+### GetProxyStripRequestHeaders
+
+`func (o *RuleProxyRequest) GetProxyStripRequestHeaders() []string`
+
+GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field if non-nil, zero value otherwise.
+
+### GetProxyStripRequestHeadersOk
+
+`func (o *RuleProxyRequest) GetProxyStripRequestHeadersOk() (*[]string, bool)`
+
+GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyStripRequestHeaders
+
+`func (o *RuleProxyRequest) SetProxyStripRequestHeaders(v []string)`
+
+SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
+
+### HasProxyStripRequestHeaders
+
+`func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool`
+
+HasProxyStripRequestHeaders returns a boolean if a field has been set.
 
 ### GetFailover
 
