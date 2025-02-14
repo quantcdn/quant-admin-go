@@ -43,7 +43,6 @@ type WAFConfig struct {
 	WafRatelimitCooldown *int32 `json:"waf_ratelimit_cooldown,omitempty"`
 	NotifyEmail []string `json:"notify_email,omitempty"`
 	NotifySlack *string `json:"notify_slack,omitempty"`
-	NotifySlackRpm *int32 `json:"notify_slack_rpm,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -839,38 +838,6 @@ func (o *WAFConfig) SetNotifySlack(v string) {
 	o.NotifySlack = &v
 }
 
-// GetNotifySlackRpm returns the NotifySlackRpm field value if set, zero value otherwise.
-func (o *WAFConfig) GetNotifySlackRpm() int32 {
-	if o == nil || IsNil(o.NotifySlackRpm) {
-		var ret int32
-		return ret
-	}
-	return *o.NotifySlackRpm
-}
-
-// GetNotifySlackRpmOk returns a tuple with the NotifySlackRpm field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WAFConfig) GetNotifySlackRpmOk() (*int32, bool) {
-	if o == nil || IsNil(o.NotifySlackRpm) {
-		return nil, false
-	}
-	return o.NotifySlackRpm, true
-}
-
-// HasNotifySlackRpm returns a boolean if a field has been set.
-func (o *WAFConfig) HasNotifySlackRpm() bool {
-	if o != nil && !IsNil(o.NotifySlackRpm) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotifySlackRpm gets a reference to the given int32 and assigns it to the NotifySlackRpm field.
-func (o *WAFConfig) SetNotifySlackRpm(v int32) {
-	o.NotifySlackRpm = &v
-}
-
 func (o WAFConfig) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -948,9 +915,6 @@ func (o WAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotifySlack) {
 		toSerialize["notify_slack"] = o.NotifySlack
 	}
-	if !IsNil(o.NotifySlackRpm) {
-		toSerialize["notify_slack_rpm"] = o.NotifySlackRpm
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1017,7 +981,6 @@ func (o *WAFConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "waf_ratelimit_cooldown")
 		delete(additionalProperties, "notify_email")
 		delete(additionalProperties, "notify_slack")
-		delete(additionalProperties, "notify_slack_rpm")
 		o.AdditionalProperties = additionalProperties
 	}
 

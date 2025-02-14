@@ -23,14 +23,16 @@ Name | Type | Description | Notes
 **CookieName** | Pointer to **string** |  | [optional] 
 **To** | **string** |  | 
 **Host** | Pointer to **string** |  | [optional] 
-**AuthUser** | Pointer to **string** |  | [optional] 
-**AuthPass** | Pointer to **string** |  | [optional] 
-**DisableSslVerify** | Pointer to **bool** |  | [optional] 
-**CacheLifetime** | Pointer to **int32** |  | [optional] 
-**OnlyProxy404** | Pointer to **bool** |  | [optional] 
+**AuthUser** | Pointer to **string** |  | [optional] [default to ""]
+**AuthPass** | Pointer to **string** |  | [optional] [default to ""]
+**DisableSslVerify** | Pointer to **bool** |  | [optional] [default to false]
+**CacheLifetime** | Pointer to **NullableInt32** |  | [optional] 
+**OnlyProxy404** | Pointer to **bool** |  | [optional] [default to false]
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
+**StaticErrorPage** | Pointer to **string** |  | [optional] [default to ""]
+**StaticErrorPageStatusCodes** | Pointer to **[]string** |  | [optional] 
 **Failover** | Pointer to [**FailoverConfig**](FailoverConfig.md) |  | [optional] 
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
 **NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
@@ -611,6 +613,16 @@ SetCacheLifetime sets CacheLifetime field to given value.
 
 HasCacheLifetime returns a boolean if a field has been set.
 
+### SetCacheLifetimeNil
+
+`func (o *RuleProxyRequest) SetCacheLifetimeNil(b bool)`
+
+ SetCacheLifetimeNil sets the value for CacheLifetime to be an explicit nil
+
+### UnsetCacheLifetime
+`func (o *RuleProxyRequest) UnsetCacheLifetime()`
+
+UnsetCacheLifetime ensures that no value is present for CacheLifetime, not even an explicit nil
 ### GetOnlyProxy404
 
 `func (o *RuleProxyRequest) GetOnlyProxy404() bool`
@@ -661,6 +673,16 @@ SetInjectHeaders sets InjectHeaders field to given value.
 
 HasInjectHeaders returns a boolean if a field has been set.
 
+### SetInjectHeadersNil
+
+`func (o *RuleProxyRequest) SetInjectHeadersNil(b bool)`
+
+ SetInjectHeadersNil sets the value for InjectHeaders to be an explicit nil
+
+### UnsetInjectHeaders
+`func (o *RuleProxyRequest) UnsetInjectHeaders()`
+
+UnsetInjectHeaders ensures that no value is present for InjectHeaders, not even an explicit nil
 ### GetProxyStripHeaders
 
 `func (o *RuleProxyRequest) GetProxyStripHeaders() []string`
@@ -710,6 +732,56 @@ SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 `func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool`
 
 HasProxyStripRequestHeaders returns a boolean if a field has been set.
+
+### GetStaticErrorPage
+
+`func (o *RuleProxyRequest) GetStaticErrorPage() string`
+
+GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageOk
+
+`func (o *RuleProxyRequest) GetStaticErrorPageOk() (*string, bool)`
+
+GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPage
+
+`func (o *RuleProxyRequest) SetStaticErrorPage(v string)`
+
+SetStaticErrorPage sets StaticErrorPage field to given value.
+
+### HasStaticErrorPage
+
+`func (o *RuleProxyRequest) HasStaticErrorPage() bool`
+
+HasStaticErrorPage returns a boolean if a field has been set.
+
+### GetStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequest) GetStaticErrorPageStatusCodes() []string`
+
+GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageStatusCodesOk
+
+`func (o *RuleProxyRequest) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
+
+GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string)`
+
+SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
+
+### HasStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequest) HasStaticErrorPageStatusCodes() bool`
+
+HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
 
 ### GetFailover
 

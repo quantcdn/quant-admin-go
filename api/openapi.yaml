@@ -2546,10 +2546,8 @@ components:
         name:
           type: string
         id:
-          format: int32
           type: integer
         project_id:
-          format: int32
           type: integer
         uuid:
           type: string
@@ -2559,7 +2557,6 @@ components:
           type: string
         domain_verified:
           default: 0
-          format: int32
           type: integer
         urls_list:
           type: string
@@ -2663,18 +2660,14 @@ components:
         deleted_at: deleted_at
       properties:
         id:
-          format: int32
           type: integer
         name:
           type: string
         crawler_config_id:
-          format: int32
           type: integer
         project_id:
-          format: int32
           type: integer
         crawler_last_run_id:
-          format: int32
           type: integer
         schedule_cron_string:
           type: string
@@ -2726,18 +2719,14 @@ components:
         section_message: section_message
       properties:
         id:
-          format: int32
           type: integer
         domain:
           type: string
         project_id:
-          format: int32
           type: integer
         in_section:
-          format: int32
           type: integer
         dns_engaged:
-          format: int32
           type: integer
         section_message:
           type: string
@@ -2795,10 +2784,11 @@ components:
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
-        failover_mode: failover_mode
+        failover_mode: false
       properties:
         failover_mode:
-          type: string
+          default: false
+          type: boolean
         failover_origin_ttfb:
           default: "2000"
           type: string
@@ -2885,14 +2875,12 @@ components:
         region: region
       properties:
         id:
-          format: int32
           type: integer
         machine_name:
           type: string
         name:
           type: string
         organization_id:
-          format: int32
           type: integer
         uuid:
           type: string
@@ -2908,7 +2896,6 @@ components:
         security_score:
           type: string
         parent_project_id:
-          format: int32
           type: integer
         region:
           type: string
@@ -2920,7 +2907,6 @@ components:
           type: string
         fastly_migrated:
           default: 1
-          format: int32
           type: integer
         disable_revisions:
           default: true
@@ -3130,7 +3116,6 @@ components:
           type: string
         bot_challenge_status_code:
           default: 200
-          format: int32
           type: integer
       required:
       - bot_challenge_body
@@ -3158,7 +3143,6 @@ components:
           type: string
         content_filter_status_code:
           default: 200
-          format: int32
           type: integer
       required:
       - content_filter_body
@@ -3177,7 +3161,6 @@ components:
           type: string
         custom_response_status_code:
           default: 200
-          format: int32
           type: integer
       required:
       - custom_response_body
@@ -3251,7 +3234,7 @@ components:
             failover_origin_status_codes:
             - failover_origin_status_codes
             - failover_origin_status_codes
-            failover_mode: failover_mode
+            failover_mode: false
           auth_user: auth_user
           host: host
           waf_enabled: false
@@ -3264,7 +3247,6 @@ components:
             - allow_rules
             - allow_rules
             waf_ratelimit_cooldown: 1
-            notify_slack_rpm: 1
             request_header_ratelimit_mode: disabled
             ip_ratelimit_cooldown: 3
             request_header_ratelimit_cooldown: 4
@@ -3347,7 +3329,7 @@ components:
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
-          failover_mode: failover_mode
+          failover_mode: false
         auth_user: auth_user
         host: host
         waf_enabled: false
@@ -3360,7 +3342,6 @@ components:
           - allow_rules
           - allow_rules
           waf_ratelimit_cooldown: 1
-          notify_slack_rpm: 1
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 3
           request_header_ratelimit_cooldown: 4
@@ -3470,6 +3451,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        static_error_page: ""
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
@@ -3485,11 +3467,14 @@ components:
         country_is_not:
         - country_is_not
         - country_is_not
-        auth_user: auth_user
+        auth_user: ""
         host: host
         waf_enabled: false
-        auth_pass: auth_pass
+        auth_pass: ""
         disabled: false
+        static_error_page_status_codes:
+        - static_error_page_status_codes
+        - static_error_page_status_codes
         method: method_is
         ip_is_not:
         - ip_is_not
@@ -3503,7 +3488,7 @@ components:
         url:
         - url
         - url
-        only_proxy_404: true
+        only_proxy_404: false
         inject_headers:
           key: inject_headers
         failover:
@@ -3512,7 +3497,7 @@ components:
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
-          failover_mode: failover_mode
+          failover_mode: false
         domain:
         - domain
         - domain
@@ -3521,13 +3506,12 @@ components:
         - ip_is
         - ip_is
         to: to
-        disable_ssl_verify: true
+        disable_ssl_verify: false
         waf_config:
           allow_rules:
           - allow_rules
           - allow_rules
           waf_ratelimit_cooldown: 1
-          notify_slack_rpm: 1
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 3
           request_header_ratelimit_cooldown: 4
@@ -3600,6 +3584,7 @@ components:
           enum:
           - country_is
           - country_is_not
+          - any
           type: string
         country_is:
           items:
@@ -3613,6 +3598,7 @@ components:
           enum:
           - method_is
           - method_is_not
+          - any
           type: string
         method_is:
           items:
@@ -3626,6 +3612,7 @@ components:
           enum:
           - ip_is
           - ip_is_not
+          - any
           type: string
         ip_is:
           items:
@@ -3645,24 +3632,37 @@ components:
         host:
           type: string
         auth_user:
+          default: ""
           type: string
         auth_pass:
+          default: ""
           type: string
         disable_ssl_verify:
+          default: false
           type: boolean
         cache_lifetime:
+          nullable: true
           type: integer
         only_proxy_404:
+          default: false
           type: boolean
         inject_headers:
           additionalProperties:
             type: string
+          nullable: true
           type: object
         proxy_strip_headers:
           items:
             type: string
           type: array
         proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+        static_error_page:
+          default: ""
+          type: string
+        static_error_page_status_codes:
           items:
             type: string
           type: array
@@ -3700,6 +3700,7 @@ components:
         method_is_not:
         - method_is_not
         - method_is_not
+        static_error_page: ""
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
@@ -3715,11 +3716,14 @@ components:
         country_is_not:
         - country_is_not
         - country_is_not
-        auth_user: auth_user
+        auth_user: ""
         host: host
         waf_enabled: false
-        auth_pass: auth_pass
+        auth_pass: ""
         disabled: false
+        static_error_page_status_codes:
+        - static_error_page_status_codes
+        - static_error_page_status_codes
         method: method_is
         ip_is_not:
         - ip_is_not
@@ -3733,7 +3737,7 @@ components:
         url:
         - url
         - url
-        only_proxy_404: true
+        only_proxy_404: false
         inject_headers:
           key: inject_headers
         failover:
@@ -3742,7 +3746,7 @@ components:
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
-          failover_mode: failover_mode
+          failover_mode: false
         domain:
         - domain
         - domain
@@ -3751,13 +3755,12 @@ components:
         - ip_is
         - ip_is
         to: to
-        disable_ssl_verify: true
+        disable_ssl_verify: false
         waf_config:
           allow_rules:
           - allow_rules
           - allow_rules
           waf_ratelimit_cooldown: 4
-          notify_slack_rpm: 7
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 2
           request_header_ratelimit_cooldown: 9
@@ -3830,6 +3833,7 @@ components:
           enum:
           - country_is
           - country_is_not
+          - any
           type: string
         country_is:
           items:
@@ -3843,6 +3847,7 @@ components:
           enum:
           - method_is
           - method_is_not
+          - any
           type: string
         method_is:
           items:
@@ -3856,6 +3861,7 @@ components:
           enum:
           - ip_is
           - ip_is_not
+          - any
           type: string
         ip_is:
           items:
@@ -3875,24 +3881,37 @@ components:
         host:
           type: string
         auth_user:
+          default: ""
           type: string
         auth_pass:
+          default: ""
           type: string
         disable_ssl_verify:
+          default: false
           type: boolean
         cache_lifetime:
+          nullable: true
           type: integer
         only_proxy_404:
+          default: false
           type: boolean
         inject_headers:
           additionalProperties:
             type: string
+          nullable: true
           type: object
         proxy_strip_headers:
           items:
             type: string
           type: array
         proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+        static_error_page:
+          default: ""
+          type: string
+        static_error_page_status_codes:
           items:
             type: string
           type: array
@@ -3998,6 +4017,7 @@ components:
           enum:
           - country_is
           - country_is_not
+          - any
           type: string
         country_is:
           items:
@@ -4011,6 +4031,7 @@ components:
           enum:
           - method_is
           - method_is_not
+          - any
           type: string
         method_is:
           items:
@@ -4024,6 +4045,7 @@ components:
           enum:
           - ip_is
           - ip_is_not
+          - any
           type: string
         ip_is:
           items:
@@ -4111,6 +4133,7 @@ components:
           enum:
           - country_is
           - country_is_not
+          - any
           type: string
         country_is:
           items:
@@ -4124,6 +4147,7 @@ components:
           enum:
           - method_is
           - method_is_not
+          - any
           type: string
         method_is:
           items:
@@ -4137,6 +4161,7 @@ components:
           enum:
           - ip_is
           - ip_is_not
+          - any
           type: string
         ip_is:
           items:
@@ -4231,7 +4256,6 @@ components:
         - allow_rules
         - allow_rules
         waf_ratelimit_cooldown: 1
-        notify_slack_rpm: 1
         request_header_ratelimit_mode: disabled
         ip_ratelimit_cooldown: 3
         request_header_ratelimit_cooldown: 4
@@ -4369,9 +4393,6 @@ components:
           type: array
         notify_slack:
           type: string
-        notify_slack_rpm:
-          format: int32
-          type: integer
       required:
       - mode
       type: object
@@ -4381,7 +4402,6 @@ components:
         - allow_rules
         - allow_rules
         waf_ratelimit_cooldown: 4
-        notify_slack_rpm: 7
         request_header_ratelimit_mode: disabled
         ip_ratelimit_cooldown: 2
         request_header_ratelimit_cooldown: 9
@@ -4519,9 +4539,6 @@ components:
           type: array
         notify_slack:
           type: string
-        notify_slack_rpm:
-          format: int32
-          type: integer
       type: object
     Headers_create_request:
       properties:

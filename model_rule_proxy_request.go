@@ -42,11 +42,13 @@ type RuleProxyRequest struct {
 	AuthUser *string `json:"auth_user,omitempty"`
 	AuthPass *string `json:"auth_pass,omitempty"`
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
-	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
+	CacheLifetime NullableInt32 `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
-	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
+	InjectHeaders map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
+	StaticErrorPage *string `json:"static_error_page,omitempty"`
+	StaticErrorPageStatusCodes []string `json:"static_error_page_status_codes,omitempty"`
 	Failover *FailoverConfig `json:"failover,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *NotifyConfig `json:"notify_config,omitempty"`
@@ -69,6 +71,16 @@ func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
 	this.To = to
+	var authUser string = ""
+	this.AuthUser = &authUser
+	var authPass string = ""
+	this.AuthPass = &authPass
+	var disableSslVerify bool = false
+	this.DisableSslVerify = &disableSslVerify
+	var onlyProxy404 bool = false
+	this.OnlyProxy404 = &onlyProxy404
+	var staticErrorPage string = ""
+	this.StaticErrorPage = &staticErrorPage
 	var notify string = "none"
 	this.Notify = &notify
 	var wafEnabled bool = false
@@ -85,6 +97,16 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	this.Disabled = disabled
 	var onlyWithCookie bool = false
 	this.OnlyWithCookie = &onlyWithCookie
+	var authUser string = ""
+	this.AuthUser = &authUser
+	var authPass string = ""
+	this.AuthPass = &authPass
+	var disableSslVerify bool = false
+	this.DisableSslVerify = &disableSslVerify
+	var onlyProxy404 bool = false
+	this.OnlyProxy404 = &onlyProxy404
+	var staticErrorPage string = ""
+	this.StaticErrorPage = &staticErrorPage
 	var notify string = "none"
 	this.Notify = &notify
 	var wafEnabled bool = false
@@ -764,36 +786,46 @@ func (o *RuleProxyRequest) SetDisableSslVerify(v bool) {
 	o.DisableSslVerify = &v
 }
 
-// GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
+// GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RuleProxyRequest) GetCacheLifetime() int32 {
-	if o == nil || IsNil(o.CacheLifetime) {
+	if o == nil || IsNil(o.CacheLifetime.Get()) {
 		var ret int32
 		return ret
 	}
-	return *o.CacheLifetime
+	return *o.CacheLifetime.Get()
 }
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RuleProxyRequest) GetCacheLifetimeOk() (*int32, bool) {
-	if o == nil || IsNil(o.CacheLifetime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CacheLifetime, true
+	return o.CacheLifetime.Get(), o.CacheLifetime.IsSet()
 }
 
 // HasCacheLifetime returns a boolean if a field has been set.
 func (o *RuleProxyRequest) HasCacheLifetime() bool {
-	if o != nil && !IsNil(o.CacheLifetime) {
+	if o != nil && o.CacheLifetime.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
+// SetCacheLifetime gets a reference to the given NullableInt32 and assigns it to the CacheLifetime field.
 func (o *RuleProxyRequest) SetCacheLifetime(v int32) {
-	o.CacheLifetime = &v
+	o.CacheLifetime.Set(&v)
+}
+// SetCacheLifetimeNil sets the value for CacheLifetime to be an explicit nil
+func (o *RuleProxyRequest) SetCacheLifetimeNil() {
+	o.CacheLifetime.Set(nil)
+}
+
+// UnsetCacheLifetime ensures that no value is present for CacheLifetime, not even an explicit nil
+func (o *RuleProxyRequest) UnsetCacheLifetime() {
+	o.CacheLifetime.Unset()
 }
 
 // GetOnlyProxy404 returns the OnlyProxy404 field value if set, zero value otherwise.
@@ -828,22 +860,23 @@ func (o *RuleProxyRequest) SetOnlyProxy404(v bool) {
 	o.OnlyProxy404 = &v
 }
 
-// GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise.
+// GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RuleProxyRequest) GetInjectHeaders() map[string]string {
-	if o == nil || IsNil(o.InjectHeaders) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
-	return *o.InjectHeaders
+	return o.InjectHeaders
 }
 
 // GetInjectHeadersOk returns a tuple with the InjectHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RuleProxyRequest) GetInjectHeadersOk() (*map[string]string, bool) {
 	if o == nil || IsNil(o.InjectHeaders) {
 		return nil, false
 	}
-	return o.InjectHeaders, true
+	return &o.InjectHeaders, true
 }
 
 // HasInjectHeaders returns a boolean if a field has been set.
@@ -857,7 +890,7 @@ func (o *RuleProxyRequest) HasInjectHeaders() bool {
 
 // SetInjectHeaders gets a reference to the given map[string]string and assigns it to the InjectHeaders field.
 func (o *RuleProxyRequest) SetInjectHeaders(v map[string]string) {
-	o.InjectHeaders = &v
+	o.InjectHeaders = v
 }
 
 // GetProxyStripHeaders returns the ProxyStripHeaders field value if set, zero value otherwise.
@@ -922,6 +955,70 @@ func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool {
 // SetProxyStripRequestHeaders gets a reference to the given []string and assigns it to the ProxyStripRequestHeaders field.
 func (o *RuleProxyRequest) SetProxyStripRequestHeaders(v []string) {
 	o.ProxyStripRequestHeaders = v
+}
+
+// GetStaticErrorPage returns the StaticErrorPage field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetStaticErrorPage() string {
+	if o == nil || IsNil(o.StaticErrorPage) {
+		var ret string
+		return ret
+	}
+	return *o.StaticErrorPage
+}
+
+// GetStaticErrorPageOk returns a tuple with the StaticErrorPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetStaticErrorPageOk() (*string, bool) {
+	if o == nil || IsNil(o.StaticErrorPage) {
+		return nil, false
+	}
+	return o.StaticErrorPage, true
+}
+
+// HasStaticErrorPage returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasStaticErrorPage() bool {
+	if o != nil && !IsNil(o.StaticErrorPage) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPage gets a reference to the given string and assigns it to the StaticErrorPage field.
+func (o *RuleProxyRequest) SetStaticErrorPage(v string) {
+	o.StaticErrorPage = &v
+}
+
+// GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetStaticErrorPageStatusCodes() []string {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.StaticErrorPageStatusCodes
+}
+
+// GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetStaticErrorPageStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		return nil, false
+	}
+	return o.StaticErrorPageStatusCodes, true
+}
+
+// HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasStaticErrorPageStatusCodes() bool {
+	if o != nil && !IsNil(o.StaticErrorPageStatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPageStatusCodes gets a reference to the given []string and assigns it to the StaticErrorPageStatusCodes field.
+func (o *RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string) {
+	o.StaticErrorPageStatusCodes = v
 }
 
 // GetFailover returns the Failover field value if set, zero value otherwise.
@@ -1152,13 +1249,13 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DisableSslVerify) {
 		toSerialize["disable_ssl_verify"] = o.DisableSslVerify
 	}
-	if !IsNil(o.CacheLifetime) {
-		toSerialize["cache_lifetime"] = o.CacheLifetime
+	if o.CacheLifetime.IsSet() {
+		toSerialize["cache_lifetime"] = o.CacheLifetime.Get()
 	}
 	if !IsNil(o.OnlyProxy404) {
 		toSerialize["only_proxy_404"] = o.OnlyProxy404
 	}
-	if !IsNil(o.InjectHeaders) {
+	if o.InjectHeaders != nil {
 		toSerialize["inject_headers"] = o.InjectHeaders
 	}
 	if !IsNil(o.ProxyStripHeaders) {
@@ -1166,6 +1263,12 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProxyStripRequestHeaders) {
 		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
+	}
+	if !IsNil(o.StaticErrorPage) {
+		toSerialize["static_error_page"] = o.StaticErrorPage
+	}
+	if !IsNil(o.StaticErrorPageStatusCodes) {
+		toSerialize["static_error_page_status_codes"] = o.StaticErrorPageStatusCodes
 	}
 	if !IsNil(o.Failover) {
 		toSerialize["failover"] = o.Failover
@@ -1255,6 +1358,8 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "inject_headers")
 		delete(additionalProperties, "proxy_strip_headers")
 		delete(additionalProperties, "proxy_strip_request_headers")
+		delete(additionalProperties, "static_error_page")
+		delete(additionalProperties, "static_error_page_status_codes")
 		delete(additionalProperties, "failover")
 		delete(additionalProperties, "notify")
 		delete(additionalProperties, "notify_config")

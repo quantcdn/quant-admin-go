@@ -27,7 +27,6 @@ Name | Type | Description | Notes
 **WafRatelimitCooldown** | Pointer to **int32** |  | [optional] [default to 300]
 **NotifyEmail** | Pointer to **[]string** |  | [optional] 
 **NotifySlack** | Pointer to **string** |  | [optional] 
-**NotifySlackRpm** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -622,31 +621,6 @@ SetNotifySlack sets NotifySlack field to given value.
 `func (o *WAFConfigUpdate) HasNotifySlack() bool`
 
 HasNotifySlack returns a boolean if a field has been set.
-
-### GetNotifySlackRpm
-
-`func (o *WAFConfigUpdate) GetNotifySlackRpm() int32`
-
-GetNotifySlackRpm returns the NotifySlackRpm field if non-nil, zero value otherwise.
-
-### GetNotifySlackRpmOk
-
-`func (o *WAFConfigUpdate) GetNotifySlackRpmOk() (*int32, bool)`
-
-GetNotifySlackRpmOk returns a tuple with the NotifySlackRpm field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotifySlackRpm
-
-`func (o *WAFConfigUpdate) SetNotifySlackRpm(v int32)`
-
-SetNotifySlackRpm sets NotifySlackRpm field to given value.
-
-### HasNotifySlackRpm
-
-`func (o *WAFConfigUpdate) HasNotifySlackRpm() bool`
-
-HasNotifySlackRpm returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

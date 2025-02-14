@@ -19,7 +19,7 @@ var _ MappedNullable = &FailoverConfig{}
 
 // FailoverConfig struct for FailoverConfig
 type FailoverConfig struct {
-	FailoverMode *string `json:"failover_mode,omitempty"`
+	FailoverMode *bool `json:"failover_mode,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
@@ -34,6 +34,8 @@ type _FailoverConfig FailoverConfig
 // will change when the set of required properties is changed
 func NewFailoverConfig() *FailoverConfig {
 	this := FailoverConfig{}
+	var failoverMode bool = false
+	this.FailoverMode = &failoverMode
 	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
 	var failoverLifetime string = "300"
@@ -46,6 +48,8 @@ func NewFailoverConfig() *FailoverConfig {
 // but it doesn't guarantee that properties required by API are set
 func NewFailoverConfigWithDefaults() *FailoverConfig {
 	this := FailoverConfig{}
+	var failoverMode bool = false
+	this.FailoverMode = &failoverMode
 	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
 	var failoverLifetime string = "300"
@@ -54,9 +58,9 @@ func NewFailoverConfigWithDefaults() *FailoverConfig {
 }
 
 // GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
-func (o *FailoverConfig) GetFailoverMode() string {
+func (o *FailoverConfig) GetFailoverMode() bool {
 	if o == nil || IsNil(o.FailoverMode) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.FailoverMode
@@ -64,7 +68,7 @@ func (o *FailoverConfig) GetFailoverMode() string {
 
 // GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FailoverConfig) GetFailoverModeOk() (*string, bool) {
+func (o *FailoverConfig) GetFailoverModeOk() (*bool, bool) {
 	if o == nil || IsNil(o.FailoverMode) {
 		return nil, false
 	}
@@ -80,8 +84,8 @@ func (o *FailoverConfig) HasFailoverMode() bool {
 	return false
 }
 
-// SetFailoverMode gets a reference to the given string and assigns it to the FailoverMode field.
-func (o *FailoverConfig) SetFailoverMode(v string) {
+// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
+func (o *FailoverConfig) SetFailoverMode(v bool) {
 	o.FailoverMode = &v
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FailoverMode** | Pointer to **string** |  | [optional] 
+**FailoverMode** | Pointer to **bool** |  | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
 **FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFailoverMode
 
-`func (o *FailoverConfig) GetFailoverMode() string`
+`func (o *FailoverConfig) GetFailoverMode() bool`
 
 GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
 
 ### GetFailoverModeOk
 
-`func (o *FailoverConfig) GetFailoverModeOk() (*string, bool)`
+`func (o *FailoverConfig) GetFailoverModeOk() (*bool, bool)`
 
 GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFailoverMode
 
-`func (o *FailoverConfig) SetFailoverMode(v string)`
+`func (o *FailoverConfig) SetFailoverMode(v bool)`
 
 SetFailoverMode sets FailoverMode field to given value.
 
