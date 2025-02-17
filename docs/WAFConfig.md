@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **BlockIp** | Pointer to **[]string** |  | [optional] 
 **BlockUa** | Pointer to **[]string** |  | [optional] 
 **BlockReferer** | Pointer to **[]string** |  | [optional] 
-**Thresholds** | Pointer to [**[]Threshold**](Threshold.md) |  | [optional] 
 **HttpblEnabled** | Pointer to **map[string]bool** |  | [optional] 
 **NotifySlackHitsRpm** | Pointer to **int32** |  | [optional] 
 **IpRatelimitMode** | Pointer to **string** |  | [optional] [default to "disabled"]
@@ -216,31 +215,6 @@ SetBlockReferer sets BlockReferer field to given value.
 `func (o *WAFConfig) HasBlockReferer() bool`
 
 HasBlockReferer returns a boolean if a field has been set.
-
-### GetThresholds
-
-`func (o *WAFConfig) GetThresholds() []Threshold`
-
-GetThresholds returns the Thresholds field if non-nil, zero value otherwise.
-
-### GetThresholdsOk
-
-`func (o *WAFConfig) GetThresholdsOk() (*[]Threshold, bool)`
-
-GetThresholdsOk returns a tuple with the Thresholds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetThresholds
-
-`func (o *WAFConfig) SetThresholds(v []Threshold)`
-
-SetThresholds sets Thresholds field to given value.
-
-### HasThresholds
-
-`func (o *WAFConfig) HasThresholds() bool`
-
-HasThresholds returns a boolean if a field has been set.
 
 ### GetHttpblEnabled
 

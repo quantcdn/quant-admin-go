@@ -34,8 +34,6 @@ type RuleRedirectRequestUpdate struct {
 	Ip *string `json:"ip,omitempty"`
 	IpIs []string `json:"ip_is,omitempty"`
 	IpIsNot []string `json:"ip_is_not,omitempty"`
-	OnlyWithCookie *bool `json:"only_with_cookie,omitempty"`
-	CookieName *string `json:"cookie_name,omitempty"`
 	RedirectTo *string `json:"redirect_to,omitempty"`
 	RedirectCode *string `json:"redirect_code,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -49,10 +47,10 @@ type _RuleRedirectRequestUpdate RuleRedirectRequestUpdate
 // will change when the set of required properties is changed
 func NewRuleRedirectRequestUpdate() *RuleRedirectRequestUpdate {
 	this := RuleRedirectRequestUpdate{}
+	var weight int32 = 0
+	this.Weight = &weight
 	var disabled bool = false
 	this.Disabled = &disabled
-	var onlyWithCookie bool = false
-	this.OnlyWithCookie = &onlyWithCookie
 	var redirectCode string = "301"
 	this.RedirectCode = &redirectCode
 	return &this
@@ -63,10 +61,10 @@ func NewRuleRedirectRequestUpdate() *RuleRedirectRequestUpdate {
 // but it doesn't guarantee that properties required by API are set
 func NewRuleRedirectRequestUpdateWithDefaults() *RuleRedirectRequestUpdate {
 	this := RuleRedirectRequestUpdate{}
+	var weight int32 = 0
+	this.Weight = &weight
 	var disabled bool = false
 	this.Disabled = &disabled
-	var onlyWithCookie bool = false
-	this.OnlyWithCookie = &onlyWithCookie
 	var redirectCode string = "301"
 	this.RedirectCode = &redirectCode
 	return &this
@@ -552,70 +550,6 @@ func (o *RuleRedirectRequestUpdate) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
-// GetOnlyWithCookie returns the OnlyWithCookie field value if set, zero value otherwise.
-func (o *RuleRedirectRequestUpdate) GetOnlyWithCookie() bool {
-	if o == nil || IsNil(o.OnlyWithCookie) {
-		var ret bool
-		return ret
-	}
-	return *o.OnlyWithCookie
-}
-
-// GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleRedirectRequestUpdate) GetOnlyWithCookieOk() (*bool, bool) {
-	if o == nil || IsNil(o.OnlyWithCookie) {
-		return nil, false
-	}
-	return o.OnlyWithCookie, true
-}
-
-// HasOnlyWithCookie returns a boolean if a field has been set.
-func (o *RuleRedirectRequestUpdate) HasOnlyWithCookie() bool {
-	if o != nil && !IsNil(o.OnlyWithCookie) {
-		return true
-	}
-
-	return false
-}
-
-// SetOnlyWithCookie gets a reference to the given bool and assigns it to the OnlyWithCookie field.
-func (o *RuleRedirectRequestUpdate) SetOnlyWithCookie(v bool) {
-	o.OnlyWithCookie = &v
-}
-
-// GetCookieName returns the CookieName field value if set, zero value otherwise.
-func (o *RuleRedirectRequestUpdate) GetCookieName() string {
-	if o == nil || IsNil(o.CookieName) {
-		var ret string
-		return ret
-	}
-	return *o.CookieName
-}
-
-// GetCookieNameOk returns a tuple with the CookieName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RuleRedirectRequestUpdate) GetCookieNameOk() (*string, bool) {
-	if o == nil || IsNil(o.CookieName) {
-		return nil, false
-	}
-	return o.CookieName, true
-}
-
-// HasCookieName returns a boolean if a field has been set.
-func (o *RuleRedirectRequestUpdate) HasCookieName() bool {
-	if o != nil && !IsNil(o.CookieName) {
-		return true
-	}
-
-	return false
-}
-
-// SetCookieName gets a reference to the given string and assigns it to the CookieName field.
-func (o *RuleRedirectRequestUpdate) SetCookieName(v string) {
-	o.CookieName = &v
-}
-
 // GetRedirectTo returns the RedirectTo field value if set, zero value otherwise.
 func (o *RuleRedirectRequestUpdate) GetRedirectTo() string {
 	if o == nil || IsNil(o.RedirectTo) {
@@ -735,12 +669,6 @@ func (o RuleRedirectRequestUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
-	if !IsNil(o.OnlyWithCookie) {
-		toSerialize["only_with_cookie"] = o.OnlyWithCookie
-	}
-	if !IsNil(o.CookieName) {
-		toSerialize["cookie_name"] = o.CookieName
-	}
 	if !IsNil(o.RedirectTo) {
 		toSerialize["redirect_to"] = o.RedirectTo
 	}
@@ -784,8 +712,6 @@ func (o *RuleRedirectRequestUpdate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ip")
 		delete(additionalProperties, "ip_is")
 		delete(additionalProperties, "ip_is_not")
-		delete(additionalProperties, "only_with_cookie")
-		delete(additionalProperties, "cookie_name")
 		delete(additionalProperties, "redirect_to")
 		delete(additionalProperties, "redirect_code")
 		o.AdditionalProperties = additionalProperties

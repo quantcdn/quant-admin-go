@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **[]string** |  | [default to ["any"]]
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
-**Weight** | Pointer to **int32** |  | [optional] 
+**Weight** | Pointer to **int32** |  | [optional] [default to 0]
 **Disabled** | **bool** |  | [default to false]
 **Url** | **[]string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
@@ -19,8 +19,6 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
-**OnlyWithCookie** | Pointer to **bool** |  | [optional] [default to false]
-**CookieName** | Pointer to **string** |  | [optional] 
 **RedirectTo** | **string** |  | 
 **RedirectCode** | **string** |  | [default to "301"]
 
@@ -402,56 +400,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *RuleRedirectRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetOnlyWithCookie
-
-`func (o *RuleRedirectRequest) GetOnlyWithCookie() bool`
-
-GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
-
-### GetOnlyWithCookieOk
-
-`func (o *RuleRedirectRequest) GetOnlyWithCookieOk() (*bool, bool)`
-
-GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOnlyWithCookie
-
-`func (o *RuleRedirectRequest) SetOnlyWithCookie(v bool)`
-
-SetOnlyWithCookie sets OnlyWithCookie field to given value.
-
-### HasOnlyWithCookie
-
-`func (o *RuleRedirectRequest) HasOnlyWithCookie() bool`
-
-HasOnlyWithCookie returns a boolean if a field has been set.
-
-### GetCookieName
-
-`func (o *RuleRedirectRequest) GetCookieName() string`
-
-GetCookieName returns the CookieName field if non-nil, zero value otherwise.
-
-### GetCookieNameOk
-
-`func (o *RuleRedirectRequest) GetCookieNameOk() (*string, bool)`
-
-GetCookieNameOk returns a tuple with the CookieName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCookieName
-
-`func (o *RuleRedirectRequest) SetCookieName(v string)`
-
-SetCookieName sets CookieName field to given value.
-
-### HasCookieName
-
-`func (o *RuleRedirectRequest) HasCookieName() bool`
-
-HasCookieName returns a boolean if a field has been set.
 
 ### GetRedirectTo
 

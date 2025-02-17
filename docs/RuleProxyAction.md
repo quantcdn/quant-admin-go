@@ -14,7 +14,10 @@ Name | Type | Description | Notes
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
-**Failover** | Pointer to [**FailoverConfig**](FailoverConfig.md) |  | [optional] 
+**FailoverMode** | Pointer to **bool** |  | [optional] [default to false]
+**FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
+**FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
+**FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
 **Notify** | Pointer to **string** |  | [optional] 
 **NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
 **WafEnabled** | **bool** |  | [default to false]
@@ -286,30 +289,105 @@ SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 
 HasProxyStripRequestHeaders returns a boolean if a field has been set.
 
-### GetFailover
+### GetFailoverMode
 
-`func (o *RuleProxyAction) GetFailover() FailoverConfig`
+`func (o *RuleProxyAction) GetFailoverMode() bool`
 
-GetFailover returns the Failover field if non-nil, zero value otherwise.
+GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
 
-### GetFailoverOk
+### GetFailoverModeOk
 
-`func (o *RuleProxyAction) GetFailoverOk() (*FailoverConfig, bool)`
+`func (o *RuleProxyAction) GetFailoverModeOk() (*bool, bool)`
 
-GetFailoverOk returns a tuple with the Failover field if it's non-nil, zero value otherwise
+GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailover
+### SetFailoverMode
 
-`func (o *RuleProxyAction) SetFailover(v FailoverConfig)`
+`func (o *RuleProxyAction) SetFailoverMode(v bool)`
 
-SetFailover sets Failover field to given value.
+SetFailoverMode sets FailoverMode field to given value.
 
-### HasFailover
+### HasFailoverMode
 
-`func (o *RuleProxyAction) HasFailover() bool`
+`func (o *RuleProxyAction) HasFailoverMode() bool`
 
-HasFailover returns a boolean if a field has been set.
+HasFailoverMode returns a boolean if a field has been set.
+
+### GetFailoverOriginTtfb
+
+`func (o *RuleProxyAction) GetFailoverOriginTtfb() string`
+
+GetFailoverOriginTtfb returns the FailoverOriginTtfb field if non-nil, zero value otherwise.
+
+### GetFailoverOriginTtfbOk
+
+`func (o *RuleProxyAction) GetFailoverOriginTtfbOk() (*string, bool)`
+
+GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverOriginTtfb
+
+`func (o *RuleProxyAction) SetFailoverOriginTtfb(v string)`
+
+SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
+
+### HasFailoverOriginTtfb
+
+`func (o *RuleProxyAction) HasFailoverOriginTtfb() bool`
+
+HasFailoverOriginTtfb returns a boolean if a field has been set.
+
+### GetFailoverOriginStatusCodes
+
+`func (o *RuleProxyAction) GetFailoverOriginStatusCodes() []string`
+
+GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field if non-nil, zero value otherwise.
+
+### GetFailoverOriginStatusCodesOk
+
+`func (o *RuleProxyAction) GetFailoverOriginStatusCodesOk() (*[]string, bool)`
+
+GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverOriginStatusCodes
+
+`func (o *RuleProxyAction) SetFailoverOriginStatusCodes(v []string)`
+
+SetFailoverOriginStatusCodes sets FailoverOriginStatusCodes field to given value.
+
+### HasFailoverOriginStatusCodes
+
+`func (o *RuleProxyAction) HasFailoverOriginStatusCodes() bool`
+
+HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+
+### GetFailoverLifetime
+
+`func (o *RuleProxyAction) GetFailoverLifetime() string`
+
+GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
+
+### GetFailoverLifetimeOk
+
+`func (o *RuleProxyAction) GetFailoverLifetimeOk() (*string, bool)`
+
+GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverLifetime
+
+`func (o *RuleProxyAction) SetFailoverLifetime(v string)`
+
+SetFailoverLifetime sets FailoverLifetime field to given value.
+
+### HasFailoverLifetime
+
+`func (o *RuleProxyAction) HasFailoverLifetime() bool`
+
+HasFailoverLifetime returns a boolean if a field has been set.
 
 ### GetNotify
 

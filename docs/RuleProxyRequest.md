@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Domain** | **[]string** |  | [default to ["any"]]
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
-**Weight** | Pointer to **int32** |  | [optional] 
+**Weight** | Pointer to **int32** |  | [optional] [default to 0]
 **Disabled** | **bool** |  | [default to false]
 **Url** | **[]string** |  | 
 **Country** | Pointer to **string** |  | [optional] 
@@ -19,8 +19,6 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** |  | [optional] 
 **IpIs** | Pointer to **[]string** |  | [optional] 
 **IpIsNot** | Pointer to **[]string** |  | [optional] 
-**OnlyWithCookie** | Pointer to **bool** |  | [optional] [default to false]
-**CookieName** | Pointer to **string** |  | [optional] 
 **To** | **string** |  | 
 **Host** | Pointer to **string** |  | [optional] 
 **AuthUser** | Pointer to **string** |  | [optional] [default to ""]
@@ -31,9 +29,10 @@ Name | Type | Description | Notes
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
-**StaticErrorPage** | Pointer to **string** |  | [optional] [default to ""]
-**StaticErrorPageStatusCodes** | Pointer to **[]string** |  | [optional] 
-**Failover** | Pointer to [**FailoverConfig**](FailoverConfig.md) |  | [optional] 
+**FailoverMode** | Pointer to **bool** |  | [optional] [default to false]
+**FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
+**FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
+**FailoverLifetime** | Pointer to **string** |  | [optional] [default to "300"]
 **Notify** | Pointer to **string** |  | [optional] [default to "none"]
 **NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
 **WafEnabled** | Pointer to **bool** |  | [optional] [default to false]
@@ -418,56 +417,6 @@ SetIpIsNot sets IpIsNot field to given value.
 
 HasIpIsNot returns a boolean if a field has been set.
 
-### GetOnlyWithCookie
-
-`func (o *RuleProxyRequest) GetOnlyWithCookie() bool`
-
-GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
-
-### GetOnlyWithCookieOk
-
-`func (o *RuleProxyRequest) GetOnlyWithCookieOk() (*bool, bool)`
-
-GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOnlyWithCookie
-
-`func (o *RuleProxyRequest) SetOnlyWithCookie(v bool)`
-
-SetOnlyWithCookie sets OnlyWithCookie field to given value.
-
-### HasOnlyWithCookie
-
-`func (o *RuleProxyRequest) HasOnlyWithCookie() bool`
-
-HasOnlyWithCookie returns a boolean if a field has been set.
-
-### GetCookieName
-
-`func (o *RuleProxyRequest) GetCookieName() string`
-
-GetCookieName returns the CookieName field if non-nil, zero value otherwise.
-
-### GetCookieNameOk
-
-`func (o *RuleProxyRequest) GetCookieNameOk() (*string, bool)`
-
-GetCookieNameOk returns a tuple with the CookieName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCookieName
-
-`func (o *RuleProxyRequest) SetCookieName(v string)`
-
-SetCookieName sets CookieName field to given value.
-
-### HasCookieName
-
-`func (o *RuleProxyRequest) HasCookieName() bool`
-
-HasCookieName returns a boolean if a field has been set.
-
 ### GetTo
 
 `func (o *RuleProxyRequest) GetTo() string`
@@ -733,80 +682,105 @@ SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 
 HasProxyStripRequestHeaders returns a boolean if a field has been set.
 
-### GetStaticErrorPage
+### GetFailoverMode
 
-`func (o *RuleProxyRequest) GetStaticErrorPage() string`
+`func (o *RuleProxyRequest) GetFailoverMode() bool`
 
-GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
+GetFailoverMode returns the FailoverMode field if non-nil, zero value otherwise.
 
-### GetStaticErrorPageOk
+### GetFailoverModeOk
 
-`func (o *RuleProxyRequest) GetStaticErrorPageOk() (*string, bool)`
+`func (o *RuleProxyRequest) GetFailoverModeOk() (*bool, bool)`
 
-GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
+GetFailoverModeOk returns a tuple with the FailoverMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStaticErrorPage
+### SetFailoverMode
 
-`func (o *RuleProxyRequest) SetStaticErrorPage(v string)`
+`func (o *RuleProxyRequest) SetFailoverMode(v bool)`
 
-SetStaticErrorPage sets StaticErrorPage field to given value.
+SetFailoverMode sets FailoverMode field to given value.
 
-### HasStaticErrorPage
+### HasFailoverMode
 
-`func (o *RuleProxyRequest) HasStaticErrorPage() bool`
+`func (o *RuleProxyRequest) HasFailoverMode() bool`
 
-HasStaticErrorPage returns a boolean if a field has been set.
+HasFailoverMode returns a boolean if a field has been set.
 
-### GetStaticErrorPageStatusCodes
+### GetFailoverOriginTtfb
 
-`func (o *RuleProxyRequest) GetStaticErrorPageStatusCodes() []string`
+`func (o *RuleProxyRequest) GetFailoverOriginTtfb() string`
 
-GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
+GetFailoverOriginTtfb returns the FailoverOriginTtfb field if non-nil, zero value otherwise.
 
-### GetStaticErrorPageStatusCodesOk
+### GetFailoverOriginTtfbOk
 
-`func (o *RuleProxyRequest) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
+`func (o *RuleProxyRequest) GetFailoverOriginTtfbOk() (*string, bool)`
 
-GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
+GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStaticErrorPageStatusCodes
+### SetFailoverOriginTtfb
 
-`func (o *RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string)`
+`func (o *RuleProxyRequest) SetFailoverOriginTtfb(v string)`
 
-SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
+SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
 
-### HasStaticErrorPageStatusCodes
+### HasFailoverOriginTtfb
 
-`func (o *RuleProxyRequest) HasStaticErrorPageStatusCodes() bool`
+`func (o *RuleProxyRequest) HasFailoverOriginTtfb() bool`
 
-HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
+HasFailoverOriginTtfb returns a boolean if a field has been set.
 
-### GetFailover
+### GetFailoverOriginStatusCodes
 
-`func (o *RuleProxyRequest) GetFailover() FailoverConfig`
+`func (o *RuleProxyRequest) GetFailoverOriginStatusCodes() []string`
 
-GetFailover returns the Failover field if non-nil, zero value otherwise.
+GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field if non-nil, zero value otherwise.
 
-### GetFailoverOk
+### GetFailoverOriginStatusCodesOk
 
-`func (o *RuleProxyRequest) GetFailoverOk() (*FailoverConfig, bool)`
+`func (o *RuleProxyRequest) GetFailoverOriginStatusCodesOk() (*[]string, bool)`
 
-GetFailoverOk returns a tuple with the Failover field if it's non-nil, zero value otherwise
+GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailover
+### SetFailoverOriginStatusCodes
 
-`func (o *RuleProxyRequest) SetFailover(v FailoverConfig)`
+`func (o *RuleProxyRequest) SetFailoverOriginStatusCodes(v []string)`
 
-SetFailover sets Failover field to given value.
+SetFailoverOriginStatusCodes sets FailoverOriginStatusCodes field to given value.
 
-### HasFailover
+### HasFailoverOriginStatusCodes
 
-`func (o *RuleProxyRequest) HasFailover() bool`
+`func (o *RuleProxyRequest) HasFailoverOriginStatusCodes() bool`
 
-HasFailover returns a boolean if a field has been set.
+HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+
+### GetFailoverLifetime
+
+`func (o *RuleProxyRequest) GetFailoverLifetime() string`
+
+GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
+
+### GetFailoverLifetimeOk
+
+`func (o *RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool)`
+
+GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverLifetime
+
+`func (o *RuleProxyRequest) SetFailoverLifetime(v string)`
+
+SetFailoverLifetime sets FailoverLifetime field to given value.
+
+### HasFailoverLifetime
+
+`func (o *RuleProxyRequest) HasFailoverLifetime() bool`
+
+HasFailoverLifetime returns a boolean if a field has been set.
 
 ### GetNotify
 

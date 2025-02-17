@@ -30,7 +30,10 @@ type RuleProxyAction struct {
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
-	Failover *FailoverConfig `json:"failover,omitempty"`
+	FailoverMode *bool `json:"failover_mode,omitempty"`
+	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
+	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
+	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	Notify *string `json:"notify,omitempty"`
 	NotifyConfig *NotifyConfig `json:"notify_config,omitempty"`
 	WafEnabled bool `json:"waf_enabled"`
@@ -49,6 +52,12 @@ type _RuleProxyAction RuleProxyAction
 func NewRuleProxyAction(to string, wafEnabled bool) *RuleProxyAction {
 	this := RuleProxyAction{}
 	this.To = to
+	var failoverMode bool = false
+	this.FailoverMode = &failoverMode
+	var failoverOriginTtfb string = "2000"
+	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var failoverLifetime string = "300"
+	this.FailoverLifetime = &failoverLifetime
 	this.WafEnabled = wafEnabled
 	var proxyInlineFnEnabled bool = false
 	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
@@ -60,6 +69,12 @@ func NewRuleProxyAction(to string, wafEnabled bool) *RuleProxyAction {
 // but it doesn't guarantee that properties required by API are set
 func NewRuleProxyActionWithDefaults() *RuleProxyAction {
 	this := RuleProxyAction{}
+	var failoverMode bool = false
+	this.FailoverMode = &failoverMode
+	var failoverOriginTtfb string = "2000"
+	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var failoverLifetime string = "300"
+	this.FailoverLifetime = &failoverLifetime
 	var wafEnabled bool = false
 	this.WafEnabled = wafEnabled
 	var proxyInlineFnEnabled bool = false
@@ -379,36 +394,132 @@ func (o *RuleProxyAction) SetProxyStripRequestHeaders(v []string) {
 	o.ProxyStripRequestHeaders = v
 }
 
-// GetFailover returns the Failover field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetFailover() FailoverConfig {
-	if o == nil || IsNil(o.Failover) {
-		var ret FailoverConfig
+// GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetFailoverMode() bool {
+	if o == nil || IsNil(o.FailoverMode) {
+		var ret bool
 		return ret
 	}
-	return *o.Failover
+	return *o.FailoverMode
 }
 
-// GetFailoverOk returns a tuple with the Failover field value if set, nil otherwise
+// GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetFailoverOk() (*FailoverConfig, bool) {
-	if o == nil || IsNil(o.Failover) {
+func (o *RuleProxyAction) GetFailoverModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.FailoverMode) {
 		return nil, false
 	}
-	return o.Failover, true
+	return o.FailoverMode, true
 }
 
-// HasFailover returns a boolean if a field has been set.
-func (o *RuleProxyAction) HasFailover() bool {
-	if o != nil && !IsNil(o.Failover) {
+// HasFailoverMode returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasFailoverMode() bool {
+	if o != nil && !IsNil(o.FailoverMode) {
 		return true
 	}
 
 	return false
 }
 
-// SetFailover gets a reference to the given FailoverConfig and assigns it to the Failover field.
-func (o *RuleProxyAction) SetFailover(v FailoverConfig) {
-	o.Failover = &v
+// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
+func (o *RuleProxyAction) SetFailoverMode(v bool) {
+	o.FailoverMode = &v
+}
+
+// GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetFailoverOriginTtfb() string {
+	if o == nil || IsNil(o.FailoverOriginTtfb) {
+		var ret string
+		return ret
+	}
+	return *o.FailoverOriginTtfb
+}
+
+// GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetFailoverOriginTtfbOk() (*string, bool) {
+	if o == nil || IsNil(o.FailoverOriginTtfb) {
+		return nil, false
+	}
+	return o.FailoverOriginTtfb, true
+}
+
+// HasFailoverOriginTtfb returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasFailoverOriginTtfb() bool {
+	if o != nil && !IsNil(o.FailoverOriginTtfb) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverOriginTtfb gets a reference to the given string and assigns it to the FailoverOriginTtfb field.
+func (o *RuleProxyAction) SetFailoverOriginTtfb(v string) {
+	o.FailoverOriginTtfb = &v
+}
+
+// GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetFailoverOriginStatusCodes() []string {
+	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.FailoverOriginStatusCodes
+}
+
+// GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetFailoverOriginStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
+		return nil, false
+	}
+	return o.FailoverOriginStatusCodes, true
+}
+
+// HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasFailoverOriginStatusCodes() bool {
+	if o != nil && !IsNil(o.FailoverOriginStatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverOriginStatusCodes gets a reference to the given []string and assigns it to the FailoverOriginStatusCodes field.
+func (o *RuleProxyAction) SetFailoverOriginStatusCodes(v []string) {
+	o.FailoverOriginStatusCodes = v
+}
+
+// GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetFailoverLifetime() string {
+	if o == nil || IsNil(o.FailoverLifetime) {
+		var ret string
+		return ret
+	}
+	return *o.FailoverLifetime
+}
+
+// GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetFailoverLifetimeOk() (*string, bool) {
+	if o == nil || IsNil(o.FailoverLifetime) {
+		return nil, false
+	}
+	return o.FailoverLifetime, true
+}
+
+// HasFailoverLifetime returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasFailoverLifetime() bool {
+	if o != nil && !IsNil(o.FailoverLifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
+func (o *RuleProxyAction) SetFailoverLifetime(v string) {
+	o.FailoverLifetime = &v
 }
 
 // GetNotify returns the Notify field value if set, zero value otherwise.
@@ -633,8 +744,17 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProxyStripRequestHeaders) {
 		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
 	}
-	if !IsNil(o.Failover) {
-		toSerialize["failover"] = o.Failover
+	if !IsNil(o.FailoverMode) {
+		toSerialize["failover_mode"] = o.FailoverMode
+	}
+	if !IsNil(o.FailoverOriginTtfb) {
+		toSerialize["failover_origin_ttfb"] = o.FailoverOriginTtfb
+	}
+	if !IsNil(o.FailoverOriginStatusCodes) {
+		toSerialize["failover_origin_status_codes"] = o.FailoverOriginStatusCodes
+	}
+	if !IsNil(o.FailoverLifetime) {
+		toSerialize["failover_lifetime"] = o.FailoverLifetime
 	}
 	if !IsNil(o.Notify) {
 		toSerialize["notify"] = o.Notify
@@ -706,7 +826,10 @@ func (o *RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "inject_headers")
 		delete(additionalProperties, "proxy_strip_headers")
 		delete(additionalProperties, "proxy_strip_request_headers")
-		delete(additionalProperties, "failover")
+		delete(additionalProperties, "failover_mode")
+		delete(additionalProperties, "failover_origin_ttfb")
+		delete(additionalProperties, "failover_origin_status_codes")
+		delete(additionalProperties, "failover_lifetime")
 		delete(additionalProperties, "notify")
 		delete(additionalProperties, "notify_config")
 		delete(additionalProperties, "waf_enabled")

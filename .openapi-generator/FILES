@@ -33,7 +33,6 @@ docs/DomainRequest.md
 docs/DomainRequestUpdate.md
 docs/DomainsAPI.md
 docs/Error.md
-docs/FailoverConfig.md
 docs/HeadersAPI.md
 docs/HeadersCreateRequest.md
 docs/HeadersDeleteRequest.md
@@ -79,7 +78,6 @@ docs/Store.md
 docs/StoreItem.md
 docs/StoreItemUpdate.md
 docs/StoreUpdate.md
-docs/Threshold.md
 docs/WAFConfig.md
 docs/WAFConfigUpdate.md
 git_push.sh
@@ -95,7 +93,6 @@ model_domain.go
 model_domain_request.go
 model_domain_request_update.go
 model_error.go
-model_failover_config.go
 model_headers_create_request.go
 model_headers_delete_request.go
 model_notify_config.go
@@ -129,7 +126,6 @@ model_store.go
 model_store_item.go
 model_store_item_update.go
 model_store_update.go
-model_threshold.go
 model_waf_config.go
 model_waf_config_update.go
 response.go

@@ -146,7 +146,6 @@ Class | Method | HTTP request | Description
  - [DomainRequest](docs/DomainRequest.md)
  - [DomainRequestUpdate](docs/DomainRequestUpdate.md)
  - [Error](docs/Error.md)
- - [FailoverConfig](docs/FailoverConfig.md)
  - [HeadersCreateRequest](docs/HeadersCreateRequest.md)
  - [HeadersDeleteRequest](docs/HeadersDeleteRequest.md)
  - [NotifyConfig](docs/NotifyConfig.md)
@@ -180,7 +179,6 @@ Class | Method | HTTP request | Description
  - [StoreItem](docs/StoreItem.md)
  - [StoreItemUpdate](docs/StoreItemUpdate.md)
  - [StoreUpdate](docs/StoreUpdate.md)
- - [Threshold](docs/Threshold.md)
  - [WAFConfig](docs/WAFConfig.md)
  - [WAFConfigUpdate](docs/WAFConfigUpdate.md)
 

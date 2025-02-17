@@ -27,7 +27,6 @@ type WAFConfig struct {
 	BlockIp []string `json:"block_ip,omitempty"`
 	BlockUa []string `json:"block_ua,omitempty"`
 	BlockReferer []string `json:"block_referer,omitempty"`
-	Thresholds []Threshold `json:"thresholds,omitempty"`
 	HttpblEnabled *map[string]bool `json:"httpbl_enabled,omitempty"`
 	NotifySlackHitsRpm *int32 `json:"notify_slack_hits_rpm,omitempty"`
 	IpRatelimitMode *string `json:"ip_ratelimit_mode,omitempty"`
@@ -324,38 +323,6 @@ func (o *WAFConfig) HasBlockReferer() bool {
 // SetBlockReferer gets a reference to the given []string and assigns it to the BlockReferer field.
 func (o *WAFConfig) SetBlockReferer(v []string) {
 	o.BlockReferer = v
-}
-
-// GetThresholds returns the Thresholds field value if set, zero value otherwise.
-func (o *WAFConfig) GetThresholds() []Threshold {
-	if o == nil || IsNil(o.Thresholds) {
-		var ret []Threshold
-		return ret
-	}
-	return o.Thresholds
-}
-
-// GetThresholdsOk returns a tuple with the Thresholds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WAFConfig) GetThresholdsOk() ([]Threshold, bool) {
-	if o == nil || IsNil(o.Thresholds) {
-		return nil, false
-	}
-	return o.Thresholds, true
-}
-
-// HasThresholds returns a boolean if a field has been set.
-func (o *WAFConfig) HasThresholds() bool {
-	if o != nil && !IsNil(o.Thresholds) {
-		return true
-	}
-
-	return false
-}
-
-// SetThresholds gets a reference to the given []Threshold and assigns it to the Thresholds field.
-func (o *WAFConfig) SetThresholds(v []Threshold) {
-	o.Thresholds = v
 }
 
 // GetHttpblEnabled returns the HttpblEnabled field value if set, zero value otherwise.
@@ -867,9 +834,6 @@ func (o WAFConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BlockReferer) {
 		toSerialize["block_referer"] = o.BlockReferer
 	}
-	if !IsNil(o.Thresholds) {
-		toSerialize["thresholds"] = o.Thresholds
-	}
 	if !IsNil(o.HttpblEnabled) {
 		toSerialize["httpbl_enabled"] = o.HttpblEnabled
 	}
@@ -965,7 +929,6 @@ func (o *WAFConfig) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "block_ip")
 		delete(additionalProperties, "block_ua")
 		delete(additionalProperties, "block_referer")
-		delete(additionalProperties, "thresholds")
 		delete(additionalProperties, "httpbl_enabled")
 		delete(additionalProperties, "notify_slack_hits_rpm")
 		delete(additionalProperties, "ip_ratelimit_mode")
