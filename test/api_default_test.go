@@ -1,7 +1,7 @@
 /*
 QuantCDN Admin API
 
-Testing SecretsAPIService
+Testing DefaultAPIService
 
 */
 
@@ -17,19 +17,19 @@ import (
 	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
-func Test_quantadmingo_SecretsAPIService(t *testing.T) {
+func Test_quantadmingo_DefaultAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SecretsAPIService SecretsCreate", func(t *testing.T) {
+	t.Run("Test DefaultAPIService RulesServeStaticCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.SecretsAPI.SecretsCreate(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.DefaultAPI.RulesServeStaticCreate(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -37,15 +37,15 @@ func Test_quantadmingo_SecretsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SecretsAPIService SecretsDelete", func(t *testing.T) {
+	t.Run("Test DefaultAPIService RulesServeStaticDelete", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
-		var store string
+		var rule string
 
-		resp, httpRes, err := apiClient.SecretsAPI.SecretsDelete(context.Background(), organization, project, store).Execute()
+		resp, httpRes, err := apiClient.DefaultAPI.RulesServeStaticDelete(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -53,14 +53,14 @@ func Test_quantadmingo_SecretsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SecretsAPIService SecretsList", func(t *testing.T) {
+	t.Run("Test DefaultAPIService RulesServeStaticList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.SecretsAPI.SecretsList(context.Background(), organization, project).Execute()
+		resp, httpRes, err := apiClient.DefaultAPI.RulesServeStaticList(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -68,15 +68,15 @@ func Test_quantadmingo_SecretsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SecretsAPIService SecretsRead", func(t *testing.T) {
+	t.Run("Test DefaultAPIService RulesServeStaticRead", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
-		var store string
+		var rule string
 
-		resp, httpRes, err := apiClient.SecretsAPI.SecretsRead(context.Background(), organization, project, store).Execute()
+		resp, httpRes, err := apiClient.DefaultAPI.RulesServeStaticRead(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -84,15 +84,15 @@ func Test_quantadmingo_SecretsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test SecretsAPIService SecretsUpdate", func(t *testing.T) {
+	t.Run("Test DefaultAPIService RulesServeStaticUpdate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organization string
 		var project string
-		var store string
+		var rule string
 
-		resp, httpRes, err := apiClient.SecretsAPI.SecretsUpdate(context.Background(), organization, project, store).Execute()
+		resp, httpRes, err := apiClient.DefaultAPI.RulesServeStaticUpdate(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

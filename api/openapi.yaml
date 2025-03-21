@@ -22,7 +22,6 @@ tags:
 - name: Rules__ContentFilter
 - name: KV
 - name: KV__Items
-- name: Secrets
 paths:
   /organizations:
     get:
@@ -1733,6 +1732,196 @@ paths:
           description: Access is forbidden.
       tags:
       - Rules__BotChallenge
+    post:
+      operationId: RulesBotChallenge_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleBotChallengeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleBotChallenge'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__BotChallenge
+  /organizations/{organization}/projects/{project}/rules/bot-challenge/{rule}:
+    delete:
+      operationId: RulesBotChallenge_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleBotChallenge'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__BotChallenge
+    get:
+      operationId: RulesBotChallenge_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleBotChallenge'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__BotChallenge
+    patch:
+      operationId: RulesBotChallenge_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleBotChallengeRequestUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleBotChallenge'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__BotChallenge
   /organizations/{organization}/projects/{project}/rules/content-filter:
     get:
       operationId: RulesContentFilter_list
@@ -1775,6 +1964,196 @@ paths:
           description: Access is forbidden.
       tags:
       - Rules__ContentFilter
+    post:
+      operationId: RulesContentFilter_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleContentFilterRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleContentFilter'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__ContentFilter
+  /organizations/{organization}/projects/{project}/rules/content-filter/{rule}:
+    delete:
+      operationId: RulesContentFilter_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleContentFilter'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__ContentFilter
+    get:
+      operationId: RulesContentFilter_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleContentFilter'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__ContentFilter
+    patch:
+      operationId: RulesContentFilter_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleContentFilterRequestUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleContentFilter'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__ContentFilter
   /organizations/{organization}/projects/{project}/rules/function:
     get:
       operationId: RulesFunction_list
@@ -1801,6 +2180,196 @@ paths:
                 items:
                   $ref: '#/components/schemas/RuleFunction'
                 type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__Function
+    post:
+      operationId: RulesFunction_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleFunctionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleFunction'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__Function
+  /organizations/{organization}/projects/{project}/rules/function/{rule}:
+    delete:
+      operationId: RulesFunction_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleFunction'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__Function
+    get:
+      operationId: RulesFunction_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleFunction'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__Function
+    patch:
+      operationId: RulesFunction_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleFunctionRequestUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleFunction'
           description: The request has succeeded.
         "400":
           content:
@@ -2278,9 +2847,9 @@ paths:
           description: Access is forbidden.
       tags:
       - Rules__Redirect
-  /organizations/{organization}/projects/{project}/secrets:
+  /organizations/{organization}/projects/{project}/rules/serve-static:
     get:
-      operationId: Secrets_list
+      operationId: RulesServeStatic_list
       parameters:
       - explode: false
         in: path
@@ -2302,7 +2871,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Store'
+                  $ref: '#/components/schemas/RuleServeStatic'
                 type: array
           description: The request has succeeded.
         "400":
@@ -2318,10 +2887,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
-      tags:
-      - Secrets
     post:
-      operationId: Secrets_create
+      operationId: RulesServeStatic_create
       parameters:
       - explode: false
         in: path
@@ -2341,14 +2908,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Store'
+              $ref: '#/components/schemas/RuleServeStaticRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Store'
+                $ref: '#/components/schemas/RuleServeStatic'
           description: The request has succeeded.
         "400":
           content:
@@ -2363,11 +2930,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
-      tags:
-      - Secrets
-  /organizations/{organization}/projects/{project}/secrets/{store}:
+  /organizations/{organization}/projects/{project}/rules/serve-static/{rule}:
     delete:
-      operationId: Secrets_delete
+      operationId: RulesServeStatic_delete
       parameters:
       - explode: false
         in: path
@@ -2385,7 +2950,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: store
+        name: rule
         required: true
         schema:
           type: string
@@ -2395,7 +2960,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Store'
+                $ref: '#/components/schemas/RuleServeStatic'
           description: The request has succeeded.
         "400":
           content:
@@ -2410,10 +2975,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
-      tags:
-      - Secrets
     get:
-      operationId: Secrets_read
+      operationId: RulesServeStatic_read
       parameters:
       - explode: false
         in: path
@@ -2431,7 +2994,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: store
+        name: rule
         required: true
         schema:
           type: string
@@ -2441,7 +3004,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Store'
+                $ref: '#/components/schemas/RuleServeStatic'
           description: The request has succeeded.
         "400":
           content:
@@ -2456,10 +3019,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
-      tags:
-      - Secrets
     patch:
-      operationId: Secrets_update
+      operationId: RulesServeStatic_update
       parameters:
       - explode: false
         in: path
@@ -2477,7 +3038,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: store
+        name: rule
         required: true
         schema:
           type: string
@@ -2486,14 +3047,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StoreUpdate'
+              $ref: '#/components/schemas/RuleServeStaticRequestUpdate'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Store'
+                $ref: '#/components/schemas/RuleServeStatic'
           description: The request has succeeded.
         "400":
           content:
@@ -2508,8 +3069,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Access is forbidden.
-      tags:
-      - Secrets
 components:
   parameters:
     ResourceURLParameters.organization:
@@ -3070,8 +3629,9 @@ components:
       - $ref: '#/components/schemas/Rule'
       example:
         action_config:
-          bot_challenge_status_code: 0
-          bot_challenge_body: bot_challenge_body
+          robot_challenge_type: robot_challenge_type
+          robot_challenge_verification_ttl: 0
+          robot_challenge_challenge_ttl: 6
       properties:
         action_config:
           $ref: '#/components/schemas/RuleBotChallengeAction'
@@ -3080,25 +3640,252 @@ components:
       type: object
     RuleBotChallengeAction:
       example:
-        bot_challenge_status_code: 0
-        bot_challenge_body: bot_challenge_body
+        robot_challenge_type: robot_challenge_type
+        robot_challenge_verification_ttl: 0
+        robot_challenge_challenge_ttl: 6
       properties:
-        bot_challenge_body:
+        robot_challenge_type:
           type: string
-        bot_challenge_status_code:
-          default: 200
+        robot_challenge_verification_ttl:
+          default: 10800
+          type: integer
+        robot_challenge_challenge_ttl:
+          default: 30
           type: integer
       required:
-      - bot_challenge_body
-      - bot_challenge_status_code
+      - robot_challenge_challenge_ttl
+      - robot_challenge_type
+      - robot_challenge_verification_ttl
+      type: object
+    RuleBotChallengeRequest:
+      example:
+        country: country_is
+        robot_challenge_type: robot_challenge_type
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        robot_challenge_verification_ttl: 6
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        robot_challenge_challenge_ttl: 1
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        robot_challenge_type:
+          type: string
+        robot_challenge_verification_ttl:
+          default: 10800
+          type: integer
+        robot_challenge_challenge_ttl:
+          default: 30
+          type: integer
+      required:
+      - disabled
+      - domain
+      - robot_challenge_challenge_ttl
+      - robot_challenge_type
+      - robot_challenge_verification_ttl
+      - url
+      type: object
+    RuleBotChallengeRequestUpdate:
+      example:
+        country: country_is
+        robot_challenge_type: robot_challenge_type
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        robot_challenge_verification_ttl: 6
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        robot_challenge_challenge_ttl: 1
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        robot_challenge_type:
+          type: string
+        robot_challenge_verification_ttl:
+          default: 10800
+          type: integer
+        robot_challenge_challenge_ttl:
+          default: 30
+          type: integer
       type: object
     RuleContentFilter:
       allOf:
       - $ref: '#/components/schemas/Rule'
       example:
         action_config:
-          content_filter_body: content_filter_body
-          content_filter_status_code: 0
+          fn_uuid: fn_uuid
       properties:
         action_config:
           $ref: '#/components/schemas/RuleContentFilterAction'
@@ -3107,17 +3894,217 @@ components:
       type: object
     RuleContentFilterAction:
       example:
-        content_filter_body: content_filter_body
-        content_filter_status_code: 0
+        fn_uuid: fn_uuid
       properties:
-        content_filter_body:
+        fn_uuid:
           type: string
-        content_filter_status_code:
-          default: 200
-          type: integer
       required:
-      - content_filter_body
-      - content_filter_status_code
+      - fn_uuid
+      type: object
+    RuleContentFilterRequest:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        fn_uuid: fn_uuid
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        fn_uuid:
+          type: string
+      required:
+      - disabled
+      - domain
+      - fn_uuid
+      - url
+      type: object
+    RuleContentFilterRequestUpdate:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        fn_uuid: fn_uuid
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        fn_uuid:
+          type: string
       type: object
     RuleCustomResponse:
       allOf:
@@ -3142,7 +4129,7 @@ components:
       - $ref: '#/components/schemas/Rule'
       example:
         action_config:
-          function_uuid: function_uuid
+          fn_uuid: fn_uuid
       properties:
         action_config:
           $ref: '#/components/schemas/RuleFunctionAction'
@@ -3151,12 +4138,217 @@ components:
       type: object
     RuleFunctionAction:
       example:
-        function_uuid: function_uuid
+        fn_uuid: fn_uuid
       properties:
-        function_uuid:
+        fn_uuid:
           type: string
       required:
-      - function_uuid
+      - fn_uuid
+      type: object
+    RuleFunctionRequest:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        fn_uuid: fn_uuid
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        fn_uuid:
+          type: string
+      required:
+      - disabled
+      - domain
+      - fn_uuid
+      - url
+      type: object
+    RuleFunctionRequestUpdate:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        fn_uuid: fn_uuid
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        fn_uuid:
+          type: string
       type: object
     RuleHeader:
       allOf:
@@ -4084,6 +5276,232 @@ components:
           type: string
         redirect_code:
           default: "301"
+          type: string
+      type: object
+    RuleServeStatic:
+      allOf:
+      - $ref: '#/components/schemas/Rule'
+      example:
+        action_config:
+          static_file_path: static_file_path
+      properties:
+        action_config:
+          $ref: '#/components/schemas/RuleServeStaticAction'
+      required:
+      - action_config
+      type: object
+    RuleServeStaticAction:
+      example:
+        static_file_path: static_file_path
+      properties:
+        static_file_path:
+          type: string
+      required:
+      - static_file_path
+      type: object
+    RuleServeStaticRequest:
+      example:
+        country: country_is
+        method: method_is
+        static_file_path: static_file_path
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        static_file_path:
+          type: string
+      required:
+      - disabled
+      - domain
+      - static_file_path
+      - url
+      type: object
+    RuleServeStaticRequestUpdate:
+      example:
+        country: country_is
+        method: method_is
+        static_file_path: static_file_path
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        static_file_path:
           type: string
       type: object
     Store:

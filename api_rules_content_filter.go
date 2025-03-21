@@ -23,6 +23,35 @@ import (
 type RulesContentFilterAPI interface {
 
 	/*
+	RulesContentFilterCreate Method for RulesContentFilterCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return RulesContentFilterAPIRulesContentFilterCreateRequest
+	*/
+	RulesContentFilterCreate(ctx context.Context, organization string, project string) RulesContentFilterAPIRulesContentFilterCreateRequest
+
+	// RulesContentFilterCreateExecute executes the request
+	//  @return RuleContentFilter
+	RulesContentFilterCreateExecute(r RulesContentFilterAPIRulesContentFilterCreateRequest) (*RuleContentFilter, *http.Response, error)
+
+	/*
+	RulesContentFilterDelete Method for RulesContentFilterDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesContentFilterAPIRulesContentFilterDeleteRequest
+	*/
+	RulesContentFilterDelete(ctx context.Context, organization string, project string, rule string) RulesContentFilterAPIRulesContentFilterDeleteRequest
+
+	// RulesContentFilterDeleteExecute executes the request
+	//  @return RuleContentFilter
+	RulesContentFilterDeleteExecute(r RulesContentFilterAPIRulesContentFilterDeleteRequest) (*RuleContentFilter, *http.Response, error)
+
+	/*
 	RulesContentFilterList Method for RulesContentFilterList
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -35,10 +64,307 @@ type RulesContentFilterAPI interface {
 	// RulesContentFilterListExecute executes the request
 	//  @return []RuleContentFilter
 	RulesContentFilterListExecute(r RulesContentFilterAPIRulesContentFilterListRequest) ([]RuleContentFilter, *http.Response, error)
+
+	/*
+	RulesContentFilterRead Method for RulesContentFilterRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesContentFilterAPIRulesContentFilterReadRequest
+	*/
+	RulesContentFilterRead(ctx context.Context, organization string, project string, rule string) RulesContentFilterAPIRulesContentFilterReadRequest
+
+	// RulesContentFilterReadExecute executes the request
+	//  @return RuleContentFilter
+	RulesContentFilterReadExecute(r RulesContentFilterAPIRulesContentFilterReadRequest) (*RuleContentFilter, *http.Response, error)
+
+	/*
+	RulesContentFilterUpdate Method for RulesContentFilterUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesContentFilterAPIRulesContentFilterUpdateRequest
+	*/
+	RulesContentFilterUpdate(ctx context.Context, organization string, project string, rule string) RulesContentFilterAPIRulesContentFilterUpdateRequest
+
+	// RulesContentFilterUpdateExecute executes the request
+	//  @return RuleContentFilter
+	RulesContentFilterUpdateExecute(r RulesContentFilterAPIRulesContentFilterUpdateRequest) (*RuleContentFilter, *http.Response, error)
 }
 
 // RulesContentFilterAPIService RulesContentFilterAPI service
 type RulesContentFilterAPIService service
+
+type RulesContentFilterAPIRulesContentFilterCreateRequest struct {
+	ctx context.Context
+	ApiService RulesContentFilterAPI
+	organization string
+	project string
+	ruleContentFilterRequest *RuleContentFilterRequest
+}
+
+func (r RulesContentFilterAPIRulesContentFilterCreateRequest) RuleContentFilterRequest(ruleContentFilterRequest RuleContentFilterRequest) RulesContentFilterAPIRulesContentFilterCreateRequest {
+	r.ruleContentFilterRequest = &ruleContentFilterRequest
+	return r
+}
+
+func (r RulesContentFilterAPIRulesContentFilterCreateRequest) Execute() (*RuleContentFilter, *http.Response, error) {
+	return r.ApiService.RulesContentFilterCreateExecute(r)
+}
+
+/*
+RulesContentFilterCreate Method for RulesContentFilterCreate
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @return RulesContentFilterAPIRulesContentFilterCreateRequest
+*/
+func (a *RulesContentFilterAPIService) RulesContentFilterCreate(ctx context.Context, organization string, project string) RulesContentFilterAPIRulesContentFilterCreateRequest {
+	return RulesContentFilterAPIRulesContentFilterCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return RuleContentFilter
+func (a *RulesContentFilterAPIService) RulesContentFilterCreateExecute(r RulesContentFilterAPIRulesContentFilterCreateRequest) (*RuleContentFilter, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleContentFilter
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesContentFilterAPIService.RulesContentFilterCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/content-filter"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.ruleContentFilterRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleContentFilterRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleContentFilterRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RulesContentFilterAPIRulesContentFilterDeleteRequest struct {
+	ctx context.Context
+	ApiService RulesContentFilterAPI
+	organization string
+	project string
+	rule string
+}
+
+func (r RulesContentFilterAPIRulesContentFilterDeleteRequest) Execute() (*RuleContentFilter, *http.Response, error) {
+	return r.ApiService.RulesContentFilterDeleteExecute(r)
+}
+
+/*
+RulesContentFilterDelete Method for RulesContentFilterDelete
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @param rule
+ @return RulesContentFilterAPIRulesContentFilterDeleteRequest
+*/
+func (a *RulesContentFilterAPIService) RulesContentFilterDelete(ctx context.Context, organization string, project string, rule string) RulesContentFilterAPIRulesContentFilterDeleteRequest {
+	return RulesContentFilterAPIRulesContentFilterDeleteRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return RuleContentFilter
+func (a *RulesContentFilterAPIService) RulesContentFilterDeleteExecute(r RulesContentFilterAPIRulesContentFilterDeleteRequest) (*RuleContentFilter, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleContentFilter
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesContentFilterAPIService.RulesContentFilterDelete")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/content-filter/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type RulesContentFilterAPIRulesContentFilterListRequest struct {
 	ctx context.Context
@@ -108,6 +434,277 @@ func (a *RulesContentFilterAPIService) RulesContentFilterListExecute(r RulesCont
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RulesContentFilterAPIRulesContentFilterReadRequest struct {
+	ctx context.Context
+	ApiService RulesContentFilterAPI
+	organization string
+	project string
+	rule string
+}
+
+func (r RulesContentFilterAPIRulesContentFilterReadRequest) Execute() (*RuleContentFilter, *http.Response, error) {
+	return r.ApiService.RulesContentFilterReadExecute(r)
+}
+
+/*
+RulesContentFilterRead Method for RulesContentFilterRead
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @param rule
+ @return RulesContentFilterAPIRulesContentFilterReadRequest
+*/
+func (a *RulesContentFilterAPIService) RulesContentFilterRead(ctx context.Context, organization string, project string, rule string) RulesContentFilterAPIRulesContentFilterReadRequest {
+	return RulesContentFilterAPIRulesContentFilterReadRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return RuleContentFilter
+func (a *RulesContentFilterAPIService) RulesContentFilterReadExecute(r RulesContentFilterAPIRulesContentFilterReadRequest) (*RuleContentFilter, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleContentFilter
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesContentFilterAPIService.RulesContentFilterRead")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/content-filter/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RulesContentFilterAPIRulesContentFilterUpdateRequest struct {
+	ctx context.Context
+	ApiService RulesContentFilterAPI
+	organization string
+	project string
+	rule string
+	ruleContentFilterRequestUpdate *RuleContentFilterRequestUpdate
+}
+
+func (r RulesContentFilterAPIRulesContentFilterUpdateRequest) RuleContentFilterRequestUpdate(ruleContentFilterRequestUpdate RuleContentFilterRequestUpdate) RulesContentFilterAPIRulesContentFilterUpdateRequest {
+	r.ruleContentFilterRequestUpdate = &ruleContentFilterRequestUpdate
+	return r
+}
+
+func (r RulesContentFilterAPIRulesContentFilterUpdateRequest) Execute() (*RuleContentFilter, *http.Response, error) {
+	return r.ApiService.RulesContentFilterUpdateExecute(r)
+}
+
+/*
+RulesContentFilterUpdate Method for RulesContentFilterUpdate
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @param rule
+ @return RulesContentFilterAPIRulesContentFilterUpdateRequest
+*/
+func (a *RulesContentFilterAPIService) RulesContentFilterUpdate(ctx context.Context, organization string, project string, rule string) RulesContentFilterAPIRulesContentFilterUpdateRequest {
+	return RulesContentFilterAPIRulesContentFilterUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return RuleContentFilter
+func (a *RulesContentFilterAPIService) RulesContentFilterUpdateExecute(r RulesContentFilterAPIRulesContentFilterUpdateRequest) (*RuleContentFilter, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleContentFilter
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesContentFilterAPIService.RulesContentFilterUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/content-filter/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.ruleContentFilterRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("ruleContentFilterRequestUpdate is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleContentFilterRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

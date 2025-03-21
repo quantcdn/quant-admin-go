@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BotChallengeBody** | **string** |  | 
-**BotChallengeStatusCode** | **int32** |  | [default to 200]
+**RobotChallengeType** | **string** |  | 
+**RobotChallengeVerificationTtl** | **int32** |  | [default to 10800]
+**RobotChallengeChallengeTtl** | **int32** |  | [default to 30]
 
 ## Methods
 
 ### NewRuleBotChallengeAction
 
-`func NewRuleBotChallengeAction(botChallengeBody string, botChallengeStatusCode int32, ) *RuleBotChallengeAction`
+`func NewRuleBotChallengeAction(robotChallengeType string, robotChallengeVerificationTtl int32, robotChallengeChallengeTtl int32, ) *RuleBotChallengeAction`
 
 NewRuleBotChallengeAction instantiates a new RuleBotChallengeAction object
 This constructor will assign default values to properties that have it defined,
@@ -26,44 +27,64 @@ NewRuleBotChallengeActionWithDefaults instantiates a new RuleBotChallengeAction 
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetBotChallengeBody
+### GetRobotChallengeType
 
-`func (o *RuleBotChallengeAction) GetBotChallengeBody() string`
+`func (o *RuleBotChallengeAction) GetRobotChallengeType() string`
 
-GetBotChallengeBody returns the BotChallengeBody field if non-nil, zero value otherwise.
+GetRobotChallengeType returns the RobotChallengeType field if non-nil, zero value otherwise.
 
-### GetBotChallengeBodyOk
+### GetRobotChallengeTypeOk
 
-`func (o *RuleBotChallengeAction) GetBotChallengeBodyOk() (*string, bool)`
+`func (o *RuleBotChallengeAction) GetRobotChallengeTypeOk() (*string, bool)`
 
-GetBotChallengeBodyOk returns a tuple with the BotChallengeBody field if it's non-nil, zero value otherwise
+GetRobotChallengeTypeOk returns a tuple with the RobotChallengeType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBotChallengeBody
+### SetRobotChallengeType
 
-`func (o *RuleBotChallengeAction) SetBotChallengeBody(v string)`
+`func (o *RuleBotChallengeAction) SetRobotChallengeType(v string)`
 
-SetBotChallengeBody sets BotChallengeBody field to given value.
+SetRobotChallengeType sets RobotChallengeType field to given value.
 
 
-### GetBotChallengeStatusCode
+### GetRobotChallengeVerificationTtl
 
-`func (o *RuleBotChallengeAction) GetBotChallengeStatusCode() int32`
+`func (o *RuleBotChallengeAction) GetRobotChallengeVerificationTtl() int32`
 
-GetBotChallengeStatusCode returns the BotChallengeStatusCode field if non-nil, zero value otherwise.
+GetRobotChallengeVerificationTtl returns the RobotChallengeVerificationTtl field if non-nil, zero value otherwise.
 
-### GetBotChallengeStatusCodeOk
+### GetRobotChallengeVerificationTtlOk
 
-`func (o *RuleBotChallengeAction) GetBotChallengeStatusCodeOk() (*int32, bool)`
+`func (o *RuleBotChallengeAction) GetRobotChallengeVerificationTtlOk() (*int32, bool)`
 
-GetBotChallengeStatusCodeOk returns a tuple with the BotChallengeStatusCode field if it's non-nil, zero value otherwise
+GetRobotChallengeVerificationTtlOk returns a tuple with the RobotChallengeVerificationTtl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBotChallengeStatusCode
+### SetRobotChallengeVerificationTtl
 
-`func (o *RuleBotChallengeAction) SetBotChallengeStatusCode(v int32)`
+`func (o *RuleBotChallengeAction) SetRobotChallengeVerificationTtl(v int32)`
 
-SetBotChallengeStatusCode sets BotChallengeStatusCode field to given value.
+SetRobotChallengeVerificationTtl sets RobotChallengeVerificationTtl field to given value.
+
+
+### GetRobotChallengeChallengeTtl
+
+`func (o *RuleBotChallengeAction) GetRobotChallengeChallengeTtl() int32`
+
+GetRobotChallengeChallengeTtl returns the RobotChallengeChallengeTtl field if non-nil, zero value otherwise.
+
+### GetRobotChallengeChallengeTtlOk
+
+`func (o *RuleBotChallengeAction) GetRobotChallengeChallengeTtlOk() (*int32, bool)`
+
+GetRobotChallengeChallengeTtlOk returns a tuple with the RobotChallengeChallengeTtl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRobotChallengeChallengeTtl
+
+`func (o *RuleBotChallengeAction) SetRobotChallengeChallengeTtl(v int32)`
+
+SetRobotChallengeChallengeTtl sets RobotChallengeChallengeTtl field to given value.
 
 
 

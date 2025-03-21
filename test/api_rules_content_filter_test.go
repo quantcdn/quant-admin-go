@@ -22,6 +22,37 @@ func Test_quantadmingo_RulesContentFilterAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test RulesContentFilterAPIService RulesContentFilterCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+
+		resp, httpRes, err := apiClient.RulesContentFilterAPI.RulesContentFilterCreate(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesContentFilterAPIService RulesContentFilterDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesContentFilterAPI.RulesContentFilterDelete(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RulesContentFilterAPIService RulesContentFilterList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -30,6 +61,38 @@ func Test_quantadmingo_RulesContentFilterAPIService(t *testing.T) {
 		var project string
 
 		resp, httpRes, err := apiClient.RulesContentFilterAPI.RulesContentFilterList(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesContentFilterAPIService RulesContentFilterRead", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesContentFilterAPI.RulesContentFilterRead(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesContentFilterAPIService RulesContentFilterUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesContentFilterAPI.RulesContentFilterUpdate(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

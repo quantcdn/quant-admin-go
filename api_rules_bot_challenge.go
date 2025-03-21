@@ -23,6 +23,35 @@ import (
 type RulesBotChallengeAPI interface {
 
 	/*
+	RulesBotChallengeCreate Method for RulesBotChallengeCreate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@return RulesBotChallengeAPIRulesBotChallengeCreateRequest
+	*/
+	RulesBotChallengeCreate(ctx context.Context, organization string, project string) RulesBotChallengeAPIRulesBotChallengeCreateRequest
+
+	// RulesBotChallengeCreateExecute executes the request
+	//  @return RuleBotChallenge
+	RulesBotChallengeCreateExecute(r RulesBotChallengeAPIRulesBotChallengeCreateRequest) (*RuleBotChallenge, *http.Response, error)
+
+	/*
+	RulesBotChallengeDelete Method for RulesBotChallengeDelete
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesBotChallengeAPIRulesBotChallengeDeleteRequest
+	*/
+	RulesBotChallengeDelete(ctx context.Context, organization string, project string, rule string) RulesBotChallengeAPIRulesBotChallengeDeleteRequest
+
+	// RulesBotChallengeDeleteExecute executes the request
+	//  @return RuleBotChallenge
+	RulesBotChallengeDeleteExecute(r RulesBotChallengeAPIRulesBotChallengeDeleteRequest) (*RuleBotChallenge, *http.Response, error)
+
+	/*
 	RulesBotChallengeList Method for RulesBotChallengeList
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -35,10 +64,307 @@ type RulesBotChallengeAPI interface {
 	// RulesBotChallengeListExecute executes the request
 	//  @return []RuleBotChallenge
 	RulesBotChallengeListExecute(r RulesBotChallengeAPIRulesBotChallengeListRequest) ([]RuleBotChallenge, *http.Response, error)
+
+	/*
+	RulesBotChallengeRead Method for RulesBotChallengeRead
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesBotChallengeAPIRulesBotChallengeReadRequest
+	*/
+	RulesBotChallengeRead(ctx context.Context, organization string, project string, rule string) RulesBotChallengeAPIRulesBotChallengeReadRequest
+
+	// RulesBotChallengeReadExecute executes the request
+	//  @return RuleBotChallenge
+	RulesBotChallengeReadExecute(r RulesBotChallengeAPIRulesBotChallengeReadRequest) (*RuleBotChallenge, *http.Response, error)
+
+	/*
+	RulesBotChallengeUpdate Method for RulesBotChallengeUpdate
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param project
+	@param rule
+	@return RulesBotChallengeAPIRulesBotChallengeUpdateRequest
+	*/
+	RulesBotChallengeUpdate(ctx context.Context, organization string, project string, rule string) RulesBotChallengeAPIRulesBotChallengeUpdateRequest
+
+	// RulesBotChallengeUpdateExecute executes the request
+	//  @return RuleBotChallenge
+	RulesBotChallengeUpdateExecute(r RulesBotChallengeAPIRulesBotChallengeUpdateRequest) (*RuleBotChallenge, *http.Response, error)
 }
 
 // RulesBotChallengeAPIService RulesBotChallengeAPI service
 type RulesBotChallengeAPIService service
+
+type RulesBotChallengeAPIRulesBotChallengeCreateRequest struct {
+	ctx context.Context
+	ApiService RulesBotChallengeAPI
+	organization string
+	project string
+	ruleBotChallengeRequest *RuleBotChallengeRequest
+}
+
+func (r RulesBotChallengeAPIRulesBotChallengeCreateRequest) RuleBotChallengeRequest(ruleBotChallengeRequest RuleBotChallengeRequest) RulesBotChallengeAPIRulesBotChallengeCreateRequest {
+	r.ruleBotChallengeRequest = &ruleBotChallengeRequest
+	return r
+}
+
+func (r RulesBotChallengeAPIRulesBotChallengeCreateRequest) Execute() (*RuleBotChallenge, *http.Response, error) {
+	return r.ApiService.RulesBotChallengeCreateExecute(r)
+}
+
+/*
+RulesBotChallengeCreate Method for RulesBotChallengeCreate
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @return RulesBotChallengeAPIRulesBotChallengeCreateRequest
+*/
+func (a *RulesBotChallengeAPIService) RulesBotChallengeCreate(ctx context.Context, organization string, project string) RulesBotChallengeAPIRulesBotChallengeCreateRequest {
+	return RulesBotChallengeAPIRulesBotChallengeCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return RuleBotChallenge
+func (a *RulesBotChallengeAPIService) RulesBotChallengeCreateExecute(r RulesBotChallengeAPIRulesBotChallengeCreateRequest) (*RuleBotChallenge, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleBotChallenge
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesBotChallengeAPIService.RulesBotChallengeCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/bot-challenge"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.ruleBotChallengeRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleBotChallengeRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleBotChallengeRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RulesBotChallengeAPIRulesBotChallengeDeleteRequest struct {
+	ctx context.Context
+	ApiService RulesBotChallengeAPI
+	organization string
+	project string
+	rule string
+}
+
+func (r RulesBotChallengeAPIRulesBotChallengeDeleteRequest) Execute() (*RuleBotChallenge, *http.Response, error) {
+	return r.ApiService.RulesBotChallengeDeleteExecute(r)
+}
+
+/*
+RulesBotChallengeDelete Method for RulesBotChallengeDelete
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @param rule
+ @return RulesBotChallengeAPIRulesBotChallengeDeleteRequest
+*/
+func (a *RulesBotChallengeAPIService) RulesBotChallengeDelete(ctx context.Context, organization string, project string, rule string) RulesBotChallengeAPIRulesBotChallengeDeleteRequest {
+	return RulesBotChallengeAPIRulesBotChallengeDeleteRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return RuleBotChallenge
+func (a *RulesBotChallengeAPIService) RulesBotChallengeDeleteExecute(r RulesBotChallengeAPIRulesBotChallengeDeleteRequest) (*RuleBotChallenge, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleBotChallenge
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesBotChallengeAPIService.RulesBotChallengeDelete")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/bot-challenge/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type RulesBotChallengeAPIRulesBotChallengeListRequest struct {
 	ctx context.Context
@@ -108,6 +434,277 @@ func (a *RulesBotChallengeAPIService) RulesBotChallengeListExecute(r RulesBotCha
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RulesBotChallengeAPIRulesBotChallengeReadRequest struct {
+	ctx context.Context
+	ApiService RulesBotChallengeAPI
+	organization string
+	project string
+	rule string
+}
+
+func (r RulesBotChallengeAPIRulesBotChallengeReadRequest) Execute() (*RuleBotChallenge, *http.Response, error) {
+	return r.ApiService.RulesBotChallengeReadExecute(r)
+}
+
+/*
+RulesBotChallengeRead Method for RulesBotChallengeRead
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @param rule
+ @return RulesBotChallengeAPIRulesBotChallengeReadRequest
+*/
+func (a *RulesBotChallengeAPIService) RulesBotChallengeRead(ctx context.Context, organization string, project string, rule string) RulesBotChallengeAPIRulesBotChallengeReadRequest {
+	return RulesBotChallengeAPIRulesBotChallengeReadRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return RuleBotChallenge
+func (a *RulesBotChallengeAPIService) RulesBotChallengeReadExecute(r RulesBotChallengeAPIRulesBotChallengeReadRequest) (*RuleBotChallenge, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleBotChallenge
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesBotChallengeAPIService.RulesBotChallengeRead")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/bot-challenge/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RulesBotChallengeAPIRulesBotChallengeUpdateRequest struct {
+	ctx context.Context
+	ApiService RulesBotChallengeAPI
+	organization string
+	project string
+	rule string
+	ruleBotChallengeRequestUpdate *RuleBotChallengeRequestUpdate
+}
+
+func (r RulesBotChallengeAPIRulesBotChallengeUpdateRequest) RuleBotChallengeRequestUpdate(ruleBotChallengeRequestUpdate RuleBotChallengeRequestUpdate) RulesBotChallengeAPIRulesBotChallengeUpdateRequest {
+	r.ruleBotChallengeRequestUpdate = &ruleBotChallengeRequestUpdate
+	return r
+}
+
+func (r RulesBotChallengeAPIRulesBotChallengeUpdateRequest) Execute() (*RuleBotChallenge, *http.Response, error) {
+	return r.ApiService.RulesBotChallengeUpdateExecute(r)
+}
+
+/*
+RulesBotChallengeUpdate Method for RulesBotChallengeUpdate
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param project
+ @param rule
+ @return RulesBotChallengeAPIRulesBotChallengeUpdateRequest
+*/
+func (a *RulesBotChallengeAPIService) RulesBotChallengeUpdate(ctx context.Context, organization string, project string, rule string) RulesBotChallengeAPIRulesBotChallengeUpdateRequest {
+	return RulesBotChallengeAPIRulesBotChallengeUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+		rule: rule,
+	}
+}
+
+// Execute executes the request
+//  @return RuleBotChallenge
+func (a *RulesBotChallengeAPIService) RulesBotChallengeUpdateExecute(r RulesBotChallengeAPIRulesBotChallengeUpdateRequest) (*RuleBotChallenge, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RuleBotChallenge
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RulesBotChallengeAPIService.RulesBotChallengeUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/bot-challenge/{rule}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.ruleBotChallengeRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("ruleBotChallengeRequestUpdate is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.ruleBotChallengeRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

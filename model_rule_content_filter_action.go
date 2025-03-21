@@ -20,8 +20,7 @@ var _ MappedNullable = &RuleContentFilterAction{}
 
 // RuleContentFilterAction struct for RuleContentFilterAction
 type RuleContentFilterAction struct {
-	ContentFilterBody string `json:"content_filter_body"`
-	ContentFilterStatusCode int32 `json:"content_filter_status_code"`
+	FnUuid string `json:"fn_uuid"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +30,9 @@ type _RuleContentFilterAction RuleContentFilterAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleContentFilterAction(contentFilterBody string, contentFilterStatusCode int32) *RuleContentFilterAction {
+func NewRuleContentFilterAction(fnUuid string) *RuleContentFilterAction {
 	this := RuleContentFilterAction{}
-	this.ContentFilterBody = contentFilterBody
-	this.ContentFilterStatusCode = contentFilterStatusCode
+	this.FnUuid = fnUuid
 	return &this
 }
 
@@ -43,57 +41,31 @@ func NewRuleContentFilterAction(contentFilterBody string, contentFilterStatusCod
 // but it doesn't guarantee that properties required by API are set
 func NewRuleContentFilterActionWithDefaults() *RuleContentFilterAction {
 	this := RuleContentFilterAction{}
-	var contentFilterStatusCode int32 = 200
-	this.ContentFilterStatusCode = contentFilterStatusCode
 	return &this
 }
 
-// GetContentFilterBody returns the ContentFilterBody field value
-func (o *RuleContentFilterAction) GetContentFilterBody() string {
+// GetFnUuid returns the FnUuid field value
+func (o *RuleContentFilterAction) GetFnUuid() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ContentFilterBody
+	return o.FnUuid
 }
 
-// GetContentFilterBodyOk returns a tuple with the ContentFilterBody field value
+// GetFnUuidOk returns a tuple with the FnUuid field value
 // and a boolean to check if the value has been set.
-func (o *RuleContentFilterAction) GetContentFilterBodyOk() (*string, bool) {
+func (o *RuleContentFilterAction) GetFnUuidOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ContentFilterBody, true
+	return &o.FnUuid, true
 }
 
-// SetContentFilterBody sets field value
-func (o *RuleContentFilterAction) SetContentFilterBody(v string) {
-	o.ContentFilterBody = v
-}
-
-// GetContentFilterStatusCode returns the ContentFilterStatusCode field value
-func (o *RuleContentFilterAction) GetContentFilterStatusCode() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.ContentFilterStatusCode
-}
-
-// GetContentFilterStatusCodeOk returns a tuple with the ContentFilterStatusCode field value
-// and a boolean to check if the value has been set.
-func (o *RuleContentFilterAction) GetContentFilterStatusCodeOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ContentFilterStatusCode, true
-}
-
-// SetContentFilterStatusCode sets field value
-func (o *RuleContentFilterAction) SetContentFilterStatusCode(v int32) {
-	o.ContentFilterStatusCode = v
+// SetFnUuid sets field value
+func (o *RuleContentFilterAction) SetFnUuid(v string) {
+	o.FnUuid = v
 }
 
 func (o RuleContentFilterAction) MarshalJSON() ([]byte, error) {
@@ -106,8 +78,7 @@ func (o RuleContentFilterAction) MarshalJSON() ([]byte, error) {
 
 func (o RuleContentFilterAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["content_filter_body"] = o.ContentFilterBody
-	toSerialize["content_filter_status_code"] = o.ContentFilterStatusCode
+	toSerialize["fn_uuid"] = o.FnUuid
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -121,8 +92,7 @@ func (o *RuleContentFilterAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"content_filter_body",
-		"content_filter_status_code",
+		"fn_uuid",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -152,8 +122,7 @@ func (o *RuleContentFilterAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "content_filter_body")
-		delete(additionalProperties, "content_filter_status_code")
+		delete(additionalProperties, "fn_uuid")
 		o.AdditionalProperties = additionalProperties
 	}
 

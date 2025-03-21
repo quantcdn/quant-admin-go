@@ -20,112 +20,112 @@ import (
 )
 
 
-type SecretsAPI interface {
+type DefaultAPI interface {
 
 	/*
-	SecretsCreate Method for SecretsCreate
+	RulesServeStaticCreate Method for RulesServeStaticCreate
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization
 	@param project
-	@return SecretsAPISecretsCreateRequest
+	@return DefaultAPIRulesServeStaticCreateRequest
 	*/
-	SecretsCreate(ctx context.Context, organization string, project string) SecretsAPISecretsCreateRequest
+	RulesServeStaticCreate(ctx context.Context, organization string, project string) DefaultAPIRulesServeStaticCreateRequest
 
-	// SecretsCreateExecute executes the request
-	//  @return Store
-	SecretsCreateExecute(r SecretsAPISecretsCreateRequest) (*Store, *http.Response, error)
+	// RulesServeStaticCreateExecute executes the request
+	//  @return RuleServeStatic
+	RulesServeStaticCreateExecute(r DefaultAPIRulesServeStaticCreateRequest) (*RuleServeStatic, *http.Response, error)
 
 	/*
-	SecretsDelete Method for SecretsDelete
+	RulesServeStaticDelete Method for RulesServeStaticDelete
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization
 	@param project
-	@param store
-	@return SecretsAPISecretsDeleteRequest
+	@param rule
+	@return DefaultAPIRulesServeStaticDeleteRequest
 	*/
-	SecretsDelete(ctx context.Context, organization string, project string, store string) SecretsAPISecretsDeleteRequest
+	RulesServeStaticDelete(ctx context.Context, organization string, project string, rule string) DefaultAPIRulesServeStaticDeleteRequest
 
-	// SecretsDeleteExecute executes the request
-	//  @return Store
-	SecretsDeleteExecute(r SecretsAPISecretsDeleteRequest) (*Store, *http.Response, error)
+	// RulesServeStaticDeleteExecute executes the request
+	//  @return RuleServeStatic
+	RulesServeStaticDeleteExecute(r DefaultAPIRulesServeStaticDeleteRequest) (*RuleServeStatic, *http.Response, error)
 
 	/*
-	SecretsList Method for SecretsList
+	RulesServeStaticList Method for RulesServeStaticList
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization
 	@param project
-	@return SecretsAPISecretsListRequest
+	@return DefaultAPIRulesServeStaticListRequest
 	*/
-	SecretsList(ctx context.Context, organization string, project string) SecretsAPISecretsListRequest
+	RulesServeStaticList(ctx context.Context, organization string, project string) DefaultAPIRulesServeStaticListRequest
 
-	// SecretsListExecute executes the request
-	//  @return []Store
-	SecretsListExecute(r SecretsAPISecretsListRequest) ([]Store, *http.Response, error)
+	// RulesServeStaticListExecute executes the request
+	//  @return []RuleServeStatic
+	RulesServeStaticListExecute(r DefaultAPIRulesServeStaticListRequest) ([]RuleServeStatic, *http.Response, error)
 
 	/*
-	SecretsRead Method for SecretsRead
+	RulesServeStaticRead Method for RulesServeStaticRead
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization
 	@param project
-	@param store
-	@return SecretsAPISecretsReadRequest
+	@param rule
+	@return DefaultAPIRulesServeStaticReadRequest
 	*/
-	SecretsRead(ctx context.Context, organization string, project string, store string) SecretsAPISecretsReadRequest
+	RulesServeStaticRead(ctx context.Context, organization string, project string, rule string) DefaultAPIRulesServeStaticReadRequest
 
-	// SecretsReadExecute executes the request
-	//  @return Store
-	SecretsReadExecute(r SecretsAPISecretsReadRequest) (*Store, *http.Response, error)
+	// RulesServeStaticReadExecute executes the request
+	//  @return RuleServeStatic
+	RulesServeStaticReadExecute(r DefaultAPIRulesServeStaticReadRequest) (*RuleServeStatic, *http.Response, error)
 
 	/*
-	SecretsUpdate Method for SecretsUpdate
+	RulesServeStaticUpdate Method for RulesServeStaticUpdate
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization
 	@param project
-	@param store
-	@return SecretsAPISecretsUpdateRequest
+	@param rule
+	@return DefaultAPIRulesServeStaticUpdateRequest
 	*/
-	SecretsUpdate(ctx context.Context, organization string, project string, store string) SecretsAPISecretsUpdateRequest
+	RulesServeStaticUpdate(ctx context.Context, organization string, project string, rule string) DefaultAPIRulesServeStaticUpdateRequest
 
-	// SecretsUpdateExecute executes the request
-	//  @return Store
-	SecretsUpdateExecute(r SecretsAPISecretsUpdateRequest) (*Store, *http.Response, error)
+	// RulesServeStaticUpdateExecute executes the request
+	//  @return RuleServeStatic
+	RulesServeStaticUpdateExecute(r DefaultAPIRulesServeStaticUpdateRequest) (*RuleServeStatic, *http.Response, error)
 }
 
-// SecretsAPIService SecretsAPI service
-type SecretsAPIService service
+// DefaultAPIService DefaultAPI service
+type DefaultAPIService service
 
-type SecretsAPISecretsCreateRequest struct {
+type DefaultAPIRulesServeStaticCreateRequest struct {
 	ctx context.Context
-	ApiService SecretsAPI
+	ApiService DefaultAPI
 	organization string
 	project string
-	store *Store
+	ruleServeStaticRequest *RuleServeStaticRequest
 }
 
-func (r SecretsAPISecretsCreateRequest) Store(store Store) SecretsAPISecretsCreateRequest {
-	r.store = &store
+func (r DefaultAPIRulesServeStaticCreateRequest) RuleServeStaticRequest(ruleServeStaticRequest RuleServeStaticRequest) DefaultAPIRulesServeStaticCreateRequest {
+	r.ruleServeStaticRequest = &ruleServeStaticRequest
 	return r
 }
 
-func (r SecretsAPISecretsCreateRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.SecretsCreateExecute(r)
+func (r DefaultAPIRulesServeStaticCreateRequest) Execute() (*RuleServeStatic, *http.Response, error) {
+	return r.ApiService.RulesServeStaticCreateExecute(r)
 }
 
 /*
-SecretsCreate Method for SecretsCreate
+RulesServeStaticCreate Method for RulesServeStaticCreate
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return SecretsAPISecretsCreateRequest
+ @return DefaultAPIRulesServeStaticCreateRequest
 */
-func (a *SecretsAPIService) SecretsCreate(ctx context.Context, organization string, project string) SecretsAPISecretsCreateRequest {
-	return SecretsAPISecretsCreateRequest{
+func (a *DefaultAPIService) RulesServeStaticCreate(ctx context.Context, organization string, project string) DefaultAPIRulesServeStaticCreateRequest {
+	return DefaultAPIRulesServeStaticCreateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -134,29 +134,29 @@ func (a *SecretsAPIService) SecretsCreate(ctx context.Context, organization stri
 }
 
 // Execute executes the request
-//  @return Store
-func (a *SecretsAPIService) SecretsCreateExecute(r SecretsAPISecretsCreateRequest) (*Store, *http.Response, error) {
+//  @return RuleServeStatic
+func (a *DefaultAPIService) RulesServeStaticCreateExecute(r DefaultAPIRulesServeStaticCreateRequest) (*RuleServeStatic, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Store
+		localVarReturnValue  *RuleServeStatic
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretsAPIService.SecretsCreate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.RulesServeStaticCreate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/secrets"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/serve-static"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.store == nil {
-		return localVarReturnValue, nil, reportError("store is required and must be specified")
+	if r.ruleServeStaticRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleServeStaticRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -177,7 +177,7 @@ func (a *SecretsAPIService) SecretsCreateExecute(r SecretsAPISecretsCreateReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.store
+	localVarPostBody = r.ruleServeStaticRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -236,56 +236,56 @@ func (a *SecretsAPIService) SecretsCreateExecute(r SecretsAPISecretsCreateReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SecretsAPISecretsDeleteRequest struct {
+type DefaultAPIRulesServeStaticDeleteRequest struct {
 	ctx context.Context
-	ApiService SecretsAPI
+	ApiService DefaultAPI
 	organization string
 	project string
-	store string
+	rule string
 }
 
-func (r SecretsAPISecretsDeleteRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.SecretsDeleteExecute(r)
+func (r DefaultAPIRulesServeStaticDeleteRequest) Execute() (*RuleServeStatic, *http.Response, error) {
+	return r.ApiService.RulesServeStaticDeleteExecute(r)
 }
 
 /*
-SecretsDelete Method for SecretsDelete
+RulesServeStaticDelete Method for RulesServeStaticDelete
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @param store
- @return SecretsAPISecretsDeleteRequest
+ @param rule
+ @return DefaultAPIRulesServeStaticDeleteRequest
 */
-func (a *SecretsAPIService) SecretsDelete(ctx context.Context, organization string, project string, store string) SecretsAPISecretsDeleteRequest {
-	return SecretsAPISecretsDeleteRequest{
+func (a *DefaultAPIService) RulesServeStaticDelete(ctx context.Context, organization string, project string, rule string) DefaultAPIRulesServeStaticDeleteRequest {
+	return DefaultAPIRulesServeStaticDeleteRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		store: store,
+		rule: rule,
 	}
 }
 
 // Execute executes the request
-//  @return Store
-func (a *SecretsAPIService) SecretsDeleteExecute(r SecretsAPISecretsDeleteRequest) (*Store, *http.Response, error) {
+//  @return RuleServeStatic
+func (a *DefaultAPIService) RulesServeStaticDeleteExecute(r DefaultAPIRulesServeStaticDeleteRequest) (*RuleServeStatic, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Store
+		localVarReturnValue  *RuleServeStatic
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretsAPIService.SecretsDelete")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.RulesServeStaticDelete")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/secrets/{store}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/serve-static/{rule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"store"+"}", url.PathEscape(parameterValueToString(r.store, "store")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -366,27 +366,27 @@ func (a *SecretsAPIService) SecretsDeleteExecute(r SecretsAPISecretsDeleteReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SecretsAPISecretsListRequest struct {
+type DefaultAPIRulesServeStaticListRequest struct {
 	ctx context.Context
-	ApiService SecretsAPI
+	ApiService DefaultAPI
 	organization string
 	project string
 }
 
-func (r SecretsAPISecretsListRequest) Execute() ([]Store, *http.Response, error) {
-	return r.ApiService.SecretsListExecute(r)
+func (r DefaultAPIRulesServeStaticListRequest) Execute() ([]RuleServeStatic, *http.Response, error) {
+	return r.ApiService.RulesServeStaticListExecute(r)
 }
 
 /*
-SecretsList Method for SecretsList
+RulesServeStaticList Method for RulesServeStaticList
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @return SecretsAPISecretsListRequest
+ @return DefaultAPIRulesServeStaticListRequest
 */
-func (a *SecretsAPIService) SecretsList(ctx context.Context, organization string, project string) SecretsAPISecretsListRequest {
-	return SecretsAPISecretsListRequest{
+func (a *DefaultAPIService) RulesServeStaticList(ctx context.Context, organization string, project string) DefaultAPIRulesServeStaticListRequest {
+	return DefaultAPIRulesServeStaticListRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
@@ -395,21 +395,21 @@ func (a *SecretsAPIService) SecretsList(ctx context.Context, organization string
 }
 
 // Execute executes the request
-//  @return []Store
-func (a *SecretsAPIService) SecretsListExecute(r SecretsAPISecretsListRequest) ([]Store, *http.Response, error) {
+//  @return []RuleServeStatic
+func (a *DefaultAPIService) RulesServeStaticListExecute(r DefaultAPIRulesServeStaticListRequest) ([]RuleServeStatic, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Store
+		localVarReturnValue  []RuleServeStatic
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretsAPIService.SecretsList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.RulesServeStaticList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/secrets"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/serve-static"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 
@@ -492,56 +492,56 @@ func (a *SecretsAPIService) SecretsListExecute(r SecretsAPISecretsListRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SecretsAPISecretsReadRequest struct {
+type DefaultAPIRulesServeStaticReadRequest struct {
 	ctx context.Context
-	ApiService SecretsAPI
+	ApiService DefaultAPI
 	organization string
 	project string
-	store string
+	rule string
 }
 
-func (r SecretsAPISecretsReadRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.SecretsReadExecute(r)
+func (r DefaultAPIRulesServeStaticReadRequest) Execute() (*RuleServeStatic, *http.Response, error) {
+	return r.ApiService.RulesServeStaticReadExecute(r)
 }
 
 /*
-SecretsRead Method for SecretsRead
+RulesServeStaticRead Method for RulesServeStaticRead
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @param store
- @return SecretsAPISecretsReadRequest
+ @param rule
+ @return DefaultAPIRulesServeStaticReadRequest
 */
-func (a *SecretsAPIService) SecretsRead(ctx context.Context, organization string, project string, store string) SecretsAPISecretsReadRequest {
-	return SecretsAPISecretsReadRequest{
+func (a *DefaultAPIService) RulesServeStaticRead(ctx context.Context, organization string, project string, rule string) DefaultAPIRulesServeStaticReadRequest {
+	return DefaultAPIRulesServeStaticReadRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		store: store,
+		rule: rule,
 	}
 }
 
 // Execute executes the request
-//  @return Store
-func (a *SecretsAPIService) SecretsReadExecute(r SecretsAPISecretsReadRequest) (*Store, *http.Response, error) {
+//  @return RuleServeStatic
+func (a *DefaultAPIService) RulesServeStaticReadExecute(r DefaultAPIRulesServeStaticReadRequest) (*RuleServeStatic, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Store
+		localVarReturnValue  *RuleServeStatic
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretsAPIService.SecretsRead")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.RulesServeStaticRead")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/secrets/{store}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/serve-static/{rule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"store"+"}", url.PathEscape(parameterValueToString(r.store, "store")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -622,68 +622,68 @@ func (a *SecretsAPIService) SecretsReadExecute(r SecretsAPISecretsReadRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SecretsAPISecretsUpdateRequest struct {
+type DefaultAPIRulesServeStaticUpdateRequest struct {
 	ctx context.Context
-	ApiService SecretsAPI
+	ApiService DefaultAPI
 	organization string
 	project string
-	store string
-	storeUpdate *StoreUpdate
+	rule string
+	ruleServeStaticRequestUpdate *RuleServeStaticRequestUpdate
 }
 
-func (r SecretsAPISecretsUpdateRequest) StoreUpdate(storeUpdate StoreUpdate) SecretsAPISecretsUpdateRequest {
-	r.storeUpdate = &storeUpdate
+func (r DefaultAPIRulesServeStaticUpdateRequest) RuleServeStaticRequestUpdate(ruleServeStaticRequestUpdate RuleServeStaticRequestUpdate) DefaultAPIRulesServeStaticUpdateRequest {
+	r.ruleServeStaticRequestUpdate = &ruleServeStaticRequestUpdate
 	return r
 }
 
-func (r SecretsAPISecretsUpdateRequest) Execute() (*Store, *http.Response, error) {
-	return r.ApiService.SecretsUpdateExecute(r)
+func (r DefaultAPIRulesServeStaticUpdateRequest) Execute() (*RuleServeStatic, *http.Response, error) {
+	return r.ApiService.RulesServeStaticUpdateExecute(r)
 }
 
 /*
-SecretsUpdate Method for SecretsUpdate
+RulesServeStaticUpdate Method for RulesServeStaticUpdate
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization
  @param project
- @param store
- @return SecretsAPISecretsUpdateRequest
+ @param rule
+ @return DefaultAPIRulesServeStaticUpdateRequest
 */
-func (a *SecretsAPIService) SecretsUpdate(ctx context.Context, organization string, project string, store string) SecretsAPISecretsUpdateRequest {
-	return SecretsAPISecretsUpdateRequest{
+func (a *DefaultAPIService) RulesServeStaticUpdate(ctx context.Context, organization string, project string, rule string) DefaultAPIRulesServeStaticUpdateRequest {
+	return DefaultAPIRulesServeStaticUpdateRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
-		store: store,
+		rule: rule,
 	}
 }
 
 // Execute executes the request
-//  @return Store
-func (a *SecretsAPIService) SecretsUpdateExecute(r SecretsAPISecretsUpdateRequest) (*Store, *http.Response, error) {
+//  @return RuleServeStatic
+func (a *DefaultAPIService) RulesServeStaticUpdateExecute(r DefaultAPIRulesServeStaticUpdateRequest) (*RuleServeStatic, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Store
+		localVarReturnValue  *RuleServeStatic
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SecretsAPIService.SecretsUpdate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.RulesServeStaticUpdate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/secrets/{store}"
+	localVarPath := localBasePath + "/organizations/{organization}/projects/{project}/rules/serve-static/{rule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"store"+"}", url.PathEscape(parameterValueToString(r.store, "store")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rule"+"}", url.PathEscape(parameterValueToString(r.rule, "rule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.storeUpdate == nil {
-		return localVarReturnValue, nil, reportError("storeUpdate is required and must be specified")
+	if r.ruleServeStaticRequestUpdate == nil {
+		return localVarReturnValue, nil, reportError("ruleServeStaticRequestUpdate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -704,7 +704,7 @@ func (a *SecretsAPIService) SecretsUpdateExecute(r SecretsAPISecretsUpdateReques
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.storeUpdate
+	localVarPostBody = r.ruleServeStaticRequestUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

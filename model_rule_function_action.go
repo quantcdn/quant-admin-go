@@ -20,7 +20,7 @@ var _ MappedNullable = &RuleFunctionAction{}
 
 // RuleFunctionAction struct for RuleFunctionAction
 type RuleFunctionAction struct {
-	FunctionUuid string `json:"function_uuid"`
+	FnUuid string `json:"fn_uuid"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,9 +30,9 @@ type _RuleFunctionAction RuleFunctionAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleFunctionAction(functionUuid string) *RuleFunctionAction {
+func NewRuleFunctionAction(fnUuid string) *RuleFunctionAction {
 	this := RuleFunctionAction{}
-	this.FunctionUuid = functionUuid
+	this.FnUuid = fnUuid
 	return &this
 }
 
@@ -44,28 +44,28 @@ func NewRuleFunctionActionWithDefaults() *RuleFunctionAction {
 	return &this
 }
 
-// GetFunctionUuid returns the FunctionUuid field value
-func (o *RuleFunctionAction) GetFunctionUuid() string {
+// GetFnUuid returns the FnUuid field value
+func (o *RuleFunctionAction) GetFnUuid() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.FunctionUuid
+	return o.FnUuid
 }
 
-// GetFunctionUuidOk returns a tuple with the FunctionUuid field value
+// GetFnUuidOk returns a tuple with the FnUuid field value
 // and a boolean to check if the value has been set.
-func (o *RuleFunctionAction) GetFunctionUuidOk() (*string, bool) {
+func (o *RuleFunctionAction) GetFnUuidOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.FunctionUuid, true
+	return &o.FnUuid, true
 }
 
-// SetFunctionUuid sets field value
-func (o *RuleFunctionAction) SetFunctionUuid(v string) {
-	o.FunctionUuid = v
+// SetFnUuid sets field value
+func (o *RuleFunctionAction) SetFnUuid(v string) {
+	o.FnUuid = v
 }
 
 func (o RuleFunctionAction) MarshalJSON() ([]byte, error) {
@@ -78,7 +78,7 @@ func (o RuleFunctionAction) MarshalJSON() ([]byte, error) {
 
 func (o RuleFunctionAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["function_uuid"] = o.FunctionUuid
+	toSerialize["fn_uuid"] = o.FnUuid
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -92,7 +92,7 @@ func (o *RuleFunctionAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"function_uuid",
+		"fn_uuid",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -122,7 +122,7 @@ func (o *RuleFunctionAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "function_uuid")
+		delete(additionalProperties, "fn_uuid")
 		o.AdditionalProperties = additionalProperties
 	}
 

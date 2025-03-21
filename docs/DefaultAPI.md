@@ -1,20 +1,20 @@
-# \SecretsAPI
+# \DefaultAPI
 
 All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SecretsCreate**](SecretsAPI.md#SecretsCreate) | **Post** /organizations/{organization}/projects/{project}/secrets | 
-[**SecretsDelete**](SecretsAPI.md#SecretsDelete) | **Delete** /organizations/{organization}/projects/{project}/secrets/{store} | 
-[**SecretsList**](SecretsAPI.md#SecretsList) | **Get** /organizations/{organization}/projects/{project}/secrets | 
-[**SecretsRead**](SecretsAPI.md#SecretsRead) | **Get** /organizations/{organization}/projects/{project}/secrets/{store} | 
-[**SecretsUpdate**](SecretsAPI.md#SecretsUpdate) | **Patch** /organizations/{organization}/projects/{project}/secrets/{store} | 
+[**RulesServeStaticCreate**](DefaultAPI.md#RulesServeStaticCreate) | **Post** /organizations/{organization}/projects/{project}/rules/serve-static | 
+[**RulesServeStaticDelete**](DefaultAPI.md#RulesServeStaticDelete) | **Delete** /organizations/{organization}/projects/{project}/rules/serve-static/{rule} | 
+[**RulesServeStaticList**](DefaultAPI.md#RulesServeStaticList) | **Get** /organizations/{organization}/projects/{project}/rules/serve-static | 
+[**RulesServeStaticRead**](DefaultAPI.md#RulesServeStaticRead) | **Get** /organizations/{organization}/projects/{project}/rules/serve-static/{rule} | 
+[**RulesServeStaticUpdate**](DefaultAPI.md#RulesServeStaticUpdate) | **Patch** /organizations/{organization}/projects/{project}/rules/serve-static/{rule} | 
 
 
 
-## SecretsCreate
+## RulesServeStaticCreate
 
-> Store SecretsCreate(ctx, organization, project).Store(store).Execute()
+> RuleServeStatic RulesServeStaticCreate(ctx, organization, project).RuleServeStaticRequest(ruleServeStaticRequest).Execute()
 
 
 
@@ -33,17 +33,17 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := *openapiclient.NewStore("Name_example") // Store | 
+	ruleServeStaticRequest := *openapiclient.NewRuleServeStaticRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "StaticFilePath_example") // RuleServeStaticRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecretsAPI.SecretsCreate(context.Background(), organization, project).Store(store).Execute()
+	resp, r, err := apiClient.DefaultAPI.RulesServeStaticCreate(context.Background(), organization, project).RuleServeStaticRequest(ruleServeStaticRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SecretsAPI.SecretsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RulesServeStaticCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SecretsCreate`: Store
-	fmt.Fprintf(os.Stdout, "Response from `SecretsAPI.SecretsCreate`: %v\n", resp)
+	// response from `RulesServeStaticCreate`: RuleServeStatic
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RulesServeStaticCreate`: %v\n", resp)
 }
 ```
 
@@ -58,18 +58,18 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSecretsCreateRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesServeStaticCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **store** | [**Store**](Store.md) |  | 
+ **ruleServeStaticRequest** | [**RuleServeStaticRequest**](RuleServeStaticRequest.md) |  | 
 
 ### Return type
 
-[**Store**](Store.md)
+[**RuleServeStatic**](RuleServeStatic.md)
 
 ### Authorization
 
@@ -85,9 +85,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SecretsDelete
+## RulesServeStaticDelete
 
-> Store SecretsDelete(ctx, organization, project, store).Execute()
+> RuleServeStatic RulesServeStaticDelete(ctx, organization, project, rule).Execute()
 
 
 
@@ -106,17 +106,17 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := "store_example" // string | 
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecretsAPI.SecretsDelete(context.Background(), organization, project, store).Execute()
+	resp, r, err := apiClient.DefaultAPI.RulesServeStaticDelete(context.Background(), organization, project, rule).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SecretsAPI.SecretsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RulesServeStaticDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SecretsDelete`: Store
-	fmt.Fprintf(os.Stdout, "Response from `SecretsAPI.SecretsDelete`: %v\n", resp)
+	// response from `RulesServeStaticDelete`: RuleServeStatic
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RulesServeStaticDelete`: %v\n", resp)
 }
 ```
 
@@ -128,11 +128,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
-**store** | **string** |  | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSecretsDeleteRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesServeStaticDeleteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Store**](Store.md)
+[**RuleServeStatic**](RuleServeStatic.md)
 
 ### Authorization
 
@@ -159,9 +159,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SecretsList
+## RulesServeStaticList
 
-> []Store SecretsList(ctx, organization, project).Execute()
+> []RuleServeStatic RulesServeStaticList(ctx, organization, project).Execute()
 
 
 
@@ -183,13 +183,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecretsAPI.SecretsList(context.Background(), organization, project).Execute()
+	resp, r, err := apiClient.DefaultAPI.RulesServeStaticList(context.Background(), organization, project).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SecretsAPI.SecretsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RulesServeStaticList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SecretsList`: []Store
-	fmt.Fprintf(os.Stdout, "Response from `SecretsAPI.SecretsList`: %v\n", resp)
+	// response from `RulesServeStaticList`: []RuleServeStatic
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RulesServeStaticList`: %v\n", resp)
 }
 ```
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSecretsListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesServeStaticListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Store**](Store.md)
+[**[]RuleServeStatic**](RuleServeStatic.md)
 
 ### Authorization
 
@@ -230,9 +230,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SecretsRead
+## RulesServeStaticRead
 
-> Store SecretsRead(ctx, organization, project, store).Execute()
+> RuleServeStatic RulesServeStaticRead(ctx, organization, project, rule).Execute()
 
 
 
@@ -251,17 +251,17 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := "store_example" // string | 
+	rule := "rule_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecretsAPI.SecretsRead(context.Background(), organization, project, store).Execute()
+	resp, r, err := apiClient.DefaultAPI.RulesServeStaticRead(context.Background(), organization, project, rule).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SecretsAPI.SecretsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RulesServeStaticRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SecretsRead`: Store
-	fmt.Fprintf(os.Stdout, "Response from `SecretsAPI.SecretsRead`: %v\n", resp)
+	// response from `RulesServeStaticRead`: RuleServeStatic
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RulesServeStaticRead`: %v\n", resp)
 }
 ```
 
@@ -273,11 +273,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
-**store** | **string** |  | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSecretsReadRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesServeStaticReadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Store**](Store.md)
+[**RuleServeStatic**](RuleServeStatic.md)
 
 ### Authorization
 
@@ -304,9 +304,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SecretsUpdate
+## RulesServeStaticUpdate
 
-> Store SecretsUpdate(ctx, organization, project, store).StoreUpdate(storeUpdate).Execute()
+> RuleServeStatic RulesServeStaticUpdate(ctx, organization, project, rule).RuleServeStaticRequestUpdate(ruleServeStaticRequestUpdate).Execute()
 
 
 
@@ -325,18 +325,18 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := "store_example" // string | 
-	storeUpdate := *openapiclient.NewStoreUpdate() // StoreUpdate | 
+	rule := "rule_example" // string | 
+	ruleServeStaticRequestUpdate := *openapiclient.NewRuleServeStaticRequestUpdate() // RuleServeStaticRequestUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SecretsAPI.SecretsUpdate(context.Background(), organization, project, store).StoreUpdate(storeUpdate).Execute()
+	resp, r, err := apiClient.DefaultAPI.RulesServeStaticUpdate(context.Background(), organization, project, rule).RuleServeStaticRequestUpdate(ruleServeStaticRequestUpdate).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `SecretsAPI.SecretsUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.RulesServeStaticUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SecretsUpdate`: Store
-	fmt.Fprintf(os.Stdout, "Response from `SecretsAPI.SecretsUpdate`: %v\n", resp)
+	// response from `RulesServeStaticUpdate`: RuleServeStatic
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.RulesServeStaticUpdate`: %v\n", resp)
 }
 ```
 
@@ -348,11 +348,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
-**store** | **string** |  | 
+**rule** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiSecretsUpdateRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRulesServeStaticUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -360,11 +360,11 @@ Name | Type | Description  | Notes
 
 
 
- **storeUpdate** | [**StoreUpdate**](StoreUpdate.md) |  | 
+ **ruleServeStaticRequestUpdate** | [**RuleServeStaticRequestUpdate**](RuleServeStaticRequestUpdate.md) |  | 
 
 ### Return type
 
-[**Store**](Store.md)
+[**RuleServeStatic**](RuleServeStatic.md)
 
 ### Authorization
 

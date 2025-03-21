@@ -88,6 +88,11 @@ Class | Method | HTTP request | Description
 *CrawlersAPI* | [**CrawlersList**](docs/CrawlersAPI.md#crawlerslist) | **Get** /organizations/{organization}/projects/{project}/crawlers | 
 *CrawlersAPI* | [**CrawlersRead**](docs/CrawlersAPI.md#crawlersread) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
 *CrawlersAPI* | [**CrawlersUpdate**](docs/CrawlersAPI.md#crawlersupdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler} | 
+*DefaultAPI* | [**RulesServeStaticCreate**](docs/DefaultAPI.md#rulesservestaticcreate) | **Post** /organizations/{organization}/projects/{project}/rules/serve-static | 
+*DefaultAPI* | [**RulesServeStaticDelete**](docs/DefaultAPI.md#rulesservestaticdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/serve-static/{rule} | 
+*DefaultAPI* | [**RulesServeStaticList**](docs/DefaultAPI.md#rulesservestaticlist) | **Get** /organizations/{organization}/projects/{project}/rules/serve-static | 
+*DefaultAPI* | [**RulesServeStaticRead**](docs/DefaultAPI.md#rulesservestaticread) | **Get** /organizations/{organization}/projects/{project}/rules/serve-static/{rule} | 
+*DefaultAPI* | [**RulesServeStaticUpdate**](docs/DefaultAPI.md#rulesservestaticupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/serve-static/{rule} | 
 *DomainsAPI* | [**DomainsCreate**](docs/DomainsAPI.md#domainscreate) | **Post** /organizations/{organization}/projects/{project}/domains | 
 *DomainsAPI* | [**DomainsDelete**](docs/DomainsAPI.md#domainsdelete) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
 *DomainsAPI* | [**DomainsList**](docs/DomainsAPI.md#domainslist) | **Get** /organizations/{organization}/projects/{project}/domains | 
@@ -114,9 +119,21 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsRead**](docs/ProjectsAPI.md#projectsread) | **Get** /organizations/{organization}/projects/{project} | 
 *ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Patch** /organizations/{organization}/projects/{project} | 
 *PurgeAPI* | [**PurgeCreate**](docs/PurgeAPI.md#purgecreate) | **Post** /organizations/{organization}/projects/{project}/purge | 
+*RulesBotChallengeAPI* | [**RulesBotChallengeCreate**](docs/RulesBotChallengeAPI.md#rulesbotchallengecreate) | **Post** /organizations/{organization}/projects/{project}/rules/bot-challenge | 
+*RulesBotChallengeAPI* | [**RulesBotChallengeDelete**](docs/RulesBotChallengeAPI.md#rulesbotchallengedelete) | **Delete** /organizations/{organization}/projects/{project}/rules/bot-challenge/{rule} | 
 *RulesBotChallengeAPI* | [**RulesBotChallengeList**](docs/RulesBotChallengeAPI.md#rulesbotchallengelist) | **Get** /organizations/{organization}/projects/{project}/rules/bot-challenge | 
+*RulesBotChallengeAPI* | [**RulesBotChallengeRead**](docs/RulesBotChallengeAPI.md#rulesbotchallengeread) | **Get** /organizations/{organization}/projects/{project}/rules/bot-challenge/{rule} | 
+*RulesBotChallengeAPI* | [**RulesBotChallengeUpdate**](docs/RulesBotChallengeAPI.md#rulesbotchallengeupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/bot-challenge/{rule} | 
+*RulesContentFilterAPI* | [**RulesContentFilterCreate**](docs/RulesContentFilterAPI.md#rulescontentfiltercreate) | **Post** /organizations/{organization}/projects/{project}/rules/content-filter | 
+*RulesContentFilterAPI* | [**RulesContentFilterDelete**](docs/RulesContentFilterAPI.md#rulescontentfilterdelete) | **Delete** /organizations/{organization}/projects/{project}/rules/content-filter/{rule} | 
 *RulesContentFilterAPI* | [**RulesContentFilterList**](docs/RulesContentFilterAPI.md#rulescontentfilterlist) | **Get** /organizations/{organization}/projects/{project}/rules/content-filter | 
+*RulesContentFilterAPI* | [**RulesContentFilterRead**](docs/RulesContentFilterAPI.md#rulescontentfilterread) | **Get** /organizations/{organization}/projects/{project}/rules/content-filter/{rule} | 
+*RulesContentFilterAPI* | [**RulesContentFilterUpdate**](docs/RulesContentFilterAPI.md#rulescontentfilterupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/content-filter/{rule} | 
+*RulesFunctionAPI* | [**RulesFunctionCreate**](docs/RulesFunctionAPI.md#rulesfunctioncreate) | **Post** /organizations/{organization}/projects/{project}/rules/function | 
+*RulesFunctionAPI* | [**RulesFunctionDelete**](docs/RulesFunctionAPI.md#rulesfunctiondelete) | **Delete** /organizations/{organization}/projects/{project}/rules/function/{rule} | 
 *RulesFunctionAPI* | [**RulesFunctionList**](docs/RulesFunctionAPI.md#rulesfunctionlist) | **Get** /organizations/{organization}/projects/{project}/rules/function | 
+*RulesFunctionAPI* | [**RulesFunctionRead**](docs/RulesFunctionAPI.md#rulesfunctionread) | **Get** /organizations/{organization}/projects/{project}/rules/function/{rule} | 
+*RulesFunctionAPI* | [**RulesFunctionUpdate**](docs/RulesFunctionAPI.md#rulesfunctionupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/function/{rule} | 
 *RulesProxyAPI* | [**RulesProxyCreate**](docs/RulesProxyAPI.md#rulesproxycreate) | **Post** /organizations/{organization}/projects/{project}/rules/proxy | 
 *RulesProxyAPI* | [**RulesProxyDelete**](docs/RulesProxyAPI.md#rulesproxydelete) | **Delete** /organizations/{organization}/projects/{project}/rules/proxy/{rule} | 
 *RulesProxyAPI* | [**RulesProxyList**](docs/RulesProxyAPI.md#rulesproxylist) | **Get** /organizations/{organization}/projects/{project}/rules/proxy | 
@@ -127,11 +144,6 @@ Class | Method | HTTP request | Description
 *RulesRedirectAPI* | [**RulesRedirectList**](docs/RulesRedirectAPI.md#rulesredirectlist) | **Get** /organizations/{organization}/projects/{project}/rules/redirect | 
 *RulesRedirectAPI* | [**RulesRedirectRead**](docs/RulesRedirectAPI.md#rulesredirectread) | **Get** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
 *RulesRedirectAPI* | [**RulesRedirectUpdate**](docs/RulesRedirectAPI.md#rulesredirectupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/redirect/{rule} | 
-*SecretsAPI* | [**SecretsCreate**](docs/SecretsAPI.md#secretscreate) | **Post** /organizations/{organization}/projects/{project}/secrets | 
-*SecretsAPI* | [**SecretsDelete**](docs/SecretsAPI.md#secretsdelete) | **Delete** /organizations/{organization}/projects/{project}/secrets/{store} | 
-*SecretsAPI* | [**SecretsList**](docs/SecretsAPI.md#secretslist) | **Get** /organizations/{organization}/projects/{project}/secrets | 
-*SecretsAPI* | [**SecretsRead**](docs/SecretsAPI.md#secretsread) | **Get** /organizations/{organization}/projects/{project}/secrets/{store} | 
-*SecretsAPI* | [**SecretsUpdate**](docs/SecretsAPI.md#secretsupdate) | **Patch** /organizations/{organization}/projects/{project}/secrets/{store} | 
 
 
 ## Documentation For Models
@@ -159,12 +171,18 @@ Class | Method | HTTP request | Description
  - [RuleAuthAction](docs/RuleAuthAction.md)
  - [RuleBotChallenge](docs/RuleBotChallenge.md)
  - [RuleBotChallengeAction](docs/RuleBotChallengeAction.md)
+ - [RuleBotChallengeRequest](docs/RuleBotChallengeRequest.md)
+ - [RuleBotChallengeRequestUpdate](docs/RuleBotChallengeRequestUpdate.md)
  - [RuleContentFilter](docs/RuleContentFilter.md)
  - [RuleContentFilterAction](docs/RuleContentFilterAction.md)
+ - [RuleContentFilterRequest](docs/RuleContentFilterRequest.md)
+ - [RuleContentFilterRequestUpdate](docs/RuleContentFilterRequestUpdate.md)
  - [RuleCustomResponse](docs/RuleCustomResponse.md)
  - [RuleCustomResponseAction](docs/RuleCustomResponseAction.md)
  - [RuleFunction](docs/RuleFunction.md)
  - [RuleFunctionAction](docs/RuleFunctionAction.md)
+ - [RuleFunctionRequest](docs/RuleFunctionRequest.md)
+ - [RuleFunctionRequestUpdate](docs/RuleFunctionRequestUpdate.md)
  - [RuleHeader](docs/RuleHeader.md)
  - [RuleHeaderAction](docs/RuleHeaderAction.md)
  - [RuleProxy](docs/RuleProxy.md)
@@ -175,6 +193,10 @@ Class | Method | HTTP request | Description
  - [RuleRedirectAction](docs/RuleRedirectAction.md)
  - [RuleRedirectRequest](docs/RuleRedirectRequest.md)
  - [RuleRedirectRequestUpdate](docs/RuleRedirectRequestUpdate.md)
+ - [RuleServeStatic](docs/RuleServeStatic.md)
+ - [RuleServeStaticAction](docs/RuleServeStaticAction.md)
+ - [RuleServeStaticRequest](docs/RuleServeStaticRequest.md)
+ - [RuleServeStaticRequestUpdate](docs/RuleServeStaticRequestUpdate.md)
  - [Store](docs/Store.md)
  - [StoreItem](docs/StoreItem.md)
  - [StoreItemUpdate](docs/StoreItemUpdate.md)

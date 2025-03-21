@@ -22,6 +22,37 @@ func Test_quantadmingo_RulesBotChallengeAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test RulesBotChallengeAPIService RulesBotChallengeCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+
+		resp, httpRes, err := apiClient.RulesBotChallengeAPI.RulesBotChallengeCreate(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesBotChallengeAPIService RulesBotChallengeDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesBotChallengeAPI.RulesBotChallengeDelete(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RulesBotChallengeAPIService RulesBotChallengeList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -30,6 +61,38 @@ func Test_quantadmingo_RulesBotChallengeAPIService(t *testing.T) {
 		var project string
 
 		resp, httpRes, err := apiClient.RulesBotChallengeAPI.RulesBotChallengeList(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesBotChallengeAPIService RulesBotChallengeRead", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesBotChallengeAPI.RulesBotChallengeRead(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesBotChallengeAPIService RulesBotChallengeUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesBotChallengeAPI.RulesBotChallengeUpdate(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

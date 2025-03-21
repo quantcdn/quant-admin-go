@@ -4,14 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ContentFilterBody** | **string** |  | 
-**ContentFilterStatusCode** | **int32** |  | [default to 200]
+**FnUuid** | **string** |  | 
 
 ## Methods
 
 ### NewRuleContentFilterAction
 
-`func NewRuleContentFilterAction(contentFilterBody string, contentFilterStatusCode int32, ) *RuleContentFilterAction`
+`func NewRuleContentFilterAction(fnUuid string, ) *RuleContentFilterAction`
 
 NewRuleContentFilterAction instantiates a new RuleContentFilterAction object
 This constructor will assign default values to properties that have it defined,
@@ -26,44 +25,24 @@ NewRuleContentFilterActionWithDefaults instantiates a new RuleContentFilterActio
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetContentFilterBody
+### GetFnUuid
 
-`func (o *RuleContentFilterAction) GetContentFilterBody() string`
+`func (o *RuleContentFilterAction) GetFnUuid() string`
 
-GetContentFilterBody returns the ContentFilterBody field if non-nil, zero value otherwise.
+GetFnUuid returns the FnUuid field if non-nil, zero value otherwise.
 
-### GetContentFilterBodyOk
+### GetFnUuidOk
 
-`func (o *RuleContentFilterAction) GetContentFilterBodyOk() (*string, bool)`
+`func (o *RuleContentFilterAction) GetFnUuidOk() (*string, bool)`
 
-GetContentFilterBodyOk returns a tuple with the ContentFilterBody field if it's non-nil, zero value otherwise
+GetFnUuidOk returns a tuple with the FnUuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContentFilterBody
+### SetFnUuid
 
-`func (o *RuleContentFilterAction) SetContentFilterBody(v string)`
+`func (o *RuleContentFilterAction) SetFnUuid(v string)`
 
-SetContentFilterBody sets ContentFilterBody field to given value.
-
-
-### GetContentFilterStatusCode
-
-`func (o *RuleContentFilterAction) GetContentFilterStatusCode() int32`
-
-GetContentFilterStatusCode returns the ContentFilterStatusCode field if non-nil, zero value otherwise.
-
-### GetContentFilterStatusCodeOk
-
-`func (o *RuleContentFilterAction) GetContentFilterStatusCodeOk() (*int32, bool)`
-
-GetContentFilterStatusCodeOk returns a tuple with the ContentFilterStatusCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetContentFilterStatusCode
-
-`func (o *RuleContentFilterAction) SetContentFilterStatusCode(v int32)`
-
-SetContentFilterStatusCode sets ContentFilterStatusCode field to given value.
+SetFnUuid sets FnUuid field to given value.
 
 
 

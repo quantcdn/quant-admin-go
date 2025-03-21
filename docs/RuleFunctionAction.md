@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FunctionUuid** | **string** |  | 
+**FnUuid** | **string** |  | 
 
 ## Methods
 
 ### NewRuleFunctionAction
 
-`func NewRuleFunctionAction(functionUuid string, ) *RuleFunctionAction`
+`func NewRuleFunctionAction(fnUuid string, ) *RuleFunctionAction`
 
 NewRuleFunctionAction instantiates a new RuleFunctionAction object
 This constructor will assign default values to properties that have it defined,
@@ -25,24 +25,24 @@ NewRuleFunctionActionWithDefaults instantiates a new RuleFunctionAction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetFunctionUuid
+### GetFnUuid
 
-`func (o *RuleFunctionAction) GetFunctionUuid() string`
+`func (o *RuleFunctionAction) GetFnUuid() string`
 
-GetFunctionUuid returns the FunctionUuid field if non-nil, zero value otherwise.
+GetFnUuid returns the FnUuid field if non-nil, zero value otherwise.
 
-### GetFunctionUuidOk
+### GetFnUuidOk
 
-`func (o *RuleFunctionAction) GetFunctionUuidOk() (*string, bool)`
+`func (o *RuleFunctionAction) GetFnUuidOk() (*string, bool)`
 
-GetFunctionUuidOk returns a tuple with the FunctionUuid field if it's non-nil, zero value otherwise
+GetFnUuidOk returns a tuple with the FnUuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFunctionUuid
+### SetFnUuid
 
-`func (o *RuleFunctionAction) SetFunctionUuid(v string)`
+`func (o *RuleFunctionAction) SetFnUuid(v string)`
 
-SetFunctionUuid sets FunctionUuid field to given value.
+SetFnUuid sets FnUuid field to given value.
 
 
 

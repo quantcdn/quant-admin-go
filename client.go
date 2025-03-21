@@ -53,6 +53,8 @@ type APIClient struct {
 
 	CrawlersAPI CrawlersAPI
 
+	DefaultAPI DefaultAPI
+
 	DomainsAPI DomainsAPI
 
 	HeadersAPI HeadersAPI
@@ -76,8 +78,6 @@ type APIClient struct {
 	RulesProxyAPI RulesProxyAPI
 
 	RulesRedirectAPI RulesRedirectAPI
-
-	SecretsAPI SecretsAPI
 }
 
 type service struct {
@@ -98,6 +98,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.CrawlerSchedulesAPI = (*CrawlerSchedulesAPIService)(&c.common)
 	c.CrawlersAPI = (*CrawlersAPIService)(&c.common)
+	c.DefaultAPI = (*DefaultAPIService)(&c.common)
 	c.DomainsAPI = (*DomainsAPIService)(&c.common)
 	c.HeadersAPI = (*HeadersAPIService)(&c.common)
 	c.KVAPI = (*KVAPIService)(&c.common)
@@ -110,7 +111,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.RulesFunctionAPI = (*RulesFunctionAPIService)(&c.common)
 	c.RulesProxyAPI = (*RulesProxyAPIService)(&c.common)
 	c.RulesRedirectAPI = (*RulesRedirectAPIService)(&c.common)
-	c.SecretsAPI = (*SecretsAPIService)(&c.common)
 
 	return c
 }

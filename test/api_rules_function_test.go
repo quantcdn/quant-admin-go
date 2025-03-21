@@ -22,6 +22,37 @@ func Test_quantadmingo_RulesFunctionAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test RulesFunctionAPIService RulesFunctionCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+
+		resp, httpRes, err := apiClient.RulesFunctionAPI.RulesFunctionCreate(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesFunctionAPIService RulesFunctionDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesFunctionAPI.RulesFunctionDelete(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RulesFunctionAPIService RulesFunctionList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -30,6 +61,38 @@ func Test_quantadmingo_RulesFunctionAPIService(t *testing.T) {
 		var project string
 
 		resp, httpRes, err := apiClient.RulesFunctionAPI.RulesFunctionList(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesFunctionAPIService RulesFunctionRead", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesFunctionAPI.RulesFunctionRead(context.Background(), organization, project, rule).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RulesFunctionAPIService RulesFunctionUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var rule string
+
+		resp, httpRes, err := apiClient.RulesFunctionAPI.RulesFunctionUpdate(context.Background(), organization, project, rule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
