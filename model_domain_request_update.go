@@ -19,7 +19,6 @@ var _ MappedNullable = &DomainRequestUpdate{}
 
 // DomainRequestUpdate struct for DomainRequestUpdate
 type DomainRequestUpdate struct {
-	Name *string `json:"name,omitempty"`
 	Domain *string `json:"domain,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -41,38 +40,6 @@ func NewDomainRequestUpdate() *DomainRequestUpdate {
 func NewDomainRequestUpdateWithDefaults() *DomainRequestUpdate {
 	this := DomainRequestUpdate{}
 	return &this
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *DomainRequestUpdate) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DomainRequestUpdate) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *DomainRequestUpdate) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *DomainRequestUpdate) SetName(v string) {
-	o.Name = &v
 }
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
@@ -117,9 +84,6 @@ func (o DomainRequestUpdate) MarshalJSON() ([]byte, error) {
 
 func (o DomainRequestUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
 	if !IsNil(o.Domain) {
 		toSerialize["domain"] = o.Domain
 	}
@@ -145,7 +109,6 @@ func (o *DomainRequestUpdate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "domain")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -20,7 +20,6 @@ var _ MappedNullable = &DomainRequest{}
 
 // DomainRequest struct for DomainRequest
 type DomainRequest struct {
-	Name string `json:"name"`
 	Domain string `json:"domain"`
 	AdditionalProperties map[string]interface{}
 }
@@ -31,9 +30,8 @@ type _DomainRequest DomainRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDomainRequest(name string, domain string) *DomainRequest {
+func NewDomainRequest(domain string) *DomainRequest {
 	this := DomainRequest{}
-	this.Name = name
 	this.Domain = domain
 	return &this
 }
@@ -44,30 +42,6 @@ func NewDomainRequest(name string, domain string) *DomainRequest {
 func NewDomainRequestWithDefaults() *DomainRequest {
 	this := DomainRequest{}
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *DomainRequest) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *DomainRequest) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *DomainRequest) SetName(v string) {
-	o.Name = v
 }
 
 // GetDomain returns the Domain field value
@@ -104,7 +78,6 @@ func (o DomainRequest) MarshalJSON() ([]byte, error) {
 
 func (o DomainRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	toSerialize["domain"] = o.Domain
 
 	for key, value := range o.AdditionalProperties {
@@ -119,7 +92,6 @@ func (o *DomainRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"domain",
 	}
 
@@ -150,7 +122,6 @@ func (o *DomainRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "domain")
 		o.AdditionalProperties = additionalProperties
 	}

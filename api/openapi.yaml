@@ -3303,23 +3303,16 @@ components:
     DomainRequest:
       example:
         domain: domain
-        name: name
       properties:
-        name:
-          type: string
         domain:
           type: string
       required:
       - domain
-      - name
       type: object
     DomainRequestUpdate:
       example:
         domain: domain
-        name: name
       properties:
-        name:
-          type: string
         domain:
           type: string
       type: object

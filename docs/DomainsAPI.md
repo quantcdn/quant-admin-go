@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	domainRequest := *openapiclient.NewDomainRequest("Name_example", "Domain_example") // DomainRequest | 
+	domainRequest := *openapiclient.NewDomainRequest("Domain_example") // DomainRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
