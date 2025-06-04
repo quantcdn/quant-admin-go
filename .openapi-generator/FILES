@@ -15,6 +15,7 @@ api_projects.go
 api_purge.go
 api_rules_bot_challenge.go
 api_rules_content_filter.go
+api_rules_custom_response.go
 api_rules_function.go
 api_rules_proxy.go
 api_rules_redirect.go
@@ -61,6 +62,8 @@ docs/RuleContentFilterRequest.md
 docs/RuleContentFilterRequestUpdate.md
 docs/RuleCustomResponse.md
 docs/RuleCustomResponseAction.md
+docs/RuleCustomResponseRequest.md
+docs/RuleCustomResponseRequestUpdate.md
 docs/RuleFunction.md
 docs/RuleFunctionAction.md
 docs/RuleFunctionRequest.md
@@ -81,6 +84,7 @@ docs/RuleServeStaticRequest.md
 docs/RuleServeStaticRequestUpdate.md
 docs/RulesBotChallengeAPI.md
 docs/RulesContentFilterAPI.md
+docs/RulesCustomResponseAPI.md
 docs/RulesFunctionAPI.md
 docs/RulesProxyAPI.md
 docs/RulesRedirectAPI.md
@@ -124,6 +128,8 @@ model_rule_content_filter_request.go
 model_rule_content_filter_request_update.go
 model_rule_custom_response.go
 model_rule_custom_response_action.go
+model_rule_custom_response_request.go
+model_rule_custom_response_request_update.go
 model_rule_function.go
 model_rule_function_action.go
 model_rule_function_request.go
@@ -161,6 +167,7 @@ test/api_projects_test.go
 test/api_purge_test.go
 test/api_rules_bot_challenge_test.go
 test/api_rules_content_filter_test.go
+test/api_rules_custom_response_test.go
 test/api_rules_function_test.go
 test/api_rules_proxy_test.go
 test/api_rules_redirect_test.go

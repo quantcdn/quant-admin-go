@@ -17,6 +17,7 @@ tags:
 - name: Headers
 - name: Rules__Proxy
 - name: Rules__Redirect
+- name: Rules__CustomResponse
 - name: Rules__BotChallenge
 - name: Rules__Function
 - name: Rules__ContentFilter
@@ -2154,6 +2155,238 @@ paths:
           description: Access is forbidden.
       tags:
       - Rules__ContentFilter
+  /organizations/{organization}/projects/{project}/rules/custom-response:
+    get:
+      operationId: RulesCustomResponse_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleCustomResponse'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__CustomResponse
+    post:
+      operationId: RulesCustomResponse_create
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCustomResponseRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleCustomResponse'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__CustomResponse
+  /organizations/{organization}/projects/{project}/rules/custom-response/{rule}:
+    delete:
+      operationId: RulesCustomResponse_delete
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleCustomResponse'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__CustomResponse
+    get:
+      operationId: RulesCustomResponse_read
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleCustomResponse'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__CustomResponse
+    patch:
+      operationId: RulesCustomResponse_update
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCustomResponseRequestUpdate'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleCustomResponse'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Access is forbidden.
+      tags:
+      - Rules__CustomResponse
   /organizations/{organization}/projects/{project}/rules/function:
     get:
       operationId: RulesFunction_list
@@ -4102,11 +4335,18 @@ components:
     RuleCustomResponse:
       allOf:
       - $ref: '#/components/schemas/Rule'
+      example:
+        action_config:
+          custom_response_status_code: 0
+          custom_response_body: custom_response_body
       properties:
         action_config:
           $ref: '#/components/schemas/RuleCustomResponseAction'
       type: object
     RuleCustomResponseAction:
+      example:
+        custom_response_status_code: 0
+        custom_response_body: custom_response_body
       properties:
         custom_response_body:
           type: string
@@ -4116,6 +4356,220 @@ components:
       required:
       - custom_response_body
       - custom_response_status_code
+      type: object
+    RuleCustomResponseRequest:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        custom_response_status_code: 6
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        custom_response_body: custom_response_body
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        custom_response_body:
+          type: string
+        custom_response_status_code:
+          default: 200
+          type: integer
+      required:
+      - custom_response_body
+      - custom_response_status_code
+      - disabled
+      - domain
+      - url
+      type: object
+    RuleCustomResponseRequestUpdate:
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        custom_response_status_code: 6
+        method_is:
+        - method_is
+        - method_is
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        custom_response_body: custom_response_body
+        uuid: uuid
+        url:
+        - url
+        - url
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        disabled: false
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        custom_response_body:
+          type: string
+        custom_response_status_code:
+          default: 200
+          type: integer
       type: object
     RuleFunction:
       allOf:

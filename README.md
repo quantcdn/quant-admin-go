@@ -129,6 +129,11 @@ Class | Method | HTTP request | Description
 *RulesContentFilterAPI* | [**RulesContentFilterList**](docs/RulesContentFilterAPI.md#rulescontentfilterlist) | **Get** /organizations/{organization}/projects/{project}/rules/content-filter | 
 *RulesContentFilterAPI* | [**RulesContentFilterRead**](docs/RulesContentFilterAPI.md#rulescontentfilterread) | **Get** /organizations/{organization}/projects/{project}/rules/content-filter/{rule} | 
 *RulesContentFilterAPI* | [**RulesContentFilterUpdate**](docs/RulesContentFilterAPI.md#rulescontentfilterupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/content-filter/{rule} | 
+*RulesCustomResponseAPI* | [**RulesCustomResponseCreate**](docs/RulesCustomResponseAPI.md#rulescustomresponsecreate) | **Post** /organizations/{organization}/projects/{project}/rules/custom-response | 
+*RulesCustomResponseAPI* | [**RulesCustomResponseDelete**](docs/RulesCustomResponseAPI.md#rulescustomresponsedelete) | **Delete** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+*RulesCustomResponseAPI* | [**RulesCustomResponseList**](docs/RulesCustomResponseAPI.md#rulescustomresponselist) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response | 
+*RulesCustomResponseAPI* | [**RulesCustomResponseRead**](docs/RulesCustomResponseAPI.md#rulescustomresponseread) | **Get** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
+*RulesCustomResponseAPI* | [**RulesCustomResponseUpdate**](docs/RulesCustomResponseAPI.md#rulescustomresponseupdate) | **Patch** /organizations/{organization}/projects/{project}/rules/custom-response/{rule} | 
 *RulesFunctionAPI* | [**RulesFunctionCreate**](docs/RulesFunctionAPI.md#rulesfunctioncreate) | **Post** /organizations/{organization}/projects/{project}/rules/function | 
 *RulesFunctionAPI* | [**RulesFunctionDelete**](docs/RulesFunctionAPI.md#rulesfunctiondelete) | **Delete** /organizations/{organization}/projects/{project}/rules/function/{rule} | 
 *RulesFunctionAPI* | [**RulesFunctionList**](docs/RulesFunctionAPI.md#rulesfunctionlist) | **Get** /organizations/{organization}/projects/{project}/rules/function | 
@@ -179,6 +184,8 @@ Class | Method | HTTP request | Description
  - [RuleContentFilterRequestUpdate](docs/RuleContentFilterRequestUpdate.md)
  - [RuleCustomResponse](docs/RuleCustomResponse.md)
  - [RuleCustomResponseAction](docs/RuleCustomResponseAction.md)
+ - [RuleCustomResponseRequest](docs/RuleCustomResponseRequest.md)
+ - [RuleCustomResponseRequestUpdate](docs/RuleCustomResponseRequestUpdate.md)
  - [RuleFunction](docs/RuleFunction.md)
  - [RuleFunctionAction](docs/RuleFunctionAction.md)
  - [RuleFunctionRequest](docs/RuleFunctionRequest.md)

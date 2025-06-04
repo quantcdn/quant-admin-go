@@ -73,6 +73,8 @@ type APIClient struct {
 
 	RulesContentFilterAPI RulesContentFilterAPI
 
+	RulesCustomResponseAPI RulesCustomResponseAPI
+
 	RulesFunctionAPI RulesFunctionAPI
 
 	RulesProxyAPI RulesProxyAPI
@@ -108,6 +110,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PurgeAPI = (*PurgeAPIService)(&c.common)
 	c.RulesBotChallengeAPI = (*RulesBotChallengeAPIService)(&c.common)
 	c.RulesContentFilterAPI = (*RulesContentFilterAPIService)(&c.common)
+	c.RulesCustomResponseAPI = (*RulesCustomResponseAPIService)(&c.common)
 	c.RulesFunctionAPI = (*RulesFunctionAPIService)(&c.common)
 	c.RulesProxyAPI = (*RulesProxyAPIService)(&c.common)
 	c.RulesRedirectAPI = (*RulesRedirectAPIService)(&c.common)
