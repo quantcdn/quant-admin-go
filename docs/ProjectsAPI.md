@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## ProjectsRead
 
-> Project ProjectsRead(ctx, organization, project).Execute()
+> Project ProjectsRead(ctx, organization, project).WithToken(withToken).Execute()
 
 
 
@@ -240,10 +240,11 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
+	withToken := true // bool |  (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsRead(context.Background(), organization, project).Execute()
+	resp, r, err := apiClient.ProjectsAPI.ProjectsRead(context.Background(), organization, project).WithToken(withToken).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -271,6 +272,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **withToken** | **bool** |  | [default to false]
 
 ### Return type
 

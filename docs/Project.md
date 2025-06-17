@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** |  | [optional] 
 **ProjectType** | Pointer to **string** |  | [optional] [default to "normal"]
 **GitUrl** | Pointer to **string** |  | [optional] 
+**WriteToken** | Pointer to **string** |  | [optional] 
 **SecurityScore** | Pointer to **string** |  | [optional] 
 **ParentProjectId** | Pointer to **int32** |  | [optional] 
 **Region** | Pointer to **string** |  | [optional] 
@@ -203,6 +204,31 @@ SetGitUrl sets GitUrl field to given value.
 `func (o *Project) HasGitUrl() bool`
 
 HasGitUrl returns a boolean if a field has been set.
+
+### GetWriteToken
+
+`func (o *Project) GetWriteToken() string`
+
+GetWriteToken returns the WriteToken field if non-nil, zero value otherwise.
+
+### GetWriteTokenOk
+
+`func (o *Project) GetWriteTokenOk() (*string, bool)`
+
+GetWriteTokenOk returns a tuple with the WriteToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWriteToken
+
+`func (o *Project) SetWriteToken(v string)`
+
+SetWriteToken sets WriteToken field to given value.
+
+### HasWriteToken
+
+`func (o *Project) HasWriteToken() bool`
+
+HasWriteToken returns a boolean if a field has been set.
 
 ### GetSecurityScore
 

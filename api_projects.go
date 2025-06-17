@@ -468,6 +468,12 @@ type ProjectsAPIProjectsReadRequest struct {
 	ApiService ProjectsAPI
 	organization string
 	project string
+	withToken *bool
+}
+
+func (r ProjectsAPIProjectsReadRequest) WithToken(withToken bool) ProjectsAPIProjectsReadRequest {
+	r.withToken = &withToken
+	return r
 }
 
 func (r ProjectsAPIProjectsReadRequest) Execute() (*Project, *http.Response, error) {
@@ -513,7 +519,11 @@ func (a *ProjectsAPIService) ProjectsReadExecute(r ProjectsAPIProjectsReadReques
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.withToken == nil {
+		return localVarReturnValue, nil, reportError("withToken is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "with_token", r.withToken, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

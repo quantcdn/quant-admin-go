@@ -27,6 +27,7 @@ type Project struct {
 	Uuid *string `json:"uuid,omitempty"`
 	ProjectType *string `json:"project_type,omitempty"`
 	GitUrl *string `json:"git_url,omitempty"`
+	WriteToken *string `json:"write_token,omitempty"`
 	SecurityScore *string `json:"security_score,omitempty"`
 	ParentProjectId *int32 `json:"parent_project_id,omitempty"`
 	Region *string `json:"region,omitempty"`
@@ -277,6 +278,38 @@ func (o *Project) HasGitUrl() bool {
 // SetGitUrl gets a reference to the given string and assigns it to the GitUrl field.
 func (o *Project) SetGitUrl(v string) {
 	o.GitUrl = &v
+}
+
+// GetWriteToken returns the WriteToken field value if set, zero value otherwise.
+func (o *Project) GetWriteToken() string {
+	if o == nil || IsNil(o.WriteToken) {
+		var ret string
+		return ret
+	}
+	return *o.WriteToken
+}
+
+// GetWriteTokenOk returns a tuple with the WriteToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Project) GetWriteTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.WriteToken) {
+		return nil, false
+	}
+	return o.WriteToken, true
+}
+
+// HasWriteToken returns a boolean if a field has been set.
+func (o *Project) HasWriteToken() bool {
+	if o != nil && !IsNil(o.WriteToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetWriteToken gets a reference to the given string and assigns it to the WriteToken field.
+func (o *Project) SetWriteToken(v string) {
+	o.WriteToken = &v
 }
 
 // GetSecurityScore returns the SecurityScore field value if set, zero value otherwise.
@@ -562,6 +595,9 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GitUrl) {
 		toSerialize["git_url"] = o.GitUrl
 	}
+	if !IsNil(o.WriteToken) {
+		toSerialize["write_token"] = o.WriteToken
+	}
 	if !IsNil(o.SecurityScore) {
 		toSerialize["security_score"] = o.SecurityScore
 	}
@@ -637,6 +673,7 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "uuid")
 		delete(additionalProperties, "project_type")
 		delete(additionalProperties, "git_url")
+		delete(additionalProperties, "write_token")
 		delete(additionalProperties, "security_score")
 		delete(additionalProperties, "parent_project_id")
 		delete(additionalProperties, "region")

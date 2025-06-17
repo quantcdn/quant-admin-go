@@ -212,6 +212,14 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: false
+        in: query
+        name: with_token
+        required: true
+        schema:
+          default: false
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -3627,6 +3635,7 @@ components:
         security_score: security_score
         id: 0
         git_url: git_url
+        write_token: write_token
         parent_project_id: 1
         region: region
       properties:
@@ -3648,6 +3657,8 @@ components:
           - quant
           type: string
         git_url:
+          type: string
+        write_token:
           type: string
         security_score:
           type: string
