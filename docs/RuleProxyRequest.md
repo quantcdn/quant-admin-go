@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
+**ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
 **FailoverMode** | Pointer to **bool** |  | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
@@ -681,6 +682,31 @@ SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 `func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool`
 
 HasProxyStripRequestHeaders returns a boolean if a field has been set.
+
+### GetProxyAlertEnabled
+
+`func (o *RuleProxyRequest) GetProxyAlertEnabled() bool`
+
+GetProxyAlertEnabled returns the ProxyAlertEnabled field if non-nil, zero value otherwise.
+
+### GetProxyAlertEnabledOk
+
+`func (o *RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool)`
+
+GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyAlertEnabled
+
+`func (o *RuleProxyRequest) SetProxyAlertEnabled(v bool)`
+
+SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
+
+### HasProxyAlertEnabled
+
+`func (o *RuleProxyRequest) HasProxyAlertEnabled() bool`
+
+HasProxyAlertEnabled returns a boolean if a field has been set.
 
 ### GetFailoverMode
 

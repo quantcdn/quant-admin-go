@@ -45,6 +45,7 @@ type RuleProxyRequest struct {
 	InjectHeaders map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
+	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	FailoverMode *bool `json:"failover_mode,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
@@ -900,6 +901,38 @@ func (o *RuleProxyRequest) SetProxyStripRequestHeaders(v []string) {
 	o.ProxyStripRequestHeaders = v
 }
 
+// GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
+func (o *RuleProxyRequest) GetProxyAlertEnabled() bool {
+	if o == nil || IsNil(o.ProxyAlertEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.ProxyAlertEnabled
+}
+
+// GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.ProxyAlertEnabled) {
+		return nil, false
+	}
+	return o.ProxyAlertEnabled, true
+}
+
+// HasProxyAlertEnabled returns a boolean if a field has been set.
+func (o *RuleProxyRequest) HasProxyAlertEnabled() bool {
+	if o != nil && !IsNil(o.ProxyAlertEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyAlertEnabled gets a reference to the given bool and assigns it to the ProxyAlertEnabled field.
+func (o *RuleProxyRequest) SetProxyAlertEnabled(v bool) {
+	o.ProxyAlertEnabled = &v
+}
+
 // GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
 func (o *RuleProxyRequest) GetFailoverMode() bool {
 	if o == nil || IsNil(o.FailoverMode) {
@@ -1233,6 +1266,9 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProxyStripRequestHeaders) {
 		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
 	}
+	if !IsNil(o.ProxyAlertEnabled) {
+		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
+	}
 	if !IsNil(o.FailoverMode) {
 		toSerialize["failover_mode"] = o.FailoverMode
 	}
@@ -1328,6 +1364,7 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "inject_headers")
 		delete(additionalProperties, "proxy_strip_headers")
 		delete(additionalProperties, "proxy_strip_request_headers")
+		delete(additionalProperties, "proxy_alert_enabled")
 		delete(additionalProperties, "failover_mode")
 		delete(additionalProperties, "failover_origin_ttfb")
 		delete(additionalProperties, "failover_origin_status_codes")
