@@ -24,6 +24,7 @@ type RuleHeader struct {
 	Name *string `json:"name,omitempty"`
 	Uuid string `json:"uuid"`
 	RuleId *string `json:"rule_id,omitempty"`
+	Weight *int32 `json:"weight,omitempty"`
 	Url []string `json:"url,omitempty"`
 	Domain []string `json:"domain,omitempty"`
 	Disabled bool `json:"disabled"`
@@ -50,6 +51,8 @@ type _RuleHeader RuleHeader
 func NewRuleHeader(actionConfig RuleHeaderAction, uuid string, disabled bool, action string) *RuleHeader {
 	this := RuleHeader{}
 	this.Uuid = uuid
+	var weight int32 = 0
+	this.Weight = &weight
 	this.Disabled = disabled
 	this.Action = action
 	return &this
@@ -60,6 +63,8 @@ func NewRuleHeader(actionConfig RuleHeaderAction, uuid string, disabled bool, ac
 // but it doesn't guarantee that properties required by API are set
 func NewRuleHeaderWithDefaults() *RuleHeader {
 	this := RuleHeader{}
+	var weight int32 = 0
+	this.Weight = &weight
 	var disabled bool = false
 	this.Disabled = disabled
 	return &this
@@ -175,6 +180,38 @@ func (o *RuleHeader) HasRuleId() bool {
 // SetRuleId gets a reference to the given string and assigns it to the RuleId field.
 func (o *RuleHeader) SetRuleId(v string) {
 	o.RuleId = &v
+}
+
+// GetWeight returns the Weight field value if set, zero value otherwise.
+func (o *RuleHeader) GetWeight() int32 {
+	if o == nil || IsNil(o.Weight) {
+		var ret int32
+		return ret
+	}
+	return *o.Weight
+}
+
+// GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleHeader) GetWeightOk() (*int32, bool) {
+	if o == nil || IsNil(o.Weight) {
+		return nil, false
+	}
+	return o.Weight, true
+}
+
+// HasWeight returns a boolean if a field has been set.
+func (o *RuleHeader) HasWeight() bool {
+	if o != nil && !IsNil(o.Weight) {
+		return true
+	}
+
+	return false
+}
+
+// SetWeight gets a reference to the given int32 and assigns it to the Weight field.
+func (o *RuleHeader) SetWeight(v int32) {
+	o.Weight = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -627,6 +664,9 @@ func (o RuleHeader) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RuleId) {
 		toSerialize["rule_id"] = o.RuleId
 	}
+	if !IsNil(o.Weight) {
+		toSerialize["weight"] = o.Weight
+	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
@@ -715,6 +755,7 @@ func (o *RuleHeader) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")
 		delete(additionalProperties, "rule_id")
+		delete(additionalProperties, "weight")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "disabled")

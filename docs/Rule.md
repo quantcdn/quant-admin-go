@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
 **RuleId** | Pointer to **string** |  | [optional] 
+**Weight** | Pointer to **int32** |  | [optional] [default to 0]
 **Url** | Pointer to **[]string** |  | [optional] 
 **Domain** | Pointer to **[]string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
@@ -110,6 +111,31 @@ SetRuleId sets RuleId field to given value.
 `func (o *Rule) HasRuleId() bool`
 
 HasRuleId returns a boolean if a field has been set.
+
+### GetWeight
+
+`func (o *Rule) GetWeight() int32`
+
+GetWeight returns the Weight field if non-nil, zero value otherwise.
+
+### GetWeightOk
+
+`func (o *Rule) GetWeightOk() (*int32, bool)`
+
+GetWeightOk returns a tuple with the Weight field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWeight
+
+`func (o *Rule) SetWeight(v int32)`
+
+SetWeight sets Weight field to given value.
+
+### HasWeight
+
+`func (o *Rule) HasWeight() bool`
+
+HasWeight returns a boolean if a field has been set.
 
 ### GetUrl
 

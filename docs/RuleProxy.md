@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ActionConfig** | [**RuleProxyAction**](RuleProxyAction.md) |  | 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | **string** |  | 
+**Weight** | Pointer to **int32** |  | [optional] [default to 0]
 **Url** | Pointer to **[]string** |  | [optional] 
 **Domain** | Pointer to **[]string** |  | [optional] 
 **Disabled** | **bool** |  | [default to false]
@@ -131,6 +132,31 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
+
+### GetWeight
+
+`func (o *RuleProxy) GetWeight() int32`
+
+GetWeight returns the Weight field if non-nil, zero value otherwise.
+
+### GetWeightOk
+
+`func (o *RuleProxy) GetWeightOk() (*int32, bool)`
+
+GetWeightOk returns a tuple with the Weight field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWeight
+
+`func (o *RuleProxy) SetWeight(v int32)`
+
+SetWeight sets Weight field to given value.
+
+### HasWeight
+
+`func (o *RuleProxy) HasWeight() bool`
+
+HasWeight returns a boolean if a field has been set.
 
 ### GetUrl
 

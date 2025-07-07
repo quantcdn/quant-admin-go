@@ -3792,6 +3792,9 @@ components:
           type: string
         rule_id:
           type: string
+        weight:
+          default: 0
+          type: integer
         url:
           items:
             type: string
