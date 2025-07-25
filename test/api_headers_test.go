@@ -44,10 +44,9 @@ func Test_quantadmingo_HeadersAPIService(t *testing.T) {
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.HeadersAPI.HeadersDelete(context.Background(), organization, project).Execute()
+		httpRes, err := apiClient.HeadersAPI.HeadersDelete(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

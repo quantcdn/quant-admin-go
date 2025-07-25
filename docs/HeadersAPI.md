@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ## HeadersDelete
 
-> map[string]string HeadersDelete(ctx, organization, project).HeadersDeleteRequest(headersDeleteRequest).Execute()
+> HeadersDelete(ctx, organization, project).HeadersDeleteRequest(headersDeleteRequest).Execute()
 
 
 
@@ -108,13 +108,11 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HeadersAPI.HeadersDelete(context.Background(), organization, project).HeadersDeleteRequest(headersDeleteRequest).Execute()
+	r, err := apiClient.HeadersAPI.HeadersDelete(context.Background(), organization, project).HeadersDeleteRequest(headersDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HeadersAPI.HeadersDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `HeadersDelete`: map[string]string
-	fmt.Fprintf(os.Stdout, "Response from `HeadersAPI.HeadersDelete`: %v\n", resp)
 }
 ```
 
@@ -140,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]string**
+ (empty response body)
 
 ### Authorization
 
