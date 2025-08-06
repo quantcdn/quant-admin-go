@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **AuthUser** | Pointer to **string** |  | [optional] 
 **AuthPass** | Pointer to **string** |  | [optional] 
 **DisableSslVerify** | Pointer to **bool** |  | [optional] 
-**CacheLifetime** | Pointer to **int32** |  | [optional] 
+**CacheLifetime** | Pointer to **string** |  | [optional] 
 **OnlyProxy404** | Pointer to **bool** |  | [optional] 
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
@@ -166,20 +166,20 @@ HasDisableSslVerify returns a boolean if a field has been set.
 
 ### GetCacheLifetime
 
-`func (o *RuleProxyAction) GetCacheLifetime() int32`
+`func (o *RuleProxyAction) GetCacheLifetime() string`
 
 GetCacheLifetime returns the CacheLifetime field if non-nil, zero value otherwise.
 
 ### GetCacheLifetimeOk
 
-`func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool)`
+`func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool)`
 
 GetCacheLifetimeOk returns a tuple with the CacheLifetime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCacheLifetime
 
-`func (o *RuleProxyAction) SetCacheLifetime(v int32)`
+`func (o *RuleProxyAction) SetCacheLifetime(v string)`
 
 SetCacheLifetime sets CacheLifetime field to given value.
 

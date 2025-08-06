@@ -25,7 +25,7 @@ type RuleProxyAction struct {
 	AuthUser *string `json:"auth_user,omitempty"`
 	AuthPass *string `json:"auth_pass,omitempty"`
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
-	CacheLifetime *int32 `json:"cache_lifetime,omitempty"`
+	CacheLifetime *string `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
 	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
@@ -235,9 +235,9 @@ func (o *RuleProxyAction) SetDisableSslVerify(v bool) {
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetCacheLifetime() int32 {
+func (o *RuleProxyAction) GetCacheLifetime() string {
 	if o == nil || IsNil(o.CacheLifetime) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.CacheLifetime
@@ -245,7 +245,7 @@ func (o *RuleProxyAction) GetCacheLifetime() int32 {
 
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetCacheLifetimeOk() (*int32, bool) {
+func (o *RuleProxyAction) GetCacheLifetimeOk() (*string, bool) {
 	if o == nil || IsNil(o.CacheLifetime) {
 		return nil, false
 	}
@@ -261,8 +261,8 @@ func (o *RuleProxyAction) HasCacheLifetime() bool {
 	return false
 }
 
-// SetCacheLifetime gets a reference to the given int32 and assigns it to the CacheLifetime field.
-func (o *RuleProxyAction) SetCacheLifetime(v int32) {
+// SetCacheLifetime gets a reference to the given string and assigns it to the CacheLifetime field.
+func (o *RuleProxyAction) SetCacheLifetime(v string) {
 	o.CacheLifetime = &v
 }
 
