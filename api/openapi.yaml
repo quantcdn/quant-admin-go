@@ -2685,7 +2685,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RuleProxyRequest'
+              $ref: '#/components/schemas/RuleProxyRequestCreate'
         required: true
       responses:
         "201":
@@ -4830,11 +4830,14 @@ components:
       example:
         rule_id: rule_id
         action_config:
+          origin_timeout: 0
           cache_lifetime: cache_lifetime
           proxy_strip_request_headers:
           - proxy_strip_request_headers
           - proxy_strip_request_headers
           failover_origin_ttfb: "2000"
+          quant_cloud_selection:
+            key: quant_cloud_selection
           proxy_strip_headers:
           - proxy_strip_headers
           - proxy_strip_headers
@@ -4860,23 +4863,23 @@ components:
             allow_rules:
             - allow_rules
             - allow_rules
-            waf_ratelimit_cooldown: 3
+            waf_ratelimit_cooldown: 2
             request_header_ratelimit_mode: disabled
             ip_ratelimit_cooldown: 5
-            request_header_ratelimit_cooldown: 2
-            notify_slack_hits_rpm: 6
+            request_header_ratelimit_cooldown: 7
+            notify_slack_hits_rpm: 1
             allow_ip:
             - allow_ip
             - allow_ip
             request_header_name: request_header_name
             mode: block
-            request_header_ratelimit_rps: 5
-            waf_ratelimit_hits: 7
+            request_header_ratelimit_rps: 2
+            waf_ratelimit_hits: 9
             httpbl_enabled:
               key: true
             ip_ratelimit_mode: disabled
-            ip_ratelimit_rps: 1
-            waf_ratelimit_rps: 9
+            ip_ratelimit_rps: 5
+            waf_ratelimit_rps: 3
             notify_email:
             - notify_email
             - notify_email
@@ -4891,7 +4894,7 @@ components:
             - block_ua
             - block_ua
             notify_slack: notify_slack
-            paranoia_level: 0
+            paranoia_level: 6
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
@@ -4907,11 +4910,14 @@ components:
       type: object
     RuleProxyAction:
       example:
+        origin_timeout: 0
         cache_lifetime: cache_lifetime
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
         failover_origin_ttfb: "2000"
+        quant_cloud_selection:
+          key: quant_cloud_selection
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
@@ -4937,23 +4943,23 @@ components:
           allow_rules:
           - allow_rules
           - allow_rules
-          waf_ratelimit_cooldown: 3
+          waf_ratelimit_cooldown: 2
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 2
-          notify_slack_hits_rpm: 6
+          request_header_ratelimit_cooldown: 7
+          notify_slack_hits_rpm: 1
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 5
-          waf_ratelimit_hits: 7
+          request_header_ratelimit_rps: 2
+          waf_ratelimit_hits: 9
           httpbl_enabled:
             key: true
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 1
-          waf_ratelimit_rps: 9
+          ip_ratelimit_rps: 5
+          waf_ratelimit_rps: 3
           notify_email:
           - notify_email
           - notify_email
@@ -4968,7 +4974,7 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 0
+          paranoia_level: 6
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -4992,6 +4998,7 @@ components:
         inject_headers:
           additionalProperties:
             type: string
+          nullable: true
           type: object
         proxy_strip_headers:
           items:
@@ -5001,6 +5008,8 @@ components:
           items:
             type: string
           type: array
+        origin_timeout:
+          type: integer
         failover_mode:
           default: false
           type: boolean
@@ -5034,23 +5043,31 @@ components:
         proxy_inline_fn_enabled:
           default: false
           type: boolean
+        quant_cloud_selection:
+          additionalProperties:
+            type: string
+          readOnly: true
+          type: object
       required:
       - to
       - waf_enabled
       type: object
-    RuleProxyRequest:
+    RuleProxyRequestCreate:
       example:
         country: country_is
         cache_lifetime: cache_lifetime
         proxy_strip_request_headers:
         - proxy_strip_request_headers
         - proxy_strip_request_headers
+        application_proxy: false
         method_is:
         - method_is
         - method_is
+        application_container: application_container
         method_is_not:
         - method_is_not
         - method_is_not
+        static_error_page: static_error_page
         proxy_strip_headers:
         - proxy_strip_headers
         - proxy_strip_headers
@@ -5065,246 +5082,19 @@ components:
         country_is_not:
         - country_is_not
         - country_is_not
+        application_name: application_name
         auth_user: ""
         host: host
         waf_enabled: false
         auth_pass: ""
         disabled: false
+        application_port: 1
+        static_error_page_status_codes:
+        - static_error_page_status_codes
+        - static_error_page_status_codes
         failover_mode: false
-        method: method_is
-        ip_is_not:
-        - ip_is_not
-        - ip_is_not
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        weight: 0
-        country_is:
-        - country_is
-        - country_is
-        url:
-        - url
-        - url
-        only_proxy_404: false
-        inject_headers:
-          key: inject_headers
-        domain:
-        - domain
-        - domain
-        name: name
-        ip_is:
-        - ip_is
-        - ip_is
-        to: to
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          waf_ratelimit_cooldown: 3
-          request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 2
-          notify_slack_hits_rpm: 6
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          request_header_name: request_header_name
-          mode: block
-          request_header_ratelimit_rps: 5
-          waf_ratelimit_hits: 7
-          httpbl_enabled:
-            key: true
-          ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 1
-          waf_ratelimit_rps: 9
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          waf_ratelimit_mode: disabled
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: notify_slack
-          paranoia_level: 0
-        failover_origin_status_codes:
-        - failover_origin_status_codes
-        - failover_origin_status_codes
-        proxy_alert_enabled: true
-      properties:
-        domain:
-          default:
-          - any
-          items:
-            type: string
-          type: array
-        name:
-          type: string
-        uuid:
-          type: string
-        weight:
-          default: 0
-          type: integer
-        disabled:
-          default: false
-          type: boolean
-        url:
-          items:
-            type: string
-          type: array
-        country:
-          enum:
-          - country_is
-          - country_is_not
-          - any
-          type: string
-        country_is:
-          items:
-            type: string
-          type: array
-        country_is_not:
-          items:
-            type: string
-          type: array
-        method:
-          enum:
-          - method_is
-          - method_is_not
-          - any
-          type: string
-        method_is:
-          items:
-            type: string
-          type: array
-        method_is_not:
-          items:
-            type: string
-          type: array
-        ip:
-          enum:
-          - ip_is
-          - ip_is_not
-          - any
-          type: string
-        ip_is:
-          items:
-            type: string
-          type: array
-        ip_is_not:
-          items:
-            type: string
-          type: array
-        to:
-          type: string
-        host:
-          type: string
-        auth_user:
-          default: ""
-          type: string
-        auth_pass:
-          default: ""
-          type: string
-        disable_ssl_verify:
-          default: false
-          type: boolean
-        cache_lifetime:
-          nullable: true
-          type: string
-        only_proxy_404:
-          default: false
-          type: boolean
-        inject_headers:
-          additionalProperties:
-            type: string
-          nullable: true
-          type: object
-        proxy_strip_headers:
-          items:
-            type: string
-          type: array
-        proxy_strip_request_headers:
-          items:
-            type: string
-          type: array
-        proxy_alert_enabled:
-          type: boolean
-        failover_mode:
-          default: false
-          type: boolean
-        failover_origin_ttfb:
-          default: "2000"
-          type: string
-        failover_origin_status_codes:
-          default:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          items:
-            type: string
-          type: array
-        failover_lifetime:
-          default: "300"
-          type: string
-        notify:
-          default: none
-          enum:
-          - none
-          - slack
-          type: string
-        notify_config:
-          $ref: '#/components/schemas/NotifyConfig'
-        waf_enabled:
-          default: false
-          type: boolean
-        waf_config:
-          $ref: '#/components/schemas/WAFConfig'
-      required:
-      - disabled
-      - domain
-      - to
-      - url
-      type: object
-    RuleProxyRequestUpdate:
-      example:
-        country: country_is
-        cache_lifetime: cache_lifetime
-        proxy_strip_request_headers:
-        - proxy_strip_request_headers
-        - proxy_strip_request_headers
-        method_is:
-        - method_is
-        - method_is
-        method_is_not:
-        - method_is_not
-        - method_is_not
-        proxy_strip_headers:
-        - proxy_strip_headers
-        - proxy_strip_headers
-        uuid: uuid
-        notify_config:
-          period: "60"
-          slack_webhook: ""
-          origin_status_codes:
-          - origin_status_codes
-          - origin_status_codes
-        notify: none
-        country_is_not:
-        - country_is_not
-        - country_is_not
-        auth_user: ""
-        host: host
-        waf_enabled: false
-        auth_pass: ""
-        disabled: false
-        failover_mode: false
+        application_environment: application_environment
+        origin_timeout: 6
         method: method_is
         ip_is_not:
         - ip_is_not
@@ -5466,8 +5256,279 @@ components:
           items:
             type: string
           type: array
+        origin_timeout:
+          type: integer
         proxy_alert_enabled:
           type: boolean
+        static_error_page:
+          type: string
+        static_error_page_status_codes:
+          items:
+            type: string
+          type: array
+        failover_mode:
+          default: false
+          type: boolean
+        failover_origin_ttfb:
+          default: "2000"
+          type: string
+        failover_origin_status_codes:
+          default:
+          - "200"
+          - "404"
+          - "301"
+          - "302"
+          - "304"
+          items:
+            type: string
+          type: array
+        failover_lifetime:
+          default: "300"
+          type: string
+        notify:
+          default: none
+          enum:
+          - none
+          - slack
+          type: string
+        notify_config:
+          $ref: '#/components/schemas/NotifyConfig'
+        waf_enabled:
+          default: false
+          type: boolean
+        waf_config:
+          $ref: '#/components/schemas/WAFConfig'
+        application_proxy:
+          default: false
+          type: boolean
+        application_name:
+          type: string
+        application_environment:
+          type: string
+        application_container:
+          type: string
+        application_port:
+          type: integer
+      required:
+      - disabled
+      - domain
+      - to
+      - url
+      type: object
+    RuleProxyRequestUpdate:
+      example:
+        country: country_is
+        cache_lifetime: cache_lifetime
+        proxy_strip_request_headers:
+        - proxy_strip_request_headers
+        - proxy_strip_request_headers
+        application_proxy: false
+        method_is:
+        - method_is
+        - method_is
+        application_container: application_container
+        method_is_not:
+        - method_is_not
+        - method_is_not
+        static_error_page: static_error_page
+        proxy_strip_headers:
+        - proxy_strip_headers
+        - proxy_strip_headers
+        uuid: uuid
+        notify_config:
+          period: "60"
+          slack_webhook: ""
+          origin_status_codes:
+          - origin_status_codes
+          - origin_status_codes
+        notify: none
+        country_is_not:
+        - country_is_not
+        - country_is_not
+        application_name: application_name
+        auth_user: ""
+        host: host
+        waf_enabled: false
+        auth_pass: ""
+        disabled: false
+        application_port: 7
+        static_error_page_status_codes:
+        - static_error_page_status_codes
+        - static_error_page_status_codes
+        failover_mode: false
+        application_environment: application_environment
+        origin_timeout: 6
+        method: method_is
+        ip_is_not:
+        - ip_is_not
+        - ip_is_not
+        failover_origin_ttfb: "2000"
+        ip: ip_is
+        weight: 0
+        country_is:
+        - country_is
+        - country_is
+        url:
+        - url
+        - url
+        only_proxy_404: false
+        inject_headers:
+          key: inject_headers
+        domain:
+        - domain
+        - domain
+        name: name
+        ip_is:
+        - ip_is
+        - ip_is
+        to: to
+        disable_ssl_verify: false
+        failover_lifetime: "300"
+        waf_config:
+          allow_rules:
+          - allow_rules
+          - allow_rules
+          waf_ratelimit_cooldown: 4
+          request_header_ratelimit_mode: disabled
+          ip_ratelimit_cooldown: 2
+          request_header_ratelimit_cooldown: 9
+          notify_slack_hits_rpm: 5
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          request_header_name: request_header_name
+          mode: block
+          request_header_ratelimit_rps: 7
+          waf_ratelimit_hits: 3
+          httpbl_enabled:
+            key: true
+          ip_ratelimit_mode: disabled
+          ip_ratelimit_rps: 5
+          waf_ratelimit_rps: 2
+          notify_email:
+          - notify_email
+          - notify_email
+          block_ip:
+          - block_ip
+          - block_ip
+          block_referer:
+          - block_referer
+          - block_referer
+          waf_ratelimit_mode: disabled
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: notify_slack
+          paranoia_level: 1
+        failover_origin_status_codes:
+        - failover_origin_status_codes
+        - failover_origin_status_codes
+        proxy_alert_enabled: true
+      properties:
+        domain:
+          default:
+          - any
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        uuid:
+          type: string
+        weight:
+          default: 0
+          type: integer
+        disabled:
+          default: false
+          type: boolean
+        url:
+          items:
+            type: string
+          type: array
+        country:
+          enum:
+          - country_is
+          - country_is_not
+          - any
+          type: string
+        country_is:
+          items:
+            type: string
+          type: array
+        country_is_not:
+          items:
+            type: string
+          type: array
+        method:
+          enum:
+          - method_is
+          - method_is_not
+          - any
+          type: string
+        method_is:
+          items:
+            type: string
+          type: array
+        method_is_not:
+          items:
+            type: string
+          type: array
+        ip:
+          enum:
+          - ip_is
+          - ip_is_not
+          - any
+          type: string
+        ip_is:
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          items:
+            type: string
+          type: array
+        to:
+          type: string
+        host:
+          type: string
+        auth_user:
+          default: ""
+          type: string
+        auth_pass:
+          default: ""
+          type: string
+        disable_ssl_verify:
+          default: false
+          type: boolean
+        cache_lifetime:
+          nullable: true
+          type: string
+        only_proxy_404:
+          default: false
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        proxy_strip_headers:
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          items:
+            type: string
+          type: array
+        origin_timeout:
+          type: integer
+        proxy_alert_enabled:
+          type: boolean
+        static_error_page:
+          type: string
+        static_error_page_status_codes:
+          items:
+            type: string
+          type: array
         failover_mode:
           default: false
           type: boolean
@@ -5500,6 +5561,17 @@ components:
           type: boolean
         waf_config:
           $ref: '#/components/schemas/WAFConfigUpdate'
+        application_proxy:
+          default: false
+          type: boolean
+        application_name:
+          type: string
+        application_environment:
+          type: string
+        application_container:
+          type: string
+        application_port:
+          type: integer
       type: object
     RuleRedirect:
       allOf:
@@ -6010,23 +6082,23 @@ components:
         allow_rules:
         - allow_rules
         - allow_rules
-        waf_ratelimit_cooldown: 3
+        waf_ratelimit_cooldown: 2
         request_header_ratelimit_mode: disabled
         ip_ratelimit_cooldown: 5
-        request_header_ratelimit_cooldown: 2
-        notify_slack_hits_rpm: 6
+        request_header_ratelimit_cooldown: 7
+        notify_slack_hits_rpm: 1
         allow_ip:
         - allow_ip
         - allow_ip
         request_header_name: request_header_name
         mode: block
-        request_header_ratelimit_rps: 5
-        waf_ratelimit_hits: 7
+        request_header_ratelimit_rps: 2
+        waf_ratelimit_hits: 9
         httpbl_enabled:
           key: true
         ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 1
-        waf_ratelimit_rps: 9
+        ip_ratelimit_rps: 5
+        waf_ratelimit_rps: 3
         notify_email:
         - notify_email
         - notify_email
@@ -6041,7 +6113,7 @@ components:
         - block_ua
         - block_ua
         notify_slack: notify_slack
-        paranoia_level: 0
+        paranoia_level: 6
       properties:
         mode:
           enum:
@@ -6135,23 +6207,23 @@ components:
         allow_rules:
         - allow_rules
         - allow_rules
-        waf_ratelimit_cooldown: 2
+        waf_ratelimit_cooldown: 4
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 5
-        request_header_ratelimit_cooldown: 7
-        notify_slack_hits_rpm: 1
+        ip_ratelimit_cooldown: 2
+        request_header_ratelimit_cooldown: 9
+        notify_slack_hits_rpm: 5
         allow_ip:
         - allow_ip
         - allow_ip
         request_header_name: request_header_name
         mode: block
-        request_header_ratelimit_rps: 2
-        waf_ratelimit_hits: 9
+        request_header_ratelimit_rps: 7
+        waf_ratelimit_hits: 3
         httpbl_enabled:
           key: true
         ip_ratelimit_mode: disabled
         ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 3
+        waf_ratelimit_rps: 2
         notify_email:
         - notify_email
         - notify_email
@@ -6166,7 +6238,7 @@ components:
         - block_ua
         - block_ua
         notify_slack: notify_slack
-        paranoia_level: 6
+        paranoia_level: 1
       properties:
         mode:
           enum:

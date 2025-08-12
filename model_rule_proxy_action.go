@@ -27,9 +27,10 @@ type RuleProxyAction struct {
 	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
 	CacheLifetime *string `json:"cache_lifetime,omitempty"`
 	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
-	InjectHeaders *map[string]string `json:"inject_headers,omitempty"`
+	InjectHeaders map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
+	OriginTimeout *int32 `json:"origin_timeout,omitempty"`
 	FailoverMode *bool `json:"failover_mode,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
@@ -40,6 +41,7 @@ type RuleProxyAction struct {
 	WafConfig *WAFConfig `json:"waf_config,omitempty"`
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	ProxyInlineFnEnabled *bool `json:"proxy_inline_fn_enabled,omitempty"`
+	QuantCloudSelection *map[string]string `json:"quant_cloud_selection,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -298,22 +300,23 @@ func (o *RuleProxyAction) SetOnlyProxy404(v bool) {
 	o.OnlyProxy404 = &v
 }
 
-// GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise.
+// GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RuleProxyAction) GetInjectHeaders() map[string]string {
-	if o == nil || IsNil(o.InjectHeaders) {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
-	return *o.InjectHeaders
+	return o.InjectHeaders
 }
 
 // GetInjectHeadersOk returns a tuple with the InjectHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RuleProxyAction) GetInjectHeadersOk() (*map[string]string, bool) {
 	if o == nil || IsNil(o.InjectHeaders) {
 		return nil, false
 	}
-	return o.InjectHeaders, true
+	return &o.InjectHeaders, true
 }
 
 // HasInjectHeaders returns a boolean if a field has been set.
@@ -327,7 +330,7 @@ func (o *RuleProxyAction) HasInjectHeaders() bool {
 
 // SetInjectHeaders gets a reference to the given map[string]string and assigns it to the InjectHeaders field.
 func (o *RuleProxyAction) SetInjectHeaders(v map[string]string) {
-	o.InjectHeaders = &v
+	o.InjectHeaders = v
 }
 
 // GetProxyStripHeaders returns the ProxyStripHeaders field value if set, zero value otherwise.
@@ -392,6 +395,38 @@ func (o *RuleProxyAction) HasProxyStripRequestHeaders() bool {
 // SetProxyStripRequestHeaders gets a reference to the given []string and assigns it to the ProxyStripRequestHeaders field.
 func (o *RuleProxyAction) SetProxyStripRequestHeaders(v []string) {
 	o.ProxyStripRequestHeaders = v
+}
+
+// GetOriginTimeout returns the OriginTimeout field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetOriginTimeout() int32 {
+	if o == nil || IsNil(o.OriginTimeout) {
+		var ret int32
+		return ret
+	}
+	return *o.OriginTimeout
+}
+
+// GetOriginTimeoutOk returns a tuple with the OriginTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetOriginTimeoutOk() (*int32, bool) {
+	if o == nil || IsNil(o.OriginTimeout) {
+		return nil, false
+	}
+	return o.OriginTimeout, true
+}
+
+// HasOriginTimeout returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasOriginTimeout() bool {
+	if o != nil && !IsNil(o.OriginTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginTimeout gets a reference to the given int32 and assigns it to the OriginTimeout field.
+func (o *RuleProxyAction) SetOriginTimeout(v int32) {
+	o.OriginTimeout = &v
 }
 
 // GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
@@ -706,6 +741,38 @@ func (o *RuleProxyAction) SetProxyInlineFnEnabled(v bool) {
 	o.ProxyInlineFnEnabled = &v
 }
 
+// GetQuantCloudSelection returns the QuantCloudSelection field value if set, zero value otherwise.
+func (o *RuleProxyAction) GetQuantCloudSelection() map[string]string {
+	if o == nil || IsNil(o.QuantCloudSelection) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.QuantCloudSelection
+}
+
+// GetQuantCloudSelectionOk returns a tuple with the QuantCloudSelection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyAction) GetQuantCloudSelectionOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.QuantCloudSelection) {
+		return nil, false
+	}
+	return o.QuantCloudSelection, true
+}
+
+// HasQuantCloudSelection returns a boolean if a field has been set.
+func (o *RuleProxyAction) HasQuantCloudSelection() bool {
+	if o != nil && !IsNil(o.QuantCloudSelection) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuantCloudSelection gets a reference to the given map[string]string and assigns it to the QuantCloudSelection field.
+func (o *RuleProxyAction) SetQuantCloudSelection(v map[string]string) {
+	o.QuantCloudSelection = &v
+}
+
 func (o RuleProxyAction) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -735,7 +802,7 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OnlyProxy404) {
 		toSerialize["only_proxy_404"] = o.OnlyProxy404
 	}
-	if !IsNil(o.InjectHeaders) {
+	if o.InjectHeaders != nil {
 		toSerialize["inject_headers"] = o.InjectHeaders
 	}
 	if !IsNil(o.ProxyStripHeaders) {
@@ -743,6 +810,9 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProxyStripRequestHeaders) {
 		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
+	}
+	if !IsNil(o.OriginTimeout) {
+		toSerialize["origin_timeout"] = o.OriginTimeout
 	}
 	if !IsNil(o.FailoverMode) {
 		toSerialize["failover_mode"] = o.FailoverMode
@@ -771,6 +841,9 @@ func (o RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ProxyInlineFnEnabled) {
 		toSerialize["proxy_inline_fn_enabled"] = o.ProxyInlineFnEnabled
+	}
+	if !IsNil(o.QuantCloudSelection) {
+		toSerialize["quant_cloud_selection"] = o.QuantCloudSelection
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -826,6 +899,7 @@ func (o *RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "inject_headers")
 		delete(additionalProperties, "proxy_strip_headers")
 		delete(additionalProperties, "proxy_strip_request_headers")
+		delete(additionalProperties, "origin_timeout")
 		delete(additionalProperties, "failover_mode")
 		delete(additionalProperties, "failover_origin_ttfb")
 		delete(additionalProperties, "failover_origin_status_codes")
@@ -836,6 +910,7 @@ func (o *RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "waf_config")
 		delete(additionalProperties, "proxy_alert_enabled")
 		delete(additionalProperties, "proxy_inline_fn_enabled")
+		delete(additionalProperties, "quant_cloud_selection")
 		o.AdditionalProperties = additionalProperties
 	}
 

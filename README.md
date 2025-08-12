@@ -194,7 +194,7 @@ Class | Method | HTTP request | Description
  - [RuleHeaderAction](docs/RuleHeaderAction.md)
  - [RuleProxy](docs/RuleProxy.md)
  - [RuleProxyAction](docs/RuleProxyAction.md)
- - [RuleProxyRequest](docs/RuleProxyRequest.md)
+ - [RuleProxyRequestCreate](docs/RuleProxyRequestCreate.md)
  - [RuleProxyRequestUpdate](docs/RuleProxyRequestUpdate.md)
  - [RuleRedirect](docs/RuleRedirect.md)
  - [RuleRedirectAction](docs/RuleRedirectAction.md)

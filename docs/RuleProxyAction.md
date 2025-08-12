@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
+**OriginTimeout** | Pointer to **int32** |  | [optional] 
 **FailoverMode** | Pointer to **bool** |  | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
@@ -24,6 +25,7 @@ Name | Type | Description | Notes
 **WafConfig** | Pointer to [**WAFConfig**](WAFConfig.md) |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
 **ProxyInlineFnEnabled** | Pointer to **bool** |  | [optional] [default to false]
+**QuantCloudSelection** | Pointer to **map[string]string** |  | [optional] [readonly] 
 
 ## Methods
 
@@ -239,6 +241,16 @@ SetInjectHeaders sets InjectHeaders field to given value.
 
 HasInjectHeaders returns a boolean if a field has been set.
 
+### SetInjectHeadersNil
+
+`func (o *RuleProxyAction) SetInjectHeadersNil(b bool)`
+
+ SetInjectHeadersNil sets the value for InjectHeaders to be an explicit nil
+
+### UnsetInjectHeaders
+`func (o *RuleProxyAction) UnsetInjectHeaders()`
+
+UnsetInjectHeaders ensures that no value is present for InjectHeaders, not even an explicit nil
 ### GetProxyStripHeaders
 
 `func (o *RuleProxyAction) GetProxyStripHeaders() []string`
@@ -288,6 +300,31 @@ SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 `func (o *RuleProxyAction) HasProxyStripRequestHeaders() bool`
 
 HasProxyStripRequestHeaders returns a boolean if a field has been set.
+
+### GetOriginTimeout
+
+`func (o *RuleProxyAction) GetOriginTimeout() int32`
+
+GetOriginTimeout returns the OriginTimeout field if non-nil, zero value otherwise.
+
+### GetOriginTimeoutOk
+
+`func (o *RuleProxyAction) GetOriginTimeoutOk() (*int32, bool)`
+
+GetOriginTimeoutOk returns a tuple with the OriginTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginTimeout
+
+`func (o *RuleProxyAction) SetOriginTimeout(v int32)`
+
+SetOriginTimeout sets OriginTimeout field to given value.
+
+### HasOriginTimeout
+
+`func (o *RuleProxyAction) HasOriginTimeout() bool`
+
+HasOriginTimeout returns a boolean if a field has been set.
 
 ### GetFailoverMode
 
@@ -533,6 +570,31 @@ SetProxyInlineFnEnabled sets ProxyInlineFnEnabled field to given value.
 `func (o *RuleProxyAction) HasProxyInlineFnEnabled() bool`
 
 HasProxyInlineFnEnabled returns a boolean if a field has been set.
+
+### GetQuantCloudSelection
+
+`func (o *RuleProxyAction) GetQuantCloudSelection() map[string]string`
+
+GetQuantCloudSelection returns the QuantCloudSelection field if non-nil, zero value otherwise.
+
+### GetQuantCloudSelectionOk
+
+`func (o *RuleProxyAction) GetQuantCloudSelectionOk() (*map[string]string, bool)`
+
+GetQuantCloudSelectionOk returns a tuple with the QuantCloudSelection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuantCloudSelection
+
+`func (o *RuleProxyAction) SetQuantCloudSelection(v map[string]string)`
+
+SetQuantCloudSelection sets QuantCloudSelection field to given value.
+
+### HasQuantCloudSelection
+
+`func (o *RuleProxyAction) HasQuantCloudSelection() bool`
+
+HasQuantCloudSelection returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

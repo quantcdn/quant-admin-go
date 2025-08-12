@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## RulesProxyCreate
 
-> RuleProxy RulesProxyCreate(ctx, organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
+> RuleProxy RulesProxyCreate(ctx, organization, project).RuleProxyRequestCreate(ruleProxyRequestCreate).Execute()
 
 
 
@@ -33,11 +33,11 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	ruleProxyRequest := *openapiclient.NewRuleProxyRequest([]string{"Domain_example"}, false, []string{"Url_example"}, "To_example") // RuleProxyRequest | 
+	ruleProxyRequestCreate := *openapiclient.NewRuleProxyRequestCreate([]string{"Domain_example"}, false, []string{"Url_example"}, "To_example") // RuleProxyRequestCreate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RulesProxyAPI.RulesProxyCreate(context.Background(), organization, project).RuleProxyRequest(ruleProxyRequest).Execute()
+	resp, r, err := apiClient.RulesProxyAPI.RulesProxyCreate(context.Background(), organization, project).RuleProxyRequestCreate(ruleProxyRequestCreate).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RulesProxyAPI.RulesProxyCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **ruleProxyRequest** | [**RuleProxyRequest**](RuleProxyRequest.md) |  | 
+ **ruleProxyRequestCreate** | [**RuleProxyRequestCreate**](RuleProxyRequestCreate.md) |  | 
 
 ### Return type
 

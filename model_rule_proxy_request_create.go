@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the RuleProxyRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RuleProxyRequest{}
+// checks if the RuleProxyRequestCreate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RuleProxyRequestCreate{}
 
-// RuleProxyRequest struct for RuleProxyRequest
-type RuleProxyRequest struct {
+// RuleProxyRequestCreate struct for RuleProxyRequestCreate
+type RuleProxyRequestCreate struct {
 	Domain []string `json:"domain"`
 	Name *string `json:"name,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
@@ -45,7 +45,10 @@ type RuleProxyRequest struct {
 	InjectHeaders map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
+	OriginTimeout *int32 `json:"origin_timeout,omitempty"`
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
+	StaticErrorPage *string `json:"static_error_page,omitempty"`
+	StaticErrorPageStatusCodes []string `json:"static_error_page_status_codes,omitempty"`
 	FailoverMode *bool `json:"failover_mode,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
@@ -54,17 +57,22 @@ type RuleProxyRequest struct {
 	NotifyConfig *NotifyConfig `json:"notify_config,omitempty"`
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
 	WafConfig *WAFConfig `json:"waf_config,omitempty"`
+	ApplicationProxy *bool `json:"application_proxy,omitempty"`
+	ApplicationName *string `json:"application_name,omitempty"`
+	ApplicationEnvironment *string `json:"application_environment,omitempty"`
+	ApplicationContainer *string `json:"application_container,omitempty"`
+	ApplicationPort *int32 `json:"application_port,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _RuleProxyRequest RuleProxyRequest
+type _RuleProxyRequestCreate RuleProxyRequestCreate
 
-// NewRuleProxyRequest instantiates a new RuleProxyRequest object
+// NewRuleProxyRequestCreate instantiates a new RuleProxyRequestCreate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string) *RuleProxyRequest {
-	this := RuleProxyRequest{}
+func NewRuleProxyRequestCreate(domain []string, disabled bool, url []string, to string) *RuleProxyRequestCreate {
+	this := RuleProxyRequestCreate{}
 	this.Domain = domain
 	var weight int32 = 0
 	this.Weight = &weight
@@ -89,14 +97,16 @@ func NewRuleProxyRequest(domain []string, disabled bool, url []string, to string
 	this.Notify = &notify
 	var wafEnabled bool = false
 	this.WafEnabled = &wafEnabled
+	var applicationProxy bool = false
+	this.ApplicationProxy = &applicationProxy
 	return &this
 }
 
-// NewRuleProxyRequestWithDefaults instantiates a new RuleProxyRequest object
+// NewRuleProxyRequestCreateWithDefaults instantiates a new RuleProxyRequestCreate object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
-	this := RuleProxyRequest{}
+func NewRuleProxyRequestCreateWithDefaults() *RuleProxyRequestCreate {
+	this := RuleProxyRequestCreate{}
 	var weight int32 = 0
 	this.Weight = &weight
 	var disabled bool = false
@@ -119,11 +129,13 @@ func NewRuleProxyRequestWithDefaults() *RuleProxyRequest {
 	this.Notify = &notify
 	var wafEnabled bool = false
 	this.WafEnabled = &wafEnabled
+	var applicationProxy bool = false
+	this.ApplicationProxy = &applicationProxy
 	return &this
 }
 
 // GetDomain returns the Domain field value
-func (o *RuleProxyRequest) GetDomain() []string {
+func (o *RuleProxyRequestCreate) GetDomain() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -134,7 +146,7 @@ func (o *RuleProxyRequest) GetDomain() []string {
 
 // GetDomainOk returns a tuple with the Domain field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetDomainOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetDomainOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -142,12 +154,12 @@ func (o *RuleProxyRequest) GetDomainOk() ([]string, bool) {
 }
 
 // SetDomain sets field value
-func (o *RuleProxyRequest) SetDomain(v []string) {
+func (o *RuleProxyRequestCreate) SetDomain(v []string) {
 	o.Domain = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetName() string {
+func (o *RuleProxyRequestCreate) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -157,7 +169,7 @@ func (o *RuleProxyRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetNameOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -165,7 +177,7 @@ func (o *RuleProxyRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasName() bool {
+func (o *RuleProxyRequestCreate) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -174,12 +186,12 @@ func (o *RuleProxyRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *RuleProxyRequest) SetName(v string) {
+func (o *RuleProxyRequestCreate) SetName(v string) {
 	o.Name = &v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetUuid() string {
+func (o *RuleProxyRequestCreate) GetUuid() string {
 	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
@@ -189,7 +201,7 @@ func (o *RuleProxyRequest) GetUuid() string {
 
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetUuidOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetUuidOk() (*string, bool) {
 	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
@@ -197,7 +209,7 @@ func (o *RuleProxyRequest) GetUuidOk() (*string, bool) {
 }
 
 // HasUuid returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasUuid() bool {
+func (o *RuleProxyRequestCreate) HasUuid() bool {
 	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
@@ -206,12 +218,12 @@ func (o *RuleProxyRequest) HasUuid() bool {
 }
 
 // SetUuid gets a reference to the given string and assigns it to the Uuid field.
-func (o *RuleProxyRequest) SetUuid(v string) {
+func (o *RuleProxyRequestCreate) SetUuid(v string) {
 	o.Uuid = &v
 }
 
 // GetWeight returns the Weight field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetWeight() int32 {
+func (o *RuleProxyRequestCreate) GetWeight() int32 {
 	if o == nil || IsNil(o.Weight) {
 		var ret int32
 		return ret
@@ -221,7 +233,7 @@ func (o *RuleProxyRequest) GetWeight() int32 {
 
 // GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetWeightOk() (*int32, bool) {
+func (o *RuleProxyRequestCreate) GetWeightOk() (*int32, bool) {
 	if o == nil || IsNil(o.Weight) {
 		return nil, false
 	}
@@ -229,7 +241,7 @@ func (o *RuleProxyRequest) GetWeightOk() (*int32, bool) {
 }
 
 // HasWeight returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasWeight() bool {
+func (o *RuleProxyRequestCreate) HasWeight() bool {
 	if o != nil && !IsNil(o.Weight) {
 		return true
 	}
@@ -238,12 +250,12 @@ func (o *RuleProxyRequest) HasWeight() bool {
 }
 
 // SetWeight gets a reference to the given int32 and assigns it to the Weight field.
-func (o *RuleProxyRequest) SetWeight(v int32) {
+func (o *RuleProxyRequestCreate) SetWeight(v int32) {
 	o.Weight = &v
 }
 
 // GetDisabled returns the Disabled field value
-func (o *RuleProxyRequest) GetDisabled() bool {
+func (o *RuleProxyRequestCreate) GetDisabled() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -254,7 +266,7 @@ func (o *RuleProxyRequest) GetDisabled() bool {
 
 // GetDisabledOk returns a tuple with the Disabled field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetDisabledOk() (*bool, bool) {
+func (o *RuleProxyRequestCreate) GetDisabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -262,12 +274,12 @@ func (o *RuleProxyRequest) GetDisabledOk() (*bool, bool) {
 }
 
 // SetDisabled sets field value
-func (o *RuleProxyRequest) SetDisabled(v bool) {
+func (o *RuleProxyRequestCreate) SetDisabled(v bool) {
 	o.Disabled = v
 }
 
 // GetUrl returns the Url field value
-func (o *RuleProxyRequest) GetUrl() []string {
+func (o *RuleProxyRequestCreate) GetUrl() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -278,7 +290,7 @@ func (o *RuleProxyRequest) GetUrl() []string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetUrlOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetUrlOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -286,12 +298,12 @@ func (o *RuleProxyRequest) GetUrlOk() ([]string, bool) {
 }
 
 // SetUrl sets field value
-func (o *RuleProxyRequest) SetUrl(v []string) {
+func (o *RuleProxyRequestCreate) SetUrl(v []string) {
 	o.Url = v
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCountry() string {
+func (o *RuleProxyRequestCreate) GetCountry() string {
 	if o == nil || IsNil(o.Country) {
 		var ret string
 		return ret
@@ -301,7 +313,7 @@ func (o *RuleProxyRequest) GetCountry() string {
 
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCountryOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetCountryOk() (*string, bool) {
 	if o == nil || IsNil(o.Country) {
 		return nil, false
 	}
@@ -309,7 +321,7 @@ func (o *RuleProxyRequest) GetCountryOk() (*string, bool) {
 }
 
 // HasCountry returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCountry() bool {
+func (o *RuleProxyRequestCreate) HasCountry() bool {
 	if o != nil && !IsNil(o.Country) {
 		return true
 	}
@@ -318,12 +330,12 @@ func (o *RuleProxyRequest) HasCountry() bool {
 }
 
 // SetCountry gets a reference to the given string and assigns it to the Country field.
-func (o *RuleProxyRequest) SetCountry(v string) {
+func (o *RuleProxyRequestCreate) SetCountry(v string) {
 	o.Country = &v
 }
 
 // GetCountryIs returns the CountryIs field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCountryIs() []string {
+func (o *RuleProxyRequestCreate) GetCountryIs() []string {
 	if o == nil || IsNil(o.CountryIs) {
 		var ret []string
 		return ret
@@ -333,7 +345,7 @@ func (o *RuleProxyRequest) GetCountryIs() []string {
 
 // GetCountryIsOk returns a tuple with the CountryIs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCountryIsOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetCountryIsOk() ([]string, bool) {
 	if o == nil || IsNil(o.CountryIs) {
 		return nil, false
 	}
@@ -341,7 +353,7 @@ func (o *RuleProxyRequest) GetCountryIsOk() ([]string, bool) {
 }
 
 // HasCountryIs returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCountryIs() bool {
+func (o *RuleProxyRequestCreate) HasCountryIs() bool {
 	if o != nil && !IsNil(o.CountryIs) {
 		return true
 	}
@@ -350,12 +362,12 @@ func (o *RuleProxyRequest) HasCountryIs() bool {
 }
 
 // SetCountryIs gets a reference to the given []string and assigns it to the CountryIs field.
-func (o *RuleProxyRequest) SetCountryIs(v []string) {
+func (o *RuleProxyRequestCreate) SetCountryIs(v []string) {
 	o.CountryIs = v
 }
 
 // GetCountryIsNot returns the CountryIsNot field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetCountryIsNot() []string {
+func (o *RuleProxyRequestCreate) GetCountryIsNot() []string {
 	if o == nil || IsNil(o.CountryIsNot) {
 		var ret []string
 		return ret
@@ -365,7 +377,7 @@ func (o *RuleProxyRequest) GetCountryIsNot() []string {
 
 // GetCountryIsNotOk returns a tuple with the CountryIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetCountryIsNotOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetCountryIsNotOk() ([]string, bool) {
 	if o == nil || IsNil(o.CountryIsNot) {
 		return nil, false
 	}
@@ -373,7 +385,7 @@ func (o *RuleProxyRequest) GetCountryIsNotOk() ([]string, bool) {
 }
 
 // HasCountryIsNot returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCountryIsNot() bool {
+func (o *RuleProxyRequestCreate) HasCountryIsNot() bool {
 	if o != nil && !IsNil(o.CountryIsNot) {
 		return true
 	}
@@ -382,12 +394,12 @@ func (o *RuleProxyRequest) HasCountryIsNot() bool {
 }
 
 // SetCountryIsNot gets a reference to the given []string and assigns it to the CountryIsNot field.
-func (o *RuleProxyRequest) SetCountryIsNot(v []string) {
+func (o *RuleProxyRequestCreate) SetCountryIsNot(v []string) {
 	o.CountryIsNot = v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetMethod() string {
+func (o *RuleProxyRequestCreate) GetMethod() string {
 	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
@@ -397,7 +409,7 @@ func (o *RuleProxyRequest) GetMethod() string {
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetMethodOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -405,7 +417,7 @@ func (o *RuleProxyRequest) GetMethodOk() (*string, bool) {
 }
 
 // HasMethod returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasMethod() bool {
+func (o *RuleProxyRequestCreate) HasMethod() bool {
 	if o != nil && !IsNil(o.Method) {
 		return true
 	}
@@ -414,12 +426,12 @@ func (o *RuleProxyRequest) HasMethod() bool {
 }
 
 // SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *RuleProxyRequest) SetMethod(v string) {
+func (o *RuleProxyRequestCreate) SetMethod(v string) {
 	o.Method = &v
 }
 
 // GetMethodIs returns the MethodIs field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetMethodIs() []string {
+func (o *RuleProxyRequestCreate) GetMethodIs() []string {
 	if o == nil || IsNil(o.MethodIs) {
 		var ret []string
 		return ret
@@ -429,7 +441,7 @@ func (o *RuleProxyRequest) GetMethodIs() []string {
 
 // GetMethodIsOk returns a tuple with the MethodIs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetMethodIsOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetMethodIsOk() ([]string, bool) {
 	if o == nil || IsNil(o.MethodIs) {
 		return nil, false
 	}
@@ -437,7 +449,7 @@ func (o *RuleProxyRequest) GetMethodIsOk() ([]string, bool) {
 }
 
 // HasMethodIs returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasMethodIs() bool {
+func (o *RuleProxyRequestCreate) HasMethodIs() bool {
 	if o != nil && !IsNil(o.MethodIs) {
 		return true
 	}
@@ -446,12 +458,12 @@ func (o *RuleProxyRequest) HasMethodIs() bool {
 }
 
 // SetMethodIs gets a reference to the given []string and assigns it to the MethodIs field.
-func (o *RuleProxyRequest) SetMethodIs(v []string) {
+func (o *RuleProxyRequestCreate) SetMethodIs(v []string) {
 	o.MethodIs = v
 }
 
 // GetMethodIsNot returns the MethodIsNot field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetMethodIsNot() []string {
+func (o *RuleProxyRequestCreate) GetMethodIsNot() []string {
 	if o == nil || IsNil(o.MethodIsNot) {
 		var ret []string
 		return ret
@@ -461,7 +473,7 @@ func (o *RuleProxyRequest) GetMethodIsNot() []string {
 
 // GetMethodIsNotOk returns a tuple with the MethodIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetMethodIsNotOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetMethodIsNotOk() ([]string, bool) {
 	if o == nil || IsNil(o.MethodIsNot) {
 		return nil, false
 	}
@@ -469,7 +481,7 @@ func (o *RuleProxyRequest) GetMethodIsNotOk() ([]string, bool) {
 }
 
 // HasMethodIsNot returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasMethodIsNot() bool {
+func (o *RuleProxyRequestCreate) HasMethodIsNot() bool {
 	if o != nil && !IsNil(o.MethodIsNot) {
 		return true
 	}
@@ -478,12 +490,12 @@ func (o *RuleProxyRequest) HasMethodIsNot() bool {
 }
 
 // SetMethodIsNot gets a reference to the given []string and assigns it to the MethodIsNot field.
-func (o *RuleProxyRequest) SetMethodIsNot(v []string) {
+func (o *RuleProxyRequestCreate) SetMethodIsNot(v []string) {
 	o.MethodIsNot = v
 }
 
 // GetIp returns the Ip field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetIp() string {
+func (o *RuleProxyRequestCreate) GetIp() string {
 	if o == nil || IsNil(o.Ip) {
 		var ret string
 		return ret
@@ -493,7 +505,7 @@ func (o *RuleProxyRequest) GetIp() string {
 
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetIpOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetIpOk() (*string, bool) {
 	if o == nil || IsNil(o.Ip) {
 		return nil, false
 	}
@@ -501,7 +513,7 @@ func (o *RuleProxyRequest) GetIpOk() (*string, bool) {
 }
 
 // HasIp returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasIp() bool {
+func (o *RuleProxyRequestCreate) HasIp() bool {
 	if o != nil && !IsNil(o.Ip) {
 		return true
 	}
@@ -510,12 +522,12 @@ func (o *RuleProxyRequest) HasIp() bool {
 }
 
 // SetIp gets a reference to the given string and assigns it to the Ip field.
-func (o *RuleProxyRequest) SetIp(v string) {
+func (o *RuleProxyRequestCreate) SetIp(v string) {
 	o.Ip = &v
 }
 
 // GetIpIs returns the IpIs field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetIpIs() []string {
+func (o *RuleProxyRequestCreate) GetIpIs() []string {
 	if o == nil || IsNil(o.IpIs) {
 		var ret []string
 		return ret
@@ -525,7 +537,7 @@ func (o *RuleProxyRequest) GetIpIs() []string {
 
 // GetIpIsOk returns a tuple with the IpIs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetIpIsOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetIpIsOk() ([]string, bool) {
 	if o == nil || IsNil(o.IpIs) {
 		return nil, false
 	}
@@ -533,7 +545,7 @@ func (o *RuleProxyRequest) GetIpIsOk() ([]string, bool) {
 }
 
 // HasIpIs returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasIpIs() bool {
+func (o *RuleProxyRequestCreate) HasIpIs() bool {
 	if o != nil && !IsNil(o.IpIs) {
 		return true
 	}
@@ -542,12 +554,12 @@ func (o *RuleProxyRequest) HasIpIs() bool {
 }
 
 // SetIpIs gets a reference to the given []string and assigns it to the IpIs field.
-func (o *RuleProxyRequest) SetIpIs(v []string) {
+func (o *RuleProxyRequestCreate) SetIpIs(v []string) {
 	o.IpIs = v
 }
 
 // GetIpIsNot returns the IpIsNot field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetIpIsNot() []string {
+func (o *RuleProxyRequestCreate) GetIpIsNot() []string {
 	if o == nil || IsNil(o.IpIsNot) {
 		var ret []string
 		return ret
@@ -557,7 +569,7 @@ func (o *RuleProxyRequest) GetIpIsNot() []string {
 
 // GetIpIsNotOk returns a tuple with the IpIsNot field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetIpIsNotOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetIpIsNotOk() ([]string, bool) {
 	if o == nil || IsNil(o.IpIsNot) {
 		return nil, false
 	}
@@ -565,7 +577,7 @@ func (o *RuleProxyRequest) GetIpIsNotOk() ([]string, bool) {
 }
 
 // HasIpIsNot returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasIpIsNot() bool {
+func (o *RuleProxyRequestCreate) HasIpIsNot() bool {
 	if o != nil && !IsNil(o.IpIsNot) {
 		return true
 	}
@@ -574,12 +586,12 @@ func (o *RuleProxyRequest) HasIpIsNot() bool {
 }
 
 // SetIpIsNot gets a reference to the given []string and assigns it to the IpIsNot field.
-func (o *RuleProxyRequest) SetIpIsNot(v []string) {
+func (o *RuleProxyRequestCreate) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
 // GetTo returns the To field value
-func (o *RuleProxyRequest) GetTo() string {
+func (o *RuleProxyRequestCreate) GetTo() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -590,7 +602,7 @@ func (o *RuleProxyRequest) GetTo() string {
 
 // GetToOk returns a tuple with the To field value
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetToOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetToOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -598,12 +610,12 @@ func (o *RuleProxyRequest) GetToOk() (*string, bool) {
 }
 
 // SetTo sets field value
-func (o *RuleProxyRequest) SetTo(v string) {
+func (o *RuleProxyRequestCreate) SetTo(v string) {
 	o.To = v
 }
 
 // GetHost returns the Host field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetHost() string {
+func (o *RuleProxyRequestCreate) GetHost() string {
 	if o == nil || IsNil(o.Host) {
 		var ret string
 		return ret
@@ -613,7 +625,7 @@ func (o *RuleProxyRequest) GetHost() string {
 
 // GetHostOk returns a tuple with the Host field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetHostOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetHostOk() (*string, bool) {
 	if o == nil || IsNil(o.Host) {
 		return nil, false
 	}
@@ -621,7 +633,7 @@ func (o *RuleProxyRequest) GetHostOk() (*string, bool) {
 }
 
 // HasHost returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasHost() bool {
+func (o *RuleProxyRequestCreate) HasHost() bool {
 	if o != nil && !IsNil(o.Host) {
 		return true
 	}
@@ -630,12 +642,12 @@ func (o *RuleProxyRequest) HasHost() bool {
 }
 
 // SetHost gets a reference to the given string and assigns it to the Host field.
-func (o *RuleProxyRequest) SetHost(v string) {
+func (o *RuleProxyRequestCreate) SetHost(v string) {
 	o.Host = &v
 }
 
 // GetAuthUser returns the AuthUser field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetAuthUser() string {
+func (o *RuleProxyRequestCreate) GetAuthUser() string {
 	if o == nil || IsNil(o.AuthUser) {
 		var ret string
 		return ret
@@ -645,7 +657,7 @@ func (o *RuleProxyRequest) GetAuthUser() string {
 
 // GetAuthUserOk returns a tuple with the AuthUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetAuthUserOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetAuthUserOk() (*string, bool) {
 	if o == nil || IsNil(o.AuthUser) {
 		return nil, false
 	}
@@ -653,7 +665,7 @@ func (o *RuleProxyRequest) GetAuthUserOk() (*string, bool) {
 }
 
 // HasAuthUser returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasAuthUser() bool {
+func (o *RuleProxyRequestCreate) HasAuthUser() bool {
 	if o != nil && !IsNil(o.AuthUser) {
 		return true
 	}
@@ -662,12 +674,12 @@ func (o *RuleProxyRequest) HasAuthUser() bool {
 }
 
 // SetAuthUser gets a reference to the given string and assigns it to the AuthUser field.
-func (o *RuleProxyRequest) SetAuthUser(v string) {
+func (o *RuleProxyRequestCreate) SetAuthUser(v string) {
 	o.AuthUser = &v
 }
 
 // GetAuthPass returns the AuthPass field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetAuthPass() string {
+func (o *RuleProxyRequestCreate) GetAuthPass() string {
 	if o == nil || IsNil(o.AuthPass) {
 		var ret string
 		return ret
@@ -677,7 +689,7 @@ func (o *RuleProxyRequest) GetAuthPass() string {
 
 // GetAuthPassOk returns a tuple with the AuthPass field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetAuthPassOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetAuthPassOk() (*string, bool) {
 	if o == nil || IsNil(o.AuthPass) {
 		return nil, false
 	}
@@ -685,7 +697,7 @@ func (o *RuleProxyRequest) GetAuthPassOk() (*string, bool) {
 }
 
 // HasAuthPass returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasAuthPass() bool {
+func (o *RuleProxyRequestCreate) HasAuthPass() bool {
 	if o != nil && !IsNil(o.AuthPass) {
 		return true
 	}
@@ -694,12 +706,12 @@ func (o *RuleProxyRequest) HasAuthPass() bool {
 }
 
 // SetAuthPass gets a reference to the given string and assigns it to the AuthPass field.
-func (o *RuleProxyRequest) SetAuthPass(v string) {
+func (o *RuleProxyRequestCreate) SetAuthPass(v string) {
 	o.AuthPass = &v
 }
 
 // GetDisableSslVerify returns the DisableSslVerify field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetDisableSslVerify() bool {
+func (o *RuleProxyRequestCreate) GetDisableSslVerify() bool {
 	if o == nil || IsNil(o.DisableSslVerify) {
 		var ret bool
 		return ret
@@ -709,7 +721,7 @@ func (o *RuleProxyRequest) GetDisableSslVerify() bool {
 
 // GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetDisableSslVerifyOk() (*bool, bool) {
+func (o *RuleProxyRequestCreate) GetDisableSslVerifyOk() (*bool, bool) {
 	if o == nil || IsNil(o.DisableSslVerify) {
 		return nil, false
 	}
@@ -717,7 +729,7 @@ func (o *RuleProxyRequest) GetDisableSslVerifyOk() (*bool, bool) {
 }
 
 // HasDisableSslVerify returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasDisableSslVerify() bool {
+func (o *RuleProxyRequestCreate) HasDisableSslVerify() bool {
 	if o != nil && !IsNil(o.DisableSslVerify) {
 		return true
 	}
@@ -726,12 +738,12 @@ func (o *RuleProxyRequest) HasDisableSslVerify() bool {
 }
 
 // SetDisableSslVerify gets a reference to the given bool and assigns it to the DisableSslVerify field.
-func (o *RuleProxyRequest) SetDisableSslVerify(v bool) {
+func (o *RuleProxyRequestCreate) SetDisableSslVerify(v bool) {
 	o.DisableSslVerify = &v
 }
 
 // GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RuleProxyRequest) GetCacheLifetime() string {
+func (o *RuleProxyRequestCreate) GetCacheLifetime() string {
 	if o == nil || IsNil(o.CacheLifetime.Get()) {
 		var ret string
 		return ret
@@ -742,7 +754,7 @@ func (o *RuleProxyRequest) GetCacheLifetime() string {
 // GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RuleProxyRequest) GetCacheLifetimeOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetCacheLifetimeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -750,7 +762,7 @@ func (o *RuleProxyRequest) GetCacheLifetimeOk() (*string, bool) {
 }
 
 // HasCacheLifetime returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasCacheLifetime() bool {
+func (o *RuleProxyRequestCreate) HasCacheLifetime() bool {
 	if o != nil && o.CacheLifetime.IsSet() {
 		return true
 	}
@@ -759,21 +771,21 @@ func (o *RuleProxyRequest) HasCacheLifetime() bool {
 }
 
 // SetCacheLifetime gets a reference to the given NullableString and assigns it to the CacheLifetime field.
-func (o *RuleProxyRequest) SetCacheLifetime(v string) {
+func (o *RuleProxyRequestCreate) SetCacheLifetime(v string) {
 	o.CacheLifetime.Set(&v)
 }
 // SetCacheLifetimeNil sets the value for CacheLifetime to be an explicit nil
-func (o *RuleProxyRequest) SetCacheLifetimeNil() {
+func (o *RuleProxyRequestCreate) SetCacheLifetimeNil() {
 	o.CacheLifetime.Set(nil)
 }
 
 // UnsetCacheLifetime ensures that no value is present for CacheLifetime, not even an explicit nil
-func (o *RuleProxyRequest) UnsetCacheLifetime() {
+func (o *RuleProxyRequestCreate) UnsetCacheLifetime() {
 	o.CacheLifetime.Unset()
 }
 
 // GetOnlyProxy404 returns the OnlyProxy404 field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetOnlyProxy404() bool {
+func (o *RuleProxyRequestCreate) GetOnlyProxy404() bool {
 	if o == nil || IsNil(o.OnlyProxy404) {
 		var ret bool
 		return ret
@@ -783,7 +795,7 @@ func (o *RuleProxyRequest) GetOnlyProxy404() bool {
 
 // GetOnlyProxy404Ok returns a tuple with the OnlyProxy404 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetOnlyProxy404Ok() (*bool, bool) {
+func (o *RuleProxyRequestCreate) GetOnlyProxy404Ok() (*bool, bool) {
 	if o == nil || IsNil(o.OnlyProxy404) {
 		return nil, false
 	}
@@ -791,7 +803,7 @@ func (o *RuleProxyRequest) GetOnlyProxy404Ok() (*bool, bool) {
 }
 
 // HasOnlyProxy404 returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasOnlyProxy404() bool {
+func (o *RuleProxyRequestCreate) HasOnlyProxy404() bool {
 	if o != nil && !IsNil(o.OnlyProxy404) {
 		return true
 	}
@@ -800,12 +812,12 @@ func (o *RuleProxyRequest) HasOnlyProxy404() bool {
 }
 
 // SetOnlyProxy404 gets a reference to the given bool and assigns it to the OnlyProxy404 field.
-func (o *RuleProxyRequest) SetOnlyProxy404(v bool) {
+func (o *RuleProxyRequestCreate) SetOnlyProxy404(v bool) {
 	o.OnlyProxy404 = &v
 }
 
 // GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RuleProxyRequest) GetInjectHeaders() map[string]string {
+func (o *RuleProxyRequestCreate) GetInjectHeaders() map[string]string {
 	if o == nil {
 		var ret map[string]string
 		return ret
@@ -816,7 +828,7 @@ func (o *RuleProxyRequest) GetInjectHeaders() map[string]string {
 // GetInjectHeadersOk returns a tuple with the InjectHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RuleProxyRequest) GetInjectHeadersOk() (*map[string]string, bool) {
+func (o *RuleProxyRequestCreate) GetInjectHeadersOk() (*map[string]string, bool) {
 	if o == nil || IsNil(o.InjectHeaders) {
 		return nil, false
 	}
@@ -824,7 +836,7 @@ func (o *RuleProxyRequest) GetInjectHeadersOk() (*map[string]string, bool) {
 }
 
 // HasInjectHeaders returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasInjectHeaders() bool {
+func (o *RuleProxyRequestCreate) HasInjectHeaders() bool {
 	if o != nil && !IsNil(o.InjectHeaders) {
 		return true
 	}
@@ -833,12 +845,12 @@ func (o *RuleProxyRequest) HasInjectHeaders() bool {
 }
 
 // SetInjectHeaders gets a reference to the given map[string]string and assigns it to the InjectHeaders field.
-func (o *RuleProxyRequest) SetInjectHeaders(v map[string]string) {
+func (o *RuleProxyRequestCreate) SetInjectHeaders(v map[string]string) {
 	o.InjectHeaders = v
 }
 
 // GetProxyStripHeaders returns the ProxyStripHeaders field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetProxyStripHeaders() []string {
+func (o *RuleProxyRequestCreate) GetProxyStripHeaders() []string {
 	if o == nil || IsNil(o.ProxyStripHeaders) {
 		var ret []string
 		return ret
@@ -848,7 +860,7 @@ func (o *RuleProxyRequest) GetProxyStripHeaders() []string {
 
 // GetProxyStripHeadersOk returns a tuple with the ProxyStripHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetProxyStripHeadersOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetProxyStripHeadersOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProxyStripHeaders) {
 		return nil, false
 	}
@@ -856,7 +868,7 @@ func (o *RuleProxyRequest) GetProxyStripHeadersOk() ([]string, bool) {
 }
 
 // HasProxyStripHeaders returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasProxyStripHeaders() bool {
+func (o *RuleProxyRequestCreate) HasProxyStripHeaders() bool {
 	if o != nil && !IsNil(o.ProxyStripHeaders) {
 		return true
 	}
@@ -865,12 +877,12 @@ func (o *RuleProxyRequest) HasProxyStripHeaders() bool {
 }
 
 // SetProxyStripHeaders gets a reference to the given []string and assigns it to the ProxyStripHeaders field.
-func (o *RuleProxyRequest) SetProxyStripHeaders(v []string) {
+func (o *RuleProxyRequestCreate) SetProxyStripHeaders(v []string) {
 	o.ProxyStripHeaders = v
 }
 
 // GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetProxyStripRequestHeaders() []string {
+func (o *RuleProxyRequestCreate) GetProxyStripRequestHeaders() []string {
 	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
 		var ret []string
 		return ret
@@ -880,7 +892,7 @@ func (o *RuleProxyRequest) GetProxyStripRequestHeaders() []string {
 
 // GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetProxyStripRequestHeadersOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetProxyStripRequestHeadersOk() ([]string, bool) {
 	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
 		return nil, false
 	}
@@ -888,7 +900,7 @@ func (o *RuleProxyRequest) GetProxyStripRequestHeadersOk() ([]string, bool) {
 }
 
 // HasProxyStripRequestHeaders returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool {
+func (o *RuleProxyRequestCreate) HasProxyStripRequestHeaders() bool {
 	if o != nil && !IsNil(o.ProxyStripRequestHeaders) {
 		return true
 	}
@@ -897,12 +909,44 @@ func (o *RuleProxyRequest) HasProxyStripRequestHeaders() bool {
 }
 
 // SetProxyStripRequestHeaders gets a reference to the given []string and assigns it to the ProxyStripRequestHeaders field.
-func (o *RuleProxyRequest) SetProxyStripRequestHeaders(v []string) {
+func (o *RuleProxyRequestCreate) SetProxyStripRequestHeaders(v []string) {
 	o.ProxyStripRequestHeaders = v
 }
 
+// GetOriginTimeout returns the OriginTimeout field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetOriginTimeout() int32 {
+	if o == nil || IsNil(o.OriginTimeout) {
+		var ret int32
+		return ret
+	}
+	return *o.OriginTimeout
+}
+
+// GetOriginTimeoutOk returns a tuple with the OriginTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetOriginTimeoutOk() (*int32, bool) {
+	if o == nil || IsNil(o.OriginTimeout) {
+		return nil, false
+	}
+	return o.OriginTimeout, true
+}
+
+// HasOriginTimeout returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasOriginTimeout() bool {
+	if o != nil && !IsNil(o.OriginTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginTimeout gets a reference to the given int32 and assigns it to the OriginTimeout field.
+func (o *RuleProxyRequestCreate) SetOriginTimeout(v int32) {
+	o.OriginTimeout = &v
+}
+
 // GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetProxyAlertEnabled() bool {
+func (o *RuleProxyRequestCreate) GetProxyAlertEnabled() bool {
 	if o == nil || IsNil(o.ProxyAlertEnabled) {
 		var ret bool
 		return ret
@@ -912,7 +956,7 @@ func (o *RuleProxyRequest) GetProxyAlertEnabled() bool {
 
 // GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool) {
+func (o *RuleProxyRequestCreate) GetProxyAlertEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.ProxyAlertEnabled) {
 		return nil, false
 	}
@@ -920,7 +964,7 @@ func (o *RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool) {
 }
 
 // HasProxyAlertEnabled returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasProxyAlertEnabled() bool {
+func (o *RuleProxyRequestCreate) HasProxyAlertEnabled() bool {
 	if o != nil && !IsNil(o.ProxyAlertEnabled) {
 		return true
 	}
@@ -929,12 +973,76 @@ func (o *RuleProxyRequest) HasProxyAlertEnabled() bool {
 }
 
 // SetProxyAlertEnabled gets a reference to the given bool and assigns it to the ProxyAlertEnabled field.
-func (o *RuleProxyRequest) SetProxyAlertEnabled(v bool) {
+func (o *RuleProxyRequestCreate) SetProxyAlertEnabled(v bool) {
 	o.ProxyAlertEnabled = &v
 }
 
+// GetStaticErrorPage returns the StaticErrorPage field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetStaticErrorPage() string {
+	if o == nil || IsNil(o.StaticErrorPage) {
+		var ret string
+		return ret
+	}
+	return *o.StaticErrorPage
+}
+
+// GetStaticErrorPageOk returns a tuple with the StaticErrorPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetStaticErrorPageOk() (*string, bool) {
+	if o == nil || IsNil(o.StaticErrorPage) {
+		return nil, false
+	}
+	return o.StaticErrorPage, true
+}
+
+// HasStaticErrorPage returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasStaticErrorPage() bool {
+	if o != nil && !IsNil(o.StaticErrorPage) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPage gets a reference to the given string and assigns it to the StaticErrorPage field.
+func (o *RuleProxyRequestCreate) SetStaticErrorPage(v string) {
+	o.StaticErrorPage = &v
+}
+
+// GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetStaticErrorPageStatusCodes() []string {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.StaticErrorPageStatusCodes
+}
+
+// GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetStaticErrorPageStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		return nil, false
+	}
+	return o.StaticErrorPageStatusCodes, true
+}
+
+// HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasStaticErrorPageStatusCodes() bool {
+	if o != nil && !IsNil(o.StaticErrorPageStatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPageStatusCodes gets a reference to the given []string and assigns it to the StaticErrorPageStatusCodes field.
+func (o *RuleProxyRequestCreate) SetStaticErrorPageStatusCodes(v []string) {
+	o.StaticErrorPageStatusCodes = v
+}
+
 // GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverMode() bool {
+func (o *RuleProxyRequestCreate) GetFailoverMode() bool {
 	if o == nil || IsNil(o.FailoverMode) {
 		var ret bool
 		return ret
@@ -944,7 +1052,7 @@ func (o *RuleProxyRequest) GetFailoverMode() bool {
 
 // GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverModeOk() (*bool, bool) {
+func (o *RuleProxyRequestCreate) GetFailoverModeOk() (*bool, bool) {
 	if o == nil || IsNil(o.FailoverMode) {
 		return nil, false
 	}
@@ -952,7 +1060,7 @@ func (o *RuleProxyRequest) GetFailoverModeOk() (*bool, bool) {
 }
 
 // HasFailoverMode returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasFailoverMode() bool {
+func (o *RuleProxyRequestCreate) HasFailoverMode() bool {
 	if o != nil && !IsNil(o.FailoverMode) {
 		return true
 	}
@@ -961,12 +1069,12 @@ func (o *RuleProxyRequest) HasFailoverMode() bool {
 }
 
 // SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
-func (o *RuleProxyRequest) SetFailoverMode(v bool) {
+func (o *RuleProxyRequestCreate) SetFailoverMode(v bool) {
 	o.FailoverMode = &v
 }
 
 // GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverOriginTtfb() string {
+func (o *RuleProxyRequestCreate) GetFailoverOriginTtfb() string {
 	if o == nil || IsNil(o.FailoverOriginTtfb) {
 		var ret string
 		return ret
@@ -976,7 +1084,7 @@ func (o *RuleProxyRequest) GetFailoverOriginTtfb() string {
 
 // GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverOriginTtfbOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetFailoverOriginTtfbOk() (*string, bool) {
 	if o == nil || IsNil(o.FailoverOriginTtfb) {
 		return nil, false
 	}
@@ -984,7 +1092,7 @@ func (o *RuleProxyRequest) GetFailoverOriginTtfbOk() (*string, bool) {
 }
 
 // HasFailoverOriginTtfb returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasFailoverOriginTtfb() bool {
+func (o *RuleProxyRequestCreate) HasFailoverOriginTtfb() bool {
 	if o != nil && !IsNil(o.FailoverOriginTtfb) {
 		return true
 	}
@@ -993,12 +1101,12 @@ func (o *RuleProxyRequest) HasFailoverOriginTtfb() bool {
 }
 
 // SetFailoverOriginTtfb gets a reference to the given string and assigns it to the FailoverOriginTtfb field.
-func (o *RuleProxyRequest) SetFailoverOriginTtfb(v string) {
+func (o *RuleProxyRequestCreate) SetFailoverOriginTtfb(v string) {
 	o.FailoverOriginTtfb = &v
 }
 
 // GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverOriginStatusCodes() []string {
+func (o *RuleProxyRequestCreate) GetFailoverOriginStatusCodes() []string {
 	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
 		var ret []string
 		return ret
@@ -1008,7 +1116,7 @@ func (o *RuleProxyRequest) GetFailoverOriginStatusCodes() []string {
 
 // GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverOriginStatusCodesOk() ([]string, bool) {
+func (o *RuleProxyRequestCreate) GetFailoverOriginStatusCodesOk() ([]string, bool) {
 	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
 		return nil, false
 	}
@@ -1016,7 +1124,7 @@ func (o *RuleProxyRequest) GetFailoverOriginStatusCodesOk() ([]string, bool) {
 }
 
 // HasFailoverOriginStatusCodes returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasFailoverOriginStatusCodes() bool {
+func (o *RuleProxyRequestCreate) HasFailoverOriginStatusCodes() bool {
 	if o != nil && !IsNil(o.FailoverOriginStatusCodes) {
 		return true
 	}
@@ -1025,12 +1133,12 @@ func (o *RuleProxyRequest) HasFailoverOriginStatusCodes() bool {
 }
 
 // SetFailoverOriginStatusCodes gets a reference to the given []string and assigns it to the FailoverOriginStatusCodes field.
-func (o *RuleProxyRequest) SetFailoverOriginStatusCodes(v []string) {
+func (o *RuleProxyRequestCreate) SetFailoverOriginStatusCodes(v []string) {
 	o.FailoverOriginStatusCodes = v
 }
 
 // GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetFailoverLifetime() string {
+func (o *RuleProxyRequestCreate) GetFailoverLifetime() string {
 	if o == nil || IsNil(o.FailoverLifetime) {
 		var ret string
 		return ret
@@ -1040,7 +1148,7 @@ func (o *RuleProxyRequest) GetFailoverLifetime() string {
 
 // GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetFailoverLifetimeOk() (*string, bool) {
 	if o == nil || IsNil(o.FailoverLifetime) {
 		return nil, false
 	}
@@ -1048,7 +1156,7 @@ func (o *RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool) {
 }
 
 // HasFailoverLifetime returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasFailoverLifetime() bool {
+func (o *RuleProxyRequestCreate) HasFailoverLifetime() bool {
 	if o != nil && !IsNil(o.FailoverLifetime) {
 		return true
 	}
@@ -1057,12 +1165,12 @@ func (o *RuleProxyRequest) HasFailoverLifetime() bool {
 }
 
 // SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
-func (o *RuleProxyRequest) SetFailoverLifetime(v string) {
+func (o *RuleProxyRequestCreate) SetFailoverLifetime(v string) {
 	o.FailoverLifetime = &v
 }
 
 // GetNotify returns the Notify field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetNotify() string {
+func (o *RuleProxyRequestCreate) GetNotify() string {
 	if o == nil || IsNil(o.Notify) {
 		var ret string
 		return ret
@@ -1072,7 +1180,7 @@ func (o *RuleProxyRequest) GetNotify() string {
 
 // GetNotifyOk returns a tuple with the Notify field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetNotifyOk() (*string, bool) {
+func (o *RuleProxyRequestCreate) GetNotifyOk() (*string, bool) {
 	if o == nil || IsNil(o.Notify) {
 		return nil, false
 	}
@@ -1080,7 +1188,7 @@ func (o *RuleProxyRequest) GetNotifyOk() (*string, bool) {
 }
 
 // HasNotify returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasNotify() bool {
+func (o *RuleProxyRequestCreate) HasNotify() bool {
 	if o != nil && !IsNil(o.Notify) {
 		return true
 	}
@@ -1089,12 +1197,12 @@ func (o *RuleProxyRequest) HasNotify() bool {
 }
 
 // SetNotify gets a reference to the given string and assigns it to the Notify field.
-func (o *RuleProxyRequest) SetNotify(v string) {
+func (o *RuleProxyRequestCreate) SetNotify(v string) {
 	o.Notify = &v
 }
 
 // GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetNotifyConfig() NotifyConfig {
+func (o *RuleProxyRequestCreate) GetNotifyConfig() NotifyConfig {
 	if o == nil || IsNil(o.NotifyConfig) {
 		var ret NotifyConfig
 		return ret
@@ -1104,7 +1212,7 @@ func (o *RuleProxyRequest) GetNotifyConfig() NotifyConfig {
 
 // GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetNotifyConfigOk() (*NotifyConfig, bool) {
+func (o *RuleProxyRequestCreate) GetNotifyConfigOk() (*NotifyConfig, bool) {
 	if o == nil || IsNil(o.NotifyConfig) {
 		return nil, false
 	}
@@ -1112,7 +1220,7 @@ func (o *RuleProxyRequest) GetNotifyConfigOk() (*NotifyConfig, bool) {
 }
 
 // HasNotifyConfig returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasNotifyConfig() bool {
+func (o *RuleProxyRequestCreate) HasNotifyConfig() bool {
 	if o != nil && !IsNil(o.NotifyConfig) {
 		return true
 	}
@@ -1121,12 +1229,12 @@ func (o *RuleProxyRequest) HasNotifyConfig() bool {
 }
 
 // SetNotifyConfig gets a reference to the given NotifyConfig and assigns it to the NotifyConfig field.
-func (o *RuleProxyRequest) SetNotifyConfig(v NotifyConfig) {
+func (o *RuleProxyRequestCreate) SetNotifyConfig(v NotifyConfig) {
 	o.NotifyConfig = &v
 }
 
 // GetWafEnabled returns the WafEnabled field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetWafEnabled() bool {
+func (o *RuleProxyRequestCreate) GetWafEnabled() bool {
 	if o == nil || IsNil(o.WafEnabled) {
 		var ret bool
 		return ret
@@ -1136,7 +1244,7 @@ func (o *RuleProxyRequest) GetWafEnabled() bool {
 
 // GetWafEnabledOk returns a tuple with the WafEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetWafEnabledOk() (*bool, bool) {
+func (o *RuleProxyRequestCreate) GetWafEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.WafEnabled) {
 		return nil, false
 	}
@@ -1144,7 +1252,7 @@ func (o *RuleProxyRequest) GetWafEnabledOk() (*bool, bool) {
 }
 
 // HasWafEnabled returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasWafEnabled() bool {
+func (o *RuleProxyRequestCreate) HasWafEnabled() bool {
 	if o != nil && !IsNil(o.WafEnabled) {
 		return true
 	}
@@ -1153,12 +1261,12 @@ func (o *RuleProxyRequest) HasWafEnabled() bool {
 }
 
 // SetWafEnabled gets a reference to the given bool and assigns it to the WafEnabled field.
-func (o *RuleProxyRequest) SetWafEnabled(v bool) {
+func (o *RuleProxyRequestCreate) SetWafEnabled(v bool) {
 	o.WafEnabled = &v
 }
 
 // GetWafConfig returns the WafConfig field value if set, zero value otherwise.
-func (o *RuleProxyRequest) GetWafConfig() WAFConfig {
+func (o *RuleProxyRequestCreate) GetWafConfig() WAFConfig {
 	if o == nil || IsNil(o.WafConfig) {
 		var ret WAFConfig
 		return ret
@@ -1168,7 +1276,7 @@ func (o *RuleProxyRequest) GetWafConfig() WAFConfig {
 
 // GetWafConfigOk returns a tuple with the WafConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyRequest) GetWafConfigOk() (*WAFConfig, bool) {
+func (o *RuleProxyRequestCreate) GetWafConfigOk() (*WAFConfig, bool) {
 	if o == nil || IsNil(o.WafConfig) {
 		return nil, false
 	}
@@ -1176,7 +1284,7 @@ func (o *RuleProxyRequest) GetWafConfigOk() (*WAFConfig, bool) {
 }
 
 // HasWafConfig returns a boolean if a field has been set.
-func (o *RuleProxyRequest) HasWafConfig() bool {
+func (o *RuleProxyRequestCreate) HasWafConfig() bool {
 	if o != nil && !IsNil(o.WafConfig) {
 		return true
 	}
@@ -1185,11 +1293,171 @@ func (o *RuleProxyRequest) HasWafConfig() bool {
 }
 
 // SetWafConfig gets a reference to the given WAFConfig and assigns it to the WafConfig field.
-func (o *RuleProxyRequest) SetWafConfig(v WAFConfig) {
+func (o *RuleProxyRequestCreate) SetWafConfig(v WAFConfig) {
 	o.WafConfig = &v
 }
 
-func (o RuleProxyRequest) MarshalJSON() ([]byte, error) {
+// GetApplicationProxy returns the ApplicationProxy field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetApplicationProxy() bool {
+	if o == nil || IsNil(o.ApplicationProxy) {
+		var ret bool
+		return ret
+	}
+	return *o.ApplicationProxy
+}
+
+// GetApplicationProxyOk returns a tuple with the ApplicationProxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetApplicationProxyOk() (*bool, bool) {
+	if o == nil || IsNil(o.ApplicationProxy) {
+		return nil, false
+	}
+	return o.ApplicationProxy, true
+}
+
+// HasApplicationProxy returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasApplicationProxy() bool {
+	if o != nil && !IsNil(o.ApplicationProxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationProxy gets a reference to the given bool and assigns it to the ApplicationProxy field.
+func (o *RuleProxyRequestCreate) SetApplicationProxy(v bool) {
+	o.ApplicationProxy = &v
+}
+
+// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetApplicationName() string {
+	if o == nil || IsNil(o.ApplicationName) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationName
+}
+
+// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetApplicationNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationName) {
+		return nil, false
+	}
+	return o.ApplicationName, true
+}
+
+// HasApplicationName returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasApplicationName() bool {
+	if o != nil && !IsNil(o.ApplicationName) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationName gets a reference to the given string and assigns it to the ApplicationName field.
+func (o *RuleProxyRequestCreate) SetApplicationName(v string) {
+	o.ApplicationName = &v
+}
+
+// GetApplicationEnvironment returns the ApplicationEnvironment field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetApplicationEnvironment() string {
+	if o == nil || IsNil(o.ApplicationEnvironment) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationEnvironment
+}
+
+// GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetApplicationEnvironmentOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationEnvironment) {
+		return nil, false
+	}
+	return o.ApplicationEnvironment, true
+}
+
+// HasApplicationEnvironment returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasApplicationEnvironment() bool {
+	if o != nil && !IsNil(o.ApplicationEnvironment) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationEnvironment gets a reference to the given string and assigns it to the ApplicationEnvironment field.
+func (o *RuleProxyRequestCreate) SetApplicationEnvironment(v string) {
+	o.ApplicationEnvironment = &v
+}
+
+// GetApplicationContainer returns the ApplicationContainer field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetApplicationContainer() string {
+	if o == nil || IsNil(o.ApplicationContainer) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationContainer
+}
+
+// GetApplicationContainerOk returns a tuple with the ApplicationContainer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetApplicationContainerOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationContainer) {
+		return nil, false
+	}
+	return o.ApplicationContainer, true
+}
+
+// HasApplicationContainer returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasApplicationContainer() bool {
+	if o != nil && !IsNil(o.ApplicationContainer) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationContainer gets a reference to the given string and assigns it to the ApplicationContainer field.
+func (o *RuleProxyRequestCreate) SetApplicationContainer(v string) {
+	o.ApplicationContainer = &v
+}
+
+// GetApplicationPort returns the ApplicationPort field value if set, zero value otherwise.
+func (o *RuleProxyRequestCreate) GetApplicationPort() int32 {
+	if o == nil || IsNil(o.ApplicationPort) {
+		var ret int32
+		return ret
+	}
+	return *o.ApplicationPort
+}
+
+// GetApplicationPortOk returns a tuple with the ApplicationPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleProxyRequestCreate) GetApplicationPortOk() (*int32, bool) {
+	if o == nil || IsNil(o.ApplicationPort) {
+		return nil, false
+	}
+	return o.ApplicationPort, true
+}
+
+// HasApplicationPort returns a boolean if a field has been set.
+func (o *RuleProxyRequestCreate) HasApplicationPort() bool {
+	if o != nil && !IsNil(o.ApplicationPort) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationPort gets a reference to the given int32 and assigns it to the ApplicationPort field.
+func (o *RuleProxyRequestCreate) SetApplicationPort(v int32) {
+	o.ApplicationPort = &v
+}
+
+func (o RuleProxyRequestCreate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -1197,7 +1465,7 @@ func (o RuleProxyRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
+func (o RuleProxyRequestCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
@@ -1266,8 +1534,17 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProxyStripRequestHeaders) {
 		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
 	}
+	if !IsNil(o.OriginTimeout) {
+		toSerialize["origin_timeout"] = o.OriginTimeout
+	}
 	if !IsNil(o.ProxyAlertEnabled) {
 		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
+	}
+	if !IsNil(o.StaticErrorPage) {
+		toSerialize["static_error_page"] = o.StaticErrorPage
+	}
+	if !IsNil(o.StaticErrorPageStatusCodes) {
+		toSerialize["static_error_page_status_codes"] = o.StaticErrorPageStatusCodes
 	}
 	if !IsNil(o.FailoverMode) {
 		toSerialize["failover_mode"] = o.FailoverMode
@@ -1293,6 +1570,21 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WafConfig) {
 		toSerialize["waf_config"] = o.WafConfig
 	}
+	if !IsNil(o.ApplicationProxy) {
+		toSerialize["application_proxy"] = o.ApplicationProxy
+	}
+	if !IsNil(o.ApplicationName) {
+		toSerialize["application_name"] = o.ApplicationName
+	}
+	if !IsNil(o.ApplicationEnvironment) {
+		toSerialize["application_environment"] = o.ApplicationEnvironment
+	}
+	if !IsNil(o.ApplicationContainer) {
+		toSerialize["application_container"] = o.ApplicationContainer
+	}
+	if !IsNil(o.ApplicationPort) {
+		toSerialize["application_port"] = o.ApplicationPort
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1301,7 +1593,7 @@ func (o RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *RuleProxyRequestCreate) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -1326,15 +1618,15 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRuleProxyRequest := _RuleProxyRequest{}
+	varRuleProxyRequestCreate := _RuleProxyRequestCreate{}
 
-	err = json.Unmarshal(data, &varRuleProxyRequest)
+	err = json.Unmarshal(data, &varRuleProxyRequestCreate)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RuleProxyRequest(varRuleProxyRequest)
+	*o = RuleProxyRequestCreate(varRuleProxyRequestCreate)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -1364,7 +1656,10 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "inject_headers")
 		delete(additionalProperties, "proxy_strip_headers")
 		delete(additionalProperties, "proxy_strip_request_headers")
+		delete(additionalProperties, "origin_timeout")
 		delete(additionalProperties, "proxy_alert_enabled")
+		delete(additionalProperties, "static_error_page")
+		delete(additionalProperties, "static_error_page_status_codes")
 		delete(additionalProperties, "failover_mode")
 		delete(additionalProperties, "failover_origin_ttfb")
 		delete(additionalProperties, "failover_origin_status_codes")
@@ -1373,44 +1668,49 @@ func (o *RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "notify_config")
 		delete(additionalProperties, "waf_enabled")
 		delete(additionalProperties, "waf_config")
+		delete(additionalProperties, "application_proxy")
+		delete(additionalProperties, "application_name")
+		delete(additionalProperties, "application_environment")
+		delete(additionalProperties, "application_container")
+		delete(additionalProperties, "application_port")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableRuleProxyRequest struct {
-	value *RuleProxyRequest
+type NullableRuleProxyRequestCreate struct {
+	value *RuleProxyRequestCreate
 	isSet bool
 }
 
-func (v NullableRuleProxyRequest) Get() *RuleProxyRequest {
+func (v NullableRuleProxyRequestCreate) Get() *RuleProxyRequestCreate {
 	return v.value
 }
 
-func (v *NullableRuleProxyRequest) Set(val *RuleProxyRequest) {
+func (v *NullableRuleProxyRequestCreate) Set(val *RuleProxyRequestCreate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRuleProxyRequest) IsSet() bool {
+func (v NullableRuleProxyRequestCreate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRuleProxyRequest) Unset() {
+func (v *NullableRuleProxyRequestCreate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRuleProxyRequest(val *RuleProxyRequest) *NullableRuleProxyRequest {
-	return &NullableRuleProxyRequest{value: val, isSet: true}
+func NewNullableRuleProxyRequestCreate(val *RuleProxyRequestCreate) *NullableRuleProxyRequestCreate {
+	return &NullableRuleProxyRequestCreate{value: val, isSet: true}
 }
 
-func (v NullableRuleProxyRequest) MarshalJSON() ([]byte, error) {
+func (v NullableRuleProxyRequestCreate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRuleProxyRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableRuleProxyRequestCreate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

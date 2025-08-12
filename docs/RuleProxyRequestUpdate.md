@@ -29,7 +29,10 @@ Name | Type | Description | Notes
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
+**OriginTimeout** | Pointer to **int32** |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
+**StaticErrorPage** | Pointer to **string** |  | [optional] 
+**StaticErrorPageStatusCodes** | Pointer to **[]string** |  | [optional] 
 **FailoverMode** | Pointer to **bool** |  | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** |  | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** |  | [optional] [default to ["200","404","301","302","304"]]
@@ -38,6 +41,11 @@ Name | Type | Description | Notes
 **NotifyConfig** | Pointer to [**NotifyConfig**](NotifyConfig.md) |  | [optional] 
 **WafEnabled** | Pointer to **bool** |  | [optional] [default to false]
 **WafConfig** | Pointer to [**WAFConfigUpdate**](WAFConfigUpdate.md) |  | [optional] 
+**ApplicationProxy** | Pointer to **bool** |  | [optional] [default to false]
+**ApplicationName** | Pointer to **string** |  | [optional] 
+**ApplicationEnvironment** | Pointer to **string** |  | [optional] 
+**ApplicationContainer** | Pointer to **string** |  | [optional] 
+**ApplicationPort** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
@@ -703,6 +711,31 @@ SetProxyStripRequestHeaders sets ProxyStripRequestHeaders field to given value.
 
 HasProxyStripRequestHeaders returns a boolean if a field has been set.
 
+### GetOriginTimeout
+
+`func (o *RuleProxyRequestUpdate) GetOriginTimeout() int32`
+
+GetOriginTimeout returns the OriginTimeout field if non-nil, zero value otherwise.
+
+### GetOriginTimeoutOk
+
+`func (o *RuleProxyRequestUpdate) GetOriginTimeoutOk() (*int32, bool)`
+
+GetOriginTimeoutOk returns a tuple with the OriginTimeout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginTimeout
+
+`func (o *RuleProxyRequestUpdate) SetOriginTimeout(v int32)`
+
+SetOriginTimeout sets OriginTimeout field to given value.
+
+### HasOriginTimeout
+
+`func (o *RuleProxyRequestUpdate) HasOriginTimeout() bool`
+
+HasOriginTimeout returns a boolean if a field has been set.
+
 ### GetProxyAlertEnabled
 
 `func (o *RuleProxyRequestUpdate) GetProxyAlertEnabled() bool`
@@ -727,6 +760,56 @@ SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
 `func (o *RuleProxyRequestUpdate) HasProxyAlertEnabled() bool`
 
 HasProxyAlertEnabled returns a boolean if a field has been set.
+
+### GetStaticErrorPage
+
+`func (o *RuleProxyRequestUpdate) GetStaticErrorPage() string`
+
+GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageOk
+
+`func (o *RuleProxyRequestUpdate) GetStaticErrorPageOk() (*string, bool)`
+
+GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPage
+
+`func (o *RuleProxyRequestUpdate) SetStaticErrorPage(v string)`
+
+SetStaticErrorPage sets StaticErrorPage field to given value.
+
+### HasStaticErrorPage
+
+`func (o *RuleProxyRequestUpdate) HasStaticErrorPage() bool`
+
+HasStaticErrorPage returns a boolean if a field has been set.
+
+### GetStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequestUpdate) GetStaticErrorPageStatusCodes() []string`
+
+GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageStatusCodesOk
+
+`func (o *RuleProxyRequestUpdate) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
+
+GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequestUpdate) SetStaticErrorPageStatusCodes(v []string)`
+
+SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
+
+### HasStaticErrorPageStatusCodes
+
+`func (o *RuleProxyRequestUpdate) HasStaticErrorPageStatusCodes() bool`
+
+HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
 
 ### GetFailoverMode
 
@@ -927,6 +1010,131 @@ SetWafConfig sets WafConfig field to given value.
 `func (o *RuleProxyRequestUpdate) HasWafConfig() bool`
 
 HasWafConfig returns a boolean if a field has been set.
+
+### GetApplicationProxy
+
+`func (o *RuleProxyRequestUpdate) GetApplicationProxy() bool`
+
+GetApplicationProxy returns the ApplicationProxy field if non-nil, zero value otherwise.
+
+### GetApplicationProxyOk
+
+`func (o *RuleProxyRequestUpdate) GetApplicationProxyOk() (*bool, bool)`
+
+GetApplicationProxyOk returns a tuple with the ApplicationProxy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationProxy
+
+`func (o *RuleProxyRequestUpdate) SetApplicationProxy(v bool)`
+
+SetApplicationProxy sets ApplicationProxy field to given value.
+
+### HasApplicationProxy
+
+`func (o *RuleProxyRequestUpdate) HasApplicationProxy() bool`
+
+HasApplicationProxy returns a boolean if a field has been set.
+
+### GetApplicationName
+
+`func (o *RuleProxyRequestUpdate) GetApplicationName() string`
+
+GetApplicationName returns the ApplicationName field if non-nil, zero value otherwise.
+
+### GetApplicationNameOk
+
+`func (o *RuleProxyRequestUpdate) GetApplicationNameOk() (*string, bool)`
+
+GetApplicationNameOk returns a tuple with the ApplicationName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationName
+
+`func (o *RuleProxyRequestUpdate) SetApplicationName(v string)`
+
+SetApplicationName sets ApplicationName field to given value.
+
+### HasApplicationName
+
+`func (o *RuleProxyRequestUpdate) HasApplicationName() bool`
+
+HasApplicationName returns a boolean if a field has been set.
+
+### GetApplicationEnvironment
+
+`func (o *RuleProxyRequestUpdate) GetApplicationEnvironment() string`
+
+GetApplicationEnvironment returns the ApplicationEnvironment field if non-nil, zero value otherwise.
+
+### GetApplicationEnvironmentOk
+
+`func (o *RuleProxyRequestUpdate) GetApplicationEnvironmentOk() (*string, bool)`
+
+GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationEnvironment
+
+`func (o *RuleProxyRequestUpdate) SetApplicationEnvironment(v string)`
+
+SetApplicationEnvironment sets ApplicationEnvironment field to given value.
+
+### HasApplicationEnvironment
+
+`func (o *RuleProxyRequestUpdate) HasApplicationEnvironment() bool`
+
+HasApplicationEnvironment returns a boolean if a field has been set.
+
+### GetApplicationContainer
+
+`func (o *RuleProxyRequestUpdate) GetApplicationContainer() string`
+
+GetApplicationContainer returns the ApplicationContainer field if non-nil, zero value otherwise.
+
+### GetApplicationContainerOk
+
+`func (o *RuleProxyRequestUpdate) GetApplicationContainerOk() (*string, bool)`
+
+GetApplicationContainerOk returns a tuple with the ApplicationContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationContainer
+
+`func (o *RuleProxyRequestUpdate) SetApplicationContainer(v string)`
+
+SetApplicationContainer sets ApplicationContainer field to given value.
+
+### HasApplicationContainer
+
+`func (o *RuleProxyRequestUpdate) HasApplicationContainer() bool`
+
+HasApplicationContainer returns a boolean if a field has been set.
+
+### GetApplicationPort
+
+`func (o *RuleProxyRequestUpdate) GetApplicationPort() int32`
+
+GetApplicationPort returns the ApplicationPort field if non-nil, zero value otherwise.
+
+### GetApplicationPortOk
+
+`func (o *RuleProxyRequestUpdate) GetApplicationPortOk() (*int32, bool)`
+
+GetApplicationPortOk returns a tuple with the ApplicationPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationPort
+
+`func (o *RuleProxyRequestUpdate) SetApplicationPort(v int32)`
+
+SetApplicationPort sets ApplicationPort field to given value.
+
+### HasApplicationPort
+
+`func (o *RuleProxyRequestUpdate) HasApplicationPort() bool`
+
+HasApplicationPort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

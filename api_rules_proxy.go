@@ -103,11 +103,11 @@ type RulesProxyAPIRulesProxyCreateRequest struct {
 	ApiService RulesProxyAPI
 	organization string
 	project string
-	ruleProxyRequest *RuleProxyRequest
+	ruleProxyRequestCreate *RuleProxyRequestCreate
 }
 
-func (r RulesProxyAPIRulesProxyCreateRequest) RuleProxyRequest(ruleProxyRequest RuleProxyRequest) RulesProxyAPIRulesProxyCreateRequest {
-	r.ruleProxyRequest = &ruleProxyRequest
+func (r RulesProxyAPIRulesProxyCreateRequest) RuleProxyRequestCreate(ruleProxyRequestCreate RuleProxyRequestCreate) RulesProxyAPIRulesProxyCreateRequest {
+	r.ruleProxyRequestCreate = &ruleProxyRequestCreate
 	return r
 }
 
@@ -154,8 +154,8 @@ func (a *RulesProxyAPIService) RulesProxyCreateExecute(r RulesProxyAPIRulesProxy
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ruleProxyRequest == nil {
-		return localVarReturnValue, nil, reportError("ruleProxyRequest is required and must be specified")
+	if r.ruleProxyRequestCreate == nil {
+		return localVarReturnValue, nil, reportError("ruleProxyRequestCreate is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -176,7 +176,7 @@ func (a *RulesProxyAPIService) RulesProxyCreateExecute(r RulesProxyAPIRulesProxy
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ruleProxyRequest
+	localVarPostBody = r.ruleProxyRequestCreate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
