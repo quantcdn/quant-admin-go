@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **InjectHeaders** | Pointer to **map[string]string** |  | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** |  | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** |  | [optional] 
-**OriginTimeout** | Pointer to **int32** |  | [optional] 
+**OriginTimeout** | Pointer to **string** |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** |  | [optional] 
 **StaticErrorPage** | Pointer to **string** |  | [optional] 
 **StaticErrorPageStatusCodes** | Pointer to **[]string** |  | [optional] 
@@ -693,20 +693,20 @@ HasProxyStripRequestHeaders returns a boolean if a field has been set.
 
 ### GetOriginTimeout
 
-`func (o *RuleProxyRequestCreate) GetOriginTimeout() int32`
+`func (o *RuleProxyRequestCreate) GetOriginTimeout() string`
 
 GetOriginTimeout returns the OriginTimeout field if non-nil, zero value otherwise.
 
 ### GetOriginTimeoutOk
 
-`func (o *RuleProxyRequestCreate) GetOriginTimeoutOk() (*int32, bool)`
+`func (o *RuleProxyRequestCreate) GetOriginTimeoutOk() (*string, bool)`
 
 GetOriginTimeoutOk returns a tuple with the OriginTimeout field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOriginTimeout
 
-`func (o *RuleProxyRequestCreate) SetOriginTimeout(v int32)`
+`func (o *RuleProxyRequestCreate) SetOriginTimeout(v string)`
 
 SetOriginTimeout sets OriginTimeout field to given value.
 

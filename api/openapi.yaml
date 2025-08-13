@@ -4830,7 +4830,7 @@ components:
       example:
         rule_id: rule_id
         action_config:
-          origin_timeout: 0
+          origin_timeout: origin_timeout
           cache_lifetime: cache_lifetime
           proxy_strip_request_headers:
           - proxy_strip_request_headers
@@ -4863,23 +4863,23 @@ components:
             allow_rules:
             - allow_rules
             - allow_rules
-            waf_ratelimit_cooldown: 2
+            waf_ratelimit_cooldown: 3
             request_header_ratelimit_mode: disabled
             ip_ratelimit_cooldown: 5
-            request_header_ratelimit_cooldown: 7
-            notify_slack_hits_rpm: 1
+            request_header_ratelimit_cooldown: 2
+            notify_slack_hits_rpm: 6
             allow_ip:
             - allow_ip
             - allow_ip
             request_header_name: request_header_name
             mode: block
-            request_header_ratelimit_rps: 2
-            waf_ratelimit_hits: 9
+            request_header_ratelimit_rps: 5
+            waf_ratelimit_hits: 7
             httpbl_enabled:
               key: true
             ip_ratelimit_mode: disabled
-            ip_ratelimit_rps: 5
-            waf_ratelimit_rps: 3
+            ip_ratelimit_rps: 1
+            waf_ratelimit_rps: 9
             notify_email:
             - notify_email
             - notify_email
@@ -4894,7 +4894,7 @@ components:
             - block_ua
             - block_ua
             notify_slack: notify_slack
-            paranoia_level: 6
+            paranoia_level: 0
           failover_origin_status_codes:
           - failover_origin_status_codes
           - failover_origin_status_codes
@@ -4910,7 +4910,7 @@ components:
       type: object
     RuleProxyAction:
       example:
-        origin_timeout: 0
+        origin_timeout: origin_timeout
         cache_lifetime: cache_lifetime
         proxy_strip_request_headers:
         - proxy_strip_request_headers
@@ -4943,23 +4943,23 @@ components:
           allow_rules:
           - allow_rules
           - allow_rules
-          waf_ratelimit_cooldown: 2
+          waf_ratelimit_cooldown: 3
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 7
-          notify_slack_hits_rpm: 1
+          request_header_ratelimit_cooldown: 2
+          notify_slack_hits_rpm: 6
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 2
-          waf_ratelimit_hits: 9
+          request_header_ratelimit_rps: 5
+          waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 3
+          ip_ratelimit_rps: 1
+          waf_ratelimit_rps: 9
           notify_email:
           - notify_email
           - notify_email
@@ -4974,7 +4974,7 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 6
+          paranoia_level: 0
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -5009,7 +5009,7 @@ components:
             type: string
           type: array
         origin_timeout:
-          type: integer
+          type: string
         failover_mode:
           default: false
           type: boolean
@@ -5088,13 +5088,13 @@ components:
         waf_enabled: false
         auth_pass: ""
         disabled: false
-        application_port: 1
+        application_port: 6
         static_error_page_status_codes:
         - static_error_page_status_codes
         - static_error_page_status_codes
         failover_mode: false
         application_environment: application_environment
-        origin_timeout: 6
+        origin_timeout: origin_timeout
         method: method_is
         ip_is_not:
         - ip_is_not
@@ -5125,23 +5125,23 @@ components:
           allow_rules:
           - allow_rules
           - allow_rules
-          waf_ratelimit_cooldown: 2
+          waf_ratelimit_cooldown: 3
           request_header_ratelimit_mode: disabled
           ip_ratelimit_cooldown: 5
-          request_header_ratelimit_cooldown: 7
-          notify_slack_hits_rpm: 1
+          request_header_ratelimit_cooldown: 2
+          notify_slack_hits_rpm: 6
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 2
-          waf_ratelimit_hits: 9
+          request_header_ratelimit_rps: 5
+          waf_ratelimit_hits: 7
           httpbl_enabled:
             key: true
           ip_ratelimit_mode: disabled
-          ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 3
+          ip_ratelimit_rps: 1
+          waf_ratelimit_rps: 9
           notify_email:
           - notify_email
           - notify_email
@@ -5156,7 +5156,7 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 6
+          paranoia_level: 0
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -5257,7 +5257,7 @@ components:
             type: string
           type: array
         origin_timeout:
-          type: integer
+          type: string
         proxy_alert_enabled:
           type: boolean
         static_error_page:
@@ -5351,13 +5351,13 @@ components:
         waf_enabled: false
         auth_pass: ""
         disabled: false
-        application_port: 7
+        application_port: 4
         static_error_page_status_codes:
         - static_error_page_status_codes
         - static_error_page_status_codes
         failover_mode: false
         application_environment: application_environment
-        origin_timeout: 6
+        origin_timeout: origin_timeout
         method: method_is
         ip_is_not:
         - ip_is_not
@@ -5388,23 +5388,23 @@ components:
           allow_rules:
           - allow_rules
           - allow_rules
-          waf_ratelimit_cooldown: 4
+          waf_ratelimit_cooldown: 2
           request_header_ratelimit_mode: disabled
-          ip_ratelimit_cooldown: 2
-          request_header_ratelimit_cooldown: 9
-          notify_slack_hits_rpm: 5
+          ip_ratelimit_cooldown: 5
+          request_header_ratelimit_cooldown: 7
+          notify_slack_hits_rpm: 1
           allow_ip:
           - allow_ip
           - allow_ip
           request_header_name: request_header_name
           mode: block
-          request_header_ratelimit_rps: 7
-          waf_ratelimit_hits: 3
+          request_header_ratelimit_rps: 2
+          waf_ratelimit_hits: 9
           httpbl_enabled:
             key: true
           ip_ratelimit_mode: disabled
           ip_ratelimit_rps: 5
-          waf_ratelimit_rps: 2
+          waf_ratelimit_rps: 3
           notify_email:
           - notify_email
           - notify_email
@@ -5419,7 +5419,7 @@ components:
           - block_ua
           - block_ua
           notify_slack: notify_slack
-          paranoia_level: 1
+          paranoia_level: 6
         failover_origin_status_codes:
         - failover_origin_status_codes
         - failover_origin_status_codes
@@ -5520,7 +5520,7 @@ components:
             type: string
           type: array
         origin_timeout:
-          type: integer
+          type: string
         proxy_alert_enabled:
           type: boolean
         static_error_page:
@@ -6082,23 +6082,23 @@ components:
         allow_rules:
         - allow_rules
         - allow_rules
-        waf_ratelimit_cooldown: 2
+        waf_ratelimit_cooldown: 3
         request_header_ratelimit_mode: disabled
         ip_ratelimit_cooldown: 5
-        request_header_ratelimit_cooldown: 7
-        notify_slack_hits_rpm: 1
+        request_header_ratelimit_cooldown: 2
+        notify_slack_hits_rpm: 6
         allow_ip:
         - allow_ip
         - allow_ip
         request_header_name: request_header_name
         mode: block
-        request_header_ratelimit_rps: 2
-        waf_ratelimit_hits: 9
+        request_header_ratelimit_rps: 5
+        waf_ratelimit_hits: 7
         httpbl_enabled:
           key: true
         ip_ratelimit_mode: disabled
-        ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 3
+        ip_ratelimit_rps: 1
+        waf_ratelimit_rps: 9
         notify_email:
         - notify_email
         - notify_email
@@ -6113,7 +6113,7 @@ components:
         - block_ua
         - block_ua
         notify_slack: notify_slack
-        paranoia_level: 6
+        paranoia_level: 0
       properties:
         mode:
           enum:
@@ -6207,23 +6207,23 @@ components:
         allow_rules:
         - allow_rules
         - allow_rules
-        waf_ratelimit_cooldown: 4
+        waf_ratelimit_cooldown: 2
         request_header_ratelimit_mode: disabled
-        ip_ratelimit_cooldown: 2
-        request_header_ratelimit_cooldown: 9
-        notify_slack_hits_rpm: 5
+        ip_ratelimit_cooldown: 5
+        request_header_ratelimit_cooldown: 7
+        notify_slack_hits_rpm: 1
         allow_ip:
         - allow_ip
         - allow_ip
         request_header_name: request_header_name
         mode: block
-        request_header_ratelimit_rps: 7
-        waf_ratelimit_hits: 3
+        request_header_ratelimit_rps: 2
+        waf_ratelimit_hits: 9
         httpbl_enabled:
           key: true
         ip_ratelimit_mode: disabled
         ip_ratelimit_rps: 5
-        waf_ratelimit_rps: 2
+        waf_ratelimit_rps: 3
         notify_email:
         - notify_email
         - notify_email
@@ -6238,7 +6238,7 @@ components:
         - block_ua
         - block_ua
         notify_slack: notify_slack
-        paranoia_level: 1
+        paranoia_level: 6
       properties:
         mode:
           enum:

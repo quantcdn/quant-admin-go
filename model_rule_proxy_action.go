@@ -30,7 +30,7 @@ type RuleProxyAction struct {
 	InjectHeaders map[string]string `json:"inject_headers,omitempty"`
 	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
 	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
-	OriginTimeout *int32 `json:"origin_timeout,omitempty"`
+	OriginTimeout *string `json:"origin_timeout,omitempty"`
 	FailoverMode *bool `json:"failover_mode,omitempty"`
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
@@ -398,9 +398,9 @@ func (o *RuleProxyAction) SetProxyStripRequestHeaders(v []string) {
 }
 
 // GetOriginTimeout returns the OriginTimeout field value if set, zero value otherwise.
-func (o *RuleProxyAction) GetOriginTimeout() int32 {
+func (o *RuleProxyAction) GetOriginTimeout() string {
 	if o == nil || IsNil(o.OriginTimeout) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.OriginTimeout
@@ -408,7 +408,7 @@ func (o *RuleProxyAction) GetOriginTimeout() int32 {
 
 // GetOriginTimeoutOk returns a tuple with the OriginTimeout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RuleProxyAction) GetOriginTimeoutOk() (*int32, bool) {
+func (o *RuleProxyAction) GetOriginTimeoutOk() (*string, bool) {
 	if o == nil || IsNil(o.OriginTimeout) {
 		return nil, false
 	}
@@ -424,8 +424,8 @@ func (o *RuleProxyAction) HasOriginTimeout() bool {
 	return false
 }
 
-// SetOriginTimeout gets a reference to the given int32 and assigns it to the OriginTimeout field.
-func (o *RuleProxyAction) SetOriginTimeout(v int32) {
+// SetOriginTimeout gets a reference to the given string and assigns it to the OriginTimeout field.
+func (o *RuleProxyAction) SetOriginTimeout(v string) {
 	o.OriginTimeout = &v
 }
 
