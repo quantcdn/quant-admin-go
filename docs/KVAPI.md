@@ -1,22 +1,26 @@
 # \KVAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**KVCreate**](KVAPI.md#KVCreate) | **Post** /organizations/{organization}/projects/{project}/kv | 
-[**KVDelete**](KVAPI.md#KVDelete) | **Delete** /organizations/{organization}/projects/{project}/kv/{store} | 
-[**KVList**](KVAPI.md#KVList) | **Get** /organizations/{organization}/projects/{project}/kv | 
-[**KVRead**](KVAPI.md#KVRead) | **Get** /organizations/{organization}/projects/{project}/kv/{store} | 
-[**KVUpdate**](KVAPI.md#KVUpdate) | **Patch** /organizations/{organization}/projects/{project}/kv/{store} | 
+[**KVCreate**](KVAPI.md#KVCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/kv | Add a kv store
+[**KVDelete**](KVAPI.md#KVDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id} | Delete a kv store
+[**KVItemsCreate**](KVAPI.md#KVItemsCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | Add an item to a kv store
+[**KVItemsDelete**](KVAPI.md#KVItemsDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Delete an item from a kv store
+[**KVItemsList**](KVAPI.md#KVItemsList) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | List items in a kv store
+[**KVItemsShow**](KVAPI.md#KVItemsShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Get an item from a kv store
+[**KVItemsUpdate**](KVAPI.md#KVItemsUpdate) | **Put** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Update an item in a kv store
+[**KVList**](KVAPI.md#KVList) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv | List key-value stores
+[**KVShow**](KVAPI.md#KVShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id} | Get a kv store
 
 
 
 ## KVCreate
 
-> Store KVCreate(ctx, organization, project).Store(store).Execute()
+> V2Store KVCreate(ctx, organization, project).V2StoreRequest(v2StoreRequest).Execute()
 
-
+Add a kv store
 
 ### Example
 
@@ -27,22 +31,22 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := *openapiclient.NewStore("Name_example") // Store | 
+	v2StoreRequest := *openapiclient.NewV2StoreRequest("The requested resource was not found", true, "session-data") // V2StoreRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KVAPI.KVCreate(context.Background(), organization, project).Store(store).Execute()
+	resp, r, err := apiClient.KVAPI.KVCreate(context.Background(), organization, project).V2StoreRequest(v2StoreRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `KVCreate`: Store
+	// response from `KVCreate`: V2Store
 	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVCreate`: %v\n", resp)
 }
 ```
@@ -65,11 +69,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **store** | [**Store**](Store.md) |  | 
+ **v2StoreRequest** | [**V2StoreRequest**](V2StoreRequest.md) |  | 
 
 ### Return type
 
-[**Store**](Store.md)
+[**V2Store**](V2Store.md)
 
 ### Authorization
 
@@ -87,9 +91,9 @@ Name | Type | Description  | Notes
 
 ## KVDelete
 
-> Store KVDelete(ctx, organization, project, store).Execute()
+> KVDelete(ctx, organization, project, storeId).Execute()
 
-
+Delete a kv store
 
 ### Example
 
@@ -100,23 +104,21 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := "store_example" // string | 
+	storeId := "storeId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KVAPI.KVDelete(context.Background(), organization, project, store).Execute()
+	r, err := apiClient.KVAPI.KVDelete(context.Background(), organization, project, storeId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `KVDelete`: Store
-	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVDelete`: %v\n", resp)
 }
 ```
 
@@ -128,7 +130,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
-**store** | **string** |  | 
+**storeId** | **string** |  | 
 
 ### Other Parameters
 
@@ -143,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Store**](Store.md)
+ (empty response body)
 
 ### Authorization
 
@@ -159,11 +161,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## KVList
+## KVItemsCreate
 
-> []Store KVList(ctx, organization, project).Execute()
+> KVItemsCreate200Response KVItemsCreate(ctx, organization, project, storeId).V2StoreItemRequest(v2StoreItemRequest).Execute()
 
-
+Add an item to a kv store
 
 ### Example
 
@@ -174,7 +176,396 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	storeId := "storeId_example" // string | 
+	v2StoreItemRequest := *openapiclient.NewV2StoreItemRequest("The requested resource was not found", true, "user-session-123", "Value_example") // V2StoreItemRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVItemsCreate(context.Background(), organization, project, storeId).V2StoreItemRequest(v2StoreItemRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVItemsCreate`: KVItemsCreate200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVItemsCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**storeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVItemsCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **v2StoreItemRequest** | [**V2StoreItemRequest**](V2StoreItemRequest.md) |  | 
+
+### Return type
+
+[**KVItemsCreate200Response**](KVItemsCreate200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVItemsDelete
+
+> KVItemsDelete200Response KVItemsDelete(ctx, organization, project, storeId, key).Execute()
+
+Delete an item from a kv store
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	storeId := "storeId_example" // string | 
+	key := "key_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVItemsDelete(context.Background(), organization, project, storeId, key).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVItemsDelete`: KVItemsDelete200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVItemsDelete`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**storeId** | **string** |  | 
+**key** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVItemsDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+
+### Return type
+
+[**KVItemsDelete200Response**](KVItemsDelete200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVItemsList
+
+> V2StoreItemsListResponse KVItemsList(ctx, organization, project, storeId).Cursor(cursor).Limit(limit).Search(search).Execute()
+
+List items in a kv store
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	storeId := "storeId_example" // string | 
+	cursor := "cursor_example" // string | Cursor for pagination (optional)
+	limit := int32(56) // int32 | Number of items to return (optional) (default to 10)
+	search := "search_example" // string | Search filter for keys (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVItemsList(context.Background(), organization, project, storeId).Cursor(cursor).Limit(limit).Search(search).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVItemsList`: V2StoreItemsListResponse
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVItemsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**storeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVItemsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **cursor** | **string** | Cursor for pagination | 
+ **limit** | **int32** | Number of items to return | [default to 10]
+ **search** | **string** | Search filter for keys | 
+
+### Return type
+
+[**V2StoreItemsListResponse**](V2StoreItemsListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVItemsShow
+
+> KVItemsShow200Response KVItemsShow(ctx, organization, project, storeId, key).Execute()
+
+Get an item from a kv store
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	storeId := "storeId_example" // string | 
+	key := "key_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVItemsShow(context.Background(), organization, project, storeId, key).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsShow``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVItemsShow`: KVItemsShow200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVItemsShow`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**storeId** | **string** |  | 
+**key** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVItemsShowRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+
+### Return type
+
+[**KVItemsShow200Response**](KVItemsShow200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVItemsUpdate
+
+> KVItemsCreate200Response KVItemsUpdate(ctx, organization, project, storeId, key).V2StoreItemUpdateRequest(v2StoreItemUpdateRequest).Execute()
+
+Update an item in a kv store
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	organization := "organization_example" // string | 
+	project := "project_example" // string | 
+	storeId := "storeId_example" // string | 
+	key := "key_example" // string | 
+	v2StoreItemUpdateRequest := *openapiclient.NewV2StoreItemUpdateRequest("The requested resource was not found", true, "Value_example") // V2StoreItemUpdateRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVItemsUpdate(context.Background(), organization, project, storeId, key).V2StoreItemUpdateRequest(v2StoreItemUpdateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVItemsUpdate`: KVItemsCreate200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVItemsUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** |  | 
+**project** | **string** |  | 
+**storeId** | **string** |  | 
+**key** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVItemsUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **v2StoreItemUpdateRequest** | [**V2StoreItemUpdateRequest**](V2StoreItemUpdateRequest.md) |  | 
+
+### Return type
+
+[**KVItemsCreate200Response**](KVItemsCreate200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVList
+
+> []V2Store KVList(ctx, organization, project).Execute()
+
+List key-value stores
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -188,7 +579,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `KVList`: []Store
+	// response from `KVList`: []V2Store
 	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVList`: %v\n", resp)
 }
 ```
@@ -214,7 +605,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Store**](Store.md)
+[**[]V2Store**](V2Store.md)
 
 ### Authorization
 
@@ -230,11 +621,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## KVRead
+## KVShow
 
-> Store KVRead(ctx, organization, project, store).Execute()
+> V2Store KVShow(ctx, organization, project, storeId).Execute()
 
-
+Get a kv store
 
 ### Example
 
@@ -245,23 +636,23 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	store := "store_example" // string | 
+	storeId := "storeId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KVAPI.KVRead(context.Background(), organization, project, store).Execute()
+	resp, r, err := apiClient.KVAPI.KVShow(context.Background(), organization, project, storeId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVShow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `KVRead`: Store
-	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVRead`: %v\n", resp)
+	// response from `KVShow`: V2Store
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVShow`: %v\n", resp)
 }
 ```
 
@@ -273,11 +664,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** |  | 
 **project** | **string** |  | 
-**store** | **string** |  | 
+**storeId** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiKVReadRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiKVShowRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -288,7 +679,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Store**](Store.md)
+[**V2Store**](V2Store.md)
 
 ### Authorization
 
@@ -297,82 +688,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## KVUpdate
-
-> Store KVUpdate(ctx, organization, project, store).StoreUpdate(storeUpdate).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	store := "store_example" // string | 
-	storeUpdate := *openapiclient.NewStoreUpdate() // StoreUpdate | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KVAPI.KVUpdate(context.Background(), organization, project, store).StoreUpdate(storeUpdate).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVUpdate``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `KVUpdate`: Store
-	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVUpdate`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
-**store** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiKVUpdateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **storeUpdate** | [**StoreUpdate**](StoreUpdate.md) |  | 
-
-### Return type
-
-[**Store**](Store.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

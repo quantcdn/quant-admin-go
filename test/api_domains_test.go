@@ -1,5 +1,5 @@
 /*
-QuantCDN Admin API
+QuantCDN API
 
 Testing DomainsAPIService
 
@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_quantadmingo_DomainsAPIService(t *testing.T) {
@@ -45,10 +45,9 @@ func Test_quantadmingo_DomainsAPIService(t *testing.T) {
 		var project string
 		var domain string
 
-		resp, httpRes, err := apiClient.DomainsAPI.DomainsDelete(context.Background(), organization, project, domain).Execute()
+		httpRes, err := apiClient.DomainsAPI.DomainsDelete(context.Background(), organization, project, domain).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -84,7 +83,7 @@ func Test_quantadmingo_DomainsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DomainsAPIService DomainsUpdate", func(t *testing.T) {
+	t.Run("Test DomainsAPIService DomainsRenew", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -92,10 +91,9 @@ func Test_quantadmingo_DomainsAPIService(t *testing.T) {
 		var project string
 		var domain string
 
-		resp, httpRes, err := apiClient.DomainsAPI.DomainsUpdate(context.Background(), organization, project, domain).Execute()
+		httpRes, err := apiClient.DomainsAPI.DomainsRenew(context.Background(), organization, project, domain).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

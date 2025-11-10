@@ -1,5 +1,5 @@
 /*
-QuantCDN Admin API
+QuantCDN API
 
 Testing PurgeAPIService
 
@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_quantadmingo_PurgeAPIService(t *testing.T) {

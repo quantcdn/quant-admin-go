@@ -1,22 +1,22 @@
 # \CrawlerSchedulesAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CrawlerSchedulesCreate**](CrawlerSchedulesAPI.md#CrawlerSchedulesCreate) | **Post** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | 
-[**CrawlerSchedulesDelete**](CrawlerSchedulesAPI.md#CrawlerSchedulesDelete) | **Delete** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | 
-[**CrawlerSchedulesList**](CrawlerSchedulesAPI.md#CrawlerSchedulesList) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | 
-[**CrawlerSchedulesRead**](CrawlerSchedulesAPI.md#CrawlerSchedulesRead) | **Get** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | 
-[**CrawlerSchedulesUpdate**](CrawlerSchedulesAPI.md#CrawlerSchedulesUpdate) | **Patch** /organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | 
+[**CrawlerSchedulesAdd**](CrawlerSchedulesAPI.md#CrawlerSchedulesAdd) | **Post** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Add a new schedule
+[**CrawlerSchedulesDelete**](CrawlerSchedulesAPI.md#CrawlerSchedulesDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Delete a schedule
+[**CrawlerSchedulesEdit**](CrawlerSchedulesAPI.md#CrawlerSchedulesEdit) | **Patch** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Edit a schedule
+[**CrawlerSchedulesList**](CrawlerSchedulesAPI.md#CrawlerSchedulesList) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | List schedules for a crawler
+[**CrawlerSchedulesShow**](CrawlerSchedulesAPI.md#CrawlerSchedulesShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Show a specific schedule
 
 
 
-## CrawlerSchedulesCreate
+## CrawlerSchedulesAdd
 
-> CrawlerSchedule CrawlerSchedulesCreate(ctx, organization, project, crawler).CrawlerScheduleRequest(crawlerScheduleRequest).Execute()
+> V2CrawlerSchedule CrawlerSchedulesAdd(ctx, organization, project, crawler).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
 
-
+Add a new schedule
 
 ### Example
 
@@ -27,24 +27,24 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	crawler := "crawler_example" // string | 
-	crawlerScheduleRequest := *openapiclient.NewCrawlerScheduleRequest("ScheduleCronString_example") // CrawlerScheduleRequest | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("The requested resource was not found", true, "Test schedule", "0 2 * * *") // V2CrawlerScheduleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesCreate(context.Background(), organization, project, crawler).CrawlerScheduleRequest(crawlerScheduleRequest).Execute()
+	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesAdd(context.Background(), organization, project, crawler).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesAdd``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CrawlerSchedulesCreate`: CrawlerSchedule
-	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesCreate`: %v\n", resp)
+	// response from `CrawlerSchedulesAdd`: V2CrawlerSchedule
+	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesAdd`: %v\n", resp)
 }
 ```
 
@@ -54,13 +54,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
-**crawler** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCrawlerSchedulesCreateRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCrawlerSchedulesAddRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -68,11 +68,11 @@ Name | Type | Description  | Notes
 
 
 
- **crawlerScheduleRequest** | [**CrawlerScheduleRequest**](CrawlerScheduleRequest.md) |  | 
+ **v2CrawlerScheduleRequest** | [**V2CrawlerScheduleRequest**](V2CrawlerScheduleRequest.md) |  | 
 
 ### Return type
 
-[**CrawlerSchedule**](CrawlerSchedule.md)
+[**V2CrawlerSchedule**](V2CrawlerSchedule.md)
 
 ### Authorization
 
@@ -90,9 +90,9 @@ Name | Type | Description  | Notes
 
 ## CrawlerSchedulesDelete
 
-> CrawlerSchedule CrawlerSchedulesDelete(ctx, organization, project, crawler, crawlerSchedule).Execute()
+> CrawlerSchedulesDelete(ctx, organization, project, crawler, crawlerSchedule).Execute()
 
-
+Delete a schedule
 
 ### Example
 
@@ -103,24 +103,22 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	crawler := "crawler_example" // string | 
-	crawlerSchedule := "crawlerSchedule_example" // string | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+	crawlerSchedule := "crawlerSchedule_example" // string | Crawler schedule identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesDelete(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
+	r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesDelete(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CrawlerSchedulesDelete`: CrawlerSchedule
-	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesDelete`: %v\n", resp)
 }
 ```
 
@@ -130,10 +128,10 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
-**crawler** | **string** |  | 
-**crawlerSchedule** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
+**crawlerSchedule** | **string** | Crawler schedule identifier | 
 
 ### Other Parameters
 
@@ -149,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrawlerSchedule**](CrawlerSchedule.md)
+ (empty response body)
 
 ### Authorization
 
@@ -165,11 +163,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CrawlerSchedulesList
+## CrawlerSchedulesEdit
 
-> []CrawlerSchedule CrawlerSchedulesList(ctx, organization, project, crawler).Execute()
+> V2CrawlerSchedule CrawlerSchedulesEdit(ctx, organization, project, crawler).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
 
-
+Edit a schedule
 
 ### Example
 
@@ -180,7 +178,83 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("The requested resource was not found", true, "Test schedule", "0 2 * * *") // V2CrawlerScheduleRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesEdit(context.Background(), organization, project, crawler).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesEdit``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CrawlerSchedulesEdit`: V2CrawlerSchedule
+	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesEdit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCrawlerSchedulesEditRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **v2CrawlerScheduleRequest** | [**V2CrawlerScheduleRequest**](V2CrawlerScheduleRequest.md) |  | 
+
+### Return type
+
+[**V2CrawlerSchedule**](V2CrawlerSchedule.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CrawlerSchedulesList
+
+> []V2CrawlerSchedule CrawlerSchedulesList(ctx, organization, project, crawler).Execute()
+
+List schedules for a crawler
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -195,7 +269,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CrawlerSchedulesList`: []CrawlerSchedule
+	// response from `CrawlerSchedulesList`: []V2CrawlerSchedule
 	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesList`: %v\n", resp)
 }
 ```
@@ -223,7 +297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]CrawlerSchedule**](CrawlerSchedule.md)
+[**[]V2CrawlerSchedule**](V2CrawlerSchedule.md)
 
 ### Authorization
 
@@ -239,11 +313,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CrawlerSchedulesRead
+## CrawlerSchedulesShow
 
-> CrawlerSchedule CrawlerSchedulesRead(ctx, organization, project, crawler, crawlerSchedule).Execute()
+> V2CrawlerSchedule CrawlerSchedulesShow(ctx, organization, project, crawler, crawlerSchedule).Execute()
 
-
+Show a specific schedule
 
 ### Example
 
@@ -254,24 +328,24 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	crawler := "crawler_example" // string | 
-	crawlerSchedule := "crawlerSchedule_example" // string | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+	crawlerSchedule := "crawlerSchedule_example" // string | Crawler schedule identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesRead(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
+	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesShow(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesShow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CrawlerSchedulesRead`: CrawlerSchedule
-	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesRead`: %v\n", resp)
+	// response from `CrawlerSchedulesShow`: V2CrawlerSchedule
+	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesShow`: %v\n", resp)
 }
 ```
 
@@ -281,14 +355,14 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
-**crawler** | **string** |  | 
-**crawlerSchedule** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
+**crawlerSchedule** | **string** | Crawler schedule identifier | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCrawlerSchedulesReadRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCrawlerSchedulesShowRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -300,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CrawlerSchedule**](CrawlerSchedule.md)
+[**V2CrawlerSchedule**](V2CrawlerSchedule.md)
 
 ### Authorization
 
@@ -309,85 +383,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CrawlerSchedulesUpdate
-
-> CrawlerSchedule CrawlerSchedulesUpdate(ctx, organization, project, crawler, crawlerSchedule).CrawlerScheduleRequestUpdate(crawlerScheduleRequestUpdate).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	crawler := "crawler_example" // string | 
-	crawlerSchedule := "crawlerSchedule_example" // string | 
-	crawlerScheduleRequestUpdate := *openapiclient.NewCrawlerScheduleRequestUpdate() // CrawlerScheduleRequestUpdate | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesUpdate(context.Background(), organization, project, crawler, crawlerSchedule).CrawlerScheduleRequestUpdate(crawlerScheduleRequestUpdate).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesUpdate``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CrawlerSchedulesUpdate`: CrawlerSchedule
-	fmt.Fprintf(os.Stdout, "Response from `CrawlerSchedulesAPI.CrawlerSchedulesUpdate`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
-**crawler** | **string** |  | 
-**crawlerSchedule** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCrawlerSchedulesUpdateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
- **crawlerScheduleRequestUpdate** | [**CrawlerScheduleRequestUpdate**](CrawlerScheduleRequestUpdate.md) |  | 
-
-### Return type
-
-[**CrawlerSchedule**](CrawlerSchedule.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

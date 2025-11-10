@@ -1,5 +1,5 @@
 /*
-QuantCDN Admin API
+QuantCDN API
 
 Testing CrawlersAPIService
 
@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_quantadmingo_CrawlersAPIService(t *testing.T) {
@@ -45,10 +45,9 @@ func Test_quantadmingo_CrawlersAPIService(t *testing.T) {
 		var project string
 		var crawler string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.CrawlersDelete(context.Background(), organization, project, crawler).Execute()
+		httpRes, err := apiClient.CrawlersAPI.CrawlersDelete(context.Background(), organization, project, crawler).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

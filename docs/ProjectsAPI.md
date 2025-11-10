@@ -1,22 +1,22 @@
 # \ProjectsAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ProjectsCreate**](ProjectsAPI.md#ProjectsCreate) | **Post** /organizations/{organization}/projects | 
-[**ProjectsDelete**](ProjectsAPI.md#ProjectsDelete) | **Delete** /organizations/{organization}/projects/{project} | 
-[**ProjectsList**](ProjectsAPI.md#ProjectsList) | **Get** /organizations/{organization}/projects | 
-[**ProjectsRead**](ProjectsAPI.md#ProjectsRead) | **Get** /organizations/{organization}/projects/{project} | 
-[**ProjectsUpdate**](ProjectsAPI.md#ProjectsUpdate) | **Patch** /organizations/{organization}/projects/{project} | 
+[**ProjectsCreate**](ProjectsAPI.md#ProjectsCreate) | **Post** /api/v2/organizations/{organization}/projects | Create a new project
+[**ProjectsDelete**](ProjectsAPI.md#ProjectsDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project} | Delete a project
+[**ProjectsList**](ProjectsAPI.md#ProjectsList) | **Get** /api/v2/organizations/{organization}/projects | Retrieve all projects for an organization
+[**ProjectsRead**](ProjectsAPI.md#ProjectsRead) | **Get** /api/v2/organizations/{organization}/projects/{project} | Get details of a single project
+[**ProjectsUpdate**](ProjectsAPI.md#ProjectsUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project} | Update a project
 
 
 
 ## ProjectsCreate
 
-> Project ProjectsCreate(ctx, organization).ProjectRequest(projectRequest).Execute()
+> V2Project ProjectsCreate(ctx, organization).V2ProjectRequest(v2ProjectRequest).Execute()
 
-
+Create a new project
 
 ### Example
 
@@ -27,21 +27,21 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
-	projectRequest := *openapiclient.NewProjectRequest("Name_example", "Region_example") // ProjectRequest | 
+	v2ProjectRequest := *openapiclient.NewV2ProjectRequest("The requested resource was not found", true, "Test Project", "test-project") // V2ProjectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsCreate(context.Background(), organization).ProjectRequest(projectRequest).Execute()
+	resp, r, err := apiClient.ProjectsAPI.ProjectsCreate(context.Background(), organization).V2ProjectRequest(v2ProjectRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsCreate`: Project
+	// response from `ProjectsCreate`: V2Project
 	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsCreate`: %v\n", resp)
 }
 ```
@@ -62,11 +62,11 @@ Other parameters are passed through a pointer to a apiProjectsCreateRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **projectRequest** | [**ProjectRequest**](ProjectRequest.md) |  | 
+ **v2ProjectRequest** | [**V2ProjectRequest**](V2ProjectRequest.md) |  | 
 
 ### Return type
 
-[**Project**](Project.md)
+[**V2Project**](V2Project.md)
 
 ### Authorization
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 > ProjectsDelete(ctx, organization, project).Execute()
 
-
+Delete a project
 
 ### Example
 
@@ -97,7 +97,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -153,9 +153,9 @@ Name | Type | Description  | Notes
 
 ## ProjectsList
 
-> []Project ProjectsList(ctx, organization).Execute()
+> []ProjectsList200ResponseInner ProjectsList(ctx, organization).Execute()
 
-
+Retrieve all projects for an organization
 
 ### Example
 
@@ -166,7 +166,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -179,7 +179,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsList`: []Project
+	// response from `ProjectsList`: []ProjectsList200ResponseInner
 	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsList`: %v\n", resp)
 }
 ```
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Project**](Project.md)
+[**[]ProjectsList200ResponseInner**](ProjectsList200ResponseInner.md)
 
 ### Authorization
 
@@ -221,9 +221,9 @@ Name | Type | Description  | Notes
 
 ## ProjectsRead
 
-> Project ProjectsRead(ctx, organization, project).WithToken(withToken).Execute()
+> V2Project ProjectsRead(ctx, organization, project).WithToken(withToken).Execute()
 
-
+Get details of a single project
 
 ### Example
 
@@ -234,7 +234,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -249,7 +249,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsRead`: Project
+	// response from `ProjectsRead`: V2Project
 	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsRead`: %v\n", resp)
 }
 ```
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Project**](Project.md)
+[**V2Project**](V2Project.md)
 
 ### Authorization
 
@@ -294,9 +294,9 @@ Name | Type | Description  | Notes
 
 ## ProjectsUpdate
 
-> Project ProjectsUpdate(ctx, organization, project).ProjectRequestUpdate(projectRequestUpdate).Execute()
+> V2Project ProjectsUpdate(ctx, organization, project).V2ProjectRequest(v2ProjectRequest).Execute()
 
-
+Update a project
 
 ### Example
 
@@ -307,22 +307,22 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	projectRequestUpdate := *openapiclient.NewProjectRequestUpdate() // ProjectRequestUpdate | 
+	v2ProjectRequest := *openapiclient.NewV2ProjectRequest("The requested resource was not found", true, "Test Project", "test-project") // V2ProjectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ProjectsAPI.ProjectsUpdate(context.Background(), organization, project).ProjectRequestUpdate(projectRequestUpdate).Execute()
+	resp, r, err := apiClient.ProjectsAPI.ProjectsUpdate(context.Background(), organization, project).V2ProjectRequest(v2ProjectRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsUpdate`: Project
+	// response from `ProjectsUpdate`: V2Project
 	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsUpdate`: %v\n", resp)
 }
 ```
@@ -345,11 +345,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **projectRequestUpdate** | [**ProjectRequestUpdate**](ProjectRequestUpdate.md) |  | 
+ **v2ProjectRequest** | [**V2ProjectRequest**](V2ProjectRequest.md) |  | 
 
 ### Return type
 
-[**Project**](Project.md)
+[**V2Project**](V2Project.md)
 
 ### Authorization
 

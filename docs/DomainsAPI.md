@@ -1,22 +1,22 @@
 # \DomainsAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DomainsCreate**](DomainsAPI.md#DomainsCreate) | **Post** /organizations/{organization}/projects/{project}/domains | 
-[**DomainsDelete**](DomainsAPI.md#DomainsDelete) | **Delete** /organizations/{organization}/projects/{project}/domains/{domain} | 
-[**DomainsList**](DomainsAPI.md#DomainsList) | **Get** /organizations/{organization}/projects/{project}/domains | 
-[**DomainsRead**](DomainsAPI.md#DomainsRead) | **Get** /organizations/{organization}/projects/{project}/domains/{domain} | 
-[**DomainsUpdate**](DomainsAPI.md#DomainsUpdate) | **Patch** /organizations/{organization}/projects/{project}/domains/{domain} | 
+[**DomainsCreate**](DomainsAPI.md#DomainsCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/domains | Add a new domain
+[**DomainsDelete**](DomainsAPI.md#DomainsDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/domains/{domain} | Delete a domain
+[**DomainsList**](DomainsAPI.md#DomainsList) | **Get** /api/v2/organizations/{organization}/projects/{project}/domains | List all domains for a project
+[**DomainsRead**](DomainsAPI.md#DomainsRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/domains/{domain} | Get details of a single domain
+[**DomainsRenew**](DomainsAPI.md#DomainsRenew) | **Post** /api/v2/organizations/{organization}/projects/{project}/domains/{domain}/renew | Renew the SSL certificate for a domain
 
 
 
 ## DomainsCreate
 
-> Domain DomainsCreate(ctx, organization, project).DomainRequest(domainRequest).Execute()
+> V2Domain DomainsCreate(ctx, organization, project).V2DomainRequest(v2DomainRequest).Execute()
 
-
+Add a new domain
 
 ### Example
 
@@ -27,22 +27,22 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	domainRequest := *openapiclient.NewDomainRequest("Domain_example") // DomainRequest | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	v2DomainRequest := *openapiclient.NewV2DomainRequest("The requested resource was not found", true, "test-domain.com") // V2DomainRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.DomainsCreate(context.Background(), organization, project).DomainRequest(domainRequest).Execute()
+	resp, r, err := apiClient.DomainsAPI.DomainsCreate(context.Background(), organization, project).V2DomainRequest(v2DomainRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DomainsCreate`: Domain
+	// response from `DomainsCreate`: V2Domain
 	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsCreate`: %v\n", resp)
 }
 ```
@@ -53,8 +53,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 
@@ -65,11 +65,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
+ **v2DomainRequest** | [**V2DomainRequest**](V2DomainRequest.md) |  | 
 
 ### Return type
 
-[**Domain**](Domain.md)
+[**V2Domain**](V2Domain.md)
 
 ### Authorization
 
@@ -87,9 +87,9 @@ Name | Type | Description  | Notes
 
 ## DomainsDelete
 
-> Domain DomainsDelete(ctx, organization, project, domain).Execute()
+> DomainsDelete(ctx, organization, project, domain).Execute()
 
-
+Delete a domain
 
 ### Example
 
@@ -100,23 +100,21 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
 	domain := "domain_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.DomainsDelete(context.Background(), organization, project, domain).Execute()
+	r, err := apiClient.DomainsAPI.DomainsDelete(context.Background(), organization, project, domain).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DomainsDelete`: Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsDelete`: %v\n", resp)
 }
 ```
 
@@ -126,8 +124,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **domain** | **string** |  | 
 
 ### Other Parameters
@@ -143,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Domain**](Domain.md)
+ (empty response body)
 
 ### Authorization
 
@@ -161,9 +159,9 @@ Name | Type | Description  | Notes
 
 ## DomainsList
 
-> []Domain DomainsList(ctx, organization, project).Execute()
+> []V2Domain DomainsList(ctx, organization, project).Execute()
 
-
+List all domains for a project
 
 ### Example
 
@@ -174,12 +172,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -188,7 +186,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DomainsList`: []Domain
+	// response from `DomainsList`: []V2Domain
 	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsList`: %v\n", resp)
 }
 ```
@@ -199,8 +197,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 
@@ -214,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Domain**](Domain.md)
+[**[]V2Domain**](V2Domain.md)
 
 ### Authorization
 
@@ -232,9 +230,9 @@ Name | Type | Description  | Notes
 
 ## DomainsRead
 
-> Domain DomainsRead(ctx, organization, project, domain).Execute()
+> V2Domain DomainsRead(ctx, organization, project, domain).Execute()
 
-
+Get details of a single domain
 
 ### Example
 
@@ -245,12 +243,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
 	domain := "domain_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -260,7 +258,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DomainsRead`: Domain
+	// response from `DomainsRead`: V2Domain
 	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsRead`: %v\n", resp)
 }
 ```
@@ -271,8 +269,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **domain** | **string** |  | 
 
 ### Other Parameters
@@ -288,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Domain**](Domain.md)
+[**V2Domain**](V2Domain.md)
 
 ### Authorization
 
@@ -304,11 +302,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DomainsUpdate
+## DomainsRenew
 
-> Domain DomainsUpdate(ctx, organization, project, domain).DomainRequestUpdate(domainRequestUpdate).Execute()
+> DomainsRenew(ctx, organization, project, domain).Execute()
 
-
+Renew the SSL certificate for a domain
 
 ### Example
 
@@ -319,24 +317,21 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	domain := "domain_example" // string | 
-	domainRequestUpdate := *openapiclient.NewDomainRequestUpdate() // DomainRequestUpdate | 
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	domain := "domain_example" // string | Domain identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainsAPI.DomainsUpdate(context.Background(), organization, project, domain).DomainRequestUpdate(domainRequestUpdate).Execute()
+	r, err := apiClient.DomainsAPI.DomainsRenew(context.Background(), organization, project, domain).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainsAPI.DomainsRenew``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DomainsUpdate`: Domain
-	fmt.Fprintf(os.Stdout, "Response from `DomainsAPI.DomainsUpdate`: %v\n", resp)
 }
 ```
 
@@ -346,13 +341,13 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
-**domain** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**domain** | **string** | Domain identifier | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDomainsUpdateRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDomainsRenewRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -360,11 +355,10 @@ Name | Type | Description  | Notes
 
 
 
- **domainRequestUpdate** | [**DomainRequestUpdate**](DomainRequestUpdate.md) |  | 
 
 ### Return type
 
-[**Domain**](Domain.md)
+ (empty response body)
 
 ### Authorization
 
@@ -372,7 +366,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

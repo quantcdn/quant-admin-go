@@ -1,19 +1,19 @@
 # \OrganizationsAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**OrganizationsList**](OrganizationsAPI.md#OrganizationsList) | **Get** /organizations | 
-[**OrganizationsRead**](OrganizationsAPI.md#OrganizationsRead) | **Get** /organizations/{organization} | 
+[**OrganizationsList**](OrganizationsAPI.md#OrganizationsList) | **Get** /api/v2/organizations | Retrieve all organizations
+[**OrganizationsRead**](OrganizationsAPI.md#OrganizationsRead) | **Get** /api/v2/organizations/{organization} | Get details of a single organization
 
 
 
 ## OrganizationsList
 
-> []Organization OrganizationsList(ctx).Execute()
+> []OrganizationsList200ResponseInner OrganizationsList(ctx).Execute()
 
-
+Retrieve all organizations
 
 ### Example
 
@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.OrganizationsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `OrganizationsList`: []Organization
+	// response from `OrganizationsList`: []OrganizationsList200ResponseInner
 	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.OrganizationsList`: %v\n", resp)
 }
 ```
@@ -52,7 +52,7 @@ Other parameters are passed through a pointer to a apiOrganizationsListRequest s
 
 ### Return type
 
-[**[]Organization**](Organization.md)
+[**[]OrganizationsList200ResponseInner**](OrganizationsList200ResponseInner.md)
 
 ### Authorization
 
@@ -70,9 +70,9 @@ Other parameters are passed through a pointer to a apiOrganizationsListRequest s
 
 ## OrganizationsRead
 
-> Organization OrganizationsRead(ctx, organization).Execute()
+> V2Organization OrganizationsRead(ctx, organization).Execute()
 
-
+Get details of a single organization
 
 ### Example
 
@@ -83,7 +83,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -96,7 +96,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.OrganizationsRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `OrganizationsRead`: Organization
+	// response from `OrganizationsRead`: V2Organization
 	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.OrganizationsRead`: %v\n", resp)
 }
 ```
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Organization**](Organization.md)
+[**V2Organization**](V2Organization.md)
 
 ### Authorization
 

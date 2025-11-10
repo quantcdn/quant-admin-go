@@ -1,18 +1,18 @@
 # \PurgeAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PurgeCreate**](PurgeAPI.md#PurgeCreate) | **Post** /organizations/{organization}/projects/{project}/purge | 
+[**PurgeCreate**](PurgeAPI.md#PurgeCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/purge | Purge cache via URL or cache keys
 
 
 
 ## PurgeCreate
 
-> string PurgeCreate(ctx, organization, project).PurgeRequest(purgeRequest).Execute()
+> string PurgeCreate(ctx, organization, project).PurgeCreateRequest(purgeCreateRequest).Execute()
 
-
+Purge cache via URL or cache keys
 
 ### Example
 
@@ -23,17 +23,17 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	purgeRequest := *openapiclient.NewPurgeRequest([]string{"CacheKeys_example"}, "Scope_example") // PurgeRequest | 
+	purgeCreateRequest := *openapiclient.NewPurgeCreateRequest([]string{"CacheKeys_example"}, "Scope_example") // PurgeCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PurgeAPI.PurgeCreate(context.Background(), organization, project).PurgeRequest(purgeRequest).Execute()
+	resp, r, err := apiClient.PurgeAPI.PurgeCreate(context.Background(), organization, project).PurgeCreateRequest(purgeCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PurgeAPI.PurgeCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **purgeRequest** | [**PurgeRequest**](PurgeRequest.md) |  | 
+ **purgeCreateRequest** | [**PurgeCreateRequest**](PurgeCreateRequest.md) |  | 
 
 ### Return type
 

@@ -1,20 +1,20 @@
 # \HeadersAPI
 
-All URIs are relative to *https://dashboard.quantcdn.io/api/v2*
+All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HeadersCreate**](HeadersAPI.md#HeadersCreate) | **Post** /organizations/{organization}/projects/{project}/custom-headers | 
-[**HeadersDelete**](HeadersAPI.md#HeadersDelete) | **Delete** /organizations/{organization}/projects/{project}/custom-headers | 
-[**HeadersList**](HeadersAPI.md#HeadersList) | **Get** /organizations/{organization}/projects/{project}/custom-headers | 
+[**HeadersCreate**](HeadersAPI.md#HeadersCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/custom-headers | Create or update custom headers
+[**HeadersDelete**](HeadersAPI.md#HeadersDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/custom-headers | Delete custom headers
+[**HeadersList**](HeadersAPI.md#HeadersList) | **Get** /api/v2/organizations/{organization}/projects/{project}/custom-headers | List custom headers for a project
 
 
 
 ## HeadersCreate
 
-> map[string]string HeadersCreate(ctx, organization, project).HeadersCreateRequest(headersCreateRequest).Execute()
+> map[string]string HeadersCreate(ctx, organization, project).V2CustomHeaderRequest(v2CustomHeaderRequest).Execute()
 
-
+Create or update custom headers
 
 ### Example
 
@@ -25,17 +25,17 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	headersCreateRequest := *openapiclient.NewHeadersCreateRequest(map[string]string{"key": "Inner_example"}) // HeadersCreateRequest | 
+	v2CustomHeaderRequest := *openapiclient.NewV2CustomHeaderRequest(map[string]string{"key": "Inner_example"}) // V2CustomHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HeadersAPI.HeadersCreate(context.Background(), organization, project).HeadersCreateRequest(headersCreateRequest).Execute()
+	resp, r, err := apiClient.HeadersAPI.HeadersCreate(context.Background(), organization, project).V2CustomHeaderRequest(v2CustomHeaderRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HeadersAPI.HeadersCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **headersCreateRequest** | [**HeadersCreateRequest**](HeadersCreateRequest.md) |  | 
+ **v2CustomHeaderRequest** | [**V2CustomHeaderRequest**](V2CustomHeaderRequest.md) |  | 
 
 ### Return type
 
@@ -85,9 +85,9 @@ Name | Type | Description  | Notes
 
 ## HeadersDelete
 
-> HeadersDelete(ctx, organization, project).HeadersDeleteRequest(headersDeleteRequest).Execute()
+> HeadersDelete(ctx, organization, project).V2CustomHeaderRequest(v2CustomHeaderRequest).Execute()
 
-
+Delete custom headers
 
 ### Example
 
@@ -98,17 +98,17 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	headersDeleteRequest := *openapiclient.NewHeadersDeleteRequest([]string{"Headers_example"}) // HeadersDeleteRequest | 
+	v2CustomHeaderRequest := *openapiclient.NewV2CustomHeaderRequest(map[string]string{"key": "Inner_example"}) // V2CustomHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.HeadersAPI.HeadersDelete(context.Background(), organization, project).HeadersDeleteRequest(headersDeleteRequest).Execute()
+	r, err := apiClient.HeadersAPI.HeadersDelete(context.Background(), organization, project).V2CustomHeaderRequest(v2CustomHeaderRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HeadersAPI.HeadersDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **headersDeleteRequest** | [**HeadersDeleteRequest**](HeadersDeleteRequest.md) |  | 
+ **v2CustomHeaderRequest** | [**V2CustomHeaderRequest**](V2CustomHeaderRequest.md) |  | 
 
 ### Return type
 
@@ -156,9 +156,9 @@ Name | Type | Description  | Notes
 
 ## HeadersList
 
-> map[string]string HeadersList(ctx, organization, project).Execute()
+> []map[string]string HeadersList(ctx, organization, project).Execute()
 
-
+List custom headers for a project
 
 ### Example
 
@@ -169,7 +169,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
@@ -183,7 +183,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `HeadersAPI.HeadersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `HeadersList`: map[string]string
+	// response from `HeadersList`: []map[string]string
 	fmt.Fprintf(os.Stdout, "Response from `HeadersAPI.HeadersList`: %v\n", resp)
 }
 ```
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]string**
+[**[]map[string]string**](map.md)
 
 ### Authorization
 
