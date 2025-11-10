@@ -76,10 +76,29 @@ type V2RuleProxyRequest struct {
 	FailoverMode *bool `json:"failover_mode,omitempty"`
 	// Failover TTFB threshold
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
+	// Status codes for failover (default: 200,404,301,302,304)
+	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
+	// Failover cache lifetime
+	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	// Failover S3 bucket
 	FailoverS3Bucket *string `json:"failover_s3_bucket,omitempty"`
 	// Failover S3 region
 	FailoverS3Region *string `json:"failover_s3_region,omitempty"`
+	// Proxy alert enabled
+	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
+	// WAF enabled
+	WafEnabled *bool `json:"waf_enabled,omitempty"`
+	WafConfig NullableWafConfig `json:"waf_config,omitempty"`
+	// Enable Quant Cloud application proxy mode
+	ApplicationProxy *bool `json:"application_proxy,omitempty"`
+	// Quant Cloud application name (required when application_proxy is true)
+	ApplicationName *string `json:"application_name,omitempty"`
+	// Quant Cloud application environment (required when application_proxy is true)
+	ApplicationEnvironment *string `json:"application_environment,omitempty"`
+	// Quant Cloud application container (required when application_proxy is true)
+	ApplicationContainer *string `json:"application_container,omitempty"`
+	// Quant Cloud application port (required when application_proxy is true)
+	ApplicationPort *int32 `json:"application_port,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,6 +129,14 @@ func NewV2RuleProxyRequest(domain []string, url []string, to string) *V2RuleProx
 	this.FailoverMode = &failoverMode
 	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var failoverLifetime string = "300"
+	this.FailoverLifetime = &failoverLifetime
+	var proxyAlertEnabled bool = false
+	this.ProxyAlertEnabled = &proxyAlertEnabled
+	var wafEnabled bool = false
+	this.WafEnabled = &wafEnabled
+	var applicationProxy bool = false
+	this.ApplicationProxy = &applicationProxy
 	return &this
 }
 
@@ -134,6 +161,14 @@ func NewV2RuleProxyRequestWithDefaults() *V2RuleProxyRequest {
 	this.FailoverMode = &failoverMode
 	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
+	var failoverLifetime string = "300"
+	this.FailoverLifetime = &failoverLifetime
+	var proxyAlertEnabled bool = false
+	this.ProxyAlertEnabled = &proxyAlertEnabled
+	var wafEnabled bool = false
+	this.WafEnabled = &wafEnabled
+	var applicationProxy bool = false
+	this.ApplicationProxy = &applicationProxy
 	return &this
 }
 
@@ -1020,6 +1055,70 @@ func (o *V2RuleProxyRequest) SetFailoverOriginTtfb(v string) {
 	o.FailoverOriginTtfb = &v
 }
 
+// GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetFailoverOriginStatusCodes() []string {
+	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.FailoverOriginStatusCodes
+}
+
+// GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetFailoverOriginStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
+		return nil, false
+	}
+	return o.FailoverOriginStatusCodes, true
+}
+
+// HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasFailoverOriginStatusCodes() bool {
+	if o != nil && !IsNil(o.FailoverOriginStatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverOriginStatusCodes gets a reference to the given []string and assigns it to the FailoverOriginStatusCodes field.
+func (o *V2RuleProxyRequest) SetFailoverOriginStatusCodes(v []string) {
+	o.FailoverOriginStatusCodes = v
+}
+
+// GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetFailoverLifetime() string {
+	if o == nil || IsNil(o.FailoverLifetime) {
+		var ret string
+		return ret
+	}
+	return *o.FailoverLifetime
+}
+
+// GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool) {
+	if o == nil || IsNil(o.FailoverLifetime) {
+		return nil, false
+	}
+	return o.FailoverLifetime, true
+}
+
+// HasFailoverLifetime returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasFailoverLifetime() bool {
+	if o != nil && !IsNil(o.FailoverLifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
+func (o *V2RuleProxyRequest) SetFailoverLifetime(v string) {
+	o.FailoverLifetime = &v
+}
+
 // GetFailoverS3Bucket returns the FailoverS3Bucket field value if set, zero value otherwise.
 func (o *V2RuleProxyRequest) GetFailoverS3Bucket() string {
 	if o == nil || IsNil(o.FailoverS3Bucket) {
@@ -1082,6 +1181,272 @@ func (o *V2RuleProxyRequest) HasFailoverS3Region() bool {
 // SetFailoverS3Region gets a reference to the given string and assigns it to the FailoverS3Region field.
 func (o *V2RuleProxyRequest) SetFailoverS3Region(v string) {
 	o.FailoverS3Region = &v
+}
+
+// GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetProxyAlertEnabled() bool {
+	if o == nil || IsNil(o.ProxyAlertEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.ProxyAlertEnabled
+}
+
+// GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.ProxyAlertEnabled) {
+		return nil, false
+	}
+	return o.ProxyAlertEnabled, true
+}
+
+// HasProxyAlertEnabled returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasProxyAlertEnabled() bool {
+	if o != nil && !IsNil(o.ProxyAlertEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyAlertEnabled gets a reference to the given bool and assigns it to the ProxyAlertEnabled field.
+func (o *V2RuleProxyRequest) SetProxyAlertEnabled(v bool) {
+	o.ProxyAlertEnabled = &v
+}
+
+// GetWafEnabled returns the WafEnabled field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetWafEnabled() bool {
+	if o == nil || IsNil(o.WafEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.WafEnabled
+}
+
+// GetWafEnabledOk returns a tuple with the WafEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetWafEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.WafEnabled) {
+		return nil, false
+	}
+	return o.WafEnabled, true
+}
+
+// HasWafEnabled returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasWafEnabled() bool {
+	if o != nil && !IsNil(o.WafEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetWafEnabled gets a reference to the given bool and assigns it to the WafEnabled field.
+func (o *V2RuleProxyRequest) SetWafEnabled(v bool) {
+	o.WafEnabled = &v
+}
+
+// GetWafConfig returns the WafConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *V2RuleProxyRequest) GetWafConfig() WafConfig {
+	if o == nil || IsNil(o.WafConfig.Get()) {
+		var ret WafConfig
+		return ret
+	}
+	return *o.WafConfig.Get()
+}
+
+// GetWafConfigOk returns a tuple with the WafConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *V2RuleProxyRequest) GetWafConfigOk() (*WafConfig, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.WafConfig.Get(), o.WafConfig.IsSet()
+}
+
+// HasWafConfig returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasWafConfig() bool {
+	if o != nil && o.WafConfig.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetWafConfig gets a reference to the given NullableWafConfig and assigns it to the WafConfig field.
+func (o *V2RuleProxyRequest) SetWafConfig(v WafConfig) {
+	o.WafConfig.Set(&v)
+}
+// SetWafConfigNil sets the value for WafConfig to be an explicit nil
+func (o *V2RuleProxyRequest) SetWafConfigNil() {
+	o.WafConfig.Set(nil)
+}
+
+// UnsetWafConfig ensures that no value is present for WafConfig, not even an explicit nil
+func (o *V2RuleProxyRequest) UnsetWafConfig() {
+	o.WafConfig.Unset()
+}
+
+// GetApplicationProxy returns the ApplicationProxy field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetApplicationProxy() bool {
+	if o == nil || IsNil(o.ApplicationProxy) {
+		var ret bool
+		return ret
+	}
+	return *o.ApplicationProxy
+}
+
+// GetApplicationProxyOk returns a tuple with the ApplicationProxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetApplicationProxyOk() (*bool, bool) {
+	if o == nil || IsNil(o.ApplicationProxy) {
+		return nil, false
+	}
+	return o.ApplicationProxy, true
+}
+
+// HasApplicationProxy returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasApplicationProxy() bool {
+	if o != nil && !IsNil(o.ApplicationProxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationProxy gets a reference to the given bool and assigns it to the ApplicationProxy field.
+func (o *V2RuleProxyRequest) SetApplicationProxy(v bool) {
+	o.ApplicationProxy = &v
+}
+
+// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetApplicationName() string {
+	if o == nil || IsNil(o.ApplicationName) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationName
+}
+
+// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetApplicationNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationName) {
+		return nil, false
+	}
+	return o.ApplicationName, true
+}
+
+// HasApplicationName returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasApplicationName() bool {
+	if o != nil && !IsNil(o.ApplicationName) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationName gets a reference to the given string and assigns it to the ApplicationName field.
+func (o *V2RuleProxyRequest) SetApplicationName(v string) {
+	o.ApplicationName = &v
+}
+
+// GetApplicationEnvironment returns the ApplicationEnvironment field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetApplicationEnvironment() string {
+	if o == nil || IsNil(o.ApplicationEnvironment) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationEnvironment
+}
+
+// GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetApplicationEnvironmentOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationEnvironment) {
+		return nil, false
+	}
+	return o.ApplicationEnvironment, true
+}
+
+// HasApplicationEnvironment returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasApplicationEnvironment() bool {
+	if o != nil && !IsNil(o.ApplicationEnvironment) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationEnvironment gets a reference to the given string and assigns it to the ApplicationEnvironment field.
+func (o *V2RuleProxyRequest) SetApplicationEnvironment(v string) {
+	o.ApplicationEnvironment = &v
+}
+
+// GetApplicationContainer returns the ApplicationContainer field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetApplicationContainer() string {
+	if o == nil || IsNil(o.ApplicationContainer) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationContainer
+}
+
+// GetApplicationContainerOk returns a tuple with the ApplicationContainer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetApplicationContainerOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationContainer) {
+		return nil, false
+	}
+	return o.ApplicationContainer, true
+}
+
+// HasApplicationContainer returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasApplicationContainer() bool {
+	if o != nil && !IsNil(o.ApplicationContainer) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationContainer gets a reference to the given string and assigns it to the ApplicationContainer field.
+func (o *V2RuleProxyRequest) SetApplicationContainer(v string) {
+	o.ApplicationContainer = &v
+}
+
+// GetApplicationPort returns the ApplicationPort field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetApplicationPort() int32 {
+	if o == nil || IsNil(o.ApplicationPort) {
+		var ret int32
+		return ret
+	}
+	return *o.ApplicationPort
+}
+
+// GetApplicationPortOk returns a tuple with the ApplicationPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetApplicationPortOk() (*int32, bool) {
+	if o == nil || IsNil(o.ApplicationPort) {
+		return nil, false
+	}
+	return o.ApplicationPort, true
+}
+
+// HasApplicationPort returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasApplicationPort() bool {
+	if o != nil && !IsNil(o.ApplicationPort) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationPort gets a reference to the given int32 and assigns it to the ApplicationPort field.
+func (o *V2RuleProxyRequest) SetApplicationPort(v int32) {
+	o.ApplicationPort = &v
 }
 
 func (o V2RuleProxyRequest) MarshalJSON() ([]byte, error) {
@@ -1172,11 +1537,41 @@ func (o V2RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailoverOriginTtfb) {
 		toSerialize["failover_origin_ttfb"] = o.FailoverOriginTtfb
 	}
+	if !IsNil(o.FailoverOriginStatusCodes) {
+		toSerialize["failover_origin_status_codes"] = o.FailoverOriginStatusCodes
+	}
+	if !IsNil(o.FailoverLifetime) {
+		toSerialize["failover_lifetime"] = o.FailoverLifetime
+	}
 	if !IsNil(o.FailoverS3Bucket) {
 		toSerialize["failover_s3_bucket"] = o.FailoverS3Bucket
 	}
 	if !IsNil(o.FailoverS3Region) {
 		toSerialize["failover_s3_region"] = o.FailoverS3Region
+	}
+	if !IsNil(o.ProxyAlertEnabled) {
+		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
+	}
+	if !IsNil(o.WafEnabled) {
+		toSerialize["waf_enabled"] = o.WafEnabled
+	}
+	if o.WafConfig.IsSet() {
+		toSerialize["waf_config"] = o.WafConfig.Get()
+	}
+	if !IsNil(o.ApplicationProxy) {
+		toSerialize["application_proxy"] = o.ApplicationProxy
+	}
+	if !IsNil(o.ApplicationName) {
+		toSerialize["application_name"] = o.ApplicationName
+	}
+	if !IsNil(o.ApplicationEnvironment) {
+		toSerialize["application_environment"] = o.ApplicationEnvironment
+	}
+	if !IsNil(o.ApplicationContainer) {
+		toSerialize["application_container"] = o.ApplicationContainer
+	}
+	if !IsNil(o.ApplicationPort) {
+		toSerialize["application_port"] = o.ApplicationPort
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -1251,8 +1646,18 @@ func (o *V2RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "origin_timeout")
 		delete(additionalProperties, "failover_mode")
 		delete(additionalProperties, "failover_origin_ttfb")
+		delete(additionalProperties, "failover_origin_status_codes")
+		delete(additionalProperties, "failover_lifetime")
 		delete(additionalProperties, "failover_s3_bucket")
 		delete(additionalProperties, "failover_s3_region")
+		delete(additionalProperties, "proxy_alert_enabled")
+		delete(additionalProperties, "waf_enabled")
+		delete(additionalProperties, "waf_config")
+		delete(additionalProperties, "application_proxy")
+		delete(additionalProperties, "application_name")
+		delete(additionalProperties, "application_environment")
+		delete(additionalProperties, "application_container")
+		delete(additionalProperties, "application_port")
 		o.AdditionalProperties = additionalProperties
 	}
 

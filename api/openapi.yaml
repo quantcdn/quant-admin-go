@@ -9869,6 +9869,22 @@ components:
             description: Failover TTFB threshold
             example: "2000"
             type: string
+          failover_origin_status_codes:
+            description: "Status codes for failover (default: 200,404,301,302,304)"
+            example:
+            - "200"
+            - "404"
+            - "301"
+            - "302"
+            - "304"
+            items:
+              type: string
+            type: array
+          failover_lifetime:
+            default: "300"
+            description: Failover cache lifetime
+            example: "300"
+            type: string
           failover_s3_bucket:
             description: Failover S3 bucket
             example: my-failover-bucket
@@ -9877,6 +9893,43 @@ components:
             description: Failover S3 region
             example: us-east-1
             type: string
+          proxy_alert_enabled:
+            default: false
+            description: Proxy alert enabled
+            example: false
+            type: boolean
+          waf_enabled:
+            default: false
+            description: WAF enabled
+            example: false
+            type: boolean
+          waf_config:
+            $ref: '#/components/schemas/WafConfig'
+          application_proxy:
+            default: false
+            description: Enable Quant Cloud application proxy mode
+            example: false
+            type: boolean
+          application_name:
+            description: Quant Cloud application name (required when application_proxy
+              is true)
+            example: my-app
+            type: string
+          application_environment:
+            description: Quant Cloud application environment (required when application_proxy
+              is true)
+            example: production
+            type: string
+          application_container:
+            description: Quant Cloud application container (required when application_proxy
+              is true)
+            example: web
+            type: string
+          application_port:
+            description: Quant Cloud application port (required when application_proxy
+              is true)
+            example: 80
+            type: integer
         required:
         - to
         type: object
@@ -9886,9 +9939,11 @@ components:
         proxy_strip_request_headers:
         - Cookie
         - Authorization
+        application_proxy: false
         method_is:
         - GET
         - POST
+        application_container: web
         method_is_not:
         - DELETE
         - PUT
@@ -9899,13 +9954,17 @@ components:
         country_is_not:
         - CN
         - RU
+        application_name: my-app
         failover_s3_region: us-east-1
         auth_user: admin
         host: backend.test-domain.com
         failover_s3_bucket: my-failover-bucket
+        waf_enabled: false
         auth_pass: secure_pass
         disabled: false
+        application_port: 80
         failover_mode: true
+        application_environment: production
         origin_timeout: "30"
         method: method_is
         ip_is_not:
@@ -9932,6 +9991,69 @@ components:
         - 10.0.0.1
         to: https://backend.test-domain.com
         disable_ssl_verify: false
+        failover_lifetime: "300"
+        waf_config:
+          block_lists:
+            referer: false
+            ip: false
+            ai: false
+            user_agent: false
+          allow_rules:
+          - allow_rules
+          - allow_rules
+          httpbl:
+            block_harvester: false
+            httpbl_enabled: false
+            block_spam: false
+            httpbl_key: httpbl_key
+            block_search_engine: false
+            block_suspicious: false
+          notify_slack_hits_rpm: 100
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          block_asn:
+          - block_asn
+          - block_asn
+          mode: report
+          thresholds:
+          - hits: 10
+            mode: disabled
+            rps: 10
+            minutes: 5
+            cooldown: 30
+            type: ip
+            value: value
+            notify_slack: notify_slack
+          - hits: 10
+            mode: disabled
+            rps: 10
+            minutes: 5
+            cooldown: 30
+            type: ip
+            value: value
+            notify_slack: notify_slack
+          notify_email:
+          - notify_email
+          - notify_email
+          block_ip:
+          - block_ip
+          - block_ip
+          block_referer:
+          - block_referer
+          - block_referer
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: https://hooks.slack.com/services/XXX
+          paranoia_level: 1
+        failover_origin_status_codes:
+        - "200"
+        - "404"
+        - "301"
+        - "302"
+        - "304"
+        proxy_alert_enabled: false
       type: object
     V2RuleRedirectRequest:
       allOf:

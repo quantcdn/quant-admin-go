@@ -32,8 +32,18 @@ Name | Type | Description | Notes
 **OriginTimeout** | Pointer to **string** | Origin timeout | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold | [optional] [default to "2000"]
+**FailoverOriginStatusCodes** | Pointer to **[]string** | Status codes for failover (default: 200,404,301,302,304) | [optional] 
+**FailoverLifetime** | Pointer to **string** | Failover cache lifetime | [optional] [default to "300"]
 **FailoverS3Bucket** | Pointer to **string** | Failover S3 bucket | [optional] 
 **FailoverS3Region** | Pointer to **string** | Failover S3 region | [optional] 
+**ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] [default to false]
+**WafEnabled** | Pointer to **bool** | WAF enabled | [optional] [default to false]
+**WafConfig** | Pointer to [**NullableWafConfig**](WafConfig.md) |  | [optional] 
+**ApplicationProxy** | Pointer to **bool** | Enable Quant Cloud application proxy mode | [optional] [default to false]
+**ApplicationName** | Pointer to **string** | Quant Cloud application name (required when application_proxy is true) | [optional] 
+**ApplicationEnvironment** | Pointer to **string** | Quant Cloud application environment (required when application_proxy is true) | [optional] 
+**ApplicationContainer** | Pointer to **string** | Quant Cloud application container (required when application_proxy is true) | [optional] 
+**ApplicationPort** | Pointer to **int32** | Quant Cloud application port (required when application_proxy is true) | [optional] 
 
 ## Methods
 
@@ -759,6 +769,56 @@ SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
 
 HasFailoverOriginTtfb returns a boolean if a field has been set.
 
+### GetFailoverOriginStatusCodes
+
+`func (o *V2RuleProxyRequest) GetFailoverOriginStatusCodes() []string`
+
+GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field if non-nil, zero value otherwise.
+
+### GetFailoverOriginStatusCodesOk
+
+`func (o *V2RuleProxyRequest) GetFailoverOriginStatusCodesOk() (*[]string, bool)`
+
+GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverOriginStatusCodes
+
+`func (o *V2RuleProxyRequest) SetFailoverOriginStatusCodes(v []string)`
+
+SetFailoverOriginStatusCodes sets FailoverOriginStatusCodes field to given value.
+
+### HasFailoverOriginStatusCodes
+
+`func (o *V2RuleProxyRequest) HasFailoverOriginStatusCodes() bool`
+
+HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+
+### GetFailoverLifetime
+
+`func (o *V2RuleProxyRequest) GetFailoverLifetime() string`
+
+GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
+
+### GetFailoverLifetimeOk
+
+`func (o *V2RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool)`
+
+GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverLifetime
+
+`func (o *V2RuleProxyRequest) SetFailoverLifetime(v string)`
+
+SetFailoverLifetime sets FailoverLifetime field to given value.
+
+### HasFailoverLifetime
+
+`func (o *V2RuleProxyRequest) HasFailoverLifetime() bool`
+
+HasFailoverLifetime returns a boolean if a field has been set.
+
 ### GetFailoverS3Bucket
 
 `func (o *V2RuleProxyRequest) GetFailoverS3Bucket() string`
@@ -808,6 +868,216 @@ SetFailoverS3Region sets FailoverS3Region field to given value.
 `func (o *V2RuleProxyRequest) HasFailoverS3Region() bool`
 
 HasFailoverS3Region returns a boolean if a field has been set.
+
+### GetProxyAlertEnabled
+
+`func (o *V2RuleProxyRequest) GetProxyAlertEnabled() bool`
+
+GetProxyAlertEnabled returns the ProxyAlertEnabled field if non-nil, zero value otherwise.
+
+### GetProxyAlertEnabledOk
+
+`func (o *V2RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool)`
+
+GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyAlertEnabled
+
+`func (o *V2RuleProxyRequest) SetProxyAlertEnabled(v bool)`
+
+SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
+
+### HasProxyAlertEnabled
+
+`func (o *V2RuleProxyRequest) HasProxyAlertEnabled() bool`
+
+HasProxyAlertEnabled returns a boolean if a field has been set.
+
+### GetWafEnabled
+
+`func (o *V2RuleProxyRequest) GetWafEnabled() bool`
+
+GetWafEnabled returns the WafEnabled field if non-nil, zero value otherwise.
+
+### GetWafEnabledOk
+
+`func (o *V2RuleProxyRequest) GetWafEnabledOk() (*bool, bool)`
+
+GetWafEnabledOk returns a tuple with the WafEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWafEnabled
+
+`func (o *V2RuleProxyRequest) SetWafEnabled(v bool)`
+
+SetWafEnabled sets WafEnabled field to given value.
+
+### HasWafEnabled
+
+`func (o *V2RuleProxyRequest) HasWafEnabled() bool`
+
+HasWafEnabled returns a boolean if a field has been set.
+
+### GetWafConfig
+
+`func (o *V2RuleProxyRequest) GetWafConfig() WafConfig`
+
+GetWafConfig returns the WafConfig field if non-nil, zero value otherwise.
+
+### GetWafConfigOk
+
+`func (o *V2RuleProxyRequest) GetWafConfigOk() (*WafConfig, bool)`
+
+GetWafConfigOk returns a tuple with the WafConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWafConfig
+
+`func (o *V2RuleProxyRequest) SetWafConfig(v WafConfig)`
+
+SetWafConfig sets WafConfig field to given value.
+
+### HasWafConfig
+
+`func (o *V2RuleProxyRequest) HasWafConfig() bool`
+
+HasWafConfig returns a boolean if a field has been set.
+
+### SetWafConfigNil
+
+`func (o *V2RuleProxyRequest) SetWafConfigNil(b bool)`
+
+ SetWafConfigNil sets the value for WafConfig to be an explicit nil
+
+### UnsetWafConfig
+`func (o *V2RuleProxyRequest) UnsetWafConfig()`
+
+UnsetWafConfig ensures that no value is present for WafConfig, not even an explicit nil
+### GetApplicationProxy
+
+`func (o *V2RuleProxyRequest) GetApplicationProxy() bool`
+
+GetApplicationProxy returns the ApplicationProxy field if non-nil, zero value otherwise.
+
+### GetApplicationProxyOk
+
+`func (o *V2RuleProxyRequest) GetApplicationProxyOk() (*bool, bool)`
+
+GetApplicationProxyOk returns a tuple with the ApplicationProxy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationProxy
+
+`func (o *V2RuleProxyRequest) SetApplicationProxy(v bool)`
+
+SetApplicationProxy sets ApplicationProxy field to given value.
+
+### HasApplicationProxy
+
+`func (o *V2RuleProxyRequest) HasApplicationProxy() bool`
+
+HasApplicationProxy returns a boolean if a field has been set.
+
+### GetApplicationName
+
+`func (o *V2RuleProxyRequest) GetApplicationName() string`
+
+GetApplicationName returns the ApplicationName field if non-nil, zero value otherwise.
+
+### GetApplicationNameOk
+
+`func (o *V2RuleProxyRequest) GetApplicationNameOk() (*string, bool)`
+
+GetApplicationNameOk returns a tuple with the ApplicationName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationName
+
+`func (o *V2RuleProxyRequest) SetApplicationName(v string)`
+
+SetApplicationName sets ApplicationName field to given value.
+
+### HasApplicationName
+
+`func (o *V2RuleProxyRequest) HasApplicationName() bool`
+
+HasApplicationName returns a boolean if a field has been set.
+
+### GetApplicationEnvironment
+
+`func (o *V2RuleProxyRequest) GetApplicationEnvironment() string`
+
+GetApplicationEnvironment returns the ApplicationEnvironment field if non-nil, zero value otherwise.
+
+### GetApplicationEnvironmentOk
+
+`func (o *V2RuleProxyRequest) GetApplicationEnvironmentOk() (*string, bool)`
+
+GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationEnvironment
+
+`func (o *V2RuleProxyRequest) SetApplicationEnvironment(v string)`
+
+SetApplicationEnvironment sets ApplicationEnvironment field to given value.
+
+### HasApplicationEnvironment
+
+`func (o *V2RuleProxyRequest) HasApplicationEnvironment() bool`
+
+HasApplicationEnvironment returns a boolean if a field has been set.
+
+### GetApplicationContainer
+
+`func (o *V2RuleProxyRequest) GetApplicationContainer() string`
+
+GetApplicationContainer returns the ApplicationContainer field if non-nil, zero value otherwise.
+
+### GetApplicationContainerOk
+
+`func (o *V2RuleProxyRequest) GetApplicationContainerOk() (*string, bool)`
+
+GetApplicationContainerOk returns a tuple with the ApplicationContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationContainer
+
+`func (o *V2RuleProxyRequest) SetApplicationContainer(v string)`
+
+SetApplicationContainer sets ApplicationContainer field to given value.
+
+### HasApplicationContainer
+
+`func (o *V2RuleProxyRequest) HasApplicationContainer() bool`
+
+HasApplicationContainer returns a boolean if a field has been set.
+
+### GetApplicationPort
+
+`func (o *V2RuleProxyRequest) GetApplicationPort() int32`
+
+GetApplicationPort returns the ApplicationPort field if non-nil, zero value otherwise.
+
+### GetApplicationPortOk
+
+`func (o *V2RuleProxyRequest) GetApplicationPortOk() (*int32, bool)`
+
+GetApplicationPortOk returns a tuple with the ApplicationPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationPort
+
+`func (o *V2RuleProxyRequest) SetApplicationPort(v int32)`
+
+SetApplicationPort sets ApplicationPort field to given value.
+
+### HasApplicationPort
+
+`func (o *V2RuleProxyRequest) HasApplicationPort() bool`
+
+HasApplicationPort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
