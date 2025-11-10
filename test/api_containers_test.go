@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_quantadmingo_ContainersAPIService(t *testing.T) {
