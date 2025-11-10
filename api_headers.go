@@ -60,8 +60,8 @@ type HeadersAPI interface {
 	HeadersList(ctx context.Context, organization string, project string) HeadersAPIHeadersListRequest
 
 	// HeadersListExecute executes the request
-	//  @return []map[string]string
-	HeadersListExecute(r HeadersAPIHeadersListRequest) ([]map[string]string, *http.Response, error)
+	//  @return map[string]string
+	HeadersListExecute(r HeadersAPIHeadersListRequest) (map[string]string, *http.Response, error)
 }
 
 // HeadersAPIService HeadersAPI service
@@ -337,7 +337,7 @@ type HeadersAPIHeadersListRequest struct {
 	project string
 }
 
-func (r HeadersAPIHeadersListRequest) Execute() ([]map[string]string, *http.Response, error) {
+func (r HeadersAPIHeadersListRequest) Execute() (map[string]string, *http.Response, error) {
 	return r.ApiService.HeadersListExecute(r)
 }
 
@@ -359,13 +359,13 @@ func (a *HeadersAPIService) HeadersList(ctx context.Context, organization string
 }
 
 // Execute executes the request
-//  @return []map[string]string
-func (a *HeadersAPIService) HeadersListExecute(r HeadersAPIHeadersListRequest) ([]map[string]string, *http.Response, error) {
+//  @return map[string]string
+func (a *HeadersAPIService) HeadersListExecute(r HeadersAPIHeadersListRequest) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []map[string]string
+		localVarReturnValue  map[string]string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HeadersAPIService.HeadersList")

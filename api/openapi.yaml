@@ -636,10 +636,14 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                X-Custom-Header: value
+                X-Another-Header: another-value
               schema:
-                items:
-                  $ref: '#/components/schemas/V2CustomHeader'
-                type: array
+                additionalProperties:
+                  type: string
+                description: Map of header names to header values
+                type: object
           description: The request has succeeded.
         "400":
           content:

@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## HeadersList
 
-> []map[string]string HeadersList(ctx, organization, project).Execute()
+> map[string]string HeadersList(ctx, organization, project).Execute()
 
 List custom headers for a project
 
@@ -183,7 +183,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `HeadersAPI.HeadersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `HeadersList`: []map[string]string
+	// response from `HeadersList`: map[string]string
 	fmt.Fprintf(os.Stdout, "Response from `HeadersAPI.HeadersList`: %v\n", resp)
 }
 ```
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]map[string]string**](map.md)
+**map[string]string**
 
 ### Authorization
 
