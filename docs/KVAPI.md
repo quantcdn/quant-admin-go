@@ -37,7 +37,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	v2StoreRequest := *openapiclient.NewV2StoreRequest("The requested resource was not found", true, "session-data") // V2StoreRequest | 
+	v2StoreRequest := *openapiclient.NewV2StoreRequest("session-data") // V2StoreRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -183,7 +183,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	storeId := "storeId_example" // string | 
-	v2StoreItemRequest := *openapiclient.NewV2StoreItemRequest("The requested resource was not found", true, "user-session-123", "Value_example") // V2StoreItemRequest | 
+	v2StoreItemRequest := *openapiclient.NewV2StoreItemRequest("user-session-123", "Value_example") // V2StoreItemRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -494,7 +494,7 @@ func main() {
 	project := "project_example" // string | 
 	storeId := "storeId_example" // string | 
 	key := "key_example" // string | 
-	v2StoreItemUpdateRequest := *openapiclient.NewV2StoreItemUpdateRequest("The requested resource was not found", true, "Value_example") // V2StoreItemUpdateRequest | 
+	v2StoreItemUpdateRequest := *openapiclient.NewV2StoreItemUpdateRequest("Value_example") // V2StoreItemUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

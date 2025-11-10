@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Key** | **string** | Item key | 
 **Value** | **string** | Item value (can be JSON string) | 
 
@@ -13,7 +11,7 @@ Name | Type | Description | Notes
 
 ### NewV2StoreItemRequest
 
-`func NewV2StoreItemRequest(message string, error_ bool, key string, value string, ) *V2StoreItemRequest`
+`func NewV2StoreItemRequest(key string, value string, ) *V2StoreItemRequest`
 
 NewV2StoreItemRequest instantiates a new V2StoreItemRequest object
 This constructor will assign default values to properties that have it defined,
@@ -27,46 +25,6 @@ will change when the set of required properties is changed
 NewV2StoreItemRequestWithDefaults instantiates a new V2StoreItemRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2StoreItemRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2StoreItemRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2StoreItemRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2StoreItemRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2StoreItemRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2StoreItemRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetKey
 

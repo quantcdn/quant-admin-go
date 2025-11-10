@@ -21,10 +21,6 @@ var _ MappedNullable = &V2Organization{}
 
 // V2Organization struct for V2Organization
 type V2Organization struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Organization name
 	Name string `json:"name"`
 	// Organization machine name
@@ -48,10 +44,8 @@ type _V2Organization V2Organization
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2Organization(message string, error_ bool, name string, machineName string) *V2Organization {
+func NewV2Organization(name string, machineName string) *V2Organization {
 	this := V2Organization{}
-	this.Message = message
-	this.Error = error_
 	this.Name = name
 	this.MachineName = machineName
 	return &this
@@ -63,54 +57,6 @@ func NewV2Organization(message string, error_ bool, name string, machineName str
 func NewV2OrganizationWithDefaults() *V2Organization {
 	this := V2Organization{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2Organization) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2Organization) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2Organization) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2Organization) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2Organization) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2Organization) SetError(v bool) {
-	o.Error = v
 }
 
 // GetName returns the Name field value
@@ -331,8 +277,6 @@ func (o V2Organization) MarshalJSON() ([]byte, error) {
 
 func (o V2Organization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["name"] = o.Name
 	toSerialize["machine_name"] = o.MachineName
 	if !IsNil(o.Type) {
@@ -363,8 +307,6 @@ func (o *V2Organization) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"name",
 		"machine_name",
 	}
@@ -396,8 +338,6 @@ func (o *V2Organization) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "machine_name")
 		delete(additionalProperties, "type")

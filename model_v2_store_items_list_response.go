@@ -12,7 +12,6 @@ package quantadmingo
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the V2StoreItemsListResponse type satisfies the MappedNullable interface at compile time
@@ -20,10 +19,6 @@ var _ MappedNullable = &V2StoreItemsListResponse{}
 
 // V2StoreItemsListResponse struct for V2StoreItemsListResponse
 type V2StoreItemsListResponse struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// List of item keys
 	Data []string `json:"data,omitempty"`
 	// Cursor for next page of results
@@ -37,10 +32,8 @@ type _V2StoreItemsListResponse V2StoreItemsListResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2StoreItemsListResponse(message string, error_ bool) *V2StoreItemsListResponse {
+func NewV2StoreItemsListResponse() *V2StoreItemsListResponse {
 	this := V2StoreItemsListResponse{}
-	this.Message = message
-	this.Error = error_
 	return &this
 }
 
@@ -50,54 +43,6 @@ func NewV2StoreItemsListResponse(message string, error_ bool) *V2StoreItemsListR
 func NewV2StoreItemsListResponseWithDefaults() *V2StoreItemsListResponse {
 	this := V2StoreItemsListResponse{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2StoreItemsListResponse) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2StoreItemsListResponse) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2StoreItemsListResponse) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2StoreItemsListResponse) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2StoreItemsListResponse) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2StoreItemsListResponse) SetError(v bool) {
-	o.Error = v
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
@@ -184,8 +129,6 @@ func (o V2StoreItemsListResponse) MarshalJSON() ([]byte, error) {
 
 func (o V2StoreItemsListResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
@@ -201,28 +144,6 @@ func (o V2StoreItemsListResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V2StoreItemsListResponse) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"message",
-		"error",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varV2StoreItemsListResponse := _V2StoreItemsListResponse{}
 
 	err = json.Unmarshal(data, &varV2StoreItemsListResponse)
@@ -236,8 +157,6 @@ func (o *V2StoreItemsListResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "data")
 		delete(additionalProperties, "next_cursor")
 		o.AdditionalProperties = additionalProperties

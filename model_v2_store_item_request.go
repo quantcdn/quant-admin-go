@@ -20,10 +20,6 @@ var _ MappedNullable = &V2StoreItemRequest{}
 
 // V2StoreItemRequest struct for V2StoreItemRequest
 type V2StoreItemRequest struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Item key
 	Key string `json:"key"`
 	// Item value (can be JSON string)
@@ -37,10 +33,8 @@ type _V2StoreItemRequest V2StoreItemRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2StoreItemRequest(message string, error_ bool, key string, value string) *V2StoreItemRequest {
+func NewV2StoreItemRequest(key string, value string) *V2StoreItemRequest {
 	this := V2StoreItemRequest{}
-	this.Message = message
-	this.Error = error_
 	this.Key = key
 	this.Value = value
 	return &this
@@ -52,54 +46,6 @@ func NewV2StoreItemRequest(message string, error_ bool, key string, value string
 func NewV2StoreItemRequestWithDefaults() *V2StoreItemRequest {
 	this := V2StoreItemRequest{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2StoreItemRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2StoreItemRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2StoreItemRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2StoreItemRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2StoreItemRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2StoreItemRequest) SetError(v bool) {
-	o.Error = v
 }
 
 // GetKey returns the Key field value
@@ -160,8 +106,6 @@ func (o V2StoreItemRequest) MarshalJSON() ([]byte, error) {
 
 func (o V2StoreItemRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["key"] = o.Key
 	toSerialize["value"] = o.Value
 
@@ -177,8 +121,6 @@ func (o *V2StoreItemRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"key",
 		"value",
 	}
@@ -210,8 +152,6 @@ func (o *V2StoreItemRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "key")
 		delete(additionalProperties, "value")
 		o.AdditionalProperties = additionalProperties

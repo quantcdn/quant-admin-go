@@ -6825,185 +6825,6 @@ components:
       - error
       - message
       type: object
-    V2Store:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          id:
-            description: Store ID
-            example: kv-store-123
-            type: string
-          name:
-            description: Store name
-            example: session-data
-            type: string
-        type: object
-      example:
-        name: session-data
-        id: kv-store-123
-        message: The requested resource was not found
-        error: true
-      required:
-      - id
-      - name
-      type: object
-    V2StoreRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Store name
-            example: session-data
-            type: string
-        type: object
-      example:
-        name: session-data
-        message: The requested resource was not found
-        error: true
-      required:
-      - name
-      type: object
-    V2StoreItem:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          key:
-            description: Item key
-            example: user-session-123
-            type: string
-          value:
-            description: Item value (can be JSON string)
-            type: string
-        type: object
-      required:
-      - key
-      - value
-      type: object
-    V2StoreItemRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          key:
-            description: Item key
-            example: user-session-123
-            type: string
-          value:
-            description: Item value (can be JSON string)
-            type: string
-        type: object
-      example:
-        message: The requested resource was not found
-        error: true
-        value: value
-        key: user-session-123
-      required:
-      - key
-      - value
-      type: object
-    V2StoreItemUpdateRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          value:
-            description: Item value (can be JSON string)
-            type: string
-        type: object
-      example:
-        message: The requested resource was not found
-        error: true
-        value: value
-      required:
-      - value
-      type: object
-    V2StoreItemsListResponse:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          data:
-            description: List of item keys
-            items:
-              type: string
-            type: array
-          next_cursor:
-            description: Cursor for next page of results
-            example: next-page-token
-            nullable: true
-            type: string
-        type: object
-      example:
-        next_cursor: next-page-token
-        data:
-        - data
-        - data
-        message: The requested resource was not found
-        error: true
-      type: object
-    V2Organization:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Organization name
-            example: Test Organization
-            type: string
-          machine_name:
-            description: Organization machine name
-            example: test-org
-            type: string
-          type:
-            description: Organization type
-            example: business
-            type: string
-          region:
-            description: Organization region
-            example: au
-            type: string
-          subscription:
-            description: Subscription type
-            example: professional
-            type: string
-          created_at:
-            description: Creation timestamp
-            example: 2024-01-15T10:30:00Z
-            format: date-time
-            type: string
-          updated_at:
-            description: Last update timestamp
-            example: 2024-10-10T14:20:00Z
-            format: date-time
-            type: string
-        type: object
-      example:
-        updated_at: 2024-10-10T14:20:00Z
-        name: Test Organization
-        created_at: 2024-01-15T10:30:00Z
-        subscription: professional
-        message: The requested resource was not found
-        error: true
-        machine_name: test-org
-        type: business
-        region: au
-      required:
-      - machine_name
-      - name
-      type: object
-    V2OrganizationRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Organization name
-            example: Test Organization
-            type: string
-          machine_name:
-            description: Organization machine name
-            example: test-org
-            type: string
-        type: object
-      required:
-      - machine_name
-      - name
-      type: object
     V2Rule:
       allOf:
       - $ref: '#/components/schemas/V2Error'
@@ -11185,32 +11006,6 @@ components:
         - "304"
         proxy_alert_enabled: false
       type: object
-    V2SecretStore:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          id:
-            description: Secret store ID
-            type: string
-          name:
-            description: Secret store name
-            type: string
-        type: object
-      required:
-      - id
-      - name
-      type: object
-    V2SecretStoreRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Secret store name
-            type: string
-        type: object
-      required:
-      - name
-      type: object
     CreateApplicationRequest:
       example:
         composeDefinition:
@@ -12530,6 +12325,149 @@ components:
       required:
       - domain
       type: object
+    V2Store:
+      example:
+        name: session-data
+        id: kv-store-123
+      properties:
+        id:
+          description: Store ID
+          example: kv-store-123
+          type: string
+        name:
+          description: Store name
+          example: session-data
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    V2StoreRequest:
+      example:
+        name: session-data
+      properties:
+        name:
+          description: Store name
+          example: session-data
+          type: string
+      required:
+      - name
+      type: object
+    V2StoreItem:
+      properties:
+        key:
+          description: Item key
+          example: user-session-123
+          type: string
+        value:
+          description: Item value (can be JSON string)
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    V2StoreItemRequest:
+      example:
+        value: value
+        key: user-session-123
+      properties:
+        key:
+          description: Item key
+          example: user-session-123
+          type: string
+        value:
+          description: Item value (can be JSON string)
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    V2StoreItemUpdateRequest:
+      example:
+        value: value
+      properties:
+        value:
+          description: Item value (can be JSON string)
+          type: string
+      required:
+      - value
+      type: object
+    V2StoreItemsListResponse:
+      example:
+        next_cursor: next-page-token
+        data:
+        - data
+        - data
+      properties:
+        data:
+          description: List of item keys
+          items:
+            type: string
+          type: array
+        next_cursor:
+          description: Cursor for next page of results
+          example: next-page-token
+          nullable: true
+          type: string
+      type: object
+    V2Organization:
+      example:
+        updated_at: 2024-10-10T14:20:00Z
+        name: Test Organization
+        created_at: 2024-01-15T10:30:00Z
+        subscription: professional
+        machine_name: test-org
+        type: business
+        region: au
+      properties:
+        name:
+          description: Organization name
+          example: Test Organization
+          type: string
+        machine_name:
+          description: Organization machine name
+          example: test-org
+          type: string
+        type:
+          description: Organization type
+          example: business
+          type: string
+        region:
+          description: Organization region
+          example: au
+          type: string
+        subscription:
+          description: Subscription type
+          example: professional
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: 2024-01-15T10:30:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: Last update timestamp
+          example: 2024-10-10T14:20:00Z
+          format: date-time
+          type: string
+      required:
+      - machine_name
+      - name
+      type: object
+    V2OrganizationRequest:
+      properties:
+        name:
+          description: Organization name
+          example: Test Organization
+          type: string
+        machine_name:
+          description: Organization machine name
+          example: test-org
+          type: string
+      required:
+      - machine_name
+      - name
+      type: object
     V2Project:
       example:
         name: Test Project
@@ -12889,6 +12827,26 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+      type: object
+    V2SecretStore:
+      properties:
+        id:
+          description: Secret store ID
+          type: string
+        name:
+          description: Secret store name
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    V2SecretStoreRequest:
+      properties:
+        name:
+          description: Secret store name
+          type: string
+      required:
+      - name
       type: object
     SpotConfiguration:
       description: Spot instance strategy configuration for controlling cost vs reliability.

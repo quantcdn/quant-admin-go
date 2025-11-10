@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Data** | Pointer to **[]string** | List of item keys | [optional] 
 **NextCursor** | Pointer to **NullableString** | Cursor for next page of results | [optional] 
 
@@ -13,7 +11,7 @@ Name | Type | Description | Notes
 
 ### NewV2StoreItemsListResponse
 
-`func NewV2StoreItemsListResponse(message string, error_ bool, ) *V2StoreItemsListResponse`
+`func NewV2StoreItemsListResponse() *V2StoreItemsListResponse`
 
 NewV2StoreItemsListResponse instantiates a new V2StoreItemsListResponse object
 This constructor will assign default values to properties that have it defined,
@@ -27,46 +25,6 @@ will change when the set of required properties is changed
 NewV2StoreItemsListResponseWithDefaults instantiates a new V2StoreItemsListResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2StoreItemsListResponse) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2StoreItemsListResponse) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2StoreItemsListResponse) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2StoreItemsListResponse) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2StoreItemsListResponse) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2StoreItemsListResponse) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetData
 

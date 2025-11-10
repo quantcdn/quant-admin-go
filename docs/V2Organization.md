@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Name** | **string** | Organization name | 
 **MachineName** | **string** | Organization machine name | 
 **Type** | Pointer to **string** | Organization type | [optional] 
@@ -18,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewV2Organization
 
-`func NewV2Organization(message string, error_ bool, name string, machineName string, ) *V2Organization`
+`func NewV2Organization(name string, machineName string, ) *V2Organization`
 
 NewV2Organization instantiates a new V2Organization object
 This constructor will assign default values to properties that have it defined,
@@ -32,46 +30,6 @@ will change when the set of required properties is changed
 NewV2OrganizationWithDefaults instantiates a new V2Organization object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2Organization) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2Organization) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2Organization) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2Organization) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2Organization) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2Organization) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetName
 
