@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleRedirectAction{}
 
 // V2RuleRedirectAction struct for V2RuleRedirectAction
 type V2RuleRedirectAction struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Redirect destination URL
 	To string `json:"to"`
 	// HTTP status code for redirect
@@ -37,10 +33,8 @@ type _V2RuleRedirectAction V2RuleRedirectAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleRedirectAction(message string, error_ bool, to string) *V2RuleRedirectAction {
+func NewV2RuleRedirectAction(to string) *V2RuleRedirectAction {
 	this := V2RuleRedirectAction{}
-	this.Message = message
-	this.Error = error_
 	this.To = to
 	var statusCode string = "301"
 	this.StatusCode = &statusCode
@@ -55,54 +49,6 @@ func NewV2RuleRedirectActionWithDefaults() *V2RuleRedirectAction {
 	var statusCode string = "301"
 	this.StatusCode = &statusCode
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleRedirectAction) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleRedirectAction) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleRedirectAction) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleRedirectAction) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleRedirectAction) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleRedirectAction) SetError(v bool) {
-	o.Error = v
 }
 
 // GetTo returns the To field value
@@ -171,8 +117,6 @@ func (o V2RuleRedirectAction) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleRedirectAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["to"] = o.To
 	if !IsNil(o.StatusCode) {
 		toSerialize["status_code"] = o.StatusCode
@@ -190,8 +134,6 @@ func (o *V2RuleRedirectAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"to",
 	}
 
@@ -222,8 +164,6 @@ func (o *V2RuleRedirectAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "to")
 		delete(additionalProperties, "status_code")
 		o.AdditionalProperties = additionalProperties

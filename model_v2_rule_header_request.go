@@ -50,10 +50,6 @@ type V2RuleHeaderRequest struct {
 	IpIs []string `json:"ip_is,omitempty"`
 	// Excluded IP addresses
 	IpIsNot []string `json:"ip_is_not,omitempty"`
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Headers to set
 	Headers map[string]string `json:"headers"`
 	AdditionalProperties map[string]interface{}
@@ -65,7 +61,7 @@ type _V2RuleHeaderRequest V2RuleHeaderRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleHeaderRequest(domain []string, url []string, message string, error_ bool, headers map[string]string) *V2RuleHeaderRequest {
+func NewV2RuleHeaderRequest(domain []string, url []string, headers map[string]string) *V2RuleHeaderRequest {
 	this := V2RuleHeaderRequest{}
 	this.Domain = domain
 	var weight int32 = 0
@@ -73,8 +69,6 @@ func NewV2RuleHeaderRequest(domain []string, url []string, message string, error
 	var disabled bool = false
 	this.Disabled = &disabled
 	this.Url = url
-	this.Message = message
-	this.Error = error_
 	this.Headers = headers
 	return &this
 }
@@ -555,54 +549,6 @@ func (o *V2RuleHeaderRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
-// GetMessage returns the Message field value
-func (o *V2RuleHeaderRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeaderRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleHeaderRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleHeaderRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeaderRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleHeaderRequest) SetError(v bool) {
-	o.Error = v
-}
-
 // GetHeaders returns the Headers field value
 func (o *V2RuleHeaderRequest) GetHeaders() map[string]string {
 	if o == nil {
@@ -678,8 +624,6 @@ func (o V2RuleHeaderRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["headers"] = o.Headers
 
 	for key, value := range o.AdditionalProperties {
@@ -696,8 +640,6 @@ func (o *V2RuleHeaderRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"domain",
 		"url",
-		"message",
-		"error",
 		"headers",
 	}
 
@@ -743,8 +685,6 @@ func (o *V2RuleHeaderRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ip")
 		delete(additionalProperties, "ip_is")
 		delete(additionalProperties, "ip_is_not")
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "headers")
 		o.AdditionalProperties = additionalProperties
 	}

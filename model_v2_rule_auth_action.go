@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleAuthAction{}
 
 // V2RuleAuthAction struct for V2RuleAuthAction
 type V2RuleAuthAction struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Authentication username
 	AuthUser string `json:"auth_user"`
 	// Authentication password
@@ -37,10 +33,8 @@ type _V2RuleAuthAction V2RuleAuthAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleAuthAction(message string, error_ bool, authUser string, authPass string) *V2RuleAuthAction {
+func NewV2RuleAuthAction(authUser string, authPass string) *V2RuleAuthAction {
 	this := V2RuleAuthAction{}
-	this.Message = message
-	this.Error = error_
 	this.AuthUser = authUser
 	this.AuthPass = authPass
 	return &this
@@ -52,54 +46,6 @@ func NewV2RuleAuthAction(message string, error_ bool, authUser string, authPass 
 func NewV2RuleAuthActionWithDefaults() *V2RuleAuthAction {
 	this := V2RuleAuthAction{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleAuthAction) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleAuthAction) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleAuthAction) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleAuthAction) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleAuthAction) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleAuthAction) SetError(v bool) {
-	o.Error = v
 }
 
 // GetAuthUser returns the AuthUser field value
@@ -160,8 +106,6 @@ func (o V2RuleAuthAction) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleAuthAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["auth_user"] = o.AuthUser
 	toSerialize["auth_pass"] = o.AuthPass
 
@@ -177,8 +121,6 @@ func (o *V2RuleAuthAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"auth_user",
 		"auth_pass",
 	}
@@ -210,8 +152,6 @@ func (o *V2RuleAuthAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "auth_user")
 		delete(additionalProperties, "auth_pass")
 		o.AdditionalProperties = additionalProperties

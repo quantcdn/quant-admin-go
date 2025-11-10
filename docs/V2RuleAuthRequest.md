@@ -19,8 +19,6 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **AuthUser** | **string** | Authentication username | 
 **AuthPass** | **string** | Authentication password | 
 
@@ -28,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewV2RuleAuthRequest
 
-`func NewV2RuleAuthRequest(domain []string, url []string, message string, error_ bool, authUser string, authPass string, ) *V2RuleAuthRequest`
+`func NewV2RuleAuthRequest(domain []string, url []string, authUser string, authPass string, ) *V2RuleAuthRequest`
 
 NewV2RuleAuthRequest instantiates a new V2RuleAuthRequest object
 This constructor will assign default values to properties that have it defined,
@@ -407,46 +405,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleAuthRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetMessage
-
-`func (o *V2RuleAuthRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleAuthRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleAuthRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleAuthRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleAuthRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleAuthRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetAuthUser
 

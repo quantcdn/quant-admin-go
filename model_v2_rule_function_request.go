@@ -50,10 +50,6 @@ type V2RuleFunctionRequest struct {
 	IpIs []string `json:"ip_is,omitempty"`
 	// Excluded IP addresses
 	IpIsNot []string `json:"ip_is_not,omitempty"`
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Function UUID
 	FnUuid string `json:"fn_uuid"`
 	AdditionalProperties map[string]interface{}
@@ -65,7 +61,7 @@ type _V2RuleFunctionRequest V2RuleFunctionRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleFunctionRequest(domain []string, url []string, message string, error_ bool, fnUuid string) *V2RuleFunctionRequest {
+func NewV2RuleFunctionRequest(domain []string, url []string, fnUuid string) *V2RuleFunctionRequest {
 	this := V2RuleFunctionRequest{}
 	this.Domain = domain
 	var weight int32 = 0
@@ -73,8 +69,6 @@ func NewV2RuleFunctionRequest(domain []string, url []string, message string, err
 	var disabled bool = false
 	this.Disabled = &disabled
 	this.Url = url
-	this.Message = message
-	this.Error = error_
 	this.FnUuid = fnUuid
 	return &this
 }
@@ -555,54 +549,6 @@ func (o *V2RuleFunctionRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
-// GetMessage returns the Message field value
-func (o *V2RuleFunctionRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleFunctionRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleFunctionRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleFunctionRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleFunctionRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleFunctionRequest) SetError(v bool) {
-	o.Error = v
-}
-
 // GetFnUuid returns the FnUuid field value
 func (o *V2RuleFunctionRequest) GetFnUuid() string {
 	if o == nil {
@@ -678,8 +624,6 @@ func (o V2RuleFunctionRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["fn_uuid"] = o.FnUuid
 
 	for key, value := range o.AdditionalProperties {
@@ -696,8 +640,6 @@ func (o *V2RuleFunctionRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"domain",
 		"url",
-		"message",
-		"error",
 		"fn_uuid",
 	}
 
@@ -743,8 +685,6 @@ func (o *V2RuleFunctionRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ip")
 		delete(additionalProperties, "ip_is")
 		delete(additionalProperties, "ip_is_not")
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "fn_uuid")
 		o.AdditionalProperties = additionalProperties
 	}

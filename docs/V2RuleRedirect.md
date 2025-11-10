@@ -22,15 +22,13 @@ Name | Type | Description | Notes
 **CountryIs** | Pointer to **[]string** | Allowed countries | [optional] 
 **CountryIsNot** | Pointer to **[]string** | Excluded countries | [optional] 
 **Action** | **string** | Rule action | 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **ActionConfig** | Pointer to [**V2RuleRedirectAction**](V2RuleRedirectAction.md) |  | [optional] 
 
 ## Methods
 
 ### NewV2RuleRedirect
 
-`func NewV2RuleRedirect(uuid string, disabled bool, action string, message string, error_ bool, ) *V2RuleRedirect`
+`func NewV2RuleRedirect(uuid string, disabled bool, action string, ) *V2RuleRedirect`
 
 NewV2RuleRedirect instantiates a new V2RuleRedirect object
 This constructor will assign default values to properties that have it defined,
@@ -478,46 +476,6 @@ and a boolean to check if the value has been set.
 `func (o *V2RuleRedirect) SetAction(v string)`
 
 SetAction sets Action field to given value.
-
-
-### GetMessage
-
-`func (o *V2RuleRedirect) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleRedirect) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleRedirect) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleRedirect) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleRedirect) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleRedirect) SetError(v bool)`
-
-SetError sets Error field to given value.
 
 
 ### GetActionConfig

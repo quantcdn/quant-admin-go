@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleBotChallengeAction{}
 
 // V2RuleBotChallengeAction struct for V2RuleBotChallengeAction
 type V2RuleBotChallengeAction struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Challenge type (invisible or checkbox)
 	RobotChallengeType string `json:"robot_challenge_type"`
 	// Verification TTL in seconds
@@ -39,10 +35,8 @@ type _V2RuleBotChallengeAction V2RuleBotChallengeAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleBotChallengeAction(message string, error_ bool, robotChallengeType string) *V2RuleBotChallengeAction {
+func NewV2RuleBotChallengeAction(robotChallengeType string) *V2RuleBotChallengeAction {
 	this := V2RuleBotChallengeAction{}
-	this.Message = message
-	this.Error = error_
 	this.RobotChallengeType = robotChallengeType
 	var robotChallengeVerificationTtl int32 = 10800
 	this.RobotChallengeVerificationTtl = &robotChallengeVerificationTtl
@@ -61,54 +55,6 @@ func NewV2RuleBotChallengeActionWithDefaults() *V2RuleBotChallengeAction {
 	var robotChallengeChallengeTtl int32 = 30
 	this.RobotChallengeChallengeTtl = &robotChallengeChallengeTtl
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleBotChallengeAction) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleBotChallengeAction) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleBotChallengeAction) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleBotChallengeAction) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleBotChallengeAction) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleBotChallengeAction) SetError(v bool) {
-	o.Error = v
 }
 
 // GetRobotChallengeType returns the RobotChallengeType field value
@@ -209,8 +155,6 @@ func (o V2RuleBotChallengeAction) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleBotChallengeAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["robot_challenge_type"] = o.RobotChallengeType
 	if !IsNil(o.RobotChallengeVerificationTtl) {
 		toSerialize["robot_challenge_verification_ttl"] = o.RobotChallengeVerificationTtl
@@ -231,8 +175,6 @@ func (o *V2RuleBotChallengeAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"robot_challenge_type",
 	}
 
@@ -263,8 +205,6 @@ func (o *V2RuleBotChallengeAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "robot_challenge_type")
 		delete(additionalProperties, "robot_challenge_verification_ttl")
 		delete(additionalProperties, "robot_challenge_challenge_ttl")

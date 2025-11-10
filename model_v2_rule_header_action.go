@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleHeaderAction{}
 
 // V2RuleHeaderAction struct for V2RuleHeaderAction
 type V2RuleHeaderAction struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Headers to set
 	Headers map[string]string `json:"headers"`
 	AdditionalProperties map[string]interface{}
@@ -35,10 +31,8 @@ type _V2RuleHeaderAction V2RuleHeaderAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleHeaderAction(message string, error_ bool, headers map[string]string) *V2RuleHeaderAction {
+func NewV2RuleHeaderAction(headers map[string]string) *V2RuleHeaderAction {
 	this := V2RuleHeaderAction{}
-	this.Message = message
-	this.Error = error_
 	this.Headers = headers
 	return &this
 }
@@ -49,54 +43,6 @@ func NewV2RuleHeaderAction(message string, error_ bool, headers map[string]strin
 func NewV2RuleHeaderActionWithDefaults() *V2RuleHeaderAction {
 	this := V2RuleHeaderAction{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleHeaderAction) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeaderAction) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleHeaderAction) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleHeaderAction) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeaderAction) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleHeaderAction) SetError(v bool) {
-	o.Error = v
 }
 
 // GetHeaders returns the Headers field value
@@ -133,8 +79,6 @@ func (o V2RuleHeaderAction) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleHeaderAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["headers"] = o.Headers
 
 	for key, value := range o.AdditionalProperties {
@@ -149,8 +93,6 @@ func (o *V2RuleHeaderAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"headers",
 	}
 
@@ -181,8 +123,6 @@ func (o *V2RuleHeaderAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "headers")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -22,15 +22,13 @@ Name | Type | Description | Notes
 **CountryIs** | Pointer to **[]string** | Allowed countries | [optional] 
 **CountryIsNot** | Pointer to **[]string** | Excluded countries | [optional] 
 **Action** | **string** | Rule action | 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **ActionConfig** | [**V2RuleServeStaticAction**](V2RuleServeStaticAction.md) |  | 
 
 ## Methods
 
 ### NewV2RuleServeStatic
 
-`func NewV2RuleServeStatic(uuid string, disabled bool, action string, message string, error_ bool, actionConfig V2RuleServeStaticAction, ) *V2RuleServeStatic`
+`func NewV2RuleServeStatic(uuid string, disabled bool, action string, actionConfig V2RuleServeStaticAction, ) *V2RuleServeStatic`
 
 NewV2RuleServeStatic instantiates a new V2RuleServeStatic object
 This constructor will assign default values to properties that have it defined,
@@ -478,46 +476,6 @@ and a boolean to check if the value has been set.
 `func (o *V2RuleServeStatic) SetAction(v string)`
 
 SetAction sets Action field to given value.
-
-
-### GetMessage
-
-`func (o *V2RuleServeStatic) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleServeStatic) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleServeStatic) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleServeStatic) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleServeStatic) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleServeStatic) SetError(v bool)`
-
-SetError sets Error field to given value.
 
 
 ### GetActionConfig

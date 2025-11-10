@@ -19,15 +19,13 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **FnUuid** | **string** | Function UUID | 
 
 ## Methods
 
 ### NewV2RuleFunctionRequest
 
-`func NewV2RuleFunctionRequest(domain []string, url []string, message string, error_ bool, fnUuid string, ) *V2RuleFunctionRequest`
+`func NewV2RuleFunctionRequest(domain []string, url []string, fnUuid string, ) *V2RuleFunctionRequest`
 
 NewV2RuleFunctionRequest instantiates a new V2RuleFunctionRequest object
 This constructor will assign default values to properties that have it defined,
@@ -406,46 +404,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleFunctionRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetMessage
-
-`func (o *V2RuleFunctionRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleFunctionRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleFunctionRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleFunctionRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleFunctionRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleFunctionRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetFnUuid
 

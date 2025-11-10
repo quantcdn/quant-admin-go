@@ -19,15 +19,13 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **StaticFilePath** | **string** | Path to the static file to serve | 
 
 ## Methods
 
 ### NewV2RuleServeStaticRequest
 
-`func NewV2RuleServeStaticRequest(domain []string, url []string, message string, error_ bool, staticFilePath string, ) *V2RuleServeStaticRequest`
+`func NewV2RuleServeStaticRequest(domain []string, url []string, staticFilePath string, ) *V2RuleServeStaticRequest`
 
 NewV2RuleServeStaticRequest instantiates a new V2RuleServeStaticRequest object
 This constructor will assign default values to properties that have it defined,
@@ -406,46 +404,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleServeStaticRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetMessage
-
-`func (o *V2RuleServeStaticRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleServeStaticRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleServeStaticRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleServeStaticRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleServeStaticRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleServeStaticRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetStaticFilePath
 

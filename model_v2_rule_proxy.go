@@ -56,10 +56,6 @@ type V2RuleProxy struct {
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	// Rule action
 	Action string `json:"action"`
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	ActionConfig V2RuleProxyAction `json:"action_config"`
 	AdditionalProperties map[string]interface{}
 }
@@ -70,15 +66,13 @@ type _V2RuleProxy V2RuleProxy
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleProxy(uuid string, disabled bool, action string, message string, error_ bool, actionConfig V2RuleProxyAction) *V2RuleProxy {
+func NewV2RuleProxy(uuid string, disabled bool, action string, actionConfig V2RuleProxyAction) *V2RuleProxy {
 	this := V2RuleProxy{}
 	this.Uuid = uuid
 	var weight int32 = 0
 	this.Weight = &weight
 	this.Disabled = disabled
 	this.Action = action
-	this.Message = message
-	this.Error = error_
 	this.ActionConfig = actionConfig
 	return &this
 }
@@ -647,54 +641,6 @@ func (o *V2RuleProxy) SetAction(v string) {
 	o.Action = v
 }
 
-// GetMessage returns the Message field value
-func (o *V2RuleProxy) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxy) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleProxy) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleProxy) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxy) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleProxy) SetError(v bool) {
-	o.Error = v
-}
-
 // GetActionConfig returns the ActionConfig field value
 func (o *V2RuleProxy) GetActionConfig() V2RuleProxyAction {
 	if o == nil {
@@ -777,8 +723,6 @@ func (o V2RuleProxy) ToMap() (map[string]interface{}, error) {
 		toSerialize["country_is_not"] = o.CountryIsNot
 	}
 	toSerialize["action"] = o.Action
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["action_config"] = o.ActionConfig
 
 	for key, value := range o.AdditionalProperties {
@@ -796,8 +740,6 @@ func (o *V2RuleProxy) UnmarshalJSON(data []byte) (err error) {
 		"uuid",
 		"disabled",
 		"action",
-		"message",
-		"error",
 		"action_config",
 	}
 
@@ -846,8 +788,6 @@ func (o *V2RuleProxy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "country_is")
 		delete(additionalProperties, "country_is_not")
 		delete(additionalProperties, "action")
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "action_config")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -19,8 +19,6 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **RobotChallengeType** | **string** | Challenge type (invisible or checkbox) | 
 **RobotChallengeVerificationTtl** | Pointer to **int32** | Verification TTL in seconds | [optional] [default to 10800]
 **RobotChallengeChallengeTtl** | Pointer to **int32** | Challenge TTL in seconds | [optional] [default to 30]
@@ -29,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewV2RuleBotChallengeRequest
 
-`func NewV2RuleBotChallengeRequest(domain []string, url []string, message string, error_ bool, robotChallengeType string, ) *V2RuleBotChallengeRequest`
+`func NewV2RuleBotChallengeRequest(domain []string, url []string, robotChallengeType string, ) *V2RuleBotChallengeRequest`
 
 NewV2RuleBotChallengeRequest instantiates a new V2RuleBotChallengeRequest object
 This constructor will assign default values to properties that have it defined,
@@ -408,46 +406,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleBotChallengeRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetMessage
-
-`func (o *V2RuleBotChallengeRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleBotChallengeRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleBotChallengeRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleBotChallengeRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleBotChallengeRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleBotChallengeRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetRobotChallengeType
 

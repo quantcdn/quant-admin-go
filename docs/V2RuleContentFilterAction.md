@@ -4,15 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **FnUuid** | **string** | Function UUID | 
 
 ## Methods
 
 ### NewV2RuleContentFilterAction
 
-`func NewV2RuleContentFilterAction(message string, error_ bool, fnUuid string, ) *V2RuleContentFilterAction`
+`func NewV2RuleContentFilterAction(fnUuid string, ) *V2RuleContentFilterAction`
 
 NewV2RuleContentFilterAction instantiates a new V2RuleContentFilterAction object
 This constructor will assign default values to properties that have it defined,
@@ -26,46 +24,6 @@ will change when the set of required properties is changed
 NewV2RuleContentFilterActionWithDefaults instantiates a new V2RuleContentFilterAction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2RuleContentFilterAction) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleContentFilterAction) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleContentFilterAction) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleContentFilterAction) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleContentFilterAction) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleContentFilterAction) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetFnUuid
 

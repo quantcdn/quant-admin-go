@@ -19,15 +19,13 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Headers** | **map[string]string** | Headers to set | 
 
 ## Methods
 
 ### NewV2RuleHeaderRequest
 
-`func NewV2RuleHeaderRequest(domain []string, url []string, message string, error_ bool, headers map[string]string, ) *V2RuleHeaderRequest`
+`func NewV2RuleHeaderRequest(domain []string, url []string, headers map[string]string, ) *V2RuleHeaderRequest`
 
 NewV2RuleHeaderRequest instantiates a new V2RuleHeaderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -406,46 +404,6 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleHeaderRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
-
-### GetMessage
-
-`func (o *V2RuleHeaderRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleHeaderRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleHeaderRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleHeaderRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleHeaderRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleHeaderRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetHeaders
 

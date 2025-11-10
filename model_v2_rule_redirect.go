@@ -56,10 +56,6 @@ type V2RuleRedirect struct {
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	// Rule action
 	Action string `json:"action"`
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	ActionConfig *V2RuleRedirectAction `json:"action_config,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -70,15 +66,13 @@ type _V2RuleRedirect V2RuleRedirect
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleRedirect(uuid string, disabled bool, action string, message string, error_ bool) *V2RuleRedirect {
+func NewV2RuleRedirect(uuid string, disabled bool, action string) *V2RuleRedirect {
 	this := V2RuleRedirect{}
 	this.Uuid = uuid
 	var weight int32 = 0
 	this.Weight = &weight
 	this.Disabled = disabled
 	this.Action = action
-	this.Message = message
-	this.Error = error_
 	return &this
 }
 
@@ -646,54 +640,6 @@ func (o *V2RuleRedirect) SetAction(v string) {
 	o.Action = v
 }
 
-// GetMessage returns the Message field value
-func (o *V2RuleRedirect) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleRedirect) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleRedirect) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleRedirect) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleRedirect) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleRedirect) SetError(v bool) {
-	o.Error = v
-}
-
 // GetActionConfig returns the ActionConfig field value if set, zero value otherwise.
 func (o *V2RuleRedirect) GetActionConfig() V2RuleRedirectAction {
 	if o == nil || IsNil(o.ActionConfig) {
@@ -784,8 +730,6 @@ func (o V2RuleRedirect) ToMap() (map[string]interface{}, error) {
 		toSerialize["country_is_not"] = o.CountryIsNot
 	}
 	toSerialize["action"] = o.Action
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	if !IsNil(o.ActionConfig) {
 		toSerialize["action_config"] = o.ActionConfig
 	}
@@ -805,8 +749,6 @@ func (o *V2RuleRedirect) UnmarshalJSON(data []byte) (err error) {
 		"uuid",
 		"disabled",
 		"action",
-		"message",
-		"error",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -854,8 +796,6 @@ func (o *V2RuleRedirect) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "country_is")
 		delete(additionalProperties, "country_is_not")
 		delete(additionalProperties, "action")
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "action_config")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleContentFilterAction{}
 
 // V2RuleContentFilterAction struct for V2RuleContentFilterAction
 type V2RuleContentFilterAction struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Function UUID
 	FnUuid string `json:"fn_uuid"`
 	AdditionalProperties map[string]interface{}
@@ -35,10 +31,8 @@ type _V2RuleContentFilterAction V2RuleContentFilterAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleContentFilterAction(message string, error_ bool, fnUuid string) *V2RuleContentFilterAction {
+func NewV2RuleContentFilterAction(fnUuid string) *V2RuleContentFilterAction {
 	this := V2RuleContentFilterAction{}
-	this.Message = message
-	this.Error = error_
 	this.FnUuid = fnUuid
 	return &this
 }
@@ -49,54 +43,6 @@ func NewV2RuleContentFilterAction(message string, error_ bool, fnUuid string) *V
 func NewV2RuleContentFilterActionWithDefaults() *V2RuleContentFilterAction {
 	this := V2RuleContentFilterAction{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleContentFilterAction) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleContentFilterAction) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleContentFilterAction) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleContentFilterAction) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleContentFilterAction) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleContentFilterAction) SetError(v bool) {
-	o.Error = v
 }
 
 // GetFnUuid returns the FnUuid field value
@@ -133,8 +79,6 @@ func (o V2RuleContentFilterAction) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleContentFilterAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["fn_uuid"] = o.FnUuid
 
 	for key, value := range o.AdditionalProperties {
@@ -149,8 +93,6 @@ func (o *V2RuleContentFilterAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"fn_uuid",
 	}
 
@@ -181,8 +123,6 @@ func (o *V2RuleContentFilterAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "fn_uuid")
 		o.AdditionalProperties = additionalProperties
 	}

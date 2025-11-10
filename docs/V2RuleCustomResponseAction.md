@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **CustomResponseBody** | **string** | Custom response body content | 
 **CustomResponseStatusCode** | Pointer to **int32** | HTTP status code for custom response | [optional] [default to 200]
 
@@ -13,7 +11,7 @@ Name | Type | Description | Notes
 
 ### NewV2RuleCustomResponseAction
 
-`func NewV2RuleCustomResponseAction(message string, error_ bool, customResponseBody string, ) *V2RuleCustomResponseAction`
+`func NewV2RuleCustomResponseAction(customResponseBody string, ) *V2RuleCustomResponseAction`
 
 NewV2RuleCustomResponseAction instantiates a new V2RuleCustomResponseAction object
 This constructor will assign default values to properties that have it defined,
@@ -27,46 +25,6 @@ will change when the set of required properties is changed
 NewV2RuleCustomResponseActionWithDefaults instantiates a new V2RuleCustomResponseAction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2RuleCustomResponseAction) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleCustomResponseAction) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleCustomResponseAction) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleCustomResponseAction) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleCustomResponseAction) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleCustomResponseAction) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetCustomResponseBody
 

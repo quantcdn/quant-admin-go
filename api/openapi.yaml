@@ -6837,1002 +6837,6 @@ components:
       - error
       - message
       type: object
-    V2RuleAuthAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          auth_user:
-            description: Authentication username
-            example: admin
-            type: string
-          auth_pass:
-            description: Authentication password
-            example: secure_password123
-            type: string
-        type: object
-      example:
-        auth_user: admin
-        auth_pass: secure_password123
-        message: The requested resource was not found
-        error: true
-      required:
-      - auth_pass
-      - auth_user
-      type: object
-    V2RuleAuth:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleAuthAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          auth_user: admin
-          auth_pass: secure_password123
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleAuthRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          auth_user:
-            description: Authentication username
-            example: admin
-            type: string
-          auth_pass:
-            description: Authentication password
-            example: secure_password123
-            type: string
-        required:
-        - auth_pass
-        - auth_user
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: country_is
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        method_is:
-        - GET
-        - POST
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        auth_pass: secure_password123
-        disabled: false
-      type: object
-    V2RuleBotChallengeAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          robot_challenge_type:
-            description: Challenge type (invisible or checkbox)
-            example: invisible
-            type: string
-          robot_challenge_verification_ttl:
-            default: 10800
-            description: Verification TTL in seconds
-            example: 10800
-            type: integer
-          robot_challenge_challenge_ttl:
-            default: 30
-            description: Challenge TTL in seconds
-            example: 30
-            type: integer
-        type: object
-      example:
-        robot_challenge_type: invisible
-        robot_challenge_verification_ttl: 10800
-        robot_challenge_challenge_ttl: 30
-        message: The requested resource was not found
-        error: true
-      required:
-      - robot_challenge_type
-      type: object
-    V2RuleBotChallenge:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleBotChallengeAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          robot_challenge_type: invisible
-          robot_challenge_verification_ttl: 10800
-          robot_challenge_challenge_ttl: 30
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleBotChallengeRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          robot_challenge_type:
-            description: Challenge type (invisible or checkbox)
-            example: invisible
-            type: string
-          robot_challenge_verification_ttl:
-            default: 10800
-            description: Verification TTL in seconds
-            example: 10800
-            type: integer
-          robot_challenge_challenge_ttl:
-            default: 30
-            description: Challenge TTL in seconds
-            example: 30
-            type: integer
-        required:
-        - robot_challenge_type
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: country_is
-        robot_challenge_type: invisible
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        method_is:
-        - GET
-        - POST
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        country_is_not:
-        - CN
-        - RU
-        robot_challenge_verification_ttl: 10800
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        robot_challenge_challenge_ttl: 30
-        disabled: false
-      type: object
-    V2RuleContentFilterAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          fn_uuid:
-            description: Function UUID
-            example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-            type: string
-        type: object
-      example:
-        fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-        message: The requested resource was not found
-        error: true
-      required:
-      - fn_uuid
-      type: object
-    V2RuleContentFilter:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleContentFilterAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleCustomResponseAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          custom_response_body:
-            description: Custom response body content
-            example: <html><body>Custom maintenance page</body></html>
-            type: string
-          custom_response_status_code:
-            default: 200
-            description: HTTP status code for custom response
-            example: 503
-            type: integer
-        type: object
-      example:
-        custom_response_status_code: 503
-        custom_response_body: <html><body>Custom maintenance page</body></html>
-        message: The requested resource was not found
-        error: true
-      required:
-      - custom_response_body
-      type: object
-    V2RuleCustomResponse:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleCustomResponseAction'
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          custom_response_status_code: 503
-          custom_response_body: <html><body>Custom maintenance page</body></html>
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleFunctionAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          fn_uuid:
-            description: Function UUID
-            example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-            type: string
-        type: object
-      example:
-        fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        message: The requested resource was not found
-        error: true
-      required:
-      - fn_uuid
-      type: object
-    V2RuleFunction:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleFunctionAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleFunctionRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          fn_uuid:
-            description: Function UUID
-            example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-            type: string
-        required:
-        - fn_uuid
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: country_is
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        method_is:
-        - GET
-        - POST
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        country_is_not:
-        - CN
-        - RU
-        fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        disabled: false
-      type: object
-    V2RuleHeaderAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          headers:
-            additionalProperties:
-              type: string
-            description: Headers to set
-            example:
-              X-Custom-Header: value
-              Cache-Control: max-age=3600
-            type: object
-        type: object
-      example:
-        headers:
-          X-Custom-Header: value
-          Cache-Control: max-age=3600
-        message: The requested resource was not found
-        error: true
-      required:
-      - headers
-      type: object
-    V2RuleHeader:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleHeaderAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          headers:
-            X-Custom-Header: value
-            Cache-Control: max-age=3600
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleHeaderRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          headers:
-            additionalProperties:
-              type: string
-            description: Headers to set
-            example:
-              X-Custom-Header: value
-              Cache-Control: max-age=3600
-            type: object
-        required:
-        - headers
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: country_is
-        headers:
-          X-Custom-Header: value
-          Cache-Control: max-age=3600
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        method_is:
-        - GET
-        - POST
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        disabled: false
-      type: object
-    V2RuleProxy:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          rule_id:
-            description: Rule ID
-            type: string
-          action_config:
-            $ref: '#/components/schemas/V2RuleProxyAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule_id
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          application_proxy: false
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          application_container: web
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          application_name: my-app
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          application_port: 80
-          failover_mode: true
-          application_environment: production
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-      type: object
-    V2RuleRedirectAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          to:
-            description: Redirect destination URL
-            example: https://test-domain.com/new-path
-            type: string
-          status_code:
-            default: "301"
-            description: HTTP status code for redirect
-            example: "301"
-            type: string
-        type: object
-      example:
-        status_code: "301"
-        to: https://test-domain.com/new-path
-        message: The requested resource was not found
-        error: true
-      required:
-      - to
-      type: object
-    V2RuleRedirect:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleRedirectAction'
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          status_code: "301"
-          to: https://test-domain.com/new-path
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleServeStaticAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          static_file_path:
-            description: Path to the static file to serve
-            example: /index.html
-            type: string
-        type: object
-      example:
-        static_file_path: /index.html
-        message: The requested resource was not found
-        error: true
-      required:
-      - static_file_path
-      type: object
-    V2RuleServeStatic:
-      allOf:
-      - $ref: '#/components/schemas/V2Rule'
-      - properties:
-          action_config:
-            $ref: '#/components/schemas/V2RuleServeStaticAction'
-        required:
-        - action_config
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: US
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        only_with_cookie: session_id
-        method_is:
-        - GET
-        - POST
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule-001
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        action: redirect
-        disabled: false
-        action_config:
-          static_file_path: /index.html
-          message: The requested resource was not found
-          error: true
-      type: object
-    V2RuleServeStaticRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          static_file_path:
-            description: Path to the static file to serve
-            example: /index.html
-            type: string
-        required:
-        - static_file_path
-        type: object
-      - $ref: '#/components/schemas/V2Error'
-      example:
-        country: country_is
-        method: method_is
-        static_file_path: /index.html
-        ip_is_not:
-        - 172.16.0.0/12
-        method_is:
-        - GET
-        - POST
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        method_is_not:
-        - DELETE
-        - PUT
-        message: The requested resource was not found
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        url:
-        - /old-path/*
-        - /legacy/*
-        country_is_not:
-        - CN
-        - RU
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        disabled: false
-      type: object
     CreateApplicationRequest:
       example:
         composeDefinition:
@@ -10217,6 +9221,336 @@ components:
         - "304"
         proxy_alert_enabled: false
       type: object
+    V2RuleProxy:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          rule_id:
+            description: Rule ID
+            type: string
+          action_config:
+            $ref: '#/components/schemas/V2RuleProxyAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule_id
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          cache_lifetime: "3600"
+          proxy_strip_request_headers:
+          - Cookie
+          - Authorization
+          application_proxy: false
+          quant_cloud_selection:
+            app: my-app
+            container: web
+            port: 80
+            env: production
+          application_container: web
+          proxy_strip_headers:
+          - Set-Cookie
+          - Server
+          notify_config:
+            webhook_url: https://hooks.slack.com/services/XXXXXX
+          notify: slack
+          application_name: my-app
+          auth_user: admin
+          host: backend.test-domain.com
+          waf_enabled: false
+          proxy_inline_fn_enabled: false
+          auth_pass: secure_password
+          application_port: 80
+          failover_mode: true
+          application_environment: production
+          origin_timeout: "30"
+          failover_origin_ttfb: "2000"
+          only_proxy_404: false
+          inject_headers:
+            X-Custom-Header: value
+            Authorization: Bearer token
+          to: https://backend.test-domain.com
+          disable_ssl_verify: false
+          failover_lifetime: "300"
+          waf_config:
+            block_lists:
+              referer: false
+              ip: false
+              ai: false
+              user_agent: false
+            allow_rules:
+            - allow_rules
+            - allow_rules
+            httpbl:
+              block_harvester: false
+              httpbl_enabled: false
+              block_spam: false
+              httpbl_key: httpbl_key
+              block_search_engine: false
+              block_suspicious: false
+            notify_slack_hits_rpm: 100
+            allow_ip:
+            - allow_ip
+            - allow_ip
+            block_asn:
+            - block_asn
+            - block_asn
+            mode: report
+            thresholds:
+            - hits: 10
+              mode: disabled
+              rps: 10
+              minutes: 5
+              cooldown: 30
+              type: ip
+              value: value
+              notify_slack: notify_slack
+            - hits: 10
+              mode: disabled
+              rps: 10
+              minutes: 5
+              cooldown: 30
+              type: ip
+              value: value
+              notify_slack: notify_slack
+            notify_email:
+            - notify_email
+            - notify_email
+            block_ip:
+            - block_ip
+            - block_ip
+            block_referer:
+            - block_referer
+            - block_referer
+            block_ua:
+            - block_ua
+            - block_ua
+            notify_slack: https://hooks.slack.com/services/XXX
+            paranoia_level: 1
+          failover_origin_status_codes:
+          - "200"
+          - "404"
+          - "301"
+          - "302"
+          - "304"
+          proxy_alert_enabled: false
+      type: object
+    V2RuleRedirectAction:
+      example:
+        status_code: "301"
+        to: https://test-domain.com/new-path
+      properties:
+        to:
+          description: Redirect destination URL
+          example: https://test-domain.com/new-path
+          type: string
+        status_code:
+          default: "301"
+          description: HTTP status code for redirect
+          example: "301"
+          type: string
+      required:
+      - to
+      type: object
+    V2RuleRedirect:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleRedirectAction'
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          status_code: "301"
+          to: https://test-domain.com/new-path
+      type: object
+    V2RuleCustomResponseAction:
+      example:
+        custom_response_status_code: 503
+        custom_response_body: <html><body>Custom maintenance page</body></html>
+      properties:
+        custom_response_body:
+          description: Custom response body content
+          example: <html><body>Custom maintenance page</body></html>
+          type: string
+        custom_response_status_code:
+          default: 200
+          description: HTTP status code for custom response
+          example: 503
+          type: integer
+      required:
+      - custom_response_body
+      type: object
+    V2RuleCustomResponse:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleCustomResponseAction'
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          custom_response_status_code: 503
+          custom_response_body: <html><body>Custom maintenance page</body></html>
+      type: object
+    V2RuleContentFilterAction:
+      example:
+        fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+      properties:
+        fn_uuid:
+          description: Function UUID
+          example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+          type: string
+      required:
+      - fn_uuid
+      type: object
+    V2RuleContentFilter:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleContentFilterAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+      type: object
     V2RuleRedirectRequest:
       allOf:
       - $ref: '#/components/schemas/V2RuleRequest'
@@ -10372,6 +9706,574 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
+        disabled: false
+      type: object
+    V2RuleServeStaticAction:
+      example:
+        static_file_path: /index.html
+      properties:
+        static_file_path:
+          description: Path to the static file to serve
+          example: /index.html
+          type: string
+      required:
+      - static_file_path
+      type: object
+    V2RuleServeStatic:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleServeStaticAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          static_file_path: /index.html
+      type: object
+    V2RuleServeStaticRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          static_file_path:
+            description: Path to the static file to serve
+            example: /index.html
+            type: string
+        required:
+        - static_file_path
+        type: object
+      example:
+        country: country_is
+        method: method_is
+        static_file_path: /index.html
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
+      type: object
+    V2RuleHeaderAction:
+      example:
+        headers:
+          X-Custom-Header: value
+          Cache-Control: max-age=3600
+      properties:
+        headers:
+          additionalProperties:
+            type: string
+          description: Headers to set
+          example:
+            X-Custom-Header: value
+            Cache-Control: max-age=3600
+          type: object
+      required:
+      - headers
+      type: object
+    V2RuleHeader:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleHeaderAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          headers:
+            X-Custom-Header: value
+            Cache-Control: max-age=3600
+      type: object
+    V2RuleHeaderRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          headers:
+            additionalProperties:
+              type: string
+            description: Headers to set
+            example:
+              X-Custom-Header: value
+              Cache-Control: max-age=3600
+            type: object
+        required:
+        - headers
+        type: object
+      example:
+        country: country_is
+        headers:
+          X-Custom-Header: value
+          Cache-Control: max-age=3600
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
+      type: object
+    V2RuleFunctionAction:
+      example:
+        fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      properties:
+        fn_uuid:
+          description: Function UUID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+          type: string
+      required:
+      - fn_uuid
+      type: object
+    V2RuleFunction:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleFunctionAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+      type: object
+    V2RuleFunctionRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          fn_uuid:
+            description: Function UUID
+            example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+            type: string
+        required:
+        - fn_uuid
+        type: object
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
+      type: object
+    V2RuleBotChallengeAction:
+      example:
+        robot_challenge_type: invisible
+        robot_challenge_verification_ttl: 10800
+        robot_challenge_challenge_ttl: 30
+      properties:
+        robot_challenge_type:
+          description: Challenge type (invisible or checkbox)
+          example: invisible
+          type: string
+        robot_challenge_verification_ttl:
+          default: 10800
+          description: Verification TTL in seconds
+          example: 10800
+          type: integer
+        robot_challenge_challenge_ttl:
+          default: 30
+          description: Challenge TTL in seconds
+          example: 30
+          type: integer
+      required:
+      - robot_challenge_type
+      type: object
+    V2RuleBotChallenge:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleBotChallengeAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          robot_challenge_type: invisible
+          robot_challenge_verification_ttl: 10800
+          robot_challenge_challenge_ttl: 30
+      type: object
+    V2RuleBotChallengeRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          robot_challenge_type:
+            description: Challenge type (invisible or checkbox)
+            example: invisible
+            type: string
+          robot_challenge_verification_ttl:
+            default: 10800
+            description: Verification TTL in seconds
+            example: 10800
+            type: integer
+          robot_challenge_challenge_ttl:
+            default: 30
+            description: Challenge TTL in seconds
+            example: 30
+            type: integer
+        required:
+        - robot_challenge_type
+        type: object
+      example:
+        country: country_is
+        robot_challenge_type: invisible
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        robot_challenge_verification_ttl: 10800
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        robot_challenge_challenge_ttl: 30
+        disabled: false
+      type: object
+    V2RuleAuthAction:
+      example:
+        auth_user: admin
+        auth_pass: secure_password123
+      properties:
+        auth_user:
+          description: Authentication username
+          example: admin
+          type: string
+        auth_pass:
+          description: Authentication password
+          example: secure_password123
+          type: string
+      required:
+      - auth_pass
+      - auth_user
+      type: object
+    V2RuleAuth:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleAuthAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        action_config:
+          auth_user: admin
+          auth_pass: secure_password123
+      type: object
+    V2RuleAuthRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          auth_user:
+            description: Authentication username
+            example: admin
+            type: string
+          auth_pass:
+            description: Authentication password
+            example: secure_password123
+            type: string
+        required:
+        - auth_pass
+        - auth_user
+        type: object
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        auth_user: admin
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        auth_pass: secure_password123
         disabled: false
       type: object
     V2SecretStore:

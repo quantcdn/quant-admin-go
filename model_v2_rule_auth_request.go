@@ -50,10 +50,6 @@ type V2RuleAuthRequest struct {
 	IpIs []string `json:"ip_is,omitempty"`
 	// Excluded IP addresses
 	IpIsNot []string `json:"ip_is_not,omitempty"`
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Authentication username
 	AuthUser string `json:"auth_user"`
 	// Authentication password
@@ -67,7 +63,7 @@ type _V2RuleAuthRequest V2RuleAuthRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleAuthRequest(domain []string, url []string, message string, error_ bool, authUser string, authPass string) *V2RuleAuthRequest {
+func NewV2RuleAuthRequest(domain []string, url []string, authUser string, authPass string) *V2RuleAuthRequest {
 	this := V2RuleAuthRequest{}
 	this.Domain = domain
 	var weight int32 = 0
@@ -75,8 +71,6 @@ func NewV2RuleAuthRequest(domain []string, url []string, message string, error_ 
 	var disabled bool = false
 	this.Disabled = &disabled
 	this.Url = url
-	this.Message = message
-	this.Error = error_
 	this.AuthUser = authUser
 	this.AuthPass = authPass
 	return &this
@@ -558,54 +552,6 @@ func (o *V2RuleAuthRequest) SetIpIsNot(v []string) {
 	o.IpIsNot = v
 }
 
-// GetMessage returns the Message field value
-func (o *V2RuleAuthRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleAuthRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleAuthRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleAuthRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleAuthRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleAuthRequest) SetError(v bool) {
-	o.Error = v
-}
-
 // GetAuthUser returns the AuthUser field value
 func (o *V2RuleAuthRequest) GetAuthUser() string {
 	if o == nil {
@@ -705,8 +651,6 @@ func (o V2RuleAuthRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpIsNot) {
 		toSerialize["ip_is_not"] = o.IpIsNot
 	}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["auth_user"] = o.AuthUser
 	toSerialize["auth_pass"] = o.AuthPass
 
@@ -724,8 +668,6 @@ func (o *V2RuleAuthRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"domain",
 		"url",
-		"message",
-		"error",
 		"auth_user",
 		"auth_pass",
 	}
@@ -772,8 +714,6 @@ func (o *V2RuleAuthRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "ip")
 		delete(additionalProperties, "ip_is")
 		delete(additionalProperties, "ip_is_not")
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "auth_user")
 		delete(additionalProperties, "auth_pass")
 		o.AdditionalProperties = additionalProperties
