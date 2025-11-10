@@ -8848,17 +8848,51 @@ components:
     V2Crawler:
       example:
         urls_list: single_url:\n  - /\n  - /about\n  - /contact
+        allowed_domains:
+        - example.com
+        created_at: 2024-01-20T09:15:00Z
+        uuid: 550e8400-e29b-41d4-a716-446655440000
+        status_ok:
+        - 200
+        urls:
+        - /
+        - /about
+        assets:
+          network_intercept:
+            enabled: true
         updated_at: 2024-10-11T16:45:00Z
         project_id: 789
+        exclude:
+        - /admin/*
+        id: 456
+        workers: 2
+        start_urls:
+        - /
+        - /blog
+        webhook_auth_header: Bearer token123
+        user_agent: Mozilla/5.0...
+        sitemap:
+        - url: /sitemap.xml
+          recursive: true
+        headers:
+          Authorization: Bearer token
+        include:
+        - /blog/*
+        max_errors: 100
+        webhook_url: https://example.com/webhook
+        browser_mode: false
+        max_html: 50
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        delay: 4
+        depth: -1
+        execute_js: false
+        max_hits: 0
         domain: test-domain.com
         name: Test Crawler
+        webhook_extra_vars: key1=value1&key2=value2
         domain_verified: 1
-        created_at: 2024-01-20T09:15:00Z
-        id: 456
-        uuid: 550e8400-e29b-41d4-a716-446655440000
         config: "domain: test-domain.com\\nconfig:\\n  max_html: 100\\n  browser_mode:\
           \ false"
-        deleted_at: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           description: Crawler ID
@@ -8894,6 +8928,120 @@ components:
           description: URLs list (YAML)
           example: single_url:\n  - /\n  - /about\n  - /contact
           type: string
+        webhook_url:
+          description: Webhook URL for notifications
+          example: https://example.com/webhook
+          type: string
+        webhook_auth_header:
+          description: Authorization header for webhook
+          example: Bearer token123
+          type: string
+        webhook_extra_vars:
+          description: Extra variables for webhook
+          example: key1=value1&key2=value2
+          type: string
+        browser_mode:
+          description: Browser mode enabled
+          example: false
+          type: boolean
+        execute_js:
+          description: Execute JavaScript during asset collection
+          example: false
+          type: boolean
+        workers:
+          description: Number of concurrent workers
+          example: 2
+          type: integer
+        delay:
+          description: Delay between requests in seconds
+          example: 4
+          format: float
+          type: number
+        depth:
+          description: Maximum crawl depth
+          example: -1
+          type: integer
+        max_hits:
+          description: Maximum total requests
+          example: 0
+          type: integer
+        max_html:
+          description: Maximum HTML pages
+          example: 50
+          type: integer
+        status_ok:
+          description: HTTP status codes for content capture
+          example:
+          - 200
+          items:
+            type: integer
+          type: array
+        user_agent:
+          description: Custom user agent
+          example: Mozilla/5.0...
+          type: string
+        max_errors:
+          description: Maximum errors before stopping
+          example: 100
+          type: integer
+        start_urls:
+          description: Starting URLs
+          example:
+          - /
+          - /blog
+          items:
+            type: string
+          type: array
+        urls:
+          description: URLs list
+          example:
+          - /
+          - /about
+          items:
+            type: string
+          type: array
+        headers:
+          additionalProperties:
+            type: string
+          description: Custom headers
+          example:
+            Authorization: Bearer token
+          type: object
+        exclude:
+          description: URL patterns to exclude
+          example:
+          - /admin/*
+          items:
+            type: string
+          type: array
+        include:
+          description: URL patterns to include
+          example:
+          - /blog/*
+          items:
+            type: string
+          type: array
+        sitemap:
+          description: Sitemap configuration
+          example:
+          - url: /sitemap.xml
+            recursive: true
+          items:
+            type: object
+          type: array
+        allowed_domains:
+          description: Allowed domains
+          example:
+          - example.com
+          items:
+            type: string
+          type: array
+        assets:
+          description: Asset harvesting configuration
+          example:
+            network_intercept:
+              enabled: true
+          type: object
         created_at:
           description: Creation timestamp
           example: 2024-01-20T09:15:00Z
@@ -8924,13 +9072,13 @@ components:
         include:
         - /blog/*
         - /products/*
-        max_errors: 1000
+        max_errors: 100
         webhook_url: https://example.com/webhook
         allowed_domains:
         - example.com
         - assets.example.com
         browser_mode: false
-        max_html: 100
+        max_html: 50
         urls:
         - /
         - /about
@@ -8938,14 +9086,14 @@ components:
         status_ok:
         - 200
         - 201
-        delay: 0.25
+        delay: 4
         depth: -1
         assets:
           network_intercept:
             enabled: true
             timeout: 30
         execute_js: true
-        max_hits: 1000
+        max_hits: 0
         domain: test-domain.com
         name: Test Crawler
         webhook_extra_vars: key1=value1&key2=value2
@@ -8955,7 +9103,7 @@ components:
         start_urls:
         - /
         - /blog
-        workers: 4
+        workers: 2
         webhook_auth_header: Bearer token123
         sitemap:
         - url: /sitemap.xml
@@ -9036,37 +9184,40 @@ components:
           example: key1=value1&key2=value2
           type: string
         workers:
-          description: Number of concurrent workers (verified domains only)
-          example: 4
+          description: "Number of concurrent workers (default: 2, non-default requires\
+            \ verification)"
+          example: 2
           maximum: 20
           minimum: 1
           type: integer
         delay:
-          description: Delay between requests in seconds (verified domains only)
-          example: 0.25
+          description: "Delay between requests in seconds (default: 4, non-default\
+            \ requires verification)"
+          example: 4
           format: float
           maximum: 10
           minimum: 0
           type: number
         depth:
-          description: "Maximum crawl depth, -1 for unlimited (verified domains only)"
+          description: "Maximum crawl depth, -1 for unlimited"
           example: -1
           minimum: -1
           type: integer
         max_hits:
-          description: "Maximum total requests, 0 for unlimited (verified domains\
-            \ only)"
-          example: 1000
+          description: "Maximum total requests, 0 for unlimited (default: 0, non-default\
+            \ requires verification)"
+          example: 0
           minimum: 0
           type: integer
         max_html:
-          description: "Maximum HTML pages, 0 for unlimited (verified domains only)"
-          example: 100
+          description: "Maximum HTML pages, 0 for unlimited (default: org limit, non-default\
+            \ requires verification)"
+          example: 50
           minimum: 0
           type: integer
         status_ok:
           description: HTTP status codes that will result in content being captured
-            and pushed to Quant (verified domains only)
+            and pushed to Quant
           example:
           - 200
           - 201
@@ -9074,7 +9225,7 @@ components:
             type: integer
           type: array
         sitemap:
-          description: Sitemap configuration (verified domains only)
+          description: Sitemap configuration
           example:
           - url: /sitemap.xml
             recursive: true
@@ -9083,7 +9234,7 @@ components:
           type: array
         allowed_domains:
           description: "Allowed domains for multi-domain crawling, automatically enables\
-            \ merge_domains (verified domains only)"
+            \ merge_domains"
           example:
           - example.com
           - assets.example.com
@@ -9091,20 +9242,19 @@ components:
             type: string
           type: array
         user_agent:
-          description: "Custom user agent, only when browser_mode is false (verified\
-            \ domains only)"
+          description: "Custom user agent, only when browser_mode is false"
           example: Mozilla/5.0...
           type: string
         assets:
-          description: Asset harvesting configuration (verified domains only)
+          description: Asset harvesting configuration
           example:
             network_intercept:
               enabled: true
               timeout: 30
           type: object
         max_errors:
-          description: Maximum errors before stopping crawl (verified domains only)
-          example: 1000
+          description: Maximum errors before stopping crawl
+          example: 100
           minimum: 0
           type: integer
       required:

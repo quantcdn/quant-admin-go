@@ -37,6 +37,48 @@ type V2Crawler struct {
 	DomainVerified *int32 `json:"domain_verified,omitempty"`
 	// URLs list (YAML)
 	UrlsList *string `json:"urls_list,omitempty"`
+	// Webhook URL for notifications
+	WebhookUrl *string `json:"webhook_url,omitempty"`
+	// Authorization header for webhook
+	WebhookAuthHeader *string `json:"webhook_auth_header,omitempty"`
+	// Extra variables for webhook
+	WebhookExtraVars *string `json:"webhook_extra_vars,omitempty"`
+	// Browser mode enabled
+	BrowserMode *bool `json:"browser_mode,omitempty"`
+	// Execute JavaScript during asset collection
+	ExecuteJs *bool `json:"execute_js,omitempty"`
+	// Number of concurrent workers
+	Workers *int32 `json:"workers,omitempty"`
+	// Delay between requests in seconds
+	Delay *float32 `json:"delay,omitempty"`
+	// Maximum crawl depth
+	Depth *int32 `json:"depth,omitempty"`
+	// Maximum total requests
+	MaxHits *int32 `json:"max_hits,omitempty"`
+	// Maximum HTML pages
+	MaxHtml *int32 `json:"max_html,omitempty"`
+	// HTTP status codes for content capture
+	StatusOk []int32 `json:"status_ok,omitempty"`
+	// Custom user agent
+	UserAgent *string `json:"user_agent,omitempty"`
+	// Maximum errors before stopping
+	MaxErrors *int32 `json:"max_errors,omitempty"`
+	// Starting URLs
+	StartUrls []string `json:"start_urls,omitempty"`
+	// URLs list
+	Urls []string `json:"urls,omitempty"`
+	// Custom headers
+	Headers *map[string]string `json:"headers,omitempty"`
+	// URL patterns to exclude
+	Exclude []string `json:"exclude,omitempty"`
+	// URL patterns to include
+	Include []string `json:"include,omitempty"`
+	// Sitemap configuration
+	Sitemap []map[string]interface{} `json:"sitemap,omitempty"`
+	// Allowed domains
+	AllowedDomains []string `json:"allowed_domains,omitempty"`
+	// Asset harvesting configuration
+	Assets map[string]interface{} `json:"assets,omitempty"`
 	// Creation timestamp
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Last update timestamp
@@ -290,6 +332,678 @@ func (o *V2Crawler) SetUrlsList(v string) {
 	o.UrlsList = &v
 }
 
+// GetWebhookUrl returns the WebhookUrl field value if set, zero value otherwise.
+func (o *V2Crawler) GetWebhookUrl() string {
+	if o == nil || IsNil(o.WebhookUrl) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookUrl
+}
+
+// GetWebhookUrlOk returns a tuple with the WebhookUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetWebhookUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.WebhookUrl) {
+		return nil, false
+	}
+	return o.WebhookUrl, true
+}
+
+// HasWebhookUrl returns a boolean if a field has been set.
+func (o *V2Crawler) HasWebhookUrl() bool {
+	if o != nil && !IsNil(o.WebhookUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookUrl gets a reference to the given string and assigns it to the WebhookUrl field.
+func (o *V2Crawler) SetWebhookUrl(v string) {
+	o.WebhookUrl = &v
+}
+
+// GetWebhookAuthHeader returns the WebhookAuthHeader field value if set, zero value otherwise.
+func (o *V2Crawler) GetWebhookAuthHeader() string {
+	if o == nil || IsNil(o.WebhookAuthHeader) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookAuthHeader
+}
+
+// GetWebhookAuthHeaderOk returns a tuple with the WebhookAuthHeader field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetWebhookAuthHeaderOk() (*string, bool) {
+	if o == nil || IsNil(o.WebhookAuthHeader) {
+		return nil, false
+	}
+	return o.WebhookAuthHeader, true
+}
+
+// HasWebhookAuthHeader returns a boolean if a field has been set.
+func (o *V2Crawler) HasWebhookAuthHeader() bool {
+	if o != nil && !IsNil(o.WebhookAuthHeader) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookAuthHeader gets a reference to the given string and assigns it to the WebhookAuthHeader field.
+func (o *V2Crawler) SetWebhookAuthHeader(v string) {
+	o.WebhookAuthHeader = &v
+}
+
+// GetWebhookExtraVars returns the WebhookExtraVars field value if set, zero value otherwise.
+func (o *V2Crawler) GetWebhookExtraVars() string {
+	if o == nil || IsNil(o.WebhookExtraVars) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookExtraVars
+}
+
+// GetWebhookExtraVarsOk returns a tuple with the WebhookExtraVars field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetWebhookExtraVarsOk() (*string, bool) {
+	if o == nil || IsNil(o.WebhookExtraVars) {
+		return nil, false
+	}
+	return o.WebhookExtraVars, true
+}
+
+// HasWebhookExtraVars returns a boolean if a field has been set.
+func (o *V2Crawler) HasWebhookExtraVars() bool {
+	if o != nil && !IsNil(o.WebhookExtraVars) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookExtraVars gets a reference to the given string and assigns it to the WebhookExtraVars field.
+func (o *V2Crawler) SetWebhookExtraVars(v string) {
+	o.WebhookExtraVars = &v
+}
+
+// GetBrowserMode returns the BrowserMode field value if set, zero value otherwise.
+func (o *V2Crawler) GetBrowserMode() bool {
+	if o == nil || IsNil(o.BrowserMode) {
+		var ret bool
+		return ret
+	}
+	return *o.BrowserMode
+}
+
+// GetBrowserModeOk returns a tuple with the BrowserMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetBrowserModeOk() (*bool, bool) {
+	if o == nil || IsNil(o.BrowserMode) {
+		return nil, false
+	}
+	return o.BrowserMode, true
+}
+
+// HasBrowserMode returns a boolean if a field has been set.
+func (o *V2Crawler) HasBrowserMode() bool {
+	if o != nil && !IsNil(o.BrowserMode) {
+		return true
+	}
+
+	return false
+}
+
+// SetBrowserMode gets a reference to the given bool and assigns it to the BrowserMode field.
+func (o *V2Crawler) SetBrowserMode(v bool) {
+	o.BrowserMode = &v
+}
+
+// GetExecuteJs returns the ExecuteJs field value if set, zero value otherwise.
+func (o *V2Crawler) GetExecuteJs() bool {
+	if o == nil || IsNil(o.ExecuteJs) {
+		var ret bool
+		return ret
+	}
+	return *o.ExecuteJs
+}
+
+// GetExecuteJsOk returns a tuple with the ExecuteJs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetExecuteJsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExecuteJs) {
+		return nil, false
+	}
+	return o.ExecuteJs, true
+}
+
+// HasExecuteJs returns a boolean if a field has been set.
+func (o *V2Crawler) HasExecuteJs() bool {
+	if o != nil && !IsNil(o.ExecuteJs) {
+		return true
+	}
+
+	return false
+}
+
+// SetExecuteJs gets a reference to the given bool and assigns it to the ExecuteJs field.
+func (o *V2Crawler) SetExecuteJs(v bool) {
+	o.ExecuteJs = &v
+}
+
+// GetWorkers returns the Workers field value if set, zero value otherwise.
+func (o *V2Crawler) GetWorkers() int32 {
+	if o == nil || IsNil(o.Workers) {
+		var ret int32
+		return ret
+	}
+	return *o.Workers
+}
+
+// GetWorkersOk returns a tuple with the Workers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetWorkersOk() (*int32, bool) {
+	if o == nil || IsNil(o.Workers) {
+		return nil, false
+	}
+	return o.Workers, true
+}
+
+// HasWorkers returns a boolean if a field has been set.
+func (o *V2Crawler) HasWorkers() bool {
+	if o != nil && !IsNil(o.Workers) {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkers gets a reference to the given int32 and assigns it to the Workers field.
+func (o *V2Crawler) SetWorkers(v int32) {
+	o.Workers = &v
+}
+
+// GetDelay returns the Delay field value if set, zero value otherwise.
+func (o *V2Crawler) GetDelay() float32 {
+	if o == nil || IsNil(o.Delay) {
+		var ret float32
+		return ret
+	}
+	return *o.Delay
+}
+
+// GetDelayOk returns a tuple with the Delay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetDelayOk() (*float32, bool) {
+	if o == nil || IsNil(o.Delay) {
+		return nil, false
+	}
+	return o.Delay, true
+}
+
+// HasDelay returns a boolean if a field has been set.
+func (o *V2Crawler) HasDelay() bool {
+	if o != nil && !IsNil(o.Delay) {
+		return true
+	}
+
+	return false
+}
+
+// SetDelay gets a reference to the given float32 and assigns it to the Delay field.
+func (o *V2Crawler) SetDelay(v float32) {
+	o.Delay = &v
+}
+
+// GetDepth returns the Depth field value if set, zero value otherwise.
+func (o *V2Crawler) GetDepth() int32 {
+	if o == nil || IsNil(o.Depth) {
+		var ret int32
+		return ret
+	}
+	return *o.Depth
+}
+
+// GetDepthOk returns a tuple with the Depth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetDepthOk() (*int32, bool) {
+	if o == nil || IsNil(o.Depth) {
+		return nil, false
+	}
+	return o.Depth, true
+}
+
+// HasDepth returns a boolean if a field has been set.
+func (o *V2Crawler) HasDepth() bool {
+	if o != nil && !IsNil(o.Depth) {
+		return true
+	}
+
+	return false
+}
+
+// SetDepth gets a reference to the given int32 and assigns it to the Depth field.
+func (o *V2Crawler) SetDepth(v int32) {
+	o.Depth = &v
+}
+
+// GetMaxHits returns the MaxHits field value if set, zero value otherwise.
+func (o *V2Crawler) GetMaxHits() int32 {
+	if o == nil || IsNil(o.MaxHits) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxHits
+}
+
+// GetMaxHitsOk returns a tuple with the MaxHits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetMaxHitsOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxHits) {
+		return nil, false
+	}
+	return o.MaxHits, true
+}
+
+// HasMaxHits returns a boolean if a field has been set.
+func (o *V2Crawler) HasMaxHits() bool {
+	if o != nil && !IsNil(o.MaxHits) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxHits gets a reference to the given int32 and assigns it to the MaxHits field.
+func (o *V2Crawler) SetMaxHits(v int32) {
+	o.MaxHits = &v
+}
+
+// GetMaxHtml returns the MaxHtml field value if set, zero value otherwise.
+func (o *V2Crawler) GetMaxHtml() int32 {
+	if o == nil || IsNil(o.MaxHtml) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxHtml
+}
+
+// GetMaxHtmlOk returns a tuple with the MaxHtml field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetMaxHtmlOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxHtml) {
+		return nil, false
+	}
+	return o.MaxHtml, true
+}
+
+// HasMaxHtml returns a boolean if a field has been set.
+func (o *V2Crawler) HasMaxHtml() bool {
+	if o != nil && !IsNil(o.MaxHtml) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxHtml gets a reference to the given int32 and assigns it to the MaxHtml field.
+func (o *V2Crawler) SetMaxHtml(v int32) {
+	o.MaxHtml = &v
+}
+
+// GetStatusOk returns the StatusOk field value if set, zero value otherwise.
+func (o *V2Crawler) GetStatusOk() []int32 {
+	if o == nil || IsNil(o.StatusOk) {
+		var ret []int32
+		return ret
+	}
+	return o.StatusOk
+}
+
+// GetStatusOkOk returns a tuple with the StatusOk field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetStatusOkOk() ([]int32, bool) {
+	if o == nil || IsNil(o.StatusOk) {
+		return nil, false
+	}
+	return o.StatusOk, true
+}
+
+// HasStatusOk returns a boolean if a field has been set.
+func (o *V2Crawler) HasStatusOk() bool {
+	if o != nil && !IsNil(o.StatusOk) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusOk gets a reference to the given []int32 and assigns it to the StatusOk field.
+func (o *V2Crawler) SetStatusOk(v []int32) {
+	o.StatusOk = v
+}
+
+// GetUserAgent returns the UserAgent field value if set, zero value otherwise.
+func (o *V2Crawler) GetUserAgent() string {
+	if o == nil || IsNil(o.UserAgent) {
+		var ret string
+		return ret
+	}
+	return *o.UserAgent
+}
+
+// GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetUserAgentOk() (*string, bool) {
+	if o == nil || IsNil(o.UserAgent) {
+		return nil, false
+	}
+	return o.UserAgent, true
+}
+
+// HasUserAgent returns a boolean if a field has been set.
+func (o *V2Crawler) HasUserAgent() bool {
+	if o != nil && !IsNil(o.UserAgent) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAgent gets a reference to the given string and assigns it to the UserAgent field.
+func (o *V2Crawler) SetUserAgent(v string) {
+	o.UserAgent = &v
+}
+
+// GetMaxErrors returns the MaxErrors field value if set, zero value otherwise.
+func (o *V2Crawler) GetMaxErrors() int32 {
+	if o == nil || IsNil(o.MaxErrors) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxErrors
+}
+
+// GetMaxErrorsOk returns a tuple with the MaxErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetMaxErrorsOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxErrors) {
+		return nil, false
+	}
+	return o.MaxErrors, true
+}
+
+// HasMaxErrors returns a boolean if a field has been set.
+func (o *V2Crawler) HasMaxErrors() bool {
+	if o != nil && !IsNil(o.MaxErrors) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxErrors gets a reference to the given int32 and assigns it to the MaxErrors field.
+func (o *V2Crawler) SetMaxErrors(v int32) {
+	o.MaxErrors = &v
+}
+
+// GetStartUrls returns the StartUrls field value if set, zero value otherwise.
+func (o *V2Crawler) GetStartUrls() []string {
+	if o == nil || IsNil(o.StartUrls) {
+		var ret []string
+		return ret
+	}
+	return o.StartUrls
+}
+
+// GetStartUrlsOk returns a tuple with the StartUrls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetStartUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.StartUrls) {
+		return nil, false
+	}
+	return o.StartUrls, true
+}
+
+// HasStartUrls returns a boolean if a field has been set.
+func (o *V2Crawler) HasStartUrls() bool {
+	if o != nil && !IsNil(o.StartUrls) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartUrls gets a reference to the given []string and assigns it to the StartUrls field.
+func (o *V2Crawler) SetStartUrls(v []string) {
+	o.StartUrls = v
+}
+
+// GetUrls returns the Urls field value if set, zero value otherwise.
+func (o *V2Crawler) GetUrls() []string {
+	if o == nil || IsNil(o.Urls) {
+		var ret []string
+		return ret
+	}
+	return o.Urls
+}
+
+// GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetUrlsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Urls) {
+		return nil, false
+	}
+	return o.Urls, true
+}
+
+// HasUrls returns a boolean if a field has been set.
+func (o *V2Crawler) HasUrls() bool {
+	if o != nil && !IsNil(o.Urls) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrls gets a reference to the given []string and assigns it to the Urls field.
+func (o *V2Crawler) SetUrls(v []string) {
+	o.Urls = v
+}
+
+// GetHeaders returns the Headers field value if set, zero value otherwise.
+func (o *V2Crawler) GetHeaders() map[string]string {
+	if o == nil || IsNil(o.Headers) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Headers
+}
+
+// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetHeadersOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Headers) {
+		return nil, false
+	}
+	return o.Headers, true
+}
+
+// HasHeaders returns a boolean if a field has been set.
+func (o *V2Crawler) HasHeaders() bool {
+	if o != nil && !IsNil(o.Headers) {
+		return true
+	}
+
+	return false
+}
+
+// SetHeaders gets a reference to the given map[string]string and assigns it to the Headers field.
+func (o *V2Crawler) SetHeaders(v map[string]string) {
+	o.Headers = &v
+}
+
+// GetExclude returns the Exclude field value if set, zero value otherwise.
+func (o *V2Crawler) GetExclude() []string {
+	if o == nil || IsNil(o.Exclude) {
+		var ret []string
+		return ret
+	}
+	return o.Exclude
+}
+
+// GetExcludeOk returns a tuple with the Exclude field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetExcludeOk() ([]string, bool) {
+	if o == nil || IsNil(o.Exclude) {
+		return nil, false
+	}
+	return o.Exclude, true
+}
+
+// HasExclude returns a boolean if a field has been set.
+func (o *V2Crawler) HasExclude() bool {
+	if o != nil && !IsNil(o.Exclude) {
+		return true
+	}
+
+	return false
+}
+
+// SetExclude gets a reference to the given []string and assigns it to the Exclude field.
+func (o *V2Crawler) SetExclude(v []string) {
+	o.Exclude = v
+}
+
+// GetInclude returns the Include field value if set, zero value otherwise.
+func (o *V2Crawler) GetInclude() []string {
+	if o == nil || IsNil(o.Include) {
+		var ret []string
+		return ret
+	}
+	return o.Include
+}
+
+// GetIncludeOk returns a tuple with the Include field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetIncludeOk() ([]string, bool) {
+	if o == nil || IsNil(o.Include) {
+		return nil, false
+	}
+	return o.Include, true
+}
+
+// HasInclude returns a boolean if a field has been set.
+func (o *V2Crawler) HasInclude() bool {
+	if o != nil && !IsNil(o.Include) {
+		return true
+	}
+
+	return false
+}
+
+// SetInclude gets a reference to the given []string and assigns it to the Include field.
+func (o *V2Crawler) SetInclude(v []string) {
+	o.Include = v
+}
+
+// GetSitemap returns the Sitemap field value if set, zero value otherwise.
+func (o *V2Crawler) GetSitemap() []map[string]interface{} {
+	if o == nil || IsNil(o.Sitemap) {
+		var ret []map[string]interface{}
+		return ret
+	}
+	return o.Sitemap
+}
+
+// GetSitemapOk returns a tuple with the Sitemap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetSitemapOk() ([]map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Sitemap) {
+		return nil, false
+	}
+	return o.Sitemap, true
+}
+
+// HasSitemap returns a boolean if a field has been set.
+func (o *V2Crawler) HasSitemap() bool {
+	if o != nil && !IsNil(o.Sitemap) {
+		return true
+	}
+
+	return false
+}
+
+// SetSitemap gets a reference to the given []map[string]interface{} and assigns it to the Sitemap field.
+func (o *V2Crawler) SetSitemap(v []map[string]interface{}) {
+	o.Sitemap = v
+}
+
+// GetAllowedDomains returns the AllowedDomains field value if set, zero value otherwise.
+func (o *V2Crawler) GetAllowedDomains() []string {
+	if o == nil || IsNil(o.AllowedDomains) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedDomains
+}
+
+// GetAllowedDomainsOk returns a tuple with the AllowedDomains field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetAllowedDomainsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedDomains) {
+		return nil, false
+	}
+	return o.AllowedDomains, true
+}
+
+// HasAllowedDomains returns a boolean if a field has been set.
+func (o *V2Crawler) HasAllowedDomains() bool {
+	if o != nil && !IsNil(o.AllowedDomains) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedDomains gets a reference to the given []string and assigns it to the AllowedDomains field.
+func (o *V2Crawler) SetAllowedDomains(v []string) {
+	o.AllowedDomains = v
+}
+
+// GetAssets returns the Assets field value if set, zero value otherwise.
+func (o *V2Crawler) GetAssets() map[string]interface{} {
+	if o == nil || IsNil(o.Assets) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Assets
+}
+
+// GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetAssetsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Assets) {
+		return map[string]interface{}{}, false
+	}
+	return o.Assets, true
+}
+
+// HasAssets returns a boolean if a field has been set.
+func (o *V2Crawler) HasAssets() bool {
+	if o != nil && !IsNil(o.Assets) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssets gets a reference to the given map[string]interface{} and assigns it to the Assets field.
+func (o *V2Crawler) SetAssets(v map[string]interface{}) {
+	o.Assets = v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *V2Crawler) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -410,6 +1124,69 @@ func (o V2Crawler) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UrlsList) {
 		toSerialize["urls_list"] = o.UrlsList
 	}
+	if !IsNil(o.WebhookUrl) {
+		toSerialize["webhook_url"] = o.WebhookUrl
+	}
+	if !IsNil(o.WebhookAuthHeader) {
+		toSerialize["webhook_auth_header"] = o.WebhookAuthHeader
+	}
+	if !IsNil(o.WebhookExtraVars) {
+		toSerialize["webhook_extra_vars"] = o.WebhookExtraVars
+	}
+	if !IsNil(o.BrowserMode) {
+		toSerialize["browser_mode"] = o.BrowserMode
+	}
+	if !IsNil(o.ExecuteJs) {
+		toSerialize["execute_js"] = o.ExecuteJs
+	}
+	if !IsNil(o.Workers) {
+		toSerialize["workers"] = o.Workers
+	}
+	if !IsNil(o.Delay) {
+		toSerialize["delay"] = o.Delay
+	}
+	if !IsNil(o.Depth) {
+		toSerialize["depth"] = o.Depth
+	}
+	if !IsNil(o.MaxHits) {
+		toSerialize["max_hits"] = o.MaxHits
+	}
+	if !IsNil(o.MaxHtml) {
+		toSerialize["max_html"] = o.MaxHtml
+	}
+	if !IsNil(o.StatusOk) {
+		toSerialize["status_ok"] = o.StatusOk
+	}
+	if !IsNil(o.UserAgent) {
+		toSerialize["user_agent"] = o.UserAgent
+	}
+	if !IsNil(o.MaxErrors) {
+		toSerialize["max_errors"] = o.MaxErrors
+	}
+	if !IsNil(o.StartUrls) {
+		toSerialize["start_urls"] = o.StartUrls
+	}
+	if !IsNil(o.Urls) {
+		toSerialize["urls"] = o.Urls
+	}
+	if !IsNil(o.Headers) {
+		toSerialize["headers"] = o.Headers
+	}
+	if !IsNil(o.Exclude) {
+		toSerialize["exclude"] = o.Exclude
+	}
+	if !IsNil(o.Include) {
+		toSerialize["include"] = o.Include
+	}
+	if !IsNil(o.Sitemap) {
+		toSerialize["sitemap"] = o.Sitemap
+	}
+	if !IsNil(o.AllowedDomains) {
+		toSerialize["allowed_domains"] = o.AllowedDomains
+	}
+	if !IsNil(o.Assets) {
+		toSerialize["assets"] = o.Assets
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -474,6 +1251,27 @@ func (o *V2Crawler) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "domain_verified")
 		delete(additionalProperties, "urls_list")
+		delete(additionalProperties, "webhook_url")
+		delete(additionalProperties, "webhook_auth_header")
+		delete(additionalProperties, "webhook_extra_vars")
+		delete(additionalProperties, "browser_mode")
+		delete(additionalProperties, "execute_js")
+		delete(additionalProperties, "workers")
+		delete(additionalProperties, "delay")
+		delete(additionalProperties, "depth")
+		delete(additionalProperties, "max_hits")
+		delete(additionalProperties, "max_html")
+		delete(additionalProperties, "status_ok")
+		delete(additionalProperties, "user_agent")
+		delete(additionalProperties, "max_errors")
+		delete(additionalProperties, "start_urls")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "exclude")
+		delete(additionalProperties, "include")
+		delete(additionalProperties, "sitemap")
+		delete(additionalProperties, "allowed_domains")
+		delete(additionalProperties, "assets")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "deleted_at")

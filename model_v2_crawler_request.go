@@ -44,27 +44,27 @@ type V2CrawlerRequest struct {
 	WebhookAuthHeader *string `json:"webhook_auth_header,omitempty"`
 	// Extra variables for webhook
 	WebhookExtraVars *string `json:"webhook_extra_vars,omitempty"`
-	// Number of concurrent workers (verified domains only)
+	// Number of concurrent workers (default: 2, non-default requires verification)
 	Workers *int32 `json:"workers,omitempty"`
-	// Delay between requests in seconds (verified domains only)
+	// Delay between requests in seconds (default: 4, non-default requires verification)
 	Delay *float32 `json:"delay,omitempty"`
-	// Maximum crawl depth, -1 for unlimited (verified domains only)
+	// Maximum crawl depth, -1 for unlimited
 	Depth *int32 `json:"depth,omitempty"`
-	// Maximum total requests, 0 for unlimited (verified domains only)
+	// Maximum total requests, 0 for unlimited (default: 0, non-default requires verification)
 	MaxHits *int32 `json:"max_hits,omitempty"`
-	// Maximum HTML pages, 0 for unlimited (verified domains only)
+	// Maximum HTML pages, 0 for unlimited (default: org limit, non-default requires verification)
 	MaxHtml *int32 `json:"max_html,omitempty"`
-	// HTTP status codes that will result in content being captured and pushed to Quant (verified domains only)
+	// HTTP status codes that will result in content being captured and pushed to Quant
 	StatusOk []int32 `json:"status_ok,omitempty"`
-	// Sitemap configuration (verified domains only)
+	// Sitemap configuration
 	Sitemap []map[string]interface{} `json:"sitemap,omitempty"`
-	// Allowed domains for multi-domain crawling, automatically enables merge_domains (verified domains only)
+	// Allowed domains for multi-domain crawling, automatically enables merge_domains
 	AllowedDomains []string `json:"allowed_domains,omitempty"`
-	// Custom user agent, only when browser_mode is false (verified domains only)
+	// Custom user agent, only when browser_mode is false
 	UserAgent *string `json:"user_agent,omitempty"`
-	// Asset harvesting configuration (verified domains only)
+	// Asset harvesting configuration
 	Assets map[string]interface{} `json:"assets,omitempty"`
-	// Maximum errors before stopping crawl (verified domains only)
+	// Maximum errors before stopping crawl
 	MaxErrors *int32 `json:"max_errors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
