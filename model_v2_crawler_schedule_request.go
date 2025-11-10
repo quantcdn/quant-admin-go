@@ -20,10 +20,6 @@ var _ MappedNullable = &V2CrawlerScheduleRequest{}
 
 // V2CrawlerScheduleRequest struct for V2CrawlerScheduleRequest
 type V2CrawlerScheduleRequest struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Schedule name
 	Name string `json:"name"`
 	// Cron schedule string
@@ -37,10 +33,8 @@ type _V2CrawlerScheduleRequest V2CrawlerScheduleRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2CrawlerScheduleRequest(message string, error_ bool, name string, scheduleCronString string) *V2CrawlerScheduleRequest {
+func NewV2CrawlerScheduleRequest(name string, scheduleCronString string) *V2CrawlerScheduleRequest {
 	this := V2CrawlerScheduleRequest{}
-	this.Message = message
-	this.Error = error_
 	this.Name = name
 	this.ScheduleCronString = scheduleCronString
 	return &this
@@ -52,54 +46,6 @@ func NewV2CrawlerScheduleRequest(message string, error_ bool, name string, sched
 func NewV2CrawlerScheduleRequestWithDefaults() *V2CrawlerScheduleRequest {
 	this := V2CrawlerScheduleRequest{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2CrawlerScheduleRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2CrawlerScheduleRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2CrawlerScheduleRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2CrawlerScheduleRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2CrawlerScheduleRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2CrawlerScheduleRequest) SetError(v bool) {
-	o.Error = v
 }
 
 // GetName returns the Name field value
@@ -160,8 +106,6 @@ func (o V2CrawlerScheduleRequest) MarshalJSON() ([]byte, error) {
 
 func (o V2CrawlerScheduleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["name"] = o.Name
 	toSerialize["schedule_cron_string"] = o.ScheduleCronString
 
@@ -177,8 +121,6 @@ func (o *V2CrawlerScheduleRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"name",
 		"schedule_cron_string",
 	}
@@ -210,8 +152,6 @@ func (o *V2CrawlerScheduleRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "schedule_cron_string")
 		o.AdditionalProperties = additionalProperties

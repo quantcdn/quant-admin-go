@@ -34,22 +34,8 @@ Name | Type | Description | Notes
 **OriginTimeout** | Pointer to **string** | Origin timeout | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold | [optional] [default to "2000"]
-**FailoverOriginStatusCodes** | Pointer to **[]string** | Status codes for failover (default: 200,404,301,302,304) | [optional] 
-**FailoverLifetime** | Pointer to **string** | Failover cache lifetime | [optional] [default to "300"]
-**Notify** | Pointer to **string** | Notification type (none, slack) | [optional] [default to "none"]
-**NotifyConfig** | Pointer to [**NullableV2RuleProxyActionAllOfNotifyConfig**](V2RuleProxyActionAllOfNotifyConfig.md) |  | [optional] 
-**WafEnabled** | Pointer to **bool** | WAF enabled | [optional] [default to false]
-**WafConfig** | Pointer to [**NullableWafConfig**](WafConfig.md) |  | [optional] 
-**ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] 
-**ProxyInlineFnEnabled** | Pointer to **bool** | Proxy inline function enabled | [optional] [default to false]
-**QuantCloudSelection** | Pointer to [**NullableV2RuleProxyActionAllOfQuantCloudSelection**](V2RuleProxyActionAllOfQuantCloudSelection.md) |  | [optional] 
-**StaticErrorPage** | Pointer to **string** | Static error page | [optional] 
-**StaticErrorPageStatusCodes** | Pointer to **[]string** | Status codes for static error page | [optional] 
-**ApplicationProxy** | Pointer to **bool** | Application proxy enabled | [optional] [default to false]
-**ApplicationName** | Pointer to **string** | Application name | [optional] 
-**ApplicationEnvironment** | Pointer to **string** | Application environment | [optional] 
-**ApplicationContainer** | Pointer to **string** | Application container | [optional] 
-**ApplicationPort** | Pointer to **int32** | Application port | [optional] 
+**FailoverS3Bucket** | Pointer to **string** | Failover S3 bucket | [optional] 
+**FailoverS3Region** | Pointer to **string** | Failover S3 region | [optional] 
 
 ## Methods
 
@@ -815,435 +801,55 @@ SetFailoverOriginTtfb sets FailoverOriginTtfb field to given value.
 
 HasFailoverOriginTtfb returns a boolean if a field has been set.
 
-### GetFailoverOriginStatusCodes
+### GetFailoverS3Bucket
 
-`func (o *V2RuleProxyRequest) GetFailoverOriginStatusCodes() []string`
+`func (o *V2RuleProxyRequest) GetFailoverS3Bucket() string`
 
-GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field if non-nil, zero value otherwise.
+GetFailoverS3Bucket returns the FailoverS3Bucket field if non-nil, zero value otherwise.
 
-### GetFailoverOriginStatusCodesOk
+### GetFailoverS3BucketOk
 
-`func (o *V2RuleProxyRequest) GetFailoverOriginStatusCodesOk() (*[]string, bool)`
+`func (o *V2RuleProxyRequest) GetFailoverS3BucketOk() (*string, bool)`
 
-GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field if it's non-nil, zero value otherwise
+GetFailoverS3BucketOk returns a tuple with the FailoverS3Bucket field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailoverOriginStatusCodes
+### SetFailoverS3Bucket
 
-`func (o *V2RuleProxyRequest) SetFailoverOriginStatusCodes(v []string)`
+`func (o *V2RuleProxyRequest) SetFailoverS3Bucket(v string)`
 
-SetFailoverOriginStatusCodes sets FailoverOriginStatusCodes field to given value.
+SetFailoverS3Bucket sets FailoverS3Bucket field to given value.
 
-### HasFailoverOriginStatusCodes
+### HasFailoverS3Bucket
 
-`func (o *V2RuleProxyRequest) HasFailoverOriginStatusCodes() bool`
+`func (o *V2RuleProxyRequest) HasFailoverS3Bucket() bool`
 
-HasFailoverOriginStatusCodes returns a boolean if a field has been set.
+HasFailoverS3Bucket returns a boolean if a field has been set.
 
-### GetFailoverLifetime
+### GetFailoverS3Region
 
-`func (o *V2RuleProxyRequest) GetFailoverLifetime() string`
+`func (o *V2RuleProxyRequest) GetFailoverS3Region() string`
 
-GetFailoverLifetime returns the FailoverLifetime field if non-nil, zero value otherwise.
+GetFailoverS3Region returns the FailoverS3Region field if non-nil, zero value otherwise.
 
-### GetFailoverLifetimeOk
+### GetFailoverS3RegionOk
 
-`func (o *V2RuleProxyRequest) GetFailoverLifetimeOk() (*string, bool)`
+`func (o *V2RuleProxyRequest) GetFailoverS3RegionOk() (*string, bool)`
 
-GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field if it's non-nil, zero value otherwise
+GetFailoverS3RegionOk returns a tuple with the FailoverS3Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailoverLifetime
+### SetFailoverS3Region
 
-`func (o *V2RuleProxyRequest) SetFailoverLifetime(v string)`
+`func (o *V2RuleProxyRequest) SetFailoverS3Region(v string)`
 
-SetFailoverLifetime sets FailoverLifetime field to given value.
+SetFailoverS3Region sets FailoverS3Region field to given value.
 
-### HasFailoverLifetime
+### HasFailoverS3Region
 
-`func (o *V2RuleProxyRequest) HasFailoverLifetime() bool`
+`func (o *V2RuleProxyRequest) HasFailoverS3Region() bool`
 
-HasFailoverLifetime returns a boolean if a field has been set.
-
-### GetNotify
-
-`func (o *V2RuleProxyRequest) GetNotify() string`
-
-GetNotify returns the Notify field if non-nil, zero value otherwise.
-
-### GetNotifyOk
-
-`func (o *V2RuleProxyRequest) GetNotifyOk() (*string, bool)`
-
-GetNotifyOk returns a tuple with the Notify field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotify
-
-`func (o *V2RuleProxyRequest) SetNotify(v string)`
-
-SetNotify sets Notify field to given value.
-
-### HasNotify
-
-`func (o *V2RuleProxyRequest) HasNotify() bool`
-
-HasNotify returns a boolean if a field has been set.
-
-### GetNotifyConfig
-
-`func (o *V2RuleProxyRequest) GetNotifyConfig() V2RuleProxyActionAllOfNotifyConfig`
-
-GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
-
-### GetNotifyConfigOk
-
-`func (o *V2RuleProxyRequest) GetNotifyConfigOk() (*V2RuleProxyActionAllOfNotifyConfig, bool)`
-
-GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNotifyConfig
-
-`func (o *V2RuleProxyRequest) SetNotifyConfig(v V2RuleProxyActionAllOfNotifyConfig)`
-
-SetNotifyConfig sets NotifyConfig field to given value.
-
-### HasNotifyConfig
-
-`func (o *V2RuleProxyRequest) HasNotifyConfig() bool`
-
-HasNotifyConfig returns a boolean if a field has been set.
-
-### SetNotifyConfigNil
-
-`func (o *V2RuleProxyRequest) SetNotifyConfigNil(b bool)`
-
- SetNotifyConfigNil sets the value for NotifyConfig to be an explicit nil
-
-### UnsetNotifyConfig
-`func (o *V2RuleProxyRequest) UnsetNotifyConfig()`
-
-UnsetNotifyConfig ensures that no value is present for NotifyConfig, not even an explicit nil
-### GetWafEnabled
-
-`func (o *V2RuleProxyRequest) GetWafEnabled() bool`
-
-GetWafEnabled returns the WafEnabled field if non-nil, zero value otherwise.
-
-### GetWafEnabledOk
-
-`func (o *V2RuleProxyRequest) GetWafEnabledOk() (*bool, bool)`
-
-GetWafEnabledOk returns a tuple with the WafEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWafEnabled
-
-`func (o *V2RuleProxyRequest) SetWafEnabled(v bool)`
-
-SetWafEnabled sets WafEnabled field to given value.
-
-### HasWafEnabled
-
-`func (o *V2RuleProxyRequest) HasWafEnabled() bool`
-
-HasWafEnabled returns a boolean if a field has been set.
-
-### GetWafConfig
-
-`func (o *V2RuleProxyRequest) GetWafConfig() WafConfig`
-
-GetWafConfig returns the WafConfig field if non-nil, zero value otherwise.
-
-### GetWafConfigOk
-
-`func (o *V2RuleProxyRequest) GetWafConfigOk() (*WafConfig, bool)`
-
-GetWafConfigOk returns a tuple with the WafConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWafConfig
-
-`func (o *V2RuleProxyRequest) SetWafConfig(v WafConfig)`
-
-SetWafConfig sets WafConfig field to given value.
-
-### HasWafConfig
-
-`func (o *V2RuleProxyRequest) HasWafConfig() bool`
-
-HasWafConfig returns a boolean if a field has been set.
-
-### SetWafConfigNil
-
-`func (o *V2RuleProxyRequest) SetWafConfigNil(b bool)`
-
- SetWafConfigNil sets the value for WafConfig to be an explicit nil
-
-### UnsetWafConfig
-`func (o *V2RuleProxyRequest) UnsetWafConfig()`
-
-UnsetWafConfig ensures that no value is present for WafConfig, not even an explicit nil
-### GetProxyAlertEnabled
-
-`func (o *V2RuleProxyRequest) GetProxyAlertEnabled() bool`
-
-GetProxyAlertEnabled returns the ProxyAlertEnabled field if non-nil, zero value otherwise.
-
-### GetProxyAlertEnabledOk
-
-`func (o *V2RuleProxyRequest) GetProxyAlertEnabledOk() (*bool, bool)`
-
-GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProxyAlertEnabled
-
-`func (o *V2RuleProxyRequest) SetProxyAlertEnabled(v bool)`
-
-SetProxyAlertEnabled sets ProxyAlertEnabled field to given value.
-
-### HasProxyAlertEnabled
-
-`func (o *V2RuleProxyRequest) HasProxyAlertEnabled() bool`
-
-HasProxyAlertEnabled returns a boolean if a field has been set.
-
-### GetProxyInlineFnEnabled
-
-`func (o *V2RuleProxyRequest) GetProxyInlineFnEnabled() bool`
-
-GetProxyInlineFnEnabled returns the ProxyInlineFnEnabled field if non-nil, zero value otherwise.
-
-### GetProxyInlineFnEnabledOk
-
-`func (o *V2RuleProxyRequest) GetProxyInlineFnEnabledOk() (*bool, bool)`
-
-GetProxyInlineFnEnabledOk returns a tuple with the ProxyInlineFnEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProxyInlineFnEnabled
-
-`func (o *V2RuleProxyRequest) SetProxyInlineFnEnabled(v bool)`
-
-SetProxyInlineFnEnabled sets ProxyInlineFnEnabled field to given value.
-
-### HasProxyInlineFnEnabled
-
-`func (o *V2RuleProxyRequest) HasProxyInlineFnEnabled() bool`
-
-HasProxyInlineFnEnabled returns a boolean if a field has been set.
-
-### GetQuantCloudSelection
-
-`func (o *V2RuleProxyRequest) GetQuantCloudSelection() V2RuleProxyActionAllOfQuantCloudSelection`
-
-GetQuantCloudSelection returns the QuantCloudSelection field if non-nil, zero value otherwise.
-
-### GetQuantCloudSelectionOk
-
-`func (o *V2RuleProxyRequest) GetQuantCloudSelectionOk() (*V2RuleProxyActionAllOfQuantCloudSelection, bool)`
-
-GetQuantCloudSelectionOk returns a tuple with the QuantCloudSelection field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQuantCloudSelection
-
-`func (o *V2RuleProxyRequest) SetQuantCloudSelection(v V2RuleProxyActionAllOfQuantCloudSelection)`
-
-SetQuantCloudSelection sets QuantCloudSelection field to given value.
-
-### HasQuantCloudSelection
-
-`func (o *V2RuleProxyRequest) HasQuantCloudSelection() bool`
-
-HasQuantCloudSelection returns a boolean if a field has been set.
-
-### SetQuantCloudSelectionNil
-
-`func (o *V2RuleProxyRequest) SetQuantCloudSelectionNil(b bool)`
-
- SetQuantCloudSelectionNil sets the value for QuantCloudSelection to be an explicit nil
-
-### UnsetQuantCloudSelection
-`func (o *V2RuleProxyRequest) UnsetQuantCloudSelection()`
-
-UnsetQuantCloudSelection ensures that no value is present for QuantCloudSelection, not even an explicit nil
-### GetStaticErrorPage
-
-`func (o *V2RuleProxyRequest) GetStaticErrorPage() string`
-
-GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
-
-### GetStaticErrorPageOk
-
-`func (o *V2RuleProxyRequest) GetStaticErrorPageOk() (*string, bool)`
-
-GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStaticErrorPage
-
-`func (o *V2RuleProxyRequest) SetStaticErrorPage(v string)`
-
-SetStaticErrorPage sets StaticErrorPage field to given value.
-
-### HasStaticErrorPage
-
-`func (o *V2RuleProxyRequest) HasStaticErrorPage() bool`
-
-HasStaticErrorPage returns a boolean if a field has been set.
-
-### GetStaticErrorPageStatusCodes
-
-`func (o *V2RuleProxyRequest) GetStaticErrorPageStatusCodes() []string`
-
-GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
-
-### GetStaticErrorPageStatusCodesOk
-
-`func (o *V2RuleProxyRequest) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
-
-GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStaticErrorPageStatusCodes
-
-`func (o *V2RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string)`
-
-SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
-
-### HasStaticErrorPageStatusCodes
-
-`func (o *V2RuleProxyRequest) HasStaticErrorPageStatusCodes() bool`
-
-HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
-
-### GetApplicationProxy
-
-`func (o *V2RuleProxyRequest) GetApplicationProxy() bool`
-
-GetApplicationProxy returns the ApplicationProxy field if non-nil, zero value otherwise.
-
-### GetApplicationProxyOk
-
-`func (o *V2RuleProxyRequest) GetApplicationProxyOk() (*bool, bool)`
-
-GetApplicationProxyOk returns a tuple with the ApplicationProxy field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplicationProxy
-
-`func (o *V2RuleProxyRequest) SetApplicationProxy(v bool)`
-
-SetApplicationProxy sets ApplicationProxy field to given value.
-
-### HasApplicationProxy
-
-`func (o *V2RuleProxyRequest) HasApplicationProxy() bool`
-
-HasApplicationProxy returns a boolean if a field has been set.
-
-### GetApplicationName
-
-`func (o *V2RuleProxyRequest) GetApplicationName() string`
-
-GetApplicationName returns the ApplicationName field if non-nil, zero value otherwise.
-
-### GetApplicationNameOk
-
-`func (o *V2RuleProxyRequest) GetApplicationNameOk() (*string, bool)`
-
-GetApplicationNameOk returns a tuple with the ApplicationName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplicationName
-
-`func (o *V2RuleProxyRequest) SetApplicationName(v string)`
-
-SetApplicationName sets ApplicationName field to given value.
-
-### HasApplicationName
-
-`func (o *V2RuleProxyRequest) HasApplicationName() bool`
-
-HasApplicationName returns a boolean if a field has been set.
-
-### GetApplicationEnvironment
-
-`func (o *V2RuleProxyRequest) GetApplicationEnvironment() string`
-
-GetApplicationEnvironment returns the ApplicationEnvironment field if non-nil, zero value otherwise.
-
-### GetApplicationEnvironmentOk
-
-`func (o *V2RuleProxyRequest) GetApplicationEnvironmentOk() (*string, bool)`
-
-GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplicationEnvironment
-
-`func (o *V2RuleProxyRequest) SetApplicationEnvironment(v string)`
-
-SetApplicationEnvironment sets ApplicationEnvironment field to given value.
-
-### HasApplicationEnvironment
-
-`func (o *V2RuleProxyRequest) HasApplicationEnvironment() bool`
-
-HasApplicationEnvironment returns a boolean if a field has been set.
-
-### GetApplicationContainer
-
-`func (o *V2RuleProxyRequest) GetApplicationContainer() string`
-
-GetApplicationContainer returns the ApplicationContainer field if non-nil, zero value otherwise.
-
-### GetApplicationContainerOk
-
-`func (o *V2RuleProxyRequest) GetApplicationContainerOk() (*string, bool)`
-
-GetApplicationContainerOk returns a tuple with the ApplicationContainer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplicationContainer
-
-`func (o *V2RuleProxyRequest) SetApplicationContainer(v string)`
-
-SetApplicationContainer sets ApplicationContainer field to given value.
-
-### HasApplicationContainer
-
-`func (o *V2RuleProxyRequest) HasApplicationContainer() bool`
-
-HasApplicationContainer returns a boolean if a field has been set.
-
-### GetApplicationPort
-
-`func (o *V2RuleProxyRequest) GetApplicationPort() int32`
-
-GetApplicationPort returns the ApplicationPort field if non-nil, zero value otherwise.
-
-### GetApplicationPortOk
-
-`func (o *V2RuleProxyRequest) GetApplicationPortOk() (*int32, bool)`
-
-GetApplicationPortOk returns a tuple with the ApplicationPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApplicationPort
-
-`func (o *V2RuleProxyRequest) SetApplicationPort(v int32)`
-
-SetApplicationPort sets ApplicationPort field to given value.
-
-### HasApplicationPort
-
-`func (o *V2RuleProxyRequest) HasApplicationPort() bool`
-
-HasApplicationPort returns a boolean if a field has been set.
+HasFailoverS3Region returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

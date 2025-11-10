@@ -33,7 +33,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2DomainRequest := *openapiclient.NewV2DomainRequest("The requested resource was not found", true, "test-domain.com") // V2DomainRequest | 
+	v2DomainRequest := *openapiclient.NewV2DomainRequest("test-domain.com") // V2DomainRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

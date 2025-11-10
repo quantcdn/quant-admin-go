@@ -6825,129 +6825,6 @@ components:
       - error
       - message
       type: object
-    V2CrawlerSchedule:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          id:
-            description: Schedule ID
-            example: 1
-            type: integer
-          name:
-            description: Schedule name
-            example: Test schedule
-            type: string
-          crawler_config_id:
-            description: Crawler config ID
-            example: 456
-            type: integer
-          project_id:
-            description: Project ID
-            example: 789
-            type: integer
-          crawler_last_run_id:
-            description: Last run ID
-            example: 12345
-            type: integer
-          schedule_cron_string:
-            description: Cron schedule string
-            example: 0 2 * * *
-            type: string
-          created_at:
-            description: Creation timestamp
-            example: 2024-01-20T09:15:00Z
-            format: date-time
-            type: string
-          updated_at:
-            description: Last update timestamp
-            example: 2024-10-11T16:45:00Z
-            format: date-time
-            type: string
-        type: object
-      example:
-        crawler_last_run_id: 12345
-        schedule_cron_string: 0 2 * * *
-        updated_at: 2024-10-11T16:45:00Z
-        project_id: 789
-        name: Test schedule
-        crawler_config_id: 456
-        created_at: 2024-01-20T09:15:00Z
-        id: 1
-        message: The requested resource was not found
-        error: true
-      required:
-      - crawler_config_id
-      - crawler_last_run_id
-      - id
-      - project_id
-      - schedule_cron_string
-      type: object
-    V2CrawlerScheduleRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Schedule name
-            example: Test schedule
-            type: string
-          schedule_cron_string:
-            description: Cron schedule string
-            example: 0 2 * * *
-            type: string
-        type: object
-      example:
-        schedule_cron_string: 0 2 * * *
-        name: Test schedule
-        message: The requested resource was not found
-        error: true
-      required:
-      - name
-      - schedule_cron_string
-      type: object
-    V2Domain:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          id:
-            description: Domain ID
-            example: 123
-            type: integer
-          domain:
-            description: Domain name
-            example: test-domain.com
-            type: string
-          dns_engaged:
-            description: DNS engagement status
-            example: 1
-            type: integer
-        type: object
-      example:
-        domain: test-domain.com
-        dns_engaged: 1
-        id: 123
-        message: The requested resource was not found
-        error: true
-      required:
-      - dns_engaged
-      - domain
-      - id
-      type: object
-    V2DomainRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          domain:
-            description: Domain name
-            example: test-domain.com
-            type: string
-        type: object
-      example:
-        domain: test-domain.com
-        message: The requested resource was not found
-        error: true
-      required:
-      - domain
-      type: object
     V2Store:
       allOf:
       - $ref: '#/components/schemas/V2Error'
@@ -8908,146 +8785,6 @@ components:
         - "304"
         proxy_alert_enabled: false
       type: object
-    V2RuleContentFilterRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          fn_uuid:
-            description: Function UUID
-            example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-            type: string
-        required:
-        - fn_uuid
-        type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
-      example:
-        country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
-        origin_timeout: "30"
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        message: The requested resource was not found
-        url:
-        - /old-path/*
-        - /legacy/*
-        fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
-      type: object
     V2RuleCustomResponseAction:
       allOf:
       - $ref: '#/components/schemas/V2RuleProxyAction'
@@ -9320,162 +9057,6 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
-      type: object
-    V2RuleCustomResponseRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          custom_response_body:
-            description: Custom response body content
-            example: <html><body>Custom maintenance page</body></html>
-            type: string
-          custom_response_status_code:
-            default: 200
-            description: HTTP status code for custom response
-            example: 503
-            type: integer
-          status_code:
-            description: Legacy field for status code (deprecated)
-            example: 503
-            type: integer
-          body:
-            description: Legacy field for response body (deprecated)
-            example: <html><body>Maintenance</body></html>
-            type: string
-        required:
-        - custom_response_body
-        type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
-      example:
-        country: country_is
-        status_code: 503
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        custom_response_body: <html><body>Custom maintenance page</body></html>
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        body: <html><body>Maintenance</body></html>
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
-        origin_timeout: "30"
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        custom_response_status_code: 503
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        message: The requested resource was not found
-        url:
-        - /old-path/*
-        - /legacy/*
         only_proxy_404: false
         inject_headers:
           X-Custom-Header: value
@@ -10773,284 +10354,6 @@ components:
         - "304"
         proxy_alert_enabled: false
       type: object
-    V2RuleProxyRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          to:
-            description: Target URL to proxy to
-            example: https://backend.test-domain.com
-            type: string
-          host:
-            description: Host header override
-            example: backend.test-domain.com
-            type: string
-          auth_user:
-            default: ""
-            description: Basic auth username
-            example: admin
-            type: string
-          auth_pass:
-            default: ""
-            description: Basic auth password
-            example: secure_pass
-            type: string
-          disable_ssl_verify:
-            default: false
-            description: Disable SSL verification
-            example: false
-            type: boolean
-          cache_lifetime:
-            description: Cache lifetime
-            example: "3600"
-            nullable: true
-            type: string
-          only_proxy_404:
-            default: false
-            description: Only proxy 404 responses
-            example: false
-            type: boolean
-          inject_headers:
-            additionalProperties:
-              type: string
-            description: Headers to inject
-            example:
-              X-Custom: value
-            nullable: true
-            type: object
-          proxy_strip_headers:
-            description: Headers to strip from response
-            example:
-            - Set-Cookie
-            - Server
-            items:
-              type: string
-            type: array
-          proxy_strip_request_headers:
-            description: Headers to strip from request
-            example:
-            - Cookie
-            items:
-              type: string
-            type: array
-          origin_timeout:
-            description: Origin timeout
-            example: "30"
-            type: string
-          proxy_alert_enabled:
-            description: Proxy alert enabled
-            example: false
-            type: boolean
-          static_error_page:
-            description: Static error page
-            example: /errors/500.html
-            type: string
-          static_error_page_status_codes:
-            description: Status codes for static error page
-            example:
-            - "500"
-            - "502"
-            - "503"
-            items:
-              type: string
-            type: array
-          failover_mode:
-            default: false
-            description: Enable failover mode
-            example: true
-            type: boolean
-          failover_origin_ttfb:
-            default: "2000"
-            description: Failover TTFB threshold
-            example: "2000"
-            type: string
-          failover_origin_status_codes:
-            description: "Status codes for failover (default: 200,404,301,302,304)"
-            example:
-            - "200"
-            - "404"
-            - "301"
-            items:
-              type: string
-            type: array
-          failover_lifetime:
-            default: "300"
-            description: Failover cache lifetime
-            example: "300"
-            type: string
-          notify:
-            default: none
-            description: "Notification type (none, slack)"
-            enum:
-            - none
-            - slack
-            example: slack
-            type: string
-          notify_config:
-            $ref: '#/components/schemas/V2RuleProxyAction_allOf_notify_config'
-          waf_enabled:
-            default: false
-            description: WAF enabled
-            type: boolean
-          waf_config:
-            $ref: '#/components/schemas/WafConfig'
-          application_proxy:
-            default: false
-            description: Application proxy enabled
-            type: boolean
-          application_name:
-            description: Application name
-            type: string
-          application_environment:
-            description: Application environment
-            type: string
-          application_container:
-            description: Application container
-            type: string
-          application_port:
-            description: Application port
-            type: integer
-        required:
-        - to
-        type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
-      example:
-        country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        application_proxy: false
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        application_container: application_container
-        method_is_not:
-        - DELETE
-        - PUT
-        static_error_page: /errors/500.html
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        application_name: application_name
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        application_port: 0
-        static_error_page_status_codes:
-        - "500"
-        - "502"
-        - "503"
-        failover_mode: true
-        application_environment: application_environment
-        origin_timeout: "30"
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        message: The requested resource was not found
-        url:
-        - /old-path/*
-        - /legacy/*
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
-      type: object
     V2RuleRedirectAction:
       allOf:
       - $ref: '#/components/schemas/V2RuleProxyAction'
@@ -11321,152 +10624,6 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
-      type: object
-    V2RuleRedirectRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          redirect_to:
-            description: Redirect destination URL
-            example: https://test-domain.com/new-path
-            type: string
-          redirect_code:
-            default: "301"
-            description: HTTP status code for redirect
-            example: "301"
-            type: string
-        required:
-        - redirect_to
-        type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
-      example:
-        country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        redirect_to: https://test-domain.com/new-path
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
-        origin_timeout: "30"
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
-        ip: ip_is
-        redirect_code: "301"
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        message: The requested resource was not found
-        url:
-        - /old-path/*
-        - /legacy/*
         only_proxy_404: false
         inject_headers:
           X-Custom-Header: value
@@ -13005,6 +12162,75 @@ components:
         accessPointArn:
           type: string
       type: object
+    V2CrawlerSchedule:
+      example:
+        crawler_last_run_id: 12345
+        schedule_cron_string: 0 2 * * *
+        updated_at: 2024-10-11T16:45:00Z
+        project_id: 789
+        name: Test schedule
+        crawler_config_id: 456
+        created_at: 2024-01-20T09:15:00Z
+        id: 1
+      properties:
+        id:
+          description: Schedule ID
+          example: 1
+          type: integer
+        name:
+          description: Schedule name
+          example: Test schedule
+          type: string
+        crawler_config_id:
+          description: Crawler config ID
+          example: 456
+          type: integer
+        project_id:
+          description: Project ID
+          example: 789
+          type: integer
+        crawler_last_run_id:
+          description: Last run ID
+          example: 12345
+          type: integer
+        schedule_cron_string:
+          description: Cron schedule string
+          example: 0 2 * * *
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: 2024-01-20T09:15:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: Last update timestamp
+          example: 2024-10-11T16:45:00Z
+          format: date-time
+          type: string
+      required:
+      - crawler_config_id
+      - crawler_last_run_id
+      - id
+      - project_id
+      - schedule_cron_string
+      type: object
+    V2CrawlerScheduleRequest:
+      example:
+        schedule_cron_string: 0 2 * * *
+        name: Test schedule
+      properties:
+        name:
+          description: Schedule name
+          example: Test schedule
+          type: string
+        schedule_cron_string:
+          description: Cron schedule string
+          example: 0 2 * * *
+          type: string
+      required:
+      - name
+      - schedule_cron_string
+      type: object
     V2Crawler:
       example:
         urls_list: single_url:\n  - /\n  - /about\n  - /contact
@@ -13270,6 +12496,40 @@ components:
       required:
       - domain
       type: object
+    V2Domain:
+      example:
+        domain: test-domain.com
+        dns_engaged: 1
+        id: 123
+      properties:
+        id:
+          description: Domain ID
+          example: 123
+          type: integer
+        domain:
+          description: Domain name
+          example: test-domain.com
+          type: string
+        dns_engaged:
+          description: DNS engagement status
+          example: 1
+          type: integer
+      required:
+      - dns_engaged
+      - domain
+      - id
+      type: object
+    V2DomainRequest:
+      example:
+        domain: test-domain.com
+      properties:
+        domain:
+          description: Domain name
+          example: test-domain.com
+          type: string
+      required:
+      - domain
+      type: object
     V2Project:
       example:
         name: Test Project
@@ -13325,6 +12585,310 @@ components:
           description: Basic auth password
           example: secure_password123
           type: string
+      type: object
+    V2RuleProxyRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          to:
+            description: Target URL to proxy to
+            example: https://backend.test-domain.com
+            type: string
+          host:
+            description: Host header override
+            example: backend.test-domain.com
+            type: string
+          auth_user:
+            default: ""
+            description: Basic auth username
+            example: admin
+            type: string
+          auth_pass:
+            default: ""
+            description: Basic auth password
+            example: secure_pass
+            type: string
+          disable_ssl_verify:
+            default: false
+            description: Disable SSL verification
+            example: false
+            type: boolean
+          cache_lifetime:
+            description: Cache lifetime
+            example: "3600"
+            nullable: true
+            type: string
+          only_proxy_404:
+            default: false
+            description: Only proxy 404 responses
+            example: false
+            type: boolean
+          inject_headers:
+            additionalProperties:
+              type: string
+            description: Headers to inject
+            example:
+              X-Custom: value
+            nullable: true
+            type: object
+          proxy_strip_headers:
+            description: Headers to strip from response
+            example:
+            - Set-Cookie
+            - Server
+            items:
+              type: string
+            type: array
+          proxy_strip_request_headers:
+            description: Headers to strip from request
+            example:
+            - Cookie
+            - Authorization
+            items:
+              type: string
+            type: array
+          origin_timeout:
+            description: Origin timeout
+            example: "30"
+            type: string
+          failover_mode:
+            default: false
+            description: Enable failover mode
+            example: true
+            type: boolean
+          failover_origin_ttfb:
+            default: "2000"
+            description: Failover TTFB threshold
+            example: "2000"
+            type: string
+          failover_s3_bucket:
+            description: Failover S3 bucket
+            example: my-failover-bucket
+            type: string
+          failover_s3_region:
+            description: Failover S3 region
+            example: us-east-1
+            type: string
+        required:
+        - to
+        type: object
+      example:
+        country: country_is
+        cache_lifetime: "3600"
+        proxy_strip_request_headers:
+        - Cookie
+        - Authorization
+        method_is:
+        - GET
+        - POST
+        method_is_not:
+        - DELETE
+        - PUT
+        proxy_strip_headers:
+        - Set-Cookie
+        - Server
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        country_is_not:
+        - CN
+        - RU
+        failover_s3_region: us-east-1
+        auth_user: admin
+        host: backend.test-domain.com
+        failover_s3_bucket: my-failover-bucket
+        auth_pass: secure_pass
+        disabled: false
+        failover_mode: true
+        origin_timeout: "30"
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        failover_origin_ttfb: "2000"
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        message: The requested resource was not found
+        url:
+        - /old-path/*
+        - /legacy/*
+        only_proxy_404: false
+        inject_headers:
+          X-Custom: value
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        to: https://backend.test-domain.com
+        disable_ssl_verify: false
+      type: object
+    V2RuleRedirectRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          redirect_to:
+            description: Redirect destination URL
+            example: https://test-domain.com/new-path
+            type: string
+          redirect_code:
+            default: "301"
+            description: HTTP status code for redirect
+            example: "301"
+            type: string
+        required:
+        - redirect_to
+        type: object
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        redirect_code: "301"
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        redirect_to: https://test-domain.com/new-path
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
+      type: object
+    V2RuleCustomResponseRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          custom_response_body:
+            description: Custom response body content
+            example: <html><body>Custom maintenance page</body></html>
+            type: string
+          custom_response_status_code:
+            default: 200
+            description: HTTP status code for custom response
+            example: 503
+            type: integer
+          status_code:
+            description: Legacy field for status code (deprecated)
+            example: 503
+            type: integer
+          body:
+            description: Legacy field for response body (deprecated)
+            example: <html><body>Maintenance</body></html>
+            type: string
+        required:
+        - custom_response_body
+        type: object
+      example:
+        country: country_is
+        status_code: 503
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        custom_response_status_code: 503
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        custom_response_body: <html><body>Custom maintenance page</body></html>
+        message: The requested resource was not found
+        error: true
+        body: <html><body>Maintenance</body></html>
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
+      type: object
+    V2RuleContentFilterRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          fn_uuid:
+            description: Function UUID
+            example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+            type: string
+        required:
+        - fn_uuid
+        type: object
+      example:
+        country: country_is
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
       type: object
     SpotConfiguration:
       description: Spot instance strategy configuration for controlling cost vs reliability.
