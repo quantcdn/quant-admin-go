@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleHeader{}
 
 // V2RuleHeader struct for V2RuleHeader
 type V2RuleHeader struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Rule name
 	Name *string `json:"name,omitempty"`
 	// Rule UUID
@@ -60,47 +56,10 @@ type V2RuleHeader struct {
 	CountryIsNot []string `json:"country_is_not,omitempty"`
 	// Rule action
 	Action string `json:"action"`
-	// Target URL to proxy to
-	To string `json:"to"`
-	// Host header override
-	Host *string `json:"host,omitempty"`
-	// Basic auth username
-	AuthUser *string `json:"auth_user,omitempty"`
-	// Basic auth password
-	AuthPass *string `json:"auth_pass,omitempty"`
-	// Disable SSL verification
-	DisableSslVerify *bool `json:"disable_ssl_verify,omitempty"`
-	// Cache lifetime
-	CacheLifetime NullableString `json:"cache_lifetime,omitempty"`
-	// Only proxy 404 responses
-	OnlyProxy404 *bool `json:"only_proxy_404,omitempty"`
-	// Headers to inject
-	InjectHeaders map[string]string `json:"inject_headers,omitempty"`
-	// Headers to strip from response
-	ProxyStripHeaders []string `json:"proxy_strip_headers,omitempty"`
-	// Headers to strip from request
-	ProxyStripRequestHeaders []string `json:"proxy_strip_request_headers,omitempty"`
-	// Origin timeout
-	OriginTimeout *string `json:"origin_timeout,omitempty"`
-	// Enable failover mode
-	FailoverMode *bool `json:"failover_mode,omitempty"`
-	// Failover TTFB threshold
-	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
-	// Status codes for failover (default: 200,404,301,302,304)
-	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
-	// Failover cache lifetime
-	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
-	// Notification type (none, slack)
-	Notify *string `json:"notify,omitempty"`
-	NotifyConfig NullableV2RuleProxyActionAllOfNotifyConfig `json:"notify_config,omitempty"`
-	// WAF enabled
-	WafEnabled *bool `json:"waf_enabled,omitempty"`
-	WafConfig *WafConfig `json:"waf_config,omitempty"`
-	// Proxy alert enabled
-	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
-	// Proxy inline function enabled
-	ProxyInlineFnEnabled *bool `json:"proxy_inline_fn_enabled,omitempty"`
-	QuantCloudSelection NullableV2RuleProxyActionAllOfQuantCloudSelection `json:"quant_cloud_selection,omitempty"`
+	// Error message
+	Message string `json:"message"`
+	// Error flag
+	Error bool `json:"error"`
 	ActionConfig V2RuleHeaderAction `json:"action_config"`
 	AdditionalProperties map[string]interface{}
 }
@@ -111,32 +70,15 @@ type _V2RuleHeader V2RuleHeader
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleHeader(message string, error_ bool, uuid string, disabled bool, action string, to string, actionConfig V2RuleHeaderAction) *V2RuleHeader {
+func NewV2RuleHeader(uuid string, disabled bool, action string, message string, error_ bool, actionConfig V2RuleHeaderAction) *V2RuleHeader {
 	this := V2RuleHeader{}
-	this.Message = message
-	this.Error = error_
 	this.Uuid = uuid
 	var weight int32 = 0
 	this.Weight = &weight
 	this.Disabled = disabled
 	this.Action = action
-	this.To = to
-	var disableSslVerify bool = false
-	this.DisableSslVerify = &disableSslVerify
-	var onlyProxy404 bool = false
-	this.OnlyProxy404 = &onlyProxy404
-	var failoverMode bool = false
-	this.FailoverMode = &failoverMode
-	var failoverOriginTtfb string = "2000"
-	this.FailoverOriginTtfb = &failoverOriginTtfb
-	var failoverLifetime string = "300"
-	this.FailoverLifetime = &failoverLifetime
-	var notify string = "none"
-	this.Notify = &notify
-	var wafEnabled bool = false
-	this.WafEnabled = &wafEnabled
-	var proxyInlineFnEnabled bool = false
-	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
+	this.Message = message
+	this.Error = error_
 	this.ActionConfig = actionConfig
 	return &this
 }
@@ -150,71 +92,7 @@ func NewV2RuleHeaderWithDefaults() *V2RuleHeader {
 	this.Weight = &weight
 	var disabled bool = false
 	this.Disabled = disabled
-	var disableSslVerify bool = false
-	this.DisableSslVerify = &disableSslVerify
-	var onlyProxy404 bool = false
-	this.OnlyProxy404 = &onlyProxy404
-	var failoverMode bool = false
-	this.FailoverMode = &failoverMode
-	var failoverOriginTtfb string = "2000"
-	this.FailoverOriginTtfb = &failoverOriginTtfb
-	var failoverLifetime string = "300"
-	this.FailoverLifetime = &failoverLifetime
-	var notify string = "none"
-	this.Notify = &notify
-	var wafEnabled bool = false
-	this.WafEnabled = &wafEnabled
-	var proxyInlineFnEnabled bool = false
-	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleHeader) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleHeader) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleHeader) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleHeader) SetError(v bool) {
-	o.Error = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -769,731 +647,52 @@ func (o *V2RuleHeader) SetAction(v string) {
 	o.Action = v
 }
 
-// GetTo returns the To field value
-func (o *V2RuleHeader) GetTo() string {
+// GetMessage returns the Message field value
+func (o *V2RuleHeader) GetMessage() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.To
+	return o.Message
 }
 
-// GetToOk returns a tuple with the To field value
+// GetMessageOk returns a tuple with the Message field value
 // and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetToOk() (*string, bool) {
+func (o *V2RuleHeader) GetMessageOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.To, true
+	return &o.Message, true
 }
 
-// SetTo sets field value
-func (o *V2RuleHeader) SetTo(v string) {
-	o.To = v
+// SetMessage sets field value
+func (o *V2RuleHeader) SetMessage(v string) {
+	o.Message = v
 }
 
-// GetHost returns the Host field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetHost() string {
-	if o == nil || IsNil(o.Host) {
-		var ret string
-		return ret
-	}
-	return *o.Host
-}
-
-// GetHostOk returns a tuple with the Host field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetHostOk() (*string, bool) {
-	if o == nil || IsNil(o.Host) {
-		return nil, false
-	}
-	return o.Host, true
-}
-
-// HasHost returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasHost() bool {
-	if o != nil && !IsNil(o.Host) {
-		return true
-	}
-
-	return false
-}
-
-// SetHost gets a reference to the given string and assigns it to the Host field.
-func (o *V2RuleHeader) SetHost(v string) {
-	o.Host = &v
-}
-
-// GetAuthUser returns the AuthUser field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetAuthUser() string {
-	if o == nil || IsNil(o.AuthUser) {
-		var ret string
-		return ret
-	}
-	return *o.AuthUser
-}
-
-// GetAuthUserOk returns a tuple with the AuthUser field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetAuthUserOk() (*string, bool) {
-	if o == nil || IsNil(o.AuthUser) {
-		return nil, false
-	}
-	return o.AuthUser, true
-}
-
-// HasAuthUser returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasAuthUser() bool {
-	if o != nil && !IsNil(o.AuthUser) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthUser gets a reference to the given string and assigns it to the AuthUser field.
-func (o *V2RuleHeader) SetAuthUser(v string) {
-	o.AuthUser = &v
-}
-
-// GetAuthPass returns the AuthPass field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetAuthPass() string {
-	if o == nil || IsNil(o.AuthPass) {
-		var ret string
-		return ret
-	}
-	return *o.AuthPass
-}
-
-// GetAuthPassOk returns a tuple with the AuthPass field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetAuthPassOk() (*string, bool) {
-	if o == nil || IsNil(o.AuthPass) {
-		return nil, false
-	}
-	return o.AuthPass, true
-}
-
-// HasAuthPass returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasAuthPass() bool {
-	if o != nil && !IsNil(o.AuthPass) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthPass gets a reference to the given string and assigns it to the AuthPass field.
-func (o *V2RuleHeader) SetAuthPass(v string) {
-	o.AuthPass = &v
-}
-
-// GetDisableSslVerify returns the DisableSslVerify field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetDisableSslVerify() bool {
-	if o == nil || IsNil(o.DisableSslVerify) {
+// GetError returns the Error field value
+func (o *V2RuleHeader) GetError() bool {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.DisableSslVerify
+
+	return o.Error
 }
 
-// GetDisableSslVerifyOk returns a tuple with the DisableSslVerify field value if set, nil otherwise
+// GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetDisableSslVerifyOk() (*bool, bool) {
-	if o == nil || IsNil(o.DisableSslVerify) {
-		return nil, false
-	}
-	return o.DisableSslVerify, true
-}
-
-// HasDisableSslVerify returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasDisableSslVerify() bool {
-	if o != nil && !IsNil(o.DisableSslVerify) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisableSslVerify gets a reference to the given bool and assigns it to the DisableSslVerify field.
-func (o *V2RuleHeader) SetDisableSslVerify(v bool) {
-	o.DisableSslVerify = &v
-}
-
-// GetCacheLifetime returns the CacheLifetime field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *V2RuleHeader) GetCacheLifetime() string {
-	if o == nil || IsNil(o.CacheLifetime.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.CacheLifetime.Get()
-}
-
-// GetCacheLifetimeOk returns a tuple with the CacheLifetime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V2RuleHeader) GetCacheLifetimeOk() (*string, bool) {
+func (o *V2RuleHeader) GetErrorOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.CacheLifetime.Get(), o.CacheLifetime.IsSet()
+	return &o.Error, true
 }
 
-// HasCacheLifetime returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasCacheLifetime() bool {
-	if o != nil && o.CacheLifetime.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCacheLifetime gets a reference to the given NullableString and assigns it to the CacheLifetime field.
-func (o *V2RuleHeader) SetCacheLifetime(v string) {
-	o.CacheLifetime.Set(&v)
-}
-// SetCacheLifetimeNil sets the value for CacheLifetime to be an explicit nil
-func (o *V2RuleHeader) SetCacheLifetimeNil() {
-	o.CacheLifetime.Set(nil)
-}
-
-// UnsetCacheLifetime ensures that no value is present for CacheLifetime, not even an explicit nil
-func (o *V2RuleHeader) UnsetCacheLifetime() {
-	o.CacheLifetime.Unset()
-}
-
-// GetOnlyProxy404 returns the OnlyProxy404 field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetOnlyProxy404() bool {
-	if o == nil || IsNil(o.OnlyProxy404) {
-		var ret bool
-		return ret
-	}
-	return *o.OnlyProxy404
-}
-
-// GetOnlyProxy404Ok returns a tuple with the OnlyProxy404 field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetOnlyProxy404Ok() (*bool, bool) {
-	if o == nil || IsNil(o.OnlyProxy404) {
-		return nil, false
-	}
-	return o.OnlyProxy404, true
-}
-
-// HasOnlyProxy404 returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasOnlyProxy404() bool {
-	if o != nil && !IsNil(o.OnlyProxy404) {
-		return true
-	}
-
-	return false
-}
-
-// SetOnlyProxy404 gets a reference to the given bool and assigns it to the OnlyProxy404 field.
-func (o *V2RuleHeader) SetOnlyProxy404(v bool) {
-	o.OnlyProxy404 = &v
-}
-
-// GetInjectHeaders returns the InjectHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *V2RuleHeader) GetInjectHeaders() map[string]string {
-	if o == nil {
-		var ret map[string]string
-		return ret
-	}
-	return o.InjectHeaders
-}
-
-// GetInjectHeadersOk returns a tuple with the InjectHeaders field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V2RuleHeader) GetInjectHeadersOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.InjectHeaders) {
-		return nil, false
-	}
-	return &o.InjectHeaders, true
-}
-
-// HasInjectHeaders returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasInjectHeaders() bool {
-	if o != nil && !IsNil(o.InjectHeaders) {
-		return true
-	}
-
-	return false
-}
-
-// SetInjectHeaders gets a reference to the given map[string]string and assigns it to the InjectHeaders field.
-func (o *V2RuleHeader) SetInjectHeaders(v map[string]string) {
-	o.InjectHeaders = v
-}
-
-// GetProxyStripHeaders returns the ProxyStripHeaders field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetProxyStripHeaders() []string {
-	if o == nil || IsNil(o.ProxyStripHeaders) {
-		var ret []string
-		return ret
-	}
-	return o.ProxyStripHeaders
-}
-
-// GetProxyStripHeadersOk returns a tuple with the ProxyStripHeaders field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetProxyStripHeadersOk() ([]string, bool) {
-	if o == nil || IsNil(o.ProxyStripHeaders) {
-		return nil, false
-	}
-	return o.ProxyStripHeaders, true
-}
-
-// HasProxyStripHeaders returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasProxyStripHeaders() bool {
-	if o != nil && !IsNil(o.ProxyStripHeaders) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxyStripHeaders gets a reference to the given []string and assigns it to the ProxyStripHeaders field.
-func (o *V2RuleHeader) SetProxyStripHeaders(v []string) {
-	o.ProxyStripHeaders = v
-}
-
-// GetProxyStripRequestHeaders returns the ProxyStripRequestHeaders field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetProxyStripRequestHeaders() []string {
-	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
-		var ret []string
-		return ret
-	}
-	return o.ProxyStripRequestHeaders
-}
-
-// GetProxyStripRequestHeadersOk returns a tuple with the ProxyStripRequestHeaders field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetProxyStripRequestHeadersOk() ([]string, bool) {
-	if o == nil || IsNil(o.ProxyStripRequestHeaders) {
-		return nil, false
-	}
-	return o.ProxyStripRequestHeaders, true
-}
-
-// HasProxyStripRequestHeaders returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasProxyStripRequestHeaders() bool {
-	if o != nil && !IsNil(o.ProxyStripRequestHeaders) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxyStripRequestHeaders gets a reference to the given []string and assigns it to the ProxyStripRequestHeaders field.
-func (o *V2RuleHeader) SetProxyStripRequestHeaders(v []string) {
-	o.ProxyStripRequestHeaders = v
-}
-
-// GetOriginTimeout returns the OriginTimeout field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetOriginTimeout() string {
-	if o == nil || IsNil(o.OriginTimeout) {
-		var ret string
-		return ret
-	}
-	return *o.OriginTimeout
-}
-
-// GetOriginTimeoutOk returns a tuple with the OriginTimeout field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetOriginTimeoutOk() (*string, bool) {
-	if o == nil || IsNil(o.OriginTimeout) {
-		return nil, false
-	}
-	return o.OriginTimeout, true
-}
-
-// HasOriginTimeout returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasOriginTimeout() bool {
-	if o != nil && !IsNil(o.OriginTimeout) {
-		return true
-	}
-
-	return false
-}
-
-// SetOriginTimeout gets a reference to the given string and assigns it to the OriginTimeout field.
-func (o *V2RuleHeader) SetOriginTimeout(v string) {
-	o.OriginTimeout = &v
-}
-
-// GetFailoverMode returns the FailoverMode field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetFailoverMode() bool {
-	if o == nil || IsNil(o.FailoverMode) {
-		var ret bool
-		return ret
-	}
-	return *o.FailoverMode
-}
-
-// GetFailoverModeOk returns a tuple with the FailoverMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetFailoverModeOk() (*bool, bool) {
-	if o == nil || IsNil(o.FailoverMode) {
-		return nil, false
-	}
-	return o.FailoverMode, true
-}
-
-// HasFailoverMode returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasFailoverMode() bool {
-	if o != nil && !IsNil(o.FailoverMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverMode gets a reference to the given bool and assigns it to the FailoverMode field.
-func (o *V2RuleHeader) SetFailoverMode(v bool) {
-	o.FailoverMode = &v
-}
-
-// GetFailoverOriginTtfb returns the FailoverOriginTtfb field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetFailoverOriginTtfb() string {
-	if o == nil || IsNil(o.FailoverOriginTtfb) {
-		var ret string
-		return ret
-	}
-	return *o.FailoverOriginTtfb
-}
-
-// GetFailoverOriginTtfbOk returns a tuple with the FailoverOriginTtfb field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetFailoverOriginTtfbOk() (*string, bool) {
-	if o == nil || IsNil(o.FailoverOriginTtfb) {
-		return nil, false
-	}
-	return o.FailoverOriginTtfb, true
-}
-
-// HasFailoverOriginTtfb returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasFailoverOriginTtfb() bool {
-	if o != nil && !IsNil(o.FailoverOriginTtfb) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverOriginTtfb gets a reference to the given string and assigns it to the FailoverOriginTtfb field.
-func (o *V2RuleHeader) SetFailoverOriginTtfb(v string) {
-	o.FailoverOriginTtfb = &v
-}
-
-// GetFailoverOriginStatusCodes returns the FailoverOriginStatusCodes field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetFailoverOriginStatusCodes() []string {
-	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
-		var ret []string
-		return ret
-	}
-	return o.FailoverOriginStatusCodes
-}
-
-// GetFailoverOriginStatusCodesOk returns a tuple with the FailoverOriginStatusCodes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetFailoverOriginStatusCodesOk() ([]string, bool) {
-	if o == nil || IsNil(o.FailoverOriginStatusCodes) {
-		return nil, false
-	}
-	return o.FailoverOriginStatusCodes, true
-}
-
-// HasFailoverOriginStatusCodes returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasFailoverOriginStatusCodes() bool {
-	if o != nil && !IsNil(o.FailoverOriginStatusCodes) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverOriginStatusCodes gets a reference to the given []string and assigns it to the FailoverOriginStatusCodes field.
-func (o *V2RuleHeader) SetFailoverOriginStatusCodes(v []string) {
-	o.FailoverOriginStatusCodes = v
-}
-
-// GetFailoverLifetime returns the FailoverLifetime field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetFailoverLifetime() string {
-	if o == nil || IsNil(o.FailoverLifetime) {
-		var ret string
-		return ret
-	}
-	return *o.FailoverLifetime
-}
-
-// GetFailoverLifetimeOk returns a tuple with the FailoverLifetime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetFailoverLifetimeOk() (*string, bool) {
-	if o == nil || IsNil(o.FailoverLifetime) {
-		return nil, false
-	}
-	return o.FailoverLifetime, true
-}
-
-// HasFailoverLifetime returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasFailoverLifetime() bool {
-	if o != nil && !IsNil(o.FailoverLifetime) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverLifetime gets a reference to the given string and assigns it to the FailoverLifetime field.
-func (o *V2RuleHeader) SetFailoverLifetime(v string) {
-	o.FailoverLifetime = &v
-}
-
-// GetNotify returns the Notify field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetNotify() string {
-	if o == nil || IsNil(o.Notify) {
-		var ret string
-		return ret
-	}
-	return *o.Notify
-}
-
-// GetNotifyOk returns a tuple with the Notify field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetNotifyOk() (*string, bool) {
-	if o == nil || IsNil(o.Notify) {
-		return nil, false
-	}
-	return o.Notify, true
-}
-
-// HasNotify returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasNotify() bool {
-	if o != nil && !IsNil(o.Notify) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotify gets a reference to the given string and assigns it to the Notify field.
-func (o *V2RuleHeader) SetNotify(v string) {
-	o.Notify = &v
-}
-
-// GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *V2RuleHeader) GetNotifyConfig() V2RuleProxyActionAllOfNotifyConfig {
-	if o == nil || IsNil(o.NotifyConfig.Get()) {
-		var ret V2RuleProxyActionAllOfNotifyConfig
-		return ret
-	}
-	return *o.NotifyConfig.Get()
-}
-
-// GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V2RuleHeader) GetNotifyConfigOk() (*V2RuleProxyActionAllOfNotifyConfig, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.NotifyConfig.Get(), o.NotifyConfig.IsSet()
-}
-
-// HasNotifyConfig returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasNotifyConfig() bool {
-	if o != nil && o.NotifyConfig.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetNotifyConfig gets a reference to the given NullableV2RuleProxyActionAllOfNotifyConfig and assigns it to the NotifyConfig field.
-func (o *V2RuleHeader) SetNotifyConfig(v V2RuleProxyActionAllOfNotifyConfig) {
-	o.NotifyConfig.Set(&v)
-}
-// SetNotifyConfigNil sets the value for NotifyConfig to be an explicit nil
-func (o *V2RuleHeader) SetNotifyConfigNil() {
-	o.NotifyConfig.Set(nil)
-}
-
-// UnsetNotifyConfig ensures that no value is present for NotifyConfig, not even an explicit nil
-func (o *V2RuleHeader) UnsetNotifyConfig() {
-	o.NotifyConfig.Unset()
-}
-
-// GetWafEnabled returns the WafEnabled field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetWafEnabled() bool {
-	if o == nil || IsNil(o.WafEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.WafEnabled
-}
-
-// GetWafEnabledOk returns a tuple with the WafEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetWafEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.WafEnabled) {
-		return nil, false
-	}
-	return o.WafEnabled, true
-}
-
-// HasWafEnabled returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasWafEnabled() bool {
-	if o != nil && !IsNil(o.WafEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetWafEnabled gets a reference to the given bool and assigns it to the WafEnabled field.
-func (o *V2RuleHeader) SetWafEnabled(v bool) {
-	o.WafEnabled = &v
-}
-
-// GetWafConfig returns the WafConfig field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetWafConfig() WafConfig {
-	if o == nil || IsNil(o.WafConfig) {
-		var ret WafConfig
-		return ret
-	}
-	return *o.WafConfig
-}
-
-// GetWafConfigOk returns a tuple with the WafConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetWafConfigOk() (*WafConfig, bool) {
-	if o == nil || IsNil(o.WafConfig) {
-		return nil, false
-	}
-	return o.WafConfig, true
-}
-
-// HasWafConfig returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasWafConfig() bool {
-	if o != nil && !IsNil(o.WafConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetWafConfig gets a reference to the given WafConfig and assigns it to the WafConfig field.
-func (o *V2RuleHeader) SetWafConfig(v WafConfig) {
-	o.WafConfig = &v
-}
-
-// GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetProxyAlertEnabled() bool {
-	if o == nil || IsNil(o.ProxyAlertEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.ProxyAlertEnabled
-}
-
-// GetProxyAlertEnabledOk returns a tuple with the ProxyAlertEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetProxyAlertEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.ProxyAlertEnabled) {
-		return nil, false
-	}
-	return o.ProxyAlertEnabled, true
-}
-
-// HasProxyAlertEnabled returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasProxyAlertEnabled() bool {
-	if o != nil && !IsNil(o.ProxyAlertEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxyAlertEnabled gets a reference to the given bool and assigns it to the ProxyAlertEnabled field.
-func (o *V2RuleHeader) SetProxyAlertEnabled(v bool) {
-	o.ProxyAlertEnabled = &v
-}
-
-// GetProxyInlineFnEnabled returns the ProxyInlineFnEnabled field value if set, zero value otherwise.
-func (o *V2RuleHeader) GetProxyInlineFnEnabled() bool {
-	if o == nil || IsNil(o.ProxyInlineFnEnabled) {
-		var ret bool
-		return ret
-	}
-	return *o.ProxyInlineFnEnabled
-}
-
-// GetProxyInlineFnEnabledOk returns a tuple with the ProxyInlineFnEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleHeader) GetProxyInlineFnEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.ProxyInlineFnEnabled) {
-		return nil, false
-	}
-	return o.ProxyInlineFnEnabled, true
-}
-
-// HasProxyInlineFnEnabled returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasProxyInlineFnEnabled() bool {
-	if o != nil && !IsNil(o.ProxyInlineFnEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetProxyInlineFnEnabled gets a reference to the given bool and assigns it to the ProxyInlineFnEnabled field.
-func (o *V2RuleHeader) SetProxyInlineFnEnabled(v bool) {
-	o.ProxyInlineFnEnabled = &v
-}
-
-// GetQuantCloudSelection returns the QuantCloudSelection field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *V2RuleHeader) GetQuantCloudSelection() V2RuleProxyActionAllOfQuantCloudSelection {
-	if o == nil || IsNil(o.QuantCloudSelection.Get()) {
-		var ret V2RuleProxyActionAllOfQuantCloudSelection
-		return ret
-	}
-	return *o.QuantCloudSelection.Get()
-}
-
-// GetQuantCloudSelectionOk returns a tuple with the QuantCloudSelection field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V2RuleHeader) GetQuantCloudSelectionOk() (*V2RuleProxyActionAllOfQuantCloudSelection, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.QuantCloudSelection.Get(), o.QuantCloudSelection.IsSet()
-}
-
-// HasQuantCloudSelection returns a boolean if a field has been set.
-func (o *V2RuleHeader) HasQuantCloudSelection() bool {
-	if o != nil && o.QuantCloudSelection.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantCloudSelection gets a reference to the given NullableV2RuleProxyActionAllOfQuantCloudSelection and assigns it to the QuantCloudSelection field.
-func (o *V2RuleHeader) SetQuantCloudSelection(v V2RuleProxyActionAllOfQuantCloudSelection) {
-	o.QuantCloudSelection.Set(&v)
-}
-// SetQuantCloudSelectionNil sets the value for QuantCloudSelection to be an explicit nil
-func (o *V2RuleHeader) SetQuantCloudSelectionNil() {
-	o.QuantCloudSelection.Set(nil)
-}
-
-// UnsetQuantCloudSelection ensures that no value is present for QuantCloudSelection, not even an explicit nil
-func (o *V2RuleHeader) UnsetQuantCloudSelection() {
-	o.QuantCloudSelection.Unset()
+// SetError sets field value
+func (o *V2RuleHeader) SetError(v bool) {
+	o.Error = v
 }
 
 // GetActionConfig returns the ActionConfig field value
@@ -1530,8 +729,6 @@ func (o V2RuleHeader) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleHeader) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -1580,70 +777,8 @@ func (o V2RuleHeader) ToMap() (map[string]interface{}, error) {
 		toSerialize["country_is_not"] = o.CountryIsNot
 	}
 	toSerialize["action"] = o.Action
-	toSerialize["to"] = o.To
-	if !IsNil(o.Host) {
-		toSerialize["host"] = o.Host
-	}
-	if !IsNil(o.AuthUser) {
-		toSerialize["auth_user"] = o.AuthUser
-	}
-	if !IsNil(o.AuthPass) {
-		toSerialize["auth_pass"] = o.AuthPass
-	}
-	if !IsNil(o.DisableSslVerify) {
-		toSerialize["disable_ssl_verify"] = o.DisableSslVerify
-	}
-	if o.CacheLifetime.IsSet() {
-		toSerialize["cache_lifetime"] = o.CacheLifetime.Get()
-	}
-	if !IsNil(o.OnlyProxy404) {
-		toSerialize["only_proxy_404"] = o.OnlyProxy404
-	}
-	if o.InjectHeaders != nil {
-		toSerialize["inject_headers"] = o.InjectHeaders
-	}
-	if !IsNil(o.ProxyStripHeaders) {
-		toSerialize["proxy_strip_headers"] = o.ProxyStripHeaders
-	}
-	if !IsNil(o.ProxyStripRequestHeaders) {
-		toSerialize["proxy_strip_request_headers"] = o.ProxyStripRequestHeaders
-	}
-	if !IsNil(o.OriginTimeout) {
-		toSerialize["origin_timeout"] = o.OriginTimeout
-	}
-	if !IsNil(o.FailoverMode) {
-		toSerialize["failover_mode"] = o.FailoverMode
-	}
-	if !IsNil(o.FailoverOriginTtfb) {
-		toSerialize["failover_origin_ttfb"] = o.FailoverOriginTtfb
-	}
-	if !IsNil(o.FailoverOriginStatusCodes) {
-		toSerialize["failover_origin_status_codes"] = o.FailoverOriginStatusCodes
-	}
-	if !IsNil(o.FailoverLifetime) {
-		toSerialize["failover_lifetime"] = o.FailoverLifetime
-	}
-	if !IsNil(o.Notify) {
-		toSerialize["notify"] = o.Notify
-	}
-	if o.NotifyConfig.IsSet() {
-		toSerialize["notify_config"] = o.NotifyConfig.Get()
-	}
-	if !IsNil(o.WafEnabled) {
-		toSerialize["waf_enabled"] = o.WafEnabled
-	}
-	if !IsNil(o.WafConfig) {
-		toSerialize["waf_config"] = o.WafConfig
-	}
-	if !IsNil(o.ProxyAlertEnabled) {
-		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
-	}
-	if !IsNil(o.ProxyInlineFnEnabled) {
-		toSerialize["proxy_inline_fn_enabled"] = o.ProxyInlineFnEnabled
-	}
-	if o.QuantCloudSelection.IsSet() {
-		toSerialize["quant_cloud_selection"] = o.QuantCloudSelection.Get()
-	}
+	toSerialize["message"] = o.Message
+	toSerialize["error"] = o.Error
 	toSerialize["action_config"] = o.ActionConfig
 
 	for key, value := range o.AdditionalProperties {
@@ -1658,12 +793,11 @@ func (o *V2RuleHeader) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"uuid",
 		"disabled",
 		"action",
-		"to",
+		"message",
+		"error",
 		"action_config",
 	}
 
@@ -1694,8 +828,6 @@ func (o *V2RuleHeader) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")
 		delete(additionalProperties, "rule_id")
@@ -1714,28 +846,8 @@ func (o *V2RuleHeader) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "country_is")
 		delete(additionalProperties, "country_is_not")
 		delete(additionalProperties, "action")
-		delete(additionalProperties, "to")
-		delete(additionalProperties, "host")
-		delete(additionalProperties, "auth_user")
-		delete(additionalProperties, "auth_pass")
-		delete(additionalProperties, "disable_ssl_verify")
-		delete(additionalProperties, "cache_lifetime")
-		delete(additionalProperties, "only_proxy_404")
-		delete(additionalProperties, "inject_headers")
-		delete(additionalProperties, "proxy_strip_headers")
-		delete(additionalProperties, "proxy_strip_request_headers")
-		delete(additionalProperties, "origin_timeout")
-		delete(additionalProperties, "failover_mode")
-		delete(additionalProperties, "failover_origin_ttfb")
-		delete(additionalProperties, "failover_origin_status_codes")
-		delete(additionalProperties, "failover_lifetime")
-		delete(additionalProperties, "notify")
-		delete(additionalProperties, "notify_config")
-		delete(additionalProperties, "waf_enabled")
-		delete(additionalProperties, "waf_config")
-		delete(additionalProperties, "proxy_alert_enabled")
-		delete(additionalProperties, "proxy_inline_fn_enabled")
-		delete(additionalProperties, "quant_cloud_selection")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "error")
 		delete(additionalProperties, "action_config")
 		o.AdditionalProperties = additionalProperties
 	}

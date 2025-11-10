@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Domain** | **[]string** | Domain patterns (default: any) | 
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | Pointer to **string** | Rule UUID | [optional] 
@@ -27,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewV2RuleContentFilterRequest
 
-`func NewV2RuleContentFilterRequest(message string, error_ bool, domain []string, url []string, fnUuid string, ) *V2RuleContentFilterRequest`
+`func NewV2RuleContentFilterRequest(domain []string, url []string, fnUuid string, ) *V2RuleContentFilterRequest`
 
 NewV2RuleContentFilterRequest instantiates a new V2RuleContentFilterRequest object
 This constructor will assign default values to properties that have it defined,
@@ -41,46 +39,6 @@ will change when the set of required properties is changed
 NewV2RuleContentFilterRequestWithDefaults instantiates a new V2RuleContentFilterRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2RuleContentFilterRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleContentFilterRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleContentFilterRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleContentFilterRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleContentFilterRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleContentFilterRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetDomain
 

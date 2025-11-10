@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Domain** | **[]string** | Domain patterns (default: any) | 
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | Pointer to **string** | Rule UUID | [optional] 
@@ -26,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewV2RuleRequest
 
-`func NewV2RuleRequest(message string, error_ bool, domain []string, url []string, ) *V2RuleRequest`
+`func NewV2RuleRequest(domain []string, url []string, ) *V2RuleRequest`
 
 NewV2RuleRequest instantiates a new V2RuleRequest object
 This constructor will assign default values to properties that have it defined,
@@ -40,46 +38,6 @@ will change when the set of required properties is changed
 NewV2RuleRequestWithDefaults instantiates a new V2RuleRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2RuleRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetDomain
 

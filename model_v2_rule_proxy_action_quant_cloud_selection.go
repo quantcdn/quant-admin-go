@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the V2RuleProxyActionAllOfQuantCloudSelection type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &V2RuleProxyActionAllOfQuantCloudSelection{}
+// checks if the V2RuleProxyActionQuantCloudSelection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V2RuleProxyActionQuantCloudSelection{}
 
-// V2RuleProxyActionAllOfQuantCloudSelection Quant Cloud application proxy selection (only present for Quant Cloud App proxies)
-type V2RuleProxyActionAllOfQuantCloudSelection struct {
+// V2RuleProxyActionQuantCloudSelection Quant Cloud application proxy selection (only present for Quant Cloud App proxies)
+type V2RuleProxyActionQuantCloudSelection struct {
 	// Application name
 	App *string `json:"app,omitempty"`
 	// Environment name
@@ -30,27 +30,27 @@ type V2RuleProxyActionAllOfQuantCloudSelection struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _V2RuleProxyActionAllOfQuantCloudSelection V2RuleProxyActionAllOfQuantCloudSelection
+type _V2RuleProxyActionQuantCloudSelection V2RuleProxyActionQuantCloudSelection
 
-// NewV2RuleProxyActionAllOfQuantCloudSelection instantiates a new V2RuleProxyActionAllOfQuantCloudSelection object
+// NewV2RuleProxyActionQuantCloudSelection instantiates a new V2RuleProxyActionQuantCloudSelection object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleProxyActionAllOfQuantCloudSelection() *V2RuleProxyActionAllOfQuantCloudSelection {
-	this := V2RuleProxyActionAllOfQuantCloudSelection{}
+func NewV2RuleProxyActionQuantCloudSelection() *V2RuleProxyActionQuantCloudSelection {
+	this := V2RuleProxyActionQuantCloudSelection{}
 	return &this
 }
 
-// NewV2RuleProxyActionAllOfQuantCloudSelectionWithDefaults instantiates a new V2RuleProxyActionAllOfQuantCloudSelection object
+// NewV2RuleProxyActionQuantCloudSelectionWithDefaults instantiates a new V2RuleProxyActionQuantCloudSelection object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV2RuleProxyActionAllOfQuantCloudSelectionWithDefaults() *V2RuleProxyActionAllOfQuantCloudSelection {
-	this := V2RuleProxyActionAllOfQuantCloudSelection{}
+func NewV2RuleProxyActionQuantCloudSelectionWithDefaults() *V2RuleProxyActionQuantCloudSelection {
+	this := V2RuleProxyActionQuantCloudSelection{}
 	return &this
 }
 
 // GetApp returns the App field value if set, zero value otherwise.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetApp() string {
+func (o *V2RuleProxyActionQuantCloudSelection) GetApp() string {
 	if o == nil || IsNil(o.App) {
 		var ret string
 		return ret
@@ -60,7 +60,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetApp() string {
 
 // GetAppOk returns a tuple with the App field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetAppOk() (*string, bool) {
+func (o *V2RuleProxyActionQuantCloudSelection) GetAppOk() (*string, bool) {
 	if o == nil || IsNil(o.App) {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetAppOk() (*string, bool) {
 }
 
 // HasApp returns a boolean if a field has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasApp() bool {
+func (o *V2RuleProxyActionQuantCloudSelection) HasApp() bool {
 	if o != nil && !IsNil(o.App) {
 		return true
 	}
@@ -77,12 +77,12 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasApp() bool {
 }
 
 // SetApp gets a reference to the given string and assigns it to the App field.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetApp(v string) {
+func (o *V2RuleProxyActionQuantCloudSelection) SetApp(v string) {
 	o.App = &v
 }
 
 // GetEnv returns the Env field value if set, zero value otherwise.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetEnv() string {
+func (o *V2RuleProxyActionQuantCloudSelection) GetEnv() string {
 	if o == nil || IsNil(o.Env) {
 		var ret string
 		return ret
@@ -92,7 +92,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetEnv() string {
 
 // GetEnvOk returns a tuple with the Env field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetEnvOk() (*string, bool) {
+func (o *V2RuleProxyActionQuantCloudSelection) GetEnvOk() (*string, bool) {
 	if o == nil || IsNil(o.Env) {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetEnvOk() (*string, bool) {
 }
 
 // HasEnv returns a boolean if a field has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasEnv() bool {
+func (o *V2RuleProxyActionQuantCloudSelection) HasEnv() bool {
 	if o != nil && !IsNil(o.Env) {
 		return true
 	}
@@ -109,12 +109,12 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasEnv() bool {
 }
 
 // SetEnv gets a reference to the given string and assigns it to the Env field.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetEnv(v string) {
+func (o *V2RuleProxyActionQuantCloudSelection) SetEnv(v string) {
 	o.Env = &v
 }
 
 // GetContainer returns the Container field value if set, zero value otherwise.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetContainer() string {
+func (o *V2RuleProxyActionQuantCloudSelection) GetContainer() string {
 	if o == nil || IsNil(o.Container) {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetContainer() string {
 
 // GetContainerOk returns a tuple with the Container field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetContainerOk() (*string, bool) {
+func (o *V2RuleProxyActionQuantCloudSelection) GetContainerOk() (*string, bool) {
 	if o == nil || IsNil(o.Container) {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetContainerOk() (*string, b
 }
 
 // HasContainer returns a boolean if a field has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasContainer() bool {
+func (o *V2RuleProxyActionQuantCloudSelection) HasContainer() bool {
 	if o != nil && !IsNil(o.Container) {
 		return true
 	}
@@ -141,12 +141,12 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasContainer() bool {
 }
 
 // SetContainer gets a reference to the given string and assigns it to the Container field.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetContainer(v string) {
+func (o *V2RuleProxyActionQuantCloudSelection) SetContainer(v string) {
 	o.Container = &v
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetPort() int32 {
+func (o *V2RuleProxyActionQuantCloudSelection) GetPort() int32 {
 	if o == nil || IsNil(o.Port) {
 		var ret int32
 		return ret
@@ -156,7 +156,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetPort() int32 {
 
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetPortOk() (*int32, bool) {
+func (o *V2RuleProxyActionQuantCloudSelection) GetPortOk() (*int32, bool) {
 	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
@@ -164,7 +164,7 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetPortOk() (*int32, bool) {
 }
 
 // HasPort returns a boolean if a field has been set.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasPort() bool {
+func (o *V2RuleProxyActionQuantCloudSelection) HasPort() bool {
 	if o != nil && !IsNil(o.Port) {
 		return true
 	}
@@ -173,11 +173,11 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasPort() bool {
 }
 
 // SetPort gets a reference to the given int32 and assigns it to the Port field.
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetPort(v int32) {
+func (o *V2RuleProxyActionQuantCloudSelection) SetPort(v int32) {
 	o.Port = &v
 }
 
-func (o V2RuleProxyActionAllOfQuantCloudSelection) MarshalJSON() ([]byte, error) {
+func (o V2RuleProxyActionQuantCloudSelection) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -185,7 +185,7 @@ func (o V2RuleProxyActionAllOfQuantCloudSelection) MarshalJSON() ([]byte, error)
 	return json.Marshal(toSerialize)
 }
 
-func (o V2RuleProxyActionAllOfQuantCloudSelection) ToMap() (map[string]interface{}, error) {
+func (o V2RuleProxyActionQuantCloudSelection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.App) {
 		toSerialize["app"] = o.App
@@ -207,16 +207,16 @@ func (o V2RuleProxyActionAllOfQuantCloudSelection) ToMap() (map[string]interface
 	return toSerialize, nil
 }
 
-func (o *V2RuleProxyActionAllOfQuantCloudSelection) UnmarshalJSON(data []byte) (err error) {
-	varV2RuleProxyActionAllOfQuantCloudSelection := _V2RuleProxyActionAllOfQuantCloudSelection{}
+func (o *V2RuleProxyActionQuantCloudSelection) UnmarshalJSON(data []byte) (err error) {
+	varV2RuleProxyActionQuantCloudSelection := _V2RuleProxyActionQuantCloudSelection{}
 
-	err = json.Unmarshal(data, &varV2RuleProxyActionAllOfQuantCloudSelection)
+	err = json.Unmarshal(data, &varV2RuleProxyActionQuantCloudSelection)
 
 	if err != nil {
 		return err
 	}
 
-	*o = V2RuleProxyActionAllOfQuantCloudSelection(varV2RuleProxyActionAllOfQuantCloudSelection)
+	*o = V2RuleProxyActionQuantCloudSelection(varV2RuleProxyActionQuantCloudSelection)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -231,38 +231,38 @@ func (o *V2RuleProxyActionAllOfQuantCloudSelection) UnmarshalJSON(data []byte) (
 	return err
 }
 
-type NullableV2RuleProxyActionAllOfQuantCloudSelection struct {
-	value *V2RuleProxyActionAllOfQuantCloudSelection
+type NullableV2RuleProxyActionQuantCloudSelection struct {
+	value *V2RuleProxyActionQuantCloudSelection
 	isSet bool
 }
 
-func (v NullableV2RuleProxyActionAllOfQuantCloudSelection) Get() *V2RuleProxyActionAllOfQuantCloudSelection {
+func (v NullableV2RuleProxyActionQuantCloudSelection) Get() *V2RuleProxyActionQuantCloudSelection {
 	return v.value
 }
 
-func (v *NullableV2RuleProxyActionAllOfQuantCloudSelection) Set(val *V2RuleProxyActionAllOfQuantCloudSelection) {
+func (v *NullableV2RuleProxyActionQuantCloudSelection) Set(val *V2RuleProxyActionQuantCloudSelection) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV2RuleProxyActionAllOfQuantCloudSelection) IsSet() bool {
+func (v NullableV2RuleProxyActionQuantCloudSelection) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV2RuleProxyActionAllOfQuantCloudSelection) Unset() {
+func (v *NullableV2RuleProxyActionQuantCloudSelection) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV2RuleProxyActionAllOfQuantCloudSelection(val *V2RuleProxyActionAllOfQuantCloudSelection) *NullableV2RuleProxyActionAllOfQuantCloudSelection {
-	return &NullableV2RuleProxyActionAllOfQuantCloudSelection{value: val, isSet: true}
+func NewNullableV2RuleProxyActionQuantCloudSelection(val *V2RuleProxyActionQuantCloudSelection) *NullableV2RuleProxyActionQuantCloudSelection {
+	return &NullableV2RuleProxyActionQuantCloudSelection{value: val, isSet: true}
 }
 
-func (v NullableV2RuleProxyActionAllOfQuantCloudSelection) MarshalJSON() ([]byte, error) {
+func (v NullableV2RuleProxyActionQuantCloudSelection) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV2RuleProxyActionAllOfQuantCloudSelection) UnmarshalJSON(src []byte) error {
+func (v *NullableV2RuleProxyActionQuantCloudSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

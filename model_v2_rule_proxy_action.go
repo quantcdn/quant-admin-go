@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleProxyAction{}
 
 // V2RuleProxyAction struct for V2RuleProxyAction
 type V2RuleProxyAction struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Target URL to proxy to
 	To string `json:"to"`
 	// Host header override
@@ -56,7 +52,7 @@ type V2RuleProxyAction struct {
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
 	// Notification type (none, slack)
 	Notify *string `json:"notify,omitempty"`
-	NotifyConfig NullableV2RuleProxyActionAllOfNotifyConfig `json:"notify_config,omitempty"`
+	NotifyConfig NullableV2RuleProxyActionNotifyConfig `json:"notify_config,omitempty"`
 	// WAF enabled
 	WafEnabled *bool `json:"waf_enabled,omitempty"`
 	WafConfig NullableWafConfig `json:"waf_config,omitempty"`
@@ -64,7 +60,7 @@ type V2RuleProxyAction struct {
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	// Proxy inline function enabled
 	ProxyInlineFnEnabled *bool `json:"proxy_inline_fn_enabled,omitempty"`
-	QuantCloudSelection NullableV2RuleProxyActionAllOfQuantCloudSelection `json:"quant_cloud_selection,omitempty"`
+	QuantCloudSelection NullableV2RuleProxyActionQuantCloudSelection `json:"quant_cloud_selection,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -74,10 +70,8 @@ type _V2RuleProxyAction V2RuleProxyAction
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleProxyAction(message string, error_ bool, to string) *V2RuleProxyAction {
+func NewV2RuleProxyAction(to string) *V2RuleProxyAction {
 	this := V2RuleProxyAction{}
-	this.Message = message
-	this.Error = error_
 	this.To = to
 	var disableSslVerify bool = false
 	this.DisableSslVerify = &disableSslVerify
@@ -120,54 +114,6 @@ func NewV2RuleProxyActionWithDefaults() *V2RuleProxyAction {
 	var proxyInlineFnEnabled bool = false
 	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleProxyAction) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxyAction) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleProxyAction) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleProxyAction) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxyAction) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleProxyAction) SetError(v bool) {
-	o.Error = v
 }
 
 // GetTo returns the To field value
@@ -686,9 +632,9 @@ func (o *V2RuleProxyAction) SetNotify(v string) {
 }
 
 // GetNotifyConfig returns the NotifyConfig field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *V2RuleProxyAction) GetNotifyConfig() V2RuleProxyActionAllOfNotifyConfig {
+func (o *V2RuleProxyAction) GetNotifyConfig() V2RuleProxyActionNotifyConfig {
 	if o == nil || IsNil(o.NotifyConfig.Get()) {
-		var ret V2RuleProxyActionAllOfNotifyConfig
+		var ret V2RuleProxyActionNotifyConfig
 		return ret
 	}
 	return *o.NotifyConfig.Get()
@@ -697,7 +643,7 @@ func (o *V2RuleProxyAction) GetNotifyConfig() V2RuleProxyActionAllOfNotifyConfig
 // GetNotifyConfigOk returns a tuple with the NotifyConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V2RuleProxyAction) GetNotifyConfigOk() (*V2RuleProxyActionAllOfNotifyConfig, bool) {
+func (o *V2RuleProxyAction) GetNotifyConfigOk() (*V2RuleProxyActionNotifyConfig, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -713,8 +659,8 @@ func (o *V2RuleProxyAction) HasNotifyConfig() bool {
 	return false
 }
 
-// SetNotifyConfig gets a reference to the given NullableV2RuleProxyActionAllOfNotifyConfig and assigns it to the NotifyConfig field.
-func (o *V2RuleProxyAction) SetNotifyConfig(v V2RuleProxyActionAllOfNotifyConfig) {
+// SetNotifyConfig gets a reference to the given NullableV2RuleProxyActionNotifyConfig and assigns it to the NotifyConfig field.
+func (o *V2RuleProxyAction) SetNotifyConfig(v V2RuleProxyActionNotifyConfig) {
 	o.NotifyConfig.Set(&v)
 }
 // SetNotifyConfigNil sets the value for NotifyConfig to be an explicit nil
@@ -866,9 +812,9 @@ func (o *V2RuleProxyAction) SetProxyInlineFnEnabled(v bool) {
 }
 
 // GetQuantCloudSelection returns the QuantCloudSelection field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *V2RuleProxyAction) GetQuantCloudSelection() V2RuleProxyActionAllOfQuantCloudSelection {
+func (o *V2RuleProxyAction) GetQuantCloudSelection() V2RuleProxyActionQuantCloudSelection {
 	if o == nil || IsNil(o.QuantCloudSelection.Get()) {
-		var ret V2RuleProxyActionAllOfQuantCloudSelection
+		var ret V2RuleProxyActionQuantCloudSelection
 		return ret
 	}
 	return *o.QuantCloudSelection.Get()
@@ -877,7 +823,7 @@ func (o *V2RuleProxyAction) GetQuantCloudSelection() V2RuleProxyActionAllOfQuant
 // GetQuantCloudSelectionOk returns a tuple with the QuantCloudSelection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V2RuleProxyAction) GetQuantCloudSelectionOk() (*V2RuleProxyActionAllOfQuantCloudSelection, bool) {
+func (o *V2RuleProxyAction) GetQuantCloudSelectionOk() (*V2RuleProxyActionQuantCloudSelection, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -893,8 +839,8 @@ func (o *V2RuleProxyAction) HasQuantCloudSelection() bool {
 	return false
 }
 
-// SetQuantCloudSelection gets a reference to the given NullableV2RuleProxyActionAllOfQuantCloudSelection and assigns it to the QuantCloudSelection field.
-func (o *V2RuleProxyAction) SetQuantCloudSelection(v V2RuleProxyActionAllOfQuantCloudSelection) {
+// SetQuantCloudSelection gets a reference to the given NullableV2RuleProxyActionQuantCloudSelection and assigns it to the QuantCloudSelection field.
+func (o *V2RuleProxyAction) SetQuantCloudSelection(v V2RuleProxyActionQuantCloudSelection) {
 	o.QuantCloudSelection.Set(&v)
 }
 // SetQuantCloudSelectionNil sets the value for QuantCloudSelection to be an explicit nil
@@ -917,8 +863,6 @@ func (o V2RuleProxyAction) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["to"] = o.To
 	if !IsNil(o.Host) {
 		toSerialize["host"] = o.Host
@@ -996,8 +940,6 @@ func (o *V2RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"to",
 	}
 
@@ -1028,8 +970,6 @@ func (o *V2RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "to")
 		delete(additionalProperties, "host")
 		delete(additionalProperties, "auth_user")

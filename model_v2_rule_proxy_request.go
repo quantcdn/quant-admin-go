@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleProxyRequest{}
 
 // V2RuleProxyRequest struct for V2RuleProxyRequest
 type V2RuleProxyRequest struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Domain patterns (default: any)
 	Domain []string `json:"domain"`
 	// Rule name
@@ -93,10 +89,8 @@ type _V2RuleProxyRequest V2RuleProxyRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleProxyRequest(message string, error_ bool, domain []string, url []string, to string) *V2RuleProxyRequest {
+func NewV2RuleProxyRequest(domain []string, url []string, to string) *V2RuleProxyRequest {
 	this := V2RuleProxyRequest{}
-	this.Message = message
-	this.Error = error_
 	this.Domain = domain
 	var weight int32 = 0
 	this.Weight = &weight
@@ -141,54 +135,6 @@ func NewV2RuleProxyRequestWithDefaults() *V2RuleProxyRequest {
 	var failoverOriginTtfb string = "2000"
 	this.FailoverOriginTtfb = &failoverOriginTtfb
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleProxyRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxyRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleProxyRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleProxyRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxyRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleProxyRequest) SetError(v bool) {
-	o.Error = v
 }
 
 // GetDomain returns the Domain field value
@@ -1148,8 +1094,6 @@ func (o V2RuleProxyRequest) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -1247,8 +1191,6 @@ func (o *V2RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"domain",
 		"url",
 		"to",
@@ -1281,8 +1223,6 @@ func (o *V2RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")

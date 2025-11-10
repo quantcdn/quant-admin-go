@@ -1,4 +1,4 @@
-# V2RuleProxyActionAllOfQuantCloudSelection
+# V2RuleProxyActionQuantCloudSelection
 
 ## Properties
 
@@ -11,120 +11,120 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewV2RuleProxyActionAllOfQuantCloudSelection
+### NewV2RuleProxyActionQuantCloudSelection
 
-`func NewV2RuleProxyActionAllOfQuantCloudSelection() *V2RuleProxyActionAllOfQuantCloudSelection`
+`func NewV2RuleProxyActionQuantCloudSelection() *V2RuleProxyActionQuantCloudSelection`
 
-NewV2RuleProxyActionAllOfQuantCloudSelection instantiates a new V2RuleProxyActionAllOfQuantCloudSelection object
+NewV2RuleProxyActionQuantCloudSelection instantiates a new V2RuleProxyActionQuantCloudSelection object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewV2RuleProxyActionAllOfQuantCloudSelectionWithDefaults
+### NewV2RuleProxyActionQuantCloudSelectionWithDefaults
 
-`func NewV2RuleProxyActionAllOfQuantCloudSelectionWithDefaults() *V2RuleProxyActionAllOfQuantCloudSelection`
+`func NewV2RuleProxyActionQuantCloudSelectionWithDefaults() *V2RuleProxyActionQuantCloudSelection`
 
-NewV2RuleProxyActionAllOfQuantCloudSelectionWithDefaults instantiates a new V2RuleProxyActionAllOfQuantCloudSelection object
+NewV2RuleProxyActionQuantCloudSelectionWithDefaults instantiates a new V2RuleProxyActionQuantCloudSelection object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetApp
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetApp() string`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetApp() string`
 
 GetApp returns the App field if non-nil, zero value otherwise.
 
 ### GetAppOk
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetAppOk() (*string, bool)`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetAppOk() (*string, bool)`
 
 GetAppOk returns a tuple with the App field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetApp
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetApp(v string)`
+`func (o *V2RuleProxyActionQuantCloudSelection) SetApp(v string)`
 
 SetApp sets App field to given value.
 
 ### HasApp
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasApp() bool`
+`func (o *V2RuleProxyActionQuantCloudSelection) HasApp() bool`
 
 HasApp returns a boolean if a field has been set.
 
 ### GetEnv
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetEnv() string`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetEnv() string`
 
 GetEnv returns the Env field if non-nil, zero value otherwise.
 
 ### GetEnvOk
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetEnvOk() (*string, bool)`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetEnvOk() (*string, bool)`
 
 GetEnvOk returns a tuple with the Env field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnv
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetEnv(v string)`
+`func (o *V2RuleProxyActionQuantCloudSelection) SetEnv(v string)`
 
 SetEnv sets Env field to given value.
 
 ### HasEnv
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasEnv() bool`
+`func (o *V2RuleProxyActionQuantCloudSelection) HasEnv() bool`
 
 HasEnv returns a boolean if a field has been set.
 
 ### GetContainer
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetContainer() string`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetContainer() string`
 
 GetContainer returns the Container field if non-nil, zero value otherwise.
 
 ### GetContainerOk
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetContainerOk() (*string, bool)`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetContainerOk() (*string, bool)`
 
 GetContainerOk returns a tuple with the Container field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContainer
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetContainer(v string)`
+`func (o *V2RuleProxyActionQuantCloudSelection) SetContainer(v string)`
 
 SetContainer sets Container field to given value.
 
 ### HasContainer
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasContainer() bool`
+`func (o *V2RuleProxyActionQuantCloudSelection) HasContainer() bool`
 
 HasContainer returns a boolean if a field has been set.
 
 ### GetPort
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetPort() int32`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetPort() int32`
 
 GetPort returns the Port field if non-nil, zero value otherwise.
 
 ### GetPortOk
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) GetPortOk() (*int32, bool)`
+`func (o *V2RuleProxyActionQuantCloudSelection) GetPortOk() (*int32, bool)`
 
 GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPort
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) SetPort(v int32)`
+`func (o *V2RuleProxyActionQuantCloudSelection) SetPort(v int32)`
 
 SetPort sets Port field to given value.
 
 ### HasPort
 
-`func (o *V2RuleProxyActionAllOfQuantCloudSelection) HasPort() bool`
+`func (o *V2RuleProxyActionQuantCloudSelection) HasPort() bool`
 
 HasPort returns a boolean if a field has been set.
 

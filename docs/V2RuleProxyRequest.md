@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **Domain** | **[]string** | Domain patterns (default: any) | 
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | Pointer to **string** | Rule UUID | [optional] 
@@ -41,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewV2RuleProxyRequest
 
-`func NewV2RuleProxyRequest(message string, error_ bool, domain []string, url []string, to string, ) *V2RuleProxyRequest`
+`func NewV2RuleProxyRequest(domain []string, url []string, to string, ) *V2RuleProxyRequest`
 
 NewV2RuleProxyRequest instantiates a new V2RuleProxyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -55,46 +53,6 @@ will change when the set of required properties is changed
 NewV2RuleProxyRequestWithDefaults instantiates a new V2RuleProxyRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2RuleProxyRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleProxyRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleProxyRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleProxyRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleProxyRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleProxyRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetDomain
 

@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
 **To** | **string** | Target URL to proxy to | 
 **Host** | Pointer to **string** | Host header override | [optional] 
 **AuthUser** | Pointer to **string** | Basic auth username | [optional] 
@@ -22,18 +20,18 @@ Name | Type | Description | Notes
 **FailoverOriginStatusCodes** | Pointer to **[]string** | Status codes for failover (default: 200,404,301,302,304) | [optional] 
 **FailoverLifetime** | Pointer to **string** | Failover cache lifetime | [optional] [default to "300"]
 **Notify** | Pointer to **string** | Notification type (none, slack) | [optional] [default to "none"]
-**NotifyConfig** | Pointer to [**NullableV2RuleProxyActionAllOfNotifyConfig**](V2RuleProxyActionAllOfNotifyConfig.md) |  | [optional] 
+**NotifyConfig** | Pointer to [**NullableV2RuleProxyActionNotifyConfig**](V2RuleProxyActionNotifyConfig.md) |  | [optional] 
 **WafEnabled** | Pointer to **bool** | WAF enabled | [optional] [default to false]
 **WafConfig** | Pointer to [**NullableWafConfig**](WafConfig.md) |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] 
 **ProxyInlineFnEnabled** | Pointer to **bool** | Proxy inline function enabled | [optional] [default to false]
-**QuantCloudSelection** | Pointer to [**NullableV2RuleProxyActionAllOfQuantCloudSelection**](V2RuleProxyActionAllOfQuantCloudSelection.md) |  | [optional] 
+**QuantCloudSelection** | Pointer to [**NullableV2RuleProxyActionQuantCloudSelection**](V2RuleProxyActionQuantCloudSelection.md) |  | [optional] 
 
 ## Methods
 
 ### NewV2RuleProxyAction
 
-`func NewV2RuleProxyAction(message string, error_ bool, to string, ) *V2RuleProxyAction`
+`func NewV2RuleProxyAction(to string, ) *V2RuleProxyAction`
 
 NewV2RuleProxyAction instantiates a new V2RuleProxyAction object
 This constructor will assign default values to properties that have it defined,
@@ -47,46 +45,6 @@ will change when the set of required properties is changed
 NewV2RuleProxyActionWithDefaults instantiates a new V2RuleProxyAction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2RuleProxyAction) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2RuleProxyAction) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2RuleProxyAction) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2RuleProxyAction) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2RuleProxyAction) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2RuleProxyAction) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetTo
 
@@ -505,20 +463,20 @@ HasNotify returns a boolean if a field has been set.
 
 ### GetNotifyConfig
 
-`func (o *V2RuleProxyAction) GetNotifyConfig() V2RuleProxyActionAllOfNotifyConfig`
+`func (o *V2RuleProxyAction) GetNotifyConfig() V2RuleProxyActionNotifyConfig`
 
 GetNotifyConfig returns the NotifyConfig field if non-nil, zero value otherwise.
 
 ### GetNotifyConfigOk
 
-`func (o *V2RuleProxyAction) GetNotifyConfigOk() (*V2RuleProxyActionAllOfNotifyConfig, bool)`
+`func (o *V2RuleProxyAction) GetNotifyConfigOk() (*V2RuleProxyActionNotifyConfig, bool)`
 
 GetNotifyConfigOk returns a tuple with the NotifyConfig field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotifyConfig
 
-`func (o *V2RuleProxyAction) SetNotifyConfig(v V2RuleProxyActionAllOfNotifyConfig)`
+`func (o *V2RuleProxyAction) SetNotifyConfig(v V2RuleProxyActionNotifyConfig)`
 
 SetNotifyConfig sets NotifyConfig field to given value.
 
@@ -650,20 +608,20 @@ HasProxyInlineFnEnabled returns a boolean if a field has been set.
 
 ### GetQuantCloudSelection
 
-`func (o *V2RuleProxyAction) GetQuantCloudSelection() V2RuleProxyActionAllOfQuantCloudSelection`
+`func (o *V2RuleProxyAction) GetQuantCloudSelection() V2RuleProxyActionQuantCloudSelection`
 
 GetQuantCloudSelection returns the QuantCloudSelection field if non-nil, zero value otherwise.
 
 ### GetQuantCloudSelectionOk
 
-`func (o *V2RuleProxyAction) GetQuantCloudSelectionOk() (*V2RuleProxyActionAllOfQuantCloudSelection, bool)`
+`func (o *V2RuleProxyAction) GetQuantCloudSelectionOk() (*V2RuleProxyActionQuantCloudSelection, bool)`
 
 GetQuantCloudSelectionOk returns a tuple with the QuantCloudSelection field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuantCloudSelection
 
-`func (o *V2RuleProxyAction) SetQuantCloudSelection(v V2RuleProxyActionAllOfQuantCloudSelection)`
+`func (o *V2RuleProxyAction) SetQuantCloudSelection(v V2RuleProxyActionQuantCloudSelection)`
 
 SetQuantCloudSelection sets QuantCloudSelection field to given value.
 

@@ -20,10 +20,6 @@ var _ MappedNullable = &V2RuleRequest{}
 
 // V2RuleRequest struct for V2RuleRequest
 type V2RuleRequest struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Domain patterns (default: any)
 	Domain []string `json:"domain"`
 	// Rule name
@@ -63,10 +59,8 @@ type _V2RuleRequest V2RuleRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2RuleRequest(message string, error_ bool, domain []string, url []string) *V2RuleRequest {
+func NewV2RuleRequest(domain []string, url []string) *V2RuleRequest {
 	this := V2RuleRequest{}
-	this.Message = message
-	this.Error = error_
 	this.Domain = domain
 	var weight int32 = 0
 	this.Weight = &weight
@@ -86,54 +80,6 @@ func NewV2RuleRequestWithDefaults() *V2RuleRequest {
 	var disabled bool = false
 	this.Disabled = &disabled
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2RuleRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2RuleRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2RuleRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2RuleRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2RuleRequest) SetError(v bool) {
-	o.Error = v
 }
 
 // GetDomain returns the Domain field value
@@ -610,8 +556,6 @@ func (o V2RuleRequest) MarshalJSON() ([]byte, error) {
 
 func (o V2RuleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["domain"] = o.Domain
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -666,8 +610,6 @@ func (o *V2RuleRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"domain",
 		"url",
 	}
@@ -699,8 +641,6 @@ func (o *V2RuleRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "uuid")

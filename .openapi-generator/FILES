@@ -237,8 +237,8 @@ docs/V2RuleHeaderAction.md
 docs/V2RuleHeaderRequest.md
 docs/V2RuleProxy.md
 docs/V2RuleProxyAction.md
-docs/V2RuleProxyActionAllOfNotifyConfig.md
-docs/V2RuleProxyActionAllOfQuantCloudSelection.md
+docs/V2RuleProxyActionNotifyConfig.md
+docs/V2RuleProxyActionQuantCloudSelection.md
 docs/V2RuleProxyRequest.md
 docs/V2RuleRedirect.md
 docs/V2RuleRedirectAction.md
@@ -462,8 +462,8 @@ model_v2_rule_header_action.go
 model_v2_rule_header_request.go
 model_v2_rule_proxy.go
 model_v2_rule_proxy_action.go
-model_v2_rule_proxy_action_all_of_notify_config.go
-model_v2_rule_proxy_action_all_of_quant_cloud_selection.go
+model_v2_rule_proxy_action_notify_config.go
+model_v2_rule_proxy_action_quant_cloud_selection.go
 model_v2_rule_proxy_request.go
 model_v2_rule_redirect.go
 model_v2_rule_redirect_action.go

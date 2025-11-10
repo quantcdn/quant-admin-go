@@ -1,4 +1,4 @@
-# V2RuleProxyActionAllOfNotifyConfig
+# V2RuleProxyActionNotifyConfig
 
 ## Properties
 
@@ -8,45 +8,45 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewV2RuleProxyActionAllOfNotifyConfig
+### NewV2RuleProxyActionNotifyConfig
 
-`func NewV2RuleProxyActionAllOfNotifyConfig() *V2RuleProxyActionAllOfNotifyConfig`
+`func NewV2RuleProxyActionNotifyConfig() *V2RuleProxyActionNotifyConfig`
 
-NewV2RuleProxyActionAllOfNotifyConfig instantiates a new V2RuleProxyActionAllOfNotifyConfig object
+NewV2RuleProxyActionNotifyConfig instantiates a new V2RuleProxyActionNotifyConfig object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewV2RuleProxyActionAllOfNotifyConfigWithDefaults
+### NewV2RuleProxyActionNotifyConfigWithDefaults
 
-`func NewV2RuleProxyActionAllOfNotifyConfigWithDefaults() *V2RuleProxyActionAllOfNotifyConfig`
+`func NewV2RuleProxyActionNotifyConfigWithDefaults() *V2RuleProxyActionNotifyConfig`
 
-NewV2RuleProxyActionAllOfNotifyConfigWithDefaults instantiates a new V2RuleProxyActionAllOfNotifyConfig object
+NewV2RuleProxyActionNotifyConfigWithDefaults instantiates a new V2RuleProxyActionNotifyConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetWebhookUrl
 
-`func (o *V2RuleProxyActionAllOfNotifyConfig) GetWebhookUrl() string`
+`func (o *V2RuleProxyActionNotifyConfig) GetWebhookUrl() string`
 
 GetWebhookUrl returns the WebhookUrl field if non-nil, zero value otherwise.
 
 ### GetWebhookUrlOk
 
-`func (o *V2RuleProxyActionAllOfNotifyConfig) GetWebhookUrlOk() (*string, bool)`
+`func (o *V2RuleProxyActionNotifyConfig) GetWebhookUrlOk() (*string, bool)`
 
 GetWebhookUrlOk returns a tuple with the WebhookUrl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWebhookUrl
 
-`func (o *V2RuleProxyActionAllOfNotifyConfig) SetWebhookUrl(v string)`
+`func (o *V2RuleProxyActionNotifyConfig) SetWebhookUrl(v string)`
 
 SetWebhookUrl sets WebhookUrl field to given value.
 
 ### HasWebhookUrl
 
-`func (o *V2RuleProxyActionAllOfNotifyConfig) HasWebhookUrl() bool`
+`func (o *V2RuleProxyActionNotifyConfig) HasWebhookUrl() bool`
 
 HasWebhookUrl returns a boolean if a field has been set.
 

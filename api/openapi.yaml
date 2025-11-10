@@ -6825,445 +6825,9 @@ components:
       - error
       - message
       type: object
-    V2Rule:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Rule name
-            example: Test redirect rule
-            type: string
-          uuid:
-            description: Rule UUID
-            example: 123e4567-e89b-12d3-a456-426614174000
-            type: string
-          rule_id:
-            description: Rule ID
-            example: rule-001
-            type: string
-          weight:
-            default: 0
-            description: Rule weight
-            example: 100
-            type: integer
-          url:
-            description: URL patterns
-            example:
-            - /old-path/*
-            - /legacy/*
-            items:
-              type: string
-            type: array
-          domain:
-            description: Domain patterns
-            example:
-            - test-domain.com
-            - '*.test-domain.com'
-            items:
-              type: string
-            type: array
-          disabled:
-            default: false
-            description: Whether rule is disabled
-            example: false
-            type: boolean
-          only_with_cookie:
-            description: Only apply with cookie
-            example: session_id
-            type: string
-          method:
-            description: HTTP method
-            example: GET
-            type: string
-          method_is:
-            description: Allowed HTTP methods
-            example:
-            - GET
-            - POST
-            items:
-              type: string
-            type: array
-          method_is_not:
-            description: Excluded HTTP methods
-            example:
-            - DELETE
-            - PUT
-            items:
-              type: string
-            type: array
-          ip:
-            description: IP address
-            example: 192.168.1.1
-            type: string
-          ip_is:
-            description: Allowed IP addresses
-            example:
-            - 192.168.1.0/24
-            - 10.0.0.1
-            items:
-              type: string
-            type: array
-          ip_is_not:
-            description: Excluded IP addresses
-            example:
-            - 172.16.0.0/12
-            items:
-              type: string
-            type: array
-          country:
-            description: Country code
-            example: US
-            type: string
-          country_is:
-            description: Allowed countries
-            example:
-            - US
-            - CA
-            - GB
-            items:
-              type: string
-            type: array
-          country_is_not:
-            description: Excluded countries
-            example:
-            - CN
-            - RU
-            items:
-              type: string
-            type: array
-          action:
-            description: Rule action
-            example: redirect
-            type: string
-        type: object
-      required:
-      - action
-      - disabled
-      - uuid
-      type: object
-    V2RuleRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          domain:
-            description: "Domain patterns (default: any)"
-            example:
-            - test-domain.com
-            - '*.test-domain.com'
-            items:
-              type: string
-            type: array
-          name:
-            description: Rule name
-            example: Test redirect rule
-            type: string
-          uuid:
-            description: Rule UUID
-            example: 123e4567-e89b-12d3-a456-426614174000
-            type: string
-          weight:
-            default: 0
-            description: Rule weight
-            example: 100
-            type: integer
-          disabled:
-            default: false
-            description: Whether rule is disabled
-            example: false
-            type: boolean
-          url:
-            description: URL patterns
-            example:
-            - /old-path/*
-            - /legacy/*
-            items:
-              type: string
-            type: array
-          country:
-            description: "Country filter type (country_is, country_is_not, any)"
-            example: country_is
-            type: string
-          country_is:
-            description: Allowed countries
-            example:
-            - US
-            - CA
-            - GB
-            items:
-              type: string
-            type: array
-          country_is_not:
-            description: Excluded countries
-            example:
-            - CN
-            - RU
-            items:
-              type: string
-            type: array
-          method:
-            description: "Method filter type (method_is, method_is_not, any)"
-            example: method_is
-            type: string
-          method_is:
-            description: Allowed HTTP methods
-            example:
-            - GET
-            - POST
-            items:
-              type: string
-            type: array
-          method_is_not:
-            description: Excluded HTTP methods
-            example:
-            - DELETE
-            - PUT
-            items:
-              type: string
-            type: array
-          ip:
-            description: "IP filter type (ip_is, ip_is_not, any)"
-            example: ip_is
-            type: string
-          ip_is:
-            description: Allowed IP addresses
-            example:
-            - 192.168.1.0/24
-            - 10.0.0.1
-            items:
-              type: string
-            type: array
-          ip_is_not:
-            description: Excluded IP addresses
-            example:
-            - 172.16.0.0/12
-            items:
-              type: string
-            type: array
-        type: object
-      required:
-      - domain
-      - url
-      type: object
-    V2RuleProxyAction:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          to:
-            description: Target URL to proxy to
-            example: https://backend.test-domain.com
-            type: string
-          host:
-            description: Host header override
-            example: backend.test-domain.com
-            type: string
-          auth_user:
-            description: Basic auth username
-            example: admin
-            type: string
-          auth_pass:
-            description: Basic auth password
-            example: secure_password
-            type: string
-          disable_ssl_verify:
-            default: false
-            description: Disable SSL verification
-            example: false
-            type: boolean
-          cache_lifetime:
-            description: Cache lifetime
-            example: "3600"
-            nullable: true
-            type: string
-          only_proxy_404:
-            default: false
-            description: Only proxy 404 responses
-            example: false
-            type: boolean
-          inject_headers:
-            additionalProperties:
-              type: string
-            description: Headers to inject
-            example:
-              X-Custom-Header: value
-              Authorization: Bearer token
-            nullable: true
-            type: object
-          proxy_strip_headers:
-            description: Headers to strip from response
-            example:
-            - Set-Cookie
-            - Server
-            items:
-              type: string
-            type: array
-          proxy_strip_request_headers:
-            description: Headers to strip from request
-            example:
-            - Cookie
-            - Authorization
-            items:
-              type: string
-            type: array
-          origin_timeout:
-            description: Origin timeout
-            example: "30"
-            type: string
-          failover_mode:
-            default: false
-            description: Enable failover mode
-            example: true
-            type: boolean
-          failover_origin_ttfb:
-            default: "2000"
-            description: Failover TTFB threshold
-            example: "2000"
-            type: string
-          failover_origin_status_codes:
-            description: "Status codes for failover (default: 200,404,301,302,304)"
-            example:
-            - "200"
-            - "404"
-            - "301"
-            - "302"
-            - "304"
-            items:
-              type: string
-            type: array
-          failover_lifetime:
-            default: "300"
-            description: Failover cache lifetime
-            example: "300"
-            type: string
-          notify:
-            default: none
-            description: "Notification type (none, slack)"
-            enum:
-            - none
-            - slack
-            example: slack
-            type: string
-          notify_config:
-            $ref: '#/components/schemas/V2RuleProxyAction_allOf_notify_config'
-          waf_enabled:
-            default: false
-            description: WAF enabled
-            example: false
-            type: boolean
-          waf_config:
-            $ref: '#/components/schemas/WafConfig'
-          proxy_alert_enabled:
-            description: Proxy alert enabled
-            example: false
-            type: boolean
-          proxy_inline_fn_enabled:
-            default: false
-            description: Proxy inline function enabled
-            example: false
-            type: boolean
-          quant_cloud_selection:
-            $ref: '#/components/schemas/V2RuleProxyAction_allOf_quant_cloud_selection'
-        type: object
-      example:
-        origin_timeout: "30"
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        failover_origin_ttfb: "2000"
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        message: The requested resource was not found
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
-        failover_mode: true
-      required:
-      - to
-      type: object
     V2RuleAuthAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           auth_user:
             description: Authentication username
@@ -7275,100 +6839,10 @@ components:
             type: string
         type: object
       example:
-        origin_timeout: "30"
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        failover_origin_ttfb: "2000"
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
+        auth_user: admin
+        auth_pass: secure_password123
         message: The requested resource was not found
         error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password123
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
-        failover_mode: true
       required:
       - auth_pass
       - auth_user
@@ -7382,159 +6856,35 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          origin_timeout: "30"
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          failover_origin_ttfb: "2000"
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          message: The requested resource was not found
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password123
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-          failover_mode: true
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -7542,71 +6892,13 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          auth_user: admin
+          auth_pass: secure_password123
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleAuthRequest:
       allOf:
@@ -7624,61 +6916,34 @@ components:
         - auth_pass
         - auth_user
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
+        method_is:
+        - GET
+        - POST
         ip: ip_is
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
+        auth_user: admin
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -7686,75 +6951,12 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        auth_pass: secure_password123
+        disabled: false
       type: object
     V2RuleBotChallengeAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           robot_challenge_type:
             description: Challenge type (invisible or checkbox)
@@ -7772,103 +6974,11 @@ components:
             type: integer
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        robot_challenge_challenge_ttl: 30
-        failover_mode: true
         robot_challenge_type: invisible
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
-        message: The requested resource was not found
-        only_proxy_404: false
         robot_challenge_verification_ttl: 10800
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        robot_challenge_challenge_ttl: 30
+        message: The requested resource was not found
+        error: true
       required:
       - robot_challenge_type
       type: object
@@ -7881,162 +6991,35 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          robot_challenge_challenge_ttl: 30
-          failover_mode: true
-          robot_challenge_type: invisible
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          message: The requested resource was not found
-          only_proxy_404: false
-          robot_challenge_verification_ttl: 10800
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -8044,71 +7027,14 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          robot_challenge_type: invisible
+          robot_challenge_verification_ttl: 10800
+          robot_challenge_challenge_ttl: 30
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleBotChallengeRequest:
       allOf:
@@ -8131,64 +7057,35 @@ components:
         required:
         - robot_challenge_type
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        robot_challenge_challenge_ttl: 30
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
         robot_challenge_type: invisible
-        origin_timeout: "30"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
+        method_is:
+        - GET
+        - POST
         ip: ip_is
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
+        country_is_not:
+        - CN
+        - RU
         robot_challenge_verification_ttl: 10800
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -8196,75 +7093,12 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        robot_challenge_challenge_ttl: 30
+        disabled: false
       type: object
     V2RuleContentFilterAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           fn_uuid:
             description: Function UUID
@@ -8272,101 +7106,9 @@ components:
             type: string
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        failover_mode: true
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
-        message: The requested resource was not found
         fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        message: The requested resource was not found
+        error: true
       required:
       - fn_uuid
       type: object
@@ -8379,160 +7121,35 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          failover_mode: true
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          message: The requested resource was not found
-          fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -8540,75 +7157,16 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleCustomResponseAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           custom_response_body:
             description: Custom response body content
@@ -8621,102 +7179,10 @@ components:
             type: integer
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        custom_response_body: <html><body>Custom maintenance page</body></html>
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        failover_mode: true
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
         custom_response_status_code: 503
+        custom_response_body: <html><body>Custom maintenance page</body></html>
         message: The requested resource was not found
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        error: true
       required:
       - custom_response_body
       type: object
@@ -8727,161 +7193,35 @@ components:
           action_config:
             $ref: '#/components/schemas/V2RuleCustomResponseAction'
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          custom_response_body: <html><body>Custom maintenance page</body></html>
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          failover_mode: true
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          custom_response_status_code: 503
-          message: The requested resource was not found
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -8889,75 +7229,17 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          custom_response_status_code: 503
+          custom_response_body: <html><body>Custom maintenance page</body></html>
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleFunctionAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           fn_uuid:
             description: Function UUID
@@ -8965,101 +7247,9 @@ components:
             type: string
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        failover_mode: true
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
-        message: The requested resource was not found
         fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        message: The requested resource was not found
+        error: true
       required:
       - fn_uuid
       type: object
@@ -9072,160 +7262,35 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          failover_mode: true
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          message: The requested resource was not found
-          fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -9233,71 +7298,12 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleFunctionRequest:
       allOf:
@@ -9310,62 +7316,34 @@ components:
         required:
         - fn_uuid
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
+        method_is:
+        - GET
+        - POST
         ip: ip_is
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
+        country_is_not:
+        - CN
+        - RU
         fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -9373,75 +7351,11 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        disabled: false
       type: object
     V2RuleHeaderAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           headers:
             additionalProperties:
@@ -9453,103 +7367,11 @@ components:
             type: object
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        failover_mode: true
         headers:
           X-Custom-Header: value
           Cache-Control: max-age=3600
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
         message: The requested resource was not found
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        error: true
       required:
       - headers
       type: object
@@ -9562,162 +7384,35 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          failover_mode: true
-          headers:
-            X-Custom-Header: value
-            Cache-Control: max-age=3600
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          message: The requested resource was not found
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -9725,71 +7420,14 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          headers:
+            X-Custom-Header: value
+            Cache-Control: max-age=3600
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleHeaderRequest:
       allOf:
@@ -9806,64 +7444,36 @@ components:
         required:
         - headers
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
         headers:
           X-Custom-Header: value
           Cache-Control: max-age=3600
-        origin_timeout: "30"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
+        method_is:
+        - GET
+        - POST
         ip: ip_is
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -9871,71 +7481,7 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        disabled: false
       type: object
     V2RuleProxy:
       allOf:
@@ -9949,41 +7495,43 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
         method_is:
         - GET
         - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
         method_is_not:
         - DELETE
         - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
+        message: The requested resource was not found
         error: true
         uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule_id
         country_is_not:
         - CN
         - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
         action: redirect
-        auth_pass: secure_password
         disabled: false
         action_config:
           origin_timeout: "30"
@@ -10000,8 +7548,6 @@ components:
           proxy_strip_headers:
           - Set-Cookie
           - Server
-          message: The requested resource was not found
-          error: true
           notify_config:
             webhook_url: https://hooks.slack.com/services/XXXXXX
           notify: slack
@@ -10080,104 +7626,10 @@ components:
           - "304"
           proxy_alert_enabled: false
           failover_mode: true
-        failover_mode: true
-        origin_timeout: "30"
-        method: GET
-        ip_is_not:
-        - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
-        only_with_cookie: session_id
-        ip: 192.168.1.1
-        weight: 100
-        country_is:
-        - US
-        - CA
-        - GB
-        message: The requested resource was not found
-        url:
-        - /old-path/*
-        - /legacy/*
-        rule_id: rule_id
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        domain:
-        - test-domain.com
-        - '*.test-domain.com'
-        name: Test redirect rule
-        ip_is:
-        - 192.168.1.0/24
-        - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
       type: object
     V2RuleRedirectAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           to:
             description: Redirect destination URL
@@ -10190,101 +7642,10 @@ components:
             type: string
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
         status_code: "301"
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        failover_mode: true
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
-        message: The requested resource was not found
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
         to: https://test-domain.com/new-path
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        message: The requested resource was not found
+        error: true
       required:
       - to
       type: object
@@ -10295,160 +7656,35 @@ components:
           action_config:
             $ref: '#/components/schemas/V2RuleRedirectAction'
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          status_code: "301"
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          failover_mode: true
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          message: The requested resource was not found
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://test-domain.com/new-path
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -10456,75 +7692,17 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          status_code: "301"
+          to: https://test-domain.com/new-path
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleServeStaticAction:
       allOf:
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       - properties:
           static_file_path:
             description: Path to the static file to serve
@@ -10532,101 +7710,9 @@ components:
             type: string
         type: object
       example:
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
         static_file_path: /index.html
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        failover_mode: true
-        origin_timeout: "30"
-        failover_origin_ttfb: "2000"
         message: The requested resource was not found
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        error: true
       required:
       - static_file_path
       type: object
@@ -10639,160 +7725,35 @@ components:
         required:
         - action_config
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: US
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
-        method_is:
-        - GET
-        - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        action: redirect
-        auth_pass: secure_password
-        disabled: false
-        action_config:
-          cache_lifetime: "3600"
-          proxy_strip_request_headers:
-          - Cookie
-          - Authorization
-          static_file_path: /index.html
-          quant_cloud_selection:
-            app: my-app
-            container: web
-            port: 80
-            env: production
-          proxy_strip_headers:
-          - Set-Cookie
-          - Server
-          error: true
-          notify_config:
-            webhook_url: https://hooks.slack.com/services/XXXXXX
-          notify: slack
-          auth_user: admin
-          host: backend.test-domain.com
-          waf_enabled: false
-          proxy_inline_fn_enabled: false
-          auth_pass: secure_password
-          failover_mode: true
-          origin_timeout: "30"
-          failover_origin_ttfb: "2000"
-          message: The requested resource was not found
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
-          to: https://backend.test-domain.com
-          disable_ssl_verify: false
-          failover_lifetime: "300"
-          waf_config:
-            block_lists:
-              referer: false
-              ip: false
-              ai: false
-              user_agent: false
-            allow_rules:
-            - allow_rules
-            - allow_rules
-            httpbl:
-              block_harvester: false
-              httpbl_enabled: false
-              block_spam: false
-              httpbl_key: httpbl_key
-              block_search_engine: false
-              block_suspicious: false
-            notify_slack_hits_rpm: 100
-            allow_ip:
-            - allow_ip
-            - allow_ip
-            block_asn:
-            - block_asn
-            - block_asn
-            mode: report
-            thresholds:
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            - hits: 10
-              mode: disabled
-              rps: 10
-              minutes: 5
-              cooldown: 30
-              type: ip
-              value: value
-              notify_slack: notify_slack
-            notify_email:
-            - notify_email
-            - notify_email
-            block_ip:
-            - block_ip
-            - block_ip
-            block_referer:
-            - block_referer
-            - block_referer
-            block_ua:
-            - block_ua
-            - block_ua
-            notify_slack: https://hooks.slack.com/services/XXX
-            paranoia_level: 1
-          failover_origin_status_codes:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
-          proxy_alert_enabled: false
-        failover_mode: true
-        origin_timeout: "30"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
         ip: 192.168.1.1
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -10800,71 +7761,12 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        action: redirect
+        disabled: false
+        action_config:
+          static_file_path: /index.html
+          message: The requested resource was not found
+          error: true
       type: object
     V2RuleServeStaticRequest:
       allOf:
@@ -10877,62 +7779,34 @@ components:
         required:
         - static_file_path
         type: object
-      - $ref: '#/components/schemas/V2RuleProxyAction'
+      - $ref: '#/components/schemas/V2Error'
       example:
         country: country_is
-        cache_lifetime: "3600"
-        proxy_strip_request_headers:
-        - Cookie
-        - Authorization
+        method: method_is
         static_file_path: /index.html
+        ip_is_not:
+        - 172.16.0.0/12
         method_is:
         - GET
         - POST
-        quant_cloud_selection:
-          app: my-app
-          container: web
-          port: 80
-          env: production
-        method_is_not:
-        - DELETE
-        - PUT
-        proxy_strip_headers:
-        - Set-Cookie
-        - Server
-        error: true
-        uuid: 123e4567-e89b-12d3-a456-426614174000
-        notify_config:
-          webhook_url: https://hooks.slack.com/services/XXXXXX
-        notify: slack
-        country_is_not:
-        - CN
-        - RU
-        auth_user: admin
-        host: backend.test-domain.com
-        waf_enabled: false
-        proxy_inline_fn_enabled: false
-        auth_pass: secure_password
-        disabled: false
-        failover_mode: true
-        origin_timeout: "30"
-        method: method_is
-        ip_is_not:
-        - 172.16.0.0/12
-        failover_origin_ttfb: "2000"
         ip: ip_is
         weight: 100
         country_is:
         - US
         - CA
         - GB
+        method_is_not:
+        - DELETE
+        - PUT
         message: The requested resource was not found
+        error: true
+        uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
         - /legacy/*
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        country_is_not:
+        - CN
+        - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -10940,71 +7814,7 @@ components:
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
-        to: https://backend.test-domain.com
-        disable_ssl_verify: false
-        failover_lifetime: "300"
-        waf_config:
-          block_lists:
-            referer: false
-            ip: false
-            ai: false
-            user_agent: false
-          allow_rules:
-          - allow_rules
-          - allow_rules
-          httpbl:
-            block_harvester: false
-            httpbl_enabled: false
-            block_spam: false
-            httpbl_key: httpbl_key
-            block_search_engine: false
-            block_suspicious: false
-          notify_slack_hits_rpm: 100
-          allow_ip:
-          - allow_ip
-          - allow_ip
-          block_asn:
-          - block_asn
-          - block_asn
-          mode: report
-          thresholds:
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          - hits: 10
-            mode: disabled
-            rps: 10
-            minutes: 5
-            cooldown: 30
-            type: ip
-            value: value
-            notify_slack: notify_slack
-          notify_email:
-          - notify_email
-          - notify_email
-          block_ip:
-          - block_ip
-          - block_ip
-          block_referer:
-          - block_referer
-          - block_referer
-          block_ua:
-          - block_ua
-          - block_ua
-          notify_slack: https://hooks.slack.com/services/XXX
-          paranoia_level: 1
-        failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
-        proxy_alert_enabled: false
+        disabled: false
       type: object
     CreateApplicationRequest:
       example:
@@ -12524,6 +9334,431 @@ components:
           example: secure_password123
           type: string
       type: object
+    V2Rule:
+      properties:
+        name:
+          description: Rule name
+          example: Test redirect rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        rule_id:
+          description: Rule ID
+          example: rule-001
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        url:
+          description: URL patterns
+          example:
+          - /old-path/*
+          - /legacy/*
+          items:
+            type: string
+          type: array
+        domain:
+          description: Domain patterns
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        only_with_cookie:
+          description: Only apply with cookie
+          example: session_id
+          type: string
+        method:
+          description: HTTP method
+          example: GET
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: IP address
+          example: 192.168.1.1
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        country:
+          description: Country code
+          example: US
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        action:
+          description: Rule action
+          example: redirect
+          type: string
+      required:
+      - action
+      - disabled
+      - uuid
+      type: object
+    V2RuleRequest:
+      properties:
+        domain:
+          description: "Domain patterns (default: any)"
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        name:
+          description: Rule name
+          example: Test redirect rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        url:
+          description: URL patterns
+          example:
+          - /old-path/*
+          - /legacy/*
+          items:
+            type: string
+          type: array
+        country:
+          description: "Country filter type (country_is, country_is_not, any)"
+          example: country_is
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        method:
+          description: "Method filter type (method_is, method_is_not, any)"
+          example: method_is
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: "IP filter type (ip_is, ip_is_not, any)"
+          example: ip_is
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+      required:
+      - domain
+      - url
+      type: object
+    V2RuleProxyAction:
+      example:
+        origin_timeout: "30"
+        cache_lifetime: "3600"
+        proxy_strip_request_headers:
+        - Cookie
+        - Authorization
+        failover_origin_ttfb: "2000"
+        quant_cloud_selection:
+          app: my-app
+          container: web
+          port: 80
+          env: production
+        proxy_strip_headers:
+        - Set-Cookie
+        - Server
+        notify_config:
+          webhook_url: https://hooks.slack.com/services/XXXXXX
+        notify: slack
+        only_proxy_404: false
+        inject_headers:
+          X-Custom-Header: value
+          Authorization: Bearer token
+        auth_user: admin
+        host: backend.test-domain.com
+        waf_enabled: false
+        proxy_inline_fn_enabled: false
+        auth_pass: secure_password
+        to: https://backend.test-domain.com
+        disable_ssl_verify: false
+        failover_lifetime: "300"
+        waf_config:
+          block_lists:
+            referer: false
+            ip: false
+            ai: false
+            user_agent: false
+          allow_rules:
+          - allow_rules
+          - allow_rules
+          httpbl:
+            block_harvester: false
+            httpbl_enabled: false
+            block_spam: false
+            httpbl_key: httpbl_key
+            block_search_engine: false
+            block_suspicious: false
+          notify_slack_hits_rpm: 100
+          allow_ip:
+          - allow_ip
+          - allow_ip
+          block_asn:
+          - block_asn
+          - block_asn
+          mode: report
+          thresholds:
+          - hits: 10
+            mode: disabled
+            rps: 10
+            minutes: 5
+            cooldown: 30
+            type: ip
+            value: value
+            notify_slack: notify_slack
+          - hits: 10
+            mode: disabled
+            rps: 10
+            minutes: 5
+            cooldown: 30
+            type: ip
+            value: value
+            notify_slack: notify_slack
+          notify_email:
+          - notify_email
+          - notify_email
+          block_ip:
+          - block_ip
+          - block_ip
+          block_referer:
+          - block_referer
+          - block_referer
+          block_ua:
+          - block_ua
+          - block_ua
+          notify_slack: https://hooks.slack.com/services/XXX
+          paranoia_level: 1
+        failover_origin_status_codes:
+        - "200"
+        - "404"
+        - "301"
+        - "302"
+        - "304"
+        proxy_alert_enabled: false
+        failover_mode: true
+      properties:
+        to:
+          description: Target URL to proxy to
+          example: https://backend.test-domain.com
+          type: string
+        host:
+          description: Host header override
+          example: backend.test-domain.com
+          type: string
+        auth_user:
+          description: Basic auth username
+          example: admin
+          type: string
+        auth_pass:
+          description: Basic auth password
+          example: secure_password
+          type: string
+        disable_ssl_verify:
+          default: false
+          description: Disable SSL verification
+          example: false
+          type: boolean
+        cache_lifetime:
+          description: Cache lifetime
+          example: "3600"
+          nullable: true
+          type: string
+        only_proxy_404:
+          default: false
+          description: Only proxy 404 responses
+          example: false
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          description: Headers to inject
+          example:
+            X-Custom-Header: value
+            Authorization: Bearer token
+          nullable: true
+          type: object
+        proxy_strip_headers:
+          description: Headers to strip from response
+          example:
+          - Set-Cookie
+          - Server
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          description: Headers to strip from request
+          example:
+          - Cookie
+          - Authorization
+          items:
+            type: string
+          type: array
+        origin_timeout:
+          description: Origin timeout
+          example: "30"
+          type: string
+        failover_mode:
+          default: false
+          description: Enable failover mode
+          example: true
+          type: boolean
+        failover_origin_ttfb:
+          default: "2000"
+          description: Failover TTFB threshold
+          example: "2000"
+          type: string
+        failover_origin_status_codes:
+          description: "Status codes for failover (default: 200,404,301,302,304)"
+          example:
+          - "200"
+          - "404"
+          - "301"
+          - "302"
+          - "304"
+          items:
+            type: string
+          type: array
+        failover_lifetime:
+          default: "300"
+          description: Failover cache lifetime
+          example: "300"
+          type: string
+        notify:
+          default: none
+          description: "Notification type (none, slack)"
+          enum:
+          - none
+          - slack
+          example: slack
+          type: string
+        notify_config:
+          $ref: '#/components/schemas/V2RuleProxyAction_notify_config'
+        waf_enabled:
+          default: false
+          description: WAF enabled
+          example: false
+          type: boolean
+        waf_config:
+          $ref: '#/components/schemas/WafConfig'
+        proxy_alert_enabled:
+          description: Proxy alert enabled
+          example: false
+          type: boolean
+        proxy_inline_fn_enabled:
+          default: false
+          description: Proxy inline function enabled
+          example: false
+          type: boolean
+        quant_cloud_selection:
+          $ref: '#/components/schemas/V2RuleProxyAction_quant_cloud_selection'
+      required:
+      - to
+      type: object
     V2RuleProxyRequest:
       allOf:
       - $ref: '#/components/schemas/V2RuleRequest'
@@ -12625,7 +9860,6 @@ components:
         proxy_strip_headers:
         - Set-Cookie
         - Server
-        error: true
         uuid: 123e4567-e89b-12d3-a456-426614174000
         country_is_not:
         - CN
@@ -12648,7 +9882,6 @@ components:
         - US
         - CA
         - GB
-        message: The requested resource was not found
         url:
         - /old-path/*
         - /legacy/*
@@ -12699,8 +9932,6 @@ components:
         method_is_not:
         - DELETE
         - PUT
-        message: The requested resource was not found
-        error: true
         uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
@@ -12762,8 +9993,6 @@ components:
         - DELETE
         - PUT
         custom_response_body: <html><body>Custom maintenance page</body></html>
-        message: The requested resource was not found
-        error: true
         body: <html><body>Maintenance</body></html>
         uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
@@ -12809,8 +10038,6 @@ components:
         method_is_not:
         - DELETE
         - PUT
-        message: The requested resource was not found
-        error: true
         uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
         - /old-path/*
@@ -15629,44 +12856,6 @@ components:
         value:
           type: string
       type: object
-    V2RuleProxyAction_allOf_notify_config:
-      description: Notification configuration (required when notify is slack)
-      example:
-        webhook_url: https://hooks.slack.com/services/XXXXXX
-      nullable: true
-      properties:
-        webhook_url:
-          description: Slack webhook URL
-          example: https://hooks.slack.com/services/XXXXXX
-          type: string
-      type: object
-    V2RuleProxyAction_allOf_quant_cloud_selection:
-      description: Quant Cloud application proxy selection (only present for Quant
-        Cloud App proxies)
-      example:
-        app: my-app
-        container: web
-        port: 80
-        env: production
-      nullable: true
-      properties:
-        app:
-          description: Application name
-          example: my-app
-          type: string
-        env:
-          description: Environment name
-          example: production
-          type: string
-        container:
-          description: Container name
-          example: web
-          type: string
-        port:
-          description: Container port
-          example: 80
-          type: integer
-      type: object
     CreateApplicationRequest_database:
       description: Optional database configuration
       example:
@@ -15946,6 +13135,44 @@ components:
           type: string
       required:
       - containerName
+      type: object
+    V2RuleProxyAction_notify_config:
+      description: Notification configuration (required when notify is slack)
+      example:
+        webhook_url: https://hooks.slack.com/services/XXXXXX
+      nullable: true
+      properties:
+        webhook_url:
+          description: Slack webhook URL
+          example: https://hooks.slack.com/services/XXXXXX
+          type: string
+      type: object
+    V2RuleProxyAction_quant_cloud_selection:
+      description: Quant Cloud application proxy selection (only present for Quant
+        Cloud App proxies)
+      example:
+        app: my-app
+        container: web
+        port: 80
+        env: production
+      nullable: true
+      properties:
+        app:
+          description: Application name
+          example: my-app
+          type: string
+        env:
+          description: Environment name
+          example: production
+          type: string
+        container:
+          description: Container name
+          example: web
+          type: string
+        port:
+          description: Container port
+          example: 80
+          type: integer
       type: object
     V1GetMetricsResponse_data:
       oneOf:

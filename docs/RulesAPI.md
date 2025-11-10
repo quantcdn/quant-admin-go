@@ -73,7 +73,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleAuthRequest := *openapiclient.NewV2RuleAuthRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "admin", "secure_password123") // V2RuleAuthRequest | 
+	v2RuleAuthRequest := *openapiclient.NewV2RuleAuthRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "admin", "secure_password123") // V2RuleAuthRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -364,7 +364,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleAuthRequest := *openapiclient.NewV2RuleAuthRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "admin", "secure_password123") // V2RuleAuthRequest | 
+	v2RuleAuthRequest := *openapiclient.NewV2RuleAuthRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "admin", "secure_password123") // V2RuleAuthRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -439,7 +439,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleBotChallengeRequest := *openapiclient.NewV2RuleBotChallengeRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "invisible") // V2RuleBotChallengeRequest | 
+	v2RuleBotChallengeRequest := *openapiclient.NewV2RuleBotChallengeRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "invisible") // V2RuleBotChallengeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -730,7 +730,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleBotChallengeRequest := *openapiclient.NewV2RuleBotChallengeRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "invisible") // V2RuleBotChallengeRequest | 
+	v2RuleBotChallengeRequest := *openapiclient.NewV2RuleBotChallengeRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "invisible") // V2RuleBotChallengeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -805,7 +805,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleContentFilterRequest := *openapiclient.NewV2RuleContentFilterRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "8d3f4820-8536-51ef-b827-f18gc2g01bf8") // V2RuleContentFilterRequest | 
+	v2RuleContentFilterRequest := *openapiclient.NewV2RuleContentFilterRequest([]string{"Domain_example"}, []string{"Url_example"}, "8d3f4820-8536-51ef-b827-f18gc2g01bf8") // V2RuleContentFilterRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1096,7 +1096,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleContentFilterRequest := *openapiclient.NewV2RuleContentFilterRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "8d3f4820-8536-51ef-b827-f18gc2g01bf8") // V2RuleContentFilterRequest | 
+	v2RuleContentFilterRequest := *openapiclient.NewV2RuleContentFilterRequest([]string{"Domain_example"}, []string{"Url_example"}, "8d3f4820-8536-51ef-b827-f18gc2g01bf8") // V2RuleContentFilterRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1171,7 +1171,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleCustomResponseRequest := *openapiclient.NewV2RuleCustomResponseRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "<html><body>Custom maintenance page</body></html>") // V2RuleCustomResponseRequest | 
+	v2RuleCustomResponseRequest := *openapiclient.NewV2RuleCustomResponseRequest([]string{"Domain_example"}, []string{"Url_example"}, "<html><body>Custom maintenance page</body></html>") // V2RuleCustomResponseRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1462,7 +1462,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleCustomResponseRequest := *openapiclient.NewV2RuleCustomResponseRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "<html><body>Custom maintenance page</body></html>") // V2RuleCustomResponseRequest | 
+	v2RuleCustomResponseRequest := *openapiclient.NewV2RuleCustomResponseRequest([]string{"Domain_example"}, []string{"Url_example"}, "<html><body>Custom maintenance page</body></html>") // V2RuleCustomResponseRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1537,7 +1537,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleFunctionRequest := *openapiclient.NewV2RuleFunctionRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "7c9e6679-7425-40de-944b-e07fc1f90ae7") // V2RuleFunctionRequest | 
+	v2RuleFunctionRequest := *openapiclient.NewV2RuleFunctionRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "7c9e6679-7425-40de-944b-e07fc1f90ae7") // V2RuleFunctionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1828,7 +1828,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleFunctionRequest := *openapiclient.NewV2RuleFunctionRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "7c9e6679-7425-40de-944b-e07fc1f90ae7") // V2RuleFunctionRequest | 
+	v2RuleFunctionRequest := *openapiclient.NewV2RuleFunctionRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "7c9e6679-7425-40de-944b-e07fc1f90ae7") // V2RuleFunctionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1903,7 +1903,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleHeaderRequest := *openapiclient.NewV2RuleHeaderRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", map[string]string{"key": "Inner_example"}) // V2RuleHeaderRequest | 
+	v2RuleHeaderRequest := *openapiclient.NewV2RuleHeaderRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, map[string]string{"key": "Inner_example"}) // V2RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2194,7 +2194,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleHeaderRequest := *openapiclient.NewV2RuleHeaderRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", map[string]string{"key": "Inner_example"}) // V2RuleHeaderRequest | 
+	v2RuleHeaderRequest := *openapiclient.NewV2RuleHeaderRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, map[string]string{"key": "Inner_example"}) // V2RuleHeaderRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2269,7 +2269,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	v2RuleProxyRequest := *openapiclient.NewV2RuleProxyRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com") // V2RuleProxyRequest | 
+	v2RuleProxyRequest := *openapiclient.NewV2RuleProxyRequest([]string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com") // V2RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2560,7 +2560,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	v2RuleProxyRequest := *openapiclient.NewV2RuleProxyRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com") // V2RuleProxyRequest | 
+	v2RuleProxyRequest := *openapiclient.NewV2RuleProxyRequest([]string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com") // V2RuleProxyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2635,7 +2635,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	v2RuleRedirectRequest := *openapiclient.NewV2RuleRedirectRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://test-domain.com/new-path") // V2RuleRedirectRequest | 
+	v2RuleRedirectRequest := *openapiclient.NewV2RuleRedirectRequest([]string{"Domain_example"}, []string{"Url_example"}, "https://test-domain.com/new-path") // V2RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2926,7 +2926,7 @@ func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
 	rule := "rule_example" // string | 
-	v2RuleRedirectRequest := *openapiclient.NewV2RuleRedirectRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://test-domain.com/new-path") // V2RuleRedirectRequest | 
+	v2RuleRedirectRequest := *openapiclient.NewV2RuleRedirectRequest([]string{"Domain_example"}, []string{"Url_example"}, "https://test-domain.com/new-path") // V2RuleRedirectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3001,7 +3001,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	v2RuleServeStaticRequest := *openapiclient.NewV2RuleServeStaticRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "/index.html") // V2RuleServeStaticRequest | 
+	v2RuleServeStaticRequest := *openapiclient.NewV2RuleServeStaticRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "/index.html") // V2RuleServeStaticRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3292,7 +3292,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	rule := "rule_example" // string | Rule identifier
-	v2RuleServeStaticRequest := *openapiclient.NewV2RuleServeStaticRequest("The requested resource was not found", true, []string{"Domain_example"}, []string{"Url_example"}, "https://backend.test-domain.com", "/index.html") // V2RuleServeStaticRequest | 
+	v2RuleServeStaticRequest := *openapiclient.NewV2RuleServeStaticRequest([]string{"Domain_example"}, []string{"Url_example"}, "The requested resource was not found", true, "/index.html") // V2RuleServeStaticRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
