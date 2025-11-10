@@ -61,8 +61,9 @@ func Test_quantadmingo_CrawlerSchedulesAPIService(t *testing.T) {
 		var organization string
 		var project string
 		var crawler string
+		var crawlerSchedule string
 
-		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesEdit(context.Background(), organization, project, crawler).Execute()
+		resp, httpRes, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesEdit(context.Background(), organization, project, crawler, crawlerSchedule).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -55,60 +55,6 @@ tags:
   name: Volumes
 paths:
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
-    delete:
-      operationId: CrawlerSchedules_delete
-      parameters:
-      - description: Organization identifier
-        explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Project identifier
-        explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Crawler identifier
-        explode: false
-        in: path
-        name: crawler
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Crawler schedule identifier
-        explode: false
-        in: path
-        name: crawler_schedule
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: The crawler schedule has been deleted.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/V2Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/V2Error'
-          description: Access is forbidden.
-      summary: Delete a schedule
-      tags:
-      - CrawlerSchedules
     get:
       operationId: CrawlerSchedules_list
       parameters:
@@ -156,62 +102,6 @@ paths:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
       summary: List schedules for a crawler
-      tags:
-      - CrawlerSchedules
-    patch:
-      operationId: CrawlerSchedules_edit
-      parameters:
-      - description: Organization identifier
-        explode: false
-        in: path
-        name: organization
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Project identifier
-        explode: false
-        in: path
-        name: project
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Crawler identifier
-        explode: false
-        in: path
-        name: crawler
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/V2CrawlerScheduleRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/V2CrawlerSchedule'
-          description: The crawler schedule.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/V2Error'
-          description: The server could not understand the request due to invalid
-            syntax.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/V2Error'
-          description: Access is forbidden.
-      summary: Edit a schedule
       tags:
       - CrawlerSchedules
     post:
@@ -271,6 +161,60 @@ paths:
       tags:
       - CrawlerSchedules
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule}:
+    delete:
+      operationId: CrawlerSchedules_delete
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler identifier
+        explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler schedule identifier
+        explode: false
+        in: path
+        name: crawler_schedule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: The crawler schedule has been deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: Delete a schedule
+      tags:
+      - CrawlerSchedules
     get:
       operationId: CrawlerSchedules_show
       parameters:
@@ -327,6 +271,70 @@ paths:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
       summary: Show a specific schedule
+      tags:
+      - CrawlerSchedules
+    patch:
+      operationId: CrawlerSchedules_edit
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler identifier
+        explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler schedule identifier
+        explode: false
+        in: path
+        name: crawler_schedule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V2CrawlerScheduleRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2CrawlerSchedule'
+          description: The crawler schedule.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: Edit a schedule
       tags:
       - CrawlerSchedules
   /api/v2/organizations/{organization}/projects/{project}/crawlers:

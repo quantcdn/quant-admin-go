@@ -59,9 +59,10 @@ type CrawlerSchedulesAPI interface {
 	@param organization Organization identifier
 	@param project Project identifier
 	@param crawler Crawler identifier
+	@param crawlerSchedule Crawler schedule identifier
 	@return CrawlerSchedulesAPICrawlerSchedulesEditRequest
 	*/
-	CrawlerSchedulesEdit(ctx context.Context, organization string, project string, crawler string) CrawlerSchedulesAPICrawlerSchedulesEditRequest
+	CrawlerSchedulesEdit(ctx context.Context, organization string, project string, crawler string, crawlerSchedule string) CrawlerSchedulesAPICrawlerSchedulesEditRequest
 
 	// CrawlerSchedulesEditExecute executes the request
 	//  @return V2CrawlerSchedule
@@ -290,7 +291,7 @@ func (a *CrawlerSchedulesAPIService) CrawlerSchedulesDeleteExecute(r CrawlerSche
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules"
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
@@ -372,6 +373,7 @@ type CrawlerSchedulesAPICrawlerSchedulesEditRequest struct {
 	organization string
 	project string
 	crawler string
+	crawlerSchedule string
 	v2CrawlerScheduleRequest *V2CrawlerScheduleRequest
 }
 
@@ -391,15 +393,17 @@ CrawlerSchedulesEdit Edit a schedule
  @param organization Organization identifier
  @param project Project identifier
  @param crawler Crawler identifier
+ @param crawlerSchedule Crawler schedule identifier
  @return CrawlerSchedulesAPICrawlerSchedulesEditRequest
 */
-func (a *CrawlerSchedulesAPIService) CrawlerSchedulesEdit(ctx context.Context, organization string, project string, crawler string) CrawlerSchedulesAPICrawlerSchedulesEditRequest {
+func (a *CrawlerSchedulesAPIService) CrawlerSchedulesEdit(ctx context.Context, organization string, project string, crawler string, crawlerSchedule string) CrawlerSchedulesAPICrawlerSchedulesEditRequest {
 	return CrawlerSchedulesAPICrawlerSchedulesEditRequest{
 		ApiService: a,
 		ctx: ctx,
 		organization: organization,
 		project: project,
 		crawler: crawler,
+		crawlerSchedule: crawlerSchedule,
 	}
 }
 
@@ -418,10 +422,11 @@ func (a *CrawlerSchedulesAPIService) CrawlerSchedulesEditExecute(r CrawlerSchedu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules"
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule}"
 	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"crawler"+"}", url.PathEscape(parameterValueToString(r.crawler, "crawler")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"crawler_schedule"+"}", url.PathEscape(parameterValueToString(r.crawlerSchedule, "crawlerSchedule")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

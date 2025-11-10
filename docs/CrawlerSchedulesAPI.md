@@ -5,8 +5,8 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CrawlerSchedulesAdd**](CrawlerSchedulesAPI.md#CrawlerSchedulesAdd) | **Post** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Add a new schedule
-[**CrawlerSchedulesDelete**](CrawlerSchedulesAPI.md#CrawlerSchedulesDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Delete a schedule
-[**CrawlerSchedulesEdit**](CrawlerSchedulesAPI.md#CrawlerSchedulesEdit) | **Patch** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | Edit a schedule
+[**CrawlerSchedulesDelete**](CrawlerSchedulesAPI.md#CrawlerSchedulesDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Delete a schedule
+[**CrawlerSchedulesEdit**](CrawlerSchedulesAPI.md#CrawlerSchedulesEdit) | **Patch** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Edit a schedule
 [**CrawlerSchedulesList**](CrawlerSchedulesAPI.md#CrawlerSchedulesList) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules | List schedules for a crawler
 [**CrawlerSchedulesShow**](CrawlerSchedulesAPI.md#CrawlerSchedulesShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules/{crawler_schedule} | Show a specific schedule
 
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## CrawlerSchedulesEdit
 
-> V2CrawlerSchedule CrawlerSchedulesEdit(ctx, organization, project, crawler).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
+> V2CrawlerSchedule CrawlerSchedulesEdit(ctx, organization, project, crawler, crawlerSchedule).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
 
 Edit a schedule
 
@@ -185,11 +185,12 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	crawler := "crawler_example" // string | Crawler identifier
+	crawlerSchedule := "crawlerSchedule_example" // string | Crawler schedule identifier
 	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("Test schedule", "0 2 * * *") // V2CrawlerScheduleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesEdit(context.Background(), organization, project, crawler).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
+	resp, r, err := apiClient.CrawlerSchedulesAPI.CrawlerSchedulesEdit(context.Background(), organization, project, crawler, crawlerSchedule).V2CrawlerScheduleRequest(v2CrawlerScheduleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CrawlerSchedulesAPI.CrawlerSchedulesEdit``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,6 +209,7 @@ Name | Type | Description  | Notes
 **organization** | **string** | Organization identifier | 
 **project** | **string** | Project identifier | 
 **crawler** | **string** | Crawler identifier | 
+**crawlerSchedule** | **string** | Crawler schedule identifier | 
 
 ### Other Parameters
 
@@ -216,6 +218,7 @@ Other parameters are passed through a pointer to a apiCrawlerSchedulesEditReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
 
