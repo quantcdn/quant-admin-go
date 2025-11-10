@@ -4,10 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Message** | **string** | Error message | 
-**Error** | **bool** | Error flag | 
-**Name** | **string** | Project name | 
-**MachineName** | **string** | Project machine name | 
+**Name** | Pointer to **string** | Project name | [optional] 
+**MachineName** | Pointer to **string** | Project machine name | [optional] 
 **Region** | Pointer to **string** | Project region | [optional] 
 **AllowQueryParams** | Pointer to **bool** | Allow query parameters | [optional] 
 **DisableRevisions** | Pointer to **bool** | Disable revisions | [optional] 
@@ -18,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewV2ProjectRequest
 
-`func NewV2ProjectRequest(message string, error_ bool, name string, machineName string, ) *V2ProjectRequest`
+`func NewV2ProjectRequest() *V2ProjectRequest`
 
 NewV2ProjectRequest instantiates a new V2ProjectRequest object
 This constructor will assign default values to properties that have it defined,
@@ -32,46 +30,6 @@ will change when the set of required properties is changed
 NewV2ProjectRequestWithDefaults instantiates a new V2ProjectRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMessage
-
-`func (o *V2ProjectRequest) GetMessage() string`
-
-GetMessage returns the Message field if non-nil, zero value otherwise.
-
-### GetMessageOk
-
-`func (o *V2ProjectRequest) GetMessageOk() (*string, bool)`
-
-GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMessage
-
-`func (o *V2ProjectRequest) SetMessage(v string)`
-
-SetMessage sets Message field to given value.
-
-
-### GetError
-
-`func (o *V2ProjectRequest) GetError() bool`
-
-GetError returns the Error field if non-nil, zero value otherwise.
-
-### GetErrorOk
-
-`func (o *V2ProjectRequest) GetErrorOk() (*bool, bool)`
-
-GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetError
-
-`func (o *V2ProjectRequest) SetError(v bool)`
-
-SetError sets Error field to given value.
-
 
 ### GetName
 
@@ -92,6 +50,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *V2ProjectRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetMachineName
 
@@ -112,6 +75,11 @@ and a boolean to check if the value has been set.
 
 SetMachineName sets MachineName field to given value.
 
+### HasMachineName
+
+`func (o *V2ProjectRequest) HasMachineName() bool`
+
+HasMachineName returns a boolean if a field has been set.
 
 ### GetRegion
 

@@ -12,7 +12,6 @@ package quantadmingo
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the V2ProjectRequest type satisfies the MappedNullable interface at compile time
@@ -20,14 +19,10 @@ var _ MappedNullable = &V2ProjectRequest{}
 
 // V2ProjectRequest struct for V2ProjectRequest
 type V2ProjectRequest struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Project name
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	// Project machine name
-	MachineName string `json:"machine_name"`
+	MachineName *string `json:"machine_name,omitempty"`
 	// Project region
 	Region *string `json:"region,omitempty"`
 	// Allow query parameters
@@ -47,12 +42,8 @@ type _V2ProjectRequest V2ProjectRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2ProjectRequest(message string, error_ bool, name string, machineName string) *V2ProjectRequest {
+func NewV2ProjectRequest() *V2ProjectRequest {
 	this := V2ProjectRequest{}
-	this.Message = message
-	this.Error = error_
-	this.Name = name
-	this.MachineName = machineName
 	return &this
 }
 
@@ -64,100 +55,68 @@ func NewV2ProjectRequestWithDefaults() *V2ProjectRequest {
 	return &this
 }
 
-// GetMessage returns the Message field value
-func (o *V2ProjectRequest) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2ProjectRequest) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2ProjectRequest) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2ProjectRequest) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2ProjectRequest) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2ProjectRequest) SetError(v bool) {
-	o.Error = v
-}
-
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *V2ProjectRequest) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V2ProjectRequest) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *V2ProjectRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *V2ProjectRequest) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetMachineName returns the MachineName field value
+// GetMachineName returns the MachineName field value if set, zero value otherwise.
 func (o *V2ProjectRequest) GetMachineName() string {
-	if o == nil {
+	if o == nil || IsNil(o.MachineName) {
 		var ret string
 		return ret
 	}
-
-	return o.MachineName
+	return *o.MachineName
 }
 
-// GetMachineNameOk returns a tuple with the MachineName field value
+// GetMachineNameOk returns a tuple with the MachineName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V2ProjectRequest) GetMachineNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MachineName) {
 		return nil, false
 	}
-	return &o.MachineName, true
+	return o.MachineName, true
 }
 
-// SetMachineName sets field value
+// HasMachineName returns a boolean if a field has been set.
+func (o *V2ProjectRequest) HasMachineName() bool {
+	if o != nil && !IsNil(o.MachineName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMachineName gets a reference to the given string and assigns it to the MachineName field.
 func (o *V2ProjectRequest) SetMachineName(v string) {
-	o.MachineName = v
+	o.MachineName = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
@@ -330,10 +289,12 @@ func (o V2ProjectRequest) MarshalJSON() ([]byte, error) {
 
 func (o V2ProjectRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
-	toSerialize["name"] = o.Name
-	toSerialize["machine_name"] = o.MachineName
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.MachineName) {
+		toSerialize["machine_name"] = o.MachineName
+	}
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
@@ -358,30 +319,6 @@ func (o V2ProjectRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V2ProjectRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"message",
-		"error",
-		"name",
-		"machine_name",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varV2ProjectRequest := _V2ProjectRequest{}
 
 	err = json.Unmarshal(data, &varV2ProjectRequest)
@@ -395,8 +332,6 @@ func (o *V2ProjectRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "machine_name")
 		delete(additionalProperties, "region")

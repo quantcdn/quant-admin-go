@@ -20,10 +20,6 @@ var _ MappedNullable = &V2Project{}
 
 // V2Project struct for V2Project
 type V2Project struct {
-	// Error message
-	Message string `json:"message"`
-	// Error flag
-	Error bool `json:"error"`
 	// Project name
 	Name string `json:"name"`
 	// Project machine name
@@ -37,10 +33,8 @@ type _V2Project V2Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2Project(message string, error_ bool, name string, machineName string) *V2Project {
+func NewV2Project(name string, machineName string) *V2Project {
 	this := V2Project{}
-	this.Message = message
-	this.Error = error_
 	this.Name = name
 	this.MachineName = machineName
 	return &this
@@ -52,54 +46,6 @@ func NewV2Project(message string, error_ bool, name string, machineName string) 
 func NewV2ProjectWithDefaults() *V2Project {
 	this := V2Project{}
 	return &this
-}
-
-// GetMessage returns the Message field value
-func (o *V2Project) GetMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value
-// and a boolean to check if the value has been set.
-func (o *V2Project) GetMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Message, true
-}
-
-// SetMessage sets field value
-func (o *V2Project) SetMessage(v string) {
-	o.Message = v
-}
-
-// GetError returns the Error field value
-func (o *V2Project) GetError() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Error
-}
-
-// GetErrorOk returns a tuple with the Error field value
-// and a boolean to check if the value has been set.
-func (o *V2Project) GetErrorOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Error, true
-}
-
-// SetError sets field value
-func (o *V2Project) SetError(v bool) {
-	o.Error = v
 }
 
 // GetName returns the Name field value
@@ -160,8 +106,6 @@ func (o V2Project) MarshalJSON() ([]byte, error) {
 
 func (o V2Project) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["message"] = o.Message
-	toSerialize["error"] = o.Error
 	toSerialize["name"] = o.Name
 	toSerialize["machine_name"] = o.MachineName
 
@@ -177,8 +121,6 @@ func (o *V2Project) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"message",
-		"error",
 		"name",
 		"machine_name",
 	}
@@ -210,8 +152,6 @@ func (o *V2Project) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "message")
-		delete(additionalProperties, "error")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "machine_name")
 		o.AdditionalProperties = additionalProperties

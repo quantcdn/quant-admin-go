@@ -7127,75 +7127,6 @@ components:
       - machine_name
       - name
       type: object
-    V2Project:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Project name
-            example: Test Project
-            type: string
-          machine_name:
-            description: Project machine name
-            example: test-project
-            type: string
-        type: object
-      example:
-        name: Test Project
-        message: The requested resource was not found
-        error: true
-        machine_name: test-project
-      required:
-      - machine_name
-      - name
-      type: object
-    V2ProjectRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2Error'
-      - properties:
-          name:
-            description: Project name
-            example: Test Project
-            type: string
-          machine_name:
-            description: Project machine name
-            example: test-project
-            type: string
-          region:
-            description: Project region
-            example: au
-            type: string
-          allow_query_params:
-            description: Allow query parameters
-            example: true
-            type: boolean
-          disable_revisions:
-            description: Disable revisions
-            example: false
-            type: boolean
-          basic_auth_username:
-            description: Basic auth username
-            example: admin
-            type: string
-          basic_auth_password:
-            description: Basic auth password
-            example: secure_password123
-            type: string
-        type: object
-      example:
-        disable_revisions: false
-        allow_query_params: true
-        basic_auth_password: secure_password123
-        name: Test Project
-        basic_auth_username: admin
-        message: The requested resource was not found
-        error: true
-        machine_name: test-project
-        region: au
-      required:
-      - machine_name
-      - name
-      type: object
     V2Rule:
       allOf:
       - $ref: '#/components/schemas/V2Error'
@@ -13338,6 +13269,62 @@ components:
           type: integer
       required:
       - domain
+      type: object
+    V2Project:
+      example:
+        name: Test Project
+        machine_name: test-project
+      properties:
+        name:
+          description: Project name
+          example: Test Project
+          type: string
+        machine_name:
+          description: Project machine name
+          example: test-project
+          type: string
+      required:
+      - machine_name
+      - name
+      type: object
+    V2ProjectRequest:
+      example:
+        disable_revisions: false
+        allow_query_params: true
+        basic_auth_password: secure_password123
+        name: Test Project
+        basic_auth_username: admin
+        machine_name: test-project
+        region: au
+      properties:
+        name:
+          description: Project name
+          example: Test Project
+          type: string
+        machine_name:
+          description: Project machine name
+          example: test-project
+          type: string
+        region:
+          description: Project region
+          example: au
+          type: string
+        allow_query_params:
+          description: Allow query parameters
+          example: true
+          type: boolean
+        disable_revisions:
+          description: Disable revisions
+          example: false
+          type: boolean
+        basic_auth_username:
+          description: Basic auth username
+          example: admin
+          type: string
+        basic_auth_password:
+          description: Basic auth password
+          example: secure_password123
+          type: string
       type: object
     SpotConfiguration:
       description: Spot instance strategy configuration for controlling cost vs reliability.

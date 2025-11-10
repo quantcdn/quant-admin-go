@@ -32,7 +32,7 @@ import (
 
 func main() {
 	organization := "organization_example" // string | 
-	v2ProjectRequest := *openapiclient.NewV2ProjectRequest("The requested resource was not found", true, "Test Project", "test-project") // V2ProjectRequest | 
+	v2ProjectRequest := *openapiclient.NewV2ProjectRequest() // V2ProjectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -313,7 +313,7 @@ import (
 func main() {
 	organization := "organization_example" // string | 
 	project := "project_example" // string | 
-	v2ProjectRequest := *openapiclient.NewV2ProjectRequest("The requested resource was not found", true, "Test Project", "test-project") // V2ProjectRequest | 
+	v2ProjectRequest := *openapiclient.NewV2ProjectRequest() // V2ProjectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
