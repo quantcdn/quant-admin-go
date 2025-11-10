@@ -25,6 +25,11 @@ Name | Type | Description | Notes
 **WafConfig** | Pointer to [**NullableWafConfig**](WafConfig.md) |  | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] 
 **ProxyInlineFnEnabled** | Pointer to **bool** | Proxy inline function enabled | [optional] [default to false]
+**ApplicationProxy** | Pointer to **bool** | Enable Quant Cloud application proxy mode | [optional] [default to false]
+**ApplicationName** | Pointer to **string** | Quant Cloud application name (required when application_proxy is true) | [optional] 
+**ApplicationEnvironment** | Pointer to **string** | Quant Cloud application environment (required when application_proxy is true) | [optional] 
+**ApplicationContainer** | Pointer to **string** | Quant Cloud application container (required when application_proxy is true) | [optional] 
+**ApplicationPort** | Pointer to **int32** | Quant Cloud application port (required when application_proxy is true) | [optional] 
 **QuantCloudSelection** | Pointer to [**NullableV2RuleProxyActionQuantCloudSelection**](V2RuleProxyActionQuantCloudSelection.md) |  | [optional] 
 
 ## Methods
@@ -605,6 +610,131 @@ SetProxyInlineFnEnabled sets ProxyInlineFnEnabled field to given value.
 `func (o *V2RuleProxyAction) HasProxyInlineFnEnabled() bool`
 
 HasProxyInlineFnEnabled returns a boolean if a field has been set.
+
+### GetApplicationProxy
+
+`func (o *V2RuleProxyAction) GetApplicationProxy() bool`
+
+GetApplicationProxy returns the ApplicationProxy field if non-nil, zero value otherwise.
+
+### GetApplicationProxyOk
+
+`func (o *V2RuleProxyAction) GetApplicationProxyOk() (*bool, bool)`
+
+GetApplicationProxyOk returns a tuple with the ApplicationProxy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationProxy
+
+`func (o *V2RuleProxyAction) SetApplicationProxy(v bool)`
+
+SetApplicationProxy sets ApplicationProxy field to given value.
+
+### HasApplicationProxy
+
+`func (o *V2RuleProxyAction) HasApplicationProxy() bool`
+
+HasApplicationProxy returns a boolean if a field has been set.
+
+### GetApplicationName
+
+`func (o *V2RuleProxyAction) GetApplicationName() string`
+
+GetApplicationName returns the ApplicationName field if non-nil, zero value otherwise.
+
+### GetApplicationNameOk
+
+`func (o *V2RuleProxyAction) GetApplicationNameOk() (*string, bool)`
+
+GetApplicationNameOk returns a tuple with the ApplicationName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationName
+
+`func (o *V2RuleProxyAction) SetApplicationName(v string)`
+
+SetApplicationName sets ApplicationName field to given value.
+
+### HasApplicationName
+
+`func (o *V2RuleProxyAction) HasApplicationName() bool`
+
+HasApplicationName returns a boolean if a field has been set.
+
+### GetApplicationEnvironment
+
+`func (o *V2RuleProxyAction) GetApplicationEnvironment() string`
+
+GetApplicationEnvironment returns the ApplicationEnvironment field if non-nil, zero value otherwise.
+
+### GetApplicationEnvironmentOk
+
+`func (o *V2RuleProxyAction) GetApplicationEnvironmentOk() (*string, bool)`
+
+GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationEnvironment
+
+`func (o *V2RuleProxyAction) SetApplicationEnvironment(v string)`
+
+SetApplicationEnvironment sets ApplicationEnvironment field to given value.
+
+### HasApplicationEnvironment
+
+`func (o *V2RuleProxyAction) HasApplicationEnvironment() bool`
+
+HasApplicationEnvironment returns a boolean if a field has been set.
+
+### GetApplicationContainer
+
+`func (o *V2RuleProxyAction) GetApplicationContainer() string`
+
+GetApplicationContainer returns the ApplicationContainer field if non-nil, zero value otherwise.
+
+### GetApplicationContainerOk
+
+`func (o *V2RuleProxyAction) GetApplicationContainerOk() (*string, bool)`
+
+GetApplicationContainerOk returns a tuple with the ApplicationContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationContainer
+
+`func (o *V2RuleProxyAction) SetApplicationContainer(v string)`
+
+SetApplicationContainer sets ApplicationContainer field to given value.
+
+### HasApplicationContainer
+
+`func (o *V2RuleProxyAction) HasApplicationContainer() bool`
+
+HasApplicationContainer returns a boolean if a field has been set.
+
+### GetApplicationPort
+
+`func (o *V2RuleProxyAction) GetApplicationPort() int32`
+
+GetApplicationPort returns the ApplicationPort field if non-nil, zero value otherwise.
+
+### GetApplicationPortOk
+
+`func (o *V2RuleProxyAction) GetApplicationPortOk() (*int32, bool)`
+
+GetApplicationPortOk returns a tuple with the ApplicationPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplicationPort
+
+`func (o *V2RuleProxyAction) SetApplicationPort(v int32)`
+
+SetApplicationPort sets ApplicationPort field to given value.
+
+### HasApplicationPort
+
+`func (o *V2RuleProxyAction) HasApplicationPort() bool`
+
+HasApplicationPort returns a boolean if a field has been set.
 
 ### GetQuantCloudSelection
 

@@ -17,7 +17,7 @@ import (
 // checks if the V2RuleProxyActionQuantCloudSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2RuleProxyActionQuantCloudSelection{}
 
-// V2RuleProxyActionQuantCloudSelection Quant Cloud application proxy selection (only present for Quant Cloud App proxies)
+// V2RuleProxyActionQuantCloudSelection Quant Cloud application proxy selection (populated automatically when application_proxy is enabled)
 type V2RuleProxyActionQuantCloudSelection struct {
 	// Application name
 	App *string `json:"app,omitempty"`

@@ -7534,32 +7534,38 @@ components:
         action: redirect
         disabled: false
         action_config:
-          origin_timeout: "30"
           cache_lifetime: "3600"
           proxy_strip_request_headers:
           - Cookie
           - Authorization
-          failover_origin_ttfb: "2000"
+          application_proxy: false
           quant_cloud_selection:
             app: my-app
             container: web
             port: 80
             env: production
+          application_container: web
           proxy_strip_headers:
           - Set-Cookie
           - Server
           notify_config:
             webhook_url: https://hooks.slack.com/services/XXXXXX
           notify: slack
-          only_proxy_404: false
-          inject_headers:
-            X-Custom-Header: value
-            Authorization: Bearer token
+          application_name: my-app
           auth_user: admin
           host: backend.test-domain.com
           waf_enabled: false
           proxy_inline_fn_enabled: false
           auth_pass: secure_password
+          application_port: 80
+          failover_mode: true
+          application_environment: production
+          origin_timeout: "30"
+          failover_origin_ttfb: "2000"
+          only_proxy_404: false
+          inject_headers:
+            X-Custom-Header: value
+            Authorization: Bearer token
           to: https://backend.test-domain.com
           disable_ssl_verify: false
           failover_lifetime: "300"
@@ -7625,7 +7631,6 @@ components:
           - "302"
           - "304"
           proxy_alert_enabled: false
-          failover_mode: true
       type: object
     V2RuleRedirectAction:
       allOf:
@@ -9549,32 +9554,38 @@ components:
       type: object
     V2RuleProxyAction:
       example:
-        origin_timeout: "30"
         cache_lifetime: "3600"
         proxy_strip_request_headers:
         - Cookie
         - Authorization
-        failover_origin_ttfb: "2000"
+        application_proxy: false
         quant_cloud_selection:
           app: my-app
           container: web
           port: 80
           env: production
+        application_container: web
         proxy_strip_headers:
         - Set-Cookie
         - Server
         notify_config:
           webhook_url: https://hooks.slack.com/services/XXXXXX
         notify: slack
-        only_proxy_404: false
-        inject_headers:
-          X-Custom-Header: value
-          Authorization: Bearer token
+        application_name: my-app
         auth_user: admin
         host: backend.test-domain.com
         waf_enabled: false
         proxy_inline_fn_enabled: false
         auth_pass: secure_password
+        application_port: 80
+        failover_mode: true
+        application_environment: production
+        origin_timeout: "30"
+        failover_origin_ttfb: "2000"
+        only_proxy_404: false
+        inject_headers:
+          X-Custom-Header: value
+          Authorization: Bearer token
         to: https://backend.test-domain.com
         disable_ssl_verify: false
         failover_lifetime: "300"
@@ -9640,7 +9651,6 @@ components:
         - "302"
         - "304"
         proxy_alert_enabled: false
-        failover_mode: true
       properties:
         to:
           description: Target URL to proxy to
@@ -9754,6 +9764,31 @@ components:
           description: Proxy inline function enabled
           example: false
           type: boolean
+        application_proxy:
+          default: false
+          description: Enable Quant Cloud application proxy mode
+          example: false
+          type: boolean
+        application_name:
+          description: Quant Cloud application name (required when application_proxy
+            is true)
+          example: my-app
+          type: string
+        application_environment:
+          description: Quant Cloud application environment (required when application_proxy
+            is true)
+          example: production
+          type: string
+        application_container:
+          description: Quant Cloud application container (required when application_proxy
+            is true)
+          example: web
+          type: string
+        application_port:
+          description: Quant Cloud application port (required when application_proxy
+            is true)
+          example: 80
+          type: integer
         quant_cloud_selection:
           $ref: '#/components/schemas/V2RuleProxyAction_quant_cloud_selection'
       required:
@@ -13148,8 +13183,8 @@ components:
           type: string
       type: object
     V2RuleProxyAction_quant_cloud_selection:
-      description: Quant Cloud application proxy selection (only present for Quant
-        Cloud App proxies)
+      description: Quant Cloud application proxy selection (populated automatically
+        when application_proxy is enabled)
       example:
         app: my-app
         container: web

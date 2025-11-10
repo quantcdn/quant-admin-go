@@ -60,6 +60,16 @@ type V2RuleProxyAction struct {
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	// Proxy inline function enabled
 	ProxyInlineFnEnabled *bool `json:"proxy_inline_fn_enabled,omitempty"`
+	// Enable Quant Cloud application proxy mode
+	ApplicationProxy *bool `json:"application_proxy,omitempty"`
+	// Quant Cloud application name (required when application_proxy is true)
+	ApplicationName *string `json:"application_name,omitempty"`
+	// Quant Cloud application environment (required when application_proxy is true)
+	ApplicationEnvironment *string `json:"application_environment,omitempty"`
+	// Quant Cloud application container (required when application_proxy is true)
+	ApplicationContainer *string `json:"application_container,omitempty"`
+	// Quant Cloud application port (required when application_proxy is true)
+	ApplicationPort *int32 `json:"application_port,omitempty"`
 	QuantCloudSelection NullableV2RuleProxyActionQuantCloudSelection `json:"quant_cloud_selection,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -89,6 +99,8 @@ func NewV2RuleProxyAction(to string) *V2RuleProxyAction {
 	this.WafEnabled = &wafEnabled
 	var proxyInlineFnEnabled bool = false
 	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
+	var applicationProxy bool = false
+	this.ApplicationProxy = &applicationProxy
 	return &this
 }
 
@@ -113,6 +125,8 @@ func NewV2RuleProxyActionWithDefaults() *V2RuleProxyAction {
 	this.WafEnabled = &wafEnabled
 	var proxyInlineFnEnabled bool = false
 	this.ProxyInlineFnEnabled = &proxyInlineFnEnabled
+	var applicationProxy bool = false
+	this.ApplicationProxy = &applicationProxy
 	return &this
 }
 
@@ -811,6 +825,166 @@ func (o *V2RuleProxyAction) SetProxyInlineFnEnabled(v bool) {
 	o.ProxyInlineFnEnabled = &v
 }
 
+// GetApplicationProxy returns the ApplicationProxy field value if set, zero value otherwise.
+func (o *V2RuleProxyAction) GetApplicationProxy() bool {
+	if o == nil || IsNil(o.ApplicationProxy) {
+		var ret bool
+		return ret
+	}
+	return *o.ApplicationProxy
+}
+
+// GetApplicationProxyOk returns a tuple with the ApplicationProxy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyAction) GetApplicationProxyOk() (*bool, bool) {
+	if o == nil || IsNil(o.ApplicationProxy) {
+		return nil, false
+	}
+	return o.ApplicationProxy, true
+}
+
+// HasApplicationProxy returns a boolean if a field has been set.
+func (o *V2RuleProxyAction) HasApplicationProxy() bool {
+	if o != nil && !IsNil(o.ApplicationProxy) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationProxy gets a reference to the given bool and assigns it to the ApplicationProxy field.
+func (o *V2RuleProxyAction) SetApplicationProxy(v bool) {
+	o.ApplicationProxy = &v
+}
+
+// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+func (o *V2RuleProxyAction) GetApplicationName() string {
+	if o == nil || IsNil(o.ApplicationName) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationName
+}
+
+// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyAction) GetApplicationNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationName) {
+		return nil, false
+	}
+	return o.ApplicationName, true
+}
+
+// HasApplicationName returns a boolean if a field has been set.
+func (o *V2RuleProxyAction) HasApplicationName() bool {
+	if o != nil && !IsNil(o.ApplicationName) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationName gets a reference to the given string and assigns it to the ApplicationName field.
+func (o *V2RuleProxyAction) SetApplicationName(v string) {
+	o.ApplicationName = &v
+}
+
+// GetApplicationEnvironment returns the ApplicationEnvironment field value if set, zero value otherwise.
+func (o *V2RuleProxyAction) GetApplicationEnvironment() string {
+	if o == nil || IsNil(o.ApplicationEnvironment) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationEnvironment
+}
+
+// GetApplicationEnvironmentOk returns a tuple with the ApplicationEnvironment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyAction) GetApplicationEnvironmentOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationEnvironment) {
+		return nil, false
+	}
+	return o.ApplicationEnvironment, true
+}
+
+// HasApplicationEnvironment returns a boolean if a field has been set.
+func (o *V2RuleProxyAction) HasApplicationEnvironment() bool {
+	if o != nil && !IsNil(o.ApplicationEnvironment) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationEnvironment gets a reference to the given string and assigns it to the ApplicationEnvironment field.
+func (o *V2RuleProxyAction) SetApplicationEnvironment(v string) {
+	o.ApplicationEnvironment = &v
+}
+
+// GetApplicationContainer returns the ApplicationContainer field value if set, zero value otherwise.
+func (o *V2RuleProxyAction) GetApplicationContainer() string {
+	if o == nil || IsNil(o.ApplicationContainer) {
+		var ret string
+		return ret
+	}
+	return *o.ApplicationContainer
+}
+
+// GetApplicationContainerOk returns a tuple with the ApplicationContainer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyAction) GetApplicationContainerOk() (*string, bool) {
+	if o == nil || IsNil(o.ApplicationContainer) {
+		return nil, false
+	}
+	return o.ApplicationContainer, true
+}
+
+// HasApplicationContainer returns a boolean if a field has been set.
+func (o *V2RuleProxyAction) HasApplicationContainer() bool {
+	if o != nil && !IsNil(o.ApplicationContainer) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationContainer gets a reference to the given string and assigns it to the ApplicationContainer field.
+func (o *V2RuleProxyAction) SetApplicationContainer(v string) {
+	o.ApplicationContainer = &v
+}
+
+// GetApplicationPort returns the ApplicationPort field value if set, zero value otherwise.
+func (o *V2RuleProxyAction) GetApplicationPort() int32 {
+	if o == nil || IsNil(o.ApplicationPort) {
+		var ret int32
+		return ret
+	}
+	return *o.ApplicationPort
+}
+
+// GetApplicationPortOk returns a tuple with the ApplicationPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyAction) GetApplicationPortOk() (*int32, bool) {
+	if o == nil || IsNil(o.ApplicationPort) {
+		return nil, false
+	}
+	return o.ApplicationPort, true
+}
+
+// HasApplicationPort returns a boolean if a field has been set.
+func (o *V2RuleProxyAction) HasApplicationPort() bool {
+	if o != nil && !IsNil(o.ApplicationPort) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplicationPort gets a reference to the given int32 and assigns it to the ApplicationPort field.
+func (o *V2RuleProxyAction) SetApplicationPort(v int32) {
+	o.ApplicationPort = &v
+}
+
 // GetQuantCloudSelection returns the QuantCloudSelection field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *V2RuleProxyAction) GetQuantCloudSelection() V2RuleProxyActionQuantCloudSelection {
 	if o == nil || IsNil(o.QuantCloudSelection.Get()) {
@@ -924,6 +1098,21 @@ func (o V2RuleProxyAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProxyInlineFnEnabled) {
 		toSerialize["proxy_inline_fn_enabled"] = o.ProxyInlineFnEnabled
 	}
+	if !IsNil(o.ApplicationProxy) {
+		toSerialize["application_proxy"] = o.ApplicationProxy
+	}
+	if !IsNil(o.ApplicationName) {
+		toSerialize["application_name"] = o.ApplicationName
+	}
+	if !IsNil(o.ApplicationEnvironment) {
+		toSerialize["application_environment"] = o.ApplicationEnvironment
+	}
+	if !IsNil(o.ApplicationContainer) {
+		toSerialize["application_container"] = o.ApplicationContainer
+	}
+	if !IsNil(o.ApplicationPort) {
+		toSerialize["application_port"] = o.ApplicationPort
+	}
 	if o.QuantCloudSelection.IsSet() {
 		toSerialize["quant_cloud_selection"] = o.QuantCloudSelection.Get()
 	}
@@ -991,6 +1180,11 @@ func (o *V2RuleProxyAction) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "waf_config")
 		delete(additionalProperties, "proxy_alert_enabled")
 		delete(additionalProperties, "proxy_inline_fn_enabled")
+		delete(additionalProperties, "application_proxy")
+		delete(additionalProperties, "application_name")
+		delete(additionalProperties, "application_environment")
+		delete(additionalProperties, "application_container")
+		delete(additionalProperties, "application_port")
 		delete(additionalProperties, "quant_cloud_selection")
 		o.AdditionalProperties = additionalProperties
 	}
