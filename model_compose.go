@@ -31,6 +31,10 @@ type Compose struct {
 	// Maximum number of instances
 	MaxCapacity *int32 `json:"maxCapacity,omitempty"`
 	SpotConfiguration *SpotConfiguration `json:"spotConfiguration,omitempty"`
+	// Optional. Enable cross-environment networking within the same application. When false (default): Uses shared security group for complete isolation (most secure). When true: Uses app-specific security group to enable communication between environments of the same application (e.g., staging can connect to production database). Note: If enableCrossAppNetworking is true, this setting is overridden.
+	EnableCrossEnvNetworking NullableBool `json:"enableCrossEnvNetworking,omitempty"`
+	// Optional. Enable cross-application networking within the same organization. When false (default): Uses shared/app-specific security group based on enableCrossEnvNetworking. When true: Uses org-specific security group to enable container-to-container communication with ALL applications in the same organization via service discovery (microservices architecture). This setting takes priority over enableCrossEnvNetworking.
+	EnableCrossAppNetworking NullableBool `json:"enableCrossAppNetworking,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -42,6 +46,10 @@ type _Compose Compose
 // will change when the set of required properties is changed
 func NewCompose() *Compose {
 	this := Compose{}
+	var enableCrossEnvNetworking bool = false
+	this.EnableCrossEnvNetworking = *NewNullableBool(&enableCrossEnvNetworking)
+	var enableCrossAppNetworking bool = false
+	this.EnableCrossAppNetworking = *NewNullableBool(&enableCrossAppNetworking)
 	return &this
 }
 
@@ -50,6 +58,10 @@ func NewCompose() *Compose {
 // but it doesn't guarantee that properties required by API are set
 func NewComposeWithDefaults() *Compose {
 	this := Compose{}
+	var enableCrossEnvNetworking bool = false
+	this.EnableCrossEnvNetworking = *NewNullableBool(&enableCrossEnvNetworking)
+	var enableCrossAppNetworking bool = false
+	this.EnableCrossAppNetworking = *NewNullableBool(&enableCrossAppNetworking)
 	return &this
 }
 
@@ -277,6 +289,90 @@ func (o *Compose) SetSpotConfiguration(v SpotConfiguration) {
 	o.SpotConfiguration = &v
 }
 
+// GetEnableCrossEnvNetworking returns the EnableCrossEnvNetworking field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Compose) GetEnableCrossEnvNetworking() bool {
+	if o == nil || IsNil(o.EnableCrossEnvNetworking.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableCrossEnvNetworking.Get()
+}
+
+// GetEnableCrossEnvNetworkingOk returns a tuple with the EnableCrossEnvNetworking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Compose) GetEnableCrossEnvNetworkingOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EnableCrossEnvNetworking.Get(), o.EnableCrossEnvNetworking.IsSet()
+}
+
+// HasEnableCrossEnvNetworking returns a boolean if a field has been set.
+func (o *Compose) HasEnableCrossEnvNetworking() bool {
+	if o != nil && o.EnableCrossEnvNetworking.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableCrossEnvNetworking gets a reference to the given NullableBool and assigns it to the EnableCrossEnvNetworking field.
+func (o *Compose) SetEnableCrossEnvNetworking(v bool) {
+	o.EnableCrossEnvNetworking.Set(&v)
+}
+// SetEnableCrossEnvNetworkingNil sets the value for EnableCrossEnvNetworking to be an explicit nil
+func (o *Compose) SetEnableCrossEnvNetworkingNil() {
+	o.EnableCrossEnvNetworking.Set(nil)
+}
+
+// UnsetEnableCrossEnvNetworking ensures that no value is present for EnableCrossEnvNetworking, not even an explicit nil
+func (o *Compose) UnsetEnableCrossEnvNetworking() {
+	o.EnableCrossEnvNetworking.Unset()
+}
+
+// GetEnableCrossAppNetworking returns the EnableCrossAppNetworking field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Compose) GetEnableCrossAppNetworking() bool {
+	if o == nil || IsNil(o.EnableCrossAppNetworking.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableCrossAppNetworking.Get()
+}
+
+// GetEnableCrossAppNetworkingOk returns a tuple with the EnableCrossAppNetworking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Compose) GetEnableCrossAppNetworkingOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EnableCrossAppNetworking.Get(), o.EnableCrossAppNetworking.IsSet()
+}
+
+// HasEnableCrossAppNetworking returns a boolean if a field has been set.
+func (o *Compose) HasEnableCrossAppNetworking() bool {
+	if o != nil && o.EnableCrossAppNetworking.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableCrossAppNetworking gets a reference to the given NullableBool and assigns it to the EnableCrossAppNetworking field.
+func (o *Compose) SetEnableCrossAppNetworking(v bool) {
+	o.EnableCrossAppNetworking.Set(&v)
+}
+// SetEnableCrossAppNetworkingNil sets the value for EnableCrossAppNetworking to be an explicit nil
+func (o *Compose) SetEnableCrossAppNetworkingNil() {
+	o.EnableCrossAppNetworking.Set(nil)
+}
+
+// UnsetEnableCrossAppNetworking ensures that no value is present for EnableCrossAppNetworking, not even an explicit nil
+func (o *Compose) UnsetEnableCrossAppNetworking() {
+	o.EnableCrossAppNetworking.Unset()
+}
+
 func (o Compose) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -308,6 +404,12 @@ func (o Compose) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpotConfiguration) {
 		toSerialize["spotConfiguration"] = o.SpotConfiguration
 	}
+	if o.EnableCrossEnvNetworking.IsSet() {
+		toSerialize["enableCrossEnvNetworking"] = o.EnableCrossEnvNetworking.Get()
+	}
+	if o.EnableCrossAppNetworking.IsSet() {
+		toSerialize["enableCrossAppNetworking"] = o.EnableCrossAppNetworking.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -337,6 +439,8 @@ func (o *Compose) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "minCapacity")
 		delete(additionalProperties, "maxCapacity")
 		delete(additionalProperties, "spotConfiguration")
+		delete(additionalProperties, "enableCrossEnvNetworking")
+		delete(additionalProperties, "enableCrossAppNetworking")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -6949,7 +6949,9 @@ components:
             essential: true
           minCapacity: 4
           taskCpu: 3
+          enableCrossAppNetworking: false
           architecture: architecture
+          enableCrossEnvNetworking: false
         database:
           multiAz: false
           engine: mysql
@@ -7182,7 +7184,9 @@ components:
             essential: true
           minCapacity: 4
           taskCpu: 3
+          enableCrossAppNetworking: false
           architecture: architecture
+          enableCrossEnvNetworking: false
         runningCount: 6
         minCapacity: 1
         status: status
@@ -7392,7 +7396,9 @@ components:
           essential: true
         minCapacity: 4
         taskCpu: 3
+        enableCrossAppNetworking: false
         architecture: architecture
+        enableCrossEnvNetworking: false
       properties:
         containers:
           items:
@@ -7420,6 +7426,26 @@ components:
           type: integer
         spotConfiguration:
           $ref: '#/components/schemas/SpotConfiguration'
+        enableCrossEnvNetworking:
+          default: false
+          description: "Optional. Enable cross-environment networking within the same\
+            \ application. When false (default): Uses shared security group for complete\
+            \ isolation (most secure). When true: Uses app-specific security group\
+            \ to enable communication between environments of the same application\
+            \ (e.g., staging can connect to production database). Note: If enableCrossAppNetworking\
+            \ is true, this setting is overridden."
+          nullable: true
+          type: boolean
+        enableCrossAppNetworking:
+          default: false
+          description: "Optional. Enable cross-application networking within the same\
+            \ organization. When false (default): Uses shared/app-specific security\
+            \ group based on enableCrossEnvNetworking. When true: Uses org-specific\
+            \ security group to enable container-to-container communication with ALL\
+            \ applications in the same organization via service discovery (microservices\
+            \ architecture). This setting takes priority over enableCrossEnvNetworking."
+          nullable: true
+          type: boolean
       type: object
     Container:
       example:

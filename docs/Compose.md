@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **MinCapacity** | Pointer to **int32** | Minimum number of instances | [optional] 
 **MaxCapacity** | Pointer to **int32** | Maximum number of instances | [optional] 
 **SpotConfiguration** | Pointer to [**SpotConfiguration**](SpotConfiguration.md) |  | [optional] 
+**EnableCrossEnvNetworking** | Pointer to **NullableBool** | Optional. Enable cross-environment networking within the same application. When false (default): Uses shared security group for complete isolation (most secure). When true: Uses app-specific security group to enable communication between environments of the same application (e.g., staging can connect to production database). Note: If enableCrossAppNetworking is true, this setting is overridden. | [optional] [default to false]
+**EnableCrossAppNetworking** | Pointer to **NullableBool** | Optional. Enable cross-application networking within the same organization. When false (default): Uses shared/app-specific security group based on enableCrossEnvNetworking. When true: Uses org-specific security group to enable container-to-container communication with ALL applications in the same organization via service discovery (microservices architecture). This setting takes priority over enableCrossEnvNetworking. | [optional] [default to false]
 
 ## Methods
 
@@ -206,6 +208,76 @@ SetSpotConfiguration sets SpotConfiguration field to given value.
 
 HasSpotConfiguration returns a boolean if a field has been set.
 
+### GetEnableCrossEnvNetworking
+
+`func (o *Compose) GetEnableCrossEnvNetworking() bool`
+
+GetEnableCrossEnvNetworking returns the EnableCrossEnvNetworking field if non-nil, zero value otherwise.
+
+### GetEnableCrossEnvNetworkingOk
+
+`func (o *Compose) GetEnableCrossEnvNetworkingOk() (*bool, bool)`
+
+GetEnableCrossEnvNetworkingOk returns a tuple with the EnableCrossEnvNetworking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableCrossEnvNetworking
+
+`func (o *Compose) SetEnableCrossEnvNetworking(v bool)`
+
+SetEnableCrossEnvNetworking sets EnableCrossEnvNetworking field to given value.
+
+### HasEnableCrossEnvNetworking
+
+`func (o *Compose) HasEnableCrossEnvNetworking() bool`
+
+HasEnableCrossEnvNetworking returns a boolean if a field has been set.
+
+### SetEnableCrossEnvNetworkingNil
+
+`func (o *Compose) SetEnableCrossEnvNetworkingNil(b bool)`
+
+ SetEnableCrossEnvNetworkingNil sets the value for EnableCrossEnvNetworking to be an explicit nil
+
+### UnsetEnableCrossEnvNetworking
+`func (o *Compose) UnsetEnableCrossEnvNetworking()`
+
+UnsetEnableCrossEnvNetworking ensures that no value is present for EnableCrossEnvNetworking, not even an explicit nil
+### GetEnableCrossAppNetworking
+
+`func (o *Compose) GetEnableCrossAppNetworking() bool`
+
+GetEnableCrossAppNetworking returns the EnableCrossAppNetworking field if non-nil, zero value otherwise.
+
+### GetEnableCrossAppNetworkingOk
+
+`func (o *Compose) GetEnableCrossAppNetworkingOk() (*bool, bool)`
+
+GetEnableCrossAppNetworkingOk returns a tuple with the EnableCrossAppNetworking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableCrossAppNetworking
+
+`func (o *Compose) SetEnableCrossAppNetworking(v bool)`
+
+SetEnableCrossAppNetworking sets EnableCrossAppNetworking field to given value.
+
+### HasEnableCrossAppNetworking
+
+`func (o *Compose) HasEnableCrossAppNetworking() bool`
+
+HasEnableCrossAppNetworking returns a boolean if a field has been set.
+
+### SetEnableCrossAppNetworkingNil
+
+`func (o *Compose) SetEnableCrossAppNetworkingNil(b bool)`
+
+ SetEnableCrossAppNetworkingNil sets the value for EnableCrossAppNetworking to be an explicit nil
+
+### UnsetEnableCrossAppNetworking
+`func (o *Compose) UnsetEnableCrossAppNetworking()`
+
+UnsetEnableCrossAppNetworking ensures that no value is present for EnableCrossAppNetworking, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
