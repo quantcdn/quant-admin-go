@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Crawler name | [optional] 
 **Domain** | **string** | Domain to crawl | 
 **BrowserMode** | Pointer to **bool** | Enable browser mode | [optional] [default to false]
-**ExecuteJs** | Pointer to **bool** | Execute JavaScript during asset collection (only when browser_mode is enabled) | [optional] [default to false]
 **Urls** | Pointer to **[]string** | URLs to crawl | [optional] 
 **StartUrls** | Pointer to **[]string** | Starting URLs for crawl | [optional] 
 **Headers** | Pointer to **map[string]string** | Custom headers | [optional] 
@@ -116,31 +115,6 @@ SetBrowserMode sets BrowserMode field to given value.
 `func (o *V2CrawlerRequest) HasBrowserMode() bool`
 
 HasBrowserMode returns a boolean if a field has been set.
-
-### GetExecuteJs
-
-`func (o *V2CrawlerRequest) GetExecuteJs() bool`
-
-GetExecuteJs returns the ExecuteJs field if non-nil, zero value otherwise.
-
-### GetExecuteJsOk
-
-`func (o *V2CrawlerRequest) GetExecuteJsOk() (*bool, bool)`
-
-GetExecuteJsOk returns a tuple with the ExecuteJs field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecuteJs
-
-`func (o *V2CrawlerRequest) SetExecuteJs(v bool)`
-
-SetExecuteJs sets ExecuteJs field to given value.
-
-### HasExecuteJs
-
-`func (o *V2CrawlerRequest) HasExecuteJs() bool`
-
-HasExecuteJs returns a boolean if a field has been set.
 
 ### GetUrls
 

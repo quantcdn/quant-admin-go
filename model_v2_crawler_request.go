@@ -26,8 +26,6 @@ type V2CrawlerRequest struct {
 	Domain string `json:"domain"`
 	// Enable browser mode
 	BrowserMode *bool `json:"browser_mode,omitempty"`
-	// Execute JavaScript during asset collection (only when browser_mode is enabled)
-	ExecuteJs *bool `json:"execute_js,omitempty"`
 	// URLs to crawl
 	Urls []string `json:"urls,omitempty"`
 	// Starting URLs for crawl
@@ -79,8 +77,6 @@ func NewV2CrawlerRequest(domain string) *V2CrawlerRequest {
 	this.Domain = domain
 	var browserMode bool = false
 	this.BrowserMode = &browserMode
-	var executeJs bool = false
-	this.ExecuteJs = &executeJs
 	return &this
 }
 
@@ -91,8 +87,6 @@ func NewV2CrawlerRequestWithDefaults() *V2CrawlerRequest {
 	this := V2CrawlerRequest{}
 	var browserMode bool = false
 	this.BrowserMode = &browserMode
-	var executeJs bool = false
-	this.ExecuteJs = &executeJs
 	return &this
 }
 
@@ -182,38 +176,6 @@ func (o *V2CrawlerRequest) HasBrowserMode() bool {
 // SetBrowserMode gets a reference to the given bool and assigns it to the BrowserMode field.
 func (o *V2CrawlerRequest) SetBrowserMode(v bool) {
 	o.BrowserMode = &v
-}
-
-// GetExecuteJs returns the ExecuteJs field value if set, zero value otherwise.
-func (o *V2CrawlerRequest) GetExecuteJs() bool {
-	if o == nil || IsNil(o.ExecuteJs) {
-		var ret bool
-		return ret
-	}
-	return *o.ExecuteJs
-}
-
-// GetExecuteJsOk returns a tuple with the ExecuteJs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2CrawlerRequest) GetExecuteJsOk() (*bool, bool) {
-	if o == nil || IsNil(o.ExecuteJs) {
-		return nil, false
-	}
-	return o.ExecuteJs, true
-}
-
-// HasExecuteJs returns a boolean if a field has been set.
-func (o *V2CrawlerRequest) HasExecuteJs() bool {
-	if o != nil && !IsNil(o.ExecuteJs) {
-		return true
-	}
-
-	return false
-}
-
-// SetExecuteJs gets a reference to the given bool and assigns it to the ExecuteJs field.
-func (o *V2CrawlerRequest) SetExecuteJs(v bool) {
-	o.ExecuteJs = &v
 }
 
 // GetUrls returns the Urls field value if set, zero value otherwise.
@@ -841,9 +803,6 @@ func (o V2CrawlerRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BrowserMode) {
 		toSerialize["browser_mode"] = o.BrowserMode
 	}
-	if !IsNil(o.ExecuteJs) {
-		toSerialize["execute_js"] = o.ExecuteJs
-	}
 	if !IsNil(o.Urls) {
 		toSerialize["urls"] = o.Urls
 	}
@@ -947,7 +906,6 @@ func (o *V2CrawlerRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "domain")
 		delete(additionalProperties, "browser_mode")
-		delete(additionalProperties, "execute_js")
 		delete(additionalProperties, "urls")
 		delete(additionalProperties, "start_urls")
 		delete(additionalProperties, "headers")

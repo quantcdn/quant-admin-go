@@ -7932,7 +7932,6 @@ components:
         deleted_at: 2000-01-23T04:56:07.000+00:00
         delay: 4
         depth: -1
-        execute_js: false
         max_hits: 0
         domain: test-domain.com
         name: Test Crawler
@@ -7989,10 +7988,6 @@ components:
           type: string
         browser_mode:
           description: Browser mode enabled
-          example: false
-          type: boolean
-        execute_js:
-          description: Execute JavaScript during asset collection
           example: false
           type: boolean
         workers:
@@ -8138,7 +8133,6 @@ components:
             execute_js: false
           parser:
             enabled: true
-        execute_js: true
         max_hits: 0
         domain: test-domain.com
         name: Test Crawler
@@ -8168,12 +8162,6 @@ components:
           default: false
           description: Enable browser mode
           example: false
-          type: boolean
-        execute_js:
-          default: false
-          description: Execute JavaScript during asset collection (only when browser_mode
-            is enabled)
-          example: true
           type: boolean
         urls:
           description: URLs to crawl

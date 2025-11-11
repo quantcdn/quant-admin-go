@@ -45,8 +45,6 @@ type V2Crawler struct {
 	WebhookExtraVars *string `json:"webhook_extra_vars,omitempty"`
 	// Browser mode enabled
 	BrowserMode *bool `json:"browser_mode,omitempty"`
-	// Execute JavaScript during asset collection
-	ExecuteJs *bool `json:"execute_js,omitempty"`
 	// Number of concurrent workers
 	Workers *int32 `json:"workers,omitempty"`
 	// Delay between requests in seconds
@@ -457,38 +455,6 @@ func (o *V2Crawler) HasBrowserMode() bool {
 // SetBrowserMode gets a reference to the given bool and assigns it to the BrowserMode field.
 func (o *V2Crawler) SetBrowserMode(v bool) {
 	o.BrowserMode = &v
-}
-
-// GetExecuteJs returns the ExecuteJs field value if set, zero value otherwise.
-func (o *V2Crawler) GetExecuteJs() bool {
-	if o == nil || IsNil(o.ExecuteJs) {
-		var ret bool
-		return ret
-	}
-	return *o.ExecuteJs
-}
-
-// GetExecuteJsOk returns a tuple with the ExecuteJs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2Crawler) GetExecuteJsOk() (*bool, bool) {
-	if o == nil || IsNil(o.ExecuteJs) {
-		return nil, false
-	}
-	return o.ExecuteJs, true
-}
-
-// HasExecuteJs returns a boolean if a field has been set.
-func (o *V2Crawler) HasExecuteJs() bool {
-	if o != nil && !IsNil(o.ExecuteJs) {
-		return true
-	}
-
-	return false
-}
-
-// SetExecuteJs gets a reference to the given bool and assigns it to the ExecuteJs field.
-func (o *V2Crawler) SetExecuteJs(v bool) {
-	o.ExecuteJs = &v
 }
 
 // GetWorkers returns the Workers field value if set, zero value otherwise.
@@ -1135,9 +1101,6 @@ func (o V2Crawler) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BrowserMode) {
 		toSerialize["browser_mode"] = o.BrowserMode
 	}
-	if !IsNil(o.ExecuteJs) {
-		toSerialize["execute_js"] = o.ExecuteJs
-	}
 	if !IsNil(o.Workers) {
 		toSerialize["workers"] = o.Workers
 	}
@@ -1254,7 +1217,6 @@ func (o *V2Crawler) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "webhook_auth_header")
 		delete(additionalProperties, "webhook_extra_vars")
 		delete(additionalProperties, "browser_mode")
-		delete(additionalProperties, "execute_js")
 		delete(additionalProperties, "workers")
 		delete(additionalProperties, "delay")
 		delete(additionalProperties, "depth")

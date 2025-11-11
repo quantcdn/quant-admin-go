@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **WebhookAuthHeader** | Pointer to **string** | Authorization header for webhook | [optional] 
 **WebhookExtraVars** | Pointer to **string** | Extra variables for webhook | [optional] 
 **BrowserMode** | Pointer to **bool** | Browser mode enabled | [optional] 
-**ExecuteJs** | Pointer to **bool** | Execute JavaScript during asset collection | [optional] 
 **Workers** | Pointer to **int32** | Number of concurrent workers | [optional] 
 **Delay** | Pointer to **float32** | Delay between requests in seconds | [optional] 
 **Depth** | Pointer to **int32** | Maximum crawl depth | [optional] 
@@ -330,31 +329,6 @@ SetBrowserMode sets BrowserMode field to given value.
 `func (o *V2Crawler) HasBrowserMode() bool`
 
 HasBrowserMode returns a boolean if a field has been set.
-
-### GetExecuteJs
-
-`func (o *V2Crawler) GetExecuteJs() bool`
-
-GetExecuteJs returns the ExecuteJs field if non-nil, zero value otherwise.
-
-### GetExecuteJsOk
-
-`func (o *V2Crawler) GetExecuteJsOk() (*bool, bool)`
-
-GetExecuteJsOk returns a tuple with the ExecuteJs field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExecuteJs
-
-`func (o *V2Crawler) SetExecuteJs(v bool)`
-
-SetExecuteJs sets ExecuteJs field to given value.
-
-### HasExecuteJs
-
-`func (o *V2Crawler) HasExecuteJs() bool`
-
-HasExecuteJs returns a boolean if a field has been set.
 
 ### GetWorkers
 
