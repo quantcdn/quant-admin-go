@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## ProjectsList
 
-> []ProjectsList200ResponseInner ProjectsList(ctx, organization).Execute()
+> []V2Project ProjectsList(ctx, organization).Execute()
 
 Retrieve all projects for an organization
 
@@ -179,7 +179,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.ProjectsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ProjectsList`: []ProjectsList200ResponseInner
+	// response from `ProjectsList`: []V2Project
 	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.ProjectsList`: %v\n", resp)
 }
 ```
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ProjectsList200ResponseInner**](ProjectsList200ResponseInner.md)
+[**[]V2Project**](V2Project.md)
 
 ### Authorization
 

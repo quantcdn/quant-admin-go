@@ -20,10 +20,16 @@ var _ MappedNullable = &V2Project{}
 
 // V2Project struct for V2Project
 type V2Project struct {
+	// Project ID
+	Id int32 `json:"id"`
+	// Project UUID
+	Uuid string `json:"uuid"`
 	// Project name
 	Name string `json:"name"`
 	// Project machine name
 	MachineName string `json:"machine_name"`
+	// Write token for API access
+	WriteToken *string `json:"write_token,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,8 +39,10 @@ type _V2Project V2Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2Project(name string, machineName string) *V2Project {
+func NewV2Project(id int32, uuid string, name string, machineName string) *V2Project {
 	this := V2Project{}
+	this.Id = id
+	this.Uuid = uuid
 	this.Name = name
 	this.MachineName = machineName
 	return &this
@@ -46,6 +54,54 @@ func NewV2Project(name string, machineName string) *V2Project {
 func NewV2ProjectWithDefaults() *V2Project {
 	this := V2Project{}
 	return &this
+}
+
+// GetId returns the Id field value
+func (o *V2Project) GetId() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *V2Project) GetIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *V2Project) SetId(v int32) {
+	o.Id = v
+}
+
+// GetUuid returns the Uuid field value
+func (o *V2Project) GetUuid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Uuid
+}
+
+// GetUuidOk returns a tuple with the Uuid field value
+// and a boolean to check if the value has been set.
+func (o *V2Project) GetUuidOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Uuid, true
+}
+
+// SetUuid sets field value
+func (o *V2Project) SetUuid(v string) {
+	o.Uuid = v
 }
 
 // GetName returns the Name field value
@@ -96,6 +152,38 @@ func (o *V2Project) SetMachineName(v string) {
 	o.MachineName = v
 }
 
+// GetWriteToken returns the WriteToken field value if set, zero value otherwise.
+func (o *V2Project) GetWriteToken() string {
+	if o == nil || IsNil(o.WriteToken) {
+		var ret string
+		return ret
+	}
+	return *o.WriteToken
+}
+
+// GetWriteTokenOk returns a tuple with the WriteToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Project) GetWriteTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.WriteToken) {
+		return nil, false
+	}
+	return o.WriteToken, true
+}
+
+// HasWriteToken returns a boolean if a field has been set.
+func (o *V2Project) HasWriteToken() bool {
+	if o != nil && !IsNil(o.WriteToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetWriteToken gets a reference to the given string and assigns it to the WriteToken field.
+func (o *V2Project) SetWriteToken(v string) {
+	o.WriteToken = &v
+}
+
 func (o V2Project) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -106,8 +194,13 @@ func (o V2Project) MarshalJSON() ([]byte, error) {
 
 func (o V2Project) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["uuid"] = o.Uuid
 	toSerialize["name"] = o.Name
 	toSerialize["machine_name"] = o.MachineName
+	if !IsNil(o.WriteToken) {
+		toSerialize["write_token"] = o.WriteToken
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -121,6 +214,8 @@ func (o *V2Project) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"id",
+		"uuid",
 		"name",
 		"machine_name",
 	}
@@ -152,8 +247,11 @@ func (o *V2Project) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "uuid")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "machine_name")
+		delete(additionalProperties, "write_token")
 		o.AdditionalProperties = additionalProperties
 	}
 

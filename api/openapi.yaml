@@ -1514,7 +1514,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Projects_list_200_response_inner'
+                  $ref: '#/components/schemas/V2Project'
                 type: array
           description: The request has succeeded.
         "400":
@@ -7823,6 +7823,7 @@ components:
         name: Test schedule
         crawler_config_id: 456
         created_at: 2024-01-20T09:15:00Z
+        crawler_uuid: 550e8400-e29b-41d4-a716-446655440000
         id: 1
       properties:
         id:
@@ -7837,6 +7838,10 @@ components:
           description: Crawler config ID
           example: 456
           type: integer
+        crawler_uuid:
+          description: Crawler UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
         project_id:
           description: Project ID
           example: 789
@@ -7897,6 +7902,10 @@ components:
         - /about
         assets:
           network_intercept:
+            enabled: true
+            timeout: 30
+            execute_js: false
+          parser:
             enabled: true
         updated_at: 2024-10-11T16:45:00Z
         project_id: 789
@@ -8065,7 +8074,7 @@ components:
           - url: /sitemap.xml
             recursive: true
           items:
-            type: object
+            $ref: '#/components/schemas/V2Crawler_sitemap_inner'
           type: array
         allowed_domains:
           description: Allowed domains
@@ -8075,11 +8084,7 @@ components:
             type: string
           type: array
         assets:
-          description: Asset harvesting configuration
-          example:
-            network_intercept:
-              enabled: true
-          type: object
+          $ref: '#/components/schemas/V2Crawler_assets'
         created_at:
           description: Creation timestamp
           example: 2024-01-20T09:15:00Z
@@ -8130,6 +8135,9 @@ components:
           network_intercept:
             enabled: true
             timeout: 30
+            execute_js: false
+          parser:
+            enabled: true
         execute_js: true
         max_hits: 0
         domain: test-domain.com
@@ -8268,7 +8276,7 @@ components:
           - url: /sitemap.xml
             recursive: true
           items:
-            type: object
+            $ref: '#/components/schemas/V2Crawler_sitemap_inner'
           type: array
         allowed_domains:
           description: "Allowed domains for multi-domain crawling, automatically enables\
@@ -8284,12 +8292,7 @@ components:
           example: Mozilla/5.0...
           type: string
         assets:
-          description: Asset harvesting configuration
-          example:
-            network_intercept:
-              enabled: true
-              timeout: 30
-          type: object
+          $ref: '#/components/schemas/V2Crawler_assets'
         max_errors:
           description: Maximum errors before stopping crawl
           example: 100
@@ -8478,8 +8481,19 @@ components:
     V2Project:
       example:
         name: Test Project
+        id: 123
         machine_name: test-project
+        write_token: abc123token
+        uuid: 550e8400-e29b-41d4-a716-446655440000
       properties:
+        id:
+          description: Project ID
+          example: 123
+          type: integer
+        uuid:
+          description: Project UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
         name:
           description: Project name
           example: Test Project
@@ -8488,13 +8502,20 @@ components:
           description: Project machine name
           example: test-project
           type: string
+        write_token:
+          description: Write token for API access
+          example: abc123token
+          type: string
       required:
+      - id
       - machine_name
       - name
+      - uuid
       type: object
     V2ProjectRequest:
       example:
         disable_revisions: false
+        basic_auth_preview_only: true
         allow_query_params: true
         basic_auth_password: secure_password123
         name: Test Project
@@ -8530,6 +8551,11 @@ components:
           description: Basic auth password
           example: secure_password123
           type: string
+        basic_auth_preview_only:
+          default: false
+          description: Apply basic auth to preview domain only
+          example: true
+          type: boolean
       type: object
     V2Rule:
       properties:
@@ -8757,6 +8783,7 @@ components:
           port: 80
           env: production
         application_container: web
+        static_error_page: <html><body>Service temporarily unavailable</body></html>
         proxy_strip_headers:
         - Set-Cookie
         - Server
@@ -8770,6 +8797,11 @@ components:
         proxy_inline_fn_enabled: false
         auth_pass: secure_password
         application_port: 80
+        static_error_page_status_codes:
+        - "500"
+        - "502"
+        - "503"
+        - "504"
         failover_mode: true
         application_environment: production
         origin_timeout: "30"
@@ -8983,148 +9015,25 @@ components:
           type: integer
         quant_cloud_selection:
           $ref: '#/components/schemas/V2RuleProxyAction_quant_cloud_selection'
+        static_error_page:
+          description: Static error page content (HTML) to serve on origin errors
+          example: <html><body>Service temporarily unavailable</body></html>
+          nullable: true
+          type: string
+        static_error_page_status_codes:
+          description: Origin status codes that trigger static error page
+          example:
+          - "500"
+          - "502"
+          - "503"
+          - "504"
+          items:
+            type: string
+          type: array
       required:
       - to
       type: object
     V2RuleProxyRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          to:
-            description: Target URL to proxy to
-            example: https://backend.test-domain.com
-            type: string
-          host:
-            description: Host header override
-            example: backend.test-domain.com
-            type: string
-          auth_user:
-            default: ""
-            description: Basic auth username
-            example: admin
-            type: string
-          auth_pass:
-            default: ""
-            description: Basic auth password
-            example: secure_pass
-            type: string
-          disable_ssl_verify:
-            default: false
-            description: Disable SSL verification
-            example: false
-            type: boolean
-          cache_lifetime:
-            description: Cache lifetime
-            example: "3600"
-            nullable: true
-            type: string
-          only_proxy_404:
-            default: false
-            description: Only proxy 404 responses
-            example: false
-            type: boolean
-          inject_headers:
-            additionalProperties:
-              type: string
-            description: Headers to inject
-            example:
-              X-Custom: value
-            nullable: true
-            type: object
-          proxy_strip_headers:
-            description: Headers to strip from response
-            example:
-            - Set-Cookie
-            - Server
-            items:
-              type: string
-            type: array
-          proxy_strip_request_headers:
-            description: Headers to strip from request
-            example:
-            - Cookie
-            - Authorization
-            items:
-              type: string
-            type: array
-          origin_timeout:
-            description: Origin timeout
-            example: "30"
-            type: string
-          failover_mode:
-            default: false
-            description: Enable failover mode
-            example: true
-            type: boolean
-          failover_origin_ttfb:
-            default: "2000"
-            description: Failover TTFB threshold
-            example: "2000"
-            type: string
-          failover_origin_status_codes:
-            description: "Status codes for failover (default: 200,404,301,302,304)"
-            example:
-            - "200"
-            - "404"
-            - "301"
-            - "302"
-            - "304"
-            items:
-              type: string
-            type: array
-          failover_lifetime:
-            default: "300"
-            description: Failover cache lifetime
-            example: "300"
-            type: string
-          failover_s3_bucket:
-            description: Failover S3 bucket
-            example: my-failover-bucket
-            type: string
-          failover_s3_region:
-            description: Failover S3 region
-            example: us-east-1
-            type: string
-          proxy_alert_enabled:
-            default: false
-            description: Proxy alert enabled
-            example: false
-            type: boolean
-          waf_enabled:
-            default: false
-            description: WAF enabled
-            example: false
-            type: boolean
-          waf_config:
-            $ref: '#/components/schemas/WafConfig'
-          application_proxy:
-            default: false
-            description: Enable Quant Cloud application proxy mode
-            example: false
-            type: boolean
-          application_name:
-            description: Quant Cloud application name (required when application_proxy
-              is true)
-            example: my-app
-            type: string
-          application_environment:
-            description: Quant Cloud application environment (required when application_proxy
-              is true)
-            example: production
-            type: string
-          application_container:
-            description: Quant Cloud application container (required when application_proxy
-              is true)
-            example: web
-            type: string
-          application_port:
-            description: Quant Cloud application port (required when application_proxy
-              is true)
-            example: 80
-            type: integer
-        required:
-        - to
-        type: object
       example:
         country: country_is
         cache_lifetime: "3600"
@@ -9139,6 +9048,7 @@ components:
         method_is_not:
         - DELETE
         - PUT
+        static_error_page: <html><body>Service temporarily unavailable</body></html>
         proxy_strip_headers:
         - Set-Cookie
         - Server
@@ -9155,6 +9065,11 @@ components:
         auth_pass: secure_pass
         disabled: false
         application_port: 80
+        static_error_page_status_codes:
+        - "500"
+        - "502"
+        - "503"
+        - "504"
         failover_mode: true
         application_environment: production
         origin_timeout: "30"
@@ -9169,15 +9084,15 @@ components:
         - CA
         - GB
         url:
-        - /old-path/*
-        - /legacy/*
+        - /api/*
+        - /backend/*
         only_proxy_404: false
         inject_headers:
           X-Custom: value
         domain:
         - test-domain.com
         - '*.test-domain.com'
-        name: Test redirect rule
+        name: Test proxy rule
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
@@ -9246,6 +9161,252 @@ components:
         - "302"
         - "304"
         proxy_alert_enabled: false
+      properties:
+        domain:
+          description: "Domain patterns (default: any)"
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        name:
+          description: Rule name
+          example: Test proxy rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        url:
+          description: URL patterns
+          example:
+          - /api/*
+          - /backend/*
+          items:
+            type: string
+          type: array
+        country:
+          description: "Country filter type (country_is, country_is_not, any)"
+          example: country_is
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        method:
+          description: "Method filter type (method_is, method_is_not, any)"
+          example: method_is
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: "IP filter type (ip_is, ip_is_not, any)"
+          example: ip_is
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        to:
+          description: Target URL to proxy to
+          example: https://backend.test-domain.com
+          type: string
+        host:
+          description: Host header override
+          example: backend.test-domain.com
+          type: string
+        auth_user:
+          default: ""
+          description: Basic auth username
+          example: admin
+          type: string
+        auth_pass:
+          default: ""
+          description: Basic auth password
+          example: secure_pass
+          type: string
+        disable_ssl_verify:
+          default: false
+          description: Disable SSL verification
+          example: false
+          type: boolean
+        cache_lifetime:
+          description: Cache lifetime
+          example: "3600"
+          nullable: true
+          type: string
+        only_proxy_404:
+          default: false
+          description: Only proxy 404 responses
+          example: false
+          type: boolean
+        inject_headers:
+          additionalProperties:
+            type: string
+          description: Headers to inject
+          example:
+            X-Custom: value
+          nullable: true
+          type: object
+        proxy_strip_headers:
+          description: Headers to strip from response
+          example:
+          - Set-Cookie
+          - Server
+          items:
+            type: string
+          type: array
+        proxy_strip_request_headers:
+          description: Headers to strip from request
+          example:
+          - Cookie
+          - Authorization
+          items:
+            type: string
+          type: array
+        origin_timeout:
+          description: Origin timeout
+          example: "30"
+          type: string
+        failover_mode:
+          default: false
+          description: Enable failover mode
+          example: true
+          type: boolean
+        failover_origin_ttfb:
+          default: "2000"
+          description: Failover TTFB threshold
+          example: "2000"
+          type: string
+        failover_origin_status_codes:
+          description: "Status codes for failover (default: 200,404,301,302,304)"
+          example:
+          - "200"
+          - "404"
+          - "301"
+          - "302"
+          - "304"
+          items:
+            type: string
+          type: array
+        failover_lifetime:
+          default: "300"
+          description: Failover cache lifetime
+          example: "300"
+          type: string
+        failover_s3_bucket:
+          description: Failover S3 bucket
+          example: my-failover-bucket
+          type: string
+        failover_s3_region:
+          description: Failover S3 region
+          example: us-east-1
+          type: string
+        proxy_alert_enabled:
+          default: false
+          description: Proxy alert enabled
+          example: false
+          type: boolean
+        waf_enabled:
+          default: false
+          description: WAF enabled
+          example: false
+          type: boolean
+        waf_config:
+          $ref: '#/components/schemas/WafConfig'
+        application_proxy:
+          default: false
+          description: Enable Quant Cloud application proxy mode
+          example: false
+          type: boolean
+        application_name:
+          description: Quant Cloud application name (required when application_proxy
+            is true)
+          example: my-app
+          type: string
+        application_environment:
+          description: Quant Cloud application environment (required when application_proxy
+            is true)
+          example: production
+          type: string
+        application_container:
+          description: Quant Cloud application container (required when application_proxy
+            is true)
+          example: web
+          type: string
+        application_port:
+          description: Quant Cloud application port (required when application_proxy
+            is true)
+          example: 80
+          type: integer
+        static_error_page:
+          description: Static error page content (HTML) to serve on origin errors
+          example: <html><body>Service temporarily unavailable</body></html>
+          nullable: true
+          type: string
+        static_error_page_status_codes:
+          description: Origin status codes that trigger static error page
+          example:
+          - "500"
+          - "502"
+          - "503"
+          - "504"
+          items:
+            type: string
+          type: array
+      required:
+      - domain
+      - to
+      - url
       type: object
     V2RuleProxy:
       allOf:
@@ -9306,6 +9467,7 @@ components:
             port: 80
             env: production
           application_container: web
+          static_error_page: <html><body>Service temporarily unavailable</body></html>
           proxy_strip_headers:
           - Set-Cookie
           - Server
@@ -9319,6 +9481,11 @@ components:
           proxy_inline_fn_enabled: false
           auth_pass: secure_password
           application_port: 80
+          static_error_page_status_codes:
+          - "500"
+          - "502"
+          - "503"
+          - "504"
           failover_mode: true
           application_environment: production
           origin_timeout: "30"
@@ -9578,21 +9745,6 @@ components:
           fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
       type: object
     V2RuleRedirectRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          redirect_to:
-            description: Redirect destination URL
-            example: https://test-domain.com/new-path
-            type: string
-          redirect_code:
-            default: "301"
-            description: HTTP status code for redirect
-            example: "301"
-            type: string
-        required:
-        - redirect_to
-        type: object
       example:
         country: country_is
         method: method_is
@@ -9627,31 +9779,116 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+      properties:
+        domain:
+          description: "Domain patterns (default: any)"
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        name:
+          description: Rule name
+          example: Test redirect rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        url:
+          description: URL patterns
+          example:
+          - /old-path/*
+          - /legacy/*
+          items:
+            type: string
+          type: array
+        country:
+          description: "Country filter type (country_is, country_is_not, any)"
+          example: country_is
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        method:
+          description: "Method filter type (method_is, method_is_not, any)"
+          example: method_is
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: "IP filter type (ip_is, ip_is_not, any)"
+          example: ip_is
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        redirect_to:
+          description: Redirect destination URL
+          example: https://test-domain.com/new-path
+          type: string
+        redirect_code:
+          default: "301"
+          description: HTTP status code for redirect
+          example: "301"
+          type: string
+      required:
+      - domain
+      - redirect_to
+      - url
       type: object
     V2RuleCustomResponseRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          custom_response_body:
-            description: Custom response body content
-            example: <html><body>Custom maintenance page</body></html>
-            type: string
-          custom_response_status_code:
-            default: 200
-            description: HTTP status code for custom response
-            example: 503
-            type: integer
-          status_code:
-            description: Legacy field for status code (deprecated)
-            example: 503
-            type: integer
-          body:
-            description: Legacy field for response body (deprecated)
-            example: <html><body>Maintenance</body></html>
-            type: string
-        required:
-        - custom_response_body
-        type: object
       example:
         country: country_is
         status_code: 503
@@ -9675,31 +9912,137 @@ components:
         body: <html><body>Maintenance</body></html>
         uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
-        - /old-path/*
-        - /legacy/*
+        - /maintenance
+        - /down
         country_is_not:
         - CN
         - RU
         domain:
         - test-domain.com
         - '*.test-domain.com'
-        name: Test redirect rule
+        name: Test custom response rule
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+      properties:
+        domain:
+          description: "Domain patterns (default: any)"
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        name:
+          description: Rule name
+          example: Test custom response rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        url:
+          description: URL patterns
+          example:
+          - /maintenance
+          - /down
+          items:
+            type: string
+          type: array
+        country:
+          description: "Country filter type (country_is, country_is_not, any)"
+          example: country_is
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        method:
+          description: "Method filter type (method_is, method_is_not, any)"
+          example: method_is
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: "IP filter type (ip_is, ip_is_not, any)"
+          example: ip_is
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        custom_response_body:
+          description: Custom response body content
+          example: <html><body>Custom maintenance page</body></html>
+          type: string
+        custom_response_status_code:
+          default: 200
+          description: HTTP status code for custom response
+          example: 503
+          type: integer
+        status_code:
+          description: Legacy field for status code (deprecated)
+          example: 503
+          type: integer
+        body:
+          description: Legacy field for response body (deprecated)
+          example: <html><body>Maintenance</body></html>
+          type: string
+      required:
+      - custom_response_body
+      - domain
+      - url
       type: object
     V2RuleContentFilterRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          fn_uuid:
-            description: Function UUID
-            example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
-            type: string
-        required:
-        - fn_uuid
-        type: object
       example:
         country: country_is
         method: method_is
@@ -9719,8 +10062,7 @@ components:
         - PUT
         uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
-        - /old-path/*
-        - /legacy/*
+        - /*
         country_is_not:
         - CN
         - RU
@@ -9728,11 +10070,113 @@ components:
         domain:
         - test-domain.com
         - '*.test-domain.com'
-        name: Test redirect rule
+        name: Test content filter rule
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+      properties:
+        domain:
+          description: "Domain patterns (default: any)"
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        name:
+          description: Rule name
+          example: Test content filter rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        url:
+          description: URL patterns
+          example:
+          - /*
+          items:
+            type: string
+          type: array
+        country:
+          description: "Country filter type (country_is, country_is_not, any)"
+          example: country_is
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        method:
+          description: "Method filter type (method_is, method_is_not, any)"
+          example: method_is
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: "IP filter type (ip_is, ip_is_not, any)"
+          example: ip_is
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        fn_uuid:
+          description: Function UUID
+          example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+          type: string
+      required:
+      - domain
+      - fn_uuid
+      - url
       type: object
     V2RuleServeStaticAction:
       example:
@@ -10013,16 +10457,6 @@ components:
           fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
       type: object
     V2RuleFunctionRequest:
-      allOf:
-      - $ref: '#/components/schemas/V2RuleRequest'
-      - properties:
-          fn_uuid:
-            description: Function UUID
-            example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-            type: string
-        required:
-        - fn_uuid
-        type: object
       example:
         country: country_is
         method: method_is
@@ -10042,8 +10476,7 @@ components:
         - PUT
         uuid: 123e4567-e89b-12d3-a456-426614174000
         url:
-        - /old-path/*
-        - /legacy/*
+        - /*
         country_is_not:
         - CN
         - RU
@@ -10051,11 +10484,113 @@ components:
         domain:
         - test-domain.com
         - '*.test-domain.com'
-        name: Test redirect rule
+        name: Test function rule
         ip_is:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+      properties:
+        domain:
+          description: "Domain patterns (default: any)"
+          example:
+          - test-domain.com
+          - '*.test-domain.com'
+          items:
+            type: string
+          type: array
+        name:
+          description: Rule name
+          example: Test function rule
+          type: string
+        uuid:
+          description: Rule UUID
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        weight:
+          default: 0
+          description: Rule weight
+          example: 100
+          type: integer
+        disabled:
+          default: false
+          description: Whether rule is disabled
+          example: false
+          type: boolean
+        url:
+          description: URL patterns
+          example:
+          - /*
+          items:
+            type: string
+          type: array
+        country:
+          description: "Country filter type (country_is, country_is_not, any)"
+          example: country_is
+          type: string
+        country_is:
+          description: Allowed countries
+          example:
+          - US
+          - CA
+          - GB
+          items:
+            type: string
+          type: array
+        country_is_not:
+          description: Excluded countries
+          example:
+          - CN
+          - RU
+          items:
+            type: string
+          type: array
+        method:
+          description: "Method filter type (method_is, method_is_not, any)"
+          example: method_is
+          type: string
+        method_is:
+          description: Allowed HTTP methods
+          example:
+          - GET
+          - POST
+          items:
+            type: string
+          type: array
+        method_is_not:
+          description: Excluded HTTP methods
+          example:
+          - DELETE
+          - PUT
+          items:
+            type: string
+          type: array
+        ip:
+          description: "IP filter type (ip_is, ip_is_not, any)"
+          example: ip_is
+          type: string
+        ip_is:
+          description: Allowed IP addresses
+          example:
+          - 192.168.1.0/24
+          - 10.0.0.1
+          items:
+            type: string
+          type: array
+        ip_is_not:
+          description: Excluded IP addresses
+          example:
+          - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        fn_uuid:
+          description: Function UUID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+          type: string
+      required:
+      - domain
+      - fn_uuid
+      - url
       type: object
     V2RuleBotChallengeAction:
       example:
@@ -11175,23 +11710,6 @@ components:
           description: Organization machine name
           example: test-org
           type: string
-      type: object
-    Projects_list_200_response_inner:
-      example:
-        name: Test Project
-        machine_name: test-project
-      properties:
-        name:
-          description: Project name
-          example: Test Project
-          type: string
-        machine_name:
-          description: Project machine name
-          example: test-project
-          type: string
-      required:
-      - machine_name
-      - name
       type: object
     Purge_create_request:
       properties:
@@ -13382,6 +13900,56 @@ components:
           type: string
       required:
       - containerName
+      type: object
+    V2Crawler_sitemap_inner:
+      properties:
+        url:
+          description: Sitemap URL
+          example: /sitemap.xml
+          type: string
+        recursive:
+          description: Recursively follow sitemap links
+          example: true
+          type: boolean
+      type: object
+    V2Crawler_assets_network_intercept:
+      description: Network intercept configuration for asset collection
+      properties:
+        enabled:
+          description: Enable network intercept
+          example: true
+          type: boolean
+        timeout:
+          description: Request timeout in seconds
+          example: 30
+          type: integer
+        execute_js:
+          description: Execute JavaScript during asset collection
+          example: false
+          type: boolean
+      type: object
+    V2Crawler_assets_parser:
+      description: Parser configuration for asset extraction
+      properties:
+        enabled:
+          description: Enable parser
+          example: true
+          type: boolean
+      type: object
+    V2Crawler_assets:
+      description: Asset harvesting configuration
+      example:
+        network_intercept:
+          enabled: true
+          timeout: 30
+          execute_js: false
+        parser:
+          enabled: true
+      properties:
+        network_intercept:
+          $ref: '#/components/schemas/V2Crawler_assets_network_intercept'
+        parser:
+          $ref: '#/components/schemas/V2Crawler_assets_parser'
       type: object
     V2RuleProxyAction_notify_config:
       description: Notification configuration (required when notify is slack)

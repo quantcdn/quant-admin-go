@@ -58,8 +58,8 @@ type ProjectsAPI interface {
 	ProjectsList(ctx context.Context, organization string) ProjectsAPIProjectsListRequest
 
 	// ProjectsListExecute executes the request
-	//  @return []ProjectsList200ResponseInner
-	ProjectsListExecute(r ProjectsAPIProjectsListRequest) ([]ProjectsList200ResponseInner, *http.Response, error)
+	//  @return []V2Project
+	ProjectsListExecute(r ProjectsAPIProjectsListRequest) ([]V2Project, *http.Response, error)
 
 	/*
 	ProjectsRead Get details of a single project
@@ -347,7 +347,7 @@ type ProjectsAPIProjectsListRequest struct {
 	organization string
 }
 
-func (r ProjectsAPIProjectsListRequest) Execute() ([]ProjectsList200ResponseInner, *http.Response, error) {
+func (r ProjectsAPIProjectsListRequest) Execute() ([]V2Project, *http.Response, error) {
 	return r.ApiService.ProjectsListExecute(r)
 }
 
@@ -367,13 +367,13 @@ func (a *ProjectsAPIService) ProjectsList(ctx context.Context, organization stri
 }
 
 // Execute executes the request
-//  @return []ProjectsList200ResponseInner
-func (a *ProjectsAPIService) ProjectsListExecute(r ProjectsAPIProjectsListRequest) ([]ProjectsList200ResponseInner, *http.Response, error) {
+//  @return []V2Project
+func (a *ProjectsAPIService) ProjectsListExecute(r ProjectsAPIProjectsListRequest) ([]V2Project, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []ProjectsList200ResponseInner
+		localVarReturnValue  []V2Project
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.ProjectsList")

@@ -149,7 +149,6 @@ docs/ListToolExecutions200ResponseExecutionsInner.md
 docs/OrganizationsAPI.md
 docs/OrganizationsList200ResponseInner.md
 docs/ProjectsAPI.md
-docs/ProjectsList200ResponseInner.md
 docs/PurgeAPI.md
 docs/PurgeCreateRequest.md
 docs/RulesAPI.md
@@ -205,9 +204,13 @@ docs/V1UrlMetaResponse.md
 docs/V1WafLogItem.md
 docs/V1WafLogListResponse.md
 docs/V2Crawler.md
+docs/V2CrawlerAssets.md
+docs/V2CrawlerAssetsNetworkIntercept.md
+docs/V2CrawlerAssetsParser.md
 docs/V2CrawlerRequest.md
 docs/V2CrawlerSchedule.md
 docs/V2CrawlerScheduleRequest.md
+docs/V2CrawlerSitemapInner.md
 docs/V2CustomHeaderRequest.md
 docs/V2Domain.md
 docs/V2DomainRequest.md
@@ -378,7 +381,6 @@ model_list_backups_422_response.go
 model_list_tool_executions_200_response.go
 model_list_tool_executions_200_response_executions_inner.go
 model_organizations_list_200_response_inner.go
-model_projects_list_200_response_inner.go
 model_purge_create_request.go
 model_scaling_policy.go
 model_spot_configuration.go
@@ -430,9 +432,13 @@ model_v1_url_meta_response.go
 model_v1_waf_log_item.go
 model_v1_waf_log_list_response.go
 model_v2_crawler.go
+model_v2_crawler_assets.go
+model_v2_crawler_assets_network_intercept.go
+model_v2_crawler_assets_parser.go
 model_v2_crawler_request.go
 model_v2_crawler_schedule.go
 model_v2_crawler_schedule_request.go
+model_v2_crawler_sitemap_inner.go
 model_v2_custom_header_request.go
 model_v2_domain.go
 model_v2_domain_request.go

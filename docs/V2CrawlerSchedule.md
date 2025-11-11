@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | **int32** | Schedule ID | 
 **Name** | Pointer to **string** | Schedule name | [optional] 
 **CrawlerConfigId** | **int32** | Crawler config ID | 
+**CrawlerUuid** | Pointer to **string** | Crawler UUID | [optional] 
 **ProjectId** | **int32** | Project ID | 
 **CrawlerLastRunId** | **int32** | Last run ID | 
 **ScheduleCronString** | **string** | Cron schedule string | 
@@ -96,6 +97,31 @@ and a boolean to check if the value has been set.
 
 SetCrawlerConfigId sets CrawlerConfigId field to given value.
 
+
+### GetCrawlerUuid
+
+`func (o *V2CrawlerSchedule) GetCrawlerUuid() string`
+
+GetCrawlerUuid returns the CrawlerUuid field if non-nil, zero value otherwise.
+
+### GetCrawlerUuidOk
+
+`func (o *V2CrawlerSchedule) GetCrawlerUuidOk() (*string, bool)`
+
+GetCrawlerUuidOk returns a tuple with the CrawlerUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrawlerUuid
+
+`func (o *V2CrawlerSchedule) SetCrawlerUuid(v string)`
+
+SetCrawlerUuid sets CrawlerUuid field to given value.
+
+### HasCrawlerUuid
+
+`func (o *V2CrawlerSchedule) HasCrawlerUuid() bool`
+
+HasCrawlerUuid returns a boolean if a field has been set.
 
 ### GetProjectId
 

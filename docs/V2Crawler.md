@@ -30,9 +30,9 @@ Name | Type | Description | Notes
 **Headers** | Pointer to **map[string]string** | Custom headers | [optional] 
 **Exclude** | Pointer to **[]string** | URL patterns to exclude | [optional] 
 **Include** | Pointer to **[]string** | URL patterns to include | [optional] 
-**Sitemap** | Pointer to **[]map[string]interface{}** | Sitemap configuration | [optional] 
+**Sitemap** | Pointer to [**[]V2CrawlerSitemapInner**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] 
 **AllowedDomains** | Pointer to **[]string** | Allowed domains | [optional] 
-**Assets** | Pointer to **map[string]interface{}** | Asset harvesting configuration | [optional] 
+**Assets** | Pointer to [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Creation timestamp | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Last update timestamp | [optional] 
 **DeletedAt** | Pointer to **time.Time** | Deletion timestamp | [optional] 
@@ -683,20 +683,20 @@ HasInclude returns a boolean if a field has been set.
 
 ### GetSitemap
 
-`func (o *V2Crawler) GetSitemap() []map[string]interface{}`
+`func (o *V2Crawler) GetSitemap() []V2CrawlerSitemapInner`
 
 GetSitemap returns the Sitemap field if non-nil, zero value otherwise.
 
 ### GetSitemapOk
 
-`func (o *V2Crawler) GetSitemapOk() (*[]map[string]interface{}, bool)`
+`func (o *V2Crawler) GetSitemapOk() (*[]V2CrawlerSitemapInner, bool)`
 
 GetSitemapOk returns a tuple with the Sitemap field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSitemap
 
-`func (o *V2Crawler) SetSitemap(v []map[string]interface{})`
+`func (o *V2Crawler) SetSitemap(v []V2CrawlerSitemapInner)`
 
 SetSitemap sets Sitemap field to given value.
 
@@ -733,20 +733,20 @@ HasAllowedDomains returns a boolean if a field has been set.
 
 ### GetAssets
 
-`func (o *V2Crawler) GetAssets() map[string]interface{}`
+`func (o *V2Crawler) GetAssets() V2CrawlerAssets`
 
 GetAssets returns the Assets field if non-nil, zero value otherwise.
 
 ### GetAssetsOk
 
-`func (o *V2Crawler) GetAssetsOk() (*map[string]interface{}, bool)`
+`func (o *V2Crawler) GetAssetsOk() (*V2CrawlerAssets, bool)`
 
 GetAssetsOk returns a tuple with the Assets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssets
 
-`func (o *V2Crawler) SetAssets(v map[string]interface{})`
+`func (o *V2Crawler) SetAssets(v V2CrawlerAssets)`
 
 SetAssets sets Assets field to given value.
 

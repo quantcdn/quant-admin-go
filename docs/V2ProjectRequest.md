@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **DisableRevisions** | Pointer to **bool** | Disable revisions | [optional] 
 **BasicAuthUsername** | Pointer to **string** | Basic auth username | [optional] 
 **BasicAuthPassword** | Pointer to **string** | Basic auth password | [optional] 
+**BasicAuthPreviewOnly** | Pointer to **bool** | Apply basic auth to preview domain only | [optional] [default to false]
 
 ## Methods
 
@@ -205,6 +206,31 @@ SetBasicAuthPassword sets BasicAuthPassword field to given value.
 `func (o *V2ProjectRequest) HasBasicAuthPassword() bool`
 
 HasBasicAuthPassword returns a boolean if a field has been set.
+
+### GetBasicAuthPreviewOnly
+
+`func (o *V2ProjectRequest) GetBasicAuthPreviewOnly() bool`
+
+GetBasicAuthPreviewOnly returns the BasicAuthPreviewOnly field if non-nil, zero value otherwise.
+
+### GetBasicAuthPreviewOnlyOk
+
+`func (o *V2ProjectRequest) GetBasicAuthPreviewOnlyOk() (*bool, bool)`
+
+GetBasicAuthPreviewOnlyOk returns a tuple with the BasicAuthPreviewOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBasicAuthPreviewOnly
+
+`func (o *V2ProjectRequest) SetBasicAuthPreviewOnly(v bool)`
+
+SetBasicAuthPreviewOnly sets BasicAuthPreviewOnly field to given value.
+
+### HasBasicAuthPreviewOnly
+
+`func (o *V2ProjectRequest) HasBasicAuthPreviewOnly() bool`
+
+HasBasicAuthPreviewOnly returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

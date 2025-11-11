@@ -27,6 +27,8 @@ type V2CrawlerSchedule struct {
 	Name *string `json:"name,omitempty"`
 	// Crawler config ID
 	CrawlerConfigId int32 `json:"crawler_config_id"`
+	// Crawler UUID
+	CrawlerUuid *string `json:"crawler_uuid,omitempty"`
 	// Project ID
 	ProjectId int32 `json:"project_id"`
 	// Last run ID
@@ -142,6 +144,38 @@ func (o *V2CrawlerSchedule) GetCrawlerConfigIdOk() (*int32, bool) {
 // SetCrawlerConfigId sets field value
 func (o *V2CrawlerSchedule) SetCrawlerConfigId(v int32) {
 	o.CrawlerConfigId = v
+}
+
+// GetCrawlerUuid returns the CrawlerUuid field value if set, zero value otherwise.
+func (o *V2CrawlerSchedule) GetCrawlerUuid() string {
+	if o == nil || IsNil(o.CrawlerUuid) {
+		var ret string
+		return ret
+	}
+	return *o.CrawlerUuid
+}
+
+// GetCrawlerUuidOk returns a tuple with the CrawlerUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2CrawlerSchedule) GetCrawlerUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.CrawlerUuid) {
+		return nil, false
+	}
+	return o.CrawlerUuid, true
+}
+
+// HasCrawlerUuid returns a boolean if a field has been set.
+func (o *V2CrawlerSchedule) HasCrawlerUuid() bool {
+	if o != nil && !IsNil(o.CrawlerUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrawlerUuid gets a reference to the given string and assigns it to the CrawlerUuid field.
+func (o *V2CrawlerSchedule) SetCrawlerUuid(v string) {
+	o.CrawlerUuid = &v
 }
 
 // GetProjectId returns the ProjectId field value
@@ -295,6 +329,9 @@ func (o V2CrawlerSchedule) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["crawler_config_id"] = o.CrawlerConfigId
+	if !IsNil(o.CrawlerUuid) {
+		toSerialize["crawler_uuid"] = o.CrawlerUuid
+	}
 	toSerialize["project_id"] = o.ProjectId
 	toSerialize["crawler_last_run_id"] = o.CrawlerLastRunId
 	toSerialize["schedule_cron_string"] = o.ScheduleCronString
@@ -354,6 +391,7 @@ func (o *V2CrawlerSchedule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "crawler_config_id")
+		delete(additionalProperties, "crawler_uuid")
 		delete(additionalProperties, "project_id")
 		delete(additionalProperties, "crawler_last_run_id")
 		delete(additionalProperties, "schedule_cron_string")

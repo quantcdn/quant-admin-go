@@ -74,11 +74,10 @@ type V2Crawler struct {
 	// URL patterns to include
 	Include []string `json:"include,omitempty"`
 	// Sitemap configuration
-	Sitemap []map[string]interface{} `json:"sitemap,omitempty"`
+	Sitemap []V2CrawlerSitemapInner `json:"sitemap,omitempty"`
 	// Allowed domains
 	AllowedDomains []string `json:"allowed_domains,omitempty"`
-	// Asset harvesting configuration
-	Assets map[string]interface{} `json:"assets,omitempty"`
+	Assets *V2CrawlerAssets `json:"assets,omitempty"`
 	// Creation timestamp
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Last update timestamp
@@ -909,9 +908,9 @@ func (o *V2Crawler) SetInclude(v []string) {
 }
 
 // GetSitemap returns the Sitemap field value if set, zero value otherwise.
-func (o *V2Crawler) GetSitemap() []map[string]interface{} {
+func (o *V2Crawler) GetSitemap() []V2CrawlerSitemapInner {
 	if o == nil || IsNil(o.Sitemap) {
-		var ret []map[string]interface{}
+		var ret []V2CrawlerSitemapInner
 		return ret
 	}
 	return o.Sitemap
@@ -919,7 +918,7 @@ func (o *V2Crawler) GetSitemap() []map[string]interface{} {
 
 // GetSitemapOk returns a tuple with the Sitemap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Crawler) GetSitemapOk() ([]map[string]interface{}, bool) {
+func (o *V2Crawler) GetSitemapOk() ([]V2CrawlerSitemapInner, bool) {
 	if o == nil || IsNil(o.Sitemap) {
 		return nil, false
 	}
@@ -935,8 +934,8 @@ func (o *V2Crawler) HasSitemap() bool {
 	return false
 }
 
-// SetSitemap gets a reference to the given []map[string]interface{} and assigns it to the Sitemap field.
-func (o *V2Crawler) SetSitemap(v []map[string]interface{}) {
+// SetSitemap gets a reference to the given []V2CrawlerSitemapInner and assigns it to the Sitemap field.
+func (o *V2Crawler) SetSitemap(v []V2CrawlerSitemapInner) {
 	o.Sitemap = v
 }
 
@@ -973,19 +972,19 @@ func (o *V2Crawler) SetAllowedDomains(v []string) {
 }
 
 // GetAssets returns the Assets field value if set, zero value otherwise.
-func (o *V2Crawler) GetAssets() map[string]interface{} {
+func (o *V2Crawler) GetAssets() V2CrawlerAssets {
 	if o == nil || IsNil(o.Assets) {
-		var ret map[string]interface{}
+		var ret V2CrawlerAssets
 		return ret
 	}
-	return o.Assets
+	return *o.Assets
 }
 
 // GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2Crawler) GetAssetsOk() (map[string]interface{}, bool) {
+func (o *V2Crawler) GetAssetsOk() (*V2CrawlerAssets, bool) {
 	if o == nil || IsNil(o.Assets) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Assets, true
 }
@@ -999,9 +998,9 @@ func (o *V2Crawler) HasAssets() bool {
 	return false
 }
 
-// SetAssets gets a reference to the given map[string]interface{} and assigns it to the Assets field.
-func (o *V2Crawler) SetAssets(v map[string]interface{}) {
-	o.Assets = v
+// SetAssets gets a reference to the given V2CrawlerAssets and assigns it to the Assets field.
+func (o *V2Crawler) SetAssets(v V2CrawlerAssets) {
+	o.Assets = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.

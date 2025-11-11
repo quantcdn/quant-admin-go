@@ -99,6 +99,10 @@ type V2RuleProxyRequest struct {
 	ApplicationContainer *string `json:"application_container,omitempty"`
 	// Quant Cloud application port (required when application_proxy is true)
 	ApplicationPort *int32 `json:"application_port,omitempty"`
+	// Static error page content (HTML) to serve on origin errors
+	StaticErrorPage NullableString `json:"static_error_page,omitempty"`
+	// Origin status codes that trigger static error page
+	StaticErrorPageStatusCodes []string `json:"static_error_page_status_codes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1449,6 +1453,80 @@ func (o *V2RuleProxyRequest) SetApplicationPort(v int32) {
 	o.ApplicationPort = &v
 }
 
+// GetStaticErrorPage returns the StaticErrorPage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *V2RuleProxyRequest) GetStaticErrorPage() string {
+	if o == nil || IsNil(o.StaticErrorPage.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.StaticErrorPage.Get()
+}
+
+// GetStaticErrorPageOk returns a tuple with the StaticErrorPage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *V2RuleProxyRequest) GetStaticErrorPageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StaticErrorPage.Get(), o.StaticErrorPage.IsSet()
+}
+
+// HasStaticErrorPage returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasStaticErrorPage() bool {
+	if o != nil && o.StaticErrorPage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPage gets a reference to the given NullableString and assigns it to the StaticErrorPage field.
+func (o *V2RuleProxyRequest) SetStaticErrorPage(v string) {
+	o.StaticErrorPage.Set(&v)
+}
+// SetStaticErrorPageNil sets the value for StaticErrorPage to be an explicit nil
+func (o *V2RuleProxyRequest) SetStaticErrorPageNil() {
+	o.StaticErrorPage.Set(nil)
+}
+
+// UnsetStaticErrorPage ensures that no value is present for StaticErrorPage, not even an explicit nil
+func (o *V2RuleProxyRequest) UnsetStaticErrorPage() {
+	o.StaticErrorPage.Unset()
+}
+
+// GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field value if set, zero value otherwise.
+func (o *V2RuleProxyRequest) GetStaticErrorPageStatusCodes() []string {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.StaticErrorPageStatusCodes
+}
+
+// GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2RuleProxyRequest) GetStaticErrorPageStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.StaticErrorPageStatusCodes) {
+		return nil, false
+	}
+	return o.StaticErrorPageStatusCodes, true
+}
+
+// HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasStaticErrorPageStatusCodes() bool {
+	if o != nil && !IsNil(o.StaticErrorPageStatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticErrorPageStatusCodes gets a reference to the given []string and assigns it to the StaticErrorPageStatusCodes field.
+func (o *V2RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string) {
+	o.StaticErrorPageStatusCodes = v
+}
+
 func (o V2RuleProxyRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1573,6 +1651,12 @@ func (o V2RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ApplicationPort) {
 		toSerialize["application_port"] = o.ApplicationPort
 	}
+	if o.StaticErrorPage.IsSet() {
+		toSerialize["static_error_page"] = o.StaticErrorPage.Get()
+	}
+	if !IsNil(o.StaticErrorPageStatusCodes) {
+		toSerialize["static_error_page_status_codes"] = o.StaticErrorPageStatusCodes
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1658,6 +1742,8 @@ func (o *V2RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "application_environment")
 		delete(additionalProperties, "application_container")
 		delete(additionalProperties, "application_port")
+		delete(additionalProperties, "static_error_page")
+		delete(additionalProperties, "static_error_page_status_codes")
 		o.AdditionalProperties = additionalProperties
 	}
 

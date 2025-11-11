@@ -44,6 +44,8 @@ Name | Type | Description | Notes
 **ApplicationEnvironment** | Pointer to **string** | Quant Cloud application environment (required when application_proxy is true) | [optional] 
 **ApplicationContainer** | Pointer to **string** | Quant Cloud application container (required when application_proxy is true) | [optional] 
 **ApplicationPort** | Pointer to **int32** | Quant Cloud application port (required when application_proxy is true) | [optional] 
+**StaticErrorPage** | Pointer to **NullableString** | Static error page content (HTML) to serve on origin errors | [optional] 
+**StaticErrorPageStatusCodes** | Pointer to **[]string** | Origin status codes that trigger static error page | [optional] 
 
 ## Methods
 
@@ -1078,6 +1080,66 @@ SetApplicationPort sets ApplicationPort field to given value.
 `func (o *V2RuleProxyRequest) HasApplicationPort() bool`
 
 HasApplicationPort returns a boolean if a field has been set.
+
+### GetStaticErrorPage
+
+`func (o *V2RuleProxyRequest) GetStaticErrorPage() string`
+
+GetStaticErrorPage returns the StaticErrorPage field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageOk
+
+`func (o *V2RuleProxyRequest) GetStaticErrorPageOk() (*string, bool)`
+
+GetStaticErrorPageOk returns a tuple with the StaticErrorPage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPage
+
+`func (o *V2RuleProxyRequest) SetStaticErrorPage(v string)`
+
+SetStaticErrorPage sets StaticErrorPage field to given value.
+
+### HasStaticErrorPage
+
+`func (o *V2RuleProxyRequest) HasStaticErrorPage() bool`
+
+HasStaticErrorPage returns a boolean if a field has been set.
+
+### SetStaticErrorPageNil
+
+`func (o *V2RuleProxyRequest) SetStaticErrorPageNil(b bool)`
+
+ SetStaticErrorPageNil sets the value for StaticErrorPage to be an explicit nil
+
+### UnsetStaticErrorPage
+`func (o *V2RuleProxyRequest) UnsetStaticErrorPage()`
+
+UnsetStaticErrorPage ensures that no value is present for StaticErrorPage, not even an explicit nil
+### GetStaticErrorPageStatusCodes
+
+`func (o *V2RuleProxyRequest) GetStaticErrorPageStatusCodes() []string`
+
+GetStaticErrorPageStatusCodes returns the StaticErrorPageStatusCodes field if non-nil, zero value otherwise.
+
+### GetStaticErrorPageStatusCodesOk
+
+`func (o *V2RuleProxyRequest) GetStaticErrorPageStatusCodesOk() (*[]string, bool)`
+
+GetStaticErrorPageStatusCodesOk returns a tuple with the StaticErrorPageStatusCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticErrorPageStatusCodes
+
+`func (o *V2RuleProxyRequest) SetStaticErrorPageStatusCodes(v []string)`
+
+SetStaticErrorPageStatusCodes sets StaticErrorPageStatusCodes field to given value.
+
+### HasStaticErrorPageStatusCodes
+
+`func (o *V2RuleProxyRequest) HasStaticErrorPageStatusCodes() bool`
+
+HasStaticErrorPageStatusCodes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

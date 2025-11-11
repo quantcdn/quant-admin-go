@@ -22,10 +22,10 @@ Name | Type | Description | Notes
 **MaxHits** | Pointer to **int32** | Maximum total requests, 0 for unlimited (default: 0, non-default requires verification) | [optional] 
 **MaxHtml** | Pointer to **int32** | Maximum HTML pages, 0 for unlimited (default: org limit, non-default requires verification) | [optional] 
 **StatusOk** | Pointer to **[]int32** | HTTP status codes that will result in content being captured and pushed to Quant | [optional] 
-**Sitemap** | Pointer to **[]map[string]interface{}** | Sitemap configuration | [optional] 
+**Sitemap** | Pointer to [**[]V2CrawlerSitemapInner**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] 
 **AllowedDomains** | Pointer to **[]string** | Allowed domains for multi-domain crawling, automatically enables merge_domains | [optional] 
 **UserAgent** | Pointer to **string** | Custom user agent, only when browser_mode is false | [optional] 
-**Assets** | Pointer to **map[string]interface{}** | Asset harvesting configuration | [optional] 
+**Assets** | Pointer to [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] 
 **MaxErrors** | Pointer to **int32** | Maximum errors before stopping crawl | [optional] 
 
 ## Methods
@@ -494,20 +494,20 @@ HasStatusOk returns a boolean if a field has been set.
 
 ### GetSitemap
 
-`func (o *V2CrawlerRequest) GetSitemap() []map[string]interface{}`
+`func (o *V2CrawlerRequest) GetSitemap() []V2CrawlerSitemapInner`
 
 GetSitemap returns the Sitemap field if non-nil, zero value otherwise.
 
 ### GetSitemapOk
 
-`func (o *V2CrawlerRequest) GetSitemapOk() (*[]map[string]interface{}, bool)`
+`func (o *V2CrawlerRequest) GetSitemapOk() (*[]V2CrawlerSitemapInner, bool)`
 
 GetSitemapOk returns a tuple with the Sitemap field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSitemap
 
-`func (o *V2CrawlerRequest) SetSitemap(v []map[string]interface{})`
+`func (o *V2CrawlerRequest) SetSitemap(v []V2CrawlerSitemapInner)`
 
 SetSitemap sets Sitemap field to given value.
 
@@ -569,20 +569,20 @@ HasUserAgent returns a boolean if a field has been set.
 
 ### GetAssets
 
-`func (o *V2CrawlerRequest) GetAssets() map[string]interface{}`
+`func (o *V2CrawlerRequest) GetAssets() V2CrawlerAssets`
 
 GetAssets returns the Assets field if non-nil, zero value otherwise.
 
 ### GetAssetsOk
 
-`func (o *V2CrawlerRequest) GetAssetsOk() (*map[string]interface{}, bool)`
+`func (o *V2CrawlerRequest) GetAssetsOk() (*V2CrawlerAssets, bool)`
 
 GetAssetsOk returns a tuple with the Assets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssets
 
-`func (o *V2CrawlerRequest) SetAssets(v map[string]interface{})`
+`func (o *V2CrawlerRequest) SetAssets(v V2CrawlerAssets)`
 
 SetAssets sets Assets field to given value.
 

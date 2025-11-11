@@ -33,6 +33,8 @@ type V2ProjectRequest struct {
 	BasicAuthUsername *string `json:"basic_auth_username,omitempty"`
 	// Basic auth password
 	BasicAuthPassword *string `json:"basic_auth_password,omitempty"`
+	// Apply basic auth to preview domain only
+	BasicAuthPreviewOnly *bool `json:"basic_auth_preview_only,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,6 +46,8 @@ type _V2ProjectRequest V2ProjectRequest
 // will change when the set of required properties is changed
 func NewV2ProjectRequest() *V2ProjectRequest {
 	this := V2ProjectRequest{}
+	var basicAuthPreviewOnly bool = false
+	this.BasicAuthPreviewOnly = &basicAuthPreviewOnly
 	return &this
 }
 
@@ -52,6 +56,8 @@ func NewV2ProjectRequest() *V2ProjectRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewV2ProjectRequestWithDefaults() *V2ProjectRequest {
 	this := V2ProjectRequest{}
+	var basicAuthPreviewOnly bool = false
+	this.BasicAuthPreviewOnly = &basicAuthPreviewOnly
 	return &this
 }
 
@@ -279,6 +285,38 @@ func (o *V2ProjectRequest) SetBasicAuthPassword(v string) {
 	o.BasicAuthPassword = &v
 }
 
+// GetBasicAuthPreviewOnly returns the BasicAuthPreviewOnly field value if set, zero value otherwise.
+func (o *V2ProjectRequest) GetBasicAuthPreviewOnly() bool {
+	if o == nil || IsNil(o.BasicAuthPreviewOnly) {
+		var ret bool
+		return ret
+	}
+	return *o.BasicAuthPreviewOnly
+}
+
+// GetBasicAuthPreviewOnlyOk returns a tuple with the BasicAuthPreviewOnly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2ProjectRequest) GetBasicAuthPreviewOnlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.BasicAuthPreviewOnly) {
+		return nil, false
+	}
+	return o.BasicAuthPreviewOnly, true
+}
+
+// HasBasicAuthPreviewOnly returns a boolean if a field has been set.
+func (o *V2ProjectRequest) HasBasicAuthPreviewOnly() bool {
+	if o != nil && !IsNil(o.BasicAuthPreviewOnly) {
+		return true
+	}
+
+	return false
+}
+
+// SetBasicAuthPreviewOnly gets a reference to the given bool and assigns it to the BasicAuthPreviewOnly field.
+func (o *V2ProjectRequest) SetBasicAuthPreviewOnly(v bool) {
+	o.BasicAuthPreviewOnly = &v
+}
+
 func (o V2ProjectRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -310,6 +348,9 @@ func (o V2ProjectRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BasicAuthPassword) {
 		toSerialize["basic_auth_password"] = o.BasicAuthPassword
 	}
+	if !IsNil(o.BasicAuthPreviewOnly) {
+		toSerialize["basic_auth_preview_only"] = o.BasicAuthPreviewOnly
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -339,6 +380,7 @@ func (o *V2ProjectRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "disable_revisions")
 		delete(additionalProperties, "basic_auth_username")
 		delete(additionalProperties, "basic_auth_password")
+		delete(additionalProperties, "basic_auth_preview_only")
 		o.AdditionalProperties = additionalProperties
 	}
 

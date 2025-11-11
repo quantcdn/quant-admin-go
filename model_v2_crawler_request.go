@@ -57,13 +57,12 @@ type V2CrawlerRequest struct {
 	// HTTP status codes that will result in content being captured and pushed to Quant
 	StatusOk []int32 `json:"status_ok,omitempty"`
 	// Sitemap configuration
-	Sitemap []map[string]interface{} `json:"sitemap,omitempty"`
+	Sitemap []V2CrawlerSitemapInner `json:"sitemap,omitempty"`
 	// Allowed domains for multi-domain crawling, automatically enables merge_domains
 	AllowedDomains []string `json:"allowed_domains,omitempty"`
 	// Custom user agent, only when browser_mode is false
 	UserAgent *string `json:"user_agent,omitempty"`
-	// Asset harvesting configuration
-	Assets map[string]interface{} `json:"assets,omitempty"`
+	Assets *V2CrawlerAssets `json:"assets,omitempty"`
 	// Maximum errors before stopping crawl
 	MaxErrors *int32 `json:"max_errors,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -666,9 +665,9 @@ func (o *V2CrawlerRequest) SetStatusOk(v []int32) {
 }
 
 // GetSitemap returns the Sitemap field value if set, zero value otherwise.
-func (o *V2CrawlerRequest) GetSitemap() []map[string]interface{} {
+func (o *V2CrawlerRequest) GetSitemap() []V2CrawlerSitemapInner {
 	if o == nil || IsNil(o.Sitemap) {
-		var ret []map[string]interface{}
+		var ret []V2CrawlerSitemapInner
 		return ret
 	}
 	return o.Sitemap
@@ -676,7 +675,7 @@ func (o *V2CrawlerRequest) GetSitemap() []map[string]interface{} {
 
 // GetSitemapOk returns a tuple with the Sitemap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2CrawlerRequest) GetSitemapOk() ([]map[string]interface{}, bool) {
+func (o *V2CrawlerRequest) GetSitemapOk() ([]V2CrawlerSitemapInner, bool) {
 	if o == nil || IsNil(o.Sitemap) {
 		return nil, false
 	}
@@ -692,8 +691,8 @@ func (o *V2CrawlerRequest) HasSitemap() bool {
 	return false
 }
 
-// SetSitemap gets a reference to the given []map[string]interface{} and assigns it to the Sitemap field.
-func (o *V2CrawlerRequest) SetSitemap(v []map[string]interface{}) {
+// SetSitemap gets a reference to the given []V2CrawlerSitemapInner and assigns it to the Sitemap field.
+func (o *V2CrawlerRequest) SetSitemap(v []V2CrawlerSitemapInner) {
 	o.Sitemap = v
 }
 
@@ -762,19 +761,19 @@ func (o *V2CrawlerRequest) SetUserAgent(v string) {
 }
 
 // GetAssets returns the Assets field value if set, zero value otherwise.
-func (o *V2CrawlerRequest) GetAssets() map[string]interface{} {
+func (o *V2CrawlerRequest) GetAssets() V2CrawlerAssets {
 	if o == nil || IsNil(o.Assets) {
-		var ret map[string]interface{}
+		var ret V2CrawlerAssets
 		return ret
 	}
-	return o.Assets
+	return *o.Assets
 }
 
 // GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V2CrawlerRequest) GetAssetsOk() (map[string]interface{}, bool) {
+func (o *V2CrawlerRequest) GetAssetsOk() (*V2CrawlerAssets, bool) {
 	if o == nil || IsNil(o.Assets) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Assets, true
 }
@@ -788,9 +787,9 @@ func (o *V2CrawlerRequest) HasAssets() bool {
 	return false
 }
 
-// SetAssets gets a reference to the given map[string]interface{} and assigns it to the Assets field.
-func (o *V2CrawlerRequest) SetAssets(v map[string]interface{}) {
-	o.Assets = v
+// SetAssets gets a reference to the given V2CrawlerAssets and assigns it to the Assets field.
+func (o *V2CrawlerRequest) SetAssets(v V2CrawlerAssets) {
+	o.Assets = &v
 }
 
 // GetMaxErrors returns the MaxErrors field value if set, zero value otherwise.
