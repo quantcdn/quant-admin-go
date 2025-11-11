@@ -5570,7 +5570,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Environment'
+                $ref: '#/components/schemas/EnvironmentResponse'
           description: The environment created
         "400":
           description: The environment data is invalid
@@ -5645,8 +5645,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Environment'
-          description: The environment
+                $ref: '#/components/schemas/EnvironmentResponse'
+          description: The environment with runtime details
         "404":
           description: The environment not found
       summary: Get a single environment
@@ -6715,6 +6715,12 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createVolume_request'
+        required: true
       responses:
         "201":
           content:
@@ -7653,6 +7659,34 @@ components:
           type: string
       type: object
     Environment:
+      description: Environment creation/update request schema
+      example:
+        envName: envName
+        desiredCount: 0
+        maxCapacity: 1
+        minCapacity: 6
+        cloneConfigurationFrom: cloneConfigurationFrom
+        imageSuffix: imageSuffix
+      properties:
+        envName:
+          type: string
+        desiredCount:
+          type: integer
+        minCapacity:
+          type: integer
+        maxCapacity:
+          type: integer
+        cloneConfigurationFrom:
+          type: string
+        imageSuffix:
+          description: Image tag suffix for cloning
+          pattern: "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+          type: string
+      required:
+      - envName
+      type: object
+    EnvironmentResponse:
+      description: Environment response schema with runtime details
       example:
         cron:
         - schedule: schedule
@@ -7662,7 +7696,8 @@ components:
           name: name
           command: command
         subnet: "{}"
-        desiredCount: 6
+        publicIpAddress: 54.123.45.67
+        desiredCount: 2
         vpc: "{}"
         volumes:
         - createdAt: createdAt
@@ -7683,54 +7718,98 @@ components:
           environmentEfsId: environmentEfsId
         maxCapacity: 5
         securityGroup: "{}"
-        envName: envName
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        deploymentStatus: COMPLETED
+        envName: production
         service: "{}"
         loadBalancer: "{}"
-        runningCount: 0
+        runningCount: 2
         minCapacity: 1
-        cloneConfigurationFrom: cloneConfigurationFrom
+        containers:
+        - "{}"
+        - "{}"
+        albRouting: "{}"
         taskDefinition: "{}"
-        imageSuffix: imageSuffix
-        status: status
+        status: ACTIVE
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         envName:
+          description: Environment name
+          example: production
           type: string
         status:
+          description: Environment status
+          example: ACTIVE
           type: string
         runningCount:
+          description: Number of running tasks
+          example: 2
           type: integer
         desiredCount:
+          description: Desired number of tasks
+          example: 2
           type: integer
         minCapacity:
+          description: Minimum capacity for autoscaling
+          example: 1
           type: integer
         maxCapacity:
+          description: Maximum capacity for autoscaling
+          example: 5
           type: integer
-        cloneConfigurationFrom:
+        publicIpAddress:
+          description: Public IP address for SSH access
+          example: 54.123.45.67
+          nullable: true
           type: string
-        imageSuffix:
-          description: Image tag suffix for cloning
-          pattern: "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+        deploymentStatus:
+          description: Deployment status
+          example: COMPLETED
           type: string
         taskDefinition:
+          description: ECS task definition details
           type: object
         service:
+          description: ECS service details
           type: object
         loadBalancer:
+          description: Load balancer configuration
           type: object
         securityGroup:
+          description: Security group configuration
           type: object
         subnet:
+          description: Subnet configuration
           type: object
         vpc:
+          description: VPC configuration
           type: object
+        containers:
+          description: Container configurations
+          items:
+            type: object
+          type: array
         volumes:
+          description: Persistent storage volumes
           items:
             $ref: '#/components/schemas/Volume'
           type: array
         cron:
+          description: Scheduled cron jobs
           items:
             $ref: '#/components/schemas/Cron'
           type: array
+        albRouting:
+          description: ALB routing configuration
+          type: object
+        createdAt:
+          description: Creation timestamp
+          format: date-time
+          type: string
+        updatedAt:
+          description: Last update timestamp
+          format: date-time
+          type: string
       required:
       - envName
       type: object
@@ -13608,6 +13687,22 @@ components:
       properties:
         value:
           type: string
+      type: object
+    createVolume_request:
+      properties:
+        volumeName:
+          description: Volume name
+          type: string
+        description:
+          description: Volume description
+          nullable: true
+          type: string
+        rootDirectory:
+          description: Root directory path
+          nullable: true
+          type: string
+      required:
+      - volumeName
       type: object
     CreateApplicationRequest_database:
       description: Optional database configuration

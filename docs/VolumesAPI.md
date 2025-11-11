@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateVolume
 
-> Volume CreateVolume(ctx, organisation, application, environment).Execute()
+> Volume CreateVolume(ctx, organisation, application, environment).CreateVolumeRequest(createVolumeRequest).Execute()
 
 Create a new volume
 
@@ -33,10 +33,11 @@ func main() {
 	organisation := "organisation_example" // string | The organisation ID
 	application := "application_example" // string | The application ID
 	environment := "environment_example" // string | The environment ID
+	createVolumeRequest := *openapiclient.NewCreateVolumeRequest("VolumeName_example") // CreateVolumeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.VolumesAPI.CreateVolume(context.Background(), organisation, application, environment).Execute()
+	resp, r, err := apiClient.VolumesAPI.CreateVolume(context.Background(), organisation, application, environment).CreateVolumeRequest(createVolumeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `VolumesAPI.CreateVolume``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 
 
 
+ **createVolumeRequest** | [**CreateVolumeRequest**](CreateVolumeRequest.md) |  | 
 
 ### Return type
 
@@ -77,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

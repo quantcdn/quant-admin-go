@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateEnvironment
 
-> Environment CreateEnvironment(ctx, organisation, application).CreateEnvironmentRequest(createEnvironmentRequest).Execute()
+> EnvironmentResponse CreateEnvironment(ctx, organisation, application).CreateEnvironmentRequest(createEnvironmentRequest).Execute()
 
 Create a new environment
 
@@ -47,7 +47,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.CreateEnvironment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateEnvironment`: Environment
+	// response from `CreateEnvironment`: EnvironmentResponse
 	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.CreateEnvironment`: %v\n", resp)
 }
 ```
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Environment**](Environment.md)
+[**EnvironmentResponse**](EnvironmentResponse.md)
 
 ### Authorization
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## GetEnvironment
 
-> Environment GetEnvironment(ctx, organisation, application, environment).Execute()
+> EnvironmentResponse GetEnvironment(ctx, organisation, application, environment).Execute()
 
 Get a single environment
 
@@ -192,7 +192,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.GetEnvironment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetEnvironment`: Environment
+	// response from `GetEnvironment`: EnvironmentResponse
 	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.GetEnvironment`: %v\n", resp)
 }
 ```
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Environment**](Environment.md)
+[**EnvironmentResponse**](EnvironmentResponse.md)
 
 ### Authorization
 

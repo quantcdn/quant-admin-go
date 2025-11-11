@@ -33,8 +33,8 @@ type EnvironmentsAPI interface {
 	CreateEnvironment(ctx context.Context, organisation string, application string) EnvironmentsAPICreateEnvironmentRequest
 
 	// CreateEnvironmentExecute executes the request
-	//  @return Environment
-	CreateEnvironmentExecute(r EnvironmentsAPICreateEnvironmentRequest) (*Environment, *http.Response, error)
+	//  @return EnvironmentResponse
+	CreateEnvironmentExecute(r EnvironmentsAPICreateEnvironmentRequest) (*EnvironmentResponse, *http.Response, error)
 
 	/*
 	DeleteEnvironment Delete an environment
@@ -62,8 +62,8 @@ type EnvironmentsAPI interface {
 	GetEnvironment(ctx context.Context, organisation string, application string, environment string) EnvironmentsAPIGetEnvironmentRequest
 
 	// GetEnvironmentExecute executes the request
-	//  @return Environment
-	GetEnvironmentExecute(r EnvironmentsAPIGetEnvironmentRequest) (*Environment, *http.Response, error)
+	//  @return EnvironmentResponse
+	GetEnvironmentExecute(r EnvironmentsAPIGetEnvironmentRequest) (*EnvironmentResponse, *http.Response, error)
 
 	/*
 	GetEnvironmentLogs Get the logs for an environment
@@ -192,7 +192,7 @@ func (r EnvironmentsAPICreateEnvironmentRequest) CreateEnvironmentRequest(create
 	return r
 }
 
-func (r EnvironmentsAPICreateEnvironmentRequest) Execute() (*Environment, *http.Response, error) {
+func (r EnvironmentsAPICreateEnvironmentRequest) Execute() (*EnvironmentResponse, *http.Response, error) {
 	return r.ApiService.CreateEnvironmentExecute(r)
 }
 
@@ -214,13 +214,13 @@ func (a *EnvironmentsAPIService) CreateEnvironment(ctx context.Context, organisa
 }
 
 // Execute executes the request
-//  @return Environment
-func (a *EnvironmentsAPIService) CreateEnvironmentExecute(r EnvironmentsAPICreateEnvironmentRequest) (*Environment, *http.Response, error) {
+//  @return EnvironmentResponse
+func (a *EnvironmentsAPIService) CreateEnvironmentExecute(r EnvironmentsAPICreateEnvironmentRequest) (*EnvironmentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Environment
+		localVarReturnValue  *EnvironmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.CreateEnvironment")
@@ -401,7 +401,7 @@ type EnvironmentsAPIGetEnvironmentRequest struct {
 	environment string
 }
 
-func (r EnvironmentsAPIGetEnvironmentRequest) Execute() (*Environment, *http.Response, error) {
+func (r EnvironmentsAPIGetEnvironmentRequest) Execute() (*EnvironmentResponse, *http.Response, error) {
 	return r.ApiService.GetEnvironmentExecute(r)
 }
 
@@ -425,13 +425,13 @@ func (a *EnvironmentsAPIService) GetEnvironment(ctx context.Context, organisatio
 }
 
 // Execute executes the request
-//  @return Environment
-func (a *EnvironmentsAPIService) GetEnvironmentExecute(r EnvironmentsAPIGetEnvironmentRequest) (*Environment, *http.Response, error) {
+//  @return EnvironmentResponse
+func (a *EnvironmentsAPIService) GetEnvironmentExecute(r EnvironmentsAPIGetEnvironmentRequest) (*EnvironmentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Environment
+		localVarReturnValue  *EnvironmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.GetEnvironment")

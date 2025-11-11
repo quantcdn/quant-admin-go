@@ -91,6 +91,7 @@ docs/CreateCommandRequest.md
 docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
 docs/CreateEnvironmentRequest.md
+docs/CreateVolumeRequest.md
 docs/Cron.md
 docs/CronAPI.md
 docs/CronRun.md
@@ -104,6 +105,7 @@ docs/Embeddings200ResponseUsage.md
 docs/EmbeddingsRequest.md
 docs/EmbeddingsRequestInput.md
 docs/Environment.md
+docs/EnvironmentResponse.md
 docs/EnvironmentsAPI.md
 docs/GetAIConfig200Response.md
 docs/GetAISession200Response.md
@@ -330,6 +332,7 @@ model_create_command_request.go
 model_create_cron_job_422_response.go
 model_create_cron_job_request.go
 model_create_environment_request.go
+model_create_volume_request.go
 model_cron.go
 model_cron_run.go
 model_delete_ai_session_200_response.go
@@ -341,6 +344,7 @@ model_embeddings_200_response_usage.go
 model_embeddings_request.go
 model_embeddings_request_input.go
 model_environment.go
+model_environment_response.go
 model_get_ai_config_200_response.go
 model_get_ai_session_200_response.go
 model_get_ai_usage_stats_200_response.go

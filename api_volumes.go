@@ -93,6 +93,12 @@ type VolumesAPICreateVolumeRequest struct {
 	organisation string
 	application string
 	environment string
+	createVolumeRequest *CreateVolumeRequest
+}
+
+func (r VolumesAPICreateVolumeRequest) CreateVolumeRequest(createVolumeRequest CreateVolumeRequest) VolumesAPICreateVolumeRequest {
+	r.createVolumeRequest = &createVolumeRequest
+	return r
 }
 
 func (r VolumesAPICreateVolumeRequest) Execute() (*Volume, *http.Response, error) {
@@ -141,9 +147,12 @@ func (a *VolumesAPIService) CreateVolumeExecute(r VolumesAPICreateVolumeRequest)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createVolumeRequest == nil {
+		return localVarReturnValue, nil, reportError("createVolumeRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -159,6 +168,8 @@ func (a *VolumesAPIService) CreateVolumeExecute(r VolumesAPICreateVolumeRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.createVolumeRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

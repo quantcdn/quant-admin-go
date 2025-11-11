@@ -18,25 +18,15 @@ import (
 // checks if the Environment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Environment{}
 
-// Environment struct for Environment
+// Environment Environment creation/update request schema
 type Environment struct {
 	EnvName string `json:"envName"`
-	Status *string `json:"status,omitempty"`
-	RunningCount *int32 `json:"runningCount,omitempty"`
 	DesiredCount *int32 `json:"desiredCount,omitempty"`
 	MinCapacity *int32 `json:"minCapacity,omitempty"`
 	MaxCapacity *int32 `json:"maxCapacity,omitempty"`
 	CloneConfigurationFrom *string `json:"cloneConfigurationFrom,omitempty"`
 	// Image tag suffix for cloning
 	ImageSuffix *string `json:"imageSuffix,omitempty" validate:"regexp=^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"`
-	TaskDefinition map[string]interface{} `json:"taskDefinition,omitempty"`
-	Service map[string]interface{} `json:"service,omitempty"`
-	LoadBalancer map[string]interface{} `json:"loadBalancer,omitempty"`
-	SecurityGroup map[string]interface{} `json:"securityGroup,omitempty"`
-	Subnet map[string]interface{} `json:"subnet,omitempty"`
-	Vpc map[string]interface{} `json:"vpc,omitempty"`
-	Volumes []Volume `json:"volumes,omitempty"`
-	Cron []Cron `json:"cron,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -82,70 +72,6 @@ func (o *Environment) GetEnvNameOk() (*string, bool) {
 // SetEnvName sets field value
 func (o *Environment) SetEnvName(v string) {
 	o.EnvName = v
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *Environment) GetStatus() string {
-	if o == nil || IsNil(o.Status) {
-		var ret string
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.Status) {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *Environment) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *Environment) SetStatus(v string) {
-	o.Status = &v
-}
-
-// GetRunningCount returns the RunningCount field value if set, zero value otherwise.
-func (o *Environment) GetRunningCount() int32 {
-	if o == nil || IsNil(o.RunningCount) {
-		var ret int32
-		return ret
-	}
-	return *o.RunningCount
-}
-
-// GetRunningCountOk returns a tuple with the RunningCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetRunningCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.RunningCount) {
-		return nil, false
-	}
-	return o.RunningCount, true
-}
-
-// HasRunningCount returns a boolean if a field has been set.
-func (o *Environment) HasRunningCount() bool {
-	if o != nil && !IsNil(o.RunningCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetRunningCount gets a reference to the given int32 and assigns it to the RunningCount field.
-func (o *Environment) SetRunningCount(v int32) {
-	o.RunningCount = &v
 }
 
 // GetDesiredCount returns the DesiredCount field value if set, zero value otherwise.
@@ -308,262 +234,6 @@ func (o *Environment) SetImageSuffix(v string) {
 	o.ImageSuffix = &v
 }
 
-// GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise.
-func (o *Environment) GetTaskDefinition() map[string]interface{} {
-	if o == nil || IsNil(o.TaskDefinition) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.TaskDefinition
-}
-
-// GetTaskDefinitionOk returns a tuple with the TaskDefinition field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetTaskDefinitionOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.TaskDefinition) {
-		return map[string]interface{}{}, false
-	}
-	return o.TaskDefinition, true
-}
-
-// HasTaskDefinition returns a boolean if a field has been set.
-func (o *Environment) HasTaskDefinition() bool {
-	if o != nil && !IsNil(o.TaskDefinition) {
-		return true
-	}
-
-	return false
-}
-
-// SetTaskDefinition gets a reference to the given map[string]interface{} and assigns it to the TaskDefinition field.
-func (o *Environment) SetTaskDefinition(v map[string]interface{}) {
-	o.TaskDefinition = v
-}
-
-// GetService returns the Service field value if set, zero value otherwise.
-func (o *Environment) GetService() map[string]interface{} {
-	if o == nil || IsNil(o.Service) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Service
-}
-
-// GetServiceOk returns a tuple with the Service field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetServiceOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Service) {
-		return map[string]interface{}{}, false
-	}
-	return o.Service, true
-}
-
-// HasService returns a boolean if a field has been set.
-func (o *Environment) HasService() bool {
-	if o != nil && !IsNil(o.Service) {
-		return true
-	}
-
-	return false
-}
-
-// SetService gets a reference to the given map[string]interface{} and assigns it to the Service field.
-func (o *Environment) SetService(v map[string]interface{}) {
-	o.Service = v
-}
-
-// GetLoadBalancer returns the LoadBalancer field value if set, zero value otherwise.
-func (o *Environment) GetLoadBalancer() map[string]interface{} {
-	if o == nil || IsNil(o.LoadBalancer) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.LoadBalancer
-}
-
-// GetLoadBalancerOk returns a tuple with the LoadBalancer field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetLoadBalancerOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.LoadBalancer) {
-		return map[string]interface{}{}, false
-	}
-	return o.LoadBalancer, true
-}
-
-// HasLoadBalancer returns a boolean if a field has been set.
-func (o *Environment) HasLoadBalancer() bool {
-	if o != nil && !IsNil(o.LoadBalancer) {
-		return true
-	}
-
-	return false
-}
-
-// SetLoadBalancer gets a reference to the given map[string]interface{} and assigns it to the LoadBalancer field.
-func (o *Environment) SetLoadBalancer(v map[string]interface{}) {
-	o.LoadBalancer = v
-}
-
-// GetSecurityGroup returns the SecurityGroup field value if set, zero value otherwise.
-func (o *Environment) GetSecurityGroup() map[string]interface{} {
-	if o == nil || IsNil(o.SecurityGroup) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.SecurityGroup
-}
-
-// GetSecurityGroupOk returns a tuple with the SecurityGroup field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetSecurityGroupOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.SecurityGroup) {
-		return map[string]interface{}{}, false
-	}
-	return o.SecurityGroup, true
-}
-
-// HasSecurityGroup returns a boolean if a field has been set.
-func (o *Environment) HasSecurityGroup() bool {
-	if o != nil && !IsNil(o.SecurityGroup) {
-		return true
-	}
-
-	return false
-}
-
-// SetSecurityGroup gets a reference to the given map[string]interface{} and assigns it to the SecurityGroup field.
-func (o *Environment) SetSecurityGroup(v map[string]interface{}) {
-	o.SecurityGroup = v
-}
-
-// GetSubnet returns the Subnet field value if set, zero value otherwise.
-func (o *Environment) GetSubnet() map[string]interface{} {
-	if o == nil || IsNil(o.Subnet) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Subnet
-}
-
-// GetSubnetOk returns a tuple with the Subnet field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetSubnetOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Subnet) {
-		return map[string]interface{}{}, false
-	}
-	return o.Subnet, true
-}
-
-// HasSubnet returns a boolean if a field has been set.
-func (o *Environment) HasSubnet() bool {
-	if o != nil && !IsNil(o.Subnet) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubnet gets a reference to the given map[string]interface{} and assigns it to the Subnet field.
-func (o *Environment) SetSubnet(v map[string]interface{}) {
-	o.Subnet = v
-}
-
-// GetVpc returns the Vpc field value if set, zero value otherwise.
-func (o *Environment) GetVpc() map[string]interface{} {
-	if o == nil || IsNil(o.Vpc) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Vpc
-}
-
-// GetVpcOk returns a tuple with the Vpc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetVpcOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Vpc) {
-		return map[string]interface{}{}, false
-	}
-	return o.Vpc, true
-}
-
-// HasVpc returns a boolean if a field has been set.
-func (o *Environment) HasVpc() bool {
-	if o != nil && !IsNil(o.Vpc) {
-		return true
-	}
-
-	return false
-}
-
-// SetVpc gets a reference to the given map[string]interface{} and assigns it to the Vpc field.
-func (o *Environment) SetVpc(v map[string]interface{}) {
-	o.Vpc = v
-}
-
-// GetVolumes returns the Volumes field value if set, zero value otherwise.
-func (o *Environment) GetVolumes() []Volume {
-	if o == nil || IsNil(o.Volumes) {
-		var ret []Volume
-		return ret
-	}
-	return o.Volumes
-}
-
-// GetVolumesOk returns a tuple with the Volumes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetVolumesOk() ([]Volume, bool) {
-	if o == nil || IsNil(o.Volumes) {
-		return nil, false
-	}
-	return o.Volumes, true
-}
-
-// HasVolumes returns a boolean if a field has been set.
-func (o *Environment) HasVolumes() bool {
-	if o != nil && !IsNil(o.Volumes) {
-		return true
-	}
-
-	return false
-}
-
-// SetVolumes gets a reference to the given []Volume and assigns it to the Volumes field.
-func (o *Environment) SetVolumes(v []Volume) {
-	o.Volumes = v
-}
-
-// GetCron returns the Cron field value if set, zero value otherwise.
-func (o *Environment) GetCron() []Cron {
-	if o == nil || IsNil(o.Cron) {
-		var ret []Cron
-		return ret
-	}
-	return o.Cron
-}
-
-// GetCronOk returns a tuple with the Cron field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Environment) GetCronOk() ([]Cron, bool) {
-	if o == nil || IsNil(o.Cron) {
-		return nil, false
-	}
-	return o.Cron, true
-}
-
-// HasCron returns a boolean if a field has been set.
-func (o *Environment) HasCron() bool {
-	if o != nil && !IsNil(o.Cron) {
-		return true
-	}
-
-	return false
-}
-
-// SetCron gets a reference to the given []Cron and assigns it to the Cron field.
-func (o *Environment) SetCron(v []Cron) {
-	o.Cron = v
-}
-
 func (o Environment) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -575,12 +245,6 @@ func (o Environment) MarshalJSON() ([]byte, error) {
 func (o Environment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["envName"] = o.EnvName
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.RunningCount) {
-		toSerialize["runningCount"] = o.RunningCount
-	}
 	if !IsNil(o.DesiredCount) {
 		toSerialize["desiredCount"] = o.DesiredCount
 	}
@@ -595,30 +259,6 @@ func (o Environment) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ImageSuffix) {
 		toSerialize["imageSuffix"] = o.ImageSuffix
-	}
-	if !IsNil(o.TaskDefinition) {
-		toSerialize["taskDefinition"] = o.TaskDefinition
-	}
-	if !IsNil(o.Service) {
-		toSerialize["service"] = o.Service
-	}
-	if !IsNil(o.LoadBalancer) {
-		toSerialize["loadBalancer"] = o.LoadBalancer
-	}
-	if !IsNil(o.SecurityGroup) {
-		toSerialize["securityGroup"] = o.SecurityGroup
-	}
-	if !IsNil(o.Subnet) {
-		toSerialize["subnet"] = o.Subnet
-	}
-	if !IsNil(o.Vpc) {
-		toSerialize["vpc"] = o.Vpc
-	}
-	if !IsNil(o.Volumes) {
-		toSerialize["volumes"] = o.Volumes
-	}
-	if !IsNil(o.Cron) {
-		toSerialize["cron"] = o.Cron
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -664,21 +304,11 @@ func (o *Environment) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "envName")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "runningCount")
 		delete(additionalProperties, "desiredCount")
 		delete(additionalProperties, "minCapacity")
 		delete(additionalProperties, "maxCapacity")
 		delete(additionalProperties, "cloneConfigurationFrom")
 		delete(additionalProperties, "imageSuffix")
-		delete(additionalProperties, "taskDefinition")
-		delete(additionalProperties, "service")
-		delete(additionalProperties, "loadBalancer")
-		delete(additionalProperties, "securityGroup")
-		delete(additionalProperties, "subnet")
-		delete(additionalProperties, "vpc")
-		delete(additionalProperties, "volumes")
-		delete(additionalProperties, "cron")
 		o.AdditionalProperties = additionalProperties
 	}
 
