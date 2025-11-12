@@ -91,6 +91,7 @@ docs/CreateCommandRequest.md
 docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
 docs/CreateEnvironmentRequest.md
+docs/CreateEnvironmentRequestEnvironmentInner.md
 docs/CreateVolumeRequest.md
 docs/Cron.md
 docs/CronAPI.md
@@ -332,6 +333,7 @@ model_create_command_request.go
 model_create_cron_job_422_response.go
 model_create_cron_job_request.go
 model_create_environment_request.go
+model_create_environment_request_environment_inner.go
 model_create_volume_request.go
 model_cron.go
 model_cron_run.go

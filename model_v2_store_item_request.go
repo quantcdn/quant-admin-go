@@ -24,6 +24,8 @@ type V2StoreItemRequest struct {
 	Key string `json:"key"`
 	// Item value (can be JSON string)
 	Value string `json:"value"`
+	// Store as secret with KMS encryption. Secrets cannot be retrieved via GET operations (returns [ENCRYPTED]). Ideal for API keys, passwords, and credentials.
+	Secret *bool `json:"secret,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,6 +39,8 @@ func NewV2StoreItemRequest(key string, value string) *V2StoreItemRequest {
 	this := V2StoreItemRequest{}
 	this.Key = key
 	this.Value = value
+	var secret bool = false
+	this.Secret = &secret
 	return &this
 }
 
@@ -45,6 +49,8 @@ func NewV2StoreItemRequest(key string, value string) *V2StoreItemRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewV2StoreItemRequestWithDefaults() *V2StoreItemRequest {
 	this := V2StoreItemRequest{}
+	var secret bool = false
+	this.Secret = &secret
 	return &this
 }
 
@@ -96,6 +102,38 @@ func (o *V2StoreItemRequest) SetValue(v string) {
 	o.Value = v
 }
 
+// GetSecret returns the Secret field value if set, zero value otherwise.
+func (o *V2StoreItemRequest) GetSecret() bool {
+	if o == nil || IsNil(o.Secret) {
+		var ret bool
+		return ret
+	}
+	return *o.Secret
+}
+
+// GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2StoreItemRequest) GetSecretOk() (*bool, bool) {
+	if o == nil || IsNil(o.Secret) {
+		return nil, false
+	}
+	return o.Secret, true
+}
+
+// HasSecret returns a boolean if a field has been set.
+func (o *V2StoreItemRequest) HasSecret() bool {
+	if o != nil && !IsNil(o.Secret) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecret gets a reference to the given bool and assigns it to the Secret field.
+func (o *V2StoreItemRequest) SetSecret(v bool) {
+	o.Secret = &v
+}
+
 func (o V2StoreItemRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -108,6 +146,9 @@ func (o V2StoreItemRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
 	toSerialize["value"] = o.Value
+	if !IsNil(o.Secret) {
+		toSerialize["secret"] = o.Secret
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -154,6 +195,7 @@ func (o *V2StoreItemRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "key")
 		delete(additionalProperties, "value")
+		delete(additionalProperties, "secret")
 		o.AdditionalProperties = additionalProperties
 	}
 

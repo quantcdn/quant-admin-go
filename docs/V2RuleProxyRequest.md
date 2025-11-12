@@ -31,11 +31,9 @@ Name | Type | Description | Notes
 **ProxyStripRequestHeaders** | Pointer to **[]string** | Headers to strip from request | [optional] 
 **OriginTimeout** | Pointer to **string** | Origin timeout | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
-**FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold | [optional] [default to "2000"]
-**FailoverOriginStatusCodes** | Pointer to **[]string** | Status codes for failover (default: 200,404,301,302,304) | [optional] 
-**FailoverLifetime** | Pointer to **string** | Failover cache lifetime | [optional] [default to "300"]
-**FailoverS3Bucket** | Pointer to **string** | Failover S3 bucket | [optional] 
-**FailoverS3Region** | Pointer to **string** | Failover S3 region | [optional] 
+**FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold in milliseconds | [optional] [default to "2000"]
+**FailoverOriginStatusCodes** | Pointer to **[]string** | Origin status codes that trigger failover | [optional] 
+**FailoverLifetime** | Pointer to **string** | Failover cache lifetime in seconds | [optional] [default to "300"]
 **ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] [default to false]
 **WafEnabled** | Pointer to **bool** | WAF enabled | [optional] [default to false]
 **WafConfig** | Pointer to [**NullableWafConfig**](WafConfig.md) |  | [optional] 
@@ -820,56 +818,6 @@ SetFailoverLifetime sets FailoverLifetime field to given value.
 `func (o *V2RuleProxyRequest) HasFailoverLifetime() bool`
 
 HasFailoverLifetime returns a boolean if a field has been set.
-
-### GetFailoverS3Bucket
-
-`func (o *V2RuleProxyRequest) GetFailoverS3Bucket() string`
-
-GetFailoverS3Bucket returns the FailoverS3Bucket field if non-nil, zero value otherwise.
-
-### GetFailoverS3BucketOk
-
-`func (o *V2RuleProxyRequest) GetFailoverS3BucketOk() (*string, bool)`
-
-GetFailoverS3BucketOk returns a tuple with the FailoverS3Bucket field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverS3Bucket
-
-`func (o *V2RuleProxyRequest) SetFailoverS3Bucket(v string)`
-
-SetFailoverS3Bucket sets FailoverS3Bucket field to given value.
-
-### HasFailoverS3Bucket
-
-`func (o *V2RuleProxyRequest) HasFailoverS3Bucket() bool`
-
-HasFailoverS3Bucket returns a boolean if a field has been set.
-
-### GetFailoverS3Region
-
-`func (o *V2RuleProxyRequest) GetFailoverS3Region() string`
-
-GetFailoverS3Region returns the FailoverS3Region field if non-nil, zero value otherwise.
-
-### GetFailoverS3RegionOk
-
-`func (o *V2RuleProxyRequest) GetFailoverS3RegionOk() (*string, bool)`
-
-GetFailoverS3RegionOk returns a tuple with the FailoverS3Region field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFailoverS3Region
-
-`func (o *V2RuleProxyRequest) SetFailoverS3Region(v string)`
-
-SetFailoverS3Region sets FailoverS3Region field to given value.
-
-### HasFailoverS3Region
-
-`func (o *V2RuleProxyRequest) HasFailoverS3Region() bool`
-
-HasFailoverS3Region returns a boolean if a field has been set.
 
 ### GetProxyAlertEnabled
 

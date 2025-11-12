@@ -1179,6 +1179,16 @@ paths:
         schema:
           type: string
         style: form
+      - description: "Include values in the response. Secret values will be redacted\
+          \ as '[ENCRYPTED]' for security."
+        explode: true
+        in: query
+        name: include_values
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1317,6 +1327,10 @@ paths:
       tags:
       - KV
     get:
+      description: "Retrieves an item from the KV store. **Security Note:** If the\
+        \ item was stored as a secret (secret=true), the value will be redacted and\
+        \ returned as '[ENCRYPTED]' for security. Secrets should be accessed directly\
+        \ via the Quant Cloud platform KVStore abstraction."
       operationId: KV_items_show
       parameters:
       - explode: false
@@ -8445,6 +8459,7 @@ components:
       type: object
     V2StoreItemRequest:
       example:
+        secret: false
         value: value
         key: user-session-123
       properties:
@@ -8455,17 +8470,29 @@ components:
         value:
           description: Item value (can be JSON string)
           type: string
+        secret:
+          default: false
+          description: "Store as secret with KMS encryption. Secrets cannot be retrieved\
+            \ via GET operations (returns [ENCRYPTED]). Ideal for API keys, passwords,\
+            \ and credentials."
+          type: boolean
       required:
       - key
       - value
       type: object
     V2StoreItemUpdateRequest:
       example:
+        secret: true
         value: value
       properties:
         value:
           description: Item value (can be JSON string)
           type: string
+        secret:
+          description: "Store as secret with KMS encryption. Note: Encryption status\
+            \ cannot be changed after initial creation - this value is preserved from\
+            \ the original item."
+          type: boolean
       required:
       - value
       type: object
@@ -9124,10 +9151,8 @@ components:
         - CN
         - RU
         application_name: my-app
-        failover_s3_region: us-east-1
         auth_user: admin
         host: backend.test-domain.com
-        failover_s3_bucket: my-failover-bucket
         waf_enabled: false
         auth_pass: secure_pass
         disabled: false
@@ -9222,11 +9247,9 @@ components:
           notify_slack: https://hooks.slack.com/services/XXX
           paranoia_level: 1
         failover_origin_status_codes:
-        - "200"
-        - "404"
-        - "301"
-        - "302"
-        - "304"
+        - "502"
+        - "503"
+        - "504"
         proxy_alert_enabled: false
       properties:
         domain:
@@ -9391,32 +9414,22 @@ components:
           type: boolean
         failover_origin_ttfb:
           default: "2000"
-          description: Failover TTFB threshold
+          description: Failover TTFB threshold in milliseconds
           example: "2000"
           type: string
         failover_origin_status_codes:
-          description: "Status codes for failover (default: 200,404,301,302,304)"
+          description: Origin status codes that trigger failover
           example:
-          - "200"
-          - "404"
-          - "301"
-          - "302"
-          - "304"
+          - "502"
+          - "503"
+          - "504"
           items:
             type: string
           type: array
         failover_lifetime:
           default: "300"
-          description: Failover cache lifetime
+          description: Failover cache lifetime in seconds
           example: "300"
-          type: string
-        failover_s3_bucket:
-          description: Failover S3 bucket
-          example: my-failover-bucket
-          type: string
-        failover_s3_region:
-          description: Failover S3 region
-          example: us-east-1
           type: string
         proxy_alert_enabled:
           default: false
@@ -11737,7 +11750,8 @@ components:
           type: string
       type: object
     KV_items_show_200_response_value:
-      description: Item value (decoded from JSON if applicable)
+      description: "Item value (decoded from JSON if applicable). Returns '[ENCRYPTED]'\
+        \ for secret items."
       oneOf:
       - type: string
       - type: object
@@ -13360,6 +13374,15 @@ components:
           nullable: true
           type: boolean
       type: object
+    createEnvironment_request_environment_inner:
+      properties:
+        name:
+          description: Variable name
+          type: string
+        value:
+          description: Variable value
+          type: string
+      type: object
     createEnvironment_request:
       properties:
         envName:
@@ -13382,6 +13405,15 @@ components:
           type: string
         spotConfiguration:
           $ref: '#/components/schemas/SpotConfiguration'
+        environment:
+          description: Environment variables to inject
+          items:
+            $ref: '#/components/schemas/createEnvironment_request_environment_inner'
+          type: array
+        mergeEnvironment:
+          description: "Whether to merge environment variables with cloned ones (true)\
+            \ or replace them (false). Default: false"
+          type: boolean
       required:
       - envName
       type: object

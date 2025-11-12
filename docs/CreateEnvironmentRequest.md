@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **ComposeDefinition** | Pointer to [**Compose**](Compose.md) |  | [optional] 
 **ImageSuffix** | Pointer to **string** | Optional image tag suffix for cloning | [optional] 
 **SpotConfiguration** | Pointer to [**SpotConfiguration**](SpotConfiguration.md) |  | [optional] 
+**Environment** | Pointer to [**[]CreateEnvironmentRequestEnvironmentInner**](CreateEnvironmentRequestEnvironmentInner.md) | Environment variables to inject | [optional] 
+**MergeEnvironment** | Pointer to **bool** | Whether to merge environment variables with cloned ones (true) or replace them (false). Default: false | [optional] 
 
 ## Methods
 
@@ -200,6 +202,56 @@ SetSpotConfiguration sets SpotConfiguration field to given value.
 `func (o *CreateEnvironmentRequest) HasSpotConfiguration() bool`
 
 HasSpotConfiguration returns a boolean if a field has been set.
+
+### GetEnvironment
+
+`func (o *CreateEnvironmentRequest) GetEnvironment() []CreateEnvironmentRequestEnvironmentInner`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *CreateEnvironmentRequest) GetEnvironmentOk() (*[]CreateEnvironmentRequestEnvironmentInner, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *CreateEnvironmentRequest) SetEnvironment(v []CreateEnvironmentRequestEnvironmentInner)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *CreateEnvironmentRequest) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
+
+### GetMergeEnvironment
+
+`func (o *CreateEnvironmentRequest) GetMergeEnvironment() bool`
+
+GetMergeEnvironment returns the MergeEnvironment field if non-nil, zero value otherwise.
+
+### GetMergeEnvironmentOk
+
+`func (o *CreateEnvironmentRequest) GetMergeEnvironmentOk() (*bool, bool)`
+
+GetMergeEnvironmentOk returns a tuple with the MergeEnvironment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMergeEnvironment
+
+`func (o *CreateEnvironmentRequest) SetMergeEnvironment(v bool)`
+
+SetMergeEnvironment sets MergeEnvironment field to given value.
+
+### HasMergeEnvironment
+
+`func (o *CreateEnvironmentRequest) HasMergeEnvironment() bool`
+
+HasMergeEnvironment returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

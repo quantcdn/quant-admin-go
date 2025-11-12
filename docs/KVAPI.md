@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ## KVItemsList
 
-> V2StoreItemsListResponse KVItemsList(ctx, organization, project, storeId).Cursor(cursor).Limit(limit).Search(search).Execute()
+> V2StoreItemsListResponse KVItemsList(ctx, organization, project, storeId).Cursor(cursor).Limit(limit).Search(search).IncludeValues(includeValues).Execute()
 
 List items in a kv store
 
@@ -339,10 +339,11 @@ func main() {
 	cursor := "cursor_example" // string | Cursor for pagination (optional)
 	limit := int32(56) // int32 | Number of items to return (optional) (default to 10)
 	search := "search_example" // string | Search filter for keys (optional)
+	includeValues := true // bool | Include values in the response. Secret values will be redacted as '[ENCRYPTED]' for security. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KVAPI.KVItemsList(context.Background(), organization, project, storeId).Cursor(cursor).Limit(limit).Search(search).Execute()
+	resp, r, err := apiClient.KVAPI.KVItemsList(context.Background(), organization, project, storeId).Cursor(cursor).Limit(limit).Search(search).IncludeValues(includeValues).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -375,6 +376,7 @@ Name | Type | Description  | Notes
  **cursor** | **string** | Cursor for pagination | 
  **limit** | **int32** | Number of items to return | [default to 10]
  **search** | **string** | Search filter for keys | 
+ **includeValues** | **bool** | Include values in the response. Secret values will be redacted as &#39;[ENCRYPTED]&#39; for security. | [default to false]
 
 ### Return type
 
@@ -399,6 +401,8 @@ Name | Type | Description  | Notes
 > KVItemsShow200Response KVItemsShow(ctx, organization, project, storeId, key).Execute()
 
 Get an item from a kv store
+
+
 
 ### Example
 

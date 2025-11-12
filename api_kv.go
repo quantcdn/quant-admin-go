@@ -99,6 +99,8 @@ type KVAPI interface {
 	/*
 	KVItemsShow Get an item from a kv store
 
+	Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as '[ENCRYPTED]' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization
 	@param project
@@ -712,6 +714,7 @@ type KVAPIKVItemsListRequest struct {
 	cursor *string
 	limit *int32
 	search *string
+	includeValues *bool
 }
 
 // Cursor for pagination
@@ -729,6 +732,12 @@ func (r KVAPIKVItemsListRequest) Limit(limit int32) KVAPIKVItemsListRequest {
 // Search filter for keys
 func (r KVAPIKVItemsListRequest) Search(search string) KVAPIKVItemsListRequest {
 	r.search = &search
+	return r
+}
+
+// Include values in the response. Secret values will be redacted as &#39;[ENCRYPTED]&#39; for security.
+func (r KVAPIKVItemsListRequest) IncludeValues(includeValues bool) KVAPIKVItemsListRequest {
+	r.includeValues = &includeValues
 	return r
 }
 
@@ -790,6 +799,12 @@ func (a *KVAPIService) KVItemsListExecute(r KVAPIKVItemsListRequest) (*V2StoreIt
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.includeValues != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_values", r.includeValues, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.includeValues = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -881,6 +896,8 @@ func (r KVAPIKVItemsShowRequest) Execute() (*KVItemsShow200Response, *http.Respo
 
 /*
 KVItemsShow Get an item from a kv store
+
+Retrieves an item from the KV store. **Security Note:** If the item was stored as a secret (secret=true), the value will be redacted and returned as '[ENCRYPTED]' for security. Secrets should be accessed directly via the Quant Cloud platform KVStore abstraction.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization

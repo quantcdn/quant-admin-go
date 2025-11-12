@@ -74,16 +74,12 @@ type V2RuleProxyRequest struct {
 	OriginTimeout *string `json:"origin_timeout,omitempty"`
 	// Enable failover mode
 	FailoverMode *bool `json:"failover_mode,omitempty"`
-	// Failover TTFB threshold
+	// Failover TTFB threshold in milliseconds
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
-	// Status codes for failover (default: 200,404,301,302,304)
+	// Origin status codes that trigger failover
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
-	// Failover cache lifetime
+	// Failover cache lifetime in seconds
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
-	// Failover S3 bucket
-	FailoverS3Bucket *string `json:"failover_s3_bucket,omitempty"`
-	// Failover S3 region
-	FailoverS3Region *string `json:"failover_s3_region,omitempty"`
 	// Proxy alert enabled
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	// WAF enabled
@@ -1123,70 +1119,6 @@ func (o *V2RuleProxyRequest) SetFailoverLifetime(v string) {
 	o.FailoverLifetime = &v
 }
 
-// GetFailoverS3Bucket returns the FailoverS3Bucket field value if set, zero value otherwise.
-func (o *V2RuleProxyRequest) GetFailoverS3Bucket() string {
-	if o == nil || IsNil(o.FailoverS3Bucket) {
-		var ret string
-		return ret
-	}
-	return *o.FailoverS3Bucket
-}
-
-// GetFailoverS3BucketOk returns a tuple with the FailoverS3Bucket field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxyRequest) GetFailoverS3BucketOk() (*string, bool) {
-	if o == nil || IsNil(o.FailoverS3Bucket) {
-		return nil, false
-	}
-	return o.FailoverS3Bucket, true
-}
-
-// HasFailoverS3Bucket returns a boolean if a field has been set.
-func (o *V2RuleProxyRequest) HasFailoverS3Bucket() bool {
-	if o != nil && !IsNil(o.FailoverS3Bucket) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverS3Bucket gets a reference to the given string and assigns it to the FailoverS3Bucket field.
-func (o *V2RuleProxyRequest) SetFailoverS3Bucket(v string) {
-	o.FailoverS3Bucket = &v
-}
-
-// GetFailoverS3Region returns the FailoverS3Region field value if set, zero value otherwise.
-func (o *V2RuleProxyRequest) GetFailoverS3Region() string {
-	if o == nil || IsNil(o.FailoverS3Region) {
-		var ret string
-		return ret
-	}
-	return *o.FailoverS3Region
-}
-
-// GetFailoverS3RegionOk returns a tuple with the FailoverS3Region field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *V2RuleProxyRequest) GetFailoverS3RegionOk() (*string, bool) {
-	if o == nil || IsNil(o.FailoverS3Region) {
-		return nil, false
-	}
-	return o.FailoverS3Region, true
-}
-
-// HasFailoverS3Region returns a boolean if a field has been set.
-func (o *V2RuleProxyRequest) HasFailoverS3Region() bool {
-	if o != nil && !IsNil(o.FailoverS3Region) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailoverS3Region gets a reference to the given string and assigns it to the FailoverS3Region field.
-func (o *V2RuleProxyRequest) SetFailoverS3Region(v string) {
-	o.FailoverS3Region = &v
-}
-
 // GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
 func (o *V2RuleProxyRequest) GetProxyAlertEnabled() bool {
 	if o == nil || IsNil(o.ProxyAlertEnabled) {
@@ -1621,12 +1553,6 @@ func (o V2RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailoverLifetime) {
 		toSerialize["failover_lifetime"] = o.FailoverLifetime
 	}
-	if !IsNil(o.FailoverS3Bucket) {
-		toSerialize["failover_s3_bucket"] = o.FailoverS3Bucket
-	}
-	if !IsNil(o.FailoverS3Region) {
-		toSerialize["failover_s3_region"] = o.FailoverS3Region
-	}
 	if !IsNil(o.ProxyAlertEnabled) {
 		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
 	}
@@ -1732,8 +1658,6 @@ func (o *V2RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "failover_origin_ttfb")
 		delete(additionalProperties, "failover_origin_status_codes")
 		delete(additionalProperties, "failover_lifetime")
-		delete(additionalProperties, "failover_s3_bucket")
-		delete(additionalProperties, "failover_s3_region")
 		delete(additionalProperties, "proxy_alert_enabled")
 		delete(additionalProperties, "waf_enabled")
 		delete(additionalProperties, "waf_config")

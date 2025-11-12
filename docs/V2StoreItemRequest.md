@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Key** | **string** | Item key | 
 **Value** | **string** | Item value (can be JSON string) | 
+**Secret** | Pointer to **bool** | Store as secret with KMS encryption. Secrets cannot be retrieved via GET operations (returns [ENCRYPTED]). Ideal for API keys, passwords, and credentials. | [optional] [default to false]
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetValue sets Value field to given value.
 
+
+### GetSecret
+
+`func (o *V2StoreItemRequest) GetSecret() bool`
+
+GetSecret returns the Secret field if non-nil, zero value otherwise.
+
+### GetSecretOk
+
+`func (o *V2StoreItemRequest) GetSecretOk() (*bool, bool)`
+
+GetSecretOk returns a tuple with the Secret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecret
+
+`func (o *V2StoreItemRequest) SetSecret(v bool)`
+
+SetSecret sets Secret field to given value.
+
+### HasSecret
+
+`func (o *V2StoreItemRequest) HasSecret() bool`
+
+HasSecret returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

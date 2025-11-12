@@ -22,6 +22,8 @@ var _ MappedNullable = &V2StoreItemUpdateRequest{}
 type V2StoreItemUpdateRequest struct {
 	// Item value (can be JSON string)
 	Value string `json:"value"`
+	// Store as secret with KMS encryption. Note: Encryption status cannot be changed after initial creation - this value is preserved from the original item.
+	Secret *bool `json:"secret,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,6 +71,38 @@ func (o *V2StoreItemUpdateRequest) SetValue(v string) {
 	o.Value = v
 }
 
+// GetSecret returns the Secret field value if set, zero value otherwise.
+func (o *V2StoreItemUpdateRequest) GetSecret() bool {
+	if o == nil || IsNil(o.Secret) {
+		var ret bool
+		return ret
+	}
+	return *o.Secret
+}
+
+// GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2StoreItemUpdateRequest) GetSecretOk() (*bool, bool) {
+	if o == nil || IsNil(o.Secret) {
+		return nil, false
+	}
+	return o.Secret, true
+}
+
+// HasSecret returns a boolean if a field has been set.
+func (o *V2StoreItemUpdateRequest) HasSecret() bool {
+	if o != nil && !IsNil(o.Secret) {
+		return true
+	}
+
+	return false
+}
+
+// SetSecret gets a reference to the given bool and assigns it to the Secret field.
+func (o *V2StoreItemUpdateRequest) SetSecret(v bool) {
+	o.Secret = &v
+}
+
 func (o V2StoreItemUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +114,9 @@ func (o V2StoreItemUpdateRequest) MarshalJSON() ([]byte, error) {
 func (o V2StoreItemUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
+	if !IsNil(o.Secret) {
+		toSerialize["secret"] = o.Secret
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -124,6 +161,7 @@ func (o *V2StoreItemUpdateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "value")
+		delete(additionalProperties, "secret")
 		o.AdditionalProperties = additionalProperties
 	}
 

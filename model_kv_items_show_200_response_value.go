@@ -16,7 +16,7 @@ import (
 	"gopkg.in/validator.v2"
 )
 
-// KVItemsShow200ResponseValue - Item value (decoded from JSON if applicable)
+// KVItemsShow200ResponseValue - Item value (decoded from JSON if applicable). Returns '[ENCRYPTED]' for secret items.
 type KVItemsShow200ResponseValue struct {
 	MapmapOfStringAny *map[string]interface{}
 	String *string

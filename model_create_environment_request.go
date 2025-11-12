@@ -32,6 +32,10 @@ type CreateEnvironmentRequest struct {
 	// Optional image tag suffix for cloning
 	ImageSuffix *string `json:"imageSuffix,omitempty" validate:"regexp=^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"`
 	SpotConfiguration *SpotConfiguration `json:"spotConfiguration,omitempty"`
+	// Environment variables to inject
+	Environment []CreateEnvironmentRequestEnvironmentInner `json:"environment,omitempty"`
+	// Whether to merge environment variables with cloned ones (true) or replace them (false). Default: false
+	MergeEnvironment *bool `json:"mergeEnvironment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -271,6 +275,70 @@ func (o *CreateEnvironmentRequest) SetSpotConfiguration(v SpotConfiguration) {
 	o.SpotConfiguration = &v
 }
 
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *CreateEnvironmentRequest) GetEnvironment() []CreateEnvironmentRequestEnvironmentInner {
+	if o == nil || IsNil(o.Environment) {
+		var ret []CreateEnvironmentRequestEnvironmentInner
+		return ret
+	}
+	return o.Environment
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateEnvironmentRequest) GetEnvironmentOk() ([]CreateEnvironmentRequestEnvironmentInner, bool) {
+	if o == nil || IsNil(o.Environment) {
+		return nil, false
+	}
+	return o.Environment, true
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *CreateEnvironmentRequest) HasEnvironment() bool {
+	if o != nil && !IsNil(o.Environment) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given []CreateEnvironmentRequestEnvironmentInner and assigns it to the Environment field.
+func (o *CreateEnvironmentRequest) SetEnvironment(v []CreateEnvironmentRequestEnvironmentInner) {
+	o.Environment = v
+}
+
+// GetMergeEnvironment returns the MergeEnvironment field value if set, zero value otherwise.
+func (o *CreateEnvironmentRequest) GetMergeEnvironment() bool {
+	if o == nil || IsNil(o.MergeEnvironment) {
+		var ret bool
+		return ret
+	}
+	return *o.MergeEnvironment
+}
+
+// GetMergeEnvironmentOk returns a tuple with the MergeEnvironment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateEnvironmentRequest) GetMergeEnvironmentOk() (*bool, bool) {
+	if o == nil || IsNil(o.MergeEnvironment) {
+		return nil, false
+	}
+	return o.MergeEnvironment, true
+}
+
+// HasMergeEnvironment returns a boolean if a field has been set.
+func (o *CreateEnvironmentRequest) HasMergeEnvironment() bool {
+	if o != nil && !IsNil(o.MergeEnvironment) {
+		return true
+	}
+
+	return false
+}
+
+// SetMergeEnvironment gets a reference to the given bool and assigns it to the MergeEnvironment field.
+func (o *CreateEnvironmentRequest) SetMergeEnvironment(v bool) {
+	o.MergeEnvironment = &v
+}
+
 func (o CreateEnvironmentRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -299,6 +367,12 @@ func (o CreateEnvironmentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SpotConfiguration) {
 		toSerialize["spotConfiguration"] = o.SpotConfiguration
+	}
+	if !IsNil(o.Environment) {
+		toSerialize["environment"] = o.Environment
+	}
+	if !IsNil(o.MergeEnvironment) {
+		toSerialize["mergeEnvironment"] = o.MergeEnvironment
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -350,6 +424,8 @@ func (o *CreateEnvironmentRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "composeDefinition")
 		delete(additionalProperties, "imageSuffix")
 		delete(additionalProperties, "spotConfiguration")
+		delete(additionalProperties, "environment")
+		delete(additionalProperties, "mergeEnvironment")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -281,6 +281,7 @@ Class | Method | HTTP request | Description
  - [CreateCronJob422Response](docs/CreateCronJob422Response.md)
  - [CreateCronJobRequest](docs/CreateCronJobRequest.md)
  - [CreateEnvironmentRequest](docs/CreateEnvironmentRequest.md)
+ - [CreateEnvironmentRequestEnvironmentInner](docs/CreateEnvironmentRequestEnvironmentInner.md)
  - [CreateVolumeRequest](docs/CreateVolumeRequest.md)
  - [Cron](docs/Cron.md)
  - [CronRun](docs/CronRun.md)
