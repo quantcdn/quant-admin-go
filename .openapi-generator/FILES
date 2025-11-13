@@ -79,9 +79,12 @@ docs/ContainerSecretsInner.md
 docs/ContainersAPI.md
 docs/CrawlerSchedulesAPI.md
 docs/CrawlersAPI.md
+docs/CrawlersRun200Response.md
+docs/CrawlersRunRequest.md
 docs/CreateAISession201Response.md
 docs/CreateAISessionRequest.md
 docs/CreateAISessionRequestInitialMessagesInner.md
+docs/CreateApplication403Response.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationRequestDatabase.md
 docs/CreateApplicationRequestFilesystem.md
@@ -90,6 +93,7 @@ docs/CreateBackupRequest.md
 docs/CreateCommandRequest.md
 docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
+docs/CreateEnvironment403Response.md
 docs/CreateEnvironmentRequest.md
 docs/CreateEnvironmentRequestEnvironmentInner.md
 docs/CreateVolumeRequest.md
@@ -321,9 +325,12 @@ model_container_health_check.go
 model_container_image_reference.go
 model_container_mount_points_inner.go
 model_container_secrets_inner.go
+model_crawlers_run_200_response.go
+model_crawlers_run_request.go
 model_create_ai_session_201_response.go
 model_create_ai_session_request.go
 model_create_ai_session_request_initial_messages_inner.go
+model_create_application_403_response.go
 model_create_application_request.go
 model_create_application_request_database.go
 model_create_application_request_filesystem.go
@@ -332,6 +339,7 @@ model_create_backup_request.go
 model_create_command_request.go
 model_create_cron_job_422_response.go
 model_create_cron_job_request.go
+model_create_environment_403_response.go
 model_create_environment_request.go
 model_create_environment_request_environment_inner.go
 model_create_volume_request.go

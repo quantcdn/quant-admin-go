@@ -81,7 +81,7 @@ type V2Crawler struct {
 	// Last update timestamp
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// Deletion timestamp
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1033,36 +1033,46 @@ func (o *V2Crawler) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
-// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
+// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *V2Crawler) GetDeletedAt() time.Time {
-	if o == nil || IsNil(o.DeletedAt) {
+	if o == nil || IsNil(o.DeletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.DeletedAt
+	return *o.DeletedAt.Get()
 }
 
 // GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *V2Crawler) GetDeletedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.DeletedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeletedAt, true
+	return o.DeletedAt.Get(), o.DeletedAt.IsSet()
 }
 
 // HasDeletedAt returns a boolean if a field has been set.
 func (o *V2Crawler) HasDeletedAt() bool {
-	if o != nil && !IsNil(o.DeletedAt) {
+	if o != nil && o.DeletedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
+// SetDeletedAt gets a reference to the given NullableTime and assigns it to the DeletedAt field.
 func (o *V2Crawler) SetDeletedAt(v time.Time) {
-	o.DeletedAt = &v
+	o.DeletedAt.Set(&v)
+}
+// SetDeletedAtNil sets the value for DeletedAt to be an explicit nil
+func (o *V2Crawler) SetDeletedAtNil() {
+	o.DeletedAt.Set(nil)
+}
+
+// UnsetDeletedAt ensures that no value is present for DeletedAt, not even an explicit nil
+func (o *V2Crawler) UnsetDeletedAt() {
+	o.DeletedAt.Unset()
 }
 
 func (o V2Crawler) MarshalJSON() ([]byte, error) {
@@ -1155,8 +1165,8 @@ func (o V2Crawler) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
-	if !IsNil(o.DeletedAt) {
-		toSerialize["deleted_at"] = o.DeletedAt
+	if o.DeletedAt.IsSet() {
+		toSerialize["deleted_at"] = o.DeletedAt.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {

@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **Assets** | Pointer to [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Creation timestamp | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Last update timestamp | [optional] 
-**DeletedAt** | Pointer to **time.Time** | Deletion timestamp | [optional] 
+**DeletedAt** | Pointer to **NullableTime** | Deletion timestamp | [optional] 
 
 ## Methods
 
@@ -805,6 +805,16 @@ SetDeletedAt sets DeletedAt field to given value.
 
 HasDeletedAt returns a boolean if a field has been set.
 
+### SetDeletedAtNil
+
+`func (o *V2Crawler) SetDeletedAtNil(b bool)`
+
+ SetDeletedAtNil sets the value for DeletedAt to be an explicit nil
+
+### UnsetDeletedAt
+`func (o *V2Crawler) UnsetDeletedAt()`
+
+UnsetDeletedAt ensures that no value is present for DeletedAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

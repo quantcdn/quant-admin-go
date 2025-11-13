@@ -613,7 +613,7 @@ import (
 
 func main() {
 	organisation := "organisation_example" // string | The organisation ID
-	executionId := "exec_abc123def456" // string | Tool execution identifier
+	executionId := "exec_0123456789abcdef0123456789abcdef" // string | Tool execution identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

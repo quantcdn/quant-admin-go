@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CrawlersDelete**](CrawlersAPI.md#CrawlersDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Delete a crawler
 [**CrawlersList**](CrawlersAPI.md#CrawlersList) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers | List crawlers for the project
 [**CrawlersRead**](CrawlersAPI.md#CrawlersRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Get details of a single crawler
+[**CrawlersRun**](CrawlersAPI.md#CrawlersRun) | **Post** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/run | Run a crawler
 [**CrawlersUpdate**](CrawlersAPI.md#CrawlersUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Update a crawler
 
 
@@ -295,6 +296,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CrawlersRun
+
+> CrawlersRun200Response CrawlersRun(ctx, organization, project, crawler).CrawlersRunRequest(crawlersRunRequest).Execute()
+
+Run a crawler
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+	crawlersRunRequest := *openapiclient.NewCrawlersRunRequest() // CrawlersRunRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CrawlersAPI.CrawlersRun(context.Background(), organization, project, crawler).CrawlersRunRequest(crawlersRunRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersRun``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CrawlersRun`: CrawlersRun200Response
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersRun`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCrawlersRunRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **crawlersRunRequest** | [**CrawlersRunRequest**](CrawlersRunRequest.md) |  | 
+
+### Return type
+
+[**CrawlersRun200Response**](CrawlersRun200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

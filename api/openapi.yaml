@@ -580,6 +580,75 @@ paths:
       summary: Update a crawler
       tags:
       - Crawlers
+  /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/run:
+    post:
+      operationId: Crawlers_run
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler identifier
+        explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Crawlers_run_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Crawlers_run_200_response'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The resource was not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: An unexpected error occurred.
+      summary: Run a crawler
+      tags:
+      - Crawlers
   /api/v2/organizations/{organization}/projects/{project}/custom-headers:
     delete:
       operationId: Headers_delete
@@ -4666,7 +4735,7 @@ paths:
         name: executionId
         required: true
         schema:
-          example: exec_abc123def456
+          example: exec_0123456789abcdef0123456789abcdef
           pattern: "^exec_[a-f0-9]{32}$"
           type: string
         style: simple
@@ -4811,6 +4880,13 @@ paths:
           description: The created application
         "400":
           description: The request is invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createApplication_403_response'
+          description: Application limit reached - organisation has reached the maximum
+            number of allowed applications
       summary: Create a new application
       tags:
       - Applications
@@ -5588,6 +5664,13 @@ paths:
           description: The environment created
         "400":
           description: The environment data is invalid
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createEnvironment_403_response'
+          description: Environment limit reached - application has reached the maximum
+            number of allowed environments
       summary: Create a new environment
       tags:
       - Environments
@@ -8186,8 +8269,8 @@ components:
         deleted_at:
           description: Deletion timestamp
           format: date-time
+          nullable: true
           type: string
-          example: null
       required:
       - config
       - domain
@@ -11734,6 +11817,28 @@ components:
             $ref: '#/components/schemas/WafConfig_thresholds_inner'
           type: array
       type: object
+    Crawlers_run_request:
+      properties:
+        urls:
+          description: URLs to crawl
+          example:
+          - /
+          - /about
+          - /contact
+          items:
+            example: /
+            type: string
+          type: array
+      type: object
+    Crawlers_run_200_response:
+      example:
+        run_id: "12345"
+      properties:
+        run_id:
+          description: The crawler run ID
+          example: "12345"
+          type: string
+      type: object
     KV_items_create_200_response:
       example:
         success: true
@@ -13244,6 +13349,20 @@ components:
       - executions
       - orgId
       type: object
+    createApplication_403_response:
+      example:
+        message: Application limit reached
+        error: Organisation has reached the maximum number of allowed applications
+          (10/10). Please contact support to increase your limit.
+      properties:
+        message:
+          example: Application limit reached
+          type: string
+        error:
+          example: Organisation has reached the maximum number of allowed applications
+            (10/10). Please contact support to increase your limit.
+          type: string
+      type: object
     getEcrLoginCredentials_200_response:
       example:
         password: password
@@ -13416,6 +13535,20 @@ components:
           type: boolean
       required:
       - envName
+      type: object
+    createEnvironment_403_response:
+      example:
+        message: Environment limit reached
+        error: Application my-app has reached the maximum number of allowed environments
+          (5/5). Please contact support to increase your limit.
+      properties:
+        message:
+          example: Environment limit reached
+          type: string
+        error:
+          example: Application my-app has reached the maximum number of allowed environments
+            (5/5). Please contact support to increase your limit.
+          type: string
       type: object
     updateEnvironment_request:
       properties:

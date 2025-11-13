@@ -119,6 +119,7 @@ Class | Method | HTTP request | Description
 *CrawlersAPI* | [**CrawlersDelete**](docs/CrawlersAPI.md#crawlersdelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Delete a crawler
 *CrawlersAPI* | [**CrawlersList**](docs/CrawlersAPI.md#crawlerslist) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers | List crawlers for the project
 *CrawlersAPI* | [**CrawlersRead**](docs/CrawlersAPI.md#crawlersread) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Get details of a single crawler
+*CrawlersAPI* | [**CrawlersRun**](docs/CrawlersAPI.md#crawlersrun) | **Post** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/run | Run a crawler
 *CrawlersAPI* | [**CrawlersUpdate**](docs/CrawlersAPI.md#crawlersupdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Update a crawler
 *CronAPI* | [**CreateCronJob**](docs/CronAPI.md#createcronjob) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron | Create a new cron job
 *CronAPI* | [**DeleteCronJob**](docs/CronAPI.md#deletecronjob) | **Delete** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/cron/{cron} | Delete a cron job
@@ -269,9 +270,12 @@ Class | Method | HTTP request | Description
  - [ContainerImageReference](docs/ContainerImageReference.md)
  - [ContainerMountPointsInner](docs/ContainerMountPointsInner.md)
  - [ContainerSecretsInner](docs/ContainerSecretsInner.md)
+ - [CrawlersRun200Response](docs/CrawlersRun200Response.md)
+ - [CrawlersRunRequest](docs/CrawlersRunRequest.md)
  - [CreateAISession201Response](docs/CreateAISession201Response.md)
  - [CreateAISessionRequest](docs/CreateAISessionRequest.md)
  - [CreateAISessionRequestInitialMessagesInner](docs/CreateAISessionRequestInitialMessagesInner.md)
+ - [CreateApplication403Response](docs/CreateApplication403Response.md)
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
  - [CreateApplicationRequestDatabase](docs/CreateApplicationRequestDatabase.md)
  - [CreateApplicationRequestFilesystem](docs/CreateApplicationRequestFilesystem.md)
@@ -280,6 +284,7 @@ Class | Method | HTTP request | Description
  - [CreateCommandRequest](docs/CreateCommandRequest.md)
  - [CreateCronJob422Response](docs/CreateCronJob422Response.md)
  - [CreateCronJobRequest](docs/CreateCronJobRequest.md)
+ - [CreateEnvironment403Response](docs/CreateEnvironment403Response.md)
  - [CreateEnvironmentRequest](docs/CreateEnvironmentRequest.md)
  - [CreateEnvironmentRequestEnvironmentInner](docs/CreateEnvironmentRequestEnvironmentInner.md)
  - [CreateVolumeRequest](docs/CreateVolumeRequest.md)

@@ -83,6 +83,22 @@ func Test_quantadmingo_CrawlersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test CrawlersAPIService CrawlersRun", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var crawler string
+
+		resp, httpRes, err := apiClient.CrawlersAPI.CrawlersRun(context.Background(), organization, project, crawler).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CrawlersAPIService CrawlersUpdate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
