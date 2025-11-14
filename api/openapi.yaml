@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.2.1
+  version: 4.3.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
