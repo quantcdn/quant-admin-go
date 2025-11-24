@@ -52,6 +52,39 @@ func Test_quantadmingo_CrawlersAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test CrawlersAPIService CrawlersGetRunById", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var crawler string
+		var runId int32
+
+		resp, httpRes, err := apiClient.CrawlersAPI.CrawlersGetRunById(context.Background(), organization, project, crawler, runId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CrawlersAPIService CrawlersGetRuns", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var crawler string
+
+		resp, httpRes, err := apiClient.CrawlersAPI.CrawlersGetRuns(context.Background(), organization, project, crawler).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CrawlersAPIService CrawlersList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

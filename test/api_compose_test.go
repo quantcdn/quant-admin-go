@@ -38,6 +38,22 @@ func Test_quantadmingo_ComposeAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ComposeAPIService PatchEnvironmentCompose", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var application string
+		var environment string
+
+		resp, httpRes, err := apiClient.ComposeAPI.PatchEnvironmentCompose(context.Background(), organisation, application, environment).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ComposeAPIService ValidateCompose", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

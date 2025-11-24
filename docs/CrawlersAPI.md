@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CrawlersCreate**](CrawlersAPI.md#CrawlersCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/crawlers | Create a new crawler
 [**CrawlersDelete**](CrawlersAPI.md#CrawlersDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Delete a crawler
+[**CrawlersGetRunById**](CrawlersAPI.md#CrawlersGetRunById) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/runs/{run_id} | Get a run by ID
+[**CrawlersGetRuns**](CrawlersAPI.md#CrawlersGetRuns) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/runs | Get all runs for a crawler
 [**CrawlersList**](CrawlersAPI.md#CrawlersList) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers | List crawlers for the project
 [**CrawlersRead**](CrawlersAPI.md#CrawlersRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler} | Get details of a single crawler
 [**CrawlersRun**](CrawlersAPI.md#CrawlersRun) | **Post** /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/run | Run a crawler
@@ -143,6 +145,157 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CrawlersGetRunById
+
+> V2CrawlerRun CrawlersGetRunById(ctx, organization, project, crawler, runId).Execute()
+
+Get a run by ID
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+	runId := int32(56) // int32 | Run identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CrawlersAPI.CrawlersGetRunById(context.Background(), organization, project, crawler, runId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersGetRunById``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CrawlersGetRunById`: V2CrawlerRun
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersGetRunById`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
+**runId** | **int32** | Run identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCrawlersGetRunByIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+
+### Return type
+
+[**V2CrawlerRun**](V2CrawlerRun.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CrawlersGetRuns
+
+> []V2CrawlerRun CrawlersGetRuns(ctx, organization, project, crawler).Execute()
+
+Get all runs for a crawler
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	crawler := "crawler_example" // string | Crawler identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CrawlersAPI.CrawlersGetRuns(context.Background(), organization, project, crawler).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersGetRuns``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CrawlersGetRuns`: []V2CrawlerRun
+	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersGetRuns`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**crawler** | **string** | Crawler identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCrawlersGetRunsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**[]V2CrawlerRun**](V2CrawlerRun.md)
 
 ### Authorization
 

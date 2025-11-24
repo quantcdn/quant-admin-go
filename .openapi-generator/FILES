@@ -91,7 +91,6 @@ docs/CreateApplicationRequestFilesystem.md
 docs/CreateBackup202Response.md
 docs/CreateBackupRequest.md
 docs/CreateCommandRequest.md
-docs/CreateCronJob422Response.md
 docs/CreateCronJobRequest.md
 docs/CreateEnvironment403Response.md
 docs/CreateEnvironmentRequest.md
@@ -155,6 +154,11 @@ docs/ListToolExecutions200Response.md
 docs/ListToolExecutions200ResponseExecutionsInner.md
 docs/OrganizationsAPI.md
 docs/OrganizationsList200ResponseInner.md
+docs/PatchEnvironmentCompose202Response.md
+docs/PatchEnvironmentCompose202ResponseSpotConfiguration.md
+docs/PatchEnvironmentCompose400Response.md
+docs/PatchEnvironmentComposeRequest.md
+docs/PatchEnvironmentComposeRequestSpotConfiguration.md
 docs/ProjectsAPI.md
 docs/PurgeAPI.md
 docs/PurgeCreateRequest.md
@@ -215,6 +219,7 @@ docs/V2CrawlerAssets.md
 docs/V2CrawlerAssetsNetworkIntercept.md
 docs/V2CrawlerAssetsParser.md
 docs/V2CrawlerRequest.md
+docs/V2CrawlerRun.md
 docs/V2CrawlerSchedule.md
 docs/V2CrawlerScheduleRequest.md
 docs/V2CrawlerSitemapInner.md
@@ -337,7 +342,6 @@ model_create_application_request_filesystem.go
 model_create_backup_202_response.go
 model_create_backup_request.go
 model_create_command_request.go
-model_create_cron_job_422_response.go
 model_create_cron_job_request.go
 model_create_environment_403_response.go
 model_create_environment_request.go
@@ -395,6 +399,11 @@ model_list_backups_422_response.go
 model_list_tool_executions_200_response.go
 model_list_tool_executions_200_response_executions_inner.go
 model_organizations_list_200_response_inner.go
+model_patch_environment_compose_202_response.go
+model_patch_environment_compose_202_response_spot_configuration.go
+model_patch_environment_compose_400_response.go
+model_patch_environment_compose_request.go
+model_patch_environment_compose_request_spot_configuration.go
 model_purge_create_request.go
 model_scaling_policy.go
 model_spot_configuration.go
@@ -450,6 +459,7 @@ model_v2_crawler_assets.go
 model_v2_crawler_assets_network_intercept.go
 model_v2_crawler_assets_parser.go
 model_v2_crawler_request.go
+model_v2_crawler_run.go
 model_v2_crawler_schedule.go
 model_v2_crawler_schedule_request.go
 model_v2_crawler_sitemap_inner.go

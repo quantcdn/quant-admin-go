@@ -5,6 +5,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetEnvironmentCompose**](ComposeAPI.md#GetEnvironmentCompose) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/compose | Get the compose file for an environment
+[**PatchEnvironmentCompose**](ComposeAPI.md#PatchEnvironmentCompose) | **Patch** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/compose | Partially Update Environment Compose Definition
 [**ValidateCompose**](ComposeAPI.md#ValidateCompose) | **Post** /api/v3/organizations/{organisation}/compose/validate | Validate a compose file
 
 
@@ -76,6 +77,84 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchEnvironmentCompose
+
+> PatchEnvironmentCompose202Response PatchEnvironmentCompose(ctx, organisation, application, environment).PatchEnvironmentComposeRequest(patchEnvironmentComposeRequest).Execute()
+
+Partially Update Environment Compose Definition
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation ID
+	application := "application_example" // string | The application ID
+	environment := "environment_example" // string | The environment ID
+	patchEnvironmentComposeRequest := *openapiclient.NewPatchEnvironmentComposeRequest() // PatchEnvironmentComposeRequest | Partial compose definition updates. All fields are optional.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ComposeAPI.PatchEnvironmentCompose(context.Background(), organisation, application, environment).PatchEnvironmentComposeRequest(patchEnvironmentComposeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ComposeAPI.PatchEnvironmentCompose``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchEnvironmentCompose`: PatchEnvironmentCompose202Response
+	fmt.Fprintf(os.Stdout, "Response from `ComposeAPI.PatchEnvironmentCompose`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**application** | **string** | The application ID | 
+**environment** | **string** | The environment ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchEnvironmentComposeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **patchEnvironmentComposeRequest** | [**PatchEnvironmentComposeRequest**](PatchEnvironmentComposeRequest.md) | Partial compose definition updates. All fields are optional. | 
+
+### Return type
+
+[**PatchEnvironmentCompose202Response**](PatchEnvironmentCompose202Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

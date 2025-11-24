@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.3.0
+  version: 4.4.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -647,6 +647,142 @@ paths:
                 $ref: '#/components/schemas/V2Error'
           description: An unexpected error occurred.
       summary: Run a crawler
+      tags:
+      - Crawlers
+  /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/runs:
+    get:
+      operationId: Crawlers_getRuns
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler identifier
+        explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/V2CrawlerRun'
+                type: array
+          description: The runs
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The resource was not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: An unexpected error occurred.
+      summary: Get all runs for a crawler
+      tags:
+      - Crawlers
+  /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/runs/{run_id}:
+    get:
+      operationId: Crawlers_getRunById
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Crawler identifier
+        explode: false
+        in: path
+        name: crawler
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Run identifier
+        explode: false
+        in: path
+        name: run_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2CrawlerRun'
+          description: The run
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The resource was not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: An unexpected error occurred.
+      summary: Get a run by ID
       tags:
       - Crawlers
   /api/v2/organizations/{organization}/projects/{project}/custom-headers:
@@ -5114,6 +5250,66 @@ paths:
       summary: Get the compose file for an environment
       tags:
       - Compose
+    patch:
+      description: "Partially updates top-level fields of the environment's compose\
+        \ definition, such as architecture, task-level CPU/Memory, or min/max scaling\
+        \ capacity. Only fields included in the request body are modified. The 'containers'\
+        \ array, if provided, REPLACES the existing containers array; if omitted,\
+        \ the existing containers are NOT modified by this PATCH operation. (For modifying\
+        \ individual containers, use PATCH /containers/{containerName}). This triggers\
+        \ a validation, registers a new task definition, and updates the service."
+      operationId: patchEnvironmentCompose
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The environment ID
+        explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patchEnvironmentCompose_request'
+        description: Partial compose definition updates. All fields are optional.
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_202_response'
+          description: "Request accepted, compose definition partial update is processing.\
+            \ Returns the full updated compose definition."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Invalid compose definition or validation failed.
+        "404":
+          description: Application or environment not found
+      summary: Partially Update Environment Compose Definition
+      tags:
+      - Compose
   /api/v3/organizations/{organisation}/compose/validate:
     post:
       description: "Accepts a docker-compose.yml file content, translates it into\
@@ -5347,7 +5543,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createCronJob_422_response'
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
           description: The request is invalid
       summary: Create a new cron job
       tags:
@@ -5793,7 +5989,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createCronJob_422_response'
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
           description: Invalid compose definition or validation failed.
         "404":
           description: Application or environment not found
@@ -8596,6 +8792,65 @@ components:
           example: next-page-token
           nullable: true
           type: string
+      type: object
+    V2CrawlerRun:
+      example:
+        completed_at: 1705749600
+        updated_at: 2024-01-20T09:15:00Z
+        project_id: 12345
+        last_status: completed
+        crawler_config_id: 12345
+        started_at: 1705749300
+        created_at: 2024-01-20T09:15:00Z
+        task_id: task-12345
+        id: 12345
+      properties:
+        id:
+          description: Run ID
+          example: 12345
+          type: integer
+        crawler_config_id:
+          description: Crawler config ID
+          example: 12345
+          type: integer
+        project_id:
+          description: Project ID
+          example: 12345
+          type: integer
+        last_status:
+          description: Run status
+          example: completed
+          type: string
+        task_id:
+          description: Task ID
+          example: task-12345
+          type: string
+        started_at:
+          description: Start time (Unix timestamp)
+          example: 1705749300
+          nullable: true
+          type: integer
+        completed_at:
+          description: Completion time (Unix timestamp)
+          example: 1705749600
+          nullable: true
+          type: integer
+        created_at:
+          description: Creation timestamp
+          example: 2024-01-20T09:15:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: Last update timestamp
+          example: 2024-01-20T09:15:00Z
+          format: date-time
+          type: string
+      required:
+      - crawler_config_id
+      - id
+      - last_status
+      - project_id
+      - task_id
       type: object
     V2Organization:
       example:
@@ -13384,6 +13639,116 @@ components:
         command:
           type: string
       type: object
+    patchEnvironmentCompose_request_spotConfiguration:
+      nullable: true
+      properties:
+        strategy:
+          enum:
+          - "off"
+          - spot-only
+          - mixed-safe
+          - mixed-aggressive
+          type: string
+      type: object
+    patchEnvironmentCompose_request:
+      properties:
+        architecture:
+          nullable: true
+          type: string
+        taskCpu:
+          nullable: true
+          type: string
+        taskMemory:
+          nullable: true
+          type: string
+        minCapacity:
+          minimum: 0
+          nullable: true
+          type: integer
+        maxCapacity:
+          minimum: 1
+          nullable: true
+          type: integer
+        containers:
+          items:
+            type: object
+          nullable: true
+          type: array
+        spotConfiguration:
+          $ref: '#/components/schemas/patchEnvironmentCompose_request_spotConfiguration'
+        enableCrossEnvNetworking:
+          nullable: true
+          type: boolean
+        enableCrossAppNetworking:
+          nullable: true
+          type: boolean
+      type: object
+    patchEnvironmentCompose_202_response_spotConfiguration:
+      example:
+        tolerateDowntime: true
+        strategy: "off"
+      properties:
+        strategy:
+          example: "off"
+          type: string
+        tolerateDowntime:
+          example: true
+          type: boolean
+      type: object
+    patchEnvironmentCompose_202_response:
+      example:
+        spotConfiguration:
+          tolerateDowntime: true
+          strategy: "off"
+        taskMemory: "2048"
+        maxCapacity: 1
+        minCapacity: 1
+        containers:
+        - "{}"
+        - "{}"
+        taskCpu: "512"
+        enableCrossAppNetworking: true
+        architecture: ARM64
+        enableCrossEnvNetworking: true
+      properties:
+        architecture:
+          example: ARM64
+          type: string
+        taskCpu:
+          example: "512"
+          type: string
+        taskMemory:
+          example: "2048"
+          type: string
+        minCapacity:
+          example: 1
+          type: integer
+        maxCapacity:
+          example: 1
+          type: integer
+        containers:
+          items:
+            type: object
+          type: array
+        spotConfiguration:
+          $ref: '#/components/schemas/patchEnvironmentCompose_202_response_spotConfiguration'
+        enableCrossEnvNetworking:
+          example: true
+          type: boolean
+        enableCrossAppNetworking:
+          example: true
+          type: boolean
+      type: object
+    patchEnvironmentCompose_400_response:
+      example:
+        message: message
+        errors: "{}"
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+      type: object
     validateCompose_request:
       properties:
         compose:
@@ -13462,16 +13827,6 @@ components:
       - command
       - name
       - scheduleExpression
-      type: object
-    createCronJob_422_response:
-      example:
-        message: message
-        errors: "{}"
-      properties:
-        message:
-          type: string
-        errors:
-          type: object
       type: object
     updateCronJob_request:
       properties:
