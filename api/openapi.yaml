@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.4.0
+  version: 4.6.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -1033,7 +1033,8 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Domain identifier
+        explode: false
         in: path
         name: domain
         required: true
@@ -1078,7 +1079,8 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Domain identifier
+        explode: false
         in: path
         name: domain
         required: true
@@ -1138,7 +1140,7 @@ paths:
         style: simple
       responses:
         "202":
-          description: The SSL certificate has been renewed.
+          description: The SSL certificate renewal has been initiated.
         "400":
           content:
             application/json:
@@ -7256,6 +7258,11 @@ components:
           engine: mysql
           instanceClass: db.t4g.micro
           storageGb: 20
+        environment:
+        - name: name
+          value: value
+        - name: name
+          value: value
         appName: my-app
         maxCapacity: 6
         minCapacity: 0
@@ -7283,6 +7290,13 @@ components:
           $ref: '#/components/schemas/CreateApplicationRequest_database'
         filesystem:
           $ref: '#/components/schemas/CreateApplicationRequest_filesystem'
+        environment:
+          description: Optional. Initial environment variables for the production
+            environment.
+          items:
+            $ref: '#/components/schemas/CreateApplicationRequest_environment_inner'
+          nullable: true
+          type: array
       required:
       - appName
       - composeDefinition
@@ -8663,9 +8677,19 @@ components:
       type: object
     V2Domain:
       example:
+        dns_validation_records:
+        - name: _abc123.example.com
+          type: CNAME
+          value: _xyz789.validation.example.com.
         domain: test-domain.com
         dns_engaged: 1
         id: 123
+        dns_go_live_records:
+        - type: CNAME
+          name: www
+          value: cdn.example.com
+          description: Add a CNAME record with the host set to your subdomain pointing
+            to the CDN endpoint.
       properties:
         id:
           description: Domain ID
@@ -8676,9 +8700,36 @@ components:
           example: test-domain.com
           type: string
         dns_engaged:
-          description: DNS engagement status
+          description: "DNS engagement status. 1 indicates DNS is properly configured\
+            \ and engaged, 0 indicates DNS configuration is pending or incomplete."
           example: 1
           type: integer
+        dns_validation_records:
+          description: DNS validation records required for SSL certificate validation.
+            Present for domains pending certificate validation. Each record contains
+            the CNAME information needed to validate domain ownership.
+          example:
+          - name: _abc123.example.com
+            type: CNAME
+            value: _xyz789.validation.example.com.
+          items:
+            $ref: '#/components/schemas/V2Domain_dns_validation_records_inner'
+          nullable: true
+          type: array
+        dns_go_live_records:
+          description: DNS records required to route traffic to the CDN. These records
+            differ based on domain type (apex vs subdomain). Present when the CDN
+            is configured and ready to receive traffic.
+          example:
+          - type: CNAME
+            name: www
+            value: cdn.example.com
+            description: Add a CNAME record with the host set to your subdomain pointing
+              to the CDN endpoint.
+          items:
+            $ref: '#/components/schemas/V2Domain_dns_go_live_records_inner'
+          nullable: true
+          type: array
       required:
       - dns_engaged
       - domain
@@ -14272,6 +14323,18 @@ components:
           example: /data/shared
           type: string
       type: object
+    CreateApplicationRequest_environment_inner:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          description: Environment variable name
+          type: string
+        value:
+          description: Environment variable value
+          type: string
+      type: object
     Application_database:
       description: Database configuration
       example:
@@ -14553,6 +14616,44 @@ components:
           $ref: '#/components/schemas/V2Crawler_assets_network_intercept'
         parser:
           $ref: '#/components/schemas/V2Crawler_assets_parser'
+      type: object
+    V2Domain_dns_validation_records_inner:
+      properties:
+        name:
+          description: DNS record name (host/subdomain)
+          example: _abc123.example.com
+          type: string
+        type:
+          description: DNS record type (typically CNAME)
+          example: CNAME
+          type: string
+        value:
+          description: DNS record value to point to
+          example: _xyz789.validation.example.com.
+          type: string
+      type: object
+    V2Domain_dns_go_live_records_inner:
+      properties:
+        type:
+          description: "DNS record type (CNAME, A, or ALIAS)"
+          example: CNAME
+          type: string
+        name:
+          description: "DNS record name/host (@ for apex/root domains, subdomain name\
+            \ for subdomains)"
+          example: www
+          type: string
+        value:
+          description: "DNS record value (IP addresses for A records, domain name\
+            \ for CNAME/ALIAS)"
+          example: cdn.example.com
+          nullable: true
+          type: string
+        description:
+          description: Human-readable instructions for configuring this DNS record
+          example: Add a CNAME record with the host set to your subdomain pointing
+            to the CDN endpoint.
+          type: string
       type: object
     V2RuleProxyAction_notify_config:
       description: Notification configuration (required when notify is slack)

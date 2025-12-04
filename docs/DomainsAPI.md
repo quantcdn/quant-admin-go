@@ -106,7 +106,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	domain := "domain_example" // string | 
+	domain := "domain_example" // string | Domain identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** | Organization identifier | 
 **project** | **string** | Project identifier | 
-**domain** | **string** |  | 
+**domain** | **string** | Domain identifier | 
 
 ### Other Parameters
 
@@ -249,7 +249,7 @@ import (
 func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
-	domain := "domain_example" // string | 
+	domain := "domain_example" // string | Domain identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** | Organization identifier | 
 **project** | **string** | Project identifier | 
-**domain** | **string** |  | 
+**domain** | **string** | Domain identifier | 
 
 ### Other Parameters
 

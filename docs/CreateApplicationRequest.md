@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **MaxCapacity** | Pointer to **NullableInt32** | Maximum task count for auto-scaling | [optional] [default to 1]
 **Database** | Pointer to [**NullableCreateApplicationRequestDatabase**](CreateApplicationRequestDatabase.md) |  | [optional] 
 **Filesystem** | Pointer to [**NullableCreateApplicationRequestFilesystem**](CreateApplicationRequestFilesystem.md) |  | [optional] 
+**Environment** | Pointer to [**[]CreateApplicationRequestEnvironmentInner**](CreateApplicationRequestEnvironmentInner.md) | Optional. Initial environment variables for the production environment. | [optional] 
 
 ## Methods
 
@@ -210,6 +211,41 @@ HasFilesystem returns a boolean if a field has been set.
 `func (o *CreateApplicationRequest) UnsetFilesystem()`
 
 UnsetFilesystem ensures that no value is present for Filesystem, not even an explicit nil
+### GetEnvironment
+
+`func (o *CreateApplicationRequest) GetEnvironment() []CreateApplicationRequestEnvironmentInner`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *CreateApplicationRequest) GetEnvironmentOk() (*[]CreateApplicationRequestEnvironmentInner, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *CreateApplicationRequest) SetEnvironment(v []CreateApplicationRequestEnvironmentInner)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *CreateApplicationRequest) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
+
+### SetEnvironmentNil
+
+`func (o *CreateApplicationRequest) SetEnvironmentNil(b bool)`
+
+ SetEnvironmentNil sets the value for Environment to be an explicit nil
+
+### UnsetEnvironment
+`func (o *CreateApplicationRequest) UnsetEnvironment()`
+
+UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

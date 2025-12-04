@@ -87,6 +87,7 @@ docs/CreateAISessionRequestInitialMessagesInner.md
 docs/CreateApplication403Response.md
 docs/CreateApplicationRequest.md
 docs/CreateApplicationRequestDatabase.md
+docs/CreateApplicationRequestEnvironmentInner.md
 docs/CreateApplicationRequestFilesystem.md
 docs/CreateBackup202Response.md
 docs/CreateBackupRequest.md
@@ -225,6 +226,8 @@ docs/V2CrawlerScheduleRequest.md
 docs/V2CrawlerSitemapInner.md
 docs/V2CustomHeaderRequest.md
 docs/V2Domain.md
+docs/V2DomainDnsGoLiveRecordsInner.md
+docs/V2DomainDnsValidationRecordsInner.md
 docs/V2DomainRequest.md
 docs/V2Error.md
 docs/V2Organization.md
@@ -338,6 +341,7 @@ model_create_ai_session_request_initial_messages_inner.go
 model_create_application_403_response.go
 model_create_application_request.go
 model_create_application_request_database.go
+model_create_application_request_environment_inner.go
 model_create_application_request_filesystem.go
 model_create_backup_202_response.go
 model_create_backup_request.go
@@ -465,6 +469,8 @@ model_v2_crawler_schedule_request.go
 model_v2_crawler_sitemap_inner.go
 model_v2_custom_header_request.go
 model_v2_domain.go
+model_v2_domain_dns_go_live_records_inner.go
+model_v2_domain_dns_validation_records_inner.go
 model_v2_domain_request.go
 model_v2_error.go
 model_v2_organization.go
