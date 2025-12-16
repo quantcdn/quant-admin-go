@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
 
 ## ListEnvironments
 
-> []Environment ListEnvironments(ctx, organisation, application).Execute()
+> []EnvironmentSummary ListEnvironments(ctx, organisation, application).Execute()
 
 Get all environments for an application
 
@@ -439,7 +439,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.ListEnvironments``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListEnvironments`: []Environment
+	// response from `ListEnvironments`: []EnvironmentSummary
 	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.ListEnvironments`: %v\n", resp)
 }
 ```
@@ -465,7 +465,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Environment**](Environment.md)
+[**[]EnvironmentSummary**](EnvironmentSummary.md)
 
 ### Authorization
 

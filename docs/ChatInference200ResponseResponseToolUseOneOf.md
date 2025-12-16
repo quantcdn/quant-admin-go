@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Input** | Pointer to **map[string]interface{}** |  | [optional] 
 **ExecutionId** | Pointer to **string** | Present for async tools with autoExecute | [optional] 
-**Status** | Pointer to **string** | Present for async tools with autoExecute | [optional] 
+**Status** | Pointer to **string** | Execution status (pending/running/complete/failed) - present for async tools with autoExecute | [optional] 
 **Result** | Pointer to [**ChatInference200ResponseResponseToolUseOneOfResult**](ChatInference200ResponseResponseToolUseOneOfResult.md) |  | [optional] 
 
 ## Methods

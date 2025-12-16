@@ -11,7 +11,9 @@ Name | Type | Description | Notes
 **MinCapacity** | Pointer to **int32** | Minimum capacity for autoscaling | [optional] 
 **MaxCapacity** | Pointer to **int32** | Maximum capacity for autoscaling | [optional] 
 **PublicIpAddress** | Pointer to **NullableString** | Public IP address for SSH access | [optional] 
-**DeploymentStatus** | Pointer to **string** | Deployment status | [optional] 
+**DeploymentStatus** | Pointer to **string** | Current deployment status. FAILED indicates the most recent deployment did not complete successfully. | [optional] 
+**DeploymentFailureType** | Pointer to **NullableString** | Type of deployment failure when deploymentStatus is FAILED (e.g., &#39;ECS_DEPLOYMENT_CIRCUIT_BREAKER&#39;, &#39;IMAGE_PULL_ERROR&#39;) | [optional] 
+**DeploymentFailureReason** | Pointer to **NullableString** | Human-readable explanation of why the deployment failed. Contains details such as wrong image architecture, missing image, or container startup errors. | [optional] 
 **TaskDefinition** | Pointer to **map[string]interface{}** | ECS task definition details | [optional] 
 **Service** | Pointer to **map[string]interface{}** | ECS service details | [optional] 
 **LoadBalancer** | Pointer to **map[string]interface{}** | Load balancer configuration | [optional] 
@@ -249,6 +251,76 @@ SetDeploymentStatus sets DeploymentStatus field to given value.
 
 HasDeploymentStatus returns a boolean if a field has been set.
 
+### GetDeploymentFailureType
+
+`func (o *EnvironmentResponse) GetDeploymentFailureType() string`
+
+GetDeploymentFailureType returns the DeploymentFailureType field if non-nil, zero value otherwise.
+
+### GetDeploymentFailureTypeOk
+
+`func (o *EnvironmentResponse) GetDeploymentFailureTypeOk() (*string, bool)`
+
+GetDeploymentFailureTypeOk returns a tuple with the DeploymentFailureType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeploymentFailureType
+
+`func (o *EnvironmentResponse) SetDeploymentFailureType(v string)`
+
+SetDeploymentFailureType sets DeploymentFailureType field to given value.
+
+### HasDeploymentFailureType
+
+`func (o *EnvironmentResponse) HasDeploymentFailureType() bool`
+
+HasDeploymentFailureType returns a boolean if a field has been set.
+
+### SetDeploymentFailureTypeNil
+
+`func (o *EnvironmentResponse) SetDeploymentFailureTypeNil(b bool)`
+
+ SetDeploymentFailureTypeNil sets the value for DeploymentFailureType to be an explicit nil
+
+### UnsetDeploymentFailureType
+`func (o *EnvironmentResponse) UnsetDeploymentFailureType()`
+
+UnsetDeploymentFailureType ensures that no value is present for DeploymentFailureType, not even an explicit nil
+### GetDeploymentFailureReason
+
+`func (o *EnvironmentResponse) GetDeploymentFailureReason() string`
+
+GetDeploymentFailureReason returns the DeploymentFailureReason field if non-nil, zero value otherwise.
+
+### GetDeploymentFailureReasonOk
+
+`func (o *EnvironmentResponse) GetDeploymentFailureReasonOk() (*string, bool)`
+
+GetDeploymentFailureReasonOk returns a tuple with the DeploymentFailureReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeploymentFailureReason
+
+`func (o *EnvironmentResponse) SetDeploymentFailureReason(v string)`
+
+SetDeploymentFailureReason sets DeploymentFailureReason field to given value.
+
+### HasDeploymentFailureReason
+
+`func (o *EnvironmentResponse) HasDeploymentFailureReason() bool`
+
+HasDeploymentFailureReason returns a boolean if a field has been set.
+
+### SetDeploymentFailureReasonNil
+
+`func (o *EnvironmentResponse) SetDeploymentFailureReasonNil(b bool)`
+
+ SetDeploymentFailureReasonNil sets the value for DeploymentFailureReason to be an explicit nil
+
+### UnsetDeploymentFailureReason
+`func (o *EnvironmentResponse) UnsetDeploymentFailureReason()`
+
+UnsetDeploymentFailureReason ensures that no value is present for DeploymentFailureReason, not even an explicit nil
 ### GetTaskDefinition
 
 `func (o *EnvironmentResponse) GetTaskDefinition() map[string]interface{}`

@@ -11,8 +11,6 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- description: "AI chat, embeddings, and image generation services"
-  name: AI Services
 - description: Cloud application lifecycle management
   name: Applications
 - description: Backup and restore operations for applications
@@ -53,6 +51,22 @@ tags:
   name: Variables
 - description: Persistent storage volume management
   name: Volumes
+- description: AI Models
+  name: AI Models
+- description: AI Sessions
+  name: AI Sessions
+- description: AI Monitoring
+  name: AI Monitoring
+- description: AI Inference
+  name: AI Inference
+- description: AI Tools
+  name: AI Tools
+- description: AI Agents
+  name: AI Agents
+- description: AI Custom Tools
+  name: AI Custom Tools
+- description: AI Vector Database
+  name: AI Vector Database
 paths:
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
@@ -4200,15 +4214,38 @@ paths:
           description: Failed to fetch models
       summary: List available AI models for an organization
       tags:
-      - AI Services
-  /api/v3/organizations/{organisation}/ai/config:
+      - AI Models
+  /api/v3/organizations/{organisation}/ai/models/{modelId}:
     get:
-      operationId: getAIConfig
+      description: |-
+        Retrieves detailed information about a specific Bedrock model from the catalog.
+             *
+             * **Features:**
+             * - Complete pricing breakdown (input/output per million tokens)
+             * - Context window and output token limits
+             * - Supported features (chat, vision, streaming, embeddings)
+             * - Model availability and deprecation status
+             * - Release date for version tracking
+             *
+             * **Example Model IDs:**
+             * - `amazon.nova-lite-v1:0` - Default multimodal model
+             * - `anthropic.claude-3-5-sonnet-20241022-v2:0` - Latest Claude
+             * - `amazon.titan-embed-text-v2:0` - Latest embeddings
+      operationId: getAIModel
       parameters:
       - description: The organisation ID
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "The model identifier (e.g., amazon.nova-lite-v1:0)"
+        example: amazon.nova-lite-v1:0
+        explode: false
+        in: path
+        name: modelId
         required: true
         schema:
           type: string
@@ -4218,38 +4255,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getAIConfig_200_response'
-          description: AI configuration
+                $ref: '#/components/schemas/getAIModel_200_response'
+          description: Model details retrieved successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAIModel_404_response'
+          description: Model not found in catalog
         "500":
-          description: Failed to fetch configuration
-      summary: Get AI configuration for an organization
+          description: Failed to fetch model details
+      summary: Get AI Model Details
       tags:
-      - AI Services
-    put:
-      operationId: updateAIConfig
-      parameters:
-      - description: The organisation ID
-        explode: false
-        in: path
-        name: organisation
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateAIConfig_request'
-        required: true
-      responses:
-        "200":
-          description: Configuration updated successfully
-        "500":
-          description: Failed to update configuration
-      summary: Update AI configuration for an organization
-      tags:
-      - AI Services
+      - AI Models
   /api/v3/organizations/{organisation}/ai/sessions:
     get:
       description: |-
@@ -4334,7 +4352,7 @@ paths:
           description: Failed to fetch sessions
       summary: List chat sessions with multi-tenant filtering
       tags:
-      - AI Services
+      - AI Sessions
     post:
       description: "Creates an AI session with automatic expiration (60 min default,\
         \ 24h max). Sessions are isolated by organization. Use userId to identify\
@@ -4370,7 +4388,7 @@ paths:
           description: Failed to create session
       summary: Create a new chat session with multi-tenant isolation
       tags:
-      - AI Services
+      - AI Sessions
   /api/v3/organizations/{organisation}/ai/sessions/{sessionId}:
     delete:
       operationId: deleteAISession
@@ -4402,7 +4420,7 @@ paths:
           description: Failed to delete session
       summary: Delete a chat session
       tags:
-      - AI Services
+      - AI Sessions
     get:
       operationId: getAISession
       parameters:
@@ -4433,7 +4451,105 @@ paths:
           description: Session not found
       summary: Get a specific chat session
       tags:
-      - AI Services
+      - AI Sessions
+    put:
+      description: |-
+        Updates session with new conversation messages and tracks token usage. Appends new messages to conversation history and updates session stats.
+             *
+             * **Typical Flow:**
+             * 1. Get session to retrieve conversation history
+             * 2. Call AI inference with full message history
+             * 3. Update session with new user + assistant messages
+      operationId: updateAISession
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The session ID
+        explode: false
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateAISession_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAISession_200_response'
+          description: Session updated successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Session not found
+        "500":
+          description: Failed to update session
+      summary: Update Session
+      tags:
+      - AI Sessions
+  /api/v3/organizations/{organisation}/ai/sessions/{sessionId}/extend:
+    put:
+      description: Extends the expiration time of an active session. Useful for keeping
+        long-running conversations alive.
+      operationId: extendAISession
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The session ID
+        explode: false
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/extendAISession_request'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/extendAISession_200_response'
+          description: Session extended successfully
+        "400":
+          description: Invalid parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Session not found
+        "500":
+          description: Failed to extend session
+      summary: Extend Session Expiration
+      tags:
+      - AI Sessions
   /api/v3/organizations/{organisation}/ai/usage:
     get:
       operationId: getAIUsageStats
@@ -4466,7 +4582,7 @@ paths:
           description: Failed to fetch usage statistics
       summary: Get AI usage statistics
       tags:
-      - AI Services
+      - AI Monitoring
   /api/v3/organizations/{organisation}/ai/chat:
     post:
       description: |-
@@ -4534,7 +4650,7 @@ paths:
       summary: Chat inference via API Gateway (buffered responses) with multimodal
         support
       tags:
-      - AI Services
+      - AI Inference
   /api/v3/organizations/{organisation}/ai/chat/stream:
     post:
       description: |-
@@ -4603,7 +4719,7 @@ paths:
       summary: Chat inference via streaming endpoint (true HTTP streaming) with multimodal
         support
       tags:
-      - AI Services
+      - AI Inference
   /api/v3/organizations/{organisation}/ai/embeddings:
     post:
       description: |-
@@ -4673,7 +4789,7 @@ paths:
           description: Failed to generate embeddings
       summary: Generate text embeddings for semantic search and RAG applications
       tags:
-      - AI Services
+      - AI Inference
   /api/v3/organizations/{organisation}/ai/image-generation:
     post:
       description: |-
@@ -4745,7 +4861,7 @@ paths:
           description: Failed to generate images
       summary: Generate images with Amazon Nova Canvas
       tags:
-      - AI Services
+      - AI Inference
   /api/v3/organizations/{organisation}/ai/tools:
     get:
       description: |-
@@ -4795,7 +4911,7 @@ paths:
           description: Failed to fetch tools
       summary: List available built-in tools for function calling
       tags:
-      - AI Services
+      - AI Tools
   /api/v3/organizations/{organisation}/ai/tools/names:
     get:
       description: Retrieves just the names of available built-in tools. Useful for
@@ -4823,7 +4939,7 @@ paths:
           description: Failed to fetch tool names
       summary: List tool names only (lightweight response)
       tags:
-      - AI Services
+      - AI Tools
   /api/v3/organizations/{organisation}/ai/tools/executions/{executionId}:
     get:
       description: |-
@@ -4857,7 +4973,7 @@ paths:
              * - Large file uploads/downloads
              * - Complex database queries
              * - External API calls with high latency
-      operationId: getToolExecutionStatus
+      operationId: getAIToolExecutionStatus
       parameters:
       - description: The organisation ID
         explode: false
@@ -4882,13 +4998,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getToolExecutionStatus_200_response'
+                $ref: '#/components/schemas/getAIToolExecutionStatus_200_response'
           description: Tool execution status retrieved successfully
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getToolExecutionStatus_404_response'
+                $ref: '#/components/schemas/getAIToolExecutionStatus_404_response'
           description: Execution not found (may have expired after 24h)
         "403":
           description: Access denied
@@ -4896,7 +5012,7 @@ paths:
           description: Failed to retrieve execution status
       summary: Get async tool execution status and result
       tags:
-      - AI Services
+      - AI Tools
   /api/v3/organizations/{organisation}/ai/tools/executions:
     get:
       description: |-
@@ -4918,7 +5034,7 @@ paths:
              * - Build admin dashboards
              * - Track tool usage patterns
              * - Audit async operations
-      operationId: listToolExecutions
+      operationId: listAIToolExecutions
       parameters:
       - description: The organisation ID
         explode: false
@@ -4957,7 +5073,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/listToolExecutions_200_response'
+                $ref: '#/components/schemas/listAIToolExecutions_200_response'
           description: Tool executions retrieved successfully
         "400":
           description: Invalid parameters
@@ -4967,7 +5083,640 @@ paths:
           description: Failed to retrieve executions
       summary: List tool executions for monitoring and debugging
       tags:
-      - AI Services
+      - AI Tools
+  /api/v3/organizations/{organisation}/ai/agents:
+    get:
+      description: |-
+        Lists all AI agents for an organization. Agents are pre-configured AI assistants with specific system prompts, model settings, and tool permissions.
+             *
+             * **Features:**
+             * - Filter by group (e.g., 'development', 'compliance')
+             * - Organization-scoped
+             * - Returns agent configurations without execution history
+      operationId: listAIAgents
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Optional group filter (e.g., 'development', 'compliance')"
+        explode: true
+        in: query
+        name: group
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAIAgents_200_response'
+          description: List of agents retrieved successfully
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to retrieve agents
+      summary: List AI Agents
+      tags:
+      - AI Agents
+    post:
+      description: |-
+        Creates a new AI agent with specific configuration, system prompt, and tool permissions.
+             *
+             * **Agent Configuration:**
+             * - **System Prompt**: Instructions that guide the agent's behavior
+             * - **Model**: Which foundation model to use (e.g., 'amazon.nova-pro-v1:0')
+             * - **Temperature**: Creativity level (0-1)
+             * - **Allowed Tools**: Which tools the agent can auto-execute
+             * - **Allowed Collections**: Vector DB collections for RAG
+             * - **Group**: Optional categorization (e.g., 'development', 'compliance')
+             *
+             * **Auto-Execution:**
+             * All tools are automatically executed when an agent requests them (no client confirmation needed).
+      operationId: createAIAgent
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createAIAgent_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createAIAgent_201_response'
+          description: Agent created successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to create agent
+      summary: Create AI Agent
+      tags:
+      - AI Agents
+  /api/v3/organizations/{organisation}/ai/agents/{agentId}:
+    delete:
+      description: Permanently deletes an AI agent. This action cannot be undone.
+      operationId: deleteAIAgent
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The agent ID
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteAIAgent_200_response'
+          description: Agent deleted successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Agent not found
+        "500":
+          description: Failed to delete agent
+      summary: Delete Agent
+      tags:
+      - AI Agents
+    get:
+      description: Retrieves detailed configuration for a specific AI agent.
+      operationId: getAIAgent
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The agent ID
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAIAgent_200_response'
+          description: Agent details retrieved successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Agent not found
+        "500":
+          description: Failed to retrieve agent
+      summary: Get Agent Details
+      tags:
+      - AI Agents
+    put:
+      description: "Updates an existing AI agent configuration. All fields except\
+        \ agentId, organizationId, createdAt, and createdBy can be updated."
+      operationId: updateAIAgent
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The agent ID
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateAIAgent_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAIAgent_200_response'
+          description: Agent updated successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Agent not found
+        "500":
+          description: Failed to update agent
+      summary: Update Agent
+      tags:
+      - AI Agents
+  /api/v3/organizations/{organisation}/ai/agents/{agentId}/chat:
+    post:
+      description: |-
+        Initiates a chat session with a specific AI agent. The agent's configuration (system prompt, temperature, model, allowed tools) is automatically applied.
+             *
+             * **Key Features:**
+             * - **Session Management**: Automatic session creation and state tracking
+             * - **Multi-turn Conversations**: Full conversation history maintained server-side
+             * - Agent's system prompt is prepended to conversation
+             * - Only agent's allowed tools are available
+             * - All tools are auto-executed (no client confirmation)
+             * - Temperature and model from agent config
+             *
+             * **Session Support:**
+             * - Omit `sessionId` to create a new session automatically
+             * - Include `sessionId` to continue an existing conversation
+             * - Sessions expire after 60 minutes of inactivity
+             * - Use `/sessions/{sessionId}` to retrieve full conversation history
+      operationId: chatWithAIAgent
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The agent ID
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/chatWithAIAgent_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chatWithAIAgent_200_response'
+          description: Agent response generated successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Agent not found
+        "500":
+          description: Failed to chat with agent
+      summary: Chat with AI Agent
+      tags:
+      - AI Agents
+  /api/v3/organizations/{organisation}/ai/custom-tools:
+    get:
+      description: Lists all registered custom edge function tools for an organization.
+      operationId: listCustomTools
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listCustomTools_200_response'
+          description: Custom tools retrieved successfully
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to retrieve custom tools
+      summary: List Custom Tools
+      tags:
+      - AI Custom Tools
+    post:
+      description: |-
+        Registers a custom edge function as a tool that AI models can invoke. This enables customers to create their own tools backed by edge functions.
+             *
+             * **Edge Function Contract:**
+             * - Edge functions must accept POST requests with JSON payload
+             * - Expected request format: `{ 'toolName': '...', 'input': {...}, 'orgId': '...' }`
+             * - Must return JSON response with either `result` or `error` field
+             *
+             * **Async Tools:**
+             * Set `isAsync: true` for operations >5 seconds. The edge function should return `{ executionId: '...' }` and the AI will poll for completion.
+      operationId: createCustomTool
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createCustomTool_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createCustomTool_201_response'
+          description: Custom tool registered successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "409":
+          description: Tool with this name already exists
+        "500":
+          description: Failed to register custom tool
+      summary: Register Custom Edge Function Tool
+      tags:
+      - AI Custom Tools
+  /api/v3/organizations/{organisation}/ai/custom-tools/{toolName}:
+    delete:
+      description: Deletes a custom tool registration. The underlying edge function
+        is not affected.
+      operationId: deleteCustomTool
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The tool name to delete
+        explode: false
+        in: path
+        name: toolName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteCustomTool_200_response'
+          description: Custom tool deleted successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Tool not found
+        "500":
+          description: Failed to delete custom tool
+      summary: Delete Custom Tool
+      tags:
+      - AI Custom Tools
+  /api/v3/organizations/{organisation}/ai/vector-db/collections:
+    get:
+      description: Lists all vector database collections (knowledge bases) for an
+        organization.
+      operationId: listVectorCollections
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listVectorCollections_200_response'
+          description: Collections retrieved successfully
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to retrieve collections
+      summary: List Vector Database Collections
+      tags:
+      - AI Vector Database
+    post:
+      description: |-
+        Creates a new vector database collection (knowledge base category) for semantic search. Collections store documents with embeddings for RAG (Retrieval Augmented Generation).
+             *
+             * **Use Cases:**
+             * - Product documentation ('docs')
+             * - Company policies ('policies')
+             * - Support knowledge base ('support')
+             * - Technical specifications ('specs')
+      operationId: createVectorCollection
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createVectorCollection_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createVectorCollection_201_response'
+          description: Collection created successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "409":
+          description: Collection with this name already exists
+        "500":
+          description: Failed to create collection
+      summary: Create Vector Database Collection
+      tags:
+      - AI Vector Database
+  /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}:
+    delete:
+      description: Deletes a vector database collection and all its documents. This
+        action cannot be undone.
+      operationId: deleteVectorCollection
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The collection ID
+        explode: false
+        in: path
+        name: collectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteVectorCollection_200_response'
+          description: Collection deleted successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Collection not found
+        "500":
+          description: Failed to delete collection
+      summary: Delete Collection
+      tags:
+      - AI Vector Database
+    get:
+      description: Get detailed information about a specific vector database collection.
+      operationId: getVectorCollection
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The collection ID
+        explode: false
+        in: path
+        name: collectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getVectorCollection_200_response'
+          description: Collection details retrieved successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Collection not found
+        "500":
+          description: Failed to retrieve collection
+      summary: Get Collection Details
+      tags:
+      - AI Vector Database
+  /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents:
+    post:
+      description: |-
+        Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection's embedding model, and stored.
+             *
+             * **Supported Content:**
+             * - Plain text content
+             * - URLs to fetch content from
+             * - Markdown documents
+             *
+             * **Metadata:**
+             * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
+      operationId: uploadVectorDocuments
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The collection ID
+        explode: false
+        in: path
+        name: collectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/uploadVectorDocuments_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uploadVectorDocuments_200_response'
+          description: Documents uploaded successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Collection not found
+        "500":
+          description: Failed to upload documents
+      summary: Upload Documents to Collection
+      tags:
+      - AI Vector Database
+  /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query:
+    post:
+      description: |-
+        Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.
+             *
+             * **Use Cases:**
+             * - Find relevant documentation for user questions
+             * - Power RAG (Retrieval Augmented Generation) in AI assistants
+             * - Semantic search across knowledge bases
+      operationId: queryVectorCollection
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The collection ID
+        explode: false
+        in: path
+        name: collectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/queryVectorCollection_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/queryVectorCollection_200_response'
+          description: Search completed successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Collection not found
+        "500":
+          description: Failed to perform search
+      summary: Semantic Search Query
+      tags:
+      - AI Vector Database
   /api/v3/organizations/{organisation}/applications:
     get:
       operationId: listApplications
@@ -5820,9 +6569,10 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Environment'
+                  $ref: '#/components/schemas/EnvironmentSummary'
                 type: array
-          description: The environments
+          description: List of environments with summary information including deployment
+            status
         "404":
           description: The organisation or application not found
       summary: Get all environments for an application
@@ -7967,13 +8717,6 @@ components:
       type: object
     Environment:
       description: Environment creation/update request schema
-      example:
-        envName: envName
-        desiredCount: 0
-        maxCapacity: 1
-        minCapacity: 6
-        cloneConfigurationFrom: cloneConfigurationFrom
-        imageSuffix: imageSuffix
       properties:
         envName:
           type: string
@@ -7992,6 +8735,50 @@ components:
       required:
       - envName
       type: object
+    EnvironmentSummary:
+      description: Environment summary returned in list responses
+      example:
+        deploymentStatus: COMPLETED
+        envName: production
+        desiredCount: 2
+        runningCount: 2
+        maxCapacity: 5
+        minCapacity: 1
+        status: ACTIVE
+      properties:
+        envName:
+          description: Environment name
+          example: production
+          type: string
+        status:
+          description: Environment status
+          example: ACTIVE
+          type: string
+        deploymentStatus:
+          description: Current deployment status
+          enum:
+          - COMPLETED
+          - IN_PROGRESS
+          - FAILED
+          example: COMPLETED
+          type: string
+        runningCount:
+          description: Number of running tasks
+          example: 2
+          type: integer
+        desiredCount:
+          description: Desired number of tasks
+          example: 2
+          type: integer
+        minCapacity:
+          description: Minimum capacity for autoscaling
+          example: 1
+          type: integer
+        maxCapacity:
+          description: Maximum capacity for autoscaling
+          example: 5
+          type: integer
+      type: object
     EnvironmentResponse:
       description: Environment response schema with runtime details
       example:
@@ -8002,6 +8789,8 @@ components:
         - schedule: schedule
           name: name
           command: command
+        deploymentFailureReason: "CannotPullContainerError: pull image manifest has\
+          \ been retried 5 times"
         subnet: "{}"
         publicIpAddress: 54.123.45.67
         desiredCount: 2
@@ -8031,6 +8820,7 @@ components:
         service: "{}"
         loadBalancer: "{}"
         runningCount: 2
+        deploymentFailureType: IMAGE_PULL_ERROR
         minCapacity: 1
         containers:
         - "{}"
@@ -8070,8 +8860,27 @@ components:
           nullable: true
           type: string
         deploymentStatus:
-          description: Deployment status
+          description: Current deployment status. FAILED indicates the most recent
+            deployment did not complete successfully.
+          enum:
+          - COMPLETED
+          - IN_PROGRESS
+          - FAILED
           example: COMPLETED
+          type: string
+        deploymentFailureType:
+          description: "Type of deployment failure when deploymentStatus is FAILED\
+            \ (e.g., 'ECS_DEPLOYMENT_CIRCUIT_BREAKER', 'IMAGE_PULL_ERROR')"
+          example: IMAGE_PULL_ERROR
+          nullable: true
+          type: string
+        deploymentFailureReason:
+          description: "Human-readable explanation of why the deployment failed. Contains\
+            \ details such as wrong image architecture, missing image, or container\
+            \ startup errors."
+          example: "CannotPullContainerError: pull image manifest has been retried\
+            \ 5 times"
+          nullable: true
           type: string
         taskDefinition:
           description: ECS task definition details
@@ -12307,41 +13116,116 @@ components:
             $ref: '#/components/schemas/listAIModels_200_response_models_inner'
           type: array
       type: object
-    getAIConfig_200_response:
+    getAIModel_200_response_capabilities:
       example:
-        max_tokens: 0
-        temperature: 6.027456183070403
-        default_model: default_model
-        enabled_models:
-        - enabled_models
-        - enabled_models
+        supportsStructuredOutput: false
+        supportsMultimodal: true
+        supportsVision: true
+        supportsStreaming: true
+        supportsTools: false
       properties:
-        enabled_models:
-          items:
-            type: string
-          type: array
-        default_model:
-          type: string
-        max_tokens:
-          type: integer
-        temperature:
-          type: number
+        supportsTools:
+          example: false
+          type: boolean
+        supportsStructuredOutput:
+          example: false
+          type: boolean
+        supportsMultimodal:
+          example: true
+          type: boolean
+        supportsVision:
+          example: true
+          type: boolean
+        supportsStreaming:
+          example: true
+          type: boolean
       type: object
-    updateAIConfig_request:
+    getAIModel_200_response_pricing:
+      example:
+        outputPerMToken: 0.24
+        currency: USD
+        inputPerMToken: 0.06
       properties:
-        enabled_models:
-          items:
-            type: string
-          type: array
-        default_model:
-          type: string
-        max_tokens:
-          minimum: 1
-          type: integer
-        temperature:
-          maximum: 2
-          minimum: 0
+        inputPerMToken:
+          example: 0.06
+          format: float
           type: number
+        outputPerMToken:
+          example: 0.24
+          format: float
+          type: number
+        currency:
+          example: USD
+          type: string
+      type: object
+    getAIModel_200_response:
+      example:
+        contextWindow: 300000
+        capabilities:
+          supportsStructuredOutput: false
+          supportsMultimodal: true
+          supportsVision: true
+          supportsStreaming: true
+          supportsTools: false
+        provider: Amazon
+        releaseDate: 2024-12-03
+        deprecated: false
+        name: Amazon Nova Lite
+        available: true
+        description: "Very low-cost multimodal model for processing text, image, and\
+          \ video inputs."
+        id: amazon.nova-lite-v1:0
+        maxOutputTokens: 5000
+        pricing:
+          outputPerMToken: 0.24
+          currency: USD
+          inputPerMToken: 0.06
+      properties:
+        id:
+          example: amazon.nova-lite-v1:0
+          type: string
+        name:
+          example: Amazon Nova Lite
+          type: string
+        provider:
+          example: Amazon
+          type: string
+        description:
+          example: "Very low-cost multimodal model for processing text, image, and\
+            \ video inputs."
+          type: string
+        contextWindow:
+          example: 300000
+          type: integer
+        maxOutputTokens:
+          example: 5000
+          type: integer
+        capabilities:
+          $ref: '#/components/schemas/getAIModel_200_response_capabilities'
+        pricing:
+          $ref: '#/components/schemas/getAIModel_200_response_pricing'
+        releaseDate:
+          example: 2024-12-03
+          format: date
+          type: string
+        deprecated:
+          example: false
+          type: boolean
+        available:
+          example: true
+          type: boolean
+      type: object
+    getAIModel_404_response:
+      example:
+        code: MODEL_NOT_FOUND
+        message: Model not found
+      properties:
+        message:
+          example: Model not found
+          type: string
+        code:
+          example: MODEL_NOT_FOUND
+          type: string
       type: object
     listAISessions_200_response_inner:
       example:
@@ -12452,11 +13336,88 @@ components:
           format: date-time
           type: string
       type: object
+    updateAISession_request_newMessages_inner:
+      properties:
+        role:
+          enum:
+          - user
+          - assistant
+          type: string
+        content:
+          type: string
+      type: object
+    updateAISession_request:
+      properties:
+        newMessages:
+          description: New messages to append to conversation
+          items:
+            $ref: '#/components/schemas/updateAISession_request_newMessages_inner'
+          type: array
+        tokensUsed:
+          description: Tokens consumed in this turn
+          type: integer
+        status:
+          description: Update session status
+          enum:
+          - active
+          - completed
+          type: string
+        metadata:
+          description: Update custom metadata
+          type: object
+      type: object
+    updateAISession_200_response:
+      example:
+        totalMessages: 0
+        sessionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        totalTokens: 6
+        status: status
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        sessionId:
+          format: uuid
+          type: string
+        status:
+          type: string
+        totalMessages:
+          type: integer
+        totalTokens:
+          type: integer
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
     deleteAISession_200_response:
       example:
         message: message
       properties:
         message:
+          type: string
+      type: object
+    extendAISession_request:
+      properties:
+        additionalMinutes:
+          default: 60
+          description: "Minutes to add to expiration time (default 60, max 1440)"
+          example: 60
+          maximum: 1440
+          minimum: 1
+          type: integer
+      type: object
+    extendAISession_200_response:
+      example:
+        sessionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        message: Session extended by 60 minutes
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        sessionId:
+          format: uuid
+          type: string
+        expiresAt:
+          format: date-time
+          type: string
+        message:
+          example: Session extended by 60 minutes
           type: string
       type: object
     getAIUsageStats_200_response_by_model_value:
@@ -12789,12 +13750,9 @@ components:
           example: exec_abc123def456
           type: string
         status:
-          description: Present for async tools with autoExecute
-          enum:
-          - pending
-          - running
-          - complete
-          - failed
+          description: Execution status (pending/running/complete/failed) - present
+            for async tools with autoExecute
+          example: pending
           type: string
         result:
           $ref: '#/components/schemas/chatInference_200_response_response_toolUse_oneOf_result'
@@ -13498,7 +14456,7 @@ components:
       - count
       - tools
       type: object
-    getToolExecutionStatus_200_response_result:
+    getAIToolExecutionStatus_200_response_result:
       description: Tool execution result (only present when status='complete'). Structure
         varies by tool type.
       example:
@@ -13522,7 +14480,7 @@ components:
             type: string
           type: array
       type: object
-    getToolExecutionStatus_200_response:
+    getAIToolExecutionStatus_200_response:
       example:
         result:
           images:
@@ -13536,7 +14494,7 @@ components:
         startedAt: 1730271601
         error: "Image generation failed: Invalid prompt"
         toolName: generate_image
-        status: pending
+        status: complete
       properties:
         executionId:
           example: exec_abc123def456
@@ -13545,14 +14503,11 @@ components:
           example: generate_image
           type: string
         status:
-          enum:
-          - pending
-          - running
-          - complete
-          - failed
+          description: "Execution status: pending, running, complete, or failed"
+          example: complete
           type: string
         result:
-          $ref: '#/components/schemas/getToolExecutionStatus_200_response_result'
+          $ref: '#/components/schemas/getAIToolExecutionStatus_200_response_result'
         error:
           description: Error message (only present when status='failed')
           example: "Image generation failed: Invalid prompt"
@@ -13580,7 +14535,7 @@ components:
       - status
       - toolName
       type: object
-    getToolExecutionStatus_404_response:
+    getAIToolExecutionStatus_404_response:
       example:
         executionId: exec_abc123def456
         error: Execution not found
@@ -13592,13 +14547,13 @@ components:
           example: exec_abc123def456
           type: string
       type: object
-    listToolExecutions_200_response_executions_inner:
+    listAIToolExecutions_200_response_executions_inner:
       example:
         executionId: exec_abc123def456
         createdAt: 2000-01-23T04:56:07.000+00:00
         completedAt: 2000-01-23T04:56:07.000+00:00
         toolName: generate_image
-        status: pending
+        status: complete
       properties:
         executionId:
           example: exec_abc123def456
@@ -13607,11 +14562,8 @@ components:
           example: generate_image
           type: string
         status:
-          enum:
-          - pending
-          - running
-          - complete
-          - failed
+          description: "Execution status: pending, running, complete, or failed"
+          example: complete
           type: string
         createdAt:
           format: date-time
@@ -13620,26 +14572,26 @@ components:
           format: date-time
           type: string
       type: object
-    listToolExecutions_200_response:
+    listAIToolExecutions_200_response:
       example:
         executions:
         - executionId: exec_abc123def456
           createdAt: 2000-01-23T04:56:07.000+00:00
           completedAt: 2000-01-23T04:56:07.000+00:00
           toolName: generate_image
-          status: pending
+          status: complete
         - executionId: exec_abc123def456
           createdAt: 2000-01-23T04:56:07.000+00:00
           completedAt: 2000-01-23T04:56:07.000+00:00
           toolName: generate_image
-          status: pending
+          status: complete
         count: 0
         orgId: orgId
         status: status
       properties:
         executions:
           items:
-            $ref: '#/components/schemas/listToolExecutions_200_response_executions_inner'
+            $ref: '#/components/schemas/listAIToolExecutions_200_response_executions_inner'
           type: array
         count:
           description: Number of executions returned
@@ -13654,6 +14606,754 @@ components:
       - count
       - executions
       - orgId
+      type: object
+    listAIAgents_200_response_agents_inner:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        modelId: modelId
+        name: name
+        temperature: 0.8008281904610115
+        maxTokens: 6
+        description: description
+        group: group
+        allowedTools:
+        - allowedTools
+        - allowedTools
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        agentId:
+          format: uuid
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        group:
+          type: string
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    listAIAgents_200_response:
+      example:
+        agents:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          modelId: modelId
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          description: description
+          group: group
+          allowedTools:
+          - allowedTools
+          - allowedTools
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          modelId: modelId
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          description: description
+          group: group
+          allowedTools:
+          - allowedTools
+          - allowedTools
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/listAIAgents_200_response_agents_inner'
+          type: array
+      type: object
+    createAIAgent_request:
+      properties:
+        name:
+          example: Code Review Assistant
+          type: string
+        description:
+          example: Reviews code for security vulnerabilities and best practices
+          type: string
+        group:
+          example: development
+          type: string
+        systemPrompt:
+          example: You are a senior software engineer specializing in secure code
+            review.
+          type: string
+        temperature:
+          example: 0.3
+          maximum: 1
+          minimum: 0
+          type: number
+        modelId:
+          example: anthropic.claude-3-5-sonnet-20241022-v2:0
+          type: string
+        maxTokens:
+          example: 4000
+          maximum: 200000
+          minimum: 1
+          type: integer
+        allowedTools:
+          example:
+          - fetch_web_content
+          - search_web
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        createdBy:
+          description: User identifier who created the agent
+          type: string
+      required:
+      - description
+      - modelId
+      - name
+      - systemPrompt
+      type: object
+    createAIAgent_201_response:
+      example:
+        agent: "{}"
+        success: true
+        message: Agent created successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        agent:
+          type: object
+        message:
+          example: Agent created successfully
+          type: string
+      type: object
+    getAIAgent_200_response_agent:
+      example:
+        agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        modelId: modelId
+        description: description
+        systemPrompt: systemPrompt
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        createdBy: createdBy
+        name: name
+        temperature: 0.8008281904610115
+        maxTokens: 6
+        allowedCollections:
+        - allowedCollections
+        - allowedCollections
+        group: group
+        allowedTools:
+        - allowedTools
+        - allowedTools
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        agentId:
+          format: uuid
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        group:
+          type: string
+        systemPrompt:
+          type: string
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        createdBy:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    getAIAgent_200_response:
+      example:
+        agent:
+          agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          modelId: modelId
+          description: description
+          systemPrompt: systemPrompt
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          createdBy: createdBy
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
+          group: group
+          allowedTools:
+          - allowedTools
+          - allowedTools
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        agent:
+          $ref: '#/components/schemas/getAIAgent_200_response_agent'
+      type: object
+    updateAIAgent_request:
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        group:
+          type: string
+        systemPrompt:
+          type: string
+        temperature:
+          maximum: 1
+          minimum: 0
+          type: number
+        modelId:
+          type: string
+        maxTokens:
+          maximum: 200000
+          minimum: 1
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+      type: object
+    updateAIAgent_200_response:
+      example:
+        agent: "{}"
+        success: true
+        message: Agent updated successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        agent:
+          type: object
+        message:
+          example: Agent updated successfully
+          type: string
+      type: object
+    deleteAIAgent_200_response:
+      example:
+        success: true
+        message: Agent deleted successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          example: Agent deleted successfully
+          type: string
+      type: object
+    chatWithAIAgent_request:
+      properties:
+        message:
+          description: The user's message to the agent
+          type: string
+        sessionId:
+          description: Optional session ID to continue a conversation
+          format: uuid
+          type: string
+        userId:
+          description: Optional user identifier for session isolation
+          type: string
+        stream:
+          default: false
+          description: Whether to stream the response (SSE)
+          type: boolean
+      required:
+      - message
+      type: object
+    chatWithAIAgent_200_response_response_usage:
+      example:
+        inputTokens: 0
+        outputTokens: 6
+      properties:
+        inputTokens:
+          type: integer
+        outputTokens:
+          type: integer
+      type: object
+    chatWithAIAgent_200_response_response:
+      example:
+        stopReason: stopReason
+        usage:
+          inputTokens: 0
+          outputTokens: 6
+        toolResults:
+        - "{}"
+        - "{}"
+        text: text
+      properties:
+        text:
+          type: string
+        stopReason:
+          type: string
+        usage:
+          $ref: '#/components/schemas/chatWithAIAgent_200_response_response_usage'
+        toolResults:
+          items:
+            type: object
+          type: array
+      type: object
+    chatWithAIAgent_200_response:
+      example:
+        response:
+          stopReason: stopReason
+          usage:
+            inputTokens: 0
+            outputTokens: 6
+          toolResults:
+          - "{}"
+          - "{}"
+          text: text
+        sessionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        sessionId:
+          format: uuid
+          type: string
+        response:
+          $ref: '#/components/schemas/chatWithAIAgent_200_response_response'
+      type: object
+    listCustomTools_200_response_tools_inner:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        inputSchema: "{}"
+        isAsync: false
+        name: check_inventory
+        description: Check product inventory levels
+        edgeFunctionUrl: https://my-edge-function.quant.cloud
+      properties:
+        name:
+          example: check_inventory
+          type: string
+        description:
+          example: Check product inventory levels
+          type: string
+        edgeFunctionUrl:
+          example: https://my-edge-function.quant.cloud
+          type: string
+        isAsync:
+          example: false
+          type: boolean
+        inputSchema:
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    listCustomTools_200_response:
+      example:
+        count: 0
+        tools:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          inputSchema: "{}"
+          isAsync: false
+          name: check_inventory
+          description: Check product inventory levels
+          edgeFunctionUrl: https://my-edge-function.quant.cloud
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          inputSchema: "{}"
+          isAsync: false
+          name: check_inventory
+          description: Check product inventory levels
+          edgeFunctionUrl: https://my-edge-function.quant.cloud
+      properties:
+        tools:
+          items:
+            $ref: '#/components/schemas/listCustomTools_200_response_tools_inner'
+          type: array
+        count:
+          type: integer
+      type: object
+    createCustomTool_request:
+      properties:
+        name:
+          description: Unique tool name (alphanumeric and underscores only)
+          example: check_inventory
+          type: string
+        description:
+          description: Human-readable description of what the tool does
+          example: Check product inventory levels in warehouse
+          type: string
+        edgeFunctionUrl:
+          description: HTTPS URL of the edge function
+          example: https://inventory-api.my-project.quant.cloud
+          type: string
+        inputSchema:
+          description: JSON Schema defining the tool's input parameters
+          type: object
+        isAsync:
+          default: false
+          description: Whether this tool runs asynchronously (>5 seconds)
+          type: boolean
+        timeoutSeconds:
+          default: 30
+          description: Tool execution timeout
+          maximum: 300
+          minimum: 5
+          type: integer
+      required:
+      - description
+      - edgeFunctionUrl
+      - inputSchema
+      - name
+      type: object
+    createCustomTool_201_response:
+      example:
+        success: true
+        message: Custom tool registered successfully
+        tool: "{}"
+      properties:
+        success:
+          example: true
+          type: boolean
+        tool:
+          type: object
+        message:
+          example: Custom tool registered successfully
+          type: string
+      type: object
+    deleteCustomTool_200_response:
+      example:
+        success: true
+        message: Custom tool deleted successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          example: Custom tool deleted successfully
+          type: string
+      type: object
+    listVectorCollections_200_response_collections_inner:
+      example:
+        documentCount: 0
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: product-docs
+        description: description
+        embeddingModel: amazon.titan-embed-text-v2:0
+        collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        collectionId:
+          format: uuid
+          type: string
+        name:
+          example: product-docs
+          type: string
+        description:
+          type: string
+        documentCount:
+          type: integer
+        embeddingModel:
+          example: amazon.titan-embed-text-v2:0
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    listVectorCollections_200_response:
+      example:
+        collections:
+        - documentCount: 0
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: product-docs
+          description: description
+          embeddingModel: amazon.titan-embed-text-v2:0
+          collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - documentCount: 0
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: product-docs
+          description: description
+          embeddingModel: amazon.titan-embed-text-v2:0
+          collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        count: 6
+      properties:
+        collections:
+          items:
+            $ref: '#/components/schemas/listVectorCollections_200_response_collections_inner'
+          type: array
+        count:
+          type: integer
+      type: object
+    createVectorCollection_request:
+      properties:
+        name:
+          description: Collection name (used for reference)
+          example: product-documentation
+          type: string
+        description:
+          example: Product user guides and API documentation
+          type: string
+        embeddingModel:
+          description: "Embedding model to use (default: amazon.titan-embed-text-v2:0)"
+          example: amazon.titan-embed-text-v2:0
+          type: string
+        dimensions:
+          description: "Embedding dimensions (default: 1024)"
+          example: 1024
+          type: integer
+      required:
+      - name
+      type: object
+    createVectorCollection_201_response_collection:
+      example:
+        name: name
+        description: description
+        embeddingModel: embeddingModel
+        collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dimensions: 0
+      properties:
+        collectionId:
+          format: uuid
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        embeddingModel:
+          type: string
+        dimensions:
+          type: integer
+      type: object
+    createVectorCollection_201_response:
+      example:
+        success: true
+        collection:
+          name: name
+          description: description
+          embeddingModel: embeddingModel
+          collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          dimensions: 0
+        message: Collection created successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        collection:
+          $ref: '#/components/schemas/createVectorCollection_201_response_collection'
+        message:
+          example: Collection created successfully
+          type: string
+      type: object
+    getVectorCollection_200_response_collection:
+      example:
+        documentCount: 0
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        description: description
+        embeddingModel: embeddingModel
+        collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dimensions: 6
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        collectionId:
+          format: uuid
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        documentCount:
+          type: integer
+        embeddingModel:
+          type: string
+        dimensions:
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    getVectorCollection_200_response:
+      example:
+        collection:
+          documentCount: 0
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          description: description
+          embeddingModel: embeddingModel
+          collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          dimensions: 6
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        collection:
+          $ref: '#/components/schemas/getVectorCollection_200_response_collection'
+      type: object
+    deleteVectorCollection_200_response:
+      example:
+        success: true
+        message: Collection deleted successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          example: Collection deleted successfully
+          type: string
+      type: object
+    uploadVectorDocuments_request_documents_inner_metadata:
+      properties:
+        title:
+          type: string
+        source_url:
+          type: string
+        section:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    uploadVectorDocuments_request_documents_inner:
+      properties:
+        content:
+          description: Document text content
+          type: string
+        metadata:
+          $ref: '#/components/schemas/uploadVectorDocuments_request_documents_inner_metadata'
+      required:
+      - content
+      type: object
+    uploadVectorDocuments_request:
+      properties:
+        documents:
+          items:
+            $ref: '#/components/schemas/uploadVectorDocuments_request_documents_inner'
+          type: array
+      required:
+      - documents
+      type: object
+    uploadVectorDocuments_200_response:
+      example:
+        chunksCreated: 0
+        success: true
+        message: message
+        documentIds:
+        - documentIds
+        - documentIds
+      properties:
+        success:
+          example: true
+          type: boolean
+        documentIds:
+          items:
+            type: string
+          type: array
+        chunksCreated:
+          type: integer
+        message:
+          type: string
+      type: object
+    queryVectorCollection_request:
+      properties:
+        query:
+          description: Natural language search query
+          example: How do I authenticate with the API?
+          type: string
+        count:
+          default: 5
+          description: Number of results to return
+          maximum: 20
+          minimum: 1
+          type: integer
+      required:
+      - query
+      type: object
+    queryVectorCollection_200_response_results_inner_metadata:
+      example:
+        section: section
+        title: title
+        source_url: source_url
+      properties:
+        title:
+          type: string
+        source_url:
+          type: string
+        section:
+          type: string
+      type: object
+    queryVectorCollection_200_response_results_inner:
+      example:
+        score: 0.8008282
+        metadata:
+          section: section
+          title: title
+          source_url: source_url
+        content: content
+      properties:
+        content:
+          type: string
+        score:
+          format: float
+          type: number
+        metadata:
+          $ref: '#/components/schemas/queryVectorCollection_200_response_results_inner_metadata'
+      type: object
+    queryVectorCollection_200_response:
+      example:
+        query: query
+        executionTimeMs: 1
+        count: 6
+        results:
+        - score: 0.8008282
+          metadata:
+            section: section
+            title: title
+            source_url: source_url
+          content: content
+        - score: 0.8008282
+          metadata:
+            section: section
+            title: title
+            source_url: source_url
+          content: content
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/queryVectorCollection_200_response_results_inner'
+          type: array
+        query:
+          type: string
+        count:
+          type: integer
+        executionTimeMs:
+          type: integer
       type: object
     createApplication_403_response:
       example:

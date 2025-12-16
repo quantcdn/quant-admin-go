@@ -35,8 +35,12 @@ type EnvironmentResponse struct {
 	MaxCapacity *int32 `json:"maxCapacity,omitempty"`
 	// Public IP address for SSH access
 	PublicIpAddress NullableString `json:"publicIpAddress,omitempty"`
-	// Deployment status
+	// Current deployment status. FAILED indicates the most recent deployment did not complete successfully.
 	DeploymentStatus *string `json:"deploymentStatus,omitempty"`
+	// Type of deployment failure when deploymentStatus is FAILED (e.g., 'ECS_DEPLOYMENT_CIRCUIT_BREAKER', 'IMAGE_PULL_ERROR')
+	DeploymentFailureType NullableString `json:"deploymentFailureType,omitempty"`
+	// Human-readable explanation of why the deployment failed. Contains details such as wrong image architecture, missing image, or container startup errors.
+	DeploymentFailureReason NullableString `json:"deploymentFailureReason,omitempty"`
 	// ECS task definition details
 	TaskDefinition map[string]interface{} `json:"taskDefinition,omitempty"`
 	// ECS service details
@@ -340,6 +344,90 @@ func (o *EnvironmentResponse) HasDeploymentStatus() bool {
 // SetDeploymentStatus gets a reference to the given string and assigns it to the DeploymentStatus field.
 func (o *EnvironmentResponse) SetDeploymentStatus(v string) {
 	o.DeploymentStatus = &v
+}
+
+// GetDeploymentFailureType returns the DeploymentFailureType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentResponse) GetDeploymentFailureType() string {
+	if o == nil || IsNil(o.DeploymentFailureType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DeploymentFailureType.Get()
+}
+
+// GetDeploymentFailureTypeOk returns a tuple with the DeploymentFailureType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentResponse) GetDeploymentFailureTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeploymentFailureType.Get(), o.DeploymentFailureType.IsSet()
+}
+
+// HasDeploymentFailureType returns a boolean if a field has been set.
+func (o *EnvironmentResponse) HasDeploymentFailureType() bool {
+	if o != nil && o.DeploymentFailureType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentFailureType gets a reference to the given NullableString and assigns it to the DeploymentFailureType field.
+func (o *EnvironmentResponse) SetDeploymentFailureType(v string) {
+	o.DeploymentFailureType.Set(&v)
+}
+// SetDeploymentFailureTypeNil sets the value for DeploymentFailureType to be an explicit nil
+func (o *EnvironmentResponse) SetDeploymentFailureTypeNil() {
+	o.DeploymentFailureType.Set(nil)
+}
+
+// UnsetDeploymentFailureType ensures that no value is present for DeploymentFailureType, not even an explicit nil
+func (o *EnvironmentResponse) UnsetDeploymentFailureType() {
+	o.DeploymentFailureType.Unset()
+}
+
+// GetDeploymentFailureReason returns the DeploymentFailureReason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentResponse) GetDeploymentFailureReason() string {
+	if o == nil || IsNil(o.DeploymentFailureReason.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.DeploymentFailureReason.Get()
+}
+
+// GetDeploymentFailureReasonOk returns a tuple with the DeploymentFailureReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentResponse) GetDeploymentFailureReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeploymentFailureReason.Get(), o.DeploymentFailureReason.IsSet()
+}
+
+// HasDeploymentFailureReason returns a boolean if a field has been set.
+func (o *EnvironmentResponse) HasDeploymentFailureReason() bool {
+	if o != nil && o.DeploymentFailureReason.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentFailureReason gets a reference to the given NullableString and assigns it to the DeploymentFailureReason field.
+func (o *EnvironmentResponse) SetDeploymentFailureReason(v string) {
+	o.DeploymentFailureReason.Set(&v)
+}
+// SetDeploymentFailureReasonNil sets the value for DeploymentFailureReason to be an explicit nil
+func (o *EnvironmentResponse) SetDeploymentFailureReasonNil() {
+	o.DeploymentFailureReason.Set(nil)
+}
+
+// UnsetDeploymentFailureReason ensures that no value is present for DeploymentFailureReason, not even an explicit nil
+func (o *EnvironmentResponse) UnsetDeploymentFailureReason() {
+	o.DeploymentFailureReason.Unset()
 }
 
 // GetTaskDefinition returns the TaskDefinition field value if set, zero value otherwise.
@@ -758,6 +846,12 @@ func (o EnvironmentResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeploymentStatus) {
 		toSerialize["deploymentStatus"] = o.DeploymentStatus
 	}
+	if o.DeploymentFailureType.IsSet() {
+		toSerialize["deploymentFailureType"] = o.DeploymentFailureType.Get()
+	}
+	if o.DeploymentFailureReason.IsSet() {
+		toSerialize["deploymentFailureReason"] = o.DeploymentFailureReason.Get()
+	}
 	if !IsNil(o.TaskDefinition) {
 		toSerialize["taskDefinition"] = o.TaskDefinition
 	}
@@ -845,6 +939,8 @@ func (o *EnvironmentResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "maxCapacity")
 		delete(additionalProperties, "publicIpAddress")
 		delete(additionalProperties, "deploymentStatus")
+		delete(additionalProperties, "deploymentFailureType")
+		delete(additionalProperties, "deploymentFailureReason")
 		delete(additionalProperties, "taskDefinition")
 		delete(additionalProperties, "service")
 		delete(additionalProperties, "loadBalancer")

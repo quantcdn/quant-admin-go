@@ -78,22 +78,38 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AIServicesAPI* | [**ChatInference**](docs/AIServicesAPI.md#chatinference) | **Post** /api/v3/organizations/{organisation}/ai/chat | Chat inference via API Gateway (buffered responses) with multimodal support
-*AIServicesAPI* | [**ChatInferenceStream**](docs/AIServicesAPI.md#chatinferencestream) | **Post** /api/v3/organizations/{organisation}/ai/chat/stream | Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
-*AIServicesAPI* | [**CreateAISession**](docs/AIServicesAPI.md#createaisession) | **Post** /api/v3/organizations/{organisation}/ai/sessions | Create a new chat session with multi-tenant isolation
-*AIServicesAPI* | [**DeleteAISession**](docs/AIServicesAPI.md#deleteaisession) | **Delete** /api/v3/organizations/{organisation}/ai/sessions/{sessionId} | Delete a chat session
-*AIServicesAPI* | [**Embeddings**](docs/AIServicesAPI.md#embeddings) | **Post** /api/v3/organizations/{organisation}/ai/embeddings | Generate text embeddings for semantic search and RAG applications
-*AIServicesAPI* | [**GetAIConfig**](docs/AIServicesAPI.md#getaiconfig) | **Get** /api/v3/organizations/{organisation}/ai/config | Get AI configuration for an organization
-*AIServicesAPI* | [**GetAISession**](docs/AIServicesAPI.md#getaisession) | **Get** /api/v3/organizations/{organisation}/ai/sessions/{sessionId} | Get a specific chat session
-*AIServicesAPI* | [**GetAIUsageStats**](docs/AIServicesAPI.md#getaiusagestats) | **Get** /api/v3/organizations/{organisation}/ai/usage | Get AI usage statistics
-*AIServicesAPI* | [**GetToolExecutionStatus**](docs/AIServicesAPI.md#gettoolexecutionstatus) | **Get** /api/v3/organizations/{organisation}/ai/tools/executions/{executionId} | Get async tool execution status and result
-*AIServicesAPI* | [**ImageGeneration**](docs/AIServicesAPI.md#imagegeneration) | **Post** /api/v3/organizations/{organisation}/ai/image-generation | Generate images with Amazon Nova Canvas
-*AIServicesAPI* | [**ListAIModels**](docs/AIServicesAPI.md#listaimodels) | **Get** /api/v3/organizations/{organisation}/ai/models | List available AI models for an organization
-*AIServicesAPI* | [**ListAISessions**](docs/AIServicesAPI.md#listaisessions) | **Get** /api/v3/organizations/{organisation}/ai/sessions | List chat sessions with multi-tenant filtering
-*AIServicesAPI* | [**ListAIToolNames**](docs/AIServicesAPI.md#listaitoolnames) | **Get** /api/v3/organizations/{organisation}/ai/tools/names | List tool names only (lightweight response)
-*AIServicesAPI* | [**ListAITools**](docs/AIServicesAPI.md#listaitools) | **Get** /api/v3/organizations/{organisation}/ai/tools | List available built-in tools for function calling
-*AIServicesAPI* | [**ListToolExecutions**](docs/AIServicesAPI.md#listtoolexecutions) | **Get** /api/v3/organizations/{organisation}/ai/tools/executions | List tool executions for monitoring and debugging
-*AIServicesAPI* | [**UpdateAIConfig**](docs/AIServicesAPI.md#updateaiconfig) | **Put** /api/v3/organizations/{organisation}/ai/config | Update AI configuration for an organization
+*AIAgentsAPI* | [**ChatWithAIAgent**](docs/AIAgentsAPI.md#chatwithaiagent) | **Post** /api/v3/organizations/{organisation}/ai/agents/{agentId}/chat | Chat with AI Agent
+*AIAgentsAPI* | [**CreateAIAgent**](docs/AIAgentsAPI.md#createaiagent) | **Post** /api/v3/organizations/{organisation}/ai/agents | Create AI Agent
+*AIAgentsAPI* | [**DeleteAIAgent**](docs/AIAgentsAPI.md#deleteaiagent) | **Delete** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Delete Agent
+*AIAgentsAPI* | [**GetAIAgent**](docs/AIAgentsAPI.md#getaiagent) | **Get** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Get Agent Details
+*AIAgentsAPI* | [**ListAIAgents**](docs/AIAgentsAPI.md#listaiagents) | **Get** /api/v3/organizations/{organisation}/ai/agents | List AI Agents
+*AIAgentsAPI* | [**UpdateAIAgent**](docs/AIAgentsAPI.md#updateaiagent) | **Put** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Update Agent
+*AICustomToolsAPI* | [**CreateCustomTool**](docs/AICustomToolsAPI.md#createcustomtool) | **Post** /api/v3/organizations/{organisation}/ai/custom-tools | Register Custom Edge Function Tool
+*AICustomToolsAPI* | [**DeleteCustomTool**](docs/AICustomToolsAPI.md#deletecustomtool) | **Delete** /api/v3/organizations/{organisation}/ai/custom-tools/{toolName} | Delete Custom Tool
+*AICustomToolsAPI* | [**ListCustomTools**](docs/AICustomToolsAPI.md#listcustomtools) | **Get** /api/v3/organizations/{organisation}/ai/custom-tools | List Custom Tools
+*AIInferenceAPI* | [**ChatInference**](docs/AIInferenceAPI.md#chatinference) | **Post** /api/v3/organizations/{organisation}/ai/chat | Chat inference via API Gateway (buffered responses) with multimodal support
+*AIInferenceAPI* | [**ChatInferenceStream**](docs/AIInferenceAPI.md#chatinferencestream) | **Post** /api/v3/organizations/{organisation}/ai/chat/stream | Chat inference via streaming endpoint (true HTTP streaming) with multimodal support
+*AIInferenceAPI* | [**Embeddings**](docs/AIInferenceAPI.md#embeddings) | **Post** /api/v3/organizations/{organisation}/ai/embeddings | Generate text embeddings for semantic search and RAG applications
+*AIInferenceAPI* | [**ImageGeneration**](docs/AIInferenceAPI.md#imagegeneration) | **Post** /api/v3/organizations/{organisation}/ai/image-generation | Generate images with Amazon Nova Canvas
+*AIModelsAPI* | [**GetAIModel**](docs/AIModelsAPI.md#getaimodel) | **Get** /api/v3/organizations/{organisation}/ai/models/{modelId} | Get AI Model Details
+*AIModelsAPI* | [**ListAIModels**](docs/AIModelsAPI.md#listaimodels) | **Get** /api/v3/organizations/{organisation}/ai/models | List available AI models for an organization
+*AIMonitoringAPI* | [**GetAIUsageStats**](docs/AIMonitoringAPI.md#getaiusagestats) | **Get** /api/v3/organizations/{organisation}/ai/usage | Get AI usage statistics
+*AISessionsAPI* | [**CreateAISession**](docs/AISessionsAPI.md#createaisession) | **Post** /api/v3/organizations/{organisation}/ai/sessions | Create a new chat session with multi-tenant isolation
+*AISessionsAPI* | [**DeleteAISession**](docs/AISessionsAPI.md#deleteaisession) | **Delete** /api/v3/organizations/{organisation}/ai/sessions/{sessionId} | Delete a chat session
+*AISessionsAPI* | [**ExtendAISession**](docs/AISessionsAPI.md#extendaisession) | **Put** /api/v3/organizations/{organisation}/ai/sessions/{sessionId}/extend | Extend Session Expiration
+*AISessionsAPI* | [**GetAISession**](docs/AISessionsAPI.md#getaisession) | **Get** /api/v3/organizations/{organisation}/ai/sessions/{sessionId} | Get a specific chat session
+*AISessionsAPI* | [**ListAISessions**](docs/AISessionsAPI.md#listaisessions) | **Get** /api/v3/organizations/{organisation}/ai/sessions | List chat sessions with multi-tenant filtering
+*AISessionsAPI* | [**UpdateAISession**](docs/AISessionsAPI.md#updateaisession) | **Put** /api/v3/organizations/{organisation}/ai/sessions/{sessionId} | Update Session
+*AIToolsAPI* | [**GetAIToolExecutionStatus**](docs/AIToolsAPI.md#getaitoolexecutionstatus) | **Get** /api/v3/organizations/{organisation}/ai/tools/executions/{executionId} | Get async tool execution status and result
+*AIToolsAPI* | [**ListAIToolExecutions**](docs/AIToolsAPI.md#listaitoolexecutions) | **Get** /api/v3/organizations/{organisation}/ai/tools/executions | List tool executions for monitoring and debugging
+*AIToolsAPI* | [**ListAIToolNames**](docs/AIToolsAPI.md#listaitoolnames) | **Get** /api/v3/organizations/{organisation}/ai/tools/names | List tool names only (lightweight response)
+*AIToolsAPI* | [**ListAITools**](docs/AIToolsAPI.md#listaitools) | **Get** /api/v3/organizations/{organisation}/ai/tools | List available built-in tools for function calling
+*AIVectorDatabaseAPI* | [**CreateVectorCollection**](docs/AIVectorDatabaseAPI.md#createvectorcollection) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections | Create Vector Database Collection
+*AIVectorDatabaseAPI* | [**DeleteVectorCollection**](docs/AIVectorDatabaseAPI.md#deletevectorcollection) | **Delete** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId} | Delete Collection
+*AIVectorDatabaseAPI* | [**GetVectorCollection**](docs/AIVectorDatabaseAPI.md#getvectorcollection) | **Get** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId} | Get Collection Details
+*AIVectorDatabaseAPI* | [**ListVectorCollections**](docs/AIVectorDatabaseAPI.md#listvectorcollections) | **Get** /api/v3/organizations/{organisation}/ai/vector-db/collections | List Vector Database Collections
+*AIVectorDatabaseAPI* | [**QueryVectorCollection**](docs/AIVectorDatabaseAPI.md#queryvectorcollection) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query | Semantic Search Query
+*AIVectorDatabaseAPI* | [**UploadVectorDocuments**](docs/AIVectorDatabaseAPI.md#uploadvectordocuments) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | Upload Documents to Collection
 *ApplicationsAPI* | [**CreateApplication**](docs/ApplicationsAPI.md#createapplication) | **Post** /api/v3/organizations/{organisation}/applications | Create a new application
 *ApplicationsAPI* | [**DeleteApplication**](docs/ApplicationsAPI.md#deleteapplication) | **Delete** /api/v3/organizations/{organisation}/applications/{application} | Delete an application
 *ApplicationsAPI* | [**GetApplication**](docs/ApplicationsAPI.md#getapplication) | **Get** /api/v3/organizations/{organisation}/applications/{application} | Get a single application
@@ -264,6 +280,10 @@ Class | Method | HTTP request | Description
  - [ChatInferenceStreamRequest](docs/ChatInferenceStreamRequest.md)
  - [ChatInferenceStreamRequestMessagesInner](docs/ChatInferenceStreamRequestMessagesInner.md)
  - [ChatInferenceStreamRequestMessagesInnerContent](docs/ChatInferenceStreamRequestMessagesInnerContent.md)
+ - [ChatWithAIAgent200Response](docs/ChatWithAIAgent200Response.md)
+ - [ChatWithAIAgent200ResponseResponse](docs/ChatWithAIAgent200ResponseResponse.md)
+ - [ChatWithAIAgent200ResponseResponseUsage](docs/ChatWithAIAgent200ResponseResponseUsage.md)
+ - [ChatWithAIAgentRequest](docs/ChatWithAIAgentRequest.md)
  - [Command](docs/Command.md)
  - [Compose](docs/Compose.md)
  - [Container](docs/Container.md)
@@ -275,6 +295,8 @@ Class | Method | HTTP request | Description
  - [ContainerSecretsInner](docs/ContainerSecretsInner.md)
  - [CrawlersRun200Response](docs/CrawlersRun200Response.md)
  - [CrawlersRunRequest](docs/CrawlersRunRequest.md)
+ - [CreateAIAgent201Response](docs/CreateAIAgent201Response.md)
+ - [CreateAIAgentRequest](docs/CreateAIAgentRequest.md)
  - [CreateAISession201Response](docs/CreateAISession201Response.md)
  - [CreateAISessionRequest](docs/CreateAISessionRequest.md)
  - [CreateAISessionRequestInitialMessagesInner](docs/CreateAISessionRequestInitialMessagesInner.md)
@@ -287,14 +309,22 @@ Class | Method | HTTP request | Description
  - [CreateBackupRequest](docs/CreateBackupRequest.md)
  - [CreateCommandRequest](docs/CreateCommandRequest.md)
  - [CreateCronJobRequest](docs/CreateCronJobRequest.md)
+ - [CreateCustomTool201Response](docs/CreateCustomTool201Response.md)
+ - [CreateCustomToolRequest](docs/CreateCustomToolRequest.md)
  - [CreateEnvironment403Response](docs/CreateEnvironment403Response.md)
  - [CreateEnvironmentRequest](docs/CreateEnvironmentRequest.md)
  - [CreateEnvironmentRequestEnvironmentInner](docs/CreateEnvironmentRequestEnvironmentInner.md)
+ - [CreateVectorCollection201Response](docs/CreateVectorCollection201Response.md)
+ - [CreateVectorCollection201ResponseCollection](docs/CreateVectorCollection201ResponseCollection.md)
+ - [CreateVectorCollectionRequest](docs/CreateVectorCollectionRequest.md)
  - [CreateVolumeRequest](docs/CreateVolumeRequest.md)
  - [Cron](docs/Cron.md)
  - [CronRun](docs/CronRun.md)
+ - [DeleteAIAgent200Response](docs/DeleteAIAgent200Response.md)
  - [DeleteAISession200Response](docs/DeleteAISession200Response.md)
  - [DeleteBackup200Response](docs/DeleteBackup200Response.md)
+ - [DeleteCustomTool200Response](docs/DeleteCustomTool200Response.md)
+ - [DeleteVectorCollection200Response](docs/DeleteVectorCollection200Response.md)
  - [DownloadBackup200Response](docs/DownloadBackup200Response.md)
  - [Embeddings200Response](docs/Embeddings200Response.md)
  - [Embeddings200ResponseEmbeddings](docs/Embeddings200ResponseEmbeddings.md)
@@ -303,8 +333,19 @@ Class | Method | HTTP request | Description
  - [EmbeddingsRequestInput](docs/EmbeddingsRequestInput.md)
  - [Environment](docs/Environment.md)
  - [EnvironmentResponse](docs/EnvironmentResponse.md)
- - [GetAIConfig200Response](docs/GetAIConfig200Response.md)
+ - [EnvironmentSummary](docs/EnvironmentSummary.md)
+ - [ExtendAISession200Response](docs/ExtendAISession200Response.md)
+ - [ExtendAISessionRequest](docs/ExtendAISessionRequest.md)
+ - [GetAIAgent200Response](docs/GetAIAgent200Response.md)
+ - [GetAIAgent200ResponseAgent](docs/GetAIAgent200ResponseAgent.md)
+ - [GetAIModel200Response](docs/GetAIModel200Response.md)
+ - [GetAIModel200ResponseCapabilities](docs/GetAIModel200ResponseCapabilities.md)
+ - [GetAIModel200ResponsePricing](docs/GetAIModel200ResponsePricing.md)
+ - [GetAIModel404Response](docs/GetAIModel404Response.md)
  - [GetAISession200Response](docs/GetAISession200Response.md)
+ - [GetAIToolExecutionStatus200Response](docs/GetAIToolExecutionStatus200Response.md)
+ - [GetAIToolExecutionStatus200ResponseResult](docs/GetAIToolExecutionStatus200ResponseResult.md)
+ - [GetAIToolExecutionStatus404Response](docs/GetAIToolExecutionStatus404Response.md)
  - [GetAIUsageStats200Response](docs/GetAIUsageStats200Response.md)
  - [GetAIUsageStats200ResponseByModelValue](docs/GetAIUsageStats200ResponseByModelValue.md)
  - [GetEcrLoginCredentials200Response](docs/GetEcrLoginCredentials200Response.md)
@@ -312,9 +353,8 @@ Class | Method | HTTP request | Description
  - [GetEnvironmentLogs200ResponseLogEventsInner](docs/GetEnvironmentLogs200ResponseLogEventsInner.md)
  - [GetSshAccessCredentials200Response](docs/GetSshAccessCredentials200Response.md)
  - [GetSshAccessCredentials200ResponseCredentials](docs/GetSshAccessCredentials200ResponseCredentials.md)
- - [GetToolExecutionStatus200Response](docs/GetToolExecutionStatus200Response.md)
- - [GetToolExecutionStatus200ResponseResult](docs/GetToolExecutionStatus200ResponseResult.md)
- - [GetToolExecutionStatus404Response](docs/GetToolExecutionStatus404Response.md)
+ - [GetVectorCollection200Response](docs/GetVectorCollection200Response.md)
+ - [GetVectorCollection200ResponseCollection](docs/GetVectorCollection200ResponseCollection.md)
  - [ImageGeneration200Response](docs/ImageGeneration200Response.md)
  - [ImageGenerationRequest](docs/ImageGenerationRequest.md)
  - [ImageGenerationRequestBackgroundRemovalParams](docs/ImageGenerationRequestBackgroundRemovalParams.md)
@@ -328,10 +368,14 @@ Class | Method | HTTP request | Description
  - [KVItemsDelete200Response](docs/KVItemsDelete200Response.md)
  - [KVItemsShow200Response](docs/KVItemsShow200Response.md)
  - [KVItemsShow200ResponseValue](docs/KVItemsShow200ResponseValue.md)
+ - [ListAIAgents200Response](docs/ListAIAgents200Response.md)
+ - [ListAIAgents200ResponseAgentsInner](docs/ListAIAgents200ResponseAgentsInner.md)
  - [ListAIModels200Response](docs/ListAIModels200Response.md)
  - [ListAIModels200ResponseModelsInner](docs/ListAIModels200ResponseModelsInner.md)
  - [ListAIModels200ResponseModelsInnerCapabilities](docs/ListAIModels200ResponseModelsInnerCapabilities.md)
  - [ListAISessions200ResponseInner](docs/ListAISessions200ResponseInner.md)
+ - [ListAIToolExecutions200Response](docs/ListAIToolExecutions200Response.md)
+ - [ListAIToolExecutions200ResponseExecutionsInner](docs/ListAIToolExecutions200ResponseExecutionsInner.md)
  - [ListAIToolNames200Response](docs/ListAIToolNames200Response.md)
  - [ListAITools200Response](docs/ListAITools200Response.md)
  - [ListAITools200ResponseToolsInner](docs/ListAITools200ResponseToolsInner.md)
@@ -340,8 +384,10 @@ Class | Method | HTTP request | Description
  - [ListBackups200Response](docs/ListBackups200Response.md)
  - [ListBackups200ResponseBackupsInner](docs/ListBackups200ResponseBackupsInner.md)
  - [ListBackups422Response](docs/ListBackups422Response.md)
- - [ListToolExecutions200Response](docs/ListToolExecutions200Response.md)
- - [ListToolExecutions200ResponseExecutionsInner](docs/ListToolExecutions200ResponseExecutionsInner.md)
+ - [ListCustomTools200Response](docs/ListCustomTools200Response.md)
+ - [ListCustomTools200ResponseToolsInner](docs/ListCustomTools200ResponseToolsInner.md)
+ - [ListVectorCollections200Response](docs/ListVectorCollections200Response.md)
+ - [ListVectorCollections200ResponseCollectionsInner](docs/ListVectorCollections200ResponseCollectionsInner.md)
  - [OrganizationsList200ResponseInner](docs/OrganizationsList200ResponseInner.md)
  - [PatchEnvironmentCompose202Response](docs/PatchEnvironmentCompose202Response.md)
  - [PatchEnvironmentCompose202ResponseSpotConfiguration](docs/PatchEnvironmentCompose202ResponseSpotConfiguration.md)
@@ -349,15 +395,27 @@ Class | Method | HTTP request | Description
  - [PatchEnvironmentComposeRequest](docs/PatchEnvironmentComposeRequest.md)
  - [PatchEnvironmentComposeRequestSpotConfiguration](docs/PatchEnvironmentComposeRequestSpotConfiguration.md)
  - [PurgeCreateRequest](docs/PurgeCreateRequest.md)
+ - [QueryVectorCollection200Response](docs/QueryVectorCollection200Response.md)
+ - [QueryVectorCollection200ResponseResultsInner](docs/QueryVectorCollection200ResponseResultsInner.md)
+ - [QueryVectorCollection200ResponseResultsInnerMetadata](docs/QueryVectorCollection200ResponseResultsInnerMetadata.md)
+ - [QueryVectorCollectionRequest](docs/QueryVectorCollectionRequest.md)
  - [ScalingPolicy](docs/ScalingPolicy.md)
  - [SpotConfiguration](docs/SpotConfiguration.md)
  - [SyncOperation](docs/SyncOperation.md)
  - [SyncToEnvironmentRequest](docs/SyncToEnvironmentRequest.md)
- - [UpdateAIConfigRequest](docs/UpdateAIConfigRequest.md)
+ - [UpdateAIAgent200Response](docs/UpdateAIAgent200Response.md)
+ - [UpdateAIAgentRequest](docs/UpdateAIAgentRequest.md)
+ - [UpdateAISession200Response](docs/UpdateAISession200Response.md)
+ - [UpdateAISessionRequest](docs/UpdateAISessionRequest.md)
+ - [UpdateAISessionRequestNewMessagesInner](docs/UpdateAISessionRequestNewMessagesInner.md)
  - [UpdateCronJobRequest](docs/UpdateCronJobRequest.md)
  - [UpdateEnvironmentRequest](docs/UpdateEnvironmentRequest.md)
  - [UpdateEnvironmentStateRequest](docs/UpdateEnvironmentStateRequest.md)
  - [UpdateEnvironmentVariableRequest](docs/UpdateEnvironmentVariableRequest.md)
+ - [UploadVectorDocuments200Response](docs/UploadVectorDocuments200Response.md)
+ - [UploadVectorDocumentsRequest](docs/UploadVectorDocumentsRequest.md)
+ - [UploadVectorDocumentsRequestDocumentsInner](docs/UploadVectorDocumentsRequestDocumentsInner.md)
+ - [UploadVectorDocumentsRequestDocumentsInnerMetadata](docs/UploadVectorDocumentsRequestDocumentsInnerMetadata.md)
  - [V1ContentItem](docs/V1ContentItem.md)
  - [V1ContentListResponse](docs/V1ContentListResponse.md)
  - [V1ContentRequest](docs/V1ContentRequest.md)

@@ -49,7 +49,21 @@ type APIClient struct {
 
 	// API Services
 
-	AIServicesAPI AIServicesAPI
+	AIAgentsAPI AIAgentsAPI
+
+	AICustomToolsAPI AICustomToolsAPI
+
+	AIInferenceAPI AIInferenceAPI
+
+	AIModelsAPI AIModelsAPI
+
+	AIMonitoringAPI AIMonitoringAPI
+
+	AISessionsAPI AISessionsAPI
+
+	AIToolsAPI AIToolsAPI
+
+	AIVectorDatabaseAPI AIVectorDatabaseAPI
 
 	ApplicationsAPI ApplicationsAPI
 
@@ -108,7 +122,14 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.AIServicesAPI = (*AIServicesAPIService)(&c.common)
+	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
+	c.AICustomToolsAPI = (*AICustomToolsAPIService)(&c.common)
+	c.AIInferenceAPI = (*AIInferenceAPIService)(&c.common)
+	c.AIModelsAPI = (*AIModelsAPIService)(&c.common)
+	c.AIMonitoringAPI = (*AIMonitoringAPIService)(&c.common)
+	c.AISessionsAPI = (*AISessionsAPIService)(&c.common)
+	c.AIToolsAPI = (*AIToolsAPIService)(&c.common)
+	c.AIVectorDatabaseAPI = (*AIVectorDatabaseAPIService)(&c.common)
 	c.ApplicationsAPI = (*ApplicationsAPIService)(&c.common)
 	c.BackupManagementAPI = (*BackupManagementAPIService)(&c.common)
 	c.CommandsAPI = (*CommandsAPIService)(&c.common)

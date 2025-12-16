@@ -24,7 +24,7 @@ type ChatInference200ResponseResponseToolUseOneOf struct {
 	Input map[string]interface{} `json:"input,omitempty"`
 	// Present for async tools with autoExecute
 	ExecutionId *string `json:"executionId,omitempty"`
-	// Present for async tools with autoExecute
+	// Execution status (pending/running/complete/failed) - present for async tools with autoExecute
 	Status *string `json:"status,omitempty"`
 	Result *ChatInference200ResponseResponseToolUseOneOfResult `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}

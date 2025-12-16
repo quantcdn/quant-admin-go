@@ -110,8 +110,8 @@ type EnvironmentsAPI interface {
 	ListEnvironments(ctx context.Context, organisation string, application string) EnvironmentsAPIListEnvironmentsRequest
 
 	// ListEnvironmentsExecute executes the request
-	//  @return []Environment
-	ListEnvironmentsExecute(r EnvironmentsAPIListEnvironmentsRequest) ([]Environment, *http.Response, error)
+	//  @return []EnvironmentSummary
+	ListEnvironmentsExecute(r EnvironmentsAPIListEnvironmentsRequest) ([]EnvironmentSummary, *http.Response, error)
 
 	/*
 	ListSyncOperations List the sync operations for an environment
@@ -851,7 +851,7 @@ type EnvironmentsAPIListEnvironmentsRequest struct {
 	application string
 }
 
-func (r EnvironmentsAPIListEnvironmentsRequest) Execute() ([]Environment, *http.Response, error) {
+func (r EnvironmentsAPIListEnvironmentsRequest) Execute() ([]EnvironmentSummary, *http.Response, error) {
 	return r.ApiService.ListEnvironmentsExecute(r)
 }
 
@@ -873,13 +873,13 @@ func (a *EnvironmentsAPIService) ListEnvironments(ctx context.Context, organisat
 }
 
 // Execute executes the request
-//  @return []Environment
-func (a *EnvironmentsAPIService) ListEnvironmentsExecute(r EnvironmentsAPIListEnvironmentsRequest) ([]Environment, *http.Response, error) {
+//  @return []EnvironmentSummary
+func (a *EnvironmentsAPIService) ListEnvironmentsExecute(r EnvironmentsAPIListEnvironmentsRequest) ([]EnvironmentSummary, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []Environment
+		localVarReturnValue  []EnvironmentSummary
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.ListEnvironments")
