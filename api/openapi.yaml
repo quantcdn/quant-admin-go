@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.6.0
+  version: 4.8.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -7896,7 +7896,12 @@ components:
           taskMemory: 2
           maxCapacity: 7
           containers:
-          - memory: 6
+          - originProtectionConfig:
+              ipAllow:
+              - ipAllow
+              - ipAllow
+              enabled: true
+            memory: 6
             dependsOn:
             - condition: START
               containerName: containerName
@@ -7947,7 +7952,12 @@ components:
             - entryPoint
             user: user
             essential: true
-          - memory: 6
+          - originProtectionConfig:
+              ipAllow:
+              - ipAllow
+              - ipAllow
+              enabled: true
+            memory: 6
             dependsOn:
             - condition: START
               containerName: containerName
@@ -8143,7 +8153,12 @@ components:
           taskMemory: 2
           maxCapacity: 7
           containers:
-          - memory: 6
+          - originProtectionConfig:
+              ipAllow:
+              - ipAllow
+              - ipAllow
+              enabled: true
+            memory: 6
             dependsOn:
             - condition: START
               containerName: containerName
@@ -8194,7 +8209,12 @@ components:
             - entryPoint
             user: user
             essential: true
-          - memory: 6
+          - originProtectionConfig:
+              ipAllow:
+              - ipAllow
+              - ipAllow
+              enabled: true
+            memory: 6
             dependsOn:
             - condition: START
               containerName: containerName
@@ -8355,7 +8375,12 @@ components:
         taskMemory: 2
         maxCapacity: 7
         containers:
-        - memory: 6
+        - originProtectionConfig:
+            ipAllow:
+            - ipAllow
+            - ipAllow
+            enabled: true
+          memory: 6
           dependsOn:
           - condition: START
             containerName: containerName
@@ -8406,7 +8431,12 @@ components:
           - entryPoint
           user: user
           essential: true
-        - memory: 6
+        - originProtectionConfig:
+            ipAllow:
+            - ipAllow
+            - ipAllow
+            enabled: true
+          memory: 6
           dependsOn:
           - condition: START
             containerName: containerName
@@ -8512,6 +8542,11 @@ components:
       type: object
     Container:
       example:
+        originProtectionConfig:
+          ipAllow:
+          - ipAllow
+          - ipAllow
+          enabled: true
         memory: 6
         dependsOn:
         - condition: START
@@ -8639,9 +8674,12 @@ components:
           type: string
         originProtection:
           default: false
-          description: Enable origin protection for all exposed ports on this container
+          description: Enable origin protection for all exposed ports on this container.
+            Use originProtectionConfig for advanced options like IP allow lists.
           nullable: true
           type: boolean
+        originProtectionConfig:
+          $ref: '#/components/schemas/Container_originProtectionConfig'
       required:
       - imageReference
       - name
@@ -16266,6 +16304,28 @@ components:
           type: string
       required:
       - containerName
+      type: object
+    Container_originProtectionConfig:
+      description: Extended origin protection configuration with IP allow list support
+      example:
+        ipAllow:
+        - ipAllow
+        - ipAllow
+        enabled: true
+      nullable: true
+      properties:
+        enabled:
+          default: true
+          description: Whether origin protection is enabled. Defaults to true if this
+            config object is provided.
+          type: boolean
+        ipAllow:
+          description: "List of IP addresses or CIDR ranges that can bypass origin\
+            \ protection for direct access (e.g., VPN IPs)"
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     V2Crawler_sitemap_inner:
       properties:

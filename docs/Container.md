@@ -21,7 +21,8 @@ Name | Type | Description | Notes
 **Essential** | Pointer to **NullableBool** |  | [optional] [default to true]
 **ReadonlyRootFilesystem** | Pointer to **NullableBool** |  | [optional] [default to false]
 **User** | Pointer to **NullableString** |  | [optional] 
-**OriginProtection** | Pointer to **NullableBool** | Enable origin protection for all exposed ports on this container | [optional] [default to false]
+**OriginProtection** | Pointer to **NullableBool** | Enable origin protection for all exposed ports on this container. Use originProtectionConfig for advanced options like IP allow lists. | [optional] [default to false]
+**OriginProtectionConfig** | Pointer to [**NullableContainerOriginProtectionConfig**](ContainerOriginProtectionConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -642,6 +643,41 @@ HasOriginProtection returns a boolean if a field has been set.
 `func (o *Container) UnsetOriginProtection()`
 
 UnsetOriginProtection ensures that no value is present for OriginProtection, not even an explicit nil
+### GetOriginProtectionConfig
+
+`func (o *Container) GetOriginProtectionConfig() ContainerOriginProtectionConfig`
+
+GetOriginProtectionConfig returns the OriginProtectionConfig field if non-nil, zero value otherwise.
+
+### GetOriginProtectionConfigOk
+
+`func (o *Container) GetOriginProtectionConfigOk() (*ContainerOriginProtectionConfig, bool)`
+
+GetOriginProtectionConfigOk returns a tuple with the OriginProtectionConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginProtectionConfig
+
+`func (o *Container) SetOriginProtectionConfig(v ContainerOriginProtectionConfig)`
+
+SetOriginProtectionConfig sets OriginProtectionConfig field to given value.
+
+### HasOriginProtectionConfig
+
+`func (o *Container) HasOriginProtectionConfig() bool`
+
+HasOriginProtectionConfig returns a boolean if a field has been set.
+
+### SetOriginProtectionConfigNil
+
+`func (o *Container) SetOriginProtectionConfigNil(b bool)`
+
+ SetOriginProtectionConfigNil sets the value for OriginProtectionConfig to be an explicit nil
+
+### UnsetOriginProtectionConfig
+`func (o *Container) UnsetOriginProtectionConfig()`
+
+UnsetOriginProtectionConfig ensures that no value is present for OriginProtectionConfig, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

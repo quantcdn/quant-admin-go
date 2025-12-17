@@ -93,6 +93,7 @@ docs/ContainerEnvironmentInner.md
 docs/ContainerHealthCheck.md
 docs/ContainerImageReference.md
 docs/ContainerMountPointsInner.md
+docs/ContainerOriginProtectionConfig.md
 docs/ContainerSecretsInner.md
 docs/ContainersAPI.md
 docs/CrawlerSchedulesAPI.md
@@ -392,6 +393,7 @@ model_container_environment_inner.go
 model_container_health_check.go
 model_container_image_reference.go
 model_container_mount_points_inner.go
+model_container_origin_protection_config.go
 model_container_secrets_inner.go
 model_crawlers_run_200_response.go
 model_crawlers_run_request.go
