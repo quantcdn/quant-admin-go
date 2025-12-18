@@ -15,4 +15,4 @@ jobs:
           go-version: '1.21'
           
       - name: Update pkg.go.dev
-        run: go list -m github.com/quantcdn/quant-admin-go@${{ github.ref_name }}
+        run: go list -m github.com/quantcdn/quant-admin-go/v4@${{ github.ref_name }}
