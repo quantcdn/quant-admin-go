@@ -261,9 +261,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	crawler := "crawler_example" // string | 
+	organization := "test-org" // string | 
+	project := "test-project" // string | 
+	crawler := "00000000-0000-0000-0000-000000000000" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

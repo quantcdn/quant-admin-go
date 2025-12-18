@@ -28,9 +28,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,10 +100,10 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
-	container := "container_example" // string | The container ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
+	container := "test-container" // string | The container ID
 	container2 := *openapiclient.NewContainer("Name_example", *openapiclient.NewContainerImageReference("Type_example", "Identifier_example")) // Container | 
 
 	configuration := openapiclient.NewConfiguration()

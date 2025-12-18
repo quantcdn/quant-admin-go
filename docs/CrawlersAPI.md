@@ -34,8 +34,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 	v2CrawlerRequest := *openapiclient.NewV2CrawlerRequest("test-domain.com") // V2CrawlerRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -107,9 +107,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
-	crawler := "crawler_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	crawler := "00000000-0000-0000-0000-000000000000" // string | The UUID of the crawler
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** | Organization identifier | 
 **project** | **string** | Project identifier | 
-**crawler** | **string** |  | 
+**crawler** | **string** | The UUID of the crawler | 
 
 ### Other Parameters
 
@@ -179,10 +179,10 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
-	crawler := "crawler_example" // string | Crawler identifier
-	runId := int32(56) // int32 | Run identifier
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	crawler := "00000000-0000-0000-0000-000000000000" // string | Crawler identifier
+	runId := int32(1) // int32 | Run identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -256,9 +256,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
-	crawler := "crawler_example" // string | Crawler identifier
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	crawler := "00000000-0000-0000-0000-000000000000" // string | Crawler identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ## CrawlersList
 
-> []V2Crawler CrawlersList(ctx, organization, project).Execute()
+> CrawlersList(ctx, organization, project).Execute()
 
 List crawlers for the project
 
@@ -330,18 +330,16 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CrawlersAPI.CrawlersList(context.Background(), organization, project).Execute()
+	r, err := apiClient.CrawlersAPI.CrawlersList(context.Background(), organization, project).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CrawlersAPI.CrawlersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CrawlersList`: []V2Crawler
-	fmt.Fprintf(os.Stdout, "Response from `CrawlersAPI.CrawlersList`: %v\n", resp)
 }
 ```
 
@@ -366,7 +364,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]V2Crawler**](V2Crawler.md)
+ (empty response body)
 
 ### Authorization
 
@@ -401,9 +399,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
-	crawler := "crawler_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	crawler := "00000000-0000-0000-0000-000000000000" // string | The UUID of the crawler
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -425,7 +423,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** | Organization identifier | 
 **project** | **string** | Project identifier | 
-**crawler** | **string** |  | 
+**crawler** | **string** | The UUID of the crawler | 
 
 ### Other Parameters
 
@@ -475,9 +473,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
-	crawler := "crawler_example" // string | Crawler identifier
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	crawler := "00000000-0000-0000-0000-000000000000" // string | Crawler identifier
 	crawlersRunRequest := *openapiclient.NewCrawlersRunRequest() // CrawlersRunRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -551,9 +549,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | Organization identifier
-	project := "project_example" // string | Project identifier
-	crawler := "crawler_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	crawler := "00000000-0000-0000-0000-000000000000" // string | The UUID of the crawler
 	v2CrawlerRequest := *openapiclient.NewV2CrawlerRequest("test-domain.com") // V2CrawlerRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -576,7 +574,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organization** | **string** | Organization identifier | 
 **project** | **string** | Project identifier | 
-**crawler** | **string** |  | 
+**crawler** | **string** | The UUID of the crawler | 
 
 ### Other Parameters
 

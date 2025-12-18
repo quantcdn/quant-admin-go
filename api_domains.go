@@ -42,7 +42,7 @@ type DomainsAPI interface {
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization Organization identifier
 	@param project Project identifier
-	@param domain Domain identifier
+	@param domain Domain id
 	@return DomainsAPIDomainsDeleteRequest
 	*/
 	DomainsDelete(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsDeleteRequest
@@ -70,7 +70,7 @@ type DomainsAPI interface {
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization Organization identifier
 	@param project Project identifier
-	@param domain Domain identifier
+	@param domain Domain id
 	@return DomainsAPIDomainsReadRequest
 	*/
 	DomainsRead(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsReadRequest
@@ -85,7 +85,7 @@ type DomainsAPI interface {
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organization Organization identifier
 	@param project Project identifier
-	@param domain Domain identifier
+	@param domain Domain id
 	@return DomainsAPIDomainsRenewRequest
 	*/
 	DomainsRenew(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsRenewRequest
@@ -252,7 +252,7 @@ DomainsDelete Delete a domain
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization identifier
  @param project Project identifier
- @param domain Domain identifier
+ @param domain Domain id
  @return DomainsAPIDomainsDeleteRequest
 */
 func (a *DomainsAPIService) DomainsDelete(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsDeleteRequest {
@@ -497,7 +497,7 @@ DomainsRead Get details of a single domain
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization identifier
  @param project Project identifier
- @param domain Domain identifier
+ @param domain Domain id
  @return DomainsAPIDomainsReadRequest
 */
 func (a *DomainsAPIService) DomainsRead(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsReadRequest {
@@ -627,7 +627,7 @@ DomainsRenew Renew the SSL certificate for a domain
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organization Organization identifier
  @param project Project identifier
- @param domain Domain identifier
+ @param domain Domain id
  @return DomainsAPIDomainsRenewRequest
 */
 func (a *DomainsAPIService) DomainsRenew(ctx context.Context, organization string, project string, domain string) DomainsAPIDomainsRenewRequest {

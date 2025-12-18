@@ -26,7 +26,7 @@ type ProjectsAPI interface {
 	ProjectsCreate Create a new project
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organization
+	@param organization Organization identifier
 	@return ProjectsAPIProjectsCreateRequest
 	*/
 	ProjectsCreate(ctx context.Context, organization string) ProjectsAPIProjectsCreateRequest
@@ -39,8 +39,8 @@ type ProjectsAPI interface {
 	ProjectsDelete Delete a project
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organization
-	@param project
+	@param organization Organization identifier
+	@param project Project identifier
 	@return ProjectsAPIProjectsDeleteRequest
 	*/
 	ProjectsDelete(ctx context.Context, organization string, project string) ProjectsAPIProjectsDeleteRequest
@@ -52,7 +52,7 @@ type ProjectsAPI interface {
 	ProjectsList Retrieve all projects for an organization
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organization
+	@param organization Organization identifier
 	@return ProjectsAPIProjectsListRequest
 	*/
 	ProjectsList(ctx context.Context, organization string) ProjectsAPIProjectsListRequest
@@ -65,8 +65,8 @@ type ProjectsAPI interface {
 	ProjectsRead Get details of a single project
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organization
-	@param project
+	@param organization Organization identifier
+	@param project Project identifier
 	@return ProjectsAPIProjectsReadRequest
 	*/
 	ProjectsRead(ctx context.Context, organization string, project string) ProjectsAPIProjectsReadRequest
@@ -79,8 +79,8 @@ type ProjectsAPI interface {
 	ProjectsUpdate Update a project
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organization
-	@param project
+	@param organization Organization identifier
+	@param project Project identifier
 	@return ProjectsAPIProjectsUpdateRequest
 	*/
 	ProjectsUpdate(ctx context.Context, organization string, project string) ProjectsAPIProjectsUpdateRequest
@@ -113,7 +113,7 @@ func (r ProjectsAPIProjectsCreateRequest) Execute() (*V2Project, *http.Response,
 ProjectsCreate Create a new project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization
+ @param organization Organization identifier
  @return ProjectsAPIProjectsCreateRequest
 */
 func (a *ProjectsAPIService) ProjectsCreate(ctx context.Context, organization string) ProjectsAPIProjectsCreateRequest {
@@ -241,8 +241,8 @@ func (r ProjectsAPIProjectsDeleteRequest) Execute() (*http.Response, error) {
 ProjectsDelete Delete a project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization
- @param project
+ @param organization Organization identifier
+ @param project Project identifier
  @return ProjectsAPIProjectsDeleteRequest
 */
 func (a *ProjectsAPIService) ProjectsDelete(ctx context.Context, organization string, project string) ProjectsAPIProjectsDeleteRequest {
@@ -355,7 +355,7 @@ func (r ProjectsAPIProjectsListRequest) Execute() ([]V2Project, *http.Response, 
 ProjectsList Retrieve all projects for an organization
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization
+ @param organization Organization identifier
  @return ProjectsAPIProjectsListRequest
 */
 func (a *ProjectsAPIService) ProjectsList(ctx context.Context, organization string) ProjectsAPIProjectsListRequest {
@@ -484,8 +484,8 @@ func (r ProjectsAPIProjectsReadRequest) Execute() (*V2Project, *http.Response, e
 ProjectsRead Get details of a single project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization
- @param project
+ @param organization Organization identifier
+ @param project Project identifier
  @return ProjectsAPIProjectsReadRequest
 */
 func (a *ProjectsAPIService) ProjectsRead(ctx context.Context, organization string, project string) ProjectsAPIProjectsReadRequest {
@@ -620,8 +620,8 @@ func (r ProjectsAPIProjectsUpdateRequest) Execute() (*V2Project, *http.Response,
 ProjectsUpdate Update a project
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization
- @param project
+ @param organization Organization identifier
+ @param project Project identifier
  @return ProjectsAPIProjectsUpdateRequest
 */
 func (a *ProjectsAPIService) ProjectsUpdate(ctx context.Context, organization string, project string) ProjectsAPIProjectsUpdateRequest {

@@ -29,9 +29,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	policyName := "policyName_example" // string | The policy name
 
 	configuration := openapiclient.NewConfiguration()
@@ -104,9 +104,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -176,9 +176,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	scalingPolicy := *openapiclient.NewScalingPolicy() // ScalingPolicy | 
 
 	configuration := openapiclient.NewConfiguration()

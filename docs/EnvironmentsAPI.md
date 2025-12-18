@@ -36,8 +36,8 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
 	createEnvironmentRequest := *openapiclient.NewCreateEnvironmentRequest("EnvName_example") // CreateEnvironmentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -109,9 +109,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -181,9 +181,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -257,9 +257,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	startTime := "startTime_example" // string | Start time for log retrieval (ISO 8601 format or Unix timestamp) (optional)
 	endTime := "endTime_example" // string | End time for log retrieval (ISO 8601 format or Unix timestamp) (optional)
 	containerName := "containerName_example" // string | Filter logs by specific container name (optional)
@@ -345,9 +345,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	startTime := int32(56) // int32 | Start time for metrics retrieval (Unix timestamp in milliseconds) (optional)
 	endTime := int32(56) // int32 | End time for metrics retrieval (Unix timestamp in milliseconds) (optional)
 	period := int32(56) // int32 | Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) (optional)
@@ -429,8 +429,8 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -500,9 +500,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	type_ := "type__example" // string | The sync type
 
 	configuration := openapiclient.NewConfiguration()
@@ -577,9 +577,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	type_ := "type__example" // string | The sync type
 	syncToEnvironmentRequest := *openapiclient.NewSyncToEnvironmentRequest() // SyncToEnvironmentRequest | 
 
@@ -732,9 +732,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	updateEnvironmentStateRequest := *openapiclient.NewUpdateEnvironmentStateRequest() // UpdateEnvironmentStateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
