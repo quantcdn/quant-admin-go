@@ -72,21 +72,24 @@ paths:
     get:
       operationId: CrawlerSchedules_list
       parameters:
-      - explode: false
+      - example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -356,6 +359,7 @@ paths:
       operationId: Crawlers_list
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -364,6 +368,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -372,14 +377,6 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/V2Crawler'
-                type: array
-          description: The request has succeeded.
         "400":
           content:
             application/json:
@@ -400,6 +397,7 @@ paths:
       operationId: Crawlers_create
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -408,6 +406,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -449,6 +448,7 @@ paths:
       operationId: Crawlers_delete
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -457,6 +457,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -464,7 +465,9 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: The UUID of the crawler
+        example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -494,6 +497,7 @@ paths:
       operationId: Crawlers_read
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -502,6 +506,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -509,7 +514,9 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: The UUID of the crawler
+        example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -543,6 +550,7 @@ paths:
       operationId: Crawlers_update
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -551,6 +559,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -558,7 +567,9 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: The UUID of the crawler
+        example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -599,6 +610,7 @@ paths:
       operationId: Crawlers_run
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -607,6 +619,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -615,6 +628,7 @@ paths:
           type: string
         style: simple
       - description: Crawler identifier
+        example: 00000000-0000-0000-0000-000000000000
         explode: false
         in: path
         name: crawler
@@ -627,7 +641,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Crawlers_run_request'
-        required: true
+        required: false
       responses:
         "200":
           content:
@@ -668,6 +682,7 @@ paths:
       operationId: Crawlers_getRuns
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -676,6 +691,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -684,6 +700,7 @@ paths:
           type: string
         style: simple
       - description: Crawler identifier
+        example: 00000000-0000-0000-0000-000000000000
         explode: false
         in: path
         name: crawler
@@ -733,6 +750,7 @@ paths:
       operationId: Crawlers_getRunById
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -741,6 +759,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -749,6 +768,7 @@ paths:
           type: string
         style: simple
       - description: Crawler identifier
+        example: 00000000-0000-0000-0000-000000000000
         explode: false
         in: path
         name: crawler
@@ -757,6 +777,7 @@ paths:
           type: string
         style: simple
       - description: Run identifier
+        example: 1
         explode: false
         in: path
         name: run_id
@@ -803,14 +824,18 @@ paths:
     delete:
       operationId: Headers_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -845,14 +870,18 @@ paths:
     get:
       operationId: Headers_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -891,14 +920,18 @@ paths:
     post:
       operationId: Headers_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -939,6 +972,7 @@ paths:
       operationId: Domains_list
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -947,6 +981,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -983,6 +1018,7 @@ paths:
       operationId: Domains_create
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -991,6 +1027,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1032,6 +1069,7 @@ paths:
       operationId: Domains_delete
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -1040,6 +1078,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1047,7 +1086,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Domain identifier
+      - description: Domain id
+        example: "0000"
         explode: false
         in: path
         name: domain
@@ -1078,6 +1118,7 @@ paths:
       operationId: Domains_read
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -1086,6 +1127,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1093,7 +1135,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Domain identifier
+      - description: Domain id
+        example: "0000"
         explode: false
         in: path
         name: domain
@@ -1129,6 +1172,7 @@ paths:
       operationId: Domains_renew
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -1137,6 +1181,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1144,7 +1189,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Domain identifier
+      - description: Domain id
+        example: "0000"
         explode: false
         in: path
         name: domain
@@ -1175,14 +1221,18 @@ paths:
     get:
       operationId: KV_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1217,14 +1267,18 @@ paths:
     post:
       operationId: KV_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1264,21 +1318,26 @@ paths:
     delete:
       operationId: KV_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1307,21 +1366,26 @@ paths:
     get:
       operationId: KV_show
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1354,21 +1418,26 @@ paths:
     get:
       operationId: KV_items_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1436,21 +1505,26 @@ paths:
     post:
       operationId: KV_items_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1496,21 +1570,26 @@ paths:
     delete:
       operationId: KV_items_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1554,21 +1633,26 @@ paths:
         \ via the Quant Cloud platform KVStore abstraction."
       operationId: KV_items_show
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1607,21 +1691,26 @@ paths:
     put:
       operationId: KV_items_update
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1702,7 +1791,9 @@ paths:
     get:
       operationId: Organizations_read
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
@@ -1716,6 +1807,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Organization'
           description: The request has succeeded.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Organization not found.
         "400":
           content:
             application/json:
@@ -1736,7 +1833,9 @@ paths:
     get:
       operationId: Projects_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
@@ -1771,7 +1870,9 @@ paths:
     post:
       operationId: Projects_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
@@ -1812,14 +1913,18 @@ paths:
     delete:
       operationId: Projects_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1848,14 +1953,18 @@ paths:
     get:
       operationId: Projects_read
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1896,14 +2005,18 @@ paths:
     patch:
       operationId: Projects_update
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1943,14 +2056,18 @@ paths:
     post:
       operationId: Purge_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -5863,6 +5980,7 @@ paths:
       operationId: listCommands
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5871,6 +5989,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -5892,6 +6011,7 @@ paths:
       operationId: createCommand
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5900,6 +6020,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -5928,6 +6049,7 @@ paths:
       operationId: getCommand
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5936,6 +6058,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -5944,6 +6067,7 @@ paths:
           type: string
         style: simple
       - description: The command ID
+        example: test-cmd
         explode: false
         in: path
         name: command
@@ -5966,6 +6090,7 @@ paths:
       operationId: getEnvironmentCompose
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5974,6 +6099,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -5982,6 +6108,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6012,6 +6139,7 @@ paths:
       operationId: patchEnvironmentCompose
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6020,6 +6148,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6028,6 +6157,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6075,6 +6205,7 @@ paths:
       operationId: validateCompose
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6127,6 +6258,7 @@ paths:
       operationId: listContainers
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6135,6 +6267,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6143,6 +6276,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6163,6 +6297,7 @@ paths:
       operationId: updateContainer
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6171,6 +6306,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6179,6 +6315,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6187,6 +6324,7 @@ paths:
           type: string
         style: simple
       - description: The container ID
+        example: test-container
         explode: false
         in: path
         name: container
@@ -6213,6 +6351,7 @@ paths:
       operationId: listCronJobs
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6221,6 +6360,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6229,6 +6369,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6252,6 +6393,7 @@ paths:
       operationId: createCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6260,6 +6402,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6268,6 +6411,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6304,6 +6448,7 @@ paths:
       operationId: deleteCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6312,6 +6457,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6320,6 +6466,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6345,6 +6492,7 @@ paths:
       operationId: getCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6353,6 +6501,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6361,6 +6510,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6392,6 +6542,7 @@ paths:
       operationId: updateCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6400,6 +6551,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6408,6 +6560,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6446,6 +6599,7 @@ paths:
       operationId: listCronJobRuns
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6454,6 +6608,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6462,6 +6617,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6470,6 +6626,7 @@ paths:
           type: string
         style: simple
       - description: The cron job ID
+        example: test-cron
         explode: false
         in: path
         name: cron
@@ -6494,6 +6651,7 @@ paths:
       operationId: getCronRun
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6502,6 +6660,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6510,6 +6669,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6518,6 +6678,7 @@ paths:
           type: string
         style: simple
       - description: The cron job ID
+        example: test-cron
         explode: false
         in: path
         name: cron
@@ -6548,6 +6709,7 @@ paths:
       operationId: listEnvironments
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6556,6 +6718,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6582,6 +6745,7 @@ paths:
       operationId: createEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6590,6 +6754,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6627,6 +6792,7 @@ paths:
       operationId: deleteEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6635,6 +6801,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6643,6 +6810,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6662,6 +6830,7 @@ paths:
       operationId: getEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6670,6 +6839,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6678,6 +6848,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6753,6 +6924,7 @@ paths:
       operationId: updateEnvironmentState
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6761,6 +6933,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6769,6 +6942,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6798,6 +6972,7 @@ paths:
       operationId: getEnvironmentLogs
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6806,6 +6981,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6814,6 +6990,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6893,6 +7070,7 @@ paths:
       operationId: getEnvironmentMetrics
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6901,6 +7079,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6909,6 +7088,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6978,6 +7158,7 @@ paths:
       operationId: listSyncOperations
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6986,6 +7167,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6994,6 +7176,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7028,6 +7211,7 @@ paths:
       operationId: syncToEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7036,6 +7220,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7044,6 +7229,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7086,6 +7272,7 @@ paths:
       operationId: listBackups
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7094,6 +7281,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7102,6 +7290,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7204,6 +7393,7 @@ paths:
       operationId: createBackup
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7212,6 +7402,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7220,6 +7411,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7259,6 +7451,7 @@ paths:
       operationId: deleteBackup
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7267,6 +7460,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7275,6 +7469,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7316,6 +7511,7 @@ paths:
       operationId: downloadBackup
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7324,6 +7520,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7332,6 +7529,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7373,6 +7571,7 @@ paths:
       operationId: getScalingPolicies
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7381,6 +7580,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7389,6 +7589,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7406,6 +7607,7 @@ paths:
       operationId: updateScalingPolicy
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7414,6 +7616,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7422,6 +7625,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7446,6 +7650,7 @@ paths:
       operationId: deleteScalingPolicy
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7454,6 +7659,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7462,6 +7668,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7487,7 +7694,8 @@ paths:
     get:
       operationId: getSshAccessCredentials
       parameters:
-      - description: The organisation machine name
+      - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7495,7 +7703,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The application name
+      - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7503,7 +7712,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The environment name
+      - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7532,6 +7742,7 @@ paths:
       operationId: listEnvironmentVariables
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: api_organisation
@@ -7540,6 +7751,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: api_application
@@ -7548,6 +7760,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: api_environment
@@ -7565,6 +7778,7 @@ paths:
       operationId: bulkSetEnvironmentVariables
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: api_organisation
@@ -7573,6 +7787,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: api_application
@@ -7581,6 +7796,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: api_environment
@@ -7648,6 +7864,7 @@ paths:
       operationId: updateEnvironmentVariable
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: api_organisation
@@ -7656,6 +7873,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: api_application
@@ -7664,6 +7882,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: api_environment
@@ -7698,6 +7917,7 @@ paths:
       operationId: listVolumes
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7706,6 +7926,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7714,6 +7935,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7737,6 +7959,7 @@ paths:
       operationId: createVolume
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7745,6 +7968,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7753,6 +7977,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7783,6 +8008,7 @@ paths:
       operationId: deleteVolume
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7791,6 +8017,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7799,6 +8026,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7826,6 +8054,7 @@ paths:
       operationId: getVolume
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7834,6 +8063,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7842,6 +8072,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -9752,13 +9983,13 @@ components:
       type: object
     V2Organization:
       example:
-        updated_at: 2024-10-10T14:20:00Z
         name: Test Organization
-        created_at: 2024-01-15T10:30:00Z
-        subscription: professional
         machine_name: test-org
         type: business
         region: au
+        subscription: professional
+        created_at: 2024-01-15T10:30:00Z
+        updated_at: 2024-10-10T14:20:00Z
       properties:
         name:
           description: Organization name
@@ -12973,7 +13204,9 @@ components:
     Crawlers_run_request:
       properties:
         urls:
-          description: URLs to crawl
+          description: "Optional URLs to crawl (overrides crawler's default URL configuration).\
+            \ If not provided, the crawler will use its configured URLs or perform\
+            \ a full crawl."
           example:
           - /
           - /about

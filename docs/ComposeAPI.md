@@ -29,9 +29,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -105,9 +105,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	patchEnvironmentComposeRequest := *openapiclient.NewPatchEnvironmentComposeRequest() // PatchEnvironmentComposeRequest | Partial compose definition updates. All fields are optional.
 
 	configuration := openapiclient.NewConfiguration()
@@ -183,7 +183,7 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
+	organisation := "test-org" // string | The organisation ID
 	validateComposeRequest := *openapiclient.NewValidateComposeRequest("Compose_example") // ValidateComposeRequest | The docker-compose.yml file content. Can be sent as raw YAML string or as a JSON wrapper containing both yamlContent (string) and imageSuffix (string) fields. Query parameter imageSuffix takes precedence if both are provided.
 	imageSuffix := "pr-456" // string | Optional. Image tag suffix to apply during translation. Transforms internal image tags to consistent '{containerName}-{suffix}' format (e.g., 'nginx-pr-456'). External images are left unchanged. Useful for feature branch deployments. (optional)
 

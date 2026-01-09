@@ -30,9 +30,9 @@ import (
 )
 
 func main() {
-	apiOrganisation := "apiOrganisation_example" // string | The organisation ID
-	apiApplication := "apiApplication_example" // string | The application ID
-	apiEnvironment := "apiEnvironment_example" // string | The environment ID
+	apiOrganisation := "test-org" // string | The organisation ID
+	apiApplication := "test-app" // string | The application ID
+	apiEnvironment := "test-env" // string | The environment ID
 	bulkSetEnvironmentVariablesRequest := *openapiclient.NewBulkSetEnvironmentVariablesRequest([]openapiclient.BulkSetEnvironmentVariablesRequestEnvironmentInner{*openapiclient.NewBulkSetEnvironmentVariablesRequestEnvironmentInner("Name_example", "Value_example")}) // BulkSetEnvironmentVariablesRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -179,9 +179,9 @@ import (
 )
 
 func main() {
-	apiOrganisation := "apiOrganisation_example" // string | The organisation ID
-	apiApplication := "apiApplication_example" // string | The application ID
-	apiEnvironment := "apiEnvironment_example" // string | The environment ID
+	apiOrganisation := "test-org" // string | The organisation ID
+	apiApplication := "test-app" // string | The application ID
+	apiEnvironment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -251,9 +251,9 @@ import (
 )
 
 func main() {
-	apiOrganisation := "apiOrganisation_example" // string | The organisation ID
-	apiApplication := "apiApplication_example" // string | The application ID
-	apiEnvironment := "apiEnvironment_example" // string | The environment ID
+	apiOrganisation := "test-org" // string | The organisation ID
+	apiApplication := "test-app" // string | The application ID
+	apiEnvironment := "test-env" // string | The environment ID
 	apiVariable := "apiVariable_example" // string | The variable key
 	updateEnvironmentVariableRequest := *openapiclient.NewUpdateEnvironmentVariableRequest() // UpdateEnvironmentVariableRequest | 
 

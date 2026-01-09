@@ -26,8 +26,8 @@ type PurgeAPI interface {
 	PurgeCreate Purge cache via URL or cache keys
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param organization
-	@param project
+	@param organization Organization identifier
+	@param project Project identifier
 	@return PurgeAPIPurgeCreateRequest
 	*/
 	PurgeCreate(ctx context.Context, organization string, project string) PurgeAPIPurgeCreateRequest
@@ -61,8 +61,8 @@ func (r PurgeAPIPurgeCreateRequest) Execute() (string, *http.Response, error) {
 PurgeCreate Purge cache via URL or cache keys
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param organization
- @param project
+ @param organization Organization identifier
+ @param project Project identifier
  @return PurgeAPIPurgeCreateRequest
 */
 func (a *PurgeAPIService) PurgeCreate(ctx context.Context, organization string, project string) PurgeAPIPurgeCreateRequest {

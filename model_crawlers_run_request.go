@@ -19,7 +19,7 @@ var _ MappedNullable = &CrawlersRunRequest{}
 
 // CrawlersRunRequest struct for CrawlersRunRequest
 type CrawlersRunRequest struct {
-	// URLs to crawl
+	// Optional URLs to crawl (overrides crawler's default URL configuration). If not provided, the crawler will use its configured URLs or perform a full crawl.
 	Urls []string `json:"urls,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

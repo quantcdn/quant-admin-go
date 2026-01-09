@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Urls** | Pointer to **[]string** | URLs to crawl | [optional] 
+**Urls** | Pointer to **[]string** | Optional URLs to crawl (overrides crawler&#39;s default URL configuration). If not provided, the crawler will use its configured URLs or perform a full crawl. | [optional] 
 
 ## Methods
 
