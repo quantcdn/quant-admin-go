@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **SessionId** | Pointer to **string** | Optional session ID to continue a conversation | [optional] 
 **UserId** | Pointer to **string** | Optional user identifier for session isolation | [optional] 
 **Stream** | Pointer to **bool** | Whether to stream the response (SSE) | [optional] [default to false]
+**Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl. Use for long-running agent tasks. | [optional] [default to false]
+**System** | Pointer to **string** | Optional additional system prompt (appended to agent&#39;s configured prompt) | [optional] 
 
 ## Methods
 
@@ -122,6 +124,56 @@ SetStream sets Stream field to given value.
 `func (o *ChatWithAIAgentRequest) HasStream() bool`
 
 HasStream returns a boolean if a field has been set.
+
+### GetAsync
+
+`func (o *ChatWithAIAgentRequest) GetAsync() bool`
+
+GetAsync returns the Async field if non-nil, zero value otherwise.
+
+### GetAsyncOk
+
+`func (o *ChatWithAIAgentRequest) GetAsyncOk() (*bool, bool)`
+
+GetAsyncOk returns a tuple with the Async field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsync
+
+`func (o *ChatWithAIAgentRequest) SetAsync(v bool)`
+
+SetAsync sets Async field to given value.
+
+### HasAsync
+
+`func (o *ChatWithAIAgentRequest) HasAsync() bool`
+
+HasAsync returns a boolean if a field has been set.
+
+### GetSystem
+
+`func (o *ChatWithAIAgentRequest) GetSystem() string`
+
+GetSystem returns the System field if non-nil, zero value otherwise.
+
+### GetSystemOk
+
+`func (o *ChatWithAIAgentRequest) GetSystemOk() (*string, bool)`
+
+GetSystemOk returns a tuple with the System field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystem
+
+`func (o *ChatWithAIAgentRequest) SetSystem(v string)`
+
+SetSystem sets System field to given value.
+
+### HasSystem
+
+`func (o *ChatWithAIAgentRequest) HasSystem() bool`
+
+HasSystem returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

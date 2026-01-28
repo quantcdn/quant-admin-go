@@ -30,9 +30,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	type_ := "type__example" // string | The backup type
 	createBackupRequest := *openapiclient.NewCreateBackupRequest() // CreateBackupRequest |  (optional)
 
@@ -109,9 +109,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	type_ := "type__example" // string | The backup type
 	backupId := "backupId_example" // string | The backup ID
 
@@ -189,9 +189,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	type_ := "type__example" // string | The backup type
 	backupId := "backupId_example" // string | The backup ID
 
@@ -272,9 +272,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 	type_ := "type__example" // string | The backup type
 	order := "order_example" // string | Sort order for backups by creation date (asc = oldest first, desc = newest first) (optional) (default to "desc")
 	limit := int32(56) // int32 | Maximum number of backups to return (max 100) (optional) (default to 50)

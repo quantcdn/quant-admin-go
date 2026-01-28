@@ -29,8 +29,8 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	environment := "test-env" // string | The environment ID
 	createCommandRequest := *openapiclient.NewCreateCommandRequest() // CreateCommandRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -102,9 +102,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	environment := "environment_example" // string | The environment ID
-	command := "command_example" // string | The command ID
+	organisation := "test-org" // string | The organisation ID
+	environment := "test-env" // string | The environment ID
+	command := "test-cmd" // string | The command ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -176,8 +176,8 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	environment := "environment_example" // string | The environment ID
+	organisation := "test-org" // string | The organisation ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

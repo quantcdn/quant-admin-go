@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go/v4"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_quantadmingo_CrawlersAPIService(t *testing.T) {
@@ -92,10 +92,9 @@ func Test_quantadmingo_CrawlersAPIService(t *testing.T) {
 		var organization string
 		var project string
 
-		resp, httpRes, err := apiClient.CrawlersAPI.CrawlersList(context.Background(), organization, project).Execute()
+		httpRes, err := apiClient.CrawlersAPI.CrawlersList(context.Background(), organization, project).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

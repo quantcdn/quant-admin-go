@@ -7,13 +7,15 @@ Name | Type | Description | Notes
 **Messages** | [**[]ChatInferenceRequestMessagesInner**](ChatInferenceRequestMessagesInner.md) | Array of chat messages. Content can be a simple string or an array of content blocks for multimodal input. | 
 **ModelId** | **string** | Model ID. Use Nova models for multimodal support. | 
 **Temperature** | Pointer to **float32** |  | [optional] [default to 0.7]
-**MaxTokens** | Pointer to **int32** |  | [optional] [default to 1024]
+**MaxTokens** | Pointer to **int32** | Max tokens. Claude 4.5 supports up to 64k. | [optional] [default to 4096]
 **TopP** | Pointer to **float32** |  | [optional] 
 **Stream** | Pointer to **bool** | Ignored in buffered mode, always returns complete response | [optional] 
 **SystemPrompt** | Pointer to **string** | Optional custom system prompt. When tools are enabled, this is prepended with tool usage guidance. | [optional] 
 **StopSequences** | Pointer to **[]string** | Custom stop sequences | [optional] 
 **ResponseFormat** | Pointer to [**ChatInferenceRequestResponseFormat**](ChatInferenceRequestResponseFormat.md) |  | [optional] 
 **ToolConfig** | Pointer to [**ChatInferenceRequestToolConfig**](ChatInferenceRequestToolConfig.md) |  | [optional] 
+**SessionId** | Pointer to **string** | Optional session ID for conversation continuity. Omit to use stateless mode, include to continue an existing session. | [optional] 
+**Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of waiting for completion. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
 
 ## Methods
 
@@ -273,6 +275,56 @@ SetToolConfig sets ToolConfig field to given value.
 `func (o *ChatInferenceRequest) HasToolConfig() bool`
 
 HasToolConfig returns a boolean if a field has been set.
+
+### GetSessionId
+
+`func (o *ChatInferenceRequest) GetSessionId() string`
+
+GetSessionId returns the SessionId field if non-nil, zero value otherwise.
+
+### GetSessionIdOk
+
+`func (o *ChatInferenceRequest) GetSessionIdOk() (*string, bool)`
+
+GetSessionIdOk returns a tuple with the SessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSessionId
+
+`func (o *ChatInferenceRequest) SetSessionId(v string)`
+
+SetSessionId sets SessionId field to given value.
+
+### HasSessionId
+
+`func (o *ChatInferenceRequest) HasSessionId() bool`
+
+HasSessionId returns a boolean if a field has been set.
+
+### GetAsync
+
+`func (o *ChatInferenceRequest) GetAsync() bool`
+
+GetAsync returns the Async field if non-nil, zero value otherwise.
+
+### GetAsyncOk
+
+`func (o *ChatInferenceRequest) GetAsyncOk() (*bool, bool)`
+
+GetAsyncOk returns a tuple with the Async field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsync
+
+`func (o *ChatInferenceRequest) SetAsync(v bool)`
+
+SetAsync sets Async field to given value.
+
+### HasAsync
+
+`func (o *ChatInferenceRequest) HasAsync() bool`
+
+HasAsync returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

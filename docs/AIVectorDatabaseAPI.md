@@ -324,7 +324,7 @@ import (
 func main() {
 	organisation := "organisation_example" // string | The organisation ID
 	collectionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The collection ID
-	queryVectorCollectionRequest := *openapiclient.NewQueryVectorCollectionRequest("How do I authenticate with the API?") // QueryVectorCollectionRequest | 
+	queryVectorCollectionRequest := *openapiclient.NewQueryVectorCollectionRequest() // QueryVectorCollectionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

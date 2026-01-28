@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go/v4"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_quantadmingo_AIInferenceAPIService(t *testing.T) {
@@ -64,6 +64,21 @@ func Test_quantadmingo_AIInferenceAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIInferenceAPIService GetDurableExecutionStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var identifier string
+
+		resp, httpRes, err := apiClient.AIInferenceAPI.GetDurableExecutionStatus(context.Background(), organisation, identifier).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIInferenceAPIService ImageGeneration", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -71,6 +86,20 @@ func Test_quantadmingo_AIInferenceAPIService(t *testing.T) {
 		var organisation string
 
 		resp, httpRes, err := apiClient.AIInferenceAPI.ImageGeneration(context.Background(), organisation).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIInferenceAPIService SubmitToolCallback", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+
+		resp, httpRes, err := apiClient.AIInferenceAPI.SubmitToolCallback(context.Background(), organisation).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
+	organization := "test-org" // string | Organization identifier
 	v2ProjectRequest := *openapiclient.NewV2ProjectRequest() // V2ProjectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -52,7 +52,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
+**organization** | **string** | Organization identifier | 
 
 ### Other Parameters
 
@@ -101,8 +101,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -120,8 +120,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 
@@ -170,7 +170,7 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
+	organization := "test-org" // string | Organization identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -190,7 +190,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
+**organization** | **string** | Organization identifier | 
 
 ### Other Parameters
 
@@ -238,8 +238,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 	withToken := true // bool |  (default to false)
 
 	configuration := openapiclient.NewConfiguration()
@@ -260,8 +260,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 
@@ -311,8 +311,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 	v2ProjectRequest := *openapiclient.NewV2ProjectRequest() // V2ProjectRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -333,8 +333,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 

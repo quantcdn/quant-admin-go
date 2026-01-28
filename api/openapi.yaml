@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.8.0
+  version: 4.9.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -55,38 +55,47 @@ tags:
   name: AI Models
 - description: AI Sessions
   name: AI Sessions
+- description: AI Task Management
+  name: AI Task Management
 - description: AI Monitoring
   name: AI Monitoring
 - description: AI Inference
   name: AI Inference
 - description: AI Tools
   name: AI Tools
+- description: Orchestration
+  name: Orchestration
 - description: AI Agents
   name: AI Agents
 - description: AI Custom Tools
   name: AI Custom Tools
 - description: AI Vector Database
   name: AI Vector Database
+- description: AI File Storage
+  name: AI File Storage
 paths:
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
       operationId: CrawlerSchedules_list
       parameters:
-      - explode: false
+      - example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -356,6 +365,7 @@ paths:
       operationId: Crawlers_list
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -364,6 +374,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -372,14 +383,6 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/V2Crawler'
-                type: array
-          description: The request has succeeded.
         "400":
           content:
             application/json:
@@ -400,6 +403,7 @@ paths:
       operationId: Crawlers_create
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -408,6 +412,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -449,6 +454,7 @@ paths:
       operationId: Crawlers_delete
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -457,6 +463,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -464,7 +471,9 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: The UUID of the crawler
+        example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -494,6 +503,7 @@ paths:
       operationId: Crawlers_read
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -502,6 +512,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -509,7 +520,9 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: The UUID of the crawler
+        example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -543,6 +556,7 @@ paths:
       operationId: Crawlers_update
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -551,6 +565,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -558,7 +573,9 @@ paths:
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: The UUID of the crawler
+        example: 00000000-0000-0000-0000-000000000000
+        explode: false
         in: path
         name: crawler
         required: true
@@ -599,6 +616,7 @@ paths:
       operationId: Crawlers_run
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -607,6 +625,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -615,6 +634,7 @@ paths:
           type: string
         style: simple
       - description: Crawler identifier
+        example: 00000000-0000-0000-0000-000000000000
         explode: false
         in: path
         name: crawler
@@ -627,7 +647,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Crawlers_run_request'
-        required: true
+        required: false
       responses:
         "200":
           content:
@@ -668,6 +688,7 @@ paths:
       operationId: Crawlers_getRuns
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -676,6 +697,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -684,6 +706,7 @@ paths:
           type: string
         style: simple
       - description: Crawler identifier
+        example: 00000000-0000-0000-0000-000000000000
         explode: false
         in: path
         name: crawler
@@ -733,6 +756,7 @@ paths:
       operationId: Crawlers_getRunById
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -741,6 +765,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -749,6 +774,7 @@ paths:
           type: string
         style: simple
       - description: Crawler identifier
+        example: 00000000-0000-0000-0000-000000000000
         explode: false
         in: path
         name: crawler
@@ -757,6 +783,7 @@ paths:
           type: string
         style: simple
       - description: Run identifier
+        example: 1
         explode: false
         in: path
         name: run_id
@@ -803,14 +830,18 @@ paths:
     delete:
       operationId: Headers_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -845,14 +876,18 @@ paths:
     get:
       operationId: Headers_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -891,14 +926,18 @@ paths:
     post:
       operationId: Headers_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -939,6 +978,7 @@ paths:
       operationId: Domains_list
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -947,6 +987,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -983,6 +1024,7 @@ paths:
       operationId: Domains_create
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -991,6 +1033,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1032,6 +1075,7 @@ paths:
       operationId: Domains_delete
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -1040,6 +1084,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1047,7 +1092,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Domain identifier
+      - description: Domain id
+        example: "0000"
         explode: false
         in: path
         name: domain
@@ -1078,6 +1124,7 @@ paths:
       operationId: Domains_read
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -1086,6 +1133,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1093,7 +1141,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Domain identifier
+      - description: Domain id
+        example: "0000"
         explode: false
         in: path
         name: domain
@@ -1129,6 +1178,7 @@ paths:
       operationId: Domains_renew
       parameters:
       - description: Organization identifier
+        example: test-org
         explode: false
         in: path
         name: organization
@@ -1137,6 +1187,7 @@ paths:
           type: string
         style: simple
       - description: Project identifier
+        example: test-project
         explode: false
         in: path
         name: project
@@ -1144,7 +1195,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Domain identifier
+      - description: Domain id
+        example: "0000"
         explode: false
         in: path
         name: domain
@@ -1175,14 +1227,18 @@ paths:
     get:
       operationId: KV_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1217,14 +1273,18 @@ paths:
     post:
       operationId: KV_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1264,21 +1324,26 @@ paths:
     delete:
       operationId: KV_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1307,21 +1372,26 @@ paths:
     get:
       operationId: KV_show
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1354,21 +1424,26 @@ paths:
     get:
       operationId: KV_items_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1436,21 +1511,26 @@ paths:
     post:
       operationId: KV_items_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1496,21 +1576,26 @@ paths:
     delete:
       operationId: KV_items_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1554,21 +1639,26 @@ paths:
         \ via the Quant Cloud platform KVStore abstraction."
       operationId: KV_items_show
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1607,21 +1697,26 @@ paths:
     put:
       operationId: KV_items_update
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - example: "0000"
+        explode: false
         in: path
         name: store_id
         required: true
@@ -1702,7 +1797,9 @@ paths:
     get:
       operationId: Organizations_read
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
@@ -1716,6 +1813,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Organization'
           description: The request has succeeded.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Organization not found.
         "400":
           content:
             application/json:
@@ -1736,7 +1839,9 @@ paths:
     get:
       operationId: Projects_list
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
@@ -1771,7 +1876,9 @@ paths:
     post:
       operationId: Projects_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
@@ -1812,14 +1919,18 @@ paths:
     delete:
       operationId: Projects_delete
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1848,14 +1959,18 @@ paths:
     get:
       operationId: Projects_read
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1896,14 +2011,18 @@ paths:
     patch:
       operationId: Projects_update
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -1943,14 +2062,18 @@ paths:
     post:
       operationId: Purge_create
       parameters:
-      - explode: false
+      - description: Organization identifier
+        example: test-org
+        explode: false
         in: path
         name: organization
         required: true
         schema:
           type: string
         style: simple
-      - explode: false
+      - description: Project identifier
+        example: test-project
+        explode: false
         in: path
         name: project
         required: true
@@ -4550,6 +4673,369 @@ paths:
       summary: Extend Session Expiration
       tags:
       - AI Sessions
+  /api/v3/organizations/{organisation}/ai/tasks:
+    get:
+      description: |-
+        Lists tasks for an organization with optional filtering. Filters can be combined for powerful queries.
+             *
+             * **Filter Examples:**
+             * - All tasks in a list: ?taskListId=world-1
+             * - Pending tasks in a list: ?taskListId=world-1&status=pending
+             * - Tasks assigned to an agent: ?assignedAgentId=agent-code-reviewer
+             * - Combined: ?taskListId=world-1&status=in_progress&assignedAgentId=agent-1
+             *
+             * **Reverse Dependency Lookup:**
+             * Use `dependsOn` to find tasks that depend on a specific task (waiting for it to complete):
+             * - ?dependsOn=task-123 - Returns task IDs only (lightweight)
+             * - ?dependsOn=task-123&includeDetails=true - Returns full task objects
+             * - ?dependsOn=task-123&status=pending - Pending tasks waiting for task-123
+             *
+             * **Ordering:**
+             * Tasks are returned in reverse chronological order (most recent first).
+      operationId: listTasks
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter tasks by task list ID. Task lists are implicit groupings
+          - any string can be used.
+        example: world-1
+        explode: true
+        in: query
+        name: taskListId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter tasks by status
+        example: pending
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          - cancelled
+          - blocked
+          type: string
+        style: form
+      - description: Filter tasks by assigned agent ID
+        example: agent-code-reviewer
+        explode: true
+        in: query
+        name: assignedAgentId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Maximum number of tasks to return (default 50, max 100)"
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Reverse lookup: find tasks that depend on this task ID. Returns\
+          \ tasks waiting for the specified task to complete."
+        example: 550e8400-e29b-41d4-a716-446655440000
+        explode: true
+        in: query
+        name: dependsOn
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: "When using dependsOn, return full task objects in addition to\
+          \ IDs. Default false (IDs only for lightweight responses)."
+        explode: true
+        in: query
+        name: includeDetails
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listTasks_200_response'
+          description: "Tasks retrieved successfully. Response format varies: standard\
+            \ returns {tasks, count}, with dependsOn returns {taskIds, count, dependsOn},\
+            \ with dependsOn+includeDetails returns {taskIds, tasks, count, dependsOn}"
+        "500":
+          description: Failed to list tasks
+      summary: List tasks with optional filtering
+      tags:
+      - AI Task Management
+    post:
+      description: |-
+        Creates a new task for multi-agent coordination and workflow orchestration.
+             *
+             * **Key Features:**
+             * - **Persistent State**: Tasks survive across conversations and sessions
+             * - **Agent Assignment**: Pre-assign tasks to specific agents
+             * - **Task Lists**: Group related tasks using taskListId (implicit - no need to create lists first)
+             * - **Dependencies**: Define task dependencies for workflow orchestration
+             * - **Metadata**: Store flexible JSON metadata for task-specific data
+             * - **Progress Tracking**: Track progress from 0.0 to 1.0
+             *
+             * **Use Cases:**
+             * - Break down complex requests into manageable steps
+             * - Assign work to specialized agents
+             * - Track long-running operations
+             * - Coordinate multi-agent workflows
+      operationId: createTask
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createTask_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createTask_201_response'
+          description: Task created successfully
+        "400":
+          description: Invalid request
+        "500":
+          description: Failed to create task
+      summary: Create a new task
+      tags:
+      - AI Task Management
+  /api/v3/organizations/{organisation}/ai/tasks/{taskId}:
+    delete:
+      description: |-
+        Permanently deletes a task. This action cannot be undone.
+             *
+             * **Dependency Protection:**
+             * By default, deletion is blocked if other tasks depend on this task (TASK_HAS_DEPENDENTS error).
+             * This prevents breaking workflows.
+             *
+             * **Cascade Delete:**
+             * Use `?cascade=true` to delete the task AND all tasks that depend on it recursively.
+             * Useful for cleaning up entire dependency chains.
+             *
+             * **Examples:**
+             * - DELETE /tasks/{id} - Deletes task if no dependents, otherwise returns 409 error
+             * - DELETE /tasks/{id}?cascade=true - Deletes task and all dependent tasks
+      operationId: deleteTask
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The task UUID
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "If true, delete task and all dependent tasks recursively"
+        explode: true
+        in: query
+        name: cascade
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteTask_200_response'
+          description: Task deleted successfully
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteTask_409_response'
+          description: Task has dependents - cannot delete without cascade
+        "404":
+          description: Task not found
+        "500":
+          description: Failed to delete task
+      summary: Delete a task
+      tags:
+      - AI Task Management
+    get:
+      description: "Retrieves detailed information about a specific task including\
+        \ status, progress, dependencies, and results."
+      operationId: getTask
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The task UUID
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getTask_200_response'
+          description: Task details retrieved successfully
+        "404":
+          description: Task not found
+        "500":
+          description: Failed to get task
+      summary: Get task details
+      tags:
+      - AI Task Management
+    put:
+      description: |-
+        Updates an existing task. All fields are optional - only provided fields will be updated.
+             *
+             * **Status Transitions:**
+             * - Changing from **pending** to **in_progress** automatically sets startedAt timestamp
+             * - Changing to **completed**, **failed**, or **cancelled** automatically sets completedAt timestamp
+             * - Changing to **blocked** automatically sets blockedAt timestamp
+             * - Changing from **blocked** to **in_progress** or **pending** clears blocked fields
+             * - Completed tasks get a 30-day TTL for automatic cleanup
+             *
+             * **Progress Updates:**
+             * - Update progress (0.0 to 1.0) to track completion percentage
+             * - Update progressMessage for human-readable status updates
+             * - Set result object when task completes successfully
+             * - Set error string when task fails
+             * - Set blockedReason and blockedByTaskIds when blocking a task
+      operationId: updateTask
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The task UUID
+        example: 550e8400-e29b-41d4-a716-446655440000
+        explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateTask_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateTask_200_response'
+          description: Task updated successfully
+        "400":
+          description: Invalid request
+        "404":
+          description: Task not found
+        "500":
+          description: Failed to update task
+      summary: Update a task
+      tags:
+      - AI Task Management
+  /api/v3/organizations/{organisation}/ai/tasks/{taskListId}/dependency-graph:
+    get:
+      description: |-
+        Returns the full dependency graph for all tasks in a task list.
+             *
+             * **Use Cases:**
+             * - Visualize task dependencies in a UI (DAG diagram)
+             * - Analyze workflow structure and critical paths
+             * - Find starting tasks (roots) and terminal tasks (leaves)
+             * - Plan parallel execution by identifying independent task groups
+             *
+             * **Response Structure:**
+             * - `taskCount`: Total number of tasks in the list
+             * - `roots`: Task IDs with no dependencies (starting points)
+             * - `leaves`: Task IDs with no dependents (terminal tasks)
+             * - `graph`: Adjacency list with each task's dependencies and dependents
+      operationId: getDependencyGraph
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The task list ID to get the dependency graph for
+        example: world-1
+        explode: false
+        in: path
+        name: taskListId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDependencyGraph_200_response'
+          description: Dependency graph retrieved successfully
+        "500":
+          description: Failed to get dependency graph
+      summary: Get dependency graph for a task list
+      tags:
+      - AI Task Management
   /api/v3/organizations/{organisation}/ai/usage:
     get:
       operationId: getAIUsageStats
@@ -4588,15 +5074,28 @@ paths:
       description: |-
         Sends requests to the AI API Gateway endpoint which buffers responses. Supports text, images, videos, and documents via base64 encoding.
              *
+             * **Execution Modes:**
+             * - **Sync Mode** (default): Standard JSON response, waits for completion (200 response)
+             * - **Async Mode**: Set `async: true` for long-running tasks with polling (202 response)
+             *
+             * **Async/Durable Mode (`async: true`):**
+             * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)
+             * - Uses AWS Lambda Durable Functions for long-running inference
+             * - Supports client-executed tools via `waiting_callback` state
+             * - Poll `/ai/chat/executions/{requestId}` for status
+             * - Submit client tool results via `/ai/chat/callback`
+             * - Ideal for complex prompts, large contexts, or client-side tools
+             *
              * **Multimodal Support:**
              * - **Text**: Simple string content
              * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)
              * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)
              * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)
              *
-             * **Supported Models:**
-             * - Amazon Nova Lite, Micro, Pro (all support multimodal)
-             * - Claude models (text only)
+             * **Supported Models (Multimodal):**
+             * - **Claude 4.5 Series**: Sonnet 4.5, Haiku 4.5, Opus 4.5 (images, up to 20 per request)
+             * - **Claude 3.5 Series**: Sonnet v1/v2 (images, up to 20 per request)
+             * - **Amazon Nova**: Lite, Pro, Micro (images, videos, documents)
              *
              * **Usage Tips:**
              * - Use base64 encoding for images/videos < 5-10MB
@@ -4644,7 +5143,13 @@ paths:
                   totalTokens: 20
               schema:
                 $ref: '#/components/schemas/chatInference_200_response'
-          description: Chat inference completed (buffered response)
+          description: "Chat inference completed (buffered response, sync mode)"
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chatInference_202_response'
+          description: "Async execution started (when `async: true` in request)"
         "500":
           description: Failed to perform chat inference
       summary: Chat inference via API Gateway (buffered responses) with multimodal
@@ -4656,15 +5161,27 @@ paths:
       description: |-
         Streams responses from the AI streaming subdomain using Server-Sent Events (SSE). Tokens are streamed in real-time as they are generated.
              *
+             * **Execution Modes:**
+             * - **Streaming Mode** (default): Real-time SSE token-by-token responses
+             * - **Async Mode**: Set `async: true` for long-running tasks with polling (202 response)
+             *
+             * **Async/Durable Mode (`async: true`):**
+             * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)
+             * - Uses AWS Lambda Durable Functions for long-running inference
+             * - Supports client-executed tools via `waiting_callback` state
+             * - Poll `/ai/chat/executions/{requestId}` for status
+             * - Submit client tool results via `/ai/chat/callback`
+             *
              * **Multimodal Support:**
              * - **Text**: Simple string content
              * - **Images**: Base64-encoded PNG, JPEG, GIF, WebP (up to 25MB)
              * - **Videos**: Base64-encoded MP4, MOV, WebM, etc. (up to 25MB)
              * - **Documents**: Base64-encoded PDF, DOCX, CSV, etc. (up to 25MB)
              *
-             * **Supported Models:**
-             * - Amazon Nova Lite, Micro, Pro (all support multimodal)
-             * - Claude models (text only)
+             * **Supported Models (Multimodal):**
+             * - **Claude 4.5 Series**: Sonnet 4.5, Haiku 4.5, Opus 4.5 (images, up to 20 per request)
+             * - **Claude 3.5 Series**: Sonnet v1/v2 (images, up to 20 per request)
+             * - **Amazon Nova**: Lite, Pro, Micro (images, videos, documents)
              *
              * **Usage Tips:**
              * - Use base64 encoding for images/videos < 5-10MB
@@ -4713,7 +5230,13 @@ paths:
                 description: "Server-Sent Events stream with chunks of generated text.\
                   \ Format: id, event, data lines separated by newlines."
                 type: string
-          description: Streaming response (text/event-stream)
+          description: "Streaming response (text/event-stream, sync mode)"
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chatInference_202_response'
+          description: "Async execution started (when `async: true` in request)"
         "500":
           description: Failed to perform streaming inference
       summary: Chat inference via streaming endpoint (true HTTP streaming) with multimodal
@@ -5013,6 +5536,191 @@ paths:
       summary: Get async tool execution status and result
       tags:
       - AI Tools
+  /api/v3/organizations/{organisation}/ai/chat/executions/{identifier}:
+    get:
+      description: |-
+        Poll the status of an async/durable chat execution.
+             *
+             * **When to use:** After starting chat inference with `async: true`, poll this endpoint
+             * to check execution status and retrieve results when complete.
+             *
+             * **Identifier:** Accepts either:
+             * - `requestId` (recommended): The short ID returned from the async request
+             * - `executionArn`: The full AWS Lambda durable execution ARN (must be URL-encoded)
+             *
+             * **Statuses:**
+             * - `pending`: Execution is starting (retry shortly)
+             * - `running`: Execution is in progress
+             * - `waiting_callback`: Execution paused, waiting for client tool results
+             * - `complete`: Execution finished successfully
+             * - `failed`: Execution failed with error
+             *
+             * **Client Tool Callback:**
+             * When status is `waiting_callback`, submit tool results via `POST /ai/chat/callback`.
+             *
+             * **Polling Recommendations:**
+             * - Start with 1 second delay, exponential backoff up to 30 seconds
+             * - Stop polling after 15 minutes (consider failed)
+      operationId: getDurableExecutionStatus
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Either the requestId from async response, or full executionArn\
+          \ (URL-encoded)"
+        example: XkdVWiEfSwMEPrw=
+        explode: false
+        in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDurableExecutionStatus_200_response'
+          description: Execution status retrieved
+        "404":
+          description: Execution not found
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to retrieve execution status
+      summary: Get Durable Execution Status
+      tags:
+      - AI Inference
+  /api/v3/organizations/{organisation}/ai/chat/callback:
+    post:
+      description: |-
+        Submit tool execution results to resume a suspended durable execution.
+             *
+             * **When to use:** When polling the execution status returns `waiting_callback`, use this endpoint
+             * to submit the results of client-executed tools. The execution will then resume.
+             *
+             * **Flow:**
+             * 1. Start async chat with client-executed tools (`autoExecute: []` or tools not in autoExecute list)
+             * 2. Poll status until `waiting_callback`
+             * 3. Execute tools locally using `pendingTools` from status response
+             * 4. Submit results here with the `callbackId`
+             * 5. Poll status until `complete`
+             *
+             * **Important:** Each `callbackId` can only be used once. After submission, poll the execution
+             * status to see the updated state.
+      operationId: submitToolCallback
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/submitToolCallback_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/submitToolCallback_200_response'
+          description: "Callback submitted successfully, execution will resume"
+        "400":
+          description: Invalid request (missing callbackId or toolResults)
+        "404":
+          description: Callback not found or already processed
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to submit callback
+      summary: Submit Client Tool Results (Callback)
+      tags:
+      - AI Inference
+  /api/v3/organizations/{organisation}/ai/tools/orchestrations/{orchestrationId}:
+    get:
+      description: |-
+        Retrieves the status and synthesized result of a multi-tool orchestration.
+             *
+             * **Orchestration Pattern:**
+             * When the AI requests multiple async tools simultaneously, an orchestration is created
+             * to track all tool executions and synthesize their results into a single coherent response.
+             *
+             * **Flow:**
+             * 1. AI requests multiple async tools (e.g., image generation + web search)
+             * 2. Chat API creates orchestration and returns orchestrationId
+             * 3. Tool Orchestrator Lambda polls all async tools
+             * 4. When all tools complete, Orchestrator synthesizes results using AI
+             * 5. Client polls this endpoint and receives final synthesized response
+             *
+             * **Status Values:**
+             * - pending: Orchestration created, tools not yet started
+             * - polling: Orchestrator is actively polling async tools
+             * - synthesizing: All tools complete, AI is synthesizing response
+             * - complete: Orchestration finished, synthesizedResponse available
+             * - failed: Orchestration failed, error available
+             *
+             * **Polling Recommendations:**
+             * - Poll every 2 seconds
+             * - Maximum poll time: 10 minutes
+             * - Orchestrator handles tool polling internally
+             *
+             * **Benefits over individual polling:**
+             * - Single poll endpoint for multiple async tools
+             * - AI synthesizes all results into coherent response
+             * - Answers the original user question, not just tool summaries
+      operationId: getAIOrchestrationStatus
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier for aggregated async tool executions
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          example: orch_abc123def456789012345678901234
+          pattern: "^orch_[a-f0-9]{32}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAIOrchestrationStatus_200_response'
+          description: Orchestration status retrieved successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAIOrchestrationStatus_404_response'
+          description: Orchestration not found (may have expired after 24h)
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to retrieve orchestration status
+      summary: Get Orchestration Status
+      tags:
+      - AI Tools
+      - Orchestration
   /api/v3/organizations/{organisation}/ai/tools/executions:
     get:
       description: |-
@@ -5302,13 +6010,27 @@ paths:
              * - **Multi-turn Conversations**: Full conversation history maintained server-side
              * - Agent's system prompt is prepended to conversation
              * - Only agent's allowed tools are available
-             * - All tools are auto-executed (no client confirmation)
+             * - All tools are auto-executed on cloud (no client confirmation needed)
              * - Temperature and model from agent config
+             * - Supports sync, streaming, and async modes
+             *
+             * **Execution Modes:**
+             * - **Sync Mode** (default): Standard JSON response, waits for completion
+             * - **Streaming Mode**: Set `stream: true` for SSE token-by-token responses
+             * - **Async Mode**: Set `async: true` for long-running tasks with polling
+             *
+             * **Async/Durable Mode (`async: true`):**
+             * - Returns immediately with `requestId` and `pollUrl` (HTTP 202)
+             * - Uses AWS Lambda Durable Functions for long-running agent tasks
+             * - All tools are auto-executed on cloud (no `waiting_callback` state)
+             * - Poll `/ai/chat/executions/{requestId}` for status
+             * - Ideal for agents with slow tools (image generation, web search, etc.)
              *
              * **Session Support:**
              * - Omit `sessionId` to create a new session automatically
              * - Include `sessionId` to continue an existing conversation
              * - Sessions expire after 60 minutes of inactivity
+             * - Sessions work in all modes (sync, streaming, async)
              * - Use `/sessions/{sessionId}` to retrieve full conversation history
       operationId: chatWithAIAgent
       parameters:
@@ -5341,7 +6063,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/chatWithAIAgent_200_response'
-          description: Agent response generated successfully
+          description: Agent response generated successfully (sync mode)
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/chatWithAIAgent_202_response'
+          description: "Async execution started (when `async: true` in request)"
         "400":
           description: Invalid request parameters
         "403":
@@ -5670,10 +6398,38 @@ paths:
       description: |-
         Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.
              *
+             * **Three Search Modes:**
+             *
+             * 1. **Text Query** - Provide `query` string, server generates embedding
+             *    - Query text is embedded using the collection's embedding model
+             *    - Embeddings are cached for repeated queries
+             *
+             * 2. **Vector Query** - Provide pre-computed `vector` array
+             *    - Skip embedding generation (faster)
+             *    - Useful when you've already embedded the query elsewhere
+             *    - Vector dimension must match collection (e.g., 1024 for Titan v2)
+             *
+             * 3. **Metadata List** - Set `listByMetadata: true` with `filter`
+             *    - Skip semantic search entirely
+             *    - Return all documents matching the filter
+             *    - Supports cursor-based pagination for large datasets
+             *    - Results ordered by sortBy/sortOrder (default: created_at DESC)
+             *
+             * **Filtering:**
+             * - `filter.exact`: Exact match on metadata fields (AND logic)
+             * - `filter.contains`: Array contains filter for tags (ANY match)
+             * - Filters can be combined with semantic search or used alone with listByMetadata
+             *
+             * **Pagination (listByMetadata mode only):**
+             * - Use `cursor` from previous response's `nextCursor` to get next page
+             * - Uses keyset pagination for efficient traversal of large datasets
+             * - Control sort with `sortBy` and `sortOrder`
+             *
              * **Use Cases:**
              * - Find relevant documentation for user questions
              * - Power RAG (Retrieval Augmented Generation) in AI assistants
              * - Semantic search across knowledge bases
+             * - List all artifacts by building/worker/tag
       operationId: queryVectorCollection
       parameters:
       - description: The organisation ID
@@ -5717,6 +6473,193 @@ paths:
       summary: Semantic Search Query
       tags:
       - AI Vector Database
+  /api/v3/organizations/{organisation}/ai/files:
+    get:
+      description: Lists files stored in S3 for this organization with optional metadata
+        filtering and pagination.
+      operationId: listFiles
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: JSON-encoded metadata filter. Supports exact match and array
+          contains filters.
+        explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          example: "{}"
+          type: string
+        style: form
+      - description: Maximum files to return
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          maximum: 200
+          type: integer
+        style: form
+      - description: Pagination cursor from previous response
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listFiles_200_response'
+          description: List of files
+        "400":
+          description: Invalid filter parameter
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to list files
+      summary: List Files
+      tags:
+      - AI File Storage
+    post:
+      description: |-
+        Uploads a file to S3 storage for later retrieval.
+             *
+             * **Two Upload Modes:**
+             *
+             * 1. **Direct Upload (≤7MB):** Send base64-encoded content in request body.
+             *
+             * 2. **Presigned URL Upload (any size):** Set `requestUploadUrl: true` to get a presigned S3 PUT URL, then upload directly to S3.
+             *
+             * **Supported Content Types:**
+             * - Images: image/png, image/jpeg, image/gif, image/webp, image/svg+xml
+             * - Documents: application/pdf, text/plain, text/markdown, text/html
+             * - Code: text/javascript, application/json, text/css, text/yaml
+             * - Archives: application/zip, application/gzip
+             * - Video: video/mp4, video/webm (use presigned URL for large files)
+             *
+             * **Metadata:**
+             * Attach any custom metadata for filtering. `artifactType` is auto-populated from contentType if not provided.
+      operationId: uploadFile
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/uploadFile_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uploadFile_201_response'
+          description: File uploaded or presigned URL generated
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "413":
+          description: File too large (use requestUploadUrl for large files)
+        "500":
+          description: Failed to upload file
+      summary: Upload File to S3
+      tags:
+      - AI File Storage
+  /api/v3/organizations/{organisation}/ai/files/{fileId}:
+    delete:
+      description: Deletes a file from S3 storage.
+      operationId: deleteFile
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The file ID
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteFile_200_response'
+          description: File deleted successfully
+        "403":
+          description: Access denied
+        "404":
+          description: File not found
+        "500":
+          description: Failed to delete file
+      summary: Delete File
+      tags:
+      - AI File Storage
+    get:
+      description: Retrieves file metadata and a presigned download URL (valid for
+        1 hour).
+      operationId: getFile
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The file ID
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getFile_200_response'
+          description: File metadata and download URL
+        "403":
+          description: Access denied
+        "404":
+          description: File not found
+        "500":
+          description: Failed to get file
+      summary: Get File
+      tags:
+      - AI File Storage
   /api/v3/organizations/{organisation}/applications:
     get:
       operationId: listApplications
@@ -5863,6 +6806,7 @@ paths:
       operationId: listCommands
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5871,6 +6815,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -5892,6 +6837,7 @@ paths:
       operationId: createCommand
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5900,6 +6846,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -5928,6 +6875,7 @@ paths:
       operationId: getCommand
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5936,6 +6884,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -5944,6 +6893,7 @@ paths:
           type: string
         style: simple
       - description: The command ID
+        example: test-cmd
         explode: false
         in: path
         name: command
@@ -5966,6 +6916,7 @@ paths:
       operationId: getEnvironmentCompose
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -5974,6 +6925,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -5982,6 +6934,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6012,6 +6965,7 @@ paths:
       operationId: patchEnvironmentCompose
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6020,6 +6974,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6028,6 +6983,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6075,6 +7031,7 @@ paths:
       operationId: validateCompose
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6127,6 +7084,7 @@ paths:
       operationId: listContainers
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6135,6 +7093,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6143,6 +7102,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6163,6 +7123,7 @@ paths:
       operationId: updateContainer
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6171,6 +7132,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6179,6 +7141,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6187,6 +7150,7 @@ paths:
           type: string
         style: simple
       - description: The container ID
+        example: test-container
         explode: false
         in: path
         name: container
@@ -6213,6 +7177,7 @@ paths:
       operationId: listCronJobs
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6221,6 +7186,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6229,6 +7195,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6252,6 +7219,7 @@ paths:
       operationId: createCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6260,6 +7228,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6268,6 +7237,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6304,6 +7274,7 @@ paths:
       operationId: deleteCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6312,6 +7283,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6320,6 +7292,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6345,6 +7318,7 @@ paths:
       operationId: getCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6353,6 +7327,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6361,6 +7336,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6392,6 +7368,7 @@ paths:
       operationId: updateCronJob
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6400,6 +7377,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6408,6 +7386,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6446,6 +7425,7 @@ paths:
       operationId: listCronJobRuns
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6454,6 +7434,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6462,6 +7443,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6470,6 +7452,7 @@ paths:
           type: string
         style: simple
       - description: The cron job ID
+        example: test-cron
         explode: false
         in: path
         name: cron
@@ -6494,6 +7477,7 @@ paths:
       operationId: getCronRun
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6502,6 +7486,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6510,6 +7495,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6518,6 +7504,7 @@ paths:
           type: string
         style: simple
       - description: The cron job ID
+        example: test-cron
         explode: false
         in: path
         name: cron
@@ -6548,6 +7535,7 @@ paths:
       operationId: listEnvironments
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6556,6 +7544,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6582,6 +7571,7 @@ paths:
       operationId: createEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6590,6 +7580,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6627,6 +7618,7 @@ paths:
       operationId: deleteEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6635,6 +7627,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6643,6 +7636,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6662,6 +7656,7 @@ paths:
       operationId: getEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6670,6 +7665,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6678,6 +7674,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6753,6 +7750,7 @@ paths:
       operationId: updateEnvironmentState
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6761,6 +7759,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6769,6 +7768,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6798,6 +7798,7 @@ paths:
       operationId: getEnvironmentLogs
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6806,6 +7807,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6814,6 +7816,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6893,6 +7896,7 @@ paths:
       operationId: getEnvironmentMetrics
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6901,6 +7905,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6909,6 +7914,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -6978,6 +7984,7 @@ paths:
       operationId: listSyncOperations
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -6986,6 +7993,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -6994,6 +8002,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7028,6 +8037,7 @@ paths:
       operationId: syncToEnvironment
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7036,6 +8046,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7044,6 +8055,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7086,6 +8098,7 @@ paths:
       operationId: listBackups
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7094,6 +8107,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7102,6 +8116,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7204,6 +8219,7 @@ paths:
       operationId: createBackup
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7212,6 +8228,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7220,6 +8237,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7259,6 +8277,7 @@ paths:
       operationId: deleteBackup
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7267,6 +8286,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7275,6 +8295,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7316,6 +8337,7 @@ paths:
       operationId: downloadBackup
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7324,6 +8346,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7332,6 +8355,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7373,6 +8397,7 @@ paths:
       operationId: getScalingPolicies
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7381,6 +8406,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7389,6 +8415,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7406,6 +8433,7 @@ paths:
       operationId: updateScalingPolicy
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7414,6 +8442,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7422,6 +8451,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7446,6 +8476,7 @@ paths:
       operationId: deleteScalingPolicy
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7454,6 +8485,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7462,6 +8494,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7487,7 +8520,8 @@ paths:
     get:
       operationId: getSshAccessCredentials
       parameters:
-      - description: The organisation machine name
+      - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7495,7 +8529,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The application name
+      - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7503,7 +8538,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The environment name
+      - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7532,6 +8568,7 @@ paths:
       operationId: listEnvironmentVariables
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: api_organisation
@@ -7540,6 +8577,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: api_application
@@ -7548,6 +8586,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: api_environment
@@ -7565,6 +8604,7 @@ paths:
       operationId: bulkSetEnvironmentVariables
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: api_organisation
@@ -7573,6 +8613,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: api_application
@@ -7581,6 +8622,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: api_environment
@@ -7648,6 +8690,7 @@ paths:
       operationId: updateEnvironmentVariable
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: api_organisation
@@ -7656,6 +8699,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: api_application
@@ -7664,6 +8708,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: api_environment
@@ -7698,6 +8743,7 @@ paths:
       operationId: listVolumes
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7706,6 +8752,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7714,6 +8761,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7737,6 +8785,7 @@ paths:
       operationId: createVolume
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7745,6 +8794,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7753,6 +8803,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7783,6 +8834,7 @@ paths:
       operationId: deleteVolume
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7791,6 +8843,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7799,6 +8852,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -7826,6 +8880,7 @@ paths:
       operationId: getVolume
       parameters:
       - description: The organisation ID
+        example: test-org
         explode: false
         in: path
         name: organisation
@@ -7834,6 +8889,7 @@ paths:
           type: string
         style: simple
       - description: The application ID
+        example: test-app
         explode: false
         in: path
         name: application
@@ -7842,6 +8898,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
+        example: test-env
         explode: false
         in: path
         name: environment
@@ -9752,13 +10809,13 @@ components:
       type: object
     V2Organization:
       example:
-        updated_at: 2024-10-10T14:20:00Z
         name: Test Organization
-        created_at: 2024-01-15T10:30:00Z
-        subscription: professional
         machine_name: test-org
         type: business
         region: au
+        subscription: professional
+        created_at: 2024-01-15T10:30:00Z
+        updated_at: 2024-10-10T14:20:00Z
       properties:
         name:
           description: Organization name
@@ -12973,7 +14030,9 @@ components:
     Crawlers_run_request:
       properties:
         urls:
-          description: URLs to crawl
+          description: "Optional URLs to crawl (overrides crawler's default URL configuration).\
+            \ If not provided, the crawler will use its configured URLs or perform\
+            \ a full crawl."
           example:
           - /
           - /about
@@ -13458,6 +14517,540 @@ components:
           example: Session extended by 60 minutes
           type: string
       type: object
+    listTasks_200_response_tasks_inner:
+      example:
+        createdAt: 1735689600000
+        assignedAgentId: agent-123
+        blockedByTaskIds:
+        - blockedByTaskIds
+        - blockedByTaskIds
+        blockedReason: blockedReason
+        description: "Extract text from PDF, analyze content"
+        progress: 0.5
+        taskListId: world-1
+        title: Process document and create summary
+        taskId: 550e8400-e29b-41d4-a716-446655440000
+        orgId: quant
+        status: in_progress
+        updatedAt: 1735689700000
+      properties:
+        taskId:
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        orgId:
+          example: quant
+          type: string
+        taskListId:
+          example: world-1
+          nullable: true
+          type: string
+        title:
+          example: Process document and create summary
+          type: string
+        description:
+          example: "Extract text from PDF, analyze content"
+          type: string
+        status:
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          - cancelled
+          - blocked
+          example: in_progress
+          type: string
+        assignedAgentId:
+          example: agent-123
+          nullable: true
+          type: string
+        progress:
+          example: 0.5
+          maximum: 1
+          minimum: 0
+          type: number
+        blockedReason:
+          nullable: true
+          type: string
+        blockedByTaskIds:
+          items:
+            type: string
+          nullable: true
+          type: array
+        createdAt:
+          example: 1735689600000
+          type: integer
+        updatedAt:
+          example: 1735689700000
+          type: integer
+      type: object
+    listTasks_200_response:
+      example:
+        dependsOn: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        count: 2
+        taskIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tasks:
+        - createdAt: 1735689600000
+          assignedAgentId: agent-123
+          blockedByTaskIds:
+          - blockedByTaskIds
+          - blockedByTaskIds
+          blockedReason: blockedReason
+          description: "Extract text from PDF, analyze content"
+          progress: 0.5
+          taskListId: world-1
+          title: Process document and create summary
+          taskId: 550e8400-e29b-41d4-a716-446655440000
+          orgId: quant
+          status: in_progress
+          updatedAt: 1735689700000
+        - createdAt: 1735689600000
+          assignedAgentId: agent-123
+          blockedByTaskIds:
+          - blockedByTaskIds
+          - blockedByTaskIds
+          blockedReason: blockedReason
+          description: "Extract text from PDF, analyze content"
+          progress: 0.5
+          taskListId: world-1
+          title: Process document and create summary
+          taskId: 550e8400-e29b-41d4-a716-446655440000
+          orgId: quant
+          status: in_progress
+          updatedAt: 1735689700000
+      properties:
+        tasks:
+          items:
+            $ref: '#/components/schemas/listTasks_200_response_tasks_inner'
+          type: array
+        taskIds:
+          description: Task IDs (only with dependsOn filter)
+          items:
+            format: uuid
+            type: string
+          type: array
+        count:
+          example: 2
+          type: integer
+        dependsOn:
+          description: The queried task ID (only with dependsOn filter)
+          format: uuid
+          type: string
+      type: object
+    createTask_request:
+      properties:
+        title:
+          description: Task title
+          example: Process document and create summary
+          type: string
+        description:
+          description: Detailed task description
+          example: "Extract text from PDF, analyze content, and generate executive\
+            \ summary"
+          type: string
+        taskListId:
+          description: Task list ID for grouping related tasks (implicit - lists are
+            created automatically)
+          example: world-1
+          type: string
+        status:
+          default: pending
+          description: Initial task status
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          - cancelled
+          - blocked
+          type: string
+        assignedAgentId:
+          description: Pre-assign task to specific agent
+          example: agent-code-reviewer
+          type: string
+        createdByAgentId:
+          description: Agent ID that created this task
+          example: agent-coordinator
+          type: string
+        dependsOn:
+          description: Task IDs that must complete before this task can start
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          items:
+            format: uuid
+            type: string
+          type: array
+        metadata:
+          description: Flexible JSON metadata for task-specific data
+          example:
+            priority: high
+            tags:
+            - document-processing
+            workflow: document-pipeline
+          type: object
+        maxRetries:
+          default: 3
+          description: Maximum retry attempts on failure
+          maximum: 10
+          minimum: 0
+          type: integer
+        blockedReason:
+          description: Reason task is blocked (when status is blocked)
+          example: Waiting for approval
+          type: string
+        blockedByTaskIds:
+          description: Task IDs that are blocking this task
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - title
+      type: object
+    createTask_201_response:
+      example:
+        createdAt: 0
+        title: title
+        taskId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        orgId: orgId
+        status: status
+      properties:
+        taskId:
+          format: uuid
+          type: string
+        orgId:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: integer
+      type: object
+    getTask_200_response:
+      example:
+        metadata:
+          priority: high
+        completedAt: 6
+        blockedByTaskIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dependsOn:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        blockedReason: blockedReason
+        retryCount: 0
+        description: "Extract text from PDF, analyze content"
+        startedAt: 0
+        title: Process document and create summary
+        error: error
+        orgId: quant
+        expiresAt: 1
+        result: "{}"
+        createdAt: 1735689600000
+        assignedAgentId: agent-123
+        maxRetries: 3
+        blockedAt: 5
+        progress: 0.5
+        createdByAgentId: agent-coordinator
+        taskListId: world-1
+        taskId: 550e8400-e29b-41d4-a716-446655440000
+        status: in_progress
+        progressMessage: "Extracted text, analyzing content..."
+        updatedAt: 1735689700000
+      properties:
+        taskId:
+          example: 550e8400-e29b-41d4-a716-446655440000
+          format: uuid
+          type: string
+        orgId:
+          example: quant
+          type: string
+        taskListId:
+          example: world-1
+          nullable: true
+          type: string
+        title:
+          example: Process document and create summary
+          type: string
+        description:
+          example: "Extract text from PDF, analyze content"
+          type: string
+        status:
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          - cancelled
+          - blocked
+          example: in_progress
+          type: string
+        assignedAgentId:
+          example: agent-123
+          nullable: true
+          type: string
+        createdByAgentId:
+          example: agent-coordinator
+          nullable: true
+          type: string
+        dependsOn:
+          items:
+            format: uuid
+            type: string
+          type: array
+        metadata:
+          example:
+            priority: high
+          type: object
+        progress:
+          example: 0.5
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        progressMessage:
+          example: "Extracted text, analyzing content..."
+          type: string
+        result:
+          description: Task result data when completed
+          nullable: true
+          type: object
+        error:
+          description: Error message if status is failed
+          nullable: true
+          type: string
+        retryCount:
+          example: 0
+          type: integer
+        maxRetries:
+          example: 3
+          type: integer
+        createdAt:
+          description: Unix timestamp in milliseconds
+          example: 1735689600000
+          format: int64
+          type: integer
+        updatedAt:
+          description: Unix timestamp in milliseconds
+          example: 1735689700000
+          format: int64
+          type: integer
+        startedAt:
+          description: When status changed to in_progress
+          format: int64
+          nullable: true
+          type: integer
+        completedAt:
+          description: When task completed/failed/cancelled
+          format: int64
+          nullable: true
+          type: integer
+        expiresAt:
+          description: TTL timestamp for completed tasks
+          format: int64
+          nullable: true
+          type: integer
+        blockedReason:
+          description: Reason task is blocked
+          nullable: true
+          type: string
+        blockedByTaskIds:
+          description: Task IDs that are blocking this task
+          items:
+            format: uuid
+            type: string
+          nullable: true
+          type: array
+        blockedAt:
+          description: When status changed to blocked
+          format: int64
+          nullable: true
+          type: integer
+      type: object
+    updateTask_request:
+      properties:
+        title:
+          example: Updated task title
+          type: string
+        description:
+          example: Updated description with more details
+          type: string
+        taskListId:
+          description: Move task to different list or remove from list (set null)
+          example: world-2
+          nullable: true
+          type: string
+        status:
+          description: Task status (triggers automatic timestamp updates)
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          - cancelled
+          - blocked
+          example: in_progress
+          type: string
+        assignedAgentId:
+          description: Reassign task to different agent
+          example: agent-specialist
+          nullable: true
+          type: string
+        dependsOn:
+          description: Update task dependencies
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          items:
+            format: uuid
+            type: string
+          type: array
+        metadata:
+          description: Update task metadata (replaces entire metadata object)
+          example:
+            priority: urgent
+          type: object
+        progress:
+          description: Progress from 0.0 to 1.0
+          example: 0.75
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        progressMessage:
+          description: Human-readable progress message
+          example: Processing document 3 of 4...
+          type: string
+        result:
+          description: Task result data (set when completing task)
+          example:
+            summary: Document processed successfully
+            wordCount: 1500
+          type: object
+        error:
+          description: Error message (set when task fails)
+          example: Failed to connect to external API
+          nullable: true
+          type: string
+        retryCount:
+          description: Update retry count
+          example: 1
+          minimum: 0
+          type: integer
+        maxRetries:
+          description: Update maximum retry attempts
+          example: 5
+          maximum: 10
+          minimum: 0
+          type: integer
+        blockedReason:
+          description: Reason task is blocked (set when status is blocked)
+          example: Waiting for external approval
+          nullable: true
+          type: string
+        blockedByTaskIds:
+          description: Task IDs that are blocking this task
+          items:
+            format: uuid
+            type: string
+          nullable: true
+          type: array
+      type: object
+    updateTask_200_response:
+      example:
+        taskId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status: status
+        updatedAt: 0
+      properties:
+        taskId:
+          format: uuid
+          type: string
+        status:
+          type: string
+        updatedAt:
+          type: integer
+      type: object
+    deleteTask_200_response:
+      example:
+        deleted: true
+        deletedCount: 1
+        deletedTaskIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        deleted:
+          example: true
+          type: boolean
+        deletedCount:
+          description: Number of tasks deleted (more than 1 for cascade)
+          example: 1
+          type: integer
+        deletedTaskIds:
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+    deleteTask_409_response:
+      example:
+        dependentTaskIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: TASK_HAS_DEPENDENTS
+        message: Cannot delete task with 3 dependent task(s). Use cascade=true to
+          delete all.
+      properties:
+        error:
+          example: TASK_HAS_DEPENDENTS
+          type: string
+        message:
+          example: Cannot delete task with 3 dependent task(s). Use cascade=true to
+            delete all.
+          type: string
+        dependentTaskIds:
+          items:
+            format: uuid
+            type: string
+          type: array
+      type: object
+    getDependencyGraph_200_response:
+      example:
+        taskCount: 4
+        leaves:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskListId: world-1
+        roots:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        graph: "{}"
+      properties:
+        taskListId:
+          example: world-1
+          type: string
+        taskCount:
+          example: 4
+          type: integer
+        roots:
+          description: Task IDs with no dependencies
+          items:
+            format: uuid
+            type: string
+          type: array
+        leaves:
+          description: Task IDs with no dependents
+          items:
+            format: uuid
+            type: string
+          type: array
+        graph:
+          description: "Adjacency list with task summaries, dependsOn, and dependents\
+            \ arrays"
+          type: object
+      type: object
     getAIUsageStats_200_response_by_model_value:
       properties:
         requests:
@@ -13705,8 +15298,9 @@ components:
           minimum: 0
           type: number
         maxTokens:
-          default: 1024
-          maximum: 8192
+          default: 4096
+          description: Max tokens. Claude 4.5 supports up to 64k.
+          maximum: 65536
           minimum: 1
           type: integer
         topP:
@@ -13730,6 +15324,17 @@ components:
           $ref: '#/components/schemas/chatInference_request_responseFormat'
         toolConfig:
           $ref: '#/components/schemas/chatInference_request_toolConfig'
+        sessionId:
+          description: "Optional session ID for conversation continuity. Omit to use\
+            \ stateless mode, include to continue an existing session."
+          format: uuid
+          type: string
+        async:
+          default: false
+          description: "Enable async/durable execution mode. When true, returns 202\
+            \ with pollUrl instead of waiting for completion. Use for long-running\
+            \ inference, client-executed tools, or operations >30 seconds."
+          type: boolean
       required:
       - messages
       - modelId
@@ -13923,6 +15528,41 @@ components:
         usage:
           $ref: '#/components/schemas/chatInference_200_response_usage'
       type: object
+    chatInference_202_response:
+      example:
+        requestId: XkdVWiEfSwMEPrw=
+        pollUrl: /ai/chat/executions/XkdVWiEfSwMEPrw%3D
+        sessionId: session-1769056496430
+        message: Execution started. Poll the status endpoint for updates.
+        status: queued
+      properties:
+        requestId:
+          description: Unique request identifier for polling
+          example: XkdVWiEfSwMEPrw=
+          type: string
+        sessionId:
+          description: Session ID for conversation continuity
+          example: session-1769056496430
+          type: string
+        status:
+          description: Initial execution status
+          enum:
+          - queued
+          example: queued
+          type: string
+        message:
+          description: Human-readable status message
+          example: Execution started. Poll the status endpoint for updates.
+          type: string
+        pollUrl:
+          description: URL to poll for execution status
+          example: /ai/chat/executions/XkdVWiEfSwMEPrw%3D
+          type: string
+      required:
+      - pollUrl
+      - requestId
+      - status
+      type: object
     chatInferenceStream_request_messages_inner_content:
       example: What is the capital of Australia?
       oneOf:
@@ -13966,8 +15606,9 @@ components:
           minimum: 0
           type: number
         maxTokens:
-          default: 1024
-          maximum: 8192
+          default: 4096
+          description: Max tokens. Claude 4.5 supports up to 64k.
+          maximum: 65536
           minimum: 1
           type: integer
         topP:
@@ -13988,6 +15629,17 @@ components:
           $ref: '#/components/schemas/chatInference_request_responseFormat'
         toolConfig:
           $ref: '#/components/schemas/chatInference_request_toolConfig'
+        sessionId:
+          description: "Optional session ID for conversation continuity. Omit to use\
+            \ stateless mode, include to continue an existing session."
+          format: uuid
+          type: string
+        async:
+          default: false
+          description: "Enable async/durable execution mode. When true, returns 202\
+            \ with pollUrl instead of streaming. Use for long-running inference, client-executed\
+            \ tools, or operations >30 seconds."
+          type: boolean
       required:
       - messages
       - modelId
@@ -14585,6 +16237,307 @@ components:
           example: exec_abc123def456
           type: string
       type: object
+    getDurableExecutionStatus_200_response_pendingTools_inner:
+      example:
+        input:
+          location: Sydney
+        name: get_weather
+        toolUseId: toolu_bdrk_012KTC8NCG...
+      properties:
+        name:
+          example: get_weather
+          type: string
+        toolUseId:
+          example: toolu_bdrk_012KTC8NCG...
+          type: string
+        input:
+          example:
+            location: Sydney
+          type: object
+      type: object
+    getDurableExecutionStatus_200_response_result_response:
+      example:
+        role: assistant
+        content: The weather in Sydney is sunny.
+      properties:
+        role:
+          example: assistant
+          type: string
+        content:
+          example: The weather in Sydney is sunny.
+          type: string
+      type: object
+    getDurableExecutionStatus_200_response_result_usage:
+      example:
+        inputTokens: 0
+        outputTokens: 6
+        totalTokens: 1
+      properties:
+        inputTokens:
+          type: integer
+        outputTokens:
+          type: integer
+        totalTokens:
+          type: integer
+      type: object
+    getDurableExecutionStatus_200_response_result:
+      description: Present when status is complete
+      example:
+        response:
+          role: assistant
+          content: The weather in Sydney is sunny.
+        usage:
+          inputTokens: 0
+          outputTokens: 6
+          totalTokens: 1
+        toolExecutions:
+        - "{}"
+        - "{}"
+      properties:
+        response:
+          $ref: '#/components/schemas/getDurableExecutionStatus_200_response_result_response'
+        usage:
+          $ref: '#/components/schemas/getDurableExecutionStatus_200_response_result_usage'
+        toolExecutions:
+          items:
+            type: object
+          type: array
+      type: object
+    getDurableExecutionStatus_200_response_error:
+      description: Present when status is failed
+      example:
+        ErrorType: ErrorType
+        ErrorMessage: ErrorMessage
+      properties:
+        ErrorMessage:
+          type: string
+        ErrorType:
+          type: string
+      type: object
+    getDurableExecutionStatus_200_response:
+      example:
+        result:
+          response:
+            role: assistant
+            content: The weather in Sydney is sunny.
+          usage:
+            inputTokens: 0
+            outputTokens: 6
+            totalTokens: 1
+          toolExecutions:
+          - "{}"
+          - "{}"
+        callbackId: Ab9hZXi/YXJuOmF3czpsYW1iZGE...
+        requestId: XkdVWiEfSwMEPrw=
+        executionArn: arn:aws:lambda:ap-southeast-2:...
+        awsStatus: SUCCEEDED
+        pendingTools:
+        - input:
+            location: Sydney
+          name: get_weather
+          toolUseId: toolu_bdrk_012KTC8NCG...
+        - input:
+            location: Sydney
+          name: get_weather
+          toolUseId: toolu_bdrk_012KTC8NCG...
+        error:
+          ErrorType: ErrorType
+          ErrorMessage: ErrorMessage
+        status: complete
+      properties:
+        requestId:
+          example: XkdVWiEfSwMEPrw=
+          type: string
+        executionArn:
+          example: arn:aws:lambda:ap-southeast-2:...
+          type: string
+        status:
+          enum:
+          - pending
+          - running
+          - waiting_callback
+          - complete
+          - failed
+          example: complete
+          type: string
+        awsStatus:
+          description: Raw AWS Step Functions status
+          example: SUCCEEDED
+          type: string
+        callbackId:
+          description: Present when status is waiting_callback - use with /chat/callback
+          example: Ab9hZXi/YXJuOmF3czpsYW1iZGE...
+          type: string
+        pendingTools:
+          description: Present when status is waiting_callback - tools waiting for
+            results
+          items:
+            $ref: '#/components/schemas/getDurableExecutionStatus_200_response_pendingTools_inner'
+          type: array
+        result:
+          $ref: '#/components/schemas/getDurableExecutionStatus_200_response_result'
+        error:
+          $ref: '#/components/schemas/getDurableExecutionStatus_200_response_error'
+      type: object
+    submitToolCallback_request_toolResults_inner:
+      properties:
+        toolUseId:
+          description: The toolUseId from pendingTools
+          example: toolu_bdrk_012KTC8NCG...
+          type: string
+        result:
+          description: The result of executing the tool
+          example:
+            temperature: 24C
+            conditions: Sunny
+          type: object
+      required:
+      - result
+      - toolUseId
+      type: object
+    submitToolCallback_request:
+      properties:
+        callbackId:
+          description: The callbackId from the waiting_callback status response
+          example: Ab9hZXi/YXJuOmF3czpsYW1iZGE...
+          type: string
+        toolResults:
+          description: Results of client-executed tools
+          items:
+            $ref: '#/components/schemas/submitToolCallback_request_toolResults_inner'
+          type: array
+      required:
+      - callbackId
+      - toolResults
+      type: object
+    submitToolCallback_200_response:
+      example:
+        callbackId: callbackId
+        success: true
+        message: Callback submitted successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          example: Callback submitted successfully
+          type: string
+        callbackId:
+          description: Echo of the callbackId for confirmation
+          type: string
+      type: object
+    getAIOrchestrationStatus_200_response_tools_inner:
+      example:
+        result: "{}"
+        executionId: exec_abc123def456
+        error: error
+        toolName: generate_image
+        status: complete
+      properties:
+        executionId:
+          example: exec_abc123def456
+          type: string
+        toolName:
+          example: generate_image
+          type: string
+        status:
+          enum:
+          - pending
+          - running
+          - complete
+          - failed
+          example: complete
+          type: string
+        result:
+          description: Tool result (if complete)
+          type: object
+        error:
+          description: Error message (if failed)
+          type: string
+      type: object
+    getAIOrchestrationStatus_200_response:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        completedAt: 2000-01-23T04:56:07.000+00:00
+        orchestrationId: orch_abc123def456789012345678901234
+        completedTools: 2
+        synthesizedResponse: Based on the image I generated and the web research...
+        error: error
+        tools:
+        - result: "{}"
+          executionId: exec_abc123def456
+          error: error
+          toolName: generate_image
+          status: complete
+        - result: "{}"
+          executionId: exec_abc123def456
+          error: error
+          toolName: generate_image
+          status: complete
+        status: complete
+        toolCount: 2
+      properties:
+        orchestrationId:
+          description: Unique orchestration identifier
+          example: orch_abc123def456789012345678901234
+          type: string
+        status:
+          description: Current orchestration status
+          enum:
+          - pending
+          - polling
+          - synthesizing
+          - complete
+          - failed
+          example: complete
+          type: string
+        toolCount:
+          description: Total number of async tools in this orchestration
+          example: 2
+          type: integer
+        completedTools:
+          description: Number of tools that have completed
+          example: 2
+          type: integer
+        synthesizedResponse:
+          description: AI-synthesized response combining all tool results (only present
+            when status=complete)
+          example: Based on the image I generated and the web research...
+          type: string
+        tools:
+          description: Status of individual tool executions
+          items:
+            $ref: '#/components/schemas/getAIOrchestrationStatus_200_response_tools_inner'
+          type: array
+        error:
+          description: Error message (only present when status=failed)
+          type: string
+        createdAt:
+          description: When orchestration was created
+          format: date-time
+          type: string
+        completedAt:
+          description: When orchestration completed (if status in complete or failed)
+          format: date-time
+          type: string
+      required:
+      - createdAt
+      - orchestrationId
+      - status
+      - toolCount
+      type: object
+    getAIOrchestrationStatus_404_response:
+      example:
+        orchestrationId: orch_abc123def456789012345678901234
+        error: Orchestration not found
+      properties:
+        error:
+          example: Orchestration not found
+          type: string
+        orchestrationId:
+          example: orch_abc123def456789012345678901234
+          type: string
+      type: object
     listAIToolExecutions_200_response_executions_inner:
       example:
         executionId: exec_abc123def456
@@ -14932,6 +16885,15 @@ components:
           default: false
           description: Whether to stream the response (SSE)
           type: boolean
+        async:
+          default: false
+          description: "Enable async/durable execution mode. When true, returns 202\
+            \ with pollUrl. Use for long-running agent tasks."
+          type: boolean
+        system:
+          description: Optional additional system prompt (appended to agent's configured
+            prompt)
+          type: string
       required:
       - message
       type: object
@@ -14985,6 +16947,50 @@ components:
           type: string
         response:
           $ref: '#/components/schemas/chatWithAIAgent_200_response_response'
+      type: object
+    chatWithAIAgent_202_response:
+      example:
+        agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        requestId: 90fe0c53-a41b-4b28-b19e-5e900b3df959
+        pollUrl: /ai/chat/executions/90fe0c53-a41b-4b28-b19e-5e900b3df959
+        agentName: Weather Assistant
+        sessionId: sessionId
+        message: Agent execution started. Poll the status endpoint for updates.
+        status: queued
+      properties:
+        requestId:
+          description: Unique request identifier for polling
+          example: 90fe0c53-a41b-4b28-b19e-5e900b3df959
+          type: string
+        agentId:
+          description: The agent processing the request
+          format: uuid
+          type: string
+        agentName:
+          description: Human-readable agent name
+          example: Weather Assistant
+          type: string
+        sessionId:
+          description: Session ID (if provided)
+          type: string
+        status:
+          description: Initial status
+          enum:
+          - queued
+          example: queued
+          type: string
+        message:
+          example: Agent execution started. Poll the status endpoint for updates.
+          type: string
+        pollUrl:
+          description: URL to poll for execution status
+          example: /ai/chat/executions/90fe0c53-a41b-4b28-b19e-5e900b3df959
+          type: string
+      required:
+      - agentId
+      - pollUrl
+      - requestId
+      - status
       type: object
     listCustomTools_200_response_tools_inner:
       example:
@@ -15318,80 +17324,398 @@ components:
         message:
           type: string
       type: object
+    queryVectorCollection_request_filter:
+      description: Filter results by metadata fields. Applied AFTER semantic search
+        (or alone in listByMetadata mode). All conditions use AND logic.
+      properties:
+        exact:
+          additionalProperties: true
+          description: "Exact match on metadata fields. Keys are metadata field names,\
+            \ values are expected values."
+          example:
+            buildingId: building-123
+            type: research-report
+          type: object
+        contains:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: Array contains filter for array metadata fields (like tags).
+            Returns documents where the metadata array contains ANY of the specified
+            values.
+          example:
+            tags:
+            - important
+            - reviewed
+          type: object
+      type: object
     queryVectorCollection_request:
       properties:
         query:
-          description: Natural language search query
+          description: Natural language search query (mutually exclusive with vector)
           example: How do I authenticate with the API?
+          maxLength: 1000
+          minLength: 3
           type: string
-        count:
+        vector:
+          description: Pre-computed embedding vector (mutually exclusive with query).
+            Array length must match collection dimension.
+          example:
+          - 0.0234
+          - -0.0891
+          - 0.0456
+          items:
+            format: float
+            type: number
+          type: array
+        limit:
           default: 5
-          description: Number of results to return
+          description: Maximum number of results to return
           maximum: 20
           minimum: 1
           type: integer
-      required:
-      - query
-      type: object
-    queryVectorCollection_200_response_results_inner_metadata:
-      example:
-        section: section
-        title: title
-        source_url: source_url
-      properties:
-        title:
+        threshold:
+          default: 0.7
+          description: "Minimum similarity score (0-1, higher = more relevant)"
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+        includeEmbeddings:
+          default: false
+          description: Include embedding vectors in response (for debugging)
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/queryVectorCollection_request_filter'
+        listByMetadata:
+          default: false
+          description: "If true, skip semantic search and return all documents matching\
+            \ the filter. Requires filter. Supports cursor pagination."
+          type: boolean
+        cursor:
+          description: Pagination cursor for listByMetadata mode. Use nextCursor from
+            previous response. Opaque format - do not construct manually.
           type: string
-        source_url:
+        sortBy:
+          default: created_at
+          description: Field to sort by in listByMetadata mode
+          enum:
+          - created_at
+          - document_id
           type: string
-        section:
+        sortOrder:
+          default: desc
+          description: Sort direction in listByMetadata mode
+          enum:
+          - asc
+          - desc
           type: string
       type: object
     queryVectorCollection_200_response_results_inner:
       example:
-        score: 0.8008282
         metadata:
-          section: section
-          title: title
-          source_url: source_url
+          key: ""
+        similarity: 0.08008282
+        documentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        embedding:
+        - 6.027456183070403
+        - 6.027456183070403
         content: content
       properties:
-        content:
+        documentId:
+          format: uuid
           type: string
-        score:
+        content:
+          description: Document text content
+          type: string
+        similarity:
+          description: Cosine similarity score (1.0 for metadata-only queries)
           format: float
+          maximum: 1
+          minimum: 0
           type: number
         metadata:
-          $ref: '#/components/schemas/queryVectorCollection_200_response_results_inner_metadata'
+          additionalProperties: true
+          type: object
+        embedding:
+          description: Vector embedding (only if includeEmbeddings=true)
+          items:
+            type: number
+          type: array
+      type: object
+    queryVectorCollection_200_response_pagination:
+      description: Pagination info (listByMetadata mode only)
+      example:
+        sortOrder: asc
+        limit: 5
+        sortBy: created_at
+      nullable: true
+      properties:
+        sortBy:
+          enum:
+          - created_at
+          - document_id
+          type: string
+        sortOrder:
+          enum:
+          - asc
+          - desc
+          type: string
+        limit:
+          type: integer
       type: object
     queryVectorCollection_200_response:
       example:
+        filter: "{}"
+        nextCursor: nextCursor
+        pagination:
+          sortOrder: asc
+          limit: 5
+          sortBy: created_at
         query: query
-        executionTimeMs: 1
-        count: 6
+        executionTimeMs: 5
+        searchMode: text
+        count: 1
+        hasMore: true
         results:
-        - score: 0.8008282
-          metadata:
-            section: section
-            title: title
-            source_url: source_url
+        - metadata:
+            key: ""
+          similarity: 0.08008282
+          documentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          embedding:
+          - 6.027456183070403
+          - 6.027456183070403
           content: content
-        - score: 0.8008282
-          metadata:
-            section: section
-            title: title
-            source_url: source_url
+        - metadata:
+            key: ""
+          similarity: 0.08008282
+          documentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          embedding:
+          - 6.027456183070403
+          - 6.027456183070403
           content: content
+        collectionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         results:
           items:
             $ref: '#/components/schemas/queryVectorCollection_200_response_results_inner'
           type: array
         query:
+          description: Original query text (null if vector or metadata search was
+            used)
+          nullable: true
           type: string
+        searchMode:
+          description: "Search mode used: text (query provided), vector (pre-computed),\
+            \ metadata (listByMetadata)"
+          enum:
+          - text
+          - vector
+          - metadata
+          type: string
+        filter:
+          description: Filter that was applied (if any)
+          nullable: true
+          type: object
         count:
+          description: Number of results returned
           type: integer
         executionTimeMs:
+          description: Query execution time in milliseconds
           type: integer
+        collectionId:
+          format: uuid
+          type: string
+        hasMore:
+          description: True if more results available (listByMetadata mode only)
+          type: boolean
+        nextCursor:
+          description: Cursor for next page. Pass as cursor param to continue. Null
+            when no more results. Only in listByMetadata mode.
+          nullable: true
+          type: string
+        pagination:
+          $ref: '#/components/schemas/queryVectorCollection_200_response_pagination'
+      type: object
+    listFiles_200_response_files_inner:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        metadata: "{}"
+        filename: filename
+        size: 0
+        contentType: contentType
+        fileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        fileId:
+          format: uuid
+          type: string
+        filename:
+          type: string
+        contentType:
+          type: string
+        size:
+          type: integer
+        metadata:
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    listFiles_200_response:
+      example:
+        nextCursor: nextCursor
+        hasMore: true
+        files:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata: "{}"
+          filename: filename
+          size: 0
+          contentType: contentType
+          fileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata: "{}"
+          filename: filename
+          size: 0
+          contentType: contentType
+          fileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        files:
+          items:
+            $ref: '#/components/schemas/listFiles_200_response_files_inner'
+          type: array
+        nextCursor:
+          description: Cursor for next page
+          nullable: true
+          type: string
+        hasMore:
+          description: True if more results available
+          type: boolean
+      type: object
+    uploadFile_request:
+      properties:
+        content:
+          description: Base64-encoded file content (for direct upload). Required unless
+            using requestUploadUrl.
+          type: string
+        requestUploadUrl:
+          default: false
+          description: Set to true to get a presigned S3 upload URL instead of uploading
+            directly.
+          type: boolean
+        size:
+          description: File size in bytes. Optional but recommended for presigned
+            uploads.
+          type: integer
+        filename:
+          description: Original filename
+          example: diagram.png
+          type: string
+        contentType:
+          description: MIME type of the file
+          example: image/png
+          type: string
+        metadata:
+          additionalProperties: true
+          description: Custom metadata for filtering. Any fields allowed.
+          example:
+            collectionId: col-123
+            tags:
+            - architecture
+            - generated
+          type: object
+      required:
+      - contentType
+      type: object
+    uploadFile_201_response:
+      example:
+        expiresIn: 0
+        s3Uri: s3Uri
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        metadata: "{}"
+        s3Key: s3Key
+        filename: filename
+        uploadUrl: https://openapi-generator.tech
+        size: 6
+        contentType: contentType
+        url: https://openapi-generator.tech
+        fileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        fileId:
+          format: uuid
+          type: string
+        s3Uri:
+          description: S3 URI (direct upload only)
+          type: string
+        url:
+          description: Presigned download URL (direct upload only)
+          format: uri
+          type: string
+        uploadUrl:
+          description: Presigned PUT URL (presigned upload only)
+          format: uri
+          type: string
+        s3Key:
+          description: S3 object key (presigned upload only)
+          type: string
+        expiresIn:
+          description: URL expiry in seconds (presigned upload only)
+          type: integer
+        filename:
+          type: string
+        contentType:
+          type: string
+        size:
+          type: integer
+        metadata:
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    getFile_200_response:
+      example:
+        s3Uri: s3Uri
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        metadata: "{}"
+        filename: filename
+        size: 0
+        contentType: contentType
+        url: https://openapi-generator.tech
+        fileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        fileId:
+          format: uuid
+          type: string
+        s3Uri:
+          type: string
+        url:
+          description: Presigned download URL (1 hour)
+          format: uri
+          type: string
+        filename:
+          type: string
+        contentType:
+          type: string
+        size:
+          type: integer
+        metadata:
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    deleteFile_200_response:
+      example:
+        message: File deleted
+        fileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        message:
+          example: File deleted
+          type: string
+        fileId:
+          format: uuid
+          type: string
       type: object
     createApplication_403_response:
       example:

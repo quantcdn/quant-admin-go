@@ -14,13 +14,28 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go/v4"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_quantadmingo_AIToolsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
+
+	t.Run("Test AIToolsAPIService GetAIOrchestrationStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var orchestrationId string
+
+		resp, httpRes, err := apiClient.AIToolsAPI.GetAIOrchestrationStatus(context.Background(), organisation, orchestrationId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
 
 	t.Run("Test AIToolsAPIService GetAIToolExecutionStatus", func(t *testing.T) {
 
