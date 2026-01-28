@@ -35,8 +35,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 	v2StoreRequest := *openapiclient.NewV2StoreRequest("session-data") // V2StoreRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -57,8 +57,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 
@@ -108,9 +108,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -128,8 +128,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 
 ### Other Parameters
@@ -180,9 +180,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 	v2StoreItemRequest := *openapiclient.NewV2StoreItemRequest("user-session-123", "Value_example") // V2StoreItemRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -203,8 +203,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 
 ### Other Parameters
@@ -256,9 +256,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 	key := "key_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -279,8 +279,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 **key** | **string** |  | 
 
@@ -333,9 +333,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 	cursor := "cursor_example" // string | Cursor for pagination (optional)
 	limit := int32(56) // int32 | Number of items to return (optional) (default to 10)
 	search := "search_example" // string | Search filter for keys (optional)
@@ -359,8 +359,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 
 ### Other Parameters
@@ -417,9 +417,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 	key := "key_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -440,8 +440,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 **key** | **string** |  | 
 
@@ -494,9 +494,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 	key := "key_example" // string | 
 	v2StoreItemUpdateRequest := *openapiclient.NewV2StoreItemUpdateRequest("Value_example") // V2StoreItemUpdateRequest | 
 
@@ -518,8 +518,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 **key** | **string** |  | 
 
@@ -573,8 +573,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -594,8 +594,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 
@@ -644,9 +644,9 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
-	storeId := "storeId_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -666,8 +666,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 **storeId** | **string** |  | 
 
 ### Other Parameters

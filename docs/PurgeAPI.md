@@ -27,8 +27,8 @@ import (
 )
 
 func main() {
-	organization := "organization_example" // string | 
-	project := "project_example" // string | 
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
 	purgeCreateRequest := *openapiclient.NewPurgeCreateRequest([]string{"CacheKeys_example"}, "Scope_example") // PurgeCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -49,8 +49,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organization** | **string** |  | 
-**project** | **string** |  | 
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
 
 ### Other Parameters
 

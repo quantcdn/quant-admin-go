@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/quantcdn/quant-admin-go/v4"
+	openapiclient "github.com/quantcdn/quant-admin-go"
 )
 
 func Test_quantadmingo_PurgeAPIService(t *testing.T) {

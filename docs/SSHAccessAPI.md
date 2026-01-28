@@ -27,9 +27,9 @@ import (
 )
 
 func main() {
-	organisation := "organisation_example" // string | The organisation machine name
-	application := "application_example" // string | The application name
-	environment := "environment_example" // string | The environment name
+	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
+	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -49,9 +49,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organisation** | **string** | The organisation machine name | 
-**application** | **string** | The application name | 
-**environment** | **string** | The environment name | 
+**organisation** | **string** | The organisation ID | 
+**application** | **string** | The application ID | 
+**environment** | **string** | The environment ID | 
 
 ### Other Parameters
 
