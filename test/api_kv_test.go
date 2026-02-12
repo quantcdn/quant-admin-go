@@ -135,6 +135,22 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KVAPIService KVLinkToProject", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLinkToProject(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KVAPIService KVList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -159,6 +175,22 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 		var storeId string
 
 		resp, httpRes, err := apiClient.KVAPI.KVShow(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVUnlinkFromProject", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVUnlinkFromProject(context.Background(), organization, project, storeId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

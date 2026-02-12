@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **ToolConfig** | Pointer to [**ChatInferenceRequestToolConfig**](ChatInferenceRequestToolConfig.md) |  | [optional] 
 **SessionId** | Pointer to **string** | Optional session ID for conversation continuity. Omit to use stateless mode, include to continue an existing session. | [optional] 
 **Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of waiting for completion. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
+**AllowedTools** | Pointer to **[]string** | Top-level convenience alias for toolConfig.allowedTools. Whitelists which tools can be auto-executed. | [optional] 
+**Guardrails** | Pointer to [**ChatInferenceRequestGuardrails**](ChatInferenceRequestGuardrails.md) |  | [optional] 
 
 ## Methods
 
@@ -325,6 +327,56 @@ SetAsync sets Async field to given value.
 `func (o *ChatInferenceRequest) HasAsync() bool`
 
 HasAsync returns a boolean if a field has been set.
+
+### GetAllowedTools
+
+`func (o *ChatInferenceRequest) GetAllowedTools() []string`
+
+GetAllowedTools returns the AllowedTools field if non-nil, zero value otherwise.
+
+### GetAllowedToolsOk
+
+`func (o *ChatInferenceRequest) GetAllowedToolsOk() (*[]string, bool)`
+
+GetAllowedToolsOk returns a tuple with the AllowedTools field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedTools
+
+`func (o *ChatInferenceRequest) SetAllowedTools(v []string)`
+
+SetAllowedTools sets AllowedTools field to given value.
+
+### HasAllowedTools
+
+`func (o *ChatInferenceRequest) HasAllowedTools() bool`
+
+HasAllowedTools returns a boolean if a field has been set.
+
+### GetGuardrails
+
+`func (o *ChatInferenceRequest) GetGuardrails() ChatInferenceRequestGuardrails`
+
+GetGuardrails returns the Guardrails field if non-nil, zero value otherwise.
+
+### GetGuardrailsOk
+
+`func (o *ChatInferenceRequest) GetGuardrailsOk() (*ChatInferenceRequestGuardrails, bool)`
+
+GetGuardrailsOk returns a tuple with the Guardrails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuardrails
+
+`func (o *ChatInferenceRequest) SetGuardrails(v ChatInferenceRequestGuardrails)`
+
+SetGuardrails sets Guardrails field to given value.
+
+### HasGuardrails
+
+`func (o *ChatInferenceRequest) HasGuardrails() bool`
+
+HasGuardrails returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

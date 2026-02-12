@@ -8,12 +8,14 @@ api_ai_file_storage.go
 api_ai_inference.go
 api_ai_models.go
 api_ai_monitoring.go
+api_ai_orchestrations.go
 api_ai_sessions.go
 api_ai_task_management.go
 api_ai_tools.go
 api_ai_vector_database.go
 api_applications.go
 api_backup_management.go
+api_cdn_metrics.go
 api_commands.go
 api_compose.go
 api_containers.go
@@ -41,6 +43,7 @@ docs/AIFileStorageAPI.md
 docs/AIInferenceAPI.md
 docs/AIModelsAPI.md
 docs/AIMonitoringAPI.md
+docs/AIOrchestrationsAPI.md
 docs/AISessionsAPI.md
 docs/AITaskManagementAPI.md
 docs/AIToolsAPI.md
@@ -55,6 +58,7 @@ docs/ApplicationsAPI.md
 docs/BackupManagementAPI.md
 docs/BulkSetEnvironmentVariablesRequest.md
 docs/BulkSetEnvironmentVariablesRequestEnvironmentInner.md
+docs/CDNMetricsAPI.md
 docs/ChatInference200Response.md
 docs/ChatInference200ResponseResponse.md
 docs/ChatInference200ResponseResponseToolUse.md
@@ -64,6 +68,7 @@ docs/ChatInference200ResponseResponseToolUseOneOfResult.md
 docs/ChatInference200ResponseUsage.md
 docs/ChatInference202Response.md
 docs/ChatInferenceRequest.md
+docs/ChatInferenceRequestGuardrails.md
 docs/ChatInferenceRequestMessagesInner.md
 docs/ChatInferenceRequestMessagesInnerContent.md
 docs/ChatInferenceRequestMessagesInnerContentOneOfInner.md
@@ -126,6 +131,9 @@ docs/CreateCustomToolRequest.md
 docs/CreateEnvironment403Response.md
 docs/CreateEnvironmentRequest.md
 docs/CreateEnvironmentRequestEnvironmentInner.md
+docs/CreateOrchestrationRequest.md
+docs/CreateOrchestrationRequestInputSource.md
+docs/CreateOrchestrationRequestStopCondition.md
 docs/CreateTask201Response.md
 docs/CreateTaskRequest.md
 docs/CreateVectorCollection201Response.md
@@ -143,6 +151,9 @@ docs/DeleteFile200Response.md
 docs/DeleteTask200Response.md
 docs/DeleteTask409Response.md
 docs/DeleteVectorCollection200Response.md
+docs/DeleteVectorDocuments200Response.md
+docs/DeleteVectorDocumentsRequest.md
+docs/DeleteVectorDocumentsRequestMetadata.md
 docs/DomainsAPI.md
 docs/DownloadBackup200Response.md
 docs/Embeddings200Response.md
@@ -202,6 +213,8 @@ docs/KVItemsCreate200Response.md
 docs/KVItemsDelete200Response.md
 docs/KVItemsShow200Response.md
 docs/KVItemsShow200ResponseValue.md
+docs/KVLinkToProject200Response.md
+docs/KVLinkToProjectRequest.md
 docs/ListAIAgents200Response.md
 docs/ListAIAgents200ResponseAgentsInner.md
 docs/ListAIModels200Response.md
@@ -222,6 +235,9 @@ docs/ListCustomTools200Response.md
 docs/ListCustomTools200ResponseToolsInner.md
 docs/ListFiles200Response.md
 docs/ListFiles200ResponseFilesInner.md
+docs/ListOrchestrationBatches200Response.md
+docs/ListOrchestrationBatches200ResponseBatchesInner.md
+docs/ListOrchestrations200Response.md
 docs/ListTasks200Response.md
 docs/ListTasks200ResponseTasksInner.md
 docs/ListVectorCollections200Response.md
@@ -324,6 +340,11 @@ docs/V2DomainDnsGoLiveRecordsInner.md
 docs/V2DomainDnsValidationRecordsInner.md
 docs/V2DomainRequest.md
 docs/V2Error.md
+docs/V2MetricData.md
+docs/V2MetricDataPoint.md
+docs/V2MetricDataPointTimestamp.md
+docs/V2MetricsMeta.md
+docs/V2MetricsResponse.md
 docs/V2Organization.md
 docs/V2OrganizationRequest.md
 docs/V2Project.md
@@ -398,6 +419,7 @@ model_chat_inference_200_response_response_tool_use_one_of_result.go
 model_chat_inference_200_response_usage.go
 model_chat_inference_202_response.go
 model_chat_inference_request.go
+model_chat_inference_request_guardrails.go
 model_chat_inference_request_messages_inner.go
 model_chat_inference_request_messages_inner_content.go
 model_chat_inference_request_messages_inner_content_one_of_inner.go
@@ -455,6 +477,9 @@ model_create_custom_tool_request.go
 model_create_environment_403_response.go
 model_create_environment_request.go
 model_create_environment_request_environment_inner.go
+model_create_orchestration_request.go
+model_create_orchestration_request_input_source.go
+model_create_orchestration_request_stop_condition.go
 model_create_task_201_response.go
 model_create_task_request.go
 model_create_vector_collection_201_response.go
@@ -471,6 +496,9 @@ model_delete_file_200_response.go
 model_delete_task_200_response.go
 model_delete_task_409_response.go
 model_delete_vector_collection_200_response.go
+model_delete_vector_documents_200_response.go
+model_delete_vector_documents_request.go
+model_delete_vector_documents_request_metadata.go
 model_download_backup_200_response.go
 model_embeddings_200_response.go
 model_embeddings_200_response_embeddings.go
@@ -526,6 +554,8 @@ model_kv_items_create_200_response.go
 model_kv_items_delete_200_response.go
 model_kv_items_show_200_response.go
 model_kv_items_show_200_response_value.go
+model_kv_link_to_project_200_response.go
+model_kv_link_to_project_request.go
 model_list_ai_agents_200_response.go
 model_list_ai_agents_200_response_agents_inner.go
 model_list_ai_models_200_response.go
@@ -546,6 +576,9 @@ model_list_custom_tools_200_response.go
 model_list_custom_tools_200_response_tools_inner.go
 model_list_files_200_response.go
 model_list_files_200_response_files_inner.go
+model_list_orchestration_batches_200_response.go
+model_list_orchestration_batches_200_response_batches_inner.go
+model_list_orchestrations_200_response.go
 model_list_tasks_200_response.go
 model_list_tasks_200_response_tasks_inner.go
 model_list_vector_collections_200_response.go
@@ -641,6 +674,11 @@ model_v2_domain_dns_go_live_records_inner.go
 model_v2_domain_dns_validation_records_inner.go
 model_v2_domain_request.go
 model_v2_error.go
+model_v2_metric_data.go
+model_v2_metric_data_point.go
+model_v2_metric_data_point_timestamp.go
+model_v2_metrics_meta.go
+model_v2_metrics_response.go
 model_v2_organization.go
 model_v2_organization_request.go
 model_v2_project.go
@@ -700,12 +738,14 @@ test/api_ai_file_storage_test.go
 test/api_ai_inference_test.go
 test/api_ai_models_test.go
 test/api_ai_monitoring_test.go
+test/api_ai_orchestrations_test.go
 test/api_ai_sessions_test.go
 test/api_ai_task_management_test.go
 test/api_ai_tools_test.go
 test/api_ai_vector_database_test.go
 test/api_applications_test.go
 test/api_backup_management_test.go
+test/api_cdn_metrics_test.go
 test/api_commands_test.go
 test/api_compose_test.go
 test/api_containers_test.go
