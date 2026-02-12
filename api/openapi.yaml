@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.9.0
+  version: 4.10.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -51,6 +51,8 @@ tags:
   name: Variables
 - description: Persistent storage volume management
   name: Volumes
+- description: CDN Metrics
+  name: CDN Metrics
 - description: AI Models
   name: AI Models
 - description: AI Sessions
@@ -73,6 +75,8 @@ tags:
   name: AI Vector Database
 - description: AI File Storage
   name: AI File Storage
+- description: AI Orchestrations
+  name: AI Orchestrations
 paths:
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
@@ -1420,6 +1424,127 @@ paths:
       summary: Get a kv store
       tags:
       - KV
+  /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link:
+    delete:
+      description: Remove access to a linked KV store from this project. The store
+        must be linked (not owned by this project).
+      operationId: KV_unlink_from_project
+      parameters:
+      - description: Organization identifier
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        example: test-project
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: KV store identifier
+        example: store-123
+        explode: false
+        in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KV_link_to_project_200_response'
+          description: Store unlinked successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Store not linked or invalid request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Cannot unlink store owned by this project
+      summary: Unlink a KV store from this project
+      tags:
+      - KV
+    post:
+      description: Share a KV store from the source project with a target project.
+        The store will be accessible in the target project.
+      operationId: KV_link_to_project
+      parameters:
+      - description: Organization identifier
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Source project identifier
+        example: test-project
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: KV store identifier
+        example: store-123
+        explode: false
+        in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KV_link_to_project_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KV_link_to_project_200_response'
+          description: Store linked successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Store already linked or invalid request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Store or target project not found
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access forbidden
+      summary: Link a KV store to another project
+      tags:
+      - KV
   /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items:
     get:
       operationId: KV_items_list
@@ -1765,6 +1890,207 @@ paths:
       summary: Update an item in a kv store
       tags:
       - KV
+  /v2/organizations/{organization}/projects/{project}/metrics/hourly:
+    get:
+      description: Returns the last hour of minute-by-minute metrics data
+      operationId: getHourlyMetrics
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter by domain ID or domain name
+        explode: true
+        in: query
+        name: domain
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Metrics to return (default: hits, bytes)"
+        explode: true
+        in: query
+        name: "metrics[]"
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Timestamp format in response
+        explode: true
+        in: query
+        name: timestamp_format
+        required: false
+        schema:
+          default: iso8601
+          enum:
+          - iso8601
+          - unix
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2MetricsResponse'
+          description: Hourly metrics data
+        "400":
+          description: Invalid metric requested
+        "404":
+          description: No domains found or domain not found
+      security:
+      - bearerAuth: []
+      summary: Get hourly metrics
+      tags:
+      - CDN Metrics
+  /v2/organizations/{organization}/projects/{project}/metrics/daily:
+    get:
+      description: Returns the last 30 days of daily metrics data
+      operationId: getDailyMetrics
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter by domain ID or domain name
+        explode: true
+        in: query
+        name: domain
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Metrics to return (default: hits, bytes)"
+        explode: true
+        in: query
+        name: "metrics[]"
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Timestamp format in response
+        explode: true
+        in: query
+        name: timestamp_format
+        required: false
+        schema:
+          default: iso8601
+          enum:
+          - iso8601
+          - unix
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2MetricsResponse'
+          description: Daily metrics data
+        "400":
+          description: Invalid metric requested
+        "404":
+          description: No domains found or domain not found
+      security:
+      - bearerAuth: []
+      summary: Get daily metrics
+      tags:
+      - CDN Metrics
+  /v2/organizations/{organization}/projects/{project}/metrics/monthly:
+    get:
+      description: Returns the last 12 months of monthly metrics data
+      operationId: getMonthlyMetrics
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter by domain ID or domain name
+        explode: true
+        in: query
+        name: domain
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Metrics to return (default: hits, bytes)"
+        explode: true
+        in: query
+        name: "metrics[]"
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Timestamp format in response
+        explode: true
+        in: query
+        name: timestamp_format
+        required: false
+        schema:
+          default: iso8601
+          enum:
+          - iso8601
+          - unix
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2MetricsResponse'
+          description: Monthly metrics data
+        "400":
+          description: Invalid metric requested
+        "404":
+          description: No domains found or domain not found
+      security:
+      - bearerAuth: []
+      summary: Get monthly metrics
+      tags:
+      - CDN Metrics
   /api/v2/organizations:
     get:
       operationId: Organizations_list
@@ -5651,7 +5977,10 @@ paths:
   /api/v3/organizations/{organisation}/ai/tools/orchestrations/{orchestrationId}:
     get:
       description: |-
-        Retrieves the status and synthesized result of a multi-tool orchestration.
+        Retrieves the status and synthesized result of a multi-tool async execution orchestration.
+             *
+             * **Note:** This endpoint is for async tool execution polling (`/tools/orchestrations`).
+             * For durable batch processing orchestrations, see `GET /orchestrations` endpoints.
              *
              * **Orchestration Pattern:**
              * When the AI requests multiple async tools simultaneously, an orchestration is created
@@ -5717,7 +6046,7 @@ paths:
           description: Access denied
         "500":
           description: Failed to retrieve orchestration status
-      summary: Get Orchestration Status
+      summary: Get Tool Orchestration Status (Async Tool Polling)
       tags:
       - AI Tools
       - Orchestration
@@ -6339,6 +6668,63 @@ paths:
       tags:
       - AI Vector Database
   /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents:
+    delete:
+      description: |-
+        Delete documents from a collection. Supports three deletion modes:
+             *
+             * 1. **Purge All** - Set `purgeAll: true` to delete ALL documents in the collection
+             *
+             * 2. **By Document IDs** - Provide `documentIds` array with specific document UUIDs
+             *
+             * 3. **By Metadata** - Provide `metadata` object with `field` and `values` to delete documents where the metadata field matches any of the values
+             *
+             * **Drupal Integration:**
+             * When using with Drupal AI Search, use metadata deletion with:
+             * - `field: 'drupal_entity_id'` to delete all chunks for specific entities
+             * - `field: 'drupal_long_id'` to delete specific chunks
+      operationId: deleteVectorDocuments
+      parameters:
+      - description: Organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Collection UUID
+        explode: false
+        in: path
+        name: collectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteVectorDocuments_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteVectorDocuments_200_response'
+          description: Documents deleted successfully
+        "400":
+          description: "Invalid request - must specify purgeAll, documentIds, or metadata"
+        "403":
+          description: Access denied
+        "404":
+          description: Collection not found
+        "500":
+          description: Failed to delete documents
+      summary: Delete Documents from Collection
+      tags:
+      - AI Vector Database
     post:
       description: |-
         Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection's embedding model, and stored.
@@ -6660,6 +7046,422 @@ paths:
       summary: Get File
       tags:
       - AI File Storage
+  /api/v3/organizations/{organisation}/ai/orchestrations:
+    get:
+      description: |-
+        List durable orchestrations for an organization with optional filtering.
+             *
+             * **Note:** This is different from `/tools/orchestrations` which handles async tool execution
+             * polling. These durable orchestrations are for long-running batch processing loops.
+             *
+             * **Filter Options:**
+             * - `status`: Filter by orchestration status
+             * - `limit`: Max results (default 20, max 100)
+             * - `cursor`: Pagination cursor
+      operationId: listOrchestrations
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter by orchestration status
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - pending
+          - running
+          - paused
+          - completed
+          - failed
+          - cancelled
+          type: string
+        style: form
+      - description: Maximum number of results
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: Pagination cursor from previous response
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listOrchestrations_200_response'
+          description: List of orchestrations
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to list orchestrations
+      summary: List Durable Orchestrations
+      tags:
+      - AI Orchestrations
+    post:
+      description: |-
+        Create a new durable orchestration for batch processing.
+             *
+             * **Input Sources:**
+             * - `static`: Process a fixed list of items
+             * - `task_query`: Process tasks matching a query
+             * - `generator`: AI generates items from a prompt
+             *
+             * **Stop Conditions:**
+             * - `all_complete`: Stop when all items processed
+             * - `max_iterations`: Stop after N iterations
+             * - `condition`: AI evaluates a prompt to decide
+             * - `manual`: Run until manually stopped
+             *
+             * **Auto-start:**
+             * By default, the orchestration starts immediately. Set `autoStart: false` to create in pending state.
+      operationId: createOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createOrchestration_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Orchestration created
+        "400":
+          description: Invalid request
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to create orchestration
+      summary: Create Durable Orchestration
+      tags:
+      - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/orchestrations/{orchestrationId}:
+    delete:
+      description: "Delete an orchestration. Can only delete orchestrations in completed,\
+        \ failed, or cancelled status."
+      operationId: deleteOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Orchestration deleted
+        "400":
+          description: Cannot delete active orchestration
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to delete orchestration
+      summary: Delete Durable Orchestration
+      tags:
+      - AI Orchestrations
+    get:
+      description: |-
+        Get orchestration details including status and progress.
+             *
+             * **Progress Tracking:**
+             * - `total`: Total items to process
+             * - `completed`: Successfully processed
+             * - `failed`: Failed processing
+             * - `pending`: Awaiting processing
+      operationId: getOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        example: orch_1704067200_abc123xyz
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Orchestration details
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to get orchestration
+      summary: Get Durable Orchestration
+      tags:
+      - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/orchestrations/{orchestrationId}/start:
+    post:
+      description: "Start a pending orchestration. Only works on orchestrations created\
+        \ with `autoStart: false`."
+      operationId: startOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Orchestration started
+        "400":
+          description: Orchestration not in pending state
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to start orchestration
+      summary: Start Durable Orchestration
+      tags:
+      - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/orchestrations/{orchestrationId}/pause:
+    post:
+      description: "Pause a running orchestration. The current batch will complete,\
+        \ but no new batches will start. Can be resumed later."
+      operationId: pauseOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Orchestration paused
+        "400":
+          description: Orchestration not running
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to pause orchestration
+      summary: Pause Durable Orchestration
+      tags:
+      - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/orchestrations/{orchestrationId}/resume:
+    post:
+      description: Resume a paused orchestration. Processing continues from where
+        it left off.
+      operationId: resumeOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Orchestration resumed
+        "400":
+          description: Orchestration not paused
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to resume orchestration
+      summary: Resume Durable Orchestration
+      tags:
+      - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/orchestrations/{orchestrationId}/cancel:
+    post:
+      description: "Cancel an orchestration permanently. Cannot be resumed. Any in-progress\
+        \ items will complete, but no new processing starts."
+      operationId: cancelOrchestration
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Orchestration cancelled
+        "400":
+          description: Orchestration already completed/cancelled
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to cancel orchestration
+      summary: Cancel Durable Orchestration
+      tags:
+      - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/orchestrations/{orchestrationId}/batches:
+    get:
+      description: Get history of batches processed by this orchestration. Returns
+        paginated batch records with status and item counts.
+      operationId: listOrchestrationBatches
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Orchestration identifier
+        explode: false
+        in: path
+        name: orchestrationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Maximum number of batches to return
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: Pagination cursor from previous response
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listOrchestrationBatches_200_response'
+          description: Batch history
+        "403":
+          description: Access denied
+        "404":
+          description: Orchestration not found
+        "500":
+          description: Failed to list orchestration batches
+      summary: List Orchestration Batches
+      tags:
+      - AI Orchestrations
   /api/v3/organizations/{organisation}/applications:
     get:
       operationId: listApplications
@@ -8927,6 +9729,16 @@ paths:
       tags:
       - Volumes
 components:
+  parameters:
+    organisation:
+      description: The organisation machine name
+      explode: false
+      in: path
+      name: organisation
+      required: true
+      schema:
+        type: string
+      style: simple
   schemas:
     V2Error:
       example:
@@ -10141,7 +10953,9 @@ components:
           example: 12345
           type: integer
         schedule_cron_string:
-          description: Cron schedule string
+          description: "Standard Unix cron expression with 5 space-separated fields:\
+            \ minute, hour, day-of-month, month, day-of-week. Example: 0 2 * * * runs\
+            \ daily at 2 AM."
           example: 0 2 * * *
           type: string
         created_at:
@@ -10164,18 +10978,19 @@ components:
     V2CrawlerScheduleRequest:
       example:
         schedule_cron_string: 0 2 * * *
-        name: Test schedule
+        name: Daily Crawl
       properties:
         name:
-          description: Schedule name
-          example: Test schedule
+          description: "Schedule name. If not provided, defaults to 'Schedule {crawler_name}'."
+          example: Daily Crawl
           type: string
         schedule_cron_string:
-          description: Cron schedule string
+          description: "Standard Unix cron expression with 5 space-separated fields:\
+            \ minute, hour, day-of-month, month, day-of-week. Example: 0 2 * * * for\
+            \ daily at 2 AM."
           example: 0 2 * * *
           type: string
       required:
-      - name
       - schedule_cron_string
       type: object
     V2Crawler:
@@ -10806,6 +11621,162 @@ components:
       - last_status
       - project_id
       - task_id
+      type: object
+    V2MetricsResponse:
+      example:
+        data:
+          hits:
+            series:
+            - timestamp: 2026-01-29T12:00:00+00:00
+              value: 150
+            - timestamp: 2026-01-29T12:01:00+00:00
+              value: 142
+            period_total: 8523
+            all_time_total: 1284567
+            period_average: 142.05
+          bytes:
+            series:
+            - timestamp: 2026-01-29T12:00:00+00:00
+              value: 1520576
+            - timestamp: 2026-01-29T12:01:00+00:00
+              value: 1423456
+            period_total: 91234567
+            all_time_total: 12845670000
+            period_average: 1520576.12
+        meta:
+          start_time: 2026-01-29T12:00:00+00:00
+          period: hourly
+          granularity: minute
+          domain: domain
+          end_time: 2026-01-29T13:00:00+00:00
+          metrics:
+          - hits
+          - bytes
+      properties:
+        meta:
+          $ref: '#/components/schemas/V2MetricsMeta'
+        data:
+          additionalProperties:
+            $ref: '#/components/schemas/V2MetricData'
+          description: Metrics data keyed by metric name
+          example:
+            hits:
+              series:
+              - timestamp: 2026-01-29T12:00:00+00:00
+                value: 150
+              - timestamp: 2026-01-29T12:01:00+00:00
+                value: 142
+              period_total: 8523
+              all_time_total: 1284567
+              period_average: 142.05
+            bytes:
+              series:
+              - timestamp: 2026-01-29T12:00:00+00:00
+                value: 1520576
+              - timestamp: 2026-01-29T12:01:00+00:00
+                value: 1423456
+              period_total: 91234567
+              all_time_total: 12845670000
+              period_average: 1520576.12
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    V2MetricsMeta:
+      example:
+        start_time: 2026-01-29T12:00:00+00:00
+        period: hourly
+        granularity: minute
+        domain: domain
+        end_time: 2026-01-29T13:00:00+00:00
+        metrics:
+        - hits
+        - bytes
+      properties:
+        period:
+          description: The period type for this data
+          enum:
+          - hourly
+          - daily
+          - monthly
+          example: hourly
+          type: string
+        granularity:
+          description: The granularity of data points
+          enum:
+          - minute
+          - day
+          - month
+          example: minute
+          type: string
+        start_time:
+          description: Start time of the data range (ISO8601 or Unix timestamp based
+            on timestamp_format parameter)
+          example: 2026-01-29T12:00:00+00:00
+          type: string
+        end_time:
+          description: End time of the data range (ISO8601 or Unix timestamp based
+            on timestamp_format parameter)
+          example: 2026-01-29T13:00:00+00:00
+          type: string
+        metrics:
+          description: List of metrics included in the response
+          example:
+          - hits
+          - bytes
+          items:
+            type: string
+          type: array
+        domain:
+          description: Domain filter applied (if any)
+          nullable: true
+          type: string
+          example: null
+      required:
+      - end_time
+      - granularity
+      - metrics
+      - period
+      - start_time
+      type: object
+    V2MetricData:
+      properties:
+        series:
+          description: Time series data points
+          items:
+            $ref: '#/components/schemas/V2MetricDataPoint'
+          type: array
+        period_total:
+          description: Total value for the period
+          example: 8523
+          type: number
+        all_time_total:
+          description: All-time total value
+          example: 1284567
+          type: number
+        period_average:
+          description: Average value per time unit in the period
+          example: 142.05
+          format: float
+          type: number
+      required:
+      - all_time_total
+      - period_average
+      - period_total
+      - series
+      type: object
+    V2MetricDataPoint:
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/V2MetricDataPoint_timestamp'
+        value:
+          description: Metric value at this timestamp
+          example: 150
+          type: number
+      required:
+      - timestamp
+      - value
       type: object
     V2Organization:
       example:
@@ -14051,6 +15022,25 @@ components:
           example: "12345"
           type: string
       type: object
+    KV_link_to_project_request:
+      properties:
+        project_id:
+          description: Target project ID to link to
+          type: integer
+      required:
+      - project_id
+      type: object
+    KV_link_to_project_200_response:
+      example:
+        success: true
+        message: message
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          type: string
+      type: object
     KV_items_create_200_response:
       example:
         success: true
@@ -15279,6 +16269,23 @@ components:
             type: string
           type: array
       type: object
+    chatInference_request_guardrails:
+      description: AWS Bedrock guardrails configuration for content filtering and
+        safety.
+      properties:
+        guardrailIdentifier:
+          description: Guardrail identifier from AWS Bedrock
+          type: string
+        guardrailVersion:
+          description: Guardrail version
+          type: string
+        trace:
+          description: Enable guardrail trace output
+          enum:
+          - enabled
+          - disabled
+          type: string
+      type: object
     chatInference_request:
       properties:
         messages:
@@ -15335,6 +16342,17 @@ components:
             \ with pollUrl instead of waiting for completion. Use for long-running\
             \ inference, client-executed tools, or operations >30 seconds."
           type: boolean
+        allowedTools:
+          description: Top-level convenience alias for toolConfig.allowedTools. Whitelists
+            which tools can be auto-executed.
+          example:
+          - get_weather
+          - generate_image
+          items:
+            type: string
+          type: array
+        guardrails:
+          $ref: '#/components/schemas/chatInference_request_guardrails'
       required:
       - messages
       - modelId
@@ -15640,6 +16658,17 @@ components:
             \ with pollUrl instead of streaming. Use for long-running inference, client-executed\
             \ tools, or operations >30 seconds."
           type: boolean
+        allowedTools:
+          description: Top-level convenience alias for toolConfig.allowedTools. Whitelists
+            which tools can be auto-executed.
+          example:
+          - get_weather
+          - generate_image
+          items:
+            type: string
+          type: array
+        guardrails:
+          $ref: '#/components/schemas/chatInference_request_guardrails'
       required:
       - messages
       - modelId
@@ -17324,6 +18353,44 @@ components:
         message:
           type: string
       type: object
+    deleteVectorDocuments_request_metadata:
+      properties:
+        field:
+          description: "Metadata field name (e.g., 'drupal_entity_id')"
+          type: string
+        values:
+          description: Values to match (OR logic)
+          items:
+            type: string
+          type: array
+      type: object
+    deleteVectorDocuments_request:
+      properties:
+        purgeAll:
+          description: Delete ALL documents in collection
+          type: boolean
+        documentIds:
+          description: Delete specific documents by UUID
+          items:
+            format: uuid
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/deleteVectorDocuments_request_metadata'
+      type: object
+    deleteVectorDocuments_200_response:
+      example:
+        deletedCount: 0
+        message: message
+        collectionId: collectionId
+      properties:
+        message:
+          type: string
+        collectionId:
+          type: string
+        deletedCount:
+          type: integer
+      type: object
     queryVectorCollection_request_filter:
       description: Filter results by metadata fields. Applied AFTER semantic search
         (or alone in listByMetadata mode). All conditions use AND logic.
@@ -17715,6 +18782,188 @@ components:
           type: string
         fileId:
           format: uuid
+          type: string
+      type: object
+    listOrchestrations_200_response:
+      example:
+        nextCursor: nextCursor
+        orchestrations:
+        - "{}"
+        - "{}"
+      properties:
+        orchestrations:
+          items:
+            type: object
+          type: array
+        nextCursor:
+          nullable: true
+          type: string
+      type: object
+    createOrchestration_request_inputSource:
+      properties:
+        type:
+          description: Input source type (api type not yet supported)
+          enum:
+          - static
+          - task_query
+          - generator
+          type: string
+        items:
+          description: Static items (for type=static)
+          items:
+            type: object
+          type: array
+        taskQuery:
+          description: Task query filters (for type=task_query)
+          type: object
+        generatorPrompt:
+          description: AI prompt (for type=generator)
+          type: string
+      required:
+      - type
+      type: object
+    createOrchestration_request_stopCondition:
+      properties:
+        type:
+          default: all_complete
+          enum:
+          - all_complete
+          - max_iterations
+          - condition
+          - manual
+          type: string
+        maxIterations:
+          description: Max iterations (for type=max_iterations)
+          minimum: 1
+          type: integer
+        conditionPrompt:
+          description: AI prompt to evaluate stop (for type=condition)
+          type: string
+      type: object
+    createOrchestration_request:
+      properties:
+        name:
+          description: Orchestration name
+          example: Process batch documents
+          type: string
+        description:
+          description: Optional description
+          nullable: true
+          type: string
+        agentId:
+          description: Agent to process items
+          nullable: true
+          type: string
+        toolId:
+          description: Tool to execute for items
+          nullable: true
+          type: string
+        workflowId:
+          description: Workflow to run for items
+          nullable: true
+          type: string
+        inputSource:
+          $ref: '#/components/schemas/createOrchestration_request_inputSource'
+        batchSize:
+          default: 10
+          description: Items per batch
+          maximum: 100
+          minimum: 1
+          type: integer
+        concurrency:
+          default: 1
+          description: Concurrent items within a batch
+          maximum: 10
+          minimum: 1
+          type: integer
+        stopCondition:
+          $ref: '#/components/schemas/createOrchestration_request_stopCondition'
+        assignedSkills:
+          description: Skill IDs to assign
+          items:
+            type: string
+          type: array
+        autoStart:
+          default: true
+          description: Whether to start immediately
+          type: boolean
+      required:
+      - inputSource
+      - name
+      type: object
+    listOrchestrationBatches_200_response_batches_inner:
+      example:
+        completedAt: 2000-01-23T04:56:07.000+00:00
+        failedCount: 5
+        orchestrationId: orchestrationId
+        iteration: 0
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        batchId: batchId
+        completedCount: 1
+        error: error
+        itemCount: 6
+        status: pending
+      properties:
+        batchId:
+          type: string
+        orchestrationId:
+          type: string
+        iteration:
+          type: integer
+        itemCount:
+          type: integer
+        completedCount:
+          type: integer
+        failedCount:
+          type: integer
+        status:
+          enum:
+          - pending
+          - running
+          - completed
+          - failed
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        completedAt:
+          format: date-time
+          type: string
+        error:
+          nullable: true
+          type: string
+      type: object
+    listOrchestrationBatches_200_response:
+      example:
+        nextCursor: nextCursor
+        batches:
+        - completedAt: 2000-01-23T04:56:07.000+00:00
+          failedCount: 5
+          orchestrationId: orchestrationId
+          iteration: 0
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          batchId: batchId
+          completedCount: 1
+          error: error
+          itemCount: 6
+          status: pending
+        - completedAt: 2000-01-23T04:56:07.000+00:00
+          failedCount: 5
+          orchestrationId: orchestrationId
+          iteration: 0
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          batchId: batchId
+          completedCount: 1
+          error: error
+          itemCount: 6
+          status: pending
+      properties:
+        batches:
+          items:
+            $ref: '#/components/schemas/listOrchestrationBatches_200_response_batches_inner'
+          type: array
+        nextCursor:
+          nullable: true
           type: string
       type: object
     createApplication_403_response:
@@ -18739,6 +19988,16 @@ components:
             to the CDN endpoint.
           type: string
       type: object
+    V2MetricDataPoint_timestamp:
+      description: Timestamp for this data point (format depends on timestamp_format
+        parameter)
+      example: 2026-01-29T12:00:00+00:00
+      oneOf:
+      - description: ISO8601 timestamp
+        format: date-time
+        type: string
+      - description: Unix timestamp
+        type: integer
     V2RuleProxyAction_notify_config:
       description: Notification configuration (required when notify is slack)
       example:

@@ -4,7 +4,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAIOrchestrationStatus**](AIToolsAPI.md#GetAIOrchestrationStatus) | **Get** /api/v3/organizations/{organisation}/ai/tools/orchestrations/{orchestrationId} | Get Orchestration Status
+[**GetAIOrchestrationStatus**](AIToolsAPI.md#GetAIOrchestrationStatus) | **Get** /api/v3/organizations/{organisation}/ai/tools/orchestrations/{orchestrationId} | Get Tool Orchestration Status (Async Tool Polling)
 [**GetAIToolExecutionStatus**](AIToolsAPI.md#GetAIToolExecutionStatus) | **Get** /api/v3/organizations/{organisation}/ai/tools/executions/{executionId} | Get async tool execution status and result
 [**ListAIToolExecutions**](AIToolsAPI.md#ListAIToolExecutions) | **Get** /api/v3/organizations/{organisation}/ai/tools/executions | List tool executions for monitoring and debugging
 [**ListAIToolNames**](AIToolsAPI.md#ListAIToolNames) | **Get** /api/v3/organizations/{organisation}/ai/tools/names | List tool names only (lightweight response)
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > GetAIOrchestrationStatus200Response GetAIOrchestrationStatus(ctx, organisation, orchestrationId).Execute()
 
-Get Orchestration Status
+Get Tool Orchestration Status (Async Tool Polling)
 
 
 

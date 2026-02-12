@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Schedule name | 
-**ScheduleCronString** | **string** | Cron schedule string | 
+**Name** | Pointer to **string** | Schedule name. If not provided, defaults to &#39;Schedule {crawler_name}&#39;. | [optional] 
+**ScheduleCronString** | **string** | Standard Unix cron expression with 5 space-separated fields: minute, hour, day-of-month, month, day-of-week. Example: 0 2 * * * for daily at 2 AM. | 
 
 ## Methods
 
 ### NewV2CrawlerScheduleRequest
 
-`func NewV2CrawlerScheduleRequest(name string, scheduleCronString string, ) *V2CrawlerScheduleRequest`
+`func NewV2CrawlerScheduleRequest(scheduleCronString string, ) *V2CrawlerScheduleRequest`
 
 NewV2CrawlerScheduleRequest instantiates a new V2CrawlerScheduleRequest object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *V2CrawlerScheduleRequest) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetScheduleCronString
 

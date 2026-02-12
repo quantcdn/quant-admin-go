@@ -11,8 +11,10 @@ Method | HTTP request | Description
 [**KVItemsList**](KVAPI.md#KVItemsList) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | List items in a kv store
 [**KVItemsShow**](KVAPI.md#KVItemsShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Get an item from a kv store
 [**KVItemsUpdate**](KVAPI.md#KVItemsUpdate) | **Put** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Update an item in a kv store
+[**KVLinkToProject**](KVAPI.md#KVLinkToProject) | **Post** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link | Link a KV store to another project
 [**KVList**](KVAPI.md#KVList) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv | List key-value stores
 [**KVShow**](KVAPI.md#KVShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id} | Get a kv store
+[**KVUnlinkFromProject**](KVAPI.md#KVUnlinkFromProject) | **Delete** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link | Unlink a KV store from this project
 
 
 
@@ -554,6 +556,84 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## KVLinkToProject
+
+> KVLinkToProject200Response KVLinkToProject(ctx, organization, project, storeId).KVLinkToProjectRequest(kVLinkToProjectRequest).Execute()
+
+Link a KV store to another project
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Source project identifier
+	storeId := "store-123" // string | KV store identifier
+	kVLinkToProjectRequest := *openapiclient.NewKVLinkToProjectRequest(int32(123)) // KVLinkToProjectRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVLinkToProject(context.Background(), organization, project, storeId).KVLinkToProjectRequest(kVLinkToProjectRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVLinkToProject``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVLinkToProject`: KVLinkToProject200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVLinkToProject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Source project identifier | 
+**storeId** | **string** | KV store identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVLinkToProjectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **kVLinkToProjectRequest** | [**KVLinkToProjectRequest**](KVLinkToProjectRequest.md) |  | 
+
+### Return type
+
+[**KVLinkToProject200Response**](KVLinkToProject200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## KVList
 
 > []V2Store KVList(ctx, organization, project).Execute()
@@ -684,6 +764,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V2Store**](V2Store.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVUnlinkFromProject
+
+> KVLinkToProject200Response KVUnlinkFromProject(ctx, organization, project, storeId).Execute()
+
+Unlink a KV store from this project
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "store-123" // string | KV store identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVUnlinkFromProject(context.Background(), organization, project, storeId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVUnlinkFromProject``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVUnlinkFromProject`: KVLinkToProject200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVUnlinkFromProject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**storeId** | **string** | KV store identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVUnlinkFromProjectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**KVLinkToProject200Response**](KVLinkToProject200Response.md)
 
 ### Authorization
 

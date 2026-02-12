@@ -34,7 +34,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	crawler := "crawler_example" // string | Crawler identifier
-	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("Test schedule", "0 2 * * *") // V2CrawlerScheduleRequest | 
+	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("0 2 * * *") // V2CrawlerScheduleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -186,7 +186,7 @@ func main() {
 	project := "project_example" // string | Project identifier
 	crawler := "crawler_example" // string | Crawler identifier
 	crawlerSchedule := "crawlerSchedule_example" // string | Crawler schedule identifier
-	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("Test schedule", "0 2 * * *") // V2CrawlerScheduleRequest | 
+	v2CrawlerScheduleRequest := *openapiclient.NewV2CrawlerScheduleRequest("0 2 * * *") // V2CrawlerScheduleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
