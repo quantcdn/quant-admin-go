@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.10.0
+  version: 4.11.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -51,6 +51,8 @@ tags:
   name: Variables
 - description: Persistent storage volume management
   name: Volumes
+- description: API token management
+  name: Tokens
 - description: CDN Metrics
   name: CDN Metrics
 - description: AI Models
@@ -4624,6 +4626,128 @@ paths:
       summary: Update a serve static rule
       tags:
       - Rules
+  /api/v2/organizations/{organization}/tokens:
+    get:
+      operationId: Tokens_list
+      parameters:
+      - description: Organization identifier
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Tokens_list_200_response_inner'
+                type: array
+          description: The request has succeeded.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      security:
+      - BearerAuth: []
+      summary: List API tokens scoped to this organization
+      tags:
+      - Tokens
+    post:
+      operationId: Tokens_create
+      parameters:
+      - description: Organization identifier
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tokens_create_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tokens_create_201_response'
+          description: Token created. The plain token is returned once and cannot
+            be retrieved again.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Bad request.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      security:
+      - BearerAuth: []
+      summary: Create a new API token scoped to this organization
+      tags:
+      - Tokens
+  /api/v2/organizations/{organization}/tokens/{token_id}:
+    delete:
+      operationId: Tokens_delete
+      parameters:
+      - description: Organization identifier
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Token ID to revoke
+        example: 42
+        explode: false
+        in: path
+        name: token_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tokens_delete_200_response'
+          description: Token revoked successfully.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Token not found.
+      security:
+      - BearerAuth: []
+      summary: Revoke an API token
+      tags:
+      - Tokens
   /api/v3/organizations/{organisation}/ai/models:
     get:
       operationId: listAIModels
@@ -15123,6 +15247,59 @@ components:
       - cache_keys
       - scope
       type: object
+    Tokens_list_200_response_inner:
+      example:
+        last_used: 2000-01-23T04:56:07.000+00:00
+        name: My deploy token
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 42
+      properties:
+        id:
+          example: 42
+          type: integer
+        name:
+          example: My deploy token
+          type: string
+        last_used:
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+      type: object
+    Tokens_create_request:
+      properties:
+        name:
+          description: Name for the token
+          example: My deploy token
+          type: string
+      required:
+      - name
+      type: object
+    Tokens_create_201_response:
+      example:
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        token: token
+      properties:
+        token:
+          description: The plain text token (shown once)
+          type: string
+        name:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+      type: object
+    Tokens_delete_200_response:
+      example:
+        message: Token revoked successfully
+      properties:
+        message:
+          example: Token revoked successfully
+          type: string
+      type: object
     listAIModels_200_response_models_inner_capabilities:
       description: Model capabilities and features
       example:
@@ -16353,6 +16530,11 @@ components:
           type: array
         guardrails:
           $ref: '#/components/schemas/chatInference_request_guardrails'
+        longContext:
+          default: false
+          description: Enable 1M context window support regardless of token estimation.
+            Use when sending large payloads (>200K tokens).
+          type: boolean
       required:
       - messages
       - modelId
@@ -16669,6 +16851,11 @@ components:
           type: array
         guardrails:
           $ref: '#/components/schemas/chatInference_request_guardrails'
+        longContext:
+          default: false
+          description: Enable 1M context window support regardless of token estimation.
+            Use when sending large payloads (>200K tokens).
+          type: boolean
       required:
       - messages
       - modelId
@@ -18883,6 +19070,11 @@ components:
           items:
             type: string
           type: array
+        context:
+          description: Optional context merged into each item before processing (e.g.
+            shared credentials or endpoints)
+          nullable: true
+          type: object
         autoStart:
           default: true
           description: Whether to start immediately

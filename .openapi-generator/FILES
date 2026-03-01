@@ -33,6 +33,7 @@ api_purge.go
 api_rules.go
 api_scaling_policy.go
 api_ssh_access.go
+api_tokens.go
 api_variables.go
 api_volumes.go
 client.go
@@ -268,6 +269,11 @@ docs/SubmitToolCallbackRequest.md
 docs/SubmitToolCallbackRequestToolResultsInner.md
 docs/SyncOperation.md
 docs/SyncToEnvironmentRequest.md
+docs/TokensAPI.md
+docs/TokensCreate201Response.md
+docs/TokensCreateRequest.md
+docs/TokensDelete200Response.md
+docs/TokensList200ResponseInner.md
 docs/UpdateAIAgent200Response.md
 docs/UpdateAIAgentRequest.md
 docs/UpdateAISession200Response.md
@@ -602,6 +608,10 @@ model_submit_tool_callback_request.go
 model_submit_tool_callback_request_tool_results_inner.go
 model_sync_operation.go
 model_sync_to_environment_request.go
+model_tokens_create_201_response.go
+model_tokens_create_request.go
+model_tokens_delete_200_response.go
+model_tokens_list_200_response_inner.go
 model_update_ai_agent_200_response.go
 model_update_ai_agent_request.go
 model_update_ai_session_200_response.go
@@ -763,6 +773,7 @@ test/api_purge_test.go
 test/api_rules_test.go
 test/api_scaling_policy_test.go
 test/api_ssh_access_test.go
+test/api_tokens_test.go
 test/api_variables_test.go
 test/api_volumes_test.go
 utils.go
