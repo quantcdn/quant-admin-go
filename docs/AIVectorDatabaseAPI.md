@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## DeleteVectorCollection
 
-> DeleteVectorCollection200Response DeleteVectorCollection(ctx, organisation, collectionId).Execute()
+> DeleteSkillCollection200Response DeleteVectorCollection(ctx, organisation, collectionId).Execute()
 
 Delete Collection
 
@@ -117,7 +117,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIVectorDatabaseAPI.DeleteVectorCollection``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteVectorCollection`: DeleteVectorCollection200Response
+	// response from `DeleteVectorCollection`: DeleteSkillCollection200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIVectorDatabaseAPI.DeleteVectorCollection`: %v\n", resp)
 }
 ```
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DeleteVectorCollection200Response**](DeleteVectorCollection200Response.md)
+[**DeleteSkillCollection200Response**](DeleteSkillCollection200Response.md)
 
 ### Authorization
 
