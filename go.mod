@@ -1,4 +1,4 @@
-module github.com/quantcdn/quant-admin-go
+module github.com/quantcdn/quant-admin-go/v4
 
 go 1.21
 
