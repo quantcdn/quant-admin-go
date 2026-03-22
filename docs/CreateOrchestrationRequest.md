@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Concurrency** | Pointer to **int32** | Concurrent items within a batch | [optional] [default to 1]
 **StopCondition** | Pointer to [**CreateOrchestrationRequestStopCondition**](CreateOrchestrationRequestStopCondition.md) |  | [optional] 
 **AssignedSkills** | Pointer to **[]string** | Skill IDs to assign | [optional] 
+**Context** | Pointer to **map[string]interface{}** | Optional context merged into each item before processing (e.g. shared credentials or endpoints) | [optional] 
 **AutoStart** | Pointer to **bool** | Whether to start immediately | [optional] [default to true]
 
 ## Methods
@@ -315,6 +316,41 @@ SetAssignedSkills sets AssignedSkills field to given value.
 
 HasAssignedSkills returns a boolean if a field has been set.
 
+### GetContext
+
+`func (o *CreateOrchestrationRequest) GetContext() map[string]interface{}`
+
+GetContext returns the Context field if non-nil, zero value otherwise.
+
+### GetContextOk
+
+`func (o *CreateOrchestrationRequest) GetContextOk() (*map[string]interface{}, bool)`
+
+GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContext
+
+`func (o *CreateOrchestrationRequest) SetContext(v map[string]interface{})`
+
+SetContext sets Context field to given value.
+
+### HasContext
+
+`func (o *CreateOrchestrationRequest) HasContext() bool`
+
+HasContext returns a boolean if a field has been set.
+
+### SetContextNil
+
+`func (o *CreateOrchestrationRequest) SetContextNil(b bool)`
+
+ SetContextNil sets the value for Context to be an explicit nil
+
+### UnsetContext
+`func (o *CreateOrchestrationRequest) UnsetContext()`
+
+UnsetContext ensures that no value is present for Context, not even an explicit nil
 ### GetAutoStart
 
 `func (o *CreateOrchestrationRequest) GetAutoStart() bool`
