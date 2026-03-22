@@ -34,7 +34,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	domain := "domain_example" // string | Filter by domain ID or domain name (optional)
-	metrics := []string{"Inner_example"} // []string | Metrics to return (default: hits, bytes) (optional)
+	metrics := []string{"Metrics_example"} // []string | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. (optional)
 	timestampFormat := "timestampFormat_example" // string | Timestamp format in response (optional) (default to "iso8601")
 
 	configuration := openapiclient.NewConfiguration()
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 
  **domain** | **string** | Filter by domain ID or domain name | 
- **metrics** | **[]string** | Metrics to return (default: hits, bytes) | 
+ **metrics** | **[]string** | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. | 
  **timestampFormat** | **string** | Timestamp format in response | [default to &quot;iso8601&quot;]
 
 ### Return type
@@ -113,7 +113,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	domain := "domain_example" // string | Filter by domain ID or domain name (optional)
-	metrics := []string{"Inner_example"} // []string | Metrics to return (default: hits, bytes) (optional)
+	metrics := []string{"Metrics_example"} // []string | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. (optional)
 	timestampFormat := "timestampFormat_example" // string | Timestamp format in response (optional) (default to "iso8601")
 
 	configuration := openapiclient.NewConfiguration()
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 
  **domain** | **string** | Filter by domain ID or domain name | 
- **metrics** | **[]string** | Metrics to return (default: hits, bytes) | 
+ **metrics** | **[]string** | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. | 
  **timestampFormat** | **string** | Timestamp format in response | [default to &quot;iso8601&quot;]
 
 ### Return type
@@ -192,7 +192,7 @@ func main() {
 	organization := "organization_example" // string | Organization identifier
 	project := "project_example" // string | Project identifier
 	domain := "domain_example" // string | Filter by domain ID or domain name (optional)
-	metrics := []string{"Inner_example"} // []string | Metrics to return (default: hits, bytes) (optional)
+	metrics := []string{"Metrics_example"} // []string | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. (optional)
 	timestampFormat := "timestampFormat_example" // string | Timestamp format in response (optional) (default to "iso8601")
 
 	configuration := openapiclient.NewConfiguration()
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 
  **domain** | **string** | Filter by domain ID or domain name | 
- **metrics** | **[]string** | Metrics to return (default: hits, bytes) | 
+ **metrics** | **[]string** | Metrics to return (default: hits, bytes). Use the /metrics/available endpoint to list all metrics by category. | 
  **timestampFormat** | **string** | Timestamp format in response | [default to &quot;iso8601&quot;]
 
 ### Return type

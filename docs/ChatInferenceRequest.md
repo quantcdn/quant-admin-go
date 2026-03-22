@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of waiting for completion. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
 **AllowedTools** | Pointer to **[]string** | Top-level convenience alias for toolConfig.allowedTools. Whitelists which tools can be auto-executed. | [optional] 
 **Guardrails** | Pointer to [**ChatInferenceRequestGuardrails**](ChatInferenceRequestGuardrails.md) |  | [optional] 
+**LongContext** | Pointer to **bool** | Enable 1M context window support regardless of token estimation. Use when sending large payloads (&gt;200K tokens). | [optional] [default to false]
 
 ## Methods
 
@@ -377,6 +378,31 @@ SetGuardrails sets Guardrails field to given value.
 `func (o *ChatInferenceRequest) HasGuardrails() bool`
 
 HasGuardrails returns a boolean if a field has been set.
+
+### GetLongContext
+
+`func (o *ChatInferenceRequest) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *ChatInferenceRequest) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *ChatInferenceRequest) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *ChatInferenceRequest) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

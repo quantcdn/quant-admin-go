@@ -5,8 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
-**Schedule** | Pointer to **string** |  | [optional] 
-**Command** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **NullableString** |  | [optional] 
+**ScheduleExpression** | Pointer to **string** |  | [optional] 
+**Command** | Pointer to **[]string** |  | [optional] 
+**TargetContainerName** | Pointer to **NullableString** |  | [optional] 
+**IsEnabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -52,47 +55,82 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetSchedule
+### GetDescription
 
-`func (o *Cron) GetSchedule() string`
+`func (o *Cron) GetDescription() string`
 
-GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetScheduleOk
+### GetDescriptionOk
 
-`func (o *Cron) GetScheduleOk() (*string, bool)`
+`func (o *Cron) GetDescriptionOk() (*string, bool)`
 
-GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSchedule
+### SetDescription
 
-`func (o *Cron) SetSchedule(v string)`
+`func (o *Cron) SetDescription(v string)`
 
-SetSchedule sets Schedule field to given value.
+SetDescription sets Description field to given value.
 
-### HasSchedule
+### HasDescription
 
-`func (o *Cron) HasSchedule() bool`
+`func (o *Cron) HasDescription() bool`
 
-HasSchedule returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
+
+### SetDescriptionNil
+
+`func (o *Cron) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *Cron) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetScheduleExpression
+
+`func (o *Cron) GetScheduleExpression() string`
+
+GetScheduleExpression returns the ScheduleExpression field if non-nil, zero value otherwise.
+
+### GetScheduleExpressionOk
+
+`func (o *Cron) GetScheduleExpressionOk() (*string, bool)`
+
+GetScheduleExpressionOk returns a tuple with the ScheduleExpression field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleExpression
+
+`func (o *Cron) SetScheduleExpression(v string)`
+
+SetScheduleExpression sets ScheduleExpression field to given value.
+
+### HasScheduleExpression
+
+`func (o *Cron) HasScheduleExpression() bool`
+
+HasScheduleExpression returns a boolean if a field has been set.
 
 ### GetCommand
 
-`func (o *Cron) GetCommand() string`
+`func (o *Cron) GetCommand() []string`
 
 GetCommand returns the Command field if non-nil, zero value otherwise.
 
 ### GetCommandOk
 
-`func (o *Cron) GetCommandOk() (*string, bool)`
+`func (o *Cron) GetCommandOk() (*[]string, bool)`
 
 GetCommandOk returns a tuple with the Command field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCommand
 
-`func (o *Cron) SetCommand(v string)`
+`func (o *Cron) SetCommand(v []string)`
 
 SetCommand sets Command field to given value.
 
@@ -101,6 +139,66 @@ SetCommand sets Command field to given value.
 `func (o *Cron) HasCommand() bool`
 
 HasCommand returns a boolean if a field has been set.
+
+### GetTargetContainerName
+
+`func (o *Cron) GetTargetContainerName() string`
+
+GetTargetContainerName returns the TargetContainerName field if non-nil, zero value otherwise.
+
+### GetTargetContainerNameOk
+
+`func (o *Cron) GetTargetContainerNameOk() (*string, bool)`
+
+GetTargetContainerNameOk returns a tuple with the TargetContainerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetContainerName
+
+`func (o *Cron) SetTargetContainerName(v string)`
+
+SetTargetContainerName sets TargetContainerName field to given value.
+
+### HasTargetContainerName
+
+`func (o *Cron) HasTargetContainerName() bool`
+
+HasTargetContainerName returns a boolean if a field has been set.
+
+### SetTargetContainerNameNil
+
+`func (o *Cron) SetTargetContainerNameNil(b bool)`
+
+ SetTargetContainerNameNil sets the value for TargetContainerName to be an explicit nil
+
+### UnsetTargetContainerName
+`func (o *Cron) UnsetTargetContainerName()`
+
+UnsetTargetContainerName ensures that no value is present for TargetContainerName, not even an explicit nil
+### GetIsEnabled
+
+`func (o *Cron) GetIsEnabled() bool`
+
+GetIsEnabled returns the IsEnabled field if non-nil, zero value otherwise.
+
+### GetIsEnabledOk
+
+`func (o *Cron) GetIsEnabledOk() (*bool, bool)`
+
+GetIsEnabledOk returns a tuple with the IsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEnabled
+
+`func (o *Cron) SetIsEnabled(v bool)`
+
+SetIsEnabled sets IsEnabled field to given value.
+
+### HasIsEnabled
+
+`func (o *Cron) HasIsEnabled() bool`
+
+HasIsEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
