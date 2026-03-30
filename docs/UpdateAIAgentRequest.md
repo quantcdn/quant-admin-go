@@ -13,6 +13,10 @@ Name | Type | Description | Notes
 **MaxTokens** | Pointer to **int32** |  | [optional] 
 **AllowedTools** | Pointer to **[]string** |  | [optional] 
 **AllowedCollections** | Pointer to **[]string** |  | [optional] 
+**AssignedSkills** | Pointer to **[]string** | Skill IDs to assign to this agent | [optional] 
+**LongContext** | Pointer to **bool** | Enable 1M context window support | [optional] 
+**GuardrailPreset** | Pointer to **string** | Guardrail preset name | [optional] 
+**FilterPolicies** | Pointer to **[]string** | Filter policy IDs to apply to this agent&#39;s inference requests | [optional] 
 
 ## Methods
 
@@ -257,6 +261,106 @@ SetAllowedCollections sets AllowedCollections field to given value.
 `func (o *UpdateAIAgentRequest) HasAllowedCollections() bool`
 
 HasAllowedCollections returns a boolean if a field has been set.
+
+### GetAssignedSkills
+
+`func (o *UpdateAIAgentRequest) GetAssignedSkills() []string`
+
+GetAssignedSkills returns the AssignedSkills field if non-nil, zero value otherwise.
+
+### GetAssignedSkillsOk
+
+`func (o *UpdateAIAgentRequest) GetAssignedSkillsOk() (*[]string, bool)`
+
+GetAssignedSkillsOk returns a tuple with the AssignedSkills field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedSkills
+
+`func (o *UpdateAIAgentRequest) SetAssignedSkills(v []string)`
+
+SetAssignedSkills sets AssignedSkills field to given value.
+
+### HasAssignedSkills
+
+`func (o *UpdateAIAgentRequest) HasAssignedSkills() bool`
+
+HasAssignedSkills returns a boolean if a field has been set.
+
+### GetLongContext
+
+`func (o *UpdateAIAgentRequest) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *UpdateAIAgentRequest) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *UpdateAIAgentRequest) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *UpdateAIAgentRequest) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
+
+### GetGuardrailPreset
+
+`func (o *UpdateAIAgentRequest) GetGuardrailPreset() string`
+
+GetGuardrailPreset returns the GuardrailPreset field if non-nil, zero value otherwise.
+
+### GetGuardrailPresetOk
+
+`func (o *UpdateAIAgentRequest) GetGuardrailPresetOk() (*string, bool)`
+
+GetGuardrailPresetOk returns a tuple with the GuardrailPreset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuardrailPreset
+
+`func (o *UpdateAIAgentRequest) SetGuardrailPreset(v string)`
+
+SetGuardrailPreset sets GuardrailPreset field to given value.
+
+### HasGuardrailPreset
+
+`func (o *UpdateAIAgentRequest) HasGuardrailPreset() bool`
+
+HasGuardrailPreset returns a boolean if a field has been set.
+
+### GetFilterPolicies
+
+`func (o *UpdateAIAgentRequest) GetFilterPolicies() []string`
+
+GetFilterPolicies returns the FilterPolicies field if non-nil, zero value otherwise.
+
+### GetFilterPoliciesOk
+
+`func (o *UpdateAIAgentRequest) GetFilterPoliciesOk() (*[]string, bool)`
+
+GetFilterPoliciesOk returns a tuple with the FilterPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterPolicies
+
+`func (o *UpdateAIAgentRequest) SetFilterPolicies(v []string)`
+
+SetFilterPolicies sets FilterPolicies field to given value.
+
+### HasFilterPolicies
+
+`func (o *UpdateAIAgentRequest) HasFilterPolicies() bool`
+
+HasFilterPolicies returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

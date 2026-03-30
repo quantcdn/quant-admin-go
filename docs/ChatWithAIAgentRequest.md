@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **Stream** | Pointer to **bool** | Whether to stream the response (SSE) | [optional] [default to false]
 **Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl. Use for long-running agent tasks. | [optional] [default to false]
 **System** | Pointer to **string** | Optional additional system prompt (appended to agent&#39;s configured prompt) | [optional] 
+**LongContext** | Pointer to **bool** | Per-request override to force 1M context window routing | [optional] [default to false]
+**MaxToolIterations** | Pointer to **int32** | Maximum tool auto-execution iterations for this request | [optional] 
+**AllowedCollections** | Pointer to **[]string** | Per-request override for vector DB collections the agent can query | [optional] 
 
 ## Methods
 
@@ -174,6 +177,81 @@ SetSystem sets System field to given value.
 `func (o *ChatWithAIAgentRequest) HasSystem() bool`
 
 HasSystem returns a boolean if a field has been set.
+
+### GetLongContext
+
+`func (o *ChatWithAIAgentRequest) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *ChatWithAIAgentRequest) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *ChatWithAIAgentRequest) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *ChatWithAIAgentRequest) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
+
+### GetMaxToolIterations
+
+`func (o *ChatWithAIAgentRequest) GetMaxToolIterations() int32`
+
+GetMaxToolIterations returns the MaxToolIterations field if non-nil, zero value otherwise.
+
+### GetMaxToolIterationsOk
+
+`func (o *ChatWithAIAgentRequest) GetMaxToolIterationsOk() (*int32, bool)`
+
+GetMaxToolIterationsOk returns a tuple with the MaxToolIterations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxToolIterations
+
+`func (o *ChatWithAIAgentRequest) SetMaxToolIterations(v int32)`
+
+SetMaxToolIterations sets MaxToolIterations field to given value.
+
+### HasMaxToolIterations
+
+`func (o *ChatWithAIAgentRequest) HasMaxToolIterations() bool`
+
+HasMaxToolIterations returns a boolean if a field has been set.
+
+### GetAllowedCollections
+
+`func (o *ChatWithAIAgentRequest) GetAllowedCollections() []string`
+
+GetAllowedCollections returns the AllowedCollections field if non-nil, zero value otherwise.
+
+### GetAllowedCollectionsOk
+
+`func (o *ChatWithAIAgentRequest) GetAllowedCollectionsOk() (*[]string, bool)`
+
+GetAllowedCollectionsOk returns a tuple with the AllowedCollections field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedCollections
+
+`func (o *ChatWithAIAgentRequest) SetAllowedCollections(v []string)`
+
+SetAllowedCollections sets AllowedCollections field to given value.
+
+### HasAllowedCollections
+
+`func (o *ChatWithAIAgentRequest) HasAllowedCollections() bool`
+
+HasAllowedCollections returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

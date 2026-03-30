@@ -14,6 +14,11 @@ Name | Type | Description | Notes
 **MaxTokens** | Pointer to **int32** |  | [optional] 
 **AllowedTools** | Pointer to **[]string** |  | [optional] 
 **AllowedCollections** | Pointer to **[]string** |  | [optional] 
+**AssignedSkills** | Pointer to **[]string** |  | [optional] 
+**LongContext** | Pointer to **bool** | Whether 1M context window is enabled | [optional] 
+**GuardrailPreset** | Pointer to **string** | Guardrail preset name | [optional] 
+**IsGlobal** | Pointer to **bool** | Whether this is a platform-managed global agent | [optional] 
+**HasOverlay** | Pointer to **bool** | Whether the requesting org has a per-org overlay for this global agent | [optional] 
 **CreatedBy** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] 
@@ -286,6 +291,131 @@ SetAllowedCollections sets AllowedCollections field to given value.
 `func (o *GetAIAgent200ResponseAgent) HasAllowedCollections() bool`
 
 HasAllowedCollections returns a boolean if a field has been set.
+
+### GetAssignedSkills
+
+`func (o *GetAIAgent200ResponseAgent) GetAssignedSkills() []string`
+
+GetAssignedSkills returns the AssignedSkills field if non-nil, zero value otherwise.
+
+### GetAssignedSkillsOk
+
+`func (o *GetAIAgent200ResponseAgent) GetAssignedSkillsOk() (*[]string, bool)`
+
+GetAssignedSkillsOk returns a tuple with the AssignedSkills field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedSkills
+
+`func (o *GetAIAgent200ResponseAgent) SetAssignedSkills(v []string)`
+
+SetAssignedSkills sets AssignedSkills field to given value.
+
+### HasAssignedSkills
+
+`func (o *GetAIAgent200ResponseAgent) HasAssignedSkills() bool`
+
+HasAssignedSkills returns a boolean if a field has been set.
+
+### GetLongContext
+
+`func (o *GetAIAgent200ResponseAgent) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *GetAIAgent200ResponseAgent) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *GetAIAgent200ResponseAgent) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *GetAIAgent200ResponseAgent) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
+
+### GetGuardrailPreset
+
+`func (o *GetAIAgent200ResponseAgent) GetGuardrailPreset() string`
+
+GetGuardrailPreset returns the GuardrailPreset field if non-nil, zero value otherwise.
+
+### GetGuardrailPresetOk
+
+`func (o *GetAIAgent200ResponseAgent) GetGuardrailPresetOk() (*string, bool)`
+
+GetGuardrailPresetOk returns a tuple with the GuardrailPreset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuardrailPreset
+
+`func (o *GetAIAgent200ResponseAgent) SetGuardrailPreset(v string)`
+
+SetGuardrailPreset sets GuardrailPreset field to given value.
+
+### HasGuardrailPreset
+
+`func (o *GetAIAgent200ResponseAgent) HasGuardrailPreset() bool`
+
+HasGuardrailPreset returns a boolean if a field has been set.
+
+### GetIsGlobal
+
+`func (o *GetAIAgent200ResponseAgent) GetIsGlobal() bool`
+
+GetIsGlobal returns the IsGlobal field if non-nil, zero value otherwise.
+
+### GetIsGlobalOk
+
+`func (o *GetAIAgent200ResponseAgent) GetIsGlobalOk() (*bool, bool)`
+
+GetIsGlobalOk returns a tuple with the IsGlobal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsGlobal
+
+`func (o *GetAIAgent200ResponseAgent) SetIsGlobal(v bool)`
+
+SetIsGlobal sets IsGlobal field to given value.
+
+### HasIsGlobal
+
+`func (o *GetAIAgent200ResponseAgent) HasIsGlobal() bool`
+
+HasIsGlobal returns a boolean if a field has been set.
+
+### GetHasOverlay
+
+`func (o *GetAIAgent200ResponseAgent) GetHasOverlay() bool`
+
+GetHasOverlay returns the HasOverlay field if non-nil, zero value otherwise.
+
+### GetHasOverlayOk
+
+`func (o *GetAIAgent200ResponseAgent) GetHasOverlayOk() (*bool, bool)`
+
+GetHasOverlayOk returns a tuple with the HasOverlay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasOverlay
+
+`func (o *GetAIAgent200ResponseAgent) SetHasOverlay(v bool)`
+
+SetHasOverlay sets HasOverlay field to given value.
+
+### HasHasOverlay
+
+`func (o *GetAIAgent200ResponseAgent) HasHasOverlay() bool`
+
+HasHasOverlay returns a boolean if a field has been set.
 
 ### GetCreatedBy
 

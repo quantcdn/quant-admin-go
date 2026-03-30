@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.13.0
+  version: 4.14.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -80,6 +80,14 @@ tags:
   name: Volumes
 - description: API token management
   name: Tokens
+- description: AI Slack Bots
+  name: AI Slack Bots
+- description: AI Governance
+  name: AI Governance
+- description: AI Filter Policies
+  name: AI Filter Policies
+- description: AI Usage
+  name: AI Usage
 paths:
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
@@ -6615,6 +6623,130 @@ paths:
       summary: Chat with AI Agent
       tags:
       - AI Agents
+  /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay:
+    delete:
+      description: "Removes the per-organisation overlay for a global agent, reverting\
+        \ it to platform defaults."
+      operationId: deleteAgentOverlay
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Global agent identifier
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteAgentOverlay_200_response'
+          description: Overlay deleted — agent reverted to defaults
+        "403":
+          description: Access denied
+        "404":
+          description: Not a global agent
+        "500":
+          description: Failed to reset overlay
+      summary: Delete Agent Overlay
+      tags:
+      - AI Agents
+    get:
+      description: "Returns the per-organisation overlay for a global agent, plus\
+        \ base agent metadata for UI context. If no overlay exists the response contains\
+        \ `overlay: null`. Overlays can only be created for global agents."
+      operationId: getAgentOverlay
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Global agent identifier (e.g., 'quantgov-code')"
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAgentOverlay_200_response'
+          description: Overlay retrieved (may be null if none set)
+        "403":
+          description: Access denied
+        "404":
+          description: Not a global agent
+        "500":
+          description: Failed to retrieve overlay
+      summary: Get Agent Overlay
+      tags:
+      - AI Agents
+    put:
+      description: Creates or replaces the per-organisation overlay for a global agent.
+        PUT is full replacement — omitted optional fields are removed. Include `version`
+        from a prior GET to enable compare-and-swap (409 on conflict). Omit for last-writer-wins.
+      operationId: upsertAgentOverlay
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Global agent identifier
+        explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/upsertAgentOverlay_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/upsertAgentOverlay_200_response'
+          description: Overlay created or updated
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Not a global agent
+        "409":
+          description: Version conflict — overlay was modified concurrently
+        "500":
+          description: Failed to save overlay
+      summary: Upsert Agent Overlay
+      tags:
+      - AI Agents
   /api/v3/organizations/{organisation}/ai/custom-tools:
     get:
       description: Lists all registered custom edge function tools for an organization.
@@ -8137,6 +8269,599 @@ paths:
       summary: List Orchestration Batches
       tags:
       - AI Orchestrations
+  /api/v3/organizations/{organisation}/ai/slack-bots:
+    get:
+      description: Lists all Slack bots configured for the organization. Each bot
+        is backed by an AI agent and can be connected to a Slack workspace.
+      operationId: listSlackBots
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listSlackBots_200_response'
+          description: Slack bots retrieved successfully
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to retrieve Slack bots
+      summary: List Slack Bots
+      tags:
+      - AI Slack Bots
+    post:
+      description: |-
+        Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.
+             *
+             * **Setup Types:**
+             * - `quant`: Quant-managed Slack app — uses shared OAuth credentials
+             * - `byo`: Bring Your Own — customer provides their own Slack app credentials
+      operationId: createSlackBot
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createSlackBot_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createSlackBot_201_response'
+          description: Slack bot created successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to create Slack bot
+      summary: Create Slack Bot
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}:
+    delete:
+      description: Permanently deletes a Slack bot and disconnects it from the workspace.
+      operationId: deleteSlackBot
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Slack bot ID
+        explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteSlackBot_200_response'
+          description: Slack bot deleted successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Slack bot not found
+        "500":
+          description: Failed to delete Slack bot
+      summary: Delete Slack Bot
+      tags:
+      - AI Slack Bots
+    get:
+      description: Retrieves details for a specific Slack bot including its configuration
+        and connection status.
+      operationId: getSlackBot
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Slack bot ID
+        explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getSlackBot_200_response'
+          description: Slack bot details retrieved successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Slack bot not found
+        "500":
+          description: Failed to retrieve Slack bot
+      summary: Get Slack Bot
+      tags:
+      - AI Slack Bots
+    put:
+      description: Updates a Slack bot's configuration. Only provided fields are updated.
+      operationId: updateSlackBot
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Slack bot ID
+        explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateSlackBot_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createSlackBot_201_response'
+          description: Slack bot updated successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Slack bot not found
+        "500":
+          description: Failed to update Slack bot
+      summary: Update Slack Bot
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/workspace/users:
+    get:
+      description: Searches users in the Slack workspace connected to this bot. Requires
+        the bot to be connected via OAuth.
+      operationId: searchSlackWorkspaceUsers
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Slack bot ID
+        explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Search query to filter users by name
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchSlackWorkspaceUsers_200_response'
+          description: Workspace users retrieved successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Slack bot not found or not connected
+        "500":
+          description: Failed to search users
+      summary: Search Slack Workspace Users
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/workspace/channels:
+    get:
+      description: Searches channels in the Slack workspace connected to this bot.
+        Requires the bot to be connected via OAuth.
+      operationId: searchSlackWorkspaceChannels
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The Slack bot ID
+        explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Search query to filter channels by name
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchSlackWorkspaceChannels_200_response'
+          description: Workspace channels retrieved successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Slack bot not found or not connected
+        "500":
+          description: Failed to search channels
+      summary: Search Slack Workspace Channels
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/governance:
+    get:
+      operationId: getGovernanceConfig
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getGovernanceConfig_200_response'
+          description: AI governance configuration
+        "500":
+          description: Failed to retrieve governance configuration
+      summary: Get AI governance configuration for an organisation
+      tags:
+      - AI Governance
+    put:
+      operationId: updateGovernanceConfig
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateGovernanceConfig_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateGovernanceConfig_200_response'
+          description: Governance configuration updated successfully
+        "422":
+          description: Validation error
+        "500":
+          description: Failed to update governance configuration
+      summary: Update AI governance configuration for an organisation
+      tags:
+      - AI Governance
+  /api/v3/organizations/{organisation}/ai/governance/spend:
+    get:
+      operationId: getGovernanceSpend
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: AI spend summary
+        "500":
+          description: Failed to retrieve spend summary
+      summary: Get AI spend summary for an organisation
+      tags:
+      - AI Governance
+  /api/v3/organizations/{organisation}/ai/filter-policies:
+    get:
+      operationId: listFilterPolicies
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: List of filter policies
+        "500":
+          description: Failed to retrieve filter policies
+      summary: List AI filter policies for an organisation
+      tags:
+      - AI Filter Policies
+    post:
+      operationId: createFilterPolicy
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createFilterPolicy_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Filter policy created successfully
+        "422":
+          description: Validation error
+        "500":
+          description: Failed to create filter policy
+      summary: Create an AI filter policy for an organisation
+      tags:
+      - AI Filter Policies
+  /api/v3/organizations/{organisation}/ai/filter-policies/{policyId}:
+    delete:
+      operationId: deleteFilterPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Filter policy deleted successfully
+        "500":
+          description: Failed to delete filter policy
+      summary: Delete a specific AI filter policy
+      tags:
+      - AI Filter Policies
+    get:
+      operationId: getFilterPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Filter policy details
+        "404":
+          description: Filter policy not found
+      summary: Get a specific AI filter policy
+      tags:
+      - AI Filter Policies
+    put:
+      operationId: updateFilterPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateFilterPolicy_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Filter policy updated successfully
+        "422":
+          description: Validation error
+        "500":
+          description: Failed to update filter policy
+      summary: Update a specific AI filter policy
+      tags:
+      - AI Filter Policies
+  /api/v3/organizations/{organisation}/ai/filter-policies/{policyId}/enable:
+    put:
+      operationId: enableFilterPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Filter policy enabled successfully
+        "500":
+          description: Failed to enable filter policy
+      summary: Enable a specific AI filter policy
+      tags:
+      - AI Filter Policies
+  /api/v3/organizations/{organisation}/ai/filter-policies/{policyId}/disable:
+    put:
+      operationId: disableFilterPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Filter policy disabled successfully
+        "500":
+          description: Failed to disable filter policy
+      summary: Disable a specific AI filter policy
+      tags:
+      - AI Filter Policies
+  /api/v3/organizations/{organisation}/ai/usage/me:
+    get:
+      operationId: getMyUsage
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMyUsage_200_response'
+          description: User AI usage summary
+        "401":
+          description: Cannot determine caller identity
+        "500":
+          description: Failed to retrieve usage data
+      summary: Get AI usage summary for the authenticated user
+      tags:
+      - AI Usage
   /api/v3/organizations/{organisation}/applications:
     get:
       operationId: listApplications
@@ -12698,6 +13423,25 @@ components:
           items:
             type: string
           type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
+          items:
+            type: string
+          type: array
         country:
           description: Country code
           example: US
@@ -12821,6 +13565,25 @@ components:
           description: Excluded IP addresses
           example:
           - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
           items:
             type: string
           type: array
@@ -13094,6 +13857,9 @@ components:
     V2RuleProxyRequest:
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         cache_lifetime: "3600"
         proxy_strip_request_headers:
         - Cookie
@@ -13114,6 +13880,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         application_name: my-app
         auth_user: admin
         host: backend.test-domain.com
@@ -13210,6 +13978,7 @@ components:
           - block_ua
           notify_slack: https://hooks.slack.com/services/XXX
           paranoia_level: 1
+        asn: any
         failover_origin_status_codes:
         - "502"
         - "503"
@@ -13307,6 +14076,25 @@ components:
           description: Excluded IP addresses
           example:
           - 172.16.0.0/12
+          items:
+            type: string
+          type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
           items:
             type: string
           type: array
@@ -13466,6 +14254,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -13487,6 +14278,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule_id
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -13499,6 +14292,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           cache_lifetime: "3600"
           proxy_strip_request_headers:
@@ -13630,6 +14424,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -13651,6 +14448,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -13663,6 +14462,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           status_code: "301"
           to: https://test-domain.com/new-path
@@ -13693,6 +14493,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -13714,6 +14517,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -13726,6 +14531,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           custom_response_status_code: 503
           custom_response_body: <html><body>Custom maintenance page</body></html>
@@ -13752,6 +14558,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -13773,6 +14582,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -13785,12 +14596,16 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
       type: object
     V2RuleRedirectRequest:
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
@@ -13815,6 +14630,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -13823,6 +14640,7 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+        asn: any
       properties:
         domain:
           description: "Domain patterns (default: any)"
@@ -13918,6 +14736,25 @@ components:
           items:
             type: string
           type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
+          items:
+            type: string
+          type: array
         redirect_to:
           description: Redirect destination URL
           example: https://test-domain.com/new-path
@@ -13935,6 +14772,9 @@ components:
     V2RuleCustomResponseRequest:
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         status_code: 503
         method: method_is
         ip_is_not:
@@ -13961,6 +14801,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -13969,6 +14811,7 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+        asn: any
       properties:
         domain:
           description: "Domain patterns (default: any)"
@@ -14064,6 +14907,25 @@ components:
           items:
             type: string
           type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
+          items:
+            type: string
+          type: array
         custom_response_body:
           description: Custom response body content
           example: <html><body>Custom maintenance page</body></html>
@@ -14089,6 +14951,9 @@ components:
     V2RuleContentFilterRequest:
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
@@ -14110,6 +14975,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
         domain:
         - test-domain.com
@@ -14119,6 +14986,7 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+        asn: any
       properties:
         domain:
           description: "Domain patterns (default: any)"
@@ -14213,6 +15081,25 @@ components:
           items:
             type: string
           type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
+          items:
+            type: string
+          type: array
         fn_uuid:
           description: Function UUID
           example: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
@@ -14244,6 +15131,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -14265,6 +15155,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -14277,6 +15169,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           static_file_path: /index.html
       type: object
@@ -14293,6 +15186,9 @@ components:
         type: object
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         static_file_path: /index.html
         ip_is_not:
@@ -14316,6 +15212,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -14324,6 +15222,7 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+        asn: any
       type: object
     V2RuleHeaderAction:
       example:
@@ -14353,6 +15252,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -14374,6 +15276,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -14386,6 +15290,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           headers:
             X-Custom-Header: value
@@ -14411,6 +15316,9 @@ components:
         headers:
           X-Custom-Header: value
           Cache-Control: max-age=3600
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
@@ -14433,6 +15341,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         domain:
         - test-domain.com
         - '*.test-domain.com'
@@ -14441,6 +15351,7 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+        asn: any
       type: object
     V2RuleFunctionAction:
       example:
@@ -14464,6 +15375,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -14485,6 +15399,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -14497,12 +15413,16 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
       type: object
     V2RuleFunctionRequest:
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
@@ -14524,6 +15444,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
         domain:
         - test-domain.com
@@ -14533,6 +15455,7 @@ components:
         - 192.168.1.0/24
         - 10.0.0.1
         disabled: false
+        asn: any
       properties:
         domain:
           description: "Domain patterns (default: any)"
@@ -14627,6 +15550,25 @@ components:
           items:
             type: string
           type: array
+        asn:
+          description: "ASN filter type (asn_is, asn_is_not, any)"
+          example: any
+          type: string
+        asn_is:
+          description: Allowed AS numbers
+          example:
+          - "15169"
+          - "8075"
+          items:
+            type: string
+          type: array
+        asn_is_not:
+          description: Excluded AS numbers
+          example:
+          - "13335"
+          items:
+            type: string
+          type: array
         fn_uuid:
           description: Function UUID
           example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
@@ -14670,6 +15612,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -14691,6 +15636,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -14703,6 +15650,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           robot_challenge_type: invisible
           robot_challenge_verification_ttl: 10800
@@ -14732,6 +15680,9 @@ components:
       example:
         country: country_is
         robot_challenge_type: invisible
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
@@ -14754,6 +15705,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         robot_challenge_verification_ttl: 10800
         domain:
         - test-domain.com
@@ -14764,6 +15717,7 @@ components:
         - 10.0.0.1
         robot_challenge_challenge_ttl: 30
         disabled: false
+        asn: any
       type: object
     V2RuleAuthAction:
       example:
@@ -14793,6 +15747,9 @@ components:
         type: object
       example:
         country: US
+        asn_is:
+        - "15169"
+        - "8075"
         method: GET
         ip_is_not:
         - 172.16.0.0/12
@@ -14814,6 +15771,8 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        asn_is_not:
+        - "13335"
         country_is_not:
         - CN
         - RU
@@ -14826,6 +15785,7 @@ components:
         - 10.0.0.1
         action: redirect
         disabled: false
+        asn: any
         action_config:
           auth_user: admin
           auth_pass: secure_password123
@@ -14848,6 +15808,9 @@ components:
         type: object
       example:
         country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
         method: method_is
         ip_is_not:
         - 172.16.0.0/12
@@ -14870,6 +15833,8 @@ components:
         country_is_not:
         - CN
         - RU
+        asn_is_not:
+        - "13335"
         auth_user: admin
         domain:
         - test-domain.com
@@ -14880,6 +15845,7 @@ components:
         - 10.0.0.1
         auth_pass: secure_password123
         disabled: false
+        asn: any
       type: object
     V2SecretStore:
       properties:
@@ -18451,13 +19417,20 @@ components:
       type: object
     listAIAgents_200_response_agents_inner:
       example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
+        assignedSkills:
+        - assignedSkills
+        - assignedSkills
         agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        guardrailPreset: guardrailPreset
         modelId: modelId
+        description: description
+        hasOverlay: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        longContext: true
         name: name
         temperature: 0.8008281904610115
         maxTokens: 6
-        description: description
+        isGlobal: true
         group: group
         allowedTools:
         - allowedTools
@@ -18483,6 +19456,18 @@ components:
           items:
             type: string
           type: array
+        assignedSkills:
+          items:
+            type: string
+          type: array
+        longContext:
+          type: boolean
+        guardrailPreset:
+          type: string
+        isGlobal:
+          type: boolean
+        hasOverlay:
+          type: boolean
         createdAt:
           format: date-time
           type: string
@@ -18493,25 +19478,39 @@ components:
     listAIAgents_200_response:
       example:
         agents:
-        - createdAt: 2000-01-23T04:56:07.000+00:00
+        - assignedSkills:
+          - assignedSkills
+          - assignedSkills
           agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          guardrailPreset: guardrailPreset
           modelId: modelId
+          description: description
+          hasOverlay: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          longContext: true
           name: name
           temperature: 0.8008281904610115
           maxTokens: 6
-          description: description
+          isGlobal: true
           group: group
           allowedTools:
           - allowedTools
           - allowedTools
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - createdAt: 2000-01-23T04:56:07.000+00:00
+        - assignedSkills:
+          - assignedSkills
+          - assignedSkills
           agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          guardrailPreset: guardrailPreset
           modelId: modelId
+          description: description
+          hasOverlay: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          longContext: true
           name: name
           temperature: 0.8008281904610115
           maxTokens: 6
-          description: description
+          isGlobal: true
           group: group
           allowedTools:
           - allowedTools
@@ -18562,9 +19561,29 @@ components:
           items:
             type: string
           type: array
+        assignedSkills:
+          description: Skill IDs to assign to this agent
+          items:
+            type: string
+          type: array
         createdBy:
           description: User identifier who created the agent
           type: string
+        longContext:
+          description: Enable 1M context window support
+          type: boolean
+        guardrailPreset:
+          description: Guardrail preset name
+          enum:
+          - official
+          - official-sensitive
+          - protected
+          type: string
+        filterPolicies:
+          description: Filter policy IDs to apply to this agent's inference requests
+          items:
+            type: string
+          type: array
       required:
       - description
       - modelId
@@ -18588,18 +19607,25 @@ components:
       type: object
     getAIAgent_200_response_agent:
       example:
+        assignedSkills:
+        - assignedSkills
+        - assignedSkills
         agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        guardrailPreset: guardrailPreset
         modelId: modelId
         description: description
+        hasOverlay: true
         systemPrompt: systemPrompt
         createdAt: 2000-01-23T04:56:07.000+00:00
         createdBy: createdBy
+        longContext: true
         name: name
         temperature: 0.8008281904610115
         maxTokens: 6
         allowedCollections:
         - allowedCollections
         - allowedCollections
+        isGlobal: true
         group: group
         allowedTools:
         - allowedTools
@@ -18631,6 +19657,23 @@ components:
           items:
             type: string
           type: array
+        assignedSkills:
+          items:
+            type: string
+          type: array
+        longContext:
+          description: Whether 1M context window is enabled
+          type: boolean
+        guardrailPreset:
+          description: Guardrail preset name
+          type: string
+        isGlobal:
+          description: Whether this is a platform-managed global agent
+          type: boolean
+        hasOverlay:
+          description: Whether the requesting org has a per-org overlay for this global
+            agent
+          type: boolean
         createdBy:
           type: string
         createdAt:
@@ -18643,18 +19686,25 @@ components:
     getAIAgent_200_response:
       example:
         agent:
+          assignedSkills:
+          - assignedSkills
+          - assignedSkills
           agentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          hasOverlay: true
           systemPrompt: systemPrompt
           createdAt: 2000-01-23T04:56:07.000+00:00
           createdBy: createdBy
+          longContext: true
           name: name
           temperature: 0.8008281904610115
           maxTokens: 6
           allowedCollections:
           - allowedCollections
           - allowedCollections
+          isGlobal: true
           group: group
           allowedTools:
           - allowedTools
@@ -18689,6 +19739,26 @@ components:
             type: string
           type: array
         allowedCollections:
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          description: Skill IDs to assign to this agent
+          items:
+            type: string
+          type: array
+        longContext:
+          description: Enable 1M context window support
+          type: boolean
+        guardrailPreset:
+          description: Guardrail preset name
+          enum:
+          - official
+          - official-sensitive
+          - protected
+          type: string
+        filterPolicies:
+          description: Filter policy IDs to apply to this agent's inference requests
           items:
             type: string
           type: array
@@ -18745,6 +19815,21 @@ components:
           description: Optional additional system prompt (appended to agent's configured
             prompt)
           type: string
+        longContext:
+          default: false
+          description: Per-request override to force 1M context window routing
+          type: boolean
+        maxToolIterations:
+          description: Maximum tool auto-execution iterations for this request
+          maximum: 1000
+          minimum: 1
+          type: integer
+        allowedCollections:
+          description: Per-request override for vector DB collections the agent can
+            query
+          items:
+            type: string
+          type: array
       required:
       - message
       type: object
@@ -18842,6 +19927,204 @@ components:
       - pollUrl
       - requestId
       - status
+      type: object
+    getAgentOverlay_200_response_overlay:
+      example:
+        disabledSkills:
+        - disabledSkills
+        - disabledSkills
+        guardrailPreset: guardrailPreset
+        modelId: modelId
+        disabledTools:
+        - disabledTools
+        - disabledTools
+        temperature: 0.8008281904610115
+        maxTokens: 6
+        additionalSkills:
+        - additionalSkills
+        - additionalSkills
+        allowedCollections:
+        - allowedCollections
+        - allowedCollections
+        systemPromptAppend: systemPromptAppend
+        version: 1
+        additionalTools:
+        - additionalTools
+        - additionalTools
+      nullable: true
+      properties:
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        disabledSkills:
+          items:
+            type: string
+          type: array
+        additionalSkills:
+          items:
+            type: string
+          type: array
+        additionalTools:
+          items:
+            type: string
+          type: array
+        disabledTools:
+          items:
+            type: string
+          type: array
+        systemPromptAppend:
+          type: string
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          type: string
+        version:
+          type: integer
+      type: object
+    getAgentOverlay_200_response_base:
+      description: Base global agent metadata
+      example:
+        assignedSkillIds:
+        - assignedSkillIds
+        - assignedSkillIds
+        agentId: agentId
+        modelId: modelId
+        name: name
+        allowedTools:
+        - allowedTools
+        - allowedTools
+      properties:
+        agentId:
+          type: string
+        name:
+          type: string
+        modelId:
+          type: string
+        allowedTools:
+          items:
+            type: string
+          type: array
+        assignedSkillIds:
+          items:
+            type: string
+          type: array
+      type: object
+    getAgentOverlay_200_response:
+      example:
+        overlay:
+          disabledSkills:
+          - disabledSkills
+          - disabledSkills
+          guardrailPreset: guardrailPreset
+          modelId: modelId
+          disabledTools:
+          - disabledTools
+          - disabledTools
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          additionalSkills:
+          - additionalSkills
+          - additionalSkills
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
+          systemPromptAppend: systemPromptAppend
+          version: 1
+          additionalTools:
+          - additionalTools
+          - additionalTools
+        base:
+          assignedSkillIds:
+          - assignedSkillIds
+          - assignedSkillIds
+          agentId: agentId
+          modelId: modelId
+          name: name
+          allowedTools:
+          - allowedTools
+          - allowedTools
+      properties:
+        overlay:
+          $ref: '#/components/schemas/getAgentOverlay_200_response_overlay'
+        base:
+          $ref: '#/components/schemas/getAgentOverlay_200_response_base'
+      type: object
+    upsertAgentOverlay_request:
+      properties:
+        modelId:
+          description: Override the base agent's model
+          type: string
+        temperature:
+          description: Override temperature
+          maximum: 1
+          minimum: 0
+          type: number
+        maxTokens:
+          description: Override max tokens
+          minimum: 1
+          type: integer
+        disabledSkills:
+          description: Global skill IDs to exclude
+          items:
+            type: string
+          type: array
+        additionalSkills:
+          description: Org-owned skill IDs to add
+          items:
+            type: string
+          type: array
+        additionalTools:
+          description: Tool names to add
+          items:
+            type: string
+          type: array
+        disabledTools:
+          description: Tool names to remove
+          items:
+            type: string
+          type: array
+        systemPromptAppend:
+          description: Text appended to base system prompt
+          type: string
+        allowedCollections:
+          description: Vector DB collections
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          description: Guardrail preset
+          enum:
+          - official
+          - official-sensitive
+          - protected
+          type: string
+        version:
+          description: Current version for optimistic concurrency
+          type: integer
+      type: object
+    upsertAgentOverlay_200_response:
+      example:
+        overlay: "{}"
+      properties:
+        overlay:
+          type: object
+      type: object
+    deleteAgentOverlay_200_response:
+      example:
+        success: true
+        message: Agent reverted to defaults
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          example: Agent reverted to defaults
+          type: string
       type: object
     listCustomTools_200_response_tools_inner:
       example:
@@ -20251,6 +21534,525 @@ components:
         nextCursor:
           nullable: true
           type: string
+      type: object
+    listSlackBots_200_response_bots_inner:
+      example:
+        connected: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        agentId: agentId
+        sessionTtlDays: 0
+        setupType: quant
+        keywordsEnabled: true
+        botId: botId
+        status: active
+      properties:
+        botId:
+          type: string
+        agentId:
+          type: string
+        setupType:
+          enum:
+          - quant
+          - byo
+          type: string
+        status:
+          enum:
+          - active
+          - inactive
+          type: string
+        connected:
+          type: boolean
+        sessionTtlDays:
+          type: integer
+        keywordsEnabled:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    listSlackBots_200_response:
+      example:
+        bots:
+        - connected: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          agentId: agentId
+          sessionTtlDays: 0
+          setupType: quant
+          keywordsEnabled: true
+          botId: botId
+          status: active
+        - connected: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          agentId: agentId
+          sessionTtlDays: 0
+          setupType: quant
+          keywordsEnabled: true
+          botId: botId
+          status: active
+      properties:
+        bots:
+          items:
+            $ref: '#/components/schemas/listSlackBots_200_response_bots_inner'
+          type: array
+      type: object
+    createSlackBot_request:
+      properties:
+        agentId:
+          description: The AI agent that powers this bot
+          type: string
+        setupType:
+          description: Whether to use Quant-managed or customer-provided Slack app
+          enum:
+          - quant
+          - byo
+          type: string
+        sessionTtlDays:
+          description: Session TTL in days
+          maximum: 90
+          minimum: 1
+          type: integer
+        allowedChannels:
+          description: Slack channel IDs the bot may respond in
+          items:
+            type: string
+          type: array
+        keywordsEnabled:
+          description: Whether keyword triggers are enabled
+          type: boolean
+        keywords:
+          description: Keywords that trigger the bot
+          items:
+            type: string
+          type: array
+        slashCommands:
+          description: Slash commands the bot responds to
+          items:
+            type: string
+          type: array
+      required:
+      - agentId
+      - setupType
+      type: object
+    createSlackBot_201_response:
+      example:
+        bot: "{}"
+      properties:
+        bot:
+          type: object
+      type: object
+    getSlackBot_200_response_bot:
+      example:
+        connected: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        agentId: agentId
+        sessionTtlDays: 0
+        keywords:
+        - keywords
+        - keywords
+        slashCommands:
+        - slashCommands
+        - slashCommands
+        setupType: quant
+        keywordsEnabled: true
+        botId: botId
+        allowedChannels:
+        - allowedChannels
+        - allowedChannels
+        status: active
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        botId:
+          type: string
+        agentId:
+          type: string
+        setupType:
+          enum:
+          - quant
+          - byo
+          type: string
+        status:
+          enum:
+          - active
+          - inactive
+          type: string
+        connected:
+          type: boolean
+        sessionTtlDays:
+          type: integer
+        allowedChannels:
+          items:
+            type: string
+          type: array
+        keywordsEnabled:
+          type: boolean
+        keywords:
+          items:
+            type: string
+          type: array
+        slashCommands:
+          items:
+            type: string
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    getSlackBot_200_response:
+      example:
+        bot:
+          connected: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          agentId: agentId
+          sessionTtlDays: 0
+          keywords:
+          - keywords
+          - keywords
+          slashCommands:
+          - slashCommands
+          - slashCommands
+          setupType: quant
+          keywordsEnabled: true
+          botId: botId
+          allowedChannels:
+          - allowedChannels
+          - allowedChannels
+          status: active
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        bot:
+          $ref: '#/components/schemas/getSlackBot_200_response_bot'
+      type: object
+    updateSlackBot_request:
+      properties:
+        agentId:
+          description: Change the backing AI agent
+          type: string
+        status:
+          description: Enable or disable the bot
+          enum:
+          - active
+          - inactive
+          type: string
+        sessionTtlDays:
+          description: Session TTL in days
+          maximum: 90
+          minimum: 1
+          type: integer
+        allowedChannels:
+          description: Slack channel IDs the bot may respond in
+          items:
+            type: string
+          type: array
+        keywordsEnabled:
+          description: Whether keyword triggers are enabled
+          type: boolean
+        keywords:
+          description: Keywords that trigger the bot
+          items:
+            type: string
+          type: array
+        slashCommands:
+          description: Slash commands the bot responds to
+          items:
+            type: string
+          type: array
+      type: object
+    deleteSlackBot_200_response:
+      example:
+        success: true
+        message: Slack bot deleted successfully
+      properties:
+        success:
+          example: true
+          type: boolean
+        message:
+          example: Slack bot deleted successfully
+          type: string
+      type: object
+    searchSlackWorkspaceUsers_200_response_results_inner:
+      example:
+        name: name
+        real_name: real_name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        real_name:
+          type: string
+      type: object
+    searchSlackWorkspaceUsers_200_response:
+      example:
+        results:
+        - name: name
+          real_name: real_name
+          id: id
+        - name: name
+          real_name: real_name
+          id: id
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/searchSlackWorkspaceUsers_200_response_results_inner'
+          type: array
+      type: object
+    searchSlackWorkspaceChannels_200_response_results_inner:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    searchSlackWorkspaceChannels_200_response:
+      example:
+        results:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/searchSlackWorkspaceChannels_200_response_results_inner'
+          type: array
+      type: object
+    getGovernanceConfig_200_response_spendLimits:
+      example:
+        monthlyBudgetCents: 0
+        perUserDailyBudgetCents: 5
+        warningThresholdPercent: 5
+        perUserMonthlyBudgetCents: 1
+        dailyBudgetCents: 6
+      properties:
+        monthlyBudgetCents:
+          nullable: true
+          type: integer
+        dailyBudgetCents:
+          nullable: true
+          type: integer
+        perUserMonthlyBudgetCents:
+          nullable: true
+          type: integer
+        perUserDailyBudgetCents:
+          nullable: true
+          type: integer
+        warningThresholdPercent:
+          nullable: true
+          type: integer
+      type: object
+    getGovernanceConfig_200_response:
+      example:
+        mandatoryFilterPolicies:
+        - mandatoryFilterPolicies
+        - mandatoryFilterPolicies
+        modelList:
+        - modelList
+        - modelList
+        modelPolicy: unrestricted
+        aiEnabled: true
+        mandatoryGuardrailPreset: mandatoryGuardrailPreset
+        version: 2
+        orgId: orgId
+        spendLimits:
+          monthlyBudgetCents: 0
+          perUserDailyBudgetCents: 5
+          warningThresholdPercent: 5
+          perUserMonthlyBudgetCents: 1
+          dailyBudgetCents: 6
+      properties:
+        orgId:
+          type: string
+        aiEnabled:
+          type: boolean
+        modelPolicy:
+          enum:
+          - unrestricted
+          - allowlist
+          - blocklist
+          type: string
+        modelList:
+          items:
+            type: string
+          type: array
+        mandatoryGuardrailPreset:
+          nullable: true
+          type: string
+        mandatoryFilterPolicies:
+          items:
+            type: string
+          type: array
+        spendLimits:
+          $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits'
+        version:
+          type: integer
+      type: object
+    updateGovernanceConfig_request:
+      properties:
+        aiEnabled:
+          type: boolean
+        modelPolicy:
+          enum:
+          - unrestricted
+          - allowlist
+          - blocklist
+          type: string
+        modelList:
+          items:
+            type: string
+          type: array
+        mandatoryGuardrailPreset:
+          enum:
+          - official
+          - official-sensitive
+          - protected
+          nullable: true
+          type: string
+        mandatoryFilterPolicies:
+          items:
+            type: string
+          type: array
+        spendLimits:
+          type: object
+        version:
+          type: integer
+      required:
+      - aiEnabled
+      - modelPolicy
+      type: object
+    updateGovernanceConfig_200_response:
+      example:
+        success: true
+        config: "{}"
+      properties:
+        success:
+          example: true
+          type: boolean
+        config:
+          type: object
+      type: object
+    createFilterPolicy_request_rules_inner_match:
+      description: Match criteria
+      properties:
+        type:
+          enum:
+          - word
+          - regex
+          type: string
+        values:
+          description: Required when type=word
+          items:
+            maxLength: 100
+            type: string
+          type: array
+        pattern:
+          description: Required when type=regex
+          maxLength: 500
+          type: string
+      type: object
+    createFilterPolicy_request_rules_inner:
+      properties:
+        name:
+          type: string
+        match:
+          $ref: '#/components/schemas/createFilterPolicy_request_rules_inner_match'
+        action:
+          enum:
+          - BLOCK
+          - REDACT
+          type: string
+        applyTo:
+          enum:
+          - input
+          - output
+          - both
+          type: string
+      type: object
+    createFilterPolicy_request:
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        description:
+          maxLength: 1000
+          nullable: true
+          type: string
+        enabled:
+          type: boolean
+        rules:
+          items:
+            $ref: '#/components/schemas/createFilterPolicy_request_rules_inner'
+          maxItems: 100
+          minItems: 1
+          type: array
+      required:
+      - name
+      - rules
+      type: object
+    updateFilterPolicy_request:
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        description:
+          maxLength: 1000
+          nullable: true
+          type: string
+        enabled:
+          type: boolean
+        rules:
+          items:
+            $ref: '#/components/schemas/createFilterPolicy_request_rules_inner'
+          maxItems: 100
+          minItems: 1
+          type: array
+      type: object
+    getMyUsage_200_response_monthly:
+      example:
+        requestCount: 6
+        spendCents: 0
+      properties:
+        spendCents:
+          type: integer
+        requestCount:
+          type: integer
+      type: object
+    getMyUsage_200_response_daily:
+      example:
+        spendCents: 1
+      properties:
+        spendCents:
+          type: integer
+      type: object
+    getMyUsage_200_response:
+      example:
+        daily:
+          spendCents: 1
+        quota: "{}"
+        monthly:
+          requestCount: 6
+          spendCents: 0
+        currentMonth: 2026-03
+        userId: userId
+      properties:
+        userId:
+          type: string
+        currentMonth:
+          example: 2026-03
+          type: string
+        monthly:
+          $ref: '#/components/schemas/getMyUsage_200_response_monthly'
+        daily:
+          $ref: '#/components/schemas/getMyUsage_200_response_daily'
+        quota:
+          nullable: true
+          type: object
       type: object
     createApplication_403_response:
       example:

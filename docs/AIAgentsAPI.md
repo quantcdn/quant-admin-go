@@ -7,9 +7,12 @@ Method | HTTP request | Description
 [**ChatWithAIAgent**](AIAgentsAPI.md#ChatWithAIAgent) | **Post** /api/v3/organizations/{organisation}/ai/agents/{agentId}/chat | Chat with AI Agent
 [**CreateAIAgent**](AIAgentsAPI.md#CreateAIAgent) | **Post** /api/v3/organizations/{organisation}/ai/agents | Create AI Agent
 [**DeleteAIAgent**](AIAgentsAPI.md#DeleteAIAgent) | **Delete** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Delete Agent
+[**DeleteAgentOverlay**](AIAgentsAPI.md#DeleteAgentOverlay) | **Delete** /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay | Delete Agent Overlay
 [**GetAIAgent**](AIAgentsAPI.md#GetAIAgent) | **Get** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Get Agent Details
+[**GetAgentOverlay**](AIAgentsAPI.md#GetAgentOverlay) | **Get** /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay | Get Agent Overlay
 [**ListAIAgents**](AIAgentsAPI.md#ListAIAgents) | **Get** /api/v3/organizations/{organisation}/ai/agents | List AI Agents
 [**UpdateAIAgent**](AIAgentsAPI.md#UpdateAIAgent) | **Put** /api/v3/organizations/{organisation}/ai/agents/{agentId} | Update Agent
+[**UpsertAgentOverlay**](AIAgentsAPI.md#UpsertAgentOverlay) | **Put** /api/v3/organizations/{organisation}/ai/agents/{agentId}/overlay | Upsert Agent Overlay
 
 
 
@@ -233,6 +236,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteAgentOverlay
+
+> DeleteAgentOverlay200Response DeleteAgentOverlay(ctx, organisation, agentId).Execute()
+
+Delete Agent Overlay
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation ID
+	agentId := "agentId_example" // string | Global agent identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIAgentsAPI.DeleteAgentOverlay(context.Background(), organisation, agentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.DeleteAgentOverlay``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteAgentOverlay`: DeleteAgentOverlay200Response
+	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.DeleteAgentOverlay`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**agentId** | **string** | Global agent identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAgentOverlayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**DeleteAgentOverlay200Response**](DeleteAgentOverlay200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetAIAgent
 
 > GetAIAgent200Response GetAIAgent(ctx, organisation, agentId).Execute()
@@ -291,6 +367,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAIAgent200Response**](GetAIAgent200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAgentOverlay
+
+> GetAgentOverlay200Response GetAgentOverlay(ctx, organisation, agentId).Execute()
+
+Get Agent Overlay
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation ID
+	agentId := "agentId_example" // string | Global agent identifier (e.g., 'quantgov-code')
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIAgentsAPI.GetAgentOverlay(context.Background(), organisation, agentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.GetAgentOverlay``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAgentOverlay`: GetAgentOverlay200Response
+	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.GetAgentOverlay`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**agentId** | **string** | Global agent identifier (e.g., &#39;quantgov-code&#39;) | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAgentOverlayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetAgentOverlay200Response**](GetAgentOverlay200Response.md)
 
 ### Authorization
 
@@ -438,6 +587,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateAIAgent200Response**](UpdateAIAgent200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpsertAgentOverlay
+
+> UpsertAgentOverlay200Response UpsertAgentOverlay(ctx, organisation, agentId).UpsertAgentOverlayRequest(upsertAgentOverlayRequest).Execute()
+
+Upsert Agent Overlay
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation ID
+	agentId := "agentId_example" // string | Global agent identifier
+	upsertAgentOverlayRequest := *openapiclient.NewUpsertAgentOverlayRequest() // UpsertAgentOverlayRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIAgentsAPI.UpsertAgentOverlay(context.Background(), organisation, agentId).UpsertAgentOverlayRequest(upsertAgentOverlayRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIAgentsAPI.UpsertAgentOverlay``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpsertAgentOverlay`: UpsertAgentOverlay200Response
+	fmt.Fprintf(os.Stdout, "Response from `AIAgentsAPI.UpsertAgentOverlay`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**agentId** | **string** | Global agent identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpsertAgentOverlayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **upsertAgentOverlayRequest** | [**UpsertAgentOverlayRequest**](UpsertAgentOverlayRequest.md) |  | 
+
+### Return type
+
+[**UpsertAgentOverlay200Response**](UpsertAgentOverlay200Response.md)
 
 ### Authorization
 

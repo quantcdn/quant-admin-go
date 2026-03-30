@@ -66,6 +66,21 @@ func Test_quantadmingo_AIAgentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIAgentsAPIService DeleteAgentOverlay", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var agentId string
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.DeleteAgentOverlay(context.Background(), organisation, agentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIAgentsAPIService GetAIAgent", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -74,6 +89,21 @@ func Test_quantadmingo_AIAgentsAPIService(t *testing.T) {
 		var agentId string
 
 		resp, httpRes, err := apiClient.AIAgentsAPI.GetAIAgent(context.Background(), organisation, agentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService GetAgentOverlay", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var agentId string
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.GetAgentOverlay(context.Background(), organisation, agentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -103,6 +133,21 @@ func Test_quantadmingo_AIAgentsAPIService(t *testing.T) {
 		var agentId string
 
 		resp, httpRes, err := apiClient.AIAgentsAPI.UpdateAIAgent(context.Background(), organisation, agentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AIAgentsAPIService UpsertAgentOverlay", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var agentId string
+
+		resp, httpRes, err := apiClient.AIAgentsAPI.UpsertAgentOverlay(context.Background(), organisation, agentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -19,6 +19,9 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
+**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] 
+**AsnIs** | Pointer to **[]string** | Allowed AS numbers | [optional] 
+**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers | [optional] 
 **RobotChallengeType** | **string** | Challenge type (invisible or checkbox) | 
 **RobotChallengeVerificationTtl** | Pointer to **int32** | Verification TTL in seconds | [optional] [default to 10800]
 **RobotChallengeChallengeTtl** | Pointer to **int32** | Challenge TTL in seconds | [optional] [default to 30]
@@ -406,6 +409,81 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleBotChallengeRequest) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetAsn
+
+`func (o *V2RuleBotChallengeRequest) GetAsn() string`
+
+GetAsn returns the Asn field if non-nil, zero value otherwise.
+
+### GetAsnOk
+
+`func (o *V2RuleBotChallengeRequest) GetAsnOk() (*string, bool)`
+
+GetAsnOk returns a tuple with the Asn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsn
+
+`func (o *V2RuleBotChallengeRequest) SetAsn(v string)`
+
+SetAsn sets Asn field to given value.
+
+### HasAsn
+
+`func (o *V2RuleBotChallengeRequest) HasAsn() bool`
+
+HasAsn returns a boolean if a field has been set.
+
+### GetAsnIs
+
+`func (o *V2RuleBotChallengeRequest) GetAsnIs() []string`
+
+GetAsnIs returns the AsnIs field if non-nil, zero value otherwise.
+
+### GetAsnIsOk
+
+`func (o *V2RuleBotChallengeRequest) GetAsnIsOk() (*[]string, bool)`
+
+GetAsnIsOk returns a tuple with the AsnIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsnIs
+
+`func (o *V2RuleBotChallengeRequest) SetAsnIs(v []string)`
+
+SetAsnIs sets AsnIs field to given value.
+
+### HasAsnIs
+
+`func (o *V2RuleBotChallengeRequest) HasAsnIs() bool`
+
+HasAsnIs returns a boolean if a field has been set.
+
+### GetAsnIsNot
+
+`func (o *V2RuleBotChallengeRequest) GetAsnIsNot() []string`
+
+GetAsnIsNot returns the AsnIsNot field if non-nil, zero value otherwise.
+
+### GetAsnIsNotOk
+
+`func (o *V2RuleBotChallengeRequest) GetAsnIsNotOk() (*[]string, bool)`
+
+GetAsnIsNotOk returns a tuple with the AsnIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsnIsNot
+
+`func (o *V2RuleBotChallengeRequest) SetAsnIsNot(v []string)`
+
+SetAsnIsNot sets AsnIsNot field to given value.
+
+### HasAsnIsNot
+
+`func (o *V2RuleBotChallengeRequest) HasAsnIsNot() bool`
+
+HasAsnIsNot returns a boolean if a field has been set.
 
 ### GetRobotChallengeType
 
