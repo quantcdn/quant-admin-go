@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP address | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
+**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] 
+**AsnIs** | Pointer to **[]string** | Allowed AS numbers | [optional] 
+**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers | [optional] 
 **Country** | Pointer to **string** | Country code | [optional] 
 **CountryIs** | Pointer to **[]string** | Allowed countries | [optional] 
 **CountryIsNot** | Pointer to **[]string** | Excluded countries | [optional] 
@@ -382,6 +385,81 @@ SetIpIsNot sets IpIsNot field to given value.
 `func (o *V2RuleContentFilter) HasIpIsNot() bool`
 
 HasIpIsNot returns a boolean if a field has been set.
+
+### GetAsn
+
+`func (o *V2RuleContentFilter) GetAsn() string`
+
+GetAsn returns the Asn field if non-nil, zero value otherwise.
+
+### GetAsnOk
+
+`func (o *V2RuleContentFilter) GetAsnOk() (*string, bool)`
+
+GetAsnOk returns a tuple with the Asn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsn
+
+`func (o *V2RuleContentFilter) SetAsn(v string)`
+
+SetAsn sets Asn field to given value.
+
+### HasAsn
+
+`func (o *V2RuleContentFilter) HasAsn() bool`
+
+HasAsn returns a boolean if a field has been set.
+
+### GetAsnIs
+
+`func (o *V2RuleContentFilter) GetAsnIs() []string`
+
+GetAsnIs returns the AsnIs field if non-nil, zero value otherwise.
+
+### GetAsnIsOk
+
+`func (o *V2RuleContentFilter) GetAsnIsOk() (*[]string, bool)`
+
+GetAsnIsOk returns a tuple with the AsnIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsnIs
+
+`func (o *V2RuleContentFilter) SetAsnIs(v []string)`
+
+SetAsnIs sets AsnIs field to given value.
+
+### HasAsnIs
+
+`func (o *V2RuleContentFilter) HasAsnIs() bool`
+
+HasAsnIs returns a boolean if a field has been set.
+
+### GetAsnIsNot
+
+`func (o *V2RuleContentFilter) GetAsnIsNot() []string`
+
+GetAsnIsNot returns the AsnIsNot field if non-nil, zero value otherwise.
+
+### GetAsnIsNotOk
+
+`func (o *V2RuleContentFilter) GetAsnIsNotOk() (*[]string, bool)`
+
+GetAsnIsNotOk returns a tuple with the AsnIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsnIsNot
+
+`func (o *V2RuleContentFilter) SetAsnIsNot(v []string)`
+
+SetAsnIsNot sets AsnIsNot field to given value.
+
+### HasAsnIsNot
+
+`func (o *V2RuleContentFilter) HasAsnIsNot() bool`
+
+HasAsnIsNot returns a boolean if a field has been set.
 
 ### GetCountry
 
