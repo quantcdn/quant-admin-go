@@ -95,6 +95,20 @@ func Test_quantadmingo_AIVectorDatabaseAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIVectorDatabaseAPIService ListVectorDocuments", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var collectionId string
+
+		httpRes, err := apiClient.AIVectorDatabaseAPI.ListVectorDocuments(context.Background(), organisation, collectionId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AIVectorDatabaseAPIService QueryVectorCollection", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

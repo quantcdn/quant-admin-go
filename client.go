@@ -123,8 +123,6 @@ type APIClient struct {
 
 	VariablesAPI VariablesAPI
 
-	VectorDatabaseAPI VectorDatabaseAPI
-
 	VolumesAPI VolumesAPI
 }
 
@@ -181,7 +179,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ScalingPolicyAPI = (*ScalingPolicyAPIService)(&c.common)
 	c.TokensAPI = (*TokensAPIService)(&c.common)
 	c.VariablesAPI = (*VariablesAPIService)(&c.common)
-	c.VectorDatabaseAPI = (*VectorDatabaseAPIService)(&c.common)
 	c.VolumesAPI = (*VolumesAPIService)(&c.common)
 
 	return c
