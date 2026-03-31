@@ -118,6 +118,21 @@ type AIVectorDatabaseAPI interface {
 	ListVectorCollectionsExecute(r AIVectorDatabaseAPIListVectorCollectionsRequest) (*ListVectorCollections200Response, *http.Response, error)
 
 	/*
+	ListVectorDocuments List Documents in Collection
+
+	Lists documents in a collection with pagination. Supports filtering by document key.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organisation
+	@param collectionId
+	@return AIVectorDatabaseAPIListVectorDocumentsRequest
+	*/
+	ListVectorDocuments(ctx context.Context, organisation string, collectionId string) AIVectorDatabaseAPIListVectorDocumentsRequest
+
+	// ListVectorDocumentsExecute executes the request
+	ListVectorDocumentsExecute(r AIVectorDatabaseAPIListVectorDocumentsRequest) (*http.Response, error)
+
+	/*
 	QueryVectorCollection Semantic Search Query
 
 	Performs semantic search on a collection using vector similarity. Returns the most relevant documents based on meaning, not keyword matching.
@@ -734,6 +749,136 @@ func (a *AIVectorDatabaseAPIService) ListVectorCollectionsExecute(r AIVectorData
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AIVectorDatabaseAPIListVectorDocumentsRequest struct {
+	ctx context.Context
+	ApiService AIVectorDatabaseAPI
+	organisation string
+	collectionId string
+	key *string
+	limit *int32
+	offset *int32
+}
+
+// Filter by document key
+func (r AIVectorDatabaseAPIListVectorDocumentsRequest) Key(key string) AIVectorDatabaseAPIListVectorDocumentsRequest {
+	r.key = &key
+	return r
+}
+
+func (r AIVectorDatabaseAPIListVectorDocumentsRequest) Limit(limit int32) AIVectorDatabaseAPIListVectorDocumentsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r AIVectorDatabaseAPIListVectorDocumentsRequest) Offset(offset int32) AIVectorDatabaseAPIListVectorDocumentsRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r AIVectorDatabaseAPIListVectorDocumentsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.ListVectorDocumentsExecute(r)
+}
+
+/*
+ListVectorDocuments List Documents in Collection
+
+Lists documents in a collection with pagination. Supports filtering by document key.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organisation
+ @param collectionId
+ @return AIVectorDatabaseAPIListVectorDocumentsRequest
+*/
+func (a *AIVectorDatabaseAPIService) ListVectorDocuments(ctx context.Context, organisation string, collectionId string) AIVectorDatabaseAPIListVectorDocumentsRequest {
+	return AIVectorDatabaseAPIListVectorDocumentsRequest{
+		ApiService: a,
+		ctx: ctx,
+		organisation: organisation,
+		collectionId: collectionId,
+	}
+}
+
+// Execute executes the request
+func (a *AIVectorDatabaseAPIService) ListVectorDocumentsExecute(r AIVectorDatabaseAPIListVectorDocumentsRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AIVectorDatabaseAPIService.ListVectorDocuments")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents"
+	localVarPath = strings.Replace(localVarPath, "{"+"organisation"+"}", url.PathEscape(parameterValueToString(r.organisation, "organisation")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"collectionId"+"}", url.PathEscape(parameterValueToString(r.collectionId, "collectionId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.key != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "key", r.key, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 50
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	} else {
+		var defaultValue int32 = 0
+		r.offset = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type AIVectorDatabaseAPIQueryVectorCollectionRequest struct {

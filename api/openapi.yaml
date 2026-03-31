@@ -80,8 +80,6 @@ tags:
   name: Volumes
 - description: API token management
   name: Tokens
-- description: Vector Database
-  name: Vector Database
 - description: AI Slack Bots
   name: AI Slack Bots
 - description: AI Governance
@@ -7590,7 +7588,7 @@ paths:
           description: Failed to list documents
       summary: List Documents in Collection
       tags:
-      - Vector Database
+      - AI Vector Database
   /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query:
     post:
       description: |-

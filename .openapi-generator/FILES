@@ -39,7 +39,6 @@ api_scaling_policy.go
 api_ssh_access.go
 api_tokens.go
 api_variables.go
-api_vector_database.go
 api_volumes.go
 client.go
 configuration.go
@@ -451,7 +450,6 @@ docs/ValidateCompose422Response.md
 docs/ValidateComposeRequest.md
 docs/Variable.md
 docs/VariablesAPI.md
-docs/VectorDatabaseAPI.md
 docs/Volume.md
 docs/VolumesAPI.md
 docs/WafConfig.md
@@ -875,6 +873,5 @@ test/api_scaling_policy_test.go
 test/api_ssh_access_test.go
 test/api_tokens_test.go
 test/api_variables_test.go
-test/api_vector_database_test.go
 test/api_volumes_test.go
 utils.go
