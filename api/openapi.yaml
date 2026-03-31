@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.15.0
+  version: 4.15.3
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -7587,6 +7587,60 @@ paths:
         "500":
           description: Failed to list documents
       summary: List Documents in Collection
+      tags:
+      - AI Vector Database
+    post:
+      description: |-
+        Uploads documents to a vector database collection with automatic embedding generation. Documents are chunked (if needed), embedded using the collection's embedding model, and stored.
+             *
+             * **Supported Content:**
+             * - Plain text content
+             * - URLs to fetch content from
+             * - Markdown documents
+             *
+             * **Metadata:**
+             * Each document can include metadata (title, source_url, section, tags) that is returned with search results.
+      operationId: uploadVectorDocuments
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The collection ID
+        explode: false
+        in: path
+        name: collectionId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/uploadVectorDocuments_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/uploadVectorDocuments_200_response'
+          description: Documents uploaded successfully
+        "400":
+          description: Invalid request parameters
+        "403":
+          description: Access denied
+        "404":
+          description: Collection not found
+        "500":
+          description: Failed to upload documents
+      summary: Upload Documents to Collection
       tags:
       - AI Vector Database
   /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query:
@@ -20866,6 +20920,63 @@ components:
       properties:
         collection:
           $ref: '#/components/schemas/getVectorCollection_200_response_collection'
+      type: object
+    uploadVectorDocuments_request_documents_inner_metadata:
+      properties:
+        title:
+          type: string
+        source_url:
+          type: string
+        section:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      type: object
+    uploadVectorDocuments_request_documents_inner:
+      properties:
+        content:
+          description: Document text content
+          type: string
+        key:
+          description: Stable document key for upsert
+          maxLength: 512
+          type: string
+        metadata:
+          $ref: '#/components/schemas/uploadVectorDocuments_request_documents_inner_metadata'
+      required:
+      - content
+      type: object
+    uploadVectorDocuments_request:
+      properties:
+        documents:
+          items:
+            $ref: '#/components/schemas/uploadVectorDocuments_request_documents_inner'
+          type: array
+      required:
+      - documents
+      type: object
+    uploadVectorDocuments_200_response:
+      example:
+        chunksCreated: 0
+        success: true
+        message: message
+        documentIds:
+        - documentIds
+        - documentIds
+      properties:
+        success:
+          example: true
+          type: boolean
+        documentIds:
+          items:
+            type: string
+          type: array
+        chunksCreated:
+          type: integer
+        message:
+          type: string
       type: object
     deleteVectorDocuments_request_metadata:
       properties:

@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**ListVectorCollections**](AIVectorDatabaseAPI.md#ListVectorCollections) | **Get** /api/v3/organizations/{organisation}/ai/vector-db/collections | List Vector Database Collections
 [**ListVectorDocuments**](AIVectorDatabaseAPI.md#ListVectorDocuments) | **Get** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | List Documents in Collection
 [**QueryVectorCollection**](AIVectorDatabaseAPI.md#QueryVectorCollection) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query | Semantic Search Query
+[**UploadVectorDocuments**](AIVectorDatabaseAPI.md#UploadVectorDocuments) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | Upload Documents to Collection
 
 
 
@@ -514,6 +515,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**QueryVectorCollection200Response**](QueryVectorCollection200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UploadVectorDocuments
+
+> UploadVectorDocuments200Response UploadVectorDocuments(ctx, organisation, collectionId).UploadVectorDocumentsRequest(uploadVectorDocumentsRequest).Execute()
+
+Upload Documents to Collection
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation ID
+	collectionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The collection ID
+	uploadVectorDocumentsRequest := *openapiclient.NewUploadVectorDocumentsRequest([]openapiclient.UploadVectorDocumentsRequestDocumentsInner{*openapiclient.NewUploadVectorDocumentsRequestDocumentsInner("Content_example")}) // UploadVectorDocumentsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AIVectorDatabaseAPI.UploadVectorDocuments(context.Background(), organisation, collectionId).UploadVectorDocumentsRequest(uploadVectorDocumentsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AIVectorDatabaseAPI.UploadVectorDocuments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UploadVectorDocuments`: UploadVectorDocuments200Response
+	fmt.Fprintf(os.Stdout, "Response from `AIVectorDatabaseAPI.UploadVectorDocuments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**collectionId** | **string** | The collection ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUploadVectorDocumentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **uploadVectorDocumentsRequest** | [**UploadVectorDocumentsRequest**](UploadVectorDocumentsRequest.md) |  | 
+
+### Return type
+
+[**UploadVectorDocuments200Response**](UploadVectorDocuments200Response.md)
 
 ### Authorization
 

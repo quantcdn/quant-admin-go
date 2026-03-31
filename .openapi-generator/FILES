@@ -340,6 +340,10 @@ docs/UpdateTask200Response.md
 docs/UpdateTaskRequest.md
 docs/UploadFile201Response.md
 docs/UploadFileRequest.md
+docs/UploadVectorDocuments200Response.md
+docs/UploadVectorDocumentsRequest.md
+docs/UploadVectorDocumentsRequestDocumentsInner.md
+docs/UploadVectorDocumentsRequestDocumentsInnerMetadata.md
 docs/UpsertAgentOverlay200Response.md
 docs/UpsertAgentOverlayRequest.md
 docs/V1ContentItem.md
@@ -721,6 +725,10 @@ model_update_task_200_response.go
 model_update_task_request.go
 model_upload_file_201_response.go
 model_upload_file_request.go
+model_upload_vector_documents_200_response.go
+model_upload_vector_documents_request.go
+model_upload_vector_documents_request_documents_inner.go
+model_upload_vector_documents_request_documents_inner_metadata.go
 model_upsert_agent_overlay_200_response.go
 model_upsert_agent_overlay_request.go
 model_v1_content_item.go
