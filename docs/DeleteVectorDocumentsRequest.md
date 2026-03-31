@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PurgeAll** | Pointer to **bool** | Delete ALL documents in collection | [optional] 
 **DocumentIds** | Pointer to **[]string** | Delete specific documents by UUID | [optional] 
+**Keys** | Pointer to **[]string** | Delete documents by key | [optional] 
 **Metadata** | Pointer to [**DeleteVectorDocumentsRequestMetadata**](DeleteVectorDocumentsRequestMetadata.md) |  | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetDocumentIds sets DocumentIds field to given value.
 `func (o *DeleteVectorDocumentsRequest) HasDocumentIds() bool`
 
 HasDocumentIds returns a boolean if a field has been set.
+
+### GetKeys
+
+`func (o *DeleteVectorDocumentsRequest) GetKeys() []string`
+
+GetKeys returns the Keys field if non-nil, zero value otherwise.
+
+### GetKeysOk
+
+`func (o *DeleteVectorDocumentsRequest) GetKeysOk() (*[]string, bool)`
+
+GetKeysOk returns a tuple with the Keys field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKeys
+
+`func (o *DeleteVectorDocumentsRequest) SetKeys(v []string)`
+
+SetKeys sets Keys field to given value.
+
+### HasKeys
+
+`func (o *DeleteVectorDocumentsRequest) HasKeys() bool`
+
+HasKeys returns a boolean if a field has been set.
 
 ### GetMetadata
 
