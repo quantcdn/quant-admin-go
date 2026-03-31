@@ -124,4 +124,19 @@ func Test_quantadmingo_AIVectorDatabaseAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AIVectorDatabaseAPIService UploadVectorDocuments", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var collectionId string
+
+		resp, httpRes, err := apiClient.AIVectorDatabaseAPI.UploadVectorDocuments(context.Background(), organisation, collectionId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }
