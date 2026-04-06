@@ -5,27 +5,27 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnvName** | **string** | Environment name | 
-**Status** | Pointer to **string** | Environment status | [optional] 
-**RunningCount** | Pointer to **int32** | Number of running tasks | [optional] 
-**DesiredCount** | Pointer to **int32** | Desired number of tasks | [optional] 
+**Status** | Pointer to **string** | Environment status | [optional] [readonly] 
+**RunningCount** | Pointer to **int32** | Number of running tasks | [optional] [readonly] 
+**DesiredCount** | Pointer to **int32** | Desired number of tasks | [optional] [readonly] 
 **MinCapacity** | Pointer to **int32** | Minimum capacity for autoscaling | [optional] 
 **MaxCapacity** | Pointer to **int32** | Maximum capacity for autoscaling | [optional] 
-**PublicIpAddress** | Pointer to **NullableString** | Public IP address for SSH access | [optional] 
-**DeploymentStatus** | Pointer to **string** | Current deployment status. FAILED indicates the most recent deployment did not complete successfully. | [optional] 
-**DeploymentFailureType** | Pointer to **NullableString** | Type of deployment failure when deploymentStatus is FAILED (e.g., &#39;ECS_DEPLOYMENT_CIRCUIT_BREAKER&#39;, &#39;IMAGE_PULL_ERROR&#39;) | [optional] 
-**DeploymentFailureReason** | Pointer to **NullableString** | Human-readable explanation of why the deployment failed. Contains details such as wrong image architecture, missing image, or container startup errors. | [optional] 
-**TaskDefinition** | Pointer to **map[string]interface{}** | ECS task definition details | [optional] 
-**Service** | Pointer to **map[string]interface{}** | ECS service details | [optional] 
-**LoadBalancer** | Pointer to **map[string]interface{}** | Load balancer configuration | [optional] 
-**SecurityGroup** | Pointer to **map[string]interface{}** | Security group configuration | [optional] 
-**Subnet** | Pointer to **map[string]interface{}** | Subnet configuration | [optional] 
-**Vpc** | Pointer to **map[string]interface{}** | VPC configuration | [optional] 
-**Containers** | Pointer to **[]map[string]interface{}** | Container configurations | [optional] 
-**Volumes** | Pointer to [**[]Volume**](Volume.md) | Persistent storage volumes | [optional] 
-**Cron** | Pointer to [**[]Cron**](Cron.md) | Scheduled cron jobs | [optional] 
-**AlbRouting** | Pointer to **map[string]interface{}** | ALB routing configuration | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Creation timestamp | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Last update timestamp | [optional] 
+**PublicIpAddress** | Pointer to **NullableString** | Public IP address for SSH access | [optional] [readonly] 
+**DeploymentStatus** | Pointer to **string** | Current deployment status | [optional] [readonly] 
+**DeploymentFailureType** | Pointer to **NullableString** | Type of deployment failure | [optional] [readonly] 
+**DeploymentFailureReason** | Pointer to **NullableString** | Reason for deployment failure | [optional] [readonly] 
+**TaskDefinition** | Pointer to **map[string]interface{}** | ECS task definition details | [optional] [readonly] 
+**Service** | Pointer to **map[string]interface{}** | ECS service details | [optional] [readonly] 
+**LoadBalancer** | Pointer to **map[string]interface{}** | Load balancer configuration | [optional] [readonly] 
+**SecurityGroup** | Pointer to **map[string]interface{}** | Security group configuration | [optional] [readonly] 
+**Subnet** | Pointer to **map[string]interface{}** | Subnet configuration | [optional] [readonly] 
+**Vpc** | Pointer to **map[string]interface{}** | VPC configuration | [optional] [readonly] 
+**ContainerNames** | Pointer to **[]string** | Container name list | [optional] [readonly] 
+**Volumes** | Pointer to [**[]Volume**](Volume.md) | Persistent storage volumes | [optional] [readonly] 
+**Cron** | Pointer to [**[]Cron**](Cron.md) | Scheduled cron jobs | [optional] [readonly] 
+**AlbRouting** | Pointer to **map[string]interface{}** | ALB routing configuration | [optional] [readonly] 
+**CreatedAt** | Pointer to **time.Time** | Creation timestamp | [optional] [readonly] 
+**UpdatedAt** | Pointer to **time.Time** | Last update timestamp | [optional] [readonly] 
 
 ## Methods
 
@@ -471,30 +471,30 @@ SetVpc sets Vpc field to given value.
 
 HasVpc returns a boolean if a field has been set.
 
-### GetContainers
+### GetContainerNames
 
-`func (o *EnvironmentResponse) GetContainers() []map[string]interface{}`
+`func (o *EnvironmentResponse) GetContainerNames() []string`
 
-GetContainers returns the Containers field if non-nil, zero value otherwise.
+GetContainerNames returns the ContainerNames field if non-nil, zero value otherwise.
 
-### GetContainersOk
+### GetContainerNamesOk
 
-`func (o *EnvironmentResponse) GetContainersOk() (*[]map[string]interface{}, bool)`
+`func (o *EnvironmentResponse) GetContainerNamesOk() (*[]string, bool)`
 
-GetContainersOk returns a tuple with the Containers field if it's non-nil, zero value otherwise
+GetContainerNamesOk returns a tuple with the ContainerNames field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContainers
+### SetContainerNames
 
-`func (o *EnvironmentResponse) SetContainers(v []map[string]interface{})`
+`func (o *EnvironmentResponse) SetContainerNames(v []string)`
 
-SetContainers sets Containers field to given value.
+SetContainerNames sets ContainerNames field to given value.
 
-### HasContainers
+### HasContainerNames
 
-`func (o *EnvironmentResponse) HasContainers() bool`
+`func (o *EnvironmentResponse) HasContainerNames() bool`
 
-HasContainers returns a boolean if a field has been set.
+HasContainerNames returns a boolean if a field has been set.
 
 ### GetVolumes
 
