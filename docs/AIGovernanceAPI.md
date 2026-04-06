@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## GetGovernanceSpend
 
-> map[string]interface{} GetGovernanceSpend(ctx, organisation).Execute()
+> GetGovernanceSpend200Response GetGovernanceSpend(ctx, organisation).Execute()
 
 Get AI spend summary for an organisation
 
@@ -106,7 +106,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AIGovernanceAPI.GetGovernanceSpend``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetGovernanceSpend`: map[string]interface{}
+	// response from `GetGovernanceSpend`: GetGovernanceSpend200Response
 	fmt.Fprintf(os.Stdout, "Response from `AIGovernanceAPI.GetGovernanceSpend`: %v\n", resp)
 }
 ```
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+[**GetGovernanceSpend200Response**](GetGovernanceSpend200Response.md)
 
 ### Authorization
 

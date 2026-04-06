@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InputTokens** | Pointer to **int32** |  | [optional] 
 **OutputTokens** | Pointer to **int32** |  | [optional] 
+**TotalTokens** | Pointer to **int32** |  | [optional] 
+**CostCents** | Pointer to **float32** | Cost of this inference call in US cents | [optional] 
 
 ## Methods
 
@@ -75,6 +77,56 @@ SetOutputTokens sets OutputTokens field to given value.
 `func (o *ChatWithAIAgent200ResponseResponseUsage) HasOutputTokens() bool`
 
 HasOutputTokens returns a boolean if a field has been set.
+
+### GetTotalTokens
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) GetTotalTokens() int32`
+
+GetTotalTokens returns the TotalTokens field if non-nil, zero value otherwise.
+
+### GetTotalTokensOk
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) GetTotalTokensOk() (*int32, bool)`
+
+GetTotalTokensOk returns a tuple with the TotalTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalTokens
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) SetTotalTokens(v int32)`
+
+SetTotalTokens sets TotalTokens field to given value.
+
+### HasTotalTokens
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) HasTotalTokens() bool`
+
+HasTotalTokens returns a boolean if a field has been set.
+
+### GetCostCents
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) GetCostCents() float32`
+
+GetCostCents returns the CostCents field if non-nil, zero value otherwise.
+
+### GetCostCentsOk
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) GetCostCentsOk() (*float32, bool)`
+
+GetCostCentsOk returns a tuple with the CostCents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCostCents
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) SetCostCents(v float32)`
+
+SetCostCents sets CostCents field to given value.
+
+### HasCostCents
+
+`func (o *ChatWithAIAgent200ResponseResponseUsage) HasCostCents() bool`
+
+HasCostCents returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

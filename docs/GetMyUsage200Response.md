@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **CurrentMonth** | Pointer to **string** |  | [optional] 
 **Monthly** | Pointer to [**GetMyUsage200ResponseMonthly**](GetMyUsage200ResponseMonthly.md) |  | [optional] 
 **Daily** | Pointer to [**GetMyUsage200ResponseDaily**](GetMyUsage200ResponseDaily.md) |  | [optional] 
-**Quota** | Pointer to **map[string]interface{}** |  | [optional] 
+**Quota** | Pointer to [**NullableGetMyUsage200ResponseQuota**](GetMyUsage200ResponseQuota.md) |  | [optional] 
 
 ## Methods
 
@@ -131,20 +131,20 @@ HasDaily returns a boolean if a field has been set.
 
 ### GetQuota
 
-`func (o *GetMyUsage200Response) GetQuota() map[string]interface{}`
+`func (o *GetMyUsage200Response) GetQuota() GetMyUsage200ResponseQuota`
 
 GetQuota returns the Quota field if non-nil, zero value otherwise.
 
 ### GetQuotaOk
 
-`func (o *GetMyUsage200Response) GetQuotaOk() (*map[string]interface{}, bool)`
+`func (o *GetMyUsage200Response) GetQuotaOk() (*GetMyUsage200ResponseQuota, bool)`
 
 GetQuotaOk returns a tuple with the Quota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuota
 
-`func (o *GetMyUsage200Response) SetQuota(v map[string]interface{})`
+`func (o *GetMyUsage200Response) SetQuota(v GetMyUsage200ResponseQuota)`
 
 SetQuota sets Quota field to given value.
 
