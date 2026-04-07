@@ -10,6 +10,10 @@ Name | Type | Description | Notes
 **InputSchema** | **map[string]interface{}** | JSON Schema defining the tool&#39;s input parameters | 
 **IsAsync** | Pointer to **bool** | Whether this tool runs asynchronously (&gt;5 seconds) | [optional] [default to false]
 **TimeoutSeconds** | Pointer to **int32** | Tool execution timeout | [optional] [default to 30]
+**OutputSchema** | Pointer to **map[string]interface{}** | JSON Schema defining the tool&#39;s output structure | [optional] 
+**OutputSchemaDescription** | Pointer to **NullableString** | Human-readable description of the tool&#39;s output | [optional] 
+**Category** | Pointer to **NullableString** | Category to group related tools | [optional] 
+**ResponseMode** | Pointer to **NullableString** | How the tool response is handled: llm (passed back to model) or direct (returned to user) | [optional] 
 
 ## Methods
 
@@ -160,6 +164,146 @@ SetTimeoutSeconds sets TimeoutSeconds field to given value.
 
 HasTimeoutSeconds returns a boolean if a field has been set.
 
+### GetOutputSchema
+
+`func (o *CreateCustomToolRequest) GetOutputSchema() map[string]interface{}`
+
+GetOutputSchema returns the OutputSchema field if non-nil, zero value otherwise.
+
+### GetOutputSchemaOk
+
+`func (o *CreateCustomToolRequest) GetOutputSchemaOk() (*map[string]interface{}, bool)`
+
+GetOutputSchemaOk returns a tuple with the OutputSchema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutputSchema
+
+`func (o *CreateCustomToolRequest) SetOutputSchema(v map[string]interface{})`
+
+SetOutputSchema sets OutputSchema field to given value.
+
+### HasOutputSchema
+
+`func (o *CreateCustomToolRequest) HasOutputSchema() bool`
+
+HasOutputSchema returns a boolean if a field has been set.
+
+### SetOutputSchemaNil
+
+`func (o *CreateCustomToolRequest) SetOutputSchemaNil(b bool)`
+
+ SetOutputSchemaNil sets the value for OutputSchema to be an explicit nil
+
+### UnsetOutputSchema
+`func (o *CreateCustomToolRequest) UnsetOutputSchema()`
+
+UnsetOutputSchema ensures that no value is present for OutputSchema, not even an explicit nil
+### GetOutputSchemaDescription
+
+`func (o *CreateCustomToolRequest) GetOutputSchemaDescription() string`
+
+GetOutputSchemaDescription returns the OutputSchemaDescription field if non-nil, zero value otherwise.
+
+### GetOutputSchemaDescriptionOk
+
+`func (o *CreateCustomToolRequest) GetOutputSchemaDescriptionOk() (*string, bool)`
+
+GetOutputSchemaDescriptionOk returns a tuple with the OutputSchemaDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutputSchemaDescription
+
+`func (o *CreateCustomToolRequest) SetOutputSchemaDescription(v string)`
+
+SetOutputSchemaDescription sets OutputSchemaDescription field to given value.
+
+### HasOutputSchemaDescription
+
+`func (o *CreateCustomToolRequest) HasOutputSchemaDescription() bool`
+
+HasOutputSchemaDescription returns a boolean if a field has been set.
+
+### SetOutputSchemaDescriptionNil
+
+`func (o *CreateCustomToolRequest) SetOutputSchemaDescriptionNil(b bool)`
+
+ SetOutputSchemaDescriptionNil sets the value for OutputSchemaDescription to be an explicit nil
+
+### UnsetOutputSchemaDescription
+`func (o *CreateCustomToolRequest) UnsetOutputSchemaDescription()`
+
+UnsetOutputSchemaDescription ensures that no value is present for OutputSchemaDescription, not even an explicit nil
+### GetCategory
+
+`func (o *CreateCustomToolRequest) GetCategory() string`
+
+GetCategory returns the Category field if non-nil, zero value otherwise.
+
+### GetCategoryOk
+
+`func (o *CreateCustomToolRequest) GetCategoryOk() (*string, bool)`
+
+GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategory
+
+`func (o *CreateCustomToolRequest) SetCategory(v string)`
+
+SetCategory sets Category field to given value.
+
+### HasCategory
+
+`func (o *CreateCustomToolRequest) HasCategory() bool`
+
+HasCategory returns a boolean if a field has been set.
+
+### SetCategoryNil
+
+`func (o *CreateCustomToolRequest) SetCategoryNil(b bool)`
+
+ SetCategoryNil sets the value for Category to be an explicit nil
+
+### UnsetCategory
+`func (o *CreateCustomToolRequest) UnsetCategory()`
+
+UnsetCategory ensures that no value is present for Category, not even an explicit nil
+### GetResponseMode
+
+`func (o *CreateCustomToolRequest) GetResponseMode() string`
+
+GetResponseMode returns the ResponseMode field if non-nil, zero value otherwise.
+
+### GetResponseModeOk
+
+`func (o *CreateCustomToolRequest) GetResponseModeOk() (*string, bool)`
+
+GetResponseModeOk returns a tuple with the ResponseMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseMode
+
+`func (o *CreateCustomToolRequest) SetResponseMode(v string)`
+
+SetResponseMode sets ResponseMode field to given value.
+
+### HasResponseMode
+
+`func (o *CreateCustomToolRequest) HasResponseMode() bool`
+
+HasResponseMode returns a boolean if a field has been set.
+
+### SetResponseModeNil
+
+`func (o *CreateCustomToolRequest) SetResponseModeNil(b bool)`
+
+ SetResponseModeNil sets the value for ResponseMode to be an explicit nil
+
+### UnsetResponseMode
+`func (o *CreateCustomToolRequest) UnsetResponseMode()`
+
+UnsetResponseMode ensures that no value is present for ResponseMode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

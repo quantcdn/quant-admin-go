@@ -51,6 +51,21 @@ func Test_quantadmingo_AICustomToolsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AICustomToolsAPIService GetCustomTool", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var toolName string
+
+		resp, httpRes, err := apiClient.AICustomToolsAPI.GetCustomTool(context.Background(), organisation, toolName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AICustomToolsAPIService ListCustomTools", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

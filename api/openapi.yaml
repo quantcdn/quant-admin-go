@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.15.5
+  version: 4.15.6
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -6856,6 +6856,42 @@ paths:
         "500":
           description: Failed to delete custom tool
       summary: Delete Custom Tool
+      tags:
+      - AI Custom Tools
+    get:
+      description: Retrieves a single registered custom tool by name.
+      operationId: getCustomTool
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The tool name to retrieve
+        explode: false
+        in: path
+        name: toolName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCustomTool_200_response'
+          description: Custom tool retrieved successfully
+        "403":
+          description: Access denied
+        "404":
+          description: Tool not found
+        "500":
+          description: Failed to retrieve custom tools
+      summary: Get Custom Tool
       tags:
       - AI Custom Tools
   /api/v3/organizations/{organisation}/ai/skills:
@@ -20301,6 +20337,27 @@ components:
           maximum: 300
           minimum: 5
           type: integer
+        outputSchema:
+          description: JSON Schema defining the tool's output structure
+          nullable: true
+          type: object
+        outputSchemaDescription:
+          description: Human-readable description of the tool's output
+          nullable: true
+          type: string
+        category:
+          description: Category to group related tools
+          maxLength: 100
+          nullable: true
+          type: string
+        responseMode:
+          description: "How the tool response is handled: llm (passed back to model)\
+            \ or direct (returned to user)"
+          enum:
+          - llm
+          - direct
+          nullable: true
+          type: string
       required:
       - description
       - edgeFunctionUrl
@@ -20321,6 +20378,69 @@ components:
         message:
           example: Custom tool registered successfully
           type: string
+      type: object
+    getCustomTool_200_response_tool:
+      example:
+        responseMode: llm
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        outputSchema: "{}"
+        outputSchemaDescription: outputSchemaDescription
+        inputSchema: "{}"
+        isAsync: false
+        name: check_inventory
+        description: Check product inventory levels
+        edgeFunctionUrl: https://inventory-api.my-project.quant.cloud
+        category: category
+      properties:
+        name:
+          example: check_inventory
+          type: string
+        description:
+          example: Check product inventory levels
+          type: string
+        edgeFunctionUrl:
+          example: https://inventory-api.my-project.quant.cloud
+          type: string
+        isAsync:
+          example: false
+          type: boolean
+        inputSchema:
+          type: object
+        outputSchema:
+          nullable: true
+          type: object
+        outputSchemaDescription:
+          nullable: true
+          type: string
+        category:
+          nullable: true
+          type: string
+        responseMode:
+          enum:
+          - llm
+          - direct
+          nullable: true
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    getCustomTool_200_response:
+      example:
+        tool:
+          responseMode: llm
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          outputSchema: "{}"
+          outputSchemaDescription: outputSchemaDescription
+          inputSchema: "{}"
+          isAsync: false
+          name: check_inventory
+          description: Check product inventory levels
+          edgeFunctionUrl: https://inventory-api.my-project.quant.cloud
+          category: category
+      properties:
+        tool:
+          $ref: '#/components/schemas/getCustomTool_200_response_tool'
       type: object
     deleteCustomTool_200_response:
       example:
