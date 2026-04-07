@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateCustomTool**](AICustomToolsAPI.md#CreateCustomTool) | **Post** /api/v3/organizations/{organisation}/ai/custom-tools | Register Custom Edge Function Tool
 [**DeleteCustomTool**](AICustomToolsAPI.md#DeleteCustomTool) | **Delete** /api/v3/organizations/{organisation}/ai/custom-tools/{toolName} | Delete Custom Tool
+[**GetCustomTool**](AICustomToolsAPI.md#GetCustomTool) | **Get** /api/v3/organizations/{organisation}/ai/custom-tools/{toolName} | Get Custom Tool
 [**ListCustomTools**](AICustomToolsAPI.md#ListCustomTools) | **Get** /api/v3/organizations/{organisation}/ai/custom-tools | List Custom Tools
 
 
@@ -140,6 +141,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeleteCustomTool200Response**](DeleteCustomTool200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCustomTool
+
+> GetCustomTool200Response GetCustomTool(ctx, organisation, toolName).Execute()
+
+Get Custom Tool
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation ID
+	toolName := "toolName_example" // string | The tool name to retrieve
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AICustomToolsAPI.GetCustomTool(context.Background(), organisation, toolName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AICustomToolsAPI.GetCustomTool``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCustomTool`: GetCustomTool200Response
+	fmt.Fprintf(os.Stdout, "Response from `AICustomToolsAPI.GetCustomTool`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**toolName** | **string** | The tool name to retrieve | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCustomToolRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetCustomTool200Response**](GetCustomTool200Response.md)
 
 ### Authorization
 
