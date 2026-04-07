@@ -4,13 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AgentId** | Pointer to **string** | Change the backing AI agent | [optional] 
+**Name** | Pointer to **string** | Display name for the bot | [optional] 
 **Status** | Pointer to **string** | Enable or disable the bot | [optional] 
+**SystemPrompt** | Pointer to **string** | System prompt for the backing AI agent | [optional] 
+**ModelId** | Pointer to **string** | AI model identifier | [optional] 
+**Temperature** | Pointer to **float32** | Sampling temperature | [optional] 
+**MaxTokens** | Pointer to **int32** | Maximum response tokens | [optional] 
+**AllowedTools** | Pointer to **[]string** | Tools the agent may use | [optional] 
+**AssignedSkills** | Pointer to **[]string** | Skills assigned to the agent | [optional] 
+**AllowedCollections** | Pointer to **[]string** | Vector DB collections the agent may query | [optional] 
+**AllowedSubAgents** | Pointer to **[]string** | Sub-agents the agent may call | [optional] 
+**GuardrailPreset** | Pointer to **string** | Guardrail preset name | [optional] 
+**FilterPolicies** | Pointer to **[]string** | Content filter policies | [optional] 
+**LongContext** | Pointer to **bool** | Enable long context mode | [optional] 
 **SessionTtlDays** | Pointer to **int32** | Session TTL in days | [optional] 
 **AllowedChannels** | Pointer to **[]string** | Slack channel IDs the bot may respond in | [optional] 
+**AllowedUsers** | Pointer to **[]string** | Slack user IDs allowed to interact with the bot | [optional] 
+**DeniedUsers** | Pointer to **[]string** | Slack user IDs denied from interacting with the bot | [optional] 
+**AllowGuests** | Pointer to **bool** | Whether guest users may interact with the bot | [optional] 
+**HomeTabContent** | Pointer to **string** | Content shown on the bot&#39;s Home tab in Slack | [optional] 
+**AgentAccessControl** | Pointer to **map[string]interface{}** | Agent-level access control settings | [optional] 
 **KeywordsEnabled** | Pointer to **bool** | Whether keyword triggers are enabled | [optional] 
 **Keywords** | Pointer to **[]string** | Keywords that trigger the bot | [optional] 
-**SlashCommands** | Pointer to **[]string** | Slash commands the bot responds to | [optional] 
 
 ## Methods
 
@@ -31,30 +46,30 @@ NewUpdateSlackBotRequestWithDefaults instantiates a new UpdateSlackBotRequest ob
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAgentId
+### GetName
 
-`func (o *UpdateSlackBotRequest) GetAgentId() string`
+`func (o *UpdateSlackBotRequest) GetName() string`
 
-GetAgentId returns the AgentId field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetAgentIdOk
+### GetNameOk
 
-`func (o *UpdateSlackBotRequest) GetAgentIdOk() (*string, bool)`
+`func (o *UpdateSlackBotRequest) GetNameOk() (*string, bool)`
 
-GetAgentIdOk returns a tuple with the AgentId field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAgentId
+### SetName
 
-`func (o *UpdateSlackBotRequest) SetAgentId(v string)`
+`func (o *UpdateSlackBotRequest) SetName(v string)`
 
-SetAgentId sets AgentId field to given value.
+SetName sets Name field to given value.
 
-### HasAgentId
+### HasName
 
-`func (o *UpdateSlackBotRequest) HasAgentId() bool`
+`func (o *UpdateSlackBotRequest) HasName() bool`
 
-HasAgentId returns a boolean if a field has been set.
+HasName returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -80,6 +95,281 @@ SetStatus sets Status field to given value.
 `func (o *UpdateSlackBotRequest) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetSystemPrompt
+
+`func (o *UpdateSlackBotRequest) GetSystemPrompt() string`
+
+GetSystemPrompt returns the SystemPrompt field if non-nil, zero value otherwise.
+
+### GetSystemPromptOk
+
+`func (o *UpdateSlackBotRequest) GetSystemPromptOk() (*string, bool)`
+
+GetSystemPromptOk returns a tuple with the SystemPrompt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemPrompt
+
+`func (o *UpdateSlackBotRequest) SetSystemPrompt(v string)`
+
+SetSystemPrompt sets SystemPrompt field to given value.
+
+### HasSystemPrompt
+
+`func (o *UpdateSlackBotRequest) HasSystemPrompt() bool`
+
+HasSystemPrompt returns a boolean if a field has been set.
+
+### GetModelId
+
+`func (o *UpdateSlackBotRequest) GetModelId() string`
+
+GetModelId returns the ModelId field if non-nil, zero value otherwise.
+
+### GetModelIdOk
+
+`func (o *UpdateSlackBotRequest) GetModelIdOk() (*string, bool)`
+
+GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelId
+
+`func (o *UpdateSlackBotRequest) SetModelId(v string)`
+
+SetModelId sets ModelId field to given value.
+
+### HasModelId
+
+`func (o *UpdateSlackBotRequest) HasModelId() bool`
+
+HasModelId returns a boolean if a field has been set.
+
+### GetTemperature
+
+`func (o *UpdateSlackBotRequest) GetTemperature() float32`
+
+GetTemperature returns the Temperature field if non-nil, zero value otherwise.
+
+### GetTemperatureOk
+
+`func (o *UpdateSlackBotRequest) GetTemperatureOk() (*float32, bool)`
+
+GetTemperatureOk returns a tuple with the Temperature field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemperature
+
+`func (o *UpdateSlackBotRequest) SetTemperature(v float32)`
+
+SetTemperature sets Temperature field to given value.
+
+### HasTemperature
+
+`func (o *UpdateSlackBotRequest) HasTemperature() bool`
+
+HasTemperature returns a boolean if a field has been set.
+
+### GetMaxTokens
+
+`func (o *UpdateSlackBotRequest) GetMaxTokens() int32`
+
+GetMaxTokens returns the MaxTokens field if non-nil, zero value otherwise.
+
+### GetMaxTokensOk
+
+`func (o *UpdateSlackBotRequest) GetMaxTokensOk() (*int32, bool)`
+
+GetMaxTokensOk returns a tuple with the MaxTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxTokens
+
+`func (o *UpdateSlackBotRequest) SetMaxTokens(v int32)`
+
+SetMaxTokens sets MaxTokens field to given value.
+
+### HasMaxTokens
+
+`func (o *UpdateSlackBotRequest) HasMaxTokens() bool`
+
+HasMaxTokens returns a boolean if a field has been set.
+
+### GetAllowedTools
+
+`func (o *UpdateSlackBotRequest) GetAllowedTools() []string`
+
+GetAllowedTools returns the AllowedTools field if non-nil, zero value otherwise.
+
+### GetAllowedToolsOk
+
+`func (o *UpdateSlackBotRequest) GetAllowedToolsOk() (*[]string, bool)`
+
+GetAllowedToolsOk returns a tuple with the AllowedTools field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedTools
+
+`func (o *UpdateSlackBotRequest) SetAllowedTools(v []string)`
+
+SetAllowedTools sets AllowedTools field to given value.
+
+### HasAllowedTools
+
+`func (o *UpdateSlackBotRequest) HasAllowedTools() bool`
+
+HasAllowedTools returns a boolean if a field has been set.
+
+### GetAssignedSkills
+
+`func (o *UpdateSlackBotRequest) GetAssignedSkills() []string`
+
+GetAssignedSkills returns the AssignedSkills field if non-nil, zero value otherwise.
+
+### GetAssignedSkillsOk
+
+`func (o *UpdateSlackBotRequest) GetAssignedSkillsOk() (*[]string, bool)`
+
+GetAssignedSkillsOk returns a tuple with the AssignedSkills field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssignedSkills
+
+`func (o *UpdateSlackBotRequest) SetAssignedSkills(v []string)`
+
+SetAssignedSkills sets AssignedSkills field to given value.
+
+### HasAssignedSkills
+
+`func (o *UpdateSlackBotRequest) HasAssignedSkills() bool`
+
+HasAssignedSkills returns a boolean if a field has been set.
+
+### GetAllowedCollections
+
+`func (o *UpdateSlackBotRequest) GetAllowedCollections() []string`
+
+GetAllowedCollections returns the AllowedCollections field if non-nil, zero value otherwise.
+
+### GetAllowedCollectionsOk
+
+`func (o *UpdateSlackBotRequest) GetAllowedCollectionsOk() (*[]string, bool)`
+
+GetAllowedCollectionsOk returns a tuple with the AllowedCollections field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedCollections
+
+`func (o *UpdateSlackBotRequest) SetAllowedCollections(v []string)`
+
+SetAllowedCollections sets AllowedCollections field to given value.
+
+### HasAllowedCollections
+
+`func (o *UpdateSlackBotRequest) HasAllowedCollections() bool`
+
+HasAllowedCollections returns a boolean if a field has been set.
+
+### GetAllowedSubAgents
+
+`func (o *UpdateSlackBotRequest) GetAllowedSubAgents() []string`
+
+GetAllowedSubAgents returns the AllowedSubAgents field if non-nil, zero value otherwise.
+
+### GetAllowedSubAgentsOk
+
+`func (o *UpdateSlackBotRequest) GetAllowedSubAgentsOk() (*[]string, bool)`
+
+GetAllowedSubAgentsOk returns a tuple with the AllowedSubAgents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedSubAgents
+
+`func (o *UpdateSlackBotRequest) SetAllowedSubAgents(v []string)`
+
+SetAllowedSubAgents sets AllowedSubAgents field to given value.
+
+### HasAllowedSubAgents
+
+`func (o *UpdateSlackBotRequest) HasAllowedSubAgents() bool`
+
+HasAllowedSubAgents returns a boolean if a field has been set.
+
+### GetGuardrailPreset
+
+`func (o *UpdateSlackBotRequest) GetGuardrailPreset() string`
+
+GetGuardrailPreset returns the GuardrailPreset field if non-nil, zero value otherwise.
+
+### GetGuardrailPresetOk
+
+`func (o *UpdateSlackBotRequest) GetGuardrailPresetOk() (*string, bool)`
+
+GetGuardrailPresetOk returns a tuple with the GuardrailPreset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuardrailPreset
+
+`func (o *UpdateSlackBotRequest) SetGuardrailPreset(v string)`
+
+SetGuardrailPreset sets GuardrailPreset field to given value.
+
+### HasGuardrailPreset
+
+`func (o *UpdateSlackBotRequest) HasGuardrailPreset() bool`
+
+HasGuardrailPreset returns a boolean if a field has been set.
+
+### GetFilterPolicies
+
+`func (o *UpdateSlackBotRequest) GetFilterPolicies() []string`
+
+GetFilterPolicies returns the FilterPolicies field if non-nil, zero value otherwise.
+
+### GetFilterPoliciesOk
+
+`func (o *UpdateSlackBotRequest) GetFilterPoliciesOk() (*[]string, bool)`
+
+GetFilterPoliciesOk returns a tuple with the FilterPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterPolicies
+
+`func (o *UpdateSlackBotRequest) SetFilterPolicies(v []string)`
+
+SetFilterPolicies sets FilterPolicies field to given value.
+
+### HasFilterPolicies
+
+`func (o *UpdateSlackBotRequest) HasFilterPolicies() bool`
+
+HasFilterPolicies returns a boolean if a field has been set.
+
+### GetLongContext
+
+`func (o *UpdateSlackBotRequest) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *UpdateSlackBotRequest) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *UpdateSlackBotRequest) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *UpdateSlackBotRequest) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
 
 ### GetSessionTtlDays
 
@@ -131,6 +421,131 @@ SetAllowedChannels sets AllowedChannels field to given value.
 
 HasAllowedChannels returns a boolean if a field has been set.
 
+### GetAllowedUsers
+
+`func (o *UpdateSlackBotRequest) GetAllowedUsers() []string`
+
+GetAllowedUsers returns the AllowedUsers field if non-nil, zero value otherwise.
+
+### GetAllowedUsersOk
+
+`func (o *UpdateSlackBotRequest) GetAllowedUsersOk() (*[]string, bool)`
+
+GetAllowedUsersOk returns a tuple with the AllowedUsers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedUsers
+
+`func (o *UpdateSlackBotRequest) SetAllowedUsers(v []string)`
+
+SetAllowedUsers sets AllowedUsers field to given value.
+
+### HasAllowedUsers
+
+`func (o *UpdateSlackBotRequest) HasAllowedUsers() bool`
+
+HasAllowedUsers returns a boolean if a field has been set.
+
+### GetDeniedUsers
+
+`func (o *UpdateSlackBotRequest) GetDeniedUsers() []string`
+
+GetDeniedUsers returns the DeniedUsers field if non-nil, zero value otherwise.
+
+### GetDeniedUsersOk
+
+`func (o *UpdateSlackBotRequest) GetDeniedUsersOk() (*[]string, bool)`
+
+GetDeniedUsersOk returns a tuple with the DeniedUsers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeniedUsers
+
+`func (o *UpdateSlackBotRequest) SetDeniedUsers(v []string)`
+
+SetDeniedUsers sets DeniedUsers field to given value.
+
+### HasDeniedUsers
+
+`func (o *UpdateSlackBotRequest) HasDeniedUsers() bool`
+
+HasDeniedUsers returns a boolean if a field has been set.
+
+### GetAllowGuests
+
+`func (o *UpdateSlackBotRequest) GetAllowGuests() bool`
+
+GetAllowGuests returns the AllowGuests field if non-nil, zero value otherwise.
+
+### GetAllowGuestsOk
+
+`func (o *UpdateSlackBotRequest) GetAllowGuestsOk() (*bool, bool)`
+
+GetAllowGuestsOk returns a tuple with the AllowGuests field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowGuests
+
+`func (o *UpdateSlackBotRequest) SetAllowGuests(v bool)`
+
+SetAllowGuests sets AllowGuests field to given value.
+
+### HasAllowGuests
+
+`func (o *UpdateSlackBotRequest) HasAllowGuests() bool`
+
+HasAllowGuests returns a boolean if a field has been set.
+
+### GetHomeTabContent
+
+`func (o *UpdateSlackBotRequest) GetHomeTabContent() string`
+
+GetHomeTabContent returns the HomeTabContent field if non-nil, zero value otherwise.
+
+### GetHomeTabContentOk
+
+`func (o *UpdateSlackBotRequest) GetHomeTabContentOk() (*string, bool)`
+
+GetHomeTabContentOk returns a tuple with the HomeTabContent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHomeTabContent
+
+`func (o *UpdateSlackBotRequest) SetHomeTabContent(v string)`
+
+SetHomeTabContent sets HomeTabContent field to given value.
+
+### HasHomeTabContent
+
+`func (o *UpdateSlackBotRequest) HasHomeTabContent() bool`
+
+HasHomeTabContent returns a boolean if a field has been set.
+
+### GetAgentAccessControl
+
+`func (o *UpdateSlackBotRequest) GetAgentAccessControl() map[string]interface{}`
+
+GetAgentAccessControl returns the AgentAccessControl field if non-nil, zero value otherwise.
+
+### GetAgentAccessControlOk
+
+`func (o *UpdateSlackBotRequest) GetAgentAccessControlOk() (*map[string]interface{}, bool)`
+
+GetAgentAccessControlOk returns a tuple with the AgentAccessControl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAgentAccessControl
+
+`func (o *UpdateSlackBotRequest) SetAgentAccessControl(v map[string]interface{})`
+
+SetAgentAccessControl sets AgentAccessControl field to given value.
+
+### HasAgentAccessControl
+
+`func (o *UpdateSlackBotRequest) HasAgentAccessControl() bool`
+
+HasAgentAccessControl returns a boolean if a field has been set.
+
 ### GetKeywordsEnabled
 
 `func (o *UpdateSlackBotRequest) GetKeywordsEnabled() bool`
@@ -180,31 +595,6 @@ SetKeywords sets Keywords field to given value.
 `func (o *UpdateSlackBotRequest) HasKeywords() bool`
 
 HasKeywords returns a boolean if a field has been set.
-
-### GetSlashCommands
-
-`func (o *UpdateSlackBotRequest) GetSlashCommands() []string`
-
-GetSlashCommands returns the SlashCommands field if non-nil, zero value otherwise.
-
-### GetSlashCommandsOk
-
-`func (o *UpdateSlackBotRequest) GetSlashCommandsOk() (*[]string, bool)`
-
-GetSlashCommandsOk returns a tuple with the SlashCommands field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSlashCommands
-
-`func (o *UpdateSlackBotRequest) SetSlashCommands(v []string)`
-
-SetSlashCommands sets SlashCommands field to given value.
-
-### HasSlashCommands
-
-`func (o *UpdateSlackBotRequest) HasSlashCommands() bool`
-
-HasSlashCommands returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.15.3
+  version: 4.15.4
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -5681,6 +5681,7 @@ paths:
                   inputTokens: 12
                   outputTokens: 8
                   totalTokens: 20
+                  costCents: 0.18
               schema:
                 $ref: '#/components/schemas/chatInference_200_response'
           description: "Chat inference completed (buffered response, sync mode)"
@@ -8329,7 +8330,8 @@ paths:
   /api/v3/organizations/{organisation}/ai/slack-bots:
     get:
       description: Lists all Slack bots configured for the organization. Each bot
-        is backed by an AI agent and can be connected to a Slack workspace.
+        is backed by an AI agent and can be connected to a Slack workspace. Agent
+        configuration fields are flattened onto each bot object.
       operationId: listSlackBots
       parameters:
       - description: The organisation ID
@@ -8356,7 +8358,7 @@ paths:
       - AI Slack Bots
     post:
       description: |-
-        Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.
+        Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.
              *
              * **Setup Types:**
              * - `quant`: Quant-managed Slack app — uses shared OAuth credentials
@@ -8395,7 +8397,8 @@ paths:
       - AI Slack Bots
   /api/v3/organizations/{organisation}/ai/slack-bots/{botId}:
     delete:
-      description: Permanently deletes a Slack bot and disconnects it from the workspace.
+      description: "Permanently deletes a Slack bot, disconnects it from the workspace,\
+        \ and deletes its backing AI agent."
       operationId: deleteSlackBot
       parameters:
       - description: The organisation ID
@@ -8431,8 +8434,8 @@ paths:
       tags:
       - AI Slack Bots
     get:
-      description: Retrieves details for a specific Slack bot including its configuration
-        and connection status.
+      description: "Retrieves details for a specific Slack bot including its configuration,\
+        \ connection status, and flattened agent configuration."
       operationId: getSlackBot
       parameters:
       - description: The organisation ID
@@ -8468,7 +8471,8 @@ paths:
       tags:
       - AI Slack Bots
     put:
-      description: Updates a Slack bot's configuration. Only provided fields are updated.
+      description: Updates a Slack bot's configuration and/or its backing agent. Only
+        provided fields are updated.
       operationId: updateSlackBot
       parameters:
       - description: The organisation ID
@@ -8675,7 +8679,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/getGovernanceSpend_200_response'
           description: AI spend summary
         "500":
           description: Failed to retrieve spend summary
@@ -11435,15 +11439,6 @@ components:
       type: object
     Application:
       example:
-        environments:
-        - envName: envName
-          desiredCount: 1
-          runningCount: 7
-          status: status
-        - envName: envName
-          desiredCount: 1
-          runningCount: 7
-          status: status
         appName: appName
         deploymentInformation:
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -11456,6 +11451,9 @@ components:
           deploymentId: deploymentId
           imageTag: imageTag
           status: status
+        environmentNames:
+        - environmentNames
+        - environmentNames
         desiredCount: 1
         organisation: organisation
         maxCapacity: 1
@@ -11615,12 +11613,14 @@ components:
         status:
           description: Application status
           nullable: true
+          readOnly: true
           type: string
         deploymentInformation:
           description: Deployment history
           items:
             $ref: '#/components/schemas/Application_deploymentInformation_inner'
           nullable: true
+          readOnly: true
           type: array
         imageReference:
           $ref: '#/components/schemas/Application_imageReference'
@@ -11629,6 +11629,7 @@ components:
           items:
             type: string
           nullable: true
+          readOnly: true
           type: array
         minCapacity:
           description: Minimum task count for auto-scaling
@@ -11646,11 +11647,12 @@ components:
           description: Currently running task count
           nullable: true
           type: integer
-        environments:
-          description: List of environments
+        environmentNames:
+          description: List of environment names (read-only)
           items:
-            $ref: '#/components/schemas/Application_environments_inner'
+            type: string
           nullable: true
+          readOnly: true
           type: array
       required:
       - appName
@@ -12178,8 +12180,7 @@ components:
           command:
           - command
           - command
-        deploymentFailureReason: "CannotPullContainerError: pull image manifest has\
-          \ been retried 5 times"
+        deploymentFailureReason: deploymentFailureReason
         subnet: "{}"
         publicIpAddress: 54.123.45.67
         desiredCount: 2
@@ -12203,17 +12204,17 @@ components:
           environmentEfsId: environmentEfsId
         maxCapacity: 5
         securityGroup: "{}"
+        containerNames:
+        - containerNames
+        - containerNames
         createdAt: 2000-01-23T04:56:07.000+00:00
         deploymentStatus: COMPLETED
         envName: production
         service: "{}"
         loadBalancer: "{}"
         runningCount: 2
-        deploymentFailureType: IMAGE_PULL_ERROR
+        deploymentFailureType: deploymentFailureType
         minCapacity: 1
-        containers:
-        - "{}"
-        - "{}"
         albRouting: "{}"
         taskDefinition: "{}"
         status: ACTIVE
@@ -12226,14 +12227,17 @@ components:
         status:
           description: Environment status
           example: ACTIVE
+          readOnly: true
           type: string
         runningCount:
           description: Number of running tasks
           example: 2
+          readOnly: true
           type: integer
         desiredCount:
           description: Desired number of tasks
           example: 2
+          readOnly: true
           type: integer
         minCapacity:
           description: Minimum capacity for autoscaling
@@ -12247,73 +12251,82 @@ components:
           description: Public IP address for SSH access
           example: 54.123.45.67
           nullable: true
+          readOnly: true
           type: string
         deploymentStatus:
-          description: Current deployment status. FAILED indicates the most recent
-            deployment did not complete successfully.
+          description: Current deployment status
           enum:
           - COMPLETED
           - IN_PROGRESS
           - FAILED
           example: COMPLETED
+          readOnly: true
           type: string
         deploymentFailureType:
-          description: "Type of deployment failure when deploymentStatus is FAILED\
-            \ (e.g., 'ECS_DEPLOYMENT_CIRCUIT_BREAKER', 'IMAGE_PULL_ERROR')"
-          example: IMAGE_PULL_ERROR
+          description: Type of deployment failure
           nullable: true
+          readOnly: true
           type: string
         deploymentFailureReason:
-          description: "Human-readable explanation of why the deployment failed. Contains\
-            \ details such as wrong image architecture, missing image, or container\
-            \ startup errors."
-          example: "CannotPullContainerError: pull image manifest has been retried\
-            \ 5 times"
+          description: Reason for deployment failure
           nullable: true
+          readOnly: true
           type: string
         taskDefinition:
           description: ECS task definition details
+          readOnly: true
           type: object
         service:
           description: ECS service details
+          readOnly: true
           type: object
         loadBalancer:
           description: Load balancer configuration
+          readOnly: true
           type: object
         securityGroup:
           description: Security group configuration
+          readOnly: true
           type: object
         subnet:
           description: Subnet configuration
+          readOnly: true
           type: object
         vpc:
           description: VPC configuration
+          readOnly: true
           type: object
-        containers:
-          description: Container configurations
+        containerNames:
+          description: Container name list
           items:
-            type: object
+            type: string
+          readOnly: true
           type: array
         volumes:
           description: Persistent storage volumes
           items:
             $ref: '#/components/schemas/Volume'
+          readOnly: true
           type: array
         cron:
           description: Scheduled cron jobs
           items:
             $ref: '#/components/schemas/Cron'
+          readOnly: true
           type: array
         albRouting:
           description: ALB routing configuration
+          readOnly: true
           type: object
         createdAt:
           description: Creation timestamp
           format: date-time
+          readOnly: true
           type: string
         updatedAt:
           description: Last update timestamp
           format: date-time
+          readOnly: true
           type: string
       required:
       - envName
@@ -18319,8 +18332,9 @@ components:
           $ref: '#/components/schemas/chatInference_200_response_response_toolUse'
       type: object
     chatInference_200_response_usage:
-      description: Token usage information
+      description: Token usage and cost for this inference call
       example:
+        costCents: 0.42
         inputTokens: 25
         outputTokens: 150
         totalTokens: 175
@@ -18337,6 +18351,11 @@ components:
           description: Total tokens consumed
           example: 175
           type: integer
+        costCents:
+          description: Cost of this inference call in US cents
+          example: 0.42
+          format: float
+          type: number
       type: object
     chatInference_200_response:
       example:
@@ -18359,6 +18378,7 @@ components:
           content: I'll help you with that.
         requestId: req-abc123
         usage:
+          costCents: 0.42
           inputTokens: 25
           outputTokens: 150
           totalTokens: 175
@@ -19142,7 +19162,9 @@ components:
           type: string
       type: object
     getDurableExecutionStatus_200_response_result_usage:
+      description: Token usage and cost for the final synthesis turn
       example:
+        costCents: 5.962134
         inputTokens: 0
         outputTokens: 6
         totalTokens: 1
@@ -19153,6 +19175,10 @@ components:
           type: integer
         totalTokens:
           type: integer
+        costCents:
+          description: Cost of the final synthesis turn in US cents
+          format: float
+          type: number
       type: object
     getDurableExecutionStatus_200_response_result:
       description: Present when status is complete
@@ -19161,6 +19187,7 @@ components:
           role: assistant
           content: The weather in Sydney is sunny.
         usage:
+          costCents: 5.962134
           inputTokens: 0
           outputTokens: 6
           totalTokens: 1
@@ -19195,6 +19222,7 @@ components:
             role: assistant
             content: The weather in Sydney is sunny.
           usage:
+            costCents: 5.962134
             inputTokens: 0
             outputTokens: 6
             totalTokens: 1
@@ -19892,20 +19920,30 @@ components:
       type: object
     chatWithAIAgent_200_response_response_usage:
       example:
+        costCents: 5.962134
         inputTokens: 0
         outputTokens: 6
+        totalTokens: 1
       properties:
         inputTokens:
           type: integer
         outputTokens:
           type: integer
+        totalTokens:
+          type: integer
+        costCents:
+          description: Cost of this inference call in US cents
+          format: float
+          type: number
       type: object
     chatWithAIAgent_200_response_response:
       example:
         stopReason: stopReason
         usage:
+          costCents: 5.962134
           inputTokens: 0
           outputTokens: 6
+          totalTokens: 1
         toolResults:
         - "{}"
         - "{}"
@@ -19927,8 +19965,10 @@ components:
         response:
           stopReason: stopReason
           usage:
+            costCents: 5.962134
             inputTokens: 0
             outputTokens: 6
+            totalTokens: 1
           toolResults:
           - "{}"
           - "{}"
@@ -20825,7 +20865,8 @@ components:
           example: Product user guides and API documentation
           type: string
         embeddingModel:
-          description: "Embedding model to use (default: amazon.titan-embed-text-v2:0)"
+          description: "Embedding model to use. Supported: amazon.titan-embed-text-v2:0,\
+            \ cohere.embed-english-v3, cohere.embed-multilingual-v3"
           example: amazon.titan-embed-text-v2:0
           type: string
         dimensions:
@@ -20833,6 +20874,7 @@ components:
           example: 1024
           type: integer
       required:
+      - embeddingModel
       - name
       type: object
     createVectorCollection_201_response_collection:
@@ -21604,18 +21646,39 @@ components:
       type: object
     listSlackBots_200_response_bots_inner:
       example:
+        assignedSkills:
+        - assignedSkills
+        - assignedSkills
+        guardrailPreset: guardrailPreset
+        modelId: modelId
         connected: true
+        systemPrompt: systemPrompt
+        allowedSubAgents:
+        - allowedSubAgents
+        - allowedSubAgents
         createdAt: 2000-01-23T04:56:07.000+00:00
-        agentId: agentId
-        sessionTtlDays: 0
+        sessionTtlDays: 1
         setupType: quant
+        longContext: true
         keywordsEnabled: true
+        name: name
+        temperature: 0.8008281904610115
+        maxTokens: 6
+        allowedCollections:
+        - allowedCollections
+        - allowedCollections
         botId: botId
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
         status: active
+        allowedTools:
+        - allowedTools
+        - allowedTools
       properties:
         botId:
           type: string
-        agentId:
+        name:
           type: string
         setupType:
           enum:
@@ -21628,6 +21691,38 @@ components:
           - inactive
           type: string
         connected:
+          type: boolean
+        systemPrompt:
+          type: string
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          type: string
+        filterPolicies:
+          items:
+            type: string
+          type: array
+        longContext:
           type: boolean
         sessionTtlDays:
           type: integer
@@ -21640,22 +21735,64 @@ components:
     listSlackBots_200_response:
       example:
         bots:
-        - connected: true
+        - assignedSkills:
+          - assignedSkills
+          - assignedSkills
+          guardrailPreset: guardrailPreset
+          modelId: modelId
+          connected: true
+          systemPrompt: systemPrompt
+          allowedSubAgents:
+          - allowedSubAgents
+          - allowedSubAgents
           createdAt: 2000-01-23T04:56:07.000+00:00
-          agentId: agentId
-          sessionTtlDays: 0
+          sessionTtlDays: 1
           setupType: quant
+          longContext: true
           keywordsEnabled: true
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
           botId: botId
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           status: active
-        - connected: true
+          allowedTools:
+          - allowedTools
+          - allowedTools
+        - assignedSkills:
+          - assignedSkills
+          - assignedSkills
+          guardrailPreset: guardrailPreset
+          modelId: modelId
+          connected: true
+          systemPrompt: systemPrompt
+          allowedSubAgents:
+          - allowedSubAgents
+          - allowedSubAgents
           createdAt: 2000-01-23T04:56:07.000+00:00
-          agentId: agentId
-          sessionTtlDays: 0
+          sessionTtlDays: 1
           setupType: quant
+          longContext: true
           keywordsEnabled: true
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
           botId: botId
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           status: active
+          allowedTools:
+          - allowedTools
+          - allowedTools
       properties:
         bots:
           items:
@@ -21664,8 +21801,8 @@ components:
       type: object
     createSlackBot_request:
       properties:
-        agentId:
-          description: The AI agent that powers this bot
+        name:
+          description: Display name for the bot
           type: string
         setupType:
           description: Whether to use Quant-managed or customer-provided Slack app
@@ -21673,6 +21810,52 @@ components:
           - quant
           - byo
           type: string
+        systemPrompt:
+          description: System prompt for the backing AI agent
+          type: string
+        modelId:
+          description: AI model identifier
+          type: string
+        temperature:
+          description: Sampling temperature
+          maximum: 2
+          minimum: 0
+          type: number
+        maxTokens:
+          description: Maximum response tokens
+          minimum: 1
+          type: integer
+        allowedTools:
+          description: Tools the agent may use
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          description: Skills assigned to the agent
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          description: Vector DB collections the agent may query
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          description: Sub-agents the agent may call
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          description: Guardrail preset name
+          type: string
+        filterPolicies:
+          description: Content filter policies
+          items:
+            type: string
+          type: array
+        longContext:
+          description: Enable long context mode
+          type: boolean
         sessionTtlDays:
           description: Session TTL in days
           maximum: 90
@@ -21683,6 +21866,25 @@ components:
           items:
             type: string
           type: array
+        allowedUsers:
+          description: Slack user IDs allowed to interact with the bot
+          items:
+            type: string
+          type: array
+        deniedUsers:
+          description: Slack user IDs denied from interacting with the bot
+          items:
+            type: string
+          type: array
+        allowGuests:
+          description: Whether guest users may interact with the bot
+          type: boolean
+        homeTabContent:
+          description: Content shown on the bot's Home tab in Slack
+          type: string
+        agentAccessControl:
+          description: Agent-level access control settings
+          type: object
         keywordsEnabled:
           description: Whether keyword triggers are enabled
           type: boolean
@@ -21691,14 +21893,11 @@ components:
           items:
             type: string
           type: array
-        slashCommands:
-          description: Slash commands the bot responds to
-          items:
-            type: string
-          type: array
       required:
-      - agentId
+      - modelId
+      - name
       - setupType
+      - systemPrompt
       type: object
     createSlackBot_201_response:
       example:
@@ -21709,28 +21908,55 @@ components:
       type: object
     getSlackBot_200_response_bot:
       example:
-        connected: true
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        agentId: agentId
-        sessionTtlDays: 0
+        assignedSkills:
+        - assignedSkills
+        - assignedSkills
         keywords:
         - keywords
         - keywords
-        slashCommands:
-        - slashCommands
-        - slashCommands
-        setupType: quant
-        keywordsEnabled: true
+        modelId: modelId
+        allowedSubAgents:
+        - allowedSubAgents
+        - allowedSubAgents
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        homeTabContent: homeTabContent
+        sessionTtlDays: 1
+        longContext: true
+        temperature: 0.8008281904610115
+        maxTokens: 6
         botId: botId
         allowedChannels:
         - allowedChannels
         - allowedChannels
-        status: active
+        deniedUsers:
+        - deniedUsers
+        - deniedUsers
         updatedAt: 2000-01-23T04:56:07.000+00:00
+        guardrailPreset: guardrailPreset
+        connected: true
+        systemPrompt: systemPrompt
+        allowGuests: true
+        setupType: quant
+        keywordsEnabled: true
+        name: name
+        allowedCollections:
+        - allowedCollections
+        - allowedCollections
+        allowedUsers:
+        - allowedUsers
+        - allowedUsers
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
+        agentAccessControl: "{}"
+        status: active
+        allowedTools:
+        - allowedTools
+        - allowedTools
       properties:
         botId:
           type: string
-        agentId:
+        name:
           type: string
         setupType:
           enum:
@@ -21744,19 +21970,61 @@ components:
           type: string
         connected:
           type: boolean
+        systemPrompt:
+          type: string
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          type: string
+        filterPolicies:
+          items:
+            type: string
+          type: array
+        longContext:
+          type: boolean
         sessionTtlDays:
           type: integer
         allowedChannels:
           items:
             type: string
           type: array
-        keywordsEnabled:
-          type: boolean
-        keywords:
+        allowedUsers:
           items:
             type: string
           type: array
-        slashCommands:
+        deniedUsers:
+          items:
+            type: string
+          type: array
+        allowGuests:
+          type: boolean
+        homeTabContent:
+          type: string
+        agentAccessControl:
+          type: object
+        keywordsEnabled:
+          type: boolean
+        keywords:
           items:
             type: string
           type: array
@@ -21770,32 +22038,59 @@ components:
     getSlackBot_200_response:
       example:
         bot:
-          connected: true
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          agentId: agentId
-          sessionTtlDays: 0
+          assignedSkills:
+          - assignedSkills
+          - assignedSkills
           keywords:
           - keywords
           - keywords
-          slashCommands:
-          - slashCommands
-          - slashCommands
-          setupType: quant
-          keywordsEnabled: true
+          modelId: modelId
+          allowedSubAgents:
+          - allowedSubAgents
+          - allowedSubAgents
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          homeTabContent: homeTabContent
+          sessionTtlDays: 1
+          longContext: true
+          temperature: 0.8008281904610115
+          maxTokens: 6
           botId: botId
           allowedChannels:
           - allowedChannels
           - allowedChannels
-          status: active
+          deniedUsers:
+          - deniedUsers
+          - deniedUsers
           updatedAt: 2000-01-23T04:56:07.000+00:00
+          guardrailPreset: guardrailPreset
+          connected: true
+          systemPrompt: systemPrompt
+          allowGuests: true
+          setupType: quant
+          keywordsEnabled: true
+          name: name
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
+          allowedUsers:
+          - allowedUsers
+          - allowedUsers
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
+          agentAccessControl: "{}"
+          status: active
+          allowedTools:
+          - allowedTools
+          - allowedTools
       properties:
         bot:
           $ref: '#/components/schemas/getSlackBot_200_response_bot'
       type: object
     updateSlackBot_request:
       properties:
-        agentId:
-          description: Change the backing AI agent
+        name:
+          description: Display name for the bot
           type: string
         status:
           description: Enable or disable the bot
@@ -21803,6 +22098,52 @@ components:
           - active
           - inactive
           type: string
+        systemPrompt:
+          description: System prompt for the backing AI agent
+          type: string
+        modelId:
+          description: AI model identifier
+          type: string
+        temperature:
+          description: Sampling temperature
+          maximum: 2
+          minimum: 0
+          type: number
+        maxTokens:
+          description: Maximum response tokens
+          minimum: 1
+          type: integer
+        allowedTools:
+          description: Tools the agent may use
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          description: Skills assigned to the agent
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          description: Vector DB collections the agent may query
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          description: Sub-agents the agent may call
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          description: Guardrail preset name
+          type: string
+        filterPolicies:
+          description: Content filter policies
+          items:
+            type: string
+          type: array
+        longContext:
+          description: Enable long context mode
+          type: boolean
         sessionTtlDays:
           description: Session TTL in days
           maximum: 90
@@ -21813,16 +22154,30 @@ components:
           items:
             type: string
           type: array
+        allowedUsers:
+          description: Slack user IDs allowed to interact with the bot
+          items:
+            type: string
+          type: array
+        deniedUsers:
+          description: Slack user IDs denied from interacting with the bot
+          items:
+            type: string
+          type: array
+        allowGuests:
+          description: Whether guest users may interact with the bot
+          type: boolean
+        homeTabContent:
+          description: Content shown on the bot's Home tab in Slack
+          type: string
+        agentAccessControl:
+          description: Agent-level access control settings
+          type: object
         keywordsEnabled:
           description: Whether keyword triggers are enabled
           type: boolean
         keywords:
           description: Keywords that trigger the bot
-          items:
-            type: string
-          type: array
-        slashCommands:
-          description: Slash commands the bot responds to
           items:
             type: string
           type: array
@@ -21986,7 +22341,7 @@ components:
             type: string
           type: array
         spendLimits:
-          type: object
+          $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits'
         version:
           type: integer
       required:
@@ -22003,6 +22358,100 @@ components:
           type: boolean
         config:
           type: object
+      type: object
+    getGovernanceSpend_200_response_orgTotal:
+      example:
+        requestCount: 6
+        spendCents: 0
+      properties:
+        spendCents:
+          description: Total org spend in US cents
+          type: integer
+        requestCount:
+          type: integer
+      type: object
+    getGovernanceSpend_200_response_todayTotal:
+      example:
+        requestCount: 5
+        spendCents: 1
+      properties:
+        spendCents:
+          description: Org spend today in US cents
+          type: integer
+        requestCount:
+          type: integer
+      type: object
+    getGovernanceSpend_200_response_budget:
+      example:
+        monthlyBudgetCents: 5
+        usedPercent: 2.302136
+        remainingCents: 7
+      nullable: true
+      properties:
+        monthlyBudgetCents:
+          type: integer
+        usedPercent:
+          format: float
+          type: number
+        remainingCents:
+          type: integer
+      type: object
+    getGovernanceSpend_200_response_dailyBudget:
+      example:
+        usedPercent: 3.6160767
+        remainingCents: 2
+        dailyBudgetCents: 9
+      nullable: true
+      properties:
+        dailyBudgetCents:
+          type: integer
+        usedPercent:
+          format: float
+          type: number
+        remainingCents:
+          type: integer
+      type: object
+    getGovernanceSpend_200_response_userTotal:
+      example:
+        dailySpendCents: 7
+        monthlySpendCents: 4
+      nullable: true
+      properties:
+        monthlySpendCents:
+          type: integer
+        dailySpendCents:
+          type: integer
+      type: object
+    getGovernanceSpend_200_response:
+      example:
+        todayTotal:
+          requestCount: 5
+          spendCents: 1
+        dailyBudget:
+          usedPercent: 3.6160767
+          remainingCents: 2
+          dailyBudgetCents: 9
+        userTotal:
+          dailySpendCents: 7
+          monthlySpendCents: 4
+        orgTotal:
+          requestCount: 6
+          spendCents: 0
+        budget:
+          monthlyBudgetCents: 5
+          usedPercent: 2.302136
+          remainingCents: 7
+      properties:
+        orgTotal:
+          $ref: '#/components/schemas/getGovernanceSpend_200_response_orgTotal'
+        todayTotal:
+          $ref: '#/components/schemas/getGovernanceSpend_200_response_todayTotal'
+        budget:
+          $ref: '#/components/schemas/getGovernanceSpend_200_response_budget'
+        dailyBudget:
+          $ref: '#/components/schemas/getGovernanceSpend_200_response_dailyBudget'
+        userTotal:
+          $ref: '#/components/schemas/getGovernanceSpend_200_response_userTotal'
       type: object
     createFilterPolicy_request_rules_inner_match:
       description: Match criteria
@@ -22097,11 +22546,28 @@ components:
         spendCents:
           type: integer
       type: object
+    getMyUsage_200_response_quota:
+      example:
+        dailyLimit: 5
+        monthlyLimit: 5
+      nullable: true
+      properties:
+        monthlyLimit:
+          description: Per-user monthly budget in US cents
+          nullable: true
+          type: integer
+        dailyLimit:
+          description: Per-user daily budget in US cents
+          nullable: true
+          type: integer
+      type: object
     getMyUsage_200_response:
       example:
         daily:
           spendCents: 1
-        quota: "{}"
+        quota:
+          dailyLimit: 5
+          monthlyLimit: 5
         monthly:
           requestCount: 6
           spendCents: 0
@@ -22118,8 +22584,7 @@ components:
         daily:
           $ref: '#/components/schemas/getMyUsage_200_response_daily'
         quota:
-          nullable: true
-          type: object
+          $ref: '#/components/schemas/getMyUsage_200_response_quota'
       type: object
     createApplication_403_response:
       example:
@@ -22881,26 +23346,7 @@ components:
         identifier:
           description: Image identifier
           type: string
-      type: object
-    Application_environments_inner:
-      example:
-        envName: envName
-        desiredCount: 1
-        runningCount: 7
-        status: status
-      properties:
-        envName:
-          description: Environment name
-          type: string
-        status:
-          description: Environment status
-          type: string
-        runningCount:
-          description: Running task count
-          type: integer
-        desiredCount:
-          description: Desired task count
-          type: integer
+      readOnly: true
       type: object
     Container_imageReference:
       example:

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **InputTokens** | Pointer to **int32** | Number of input tokens | [optional] 
 **OutputTokens** | Pointer to **int32** | Number of output tokens | [optional] 
 **TotalTokens** | Pointer to **int32** | Total tokens consumed | [optional] 
+**CostCents** | Pointer to **float32** | Cost of this inference call in US cents | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetTotalTokens sets TotalTokens field to given value.
 `func (o *ChatInference200ResponseUsage) HasTotalTokens() bool`
 
 HasTotalTokens returns a boolean if a field has been set.
+
+### GetCostCents
+
+`func (o *ChatInference200ResponseUsage) GetCostCents() float32`
+
+GetCostCents returns the CostCents field if non-nil, zero value otherwise.
+
+### GetCostCentsOk
+
+`func (o *ChatInference200ResponseUsage) GetCostCentsOk() (*float32, bool)`
+
+GetCostCentsOk returns a tuple with the CostCents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCostCents
+
+`func (o *ChatInference200ResponseUsage) SetCostCents(v float32)`
+
+SetCostCents sets CostCents field to given value.
+
+### HasCostCents
+
+`func (o *ChatInference200ResponseUsage) HasCostCents() bool`
+
+HasCostCents returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Collection name (used for reference) | 
 **Description** | Pointer to **string** |  | [optional] 
-**EmbeddingModel** | Pointer to **string** | Embedding model to use (default: amazon.titan-embed-text-v2:0) | [optional] 
+**EmbeddingModel** | **string** | Embedding model to use. Supported: amazon.titan-embed-text-v2:0, cohere.embed-english-v3, cohere.embed-multilingual-v3 | 
 **Dimensions** | Pointer to **int32** | Embedding dimensions (default: 1024) | [optional] 
 
 ## Methods
 
 ### NewCreateVectorCollectionRequest
 
-`func NewCreateVectorCollectionRequest(name string, ) *CreateVectorCollectionRequest`
+`func NewCreateVectorCollectionRequest(name string, embeddingModel string, ) *CreateVectorCollectionRequest`
 
 NewCreateVectorCollectionRequest instantiates a new CreateVectorCollectionRequest object
 This constructor will assign default values to properties that have it defined,
@@ -92,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetEmbeddingModel sets EmbeddingModel field to given value.
 
-### HasEmbeddingModel
-
-`func (o *CreateVectorCollectionRequest) HasEmbeddingModel() bool`
-
-HasEmbeddingModel returns a boolean if a field has been set.
 
 ### GetDimensions
 

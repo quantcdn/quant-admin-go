@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ModelList** | Pointer to **[]string** |  | [optional] 
 **MandatoryGuardrailPreset** | Pointer to **NullableString** |  | [optional] 
 **MandatoryFilterPolicies** | Pointer to **[]string** |  | [optional] 
-**SpendLimits** | Pointer to **map[string]interface{}** |  | [optional] 
+**SpendLimits** | Pointer to [**GetGovernanceConfig200ResponseSpendLimits**](GetGovernanceConfig200ResponseSpendLimits.md) |  | [optional] 
 **Version** | Pointer to **int32** |  | [optional] 
 
 ## Methods
@@ -158,20 +158,20 @@ HasMandatoryFilterPolicies returns a boolean if a field has been set.
 
 ### GetSpendLimits
 
-`func (o *UpdateGovernanceConfigRequest) GetSpendLimits() map[string]interface{}`
+`func (o *UpdateGovernanceConfigRequest) GetSpendLimits() GetGovernanceConfig200ResponseSpendLimits`
 
 GetSpendLimits returns the SpendLimits field if non-nil, zero value otherwise.
 
 ### GetSpendLimitsOk
 
-`func (o *UpdateGovernanceConfigRequest) GetSpendLimitsOk() (*map[string]interface{}, bool)`
+`func (o *UpdateGovernanceConfigRequest) GetSpendLimitsOk() (*GetGovernanceConfig200ResponseSpendLimits, bool)`
 
 GetSpendLimitsOk returns a tuple with the SpendLimits field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpendLimits
 
-`func (o *UpdateGovernanceConfigRequest) SetSpendLimits(v map[string]interface{})`
+`func (o *UpdateGovernanceConfigRequest) SetSpendLimits(v GetGovernanceConfig200ResponseSpendLimits)`
 
 SetSpendLimits sets SpendLimits field to given value.
 

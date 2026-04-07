@@ -37,7 +37,7 @@ import (
 
 func main() {
 	organisation := "organisation_example" // string | The organisation ID
-	createVectorCollectionRequest := *openapiclient.NewCreateVectorCollectionRequest("product-documentation") // CreateVectorCollectionRequest | 
+	createVectorCollectionRequest := *openapiclient.NewCreateVectorCollectionRequest("product-documentation", "amazon.titan-embed-text-v2:0") // CreateVectorCollectionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

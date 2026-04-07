@@ -9,15 +9,15 @@ Name | Type | Description | Notes
 **Database** | Pointer to [**NullableApplicationDatabase**](ApplicationDatabase.md) |  | [optional] 
 **Filesystem** | Pointer to [**NullableApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] 
 **ComposeDefinition** | Pointer to [**Compose**](Compose.md) |  | [optional] 
-**Status** | Pointer to **NullableString** | Application status | [optional] 
-**DeploymentInformation** | Pointer to [**[]ApplicationDeploymentInformationInner**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] 
+**Status** | Pointer to **NullableString** | Application status | [optional] [readonly] 
+**DeploymentInformation** | Pointer to [**[]ApplicationDeploymentInformationInner**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [readonly] 
 **ImageReference** | Pointer to [**NullableApplicationImageReference**](ApplicationImageReference.md) |  | [optional] 
-**ContainerNames** | Pointer to **[]string** | List of container names | [optional] 
+**ContainerNames** | Pointer to **[]string** | List of container names | [optional] [readonly] 
 **MinCapacity** | Pointer to **NullableInt32** | Minimum task count for auto-scaling | [optional] 
 **MaxCapacity** | Pointer to **NullableInt32** | Maximum task count for auto-scaling | [optional] 
 **DesiredCount** | Pointer to **NullableInt32** | Desired task count | [optional] 
 **RunningCount** | Pointer to **NullableInt32** | Currently running task count | [optional] 
-**Environments** | Pointer to [**[]ApplicationEnvironmentsInner**](ApplicationEnvironmentsInner.md) | List of environments | [optional] 
+**EnvironmentNames** | Pointer to **[]string** | List of environment names (read-only) | [optional] [readonly] 
 
 ## Methods
 
@@ -453,41 +453,41 @@ HasRunningCount returns a boolean if a field has been set.
 `func (o *Application) UnsetRunningCount()`
 
 UnsetRunningCount ensures that no value is present for RunningCount, not even an explicit nil
-### GetEnvironments
+### GetEnvironmentNames
 
-`func (o *Application) GetEnvironments() []ApplicationEnvironmentsInner`
+`func (o *Application) GetEnvironmentNames() []string`
 
-GetEnvironments returns the Environments field if non-nil, zero value otherwise.
+GetEnvironmentNames returns the EnvironmentNames field if non-nil, zero value otherwise.
 
-### GetEnvironmentsOk
+### GetEnvironmentNamesOk
 
-`func (o *Application) GetEnvironmentsOk() (*[]ApplicationEnvironmentsInner, bool)`
+`func (o *Application) GetEnvironmentNamesOk() (*[]string, bool)`
 
-GetEnvironmentsOk returns a tuple with the Environments field if it's non-nil, zero value otherwise
+GetEnvironmentNamesOk returns a tuple with the EnvironmentNames field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEnvironments
+### SetEnvironmentNames
 
-`func (o *Application) SetEnvironments(v []ApplicationEnvironmentsInner)`
+`func (o *Application) SetEnvironmentNames(v []string)`
 
-SetEnvironments sets Environments field to given value.
+SetEnvironmentNames sets EnvironmentNames field to given value.
 
-### HasEnvironments
+### HasEnvironmentNames
 
-`func (o *Application) HasEnvironments() bool`
+`func (o *Application) HasEnvironmentNames() bool`
 
-HasEnvironments returns a boolean if a field has been set.
+HasEnvironmentNames returns a boolean if a field has been set.
 
-### SetEnvironmentsNil
+### SetEnvironmentNamesNil
 
-`func (o *Application) SetEnvironmentsNil(b bool)`
+`func (o *Application) SetEnvironmentNamesNil(b bool)`
 
- SetEnvironmentsNil sets the value for Environments to be an explicit nil
+ SetEnvironmentNamesNil sets the value for EnvironmentNames to be an explicit nil
 
-### UnsetEnvironments
-`func (o *Application) UnsetEnvironments()`
+### UnsetEnvironmentNames
+`func (o *Application) UnsetEnvironmentNames()`
 
-UnsetEnvironments ensures that no value is present for Environments, not even an explicit nil
+UnsetEnvironmentNames ensures that no value is present for EnvironmentNames, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
