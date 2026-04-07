@@ -8330,7 +8330,8 @@ paths:
   /api/v3/organizations/{organisation}/ai/slack-bots:
     get:
       description: Lists all Slack bots configured for the organization. Each bot
-        is backed by an AI agent and can be connected to a Slack workspace.
+        is backed by an AI agent and can be connected to a Slack workspace. Agent
+        configuration fields are flattened onto each bot object.
       operationId: listSlackBots
       parameters:
       - description: The organisation ID
@@ -8357,7 +8358,7 @@ paths:
       - AI Slack Bots
     post:
       description: |-
-        Creates a new Slack bot backed by an AI agent. The bot must be connected to a Slack workspace via OAuth before it can receive events.
+        Creates a new Slack bot with inline AI agent configuration. A backing agent is created automatically — callers do not need to manage agents separately.
              *
              * **Setup Types:**
              * - `quant`: Quant-managed Slack app — uses shared OAuth credentials
@@ -8396,7 +8397,8 @@ paths:
       - AI Slack Bots
   /api/v3/organizations/{organisation}/ai/slack-bots/{botId}:
     delete:
-      description: Permanently deletes a Slack bot and disconnects it from the workspace.
+      description: "Permanently deletes a Slack bot, disconnects it from the workspace,\
+        \ and deletes its backing AI agent."
       operationId: deleteSlackBot
       parameters:
       - description: The organisation ID
@@ -8432,8 +8434,8 @@ paths:
       tags:
       - AI Slack Bots
     get:
-      description: Retrieves details for a specific Slack bot including its configuration
-        and connection status.
+      description: "Retrieves details for a specific Slack bot including its configuration,\
+        \ connection status, and flattened agent configuration."
       operationId: getSlackBot
       parameters:
       - description: The organisation ID
@@ -8469,7 +8471,8 @@ paths:
       tags:
       - AI Slack Bots
     put:
-      description: Updates a Slack bot's configuration. Only provided fields are updated.
+      description: Updates a Slack bot's configuration and/or its backing agent. Only
+        provided fields are updated.
       operationId: updateSlackBot
       parameters:
       - description: The organisation ID
@@ -21643,18 +21646,39 @@ components:
       type: object
     listSlackBots_200_response_bots_inner:
       example:
+        assignedSkills:
+        - assignedSkills
+        - assignedSkills
+        guardrailPreset: guardrailPreset
+        modelId: modelId
         connected: true
+        systemPrompt: systemPrompt
+        allowedSubAgents:
+        - allowedSubAgents
+        - allowedSubAgents
         createdAt: 2000-01-23T04:56:07.000+00:00
-        agentId: agentId
-        sessionTtlDays: 0
+        sessionTtlDays: 1
         setupType: quant
+        longContext: true
         keywordsEnabled: true
+        name: name
+        temperature: 0.8008281904610115
+        maxTokens: 6
+        allowedCollections:
+        - allowedCollections
+        - allowedCollections
         botId: botId
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
         status: active
+        allowedTools:
+        - allowedTools
+        - allowedTools
       properties:
         botId:
           type: string
-        agentId:
+        name:
           type: string
         setupType:
           enum:
@@ -21667,6 +21691,38 @@ components:
           - inactive
           type: string
         connected:
+          type: boolean
+        systemPrompt:
+          type: string
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          type: string
+        filterPolicies:
+          items:
+            type: string
+          type: array
+        longContext:
           type: boolean
         sessionTtlDays:
           type: integer
@@ -21679,22 +21735,64 @@ components:
     listSlackBots_200_response:
       example:
         bots:
-        - connected: true
+        - assignedSkills:
+          - assignedSkills
+          - assignedSkills
+          guardrailPreset: guardrailPreset
+          modelId: modelId
+          connected: true
+          systemPrompt: systemPrompt
+          allowedSubAgents:
+          - allowedSubAgents
+          - allowedSubAgents
           createdAt: 2000-01-23T04:56:07.000+00:00
-          agentId: agentId
-          sessionTtlDays: 0
+          sessionTtlDays: 1
           setupType: quant
+          longContext: true
           keywordsEnabled: true
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
           botId: botId
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           status: active
-        - connected: true
+          allowedTools:
+          - allowedTools
+          - allowedTools
+        - assignedSkills:
+          - assignedSkills
+          - assignedSkills
+          guardrailPreset: guardrailPreset
+          modelId: modelId
+          connected: true
+          systemPrompt: systemPrompt
+          allowedSubAgents:
+          - allowedSubAgents
+          - allowedSubAgents
           createdAt: 2000-01-23T04:56:07.000+00:00
-          agentId: agentId
-          sessionTtlDays: 0
+          sessionTtlDays: 1
           setupType: quant
+          longContext: true
           keywordsEnabled: true
+          name: name
+          temperature: 0.8008281904610115
+          maxTokens: 6
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
           botId: botId
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           status: active
+          allowedTools:
+          - allowedTools
+          - allowedTools
       properties:
         bots:
           items:
@@ -21703,8 +21801,8 @@ components:
       type: object
     createSlackBot_request:
       properties:
-        agentId:
-          description: The AI agent that powers this bot
+        name:
+          description: Display name for the bot
           type: string
         setupType:
           description: Whether to use Quant-managed or customer-provided Slack app
@@ -21712,6 +21810,52 @@ components:
           - quant
           - byo
           type: string
+        systemPrompt:
+          description: System prompt for the backing AI agent
+          type: string
+        modelId:
+          description: AI model identifier
+          type: string
+        temperature:
+          description: Sampling temperature
+          maximum: 2
+          minimum: 0
+          type: number
+        maxTokens:
+          description: Maximum response tokens
+          minimum: 1
+          type: integer
+        allowedTools:
+          description: Tools the agent may use
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          description: Skills assigned to the agent
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          description: Vector DB collections the agent may query
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          description: Sub-agents the agent may call
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          description: Guardrail preset name
+          type: string
+        filterPolicies:
+          description: Content filter policies
+          items:
+            type: string
+          type: array
+        longContext:
+          description: Enable long context mode
+          type: boolean
         sessionTtlDays:
           description: Session TTL in days
           maximum: 90
@@ -21722,6 +21866,25 @@ components:
           items:
             type: string
           type: array
+        allowedUsers:
+          description: Slack user IDs allowed to interact with the bot
+          items:
+            type: string
+          type: array
+        deniedUsers:
+          description: Slack user IDs denied from interacting with the bot
+          items:
+            type: string
+          type: array
+        allowGuests:
+          description: Whether guest users may interact with the bot
+          type: boolean
+        homeTabContent:
+          description: Content shown on the bot's Home tab in Slack
+          type: string
+        agentAccessControl:
+          description: Agent-level access control settings
+          type: object
         keywordsEnabled:
           description: Whether keyword triggers are enabled
           type: boolean
@@ -21730,14 +21893,11 @@ components:
           items:
             type: string
           type: array
-        slashCommands:
-          description: Slash commands the bot responds to
-          items:
-            type: string
-          type: array
       required:
-      - agentId
+      - modelId
+      - name
       - setupType
+      - systemPrompt
       type: object
     createSlackBot_201_response:
       example:
@@ -21748,28 +21908,55 @@ components:
       type: object
     getSlackBot_200_response_bot:
       example:
-        connected: true
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        agentId: agentId
-        sessionTtlDays: 0
+        assignedSkills:
+        - assignedSkills
+        - assignedSkills
         keywords:
         - keywords
         - keywords
-        slashCommands:
-        - slashCommands
-        - slashCommands
-        setupType: quant
-        keywordsEnabled: true
+        modelId: modelId
+        allowedSubAgents:
+        - allowedSubAgents
+        - allowedSubAgents
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        homeTabContent: homeTabContent
+        sessionTtlDays: 1
+        longContext: true
+        temperature: 0.8008281904610115
+        maxTokens: 6
         botId: botId
         allowedChannels:
         - allowedChannels
         - allowedChannels
-        status: active
+        deniedUsers:
+        - deniedUsers
+        - deniedUsers
         updatedAt: 2000-01-23T04:56:07.000+00:00
+        guardrailPreset: guardrailPreset
+        connected: true
+        systemPrompt: systemPrompt
+        allowGuests: true
+        setupType: quant
+        keywordsEnabled: true
+        name: name
+        allowedCollections:
+        - allowedCollections
+        - allowedCollections
+        allowedUsers:
+        - allowedUsers
+        - allowedUsers
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
+        agentAccessControl: "{}"
+        status: active
+        allowedTools:
+        - allowedTools
+        - allowedTools
       properties:
         botId:
           type: string
-        agentId:
+        name:
           type: string
         setupType:
           enum:
@@ -21783,19 +21970,61 @@ components:
           type: string
         connected:
           type: boolean
+        systemPrompt:
+          type: string
+        modelId:
+          type: string
+        temperature:
+          type: number
+        maxTokens:
+          type: integer
+        allowedTools:
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          type: string
+        filterPolicies:
+          items:
+            type: string
+          type: array
+        longContext:
+          type: boolean
         sessionTtlDays:
           type: integer
         allowedChannels:
           items:
             type: string
           type: array
-        keywordsEnabled:
-          type: boolean
-        keywords:
+        allowedUsers:
           items:
             type: string
           type: array
-        slashCommands:
+        deniedUsers:
+          items:
+            type: string
+          type: array
+        allowGuests:
+          type: boolean
+        homeTabContent:
+          type: string
+        agentAccessControl:
+          type: object
+        keywordsEnabled:
+          type: boolean
+        keywords:
           items:
             type: string
           type: array
@@ -21809,32 +22038,59 @@ components:
     getSlackBot_200_response:
       example:
         bot:
-          connected: true
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          agentId: agentId
-          sessionTtlDays: 0
+          assignedSkills:
+          - assignedSkills
+          - assignedSkills
           keywords:
           - keywords
           - keywords
-          slashCommands:
-          - slashCommands
-          - slashCommands
-          setupType: quant
-          keywordsEnabled: true
+          modelId: modelId
+          allowedSubAgents:
+          - allowedSubAgents
+          - allowedSubAgents
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          homeTabContent: homeTabContent
+          sessionTtlDays: 1
+          longContext: true
+          temperature: 0.8008281904610115
+          maxTokens: 6
           botId: botId
           allowedChannels:
           - allowedChannels
           - allowedChannels
-          status: active
+          deniedUsers:
+          - deniedUsers
+          - deniedUsers
           updatedAt: 2000-01-23T04:56:07.000+00:00
+          guardrailPreset: guardrailPreset
+          connected: true
+          systemPrompt: systemPrompt
+          allowGuests: true
+          setupType: quant
+          keywordsEnabled: true
+          name: name
+          allowedCollections:
+          - allowedCollections
+          - allowedCollections
+          allowedUsers:
+          - allowedUsers
+          - allowedUsers
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
+          agentAccessControl: "{}"
+          status: active
+          allowedTools:
+          - allowedTools
+          - allowedTools
       properties:
         bot:
           $ref: '#/components/schemas/getSlackBot_200_response_bot'
       type: object
     updateSlackBot_request:
       properties:
-        agentId:
-          description: Change the backing AI agent
+        name:
+          description: Display name for the bot
           type: string
         status:
           description: Enable or disable the bot
@@ -21842,6 +22098,52 @@ components:
           - active
           - inactive
           type: string
+        systemPrompt:
+          description: System prompt for the backing AI agent
+          type: string
+        modelId:
+          description: AI model identifier
+          type: string
+        temperature:
+          description: Sampling temperature
+          maximum: 2
+          minimum: 0
+          type: number
+        maxTokens:
+          description: Maximum response tokens
+          minimum: 1
+          type: integer
+        allowedTools:
+          description: Tools the agent may use
+          items:
+            type: string
+          type: array
+        assignedSkills:
+          description: Skills assigned to the agent
+          items:
+            type: string
+          type: array
+        allowedCollections:
+          description: Vector DB collections the agent may query
+          items:
+            type: string
+          type: array
+        allowedSubAgents:
+          description: Sub-agents the agent may call
+          items:
+            type: string
+          type: array
+        guardrailPreset:
+          description: Guardrail preset name
+          type: string
+        filterPolicies:
+          description: Content filter policies
+          items:
+            type: string
+          type: array
+        longContext:
+          description: Enable long context mode
+          type: boolean
         sessionTtlDays:
           description: Session TTL in days
           maximum: 90
@@ -21852,16 +22154,30 @@ components:
           items:
             type: string
           type: array
+        allowedUsers:
+          description: Slack user IDs allowed to interact with the bot
+          items:
+            type: string
+          type: array
+        deniedUsers:
+          description: Slack user IDs denied from interacting with the bot
+          items:
+            type: string
+          type: array
+        allowGuests:
+          description: Whether guest users may interact with the bot
+          type: boolean
+        homeTabContent:
+          description: Content shown on the bot's Home tab in Slack
+          type: string
+        agentAccessControl:
+          description: Agent-level access control settings
+          type: object
         keywordsEnabled:
           description: Whether keyword triggers are enabled
           type: boolean
         keywords:
           description: Keywords that trigger the bot
-          items:
-            type: string
-          type: array
-        slashCommands:
-          description: Slash commands the bot responds to
           items:
             type: string
           type: array
@@ -22025,7 +22341,7 @@ components:
             type: string
           type: array
         spendLimits:
-          type: object
+          $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits'
         version:
           type: integer
       required:

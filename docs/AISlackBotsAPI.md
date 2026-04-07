@@ -36,7 +36,7 @@ import (
 
 func main() {
 	organisation := "organisation_example" // string | The organisation ID
-	createSlackBotRequest := *openapiclient.NewCreateSlackBotRequest("AgentId_example", "SetupType_example") // CreateSlackBotRequest | 
+	createSlackBotRequest := *openapiclient.NewCreateSlackBotRequest("Name_example", "SetupType_example", "SystemPrompt_example", "ModelId_example") // CreateSlackBotRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

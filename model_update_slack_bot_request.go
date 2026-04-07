@@ -19,20 +19,50 @@ var _ MappedNullable = &UpdateSlackBotRequest{}
 
 // UpdateSlackBotRequest struct for UpdateSlackBotRequest
 type UpdateSlackBotRequest struct {
-	// Change the backing AI agent
-	AgentId *string `json:"agentId,omitempty"`
+	// Display name for the bot
+	Name *string `json:"name,omitempty"`
 	// Enable or disable the bot
 	Status *string `json:"status,omitempty"`
+	// System prompt for the backing AI agent
+	SystemPrompt *string `json:"systemPrompt,omitempty"`
+	// AI model identifier
+	ModelId *string `json:"modelId,omitempty"`
+	// Sampling temperature
+	Temperature *float32 `json:"temperature,omitempty"`
+	// Maximum response tokens
+	MaxTokens *int32 `json:"maxTokens,omitempty"`
+	// Tools the agent may use
+	AllowedTools []string `json:"allowedTools,omitempty"`
+	// Skills assigned to the agent
+	AssignedSkills []string `json:"assignedSkills,omitempty"`
+	// Vector DB collections the agent may query
+	AllowedCollections []string `json:"allowedCollections,omitempty"`
+	// Sub-agents the agent may call
+	AllowedSubAgents []string `json:"allowedSubAgents,omitempty"`
+	// Guardrail preset name
+	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
+	// Content filter policies
+	FilterPolicies []string `json:"filterPolicies,omitempty"`
+	// Enable long context mode
+	LongContext *bool `json:"longContext,omitempty"`
 	// Session TTL in days
 	SessionTtlDays *int32 `json:"sessionTtlDays,omitempty"`
 	// Slack channel IDs the bot may respond in
 	AllowedChannels []string `json:"allowedChannels,omitempty"`
+	// Slack user IDs allowed to interact with the bot
+	AllowedUsers []string `json:"allowedUsers,omitempty"`
+	// Slack user IDs denied from interacting with the bot
+	DeniedUsers []string `json:"deniedUsers,omitempty"`
+	// Whether guest users may interact with the bot
+	AllowGuests *bool `json:"allowGuests,omitempty"`
+	// Content shown on the bot's Home tab in Slack
+	HomeTabContent *string `json:"homeTabContent,omitempty"`
+	// Agent-level access control settings
+	AgentAccessControl map[string]interface{} `json:"agentAccessControl,omitempty"`
 	// Whether keyword triggers are enabled
 	KeywordsEnabled *bool `json:"keywordsEnabled,omitempty"`
 	// Keywords that trigger the bot
 	Keywords []string `json:"keywords,omitempty"`
-	// Slash commands the bot responds to
-	SlashCommands []string `json:"slashCommands,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -55,36 +85,36 @@ func NewUpdateSlackBotRequestWithDefaults() *UpdateSlackBotRequest {
 	return &this
 }
 
-// GetAgentId returns the AgentId field value if set, zero value otherwise.
-func (o *UpdateSlackBotRequest) GetAgentId() string {
-	if o == nil || IsNil(o.AgentId) {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-	return *o.AgentId
+	return *o.Name
 }
 
-// GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateSlackBotRequest) GetAgentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AgentId) {
+func (o *UpdateSlackBotRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return o.AgentId, true
+	return o.Name, true
 }
 
-// HasAgentId returns a boolean if a field has been set.
-func (o *UpdateSlackBotRequest) HasAgentId() bool {
-	if o != nil && !IsNil(o.AgentId) {
+// HasName returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
 	return false
 }
 
-// SetAgentId gets a reference to the given string and assigns it to the AgentId field.
-func (o *UpdateSlackBotRequest) SetAgentId(v string) {
-	o.AgentId = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateSlackBotRequest) SetName(v string) {
+	o.Name = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -117,6 +147,358 @@ func (o *UpdateSlackBotRequest) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *UpdateSlackBotRequest) SetStatus(v string) {
 	o.Status = &v
+}
+
+// GetSystemPrompt returns the SystemPrompt field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetSystemPrompt() string {
+	if o == nil || IsNil(o.SystemPrompt) {
+		var ret string
+		return ret
+	}
+	return *o.SystemPrompt
+}
+
+// GetSystemPromptOk returns a tuple with the SystemPrompt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetSystemPromptOk() (*string, bool) {
+	if o == nil || IsNil(o.SystemPrompt) {
+		return nil, false
+	}
+	return o.SystemPrompt, true
+}
+
+// HasSystemPrompt returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasSystemPrompt() bool {
+	if o != nil && !IsNil(o.SystemPrompt) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemPrompt gets a reference to the given string and assigns it to the SystemPrompt field.
+func (o *UpdateSlackBotRequest) SetSystemPrompt(v string) {
+	o.SystemPrompt = &v
+}
+
+// GetModelId returns the ModelId field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetModelId() string {
+	if o == nil || IsNil(o.ModelId) {
+		var ret string
+		return ret
+	}
+	return *o.ModelId
+}
+
+// GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetModelIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ModelId) {
+		return nil, false
+	}
+	return o.ModelId, true
+}
+
+// HasModelId returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasModelId() bool {
+	if o != nil && !IsNil(o.ModelId) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelId gets a reference to the given string and assigns it to the ModelId field.
+func (o *UpdateSlackBotRequest) SetModelId(v string) {
+	o.ModelId = &v
+}
+
+// GetTemperature returns the Temperature field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetTemperature() float32 {
+	if o == nil || IsNil(o.Temperature) {
+		var ret float32
+		return ret
+	}
+	return *o.Temperature
+}
+
+// GetTemperatureOk returns a tuple with the Temperature field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetTemperatureOk() (*float32, bool) {
+	if o == nil || IsNil(o.Temperature) {
+		return nil, false
+	}
+	return o.Temperature, true
+}
+
+// HasTemperature returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasTemperature() bool {
+	if o != nil && !IsNil(o.Temperature) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemperature gets a reference to the given float32 and assigns it to the Temperature field.
+func (o *UpdateSlackBotRequest) SetTemperature(v float32) {
+	o.Temperature = &v
+}
+
+// GetMaxTokens returns the MaxTokens field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetMaxTokens() int32 {
+	if o == nil || IsNil(o.MaxTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxTokens
+}
+
+// GetMaxTokensOk returns a tuple with the MaxTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetMaxTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxTokens) {
+		return nil, false
+	}
+	return o.MaxTokens, true
+}
+
+// HasMaxTokens returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasMaxTokens() bool {
+	if o != nil && !IsNil(o.MaxTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxTokens gets a reference to the given int32 and assigns it to the MaxTokens field.
+func (o *UpdateSlackBotRequest) SetMaxTokens(v int32) {
+	o.MaxTokens = &v
+}
+
+// GetAllowedTools returns the AllowedTools field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAllowedTools() []string {
+	if o == nil || IsNil(o.AllowedTools) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedTools
+}
+
+// GetAllowedToolsOk returns a tuple with the AllowedTools field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAllowedToolsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedTools) {
+		return nil, false
+	}
+	return o.AllowedTools, true
+}
+
+// HasAllowedTools returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAllowedTools() bool {
+	if o != nil && !IsNil(o.AllowedTools) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedTools gets a reference to the given []string and assigns it to the AllowedTools field.
+func (o *UpdateSlackBotRequest) SetAllowedTools(v []string) {
+	o.AllowedTools = v
+}
+
+// GetAssignedSkills returns the AssignedSkills field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAssignedSkills() []string {
+	if o == nil || IsNil(o.AssignedSkills) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedSkills
+}
+
+// GetAssignedSkillsOk returns a tuple with the AssignedSkills field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAssignedSkillsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedSkills) {
+		return nil, false
+	}
+	return o.AssignedSkills, true
+}
+
+// HasAssignedSkills returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAssignedSkills() bool {
+	if o != nil && !IsNil(o.AssignedSkills) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedSkills gets a reference to the given []string and assigns it to the AssignedSkills field.
+func (o *UpdateSlackBotRequest) SetAssignedSkills(v []string) {
+	o.AssignedSkills = v
+}
+
+// GetAllowedCollections returns the AllowedCollections field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAllowedCollections() []string {
+	if o == nil || IsNil(o.AllowedCollections) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedCollections
+}
+
+// GetAllowedCollectionsOk returns a tuple with the AllowedCollections field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAllowedCollectionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedCollections) {
+		return nil, false
+	}
+	return o.AllowedCollections, true
+}
+
+// HasAllowedCollections returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAllowedCollections() bool {
+	if o != nil && !IsNil(o.AllowedCollections) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedCollections gets a reference to the given []string and assigns it to the AllowedCollections field.
+func (o *UpdateSlackBotRequest) SetAllowedCollections(v []string) {
+	o.AllowedCollections = v
+}
+
+// GetAllowedSubAgents returns the AllowedSubAgents field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAllowedSubAgents() []string {
+	if o == nil || IsNil(o.AllowedSubAgents) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedSubAgents
+}
+
+// GetAllowedSubAgentsOk returns a tuple with the AllowedSubAgents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAllowedSubAgentsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedSubAgents) {
+		return nil, false
+	}
+	return o.AllowedSubAgents, true
+}
+
+// HasAllowedSubAgents returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAllowedSubAgents() bool {
+	if o != nil && !IsNil(o.AllowedSubAgents) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedSubAgents gets a reference to the given []string and assigns it to the AllowedSubAgents field.
+func (o *UpdateSlackBotRequest) SetAllowedSubAgents(v []string) {
+	o.AllowedSubAgents = v
+}
+
+// GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetGuardrailPreset() string {
+	if o == nil || IsNil(o.GuardrailPreset) {
+		var ret string
+		return ret
+	}
+	return *o.GuardrailPreset
+}
+
+// GetGuardrailPresetOk returns a tuple with the GuardrailPreset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetGuardrailPresetOk() (*string, bool) {
+	if o == nil || IsNil(o.GuardrailPreset) {
+		return nil, false
+	}
+	return o.GuardrailPreset, true
+}
+
+// HasGuardrailPreset returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasGuardrailPreset() bool {
+	if o != nil && !IsNil(o.GuardrailPreset) {
+		return true
+	}
+
+	return false
+}
+
+// SetGuardrailPreset gets a reference to the given string and assigns it to the GuardrailPreset field.
+func (o *UpdateSlackBotRequest) SetGuardrailPreset(v string) {
+	o.GuardrailPreset = &v
+}
+
+// GetFilterPolicies returns the FilterPolicies field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetFilterPolicies() []string {
+	if o == nil || IsNil(o.FilterPolicies) {
+		var ret []string
+		return ret
+	}
+	return o.FilterPolicies
+}
+
+// GetFilterPoliciesOk returns a tuple with the FilterPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetFilterPoliciesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FilterPolicies) {
+		return nil, false
+	}
+	return o.FilterPolicies, true
+}
+
+// HasFilterPolicies returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasFilterPolicies() bool {
+	if o != nil && !IsNil(o.FilterPolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterPolicies gets a reference to the given []string and assigns it to the FilterPolicies field.
+func (o *UpdateSlackBotRequest) SetFilterPolicies(v []string) {
+	o.FilterPolicies = v
+}
+
+// GetLongContext returns the LongContext field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetLongContext() bool {
+	if o == nil || IsNil(o.LongContext) {
+		var ret bool
+		return ret
+	}
+	return *o.LongContext
+}
+
+// GetLongContextOk returns a tuple with the LongContext field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetLongContextOk() (*bool, bool) {
+	if o == nil || IsNil(o.LongContext) {
+		return nil, false
+	}
+	return o.LongContext, true
+}
+
+// HasLongContext returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasLongContext() bool {
+	if o != nil && !IsNil(o.LongContext) {
+		return true
+	}
+
+	return false
+}
+
+// SetLongContext gets a reference to the given bool and assigns it to the LongContext field.
+func (o *UpdateSlackBotRequest) SetLongContext(v bool) {
+	o.LongContext = &v
 }
 
 // GetSessionTtlDays returns the SessionTtlDays field value if set, zero value otherwise.
@@ -183,6 +565,166 @@ func (o *UpdateSlackBotRequest) SetAllowedChannels(v []string) {
 	o.AllowedChannels = v
 }
 
+// GetAllowedUsers returns the AllowedUsers field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAllowedUsers() []string {
+	if o == nil || IsNil(o.AllowedUsers) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedUsers
+}
+
+// GetAllowedUsersOk returns a tuple with the AllowedUsers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAllowedUsersOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedUsers) {
+		return nil, false
+	}
+	return o.AllowedUsers, true
+}
+
+// HasAllowedUsers returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAllowedUsers() bool {
+	if o != nil && !IsNil(o.AllowedUsers) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedUsers gets a reference to the given []string and assigns it to the AllowedUsers field.
+func (o *UpdateSlackBotRequest) SetAllowedUsers(v []string) {
+	o.AllowedUsers = v
+}
+
+// GetDeniedUsers returns the DeniedUsers field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetDeniedUsers() []string {
+	if o == nil || IsNil(o.DeniedUsers) {
+		var ret []string
+		return ret
+	}
+	return o.DeniedUsers
+}
+
+// GetDeniedUsersOk returns a tuple with the DeniedUsers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetDeniedUsersOk() ([]string, bool) {
+	if o == nil || IsNil(o.DeniedUsers) {
+		return nil, false
+	}
+	return o.DeniedUsers, true
+}
+
+// HasDeniedUsers returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasDeniedUsers() bool {
+	if o != nil && !IsNil(o.DeniedUsers) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeniedUsers gets a reference to the given []string and assigns it to the DeniedUsers field.
+func (o *UpdateSlackBotRequest) SetDeniedUsers(v []string) {
+	o.DeniedUsers = v
+}
+
+// GetAllowGuests returns the AllowGuests field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAllowGuests() bool {
+	if o == nil || IsNil(o.AllowGuests) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowGuests
+}
+
+// GetAllowGuestsOk returns a tuple with the AllowGuests field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAllowGuestsOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowGuests) {
+		return nil, false
+	}
+	return o.AllowGuests, true
+}
+
+// HasAllowGuests returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAllowGuests() bool {
+	if o != nil && !IsNil(o.AllowGuests) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowGuests gets a reference to the given bool and assigns it to the AllowGuests field.
+func (o *UpdateSlackBotRequest) SetAllowGuests(v bool) {
+	o.AllowGuests = &v
+}
+
+// GetHomeTabContent returns the HomeTabContent field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetHomeTabContent() string {
+	if o == nil || IsNil(o.HomeTabContent) {
+		var ret string
+		return ret
+	}
+	return *o.HomeTabContent
+}
+
+// GetHomeTabContentOk returns a tuple with the HomeTabContent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetHomeTabContentOk() (*string, bool) {
+	if o == nil || IsNil(o.HomeTabContent) {
+		return nil, false
+	}
+	return o.HomeTabContent, true
+}
+
+// HasHomeTabContent returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasHomeTabContent() bool {
+	if o != nil && !IsNil(o.HomeTabContent) {
+		return true
+	}
+
+	return false
+}
+
+// SetHomeTabContent gets a reference to the given string and assigns it to the HomeTabContent field.
+func (o *UpdateSlackBotRequest) SetHomeTabContent(v string) {
+	o.HomeTabContent = &v
+}
+
+// GetAgentAccessControl returns the AgentAccessControl field value if set, zero value otherwise.
+func (o *UpdateSlackBotRequest) GetAgentAccessControl() map[string]interface{} {
+	if o == nil || IsNil(o.AgentAccessControl) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.AgentAccessControl
+}
+
+// GetAgentAccessControlOk returns a tuple with the AgentAccessControl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateSlackBotRequest) GetAgentAccessControlOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.AgentAccessControl) {
+		return map[string]interface{}{}, false
+	}
+	return o.AgentAccessControl, true
+}
+
+// HasAgentAccessControl returns a boolean if a field has been set.
+func (o *UpdateSlackBotRequest) HasAgentAccessControl() bool {
+	if o != nil && !IsNil(o.AgentAccessControl) {
+		return true
+	}
+
+	return false
+}
+
+// SetAgentAccessControl gets a reference to the given map[string]interface{} and assigns it to the AgentAccessControl field.
+func (o *UpdateSlackBotRequest) SetAgentAccessControl(v map[string]interface{}) {
+	o.AgentAccessControl = v
+}
+
 // GetKeywordsEnabled returns the KeywordsEnabled field value if set, zero value otherwise.
 func (o *UpdateSlackBotRequest) GetKeywordsEnabled() bool {
 	if o == nil || IsNil(o.KeywordsEnabled) {
@@ -247,38 +789,6 @@ func (o *UpdateSlackBotRequest) SetKeywords(v []string) {
 	o.Keywords = v
 }
 
-// GetSlashCommands returns the SlashCommands field value if set, zero value otherwise.
-func (o *UpdateSlackBotRequest) GetSlashCommands() []string {
-	if o == nil || IsNil(o.SlashCommands) {
-		var ret []string
-		return ret
-	}
-	return o.SlashCommands
-}
-
-// GetSlashCommandsOk returns a tuple with the SlashCommands field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateSlackBotRequest) GetSlashCommandsOk() ([]string, bool) {
-	if o == nil || IsNil(o.SlashCommands) {
-		return nil, false
-	}
-	return o.SlashCommands, true
-}
-
-// HasSlashCommands returns a boolean if a field has been set.
-func (o *UpdateSlackBotRequest) HasSlashCommands() bool {
-	if o != nil && !IsNil(o.SlashCommands) {
-		return true
-	}
-
-	return false
-}
-
-// SetSlashCommands gets a reference to the given []string and assigns it to the SlashCommands field.
-func (o *UpdateSlackBotRequest) SetSlashCommands(v []string) {
-	o.SlashCommands = v
-}
-
 func (o UpdateSlackBotRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -289,11 +799,44 @@ func (o UpdateSlackBotRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateSlackBotRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AgentId) {
-		toSerialize["agentId"] = o.AgentId
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.SystemPrompt) {
+		toSerialize["systemPrompt"] = o.SystemPrompt
+	}
+	if !IsNil(o.ModelId) {
+		toSerialize["modelId"] = o.ModelId
+	}
+	if !IsNil(o.Temperature) {
+		toSerialize["temperature"] = o.Temperature
+	}
+	if !IsNil(o.MaxTokens) {
+		toSerialize["maxTokens"] = o.MaxTokens
+	}
+	if !IsNil(o.AllowedTools) {
+		toSerialize["allowedTools"] = o.AllowedTools
+	}
+	if !IsNil(o.AssignedSkills) {
+		toSerialize["assignedSkills"] = o.AssignedSkills
+	}
+	if !IsNil(o.AllowedCollections) {
+		toSerialize["allowedCollections"] = o.AllowedCollections
+	}
+	if !IsNil(o.AllowedSubAgents) {
+		toSerialize["allowedSubAgents"] = o.AllowedSubAgents
+	}
+	if !IsNil(o.GuardrailPreset) {
+		toSerialize["guardrailPreset"] = o.GuardrailPreset
+	}
+	if !IsNil(o.FilterPolicies) {
+		toSerialize["filterPolicies"] = o.FilterPolicies
+	}
+	if !IsNil(o.LongContext) {
+		toSerialize["longContext"] = o.LongContext
 	}
 	if !IsNil(o.SessionTtlDays) {
 		toSerialize["sessionTtlDays"] = o.SessionTtlDays
@@ -301,14 +844,26 @@ func (o UpdateSlackBotRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AllowedChannels) {
 		toSerialize["allowedChannels"] = o.AllowedChannels
 	}
+	if !IsNil(o.AllowedUsers) {
+		toSerialize["allowedUsers"] = o.AllowedUsers
+	}
+	if !IsNil(o.DeniedUsers) {
+		toSerialize["deniedUsers"] = o.DeniedUsers
+	}
+	if !IsNil(o.AllowGuests) {
+		toSerialize["allowGuests"] = o.AllowGuests
+	}
+	if !IsNil(o.HomeTabContent) {
+		toSerialize["homeTabContent"] = o.HomeTabContent
+	}
+	if !IsNil(o.AgentAccessControl) {
+		toSerialize["agentAccessControl"] = o.AgentAccessControl
+	}
 	if !IsNil(o.KeywordsEnabled) {
 		toSerialize["keywordsEnabled"] = o.KeywordsEnabled
 	}
 	if !IsNil(o.Keywords) {
 		toSerialize["keywords"] = o.Keywords
-	}
-	if !IsNil(o.SlashCommands) {
-		toSerialize["slashCommands"] = o.SlashCommands
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -332,13 +887,28 @@ func (o *UpdateSlackBotRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "agentId")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "systemPrompt")
+		delete(additionalProperties, "modelId")
+		delete(additionalProperties, "temperature")
+		delete(additionalProperties, "maxTokens")
+		delete(additionalProperties, "allowedTools")
+		delete(additionalProperties, "assignedSkills")
+		delete(additionalProperties, "allowedCollections")
+		delete(additionalProperties, "allowedSubAgents")
+		delete(additionalProperties, "guardrailPreset")
+		delete(additionalProperties, "filterPolicies")
+		delete(additionalProperties, "longContext")
 		delete(additionalProperties, "sessionTtlDays")
 		delete(additionalProperties, "allowedChannels")
+		delete(additionalProperties, "allowedUsers")
+		delete(additionalProperties, "deniedUsers")
+		delete(additionalProperties, "allowGuests")
+		delete(additionalProperties, "homeTabContent")
+		delete(additionalProperties, "agentAccessControl")
 		delete(additionalProperties, "keywordsEnabled")
 		delete(additionalProperties, "keywords")
-		delete(additionalProperties, "slashCommands")
 		o.AdditionalProperties = additionalProperties
 	}
 

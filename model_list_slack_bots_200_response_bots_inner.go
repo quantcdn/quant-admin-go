@@ -21,10 +21,21 @@ var _ MappedNullable = &ListSlackBots200ResponseBotsInner{}
 // ListSlackBots200ResponseBotsInner struct for ListSlackBots200ResponseBotsInner
 type ListSlackBots200ResponseBotsInner struct {
 	BotId *string `json:"botId,omitempty"`
-	AgentId *string `json:"agentId,omitempty"`
+	Name *string `json:"name,omitempty"`
 	SetupType *string `json:"setupType,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Connected *bool `json:"connected,omitempty"`
+	SystemPrompt *string `json:"systemPrompt,omitempty"`
+	ModelId *string `json:"modelId,omitempty"`
+	Temperature *float32 `json:"temperature,omitempty"`
+	MaxTokens *int32 `json:"maxTokens,omitempty"`
+	AllowedTools []string `json:"allowedTools,omitempty"`
+	AssignedSkills []string `json:"assignedSkills,omitempty"`
+	AllowedCollections []string `json:"allowedCollections,omitempty"`
+	AllowedSubAgents []string `json:"allowedSubAgents,omitempty"`
+	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
+	FilterPolicies []string `json:"filterPolicies,omitempty"`
+	LongContext *bool `json:"longContext,omitempty"`
 	SessionTtlDays *int32 `json:"sessionTtlDays,omitempty"`
 	KeywordsEnabled *bool `json:"keywordsEnabled,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -82,36 +93,36 @@ func (o *ListSlackBots200ResponseBotsInner) SetBotId(v string) {
 	o.BotId = &v
 }
 
-// GetAgentId returns the AgentId field value if set, zero value otherwise.
-func (o *ListSlackBots200ResponseBotsInner) GetAgentId() string {
-	if o == nil || IsNil(o.AgentId) {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetName() string {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-	return *o.AgentId
+	return *o.Name
 }
 
-// GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListSlackBots200ResponseBotsInner) GetAgentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.AgentId) {
+func (o *ListSlackBots200ResponseBotsInner) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return o.AgentId, true
+	return o.Name, true
 }
 
-// HasAgentId returns a boolean if a field has been set.
-func (o *ListSlackBots200ResponseBotsInner) HasAgentId() bool {
-	if o != nil && !IsNil(o.AgentId) {
+// HasName returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
 	return false
 }
 
-// SetAgentId gets a reference to the given string and assigns it to the AgentId field.
-func (o *ListSlackBots200ResponseBotsInner) SetAgentId(v string) {
-	o.AgentId = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ListSlackBots200ResponseBotsInner) SetName(v string) {
+	o.Name = &v
 }
 
 // GetSetupType returns the SetupType field value if set, zero value otherwise.
@@ -208,6 +219,358 @@ func (o *ListSlackBots200ResponseBotsInner) HasConnected() bool {
 // SetConnected gets a reference to the given bool and assigns it to the Connected field.
 func (o *ListSlackBots200ResponseBotsInner) SetConnected(v bool) {
 	o.Connected = &v
+}
+
+// GetSystemPrompt returns the SystemPrompt field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetSystemPrompt() string {
+	if o == nil || IsNil(o.SystemPrompt) {
+		var ret string
+		return ret
+	}
+	return *o.SystemPrompt
+}
+
+// GetSystemPromptOk returns a tuple with the SystemPrompt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetSystemPromptOk() (*string, bool) {
+	if o == nil || IsNil(o.SystemPrompt) {
+		return nil, false
+	}
+	return o.SystemPrompt, true
+}
+
+// HasSystemPrompt returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasSystemPrompt() bool {
+	if o != nil && !IsNil(o.SystemPrompt) {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemPrompt gets a reference to the given string and assigns it to the SystemPrompt field.
+func (o *ListSlackBots200ResponseBotsInner) SetSystemPrompt(v string) {
+	o.SystemPrompt = &v
+}
+
+// GetModelId returns the ModelId field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetModelId() string {
+	if o == nil || IsNil(o.ModelId) {
+		var ret string
+		return ret
+	}
+	return *o.ModelId
+}
+
+// GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetModelIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ModelId) {
+		return nil, false
+	}
+	return o.ModelId, true
+}
+
+// HasModelId returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasModelId() bool {
+	if o != nil && !IsNil(o.ModelId) {
+		return true
+	}
+
+	return false
+}
+
+// SetModelId gets a reference to the given string and assigns it to the ModelId field.
+func (o *ListSlackBots200ResponseBotsInner) SetModelId(v string) {
+	o.ModelId = &v
+}
+
+// GetTemperature returns the Temperature field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetTemperature() float32 {
+	if o == nil || IsNil(o.Temperature) {
+		var ret float32
+		return ret
+	}
+	return *o.Temperature
+}
+
+// GetTemperatureOk returns a tuple with the Temperature field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetTemperatureOk() (*float32, bool) {
+	if o == nil || IsNil(o.Temperature) {
+		return nil, false
+	}
+	return o.Temperature, true
+}
+
+// HasTemperature returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasTemperature() bool {
+	if o != nil && !IsNil(o.Temperature) {
+		return true
+	}
+
+	return false
+}
+
+// SetTemperature gets a reference to the given float32 and assigns it to the Temperature field.
+func (o *ListSlackBots200ResponseBotsInner) SetTemperature(v float32) {
+	o.Temperature = &v
+}
+
+// GetMaxTokens returns the MaxTokens field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetMaxTokens() int32 {
+	if o == nil || IsNil(o.MaxTokens) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxTokens
+}
+
+// GetMaxTokensOk returns a tuple with the MaxTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetMaxTokensOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxTokens) {
+		return nil, false
+	}
+	return o.MaxTokens, true
+}
+
+// HasMaxTokens returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasMaxTokens() bool {
+	if o != nil && !IsNil(o.MaxTokens) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxTokens gets a reference to the given int32 and assigns it to the MaxTokens field.
+func (o *ListSlackBots200ResponseBotsInner) SetMaxTokens(v int32) {
+	o.MaxTokens = &v
+}
+
+// GetAllowedTools returns the AllowedTools field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetAllowedTools() []string {
+	if o == nil || IsNil(o.AllowedTools) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedTools
+}
+
+// GetAllowedToolsOk returns a tuple with the AllowedTools field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetAllowedToolsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedTools) {
+		return nil, false
+	}
+	return o.AllowedTools, true
+}
+
+// HasAllowedTools returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasAllowedTools() bool {
+	if o != nil && !IsNil(o.AllowedTools) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedTools gets a reference to the given []string and assigns it to the AllowedTools field.
+func (o *ListSlackBots200ResponseBotsInner) SetAllowedTools(v []string) {
+	o.AllowedTools = v
+}
+
+// GetAssignedSkills returns the AssignedSkills field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetAssignedSkills() []string {
+	if o == nil || IsNil(o.AssignedSkills) {
+		var ret []string
+		return ret
+	}
+	return o.AssignedSkills
+}
+
+// GetAssignedSkillsOk returns a tuple with the AssignedSkills field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetAssignedSkillsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AssignedSkills) {
+		return nil, false
+	}
+	return o.AssignedSkills, true
+}
+
+// HasAssignedSkills returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasAssignedSkills() bool {
+	if o != nil && !IsNil(o.AssignedSkills) {
+		return true
+	}
+
+	return false
+}
+
+// SetAssignedSkills gets a reference to the given []string and assigns it to the AssignedSkills field.
+func (o *ListSlackBots200ResponseBotsInner) SetAssignedSkills(v []string) {
+	o.AssignedSkills = v
+}
+
+// GetAllowedCollections returns the AllowedCollections field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetAllowedCollections() []string {
+	if o == nil || IsNil(o.AllowedCollections) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedCollections
+}
+
+// GetAllowedCollectionsOk returns a tuple with the AllowedCollections field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetAllowedCollectionsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedCollections) {
+		return nil, false
+	}
+	return o.AllowedCollections, true
+}
+
+// HasAllowedCollections returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasAllowedCollections() bool {
+	if o != nil && !IsNil(o.AllowedCollections) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedCollections gets a reference to the given []string and assigns it to the AllowedCollections field.
+func (o *ListSlackBots200ResponseBotsInner) SetAllowedCollections(v []string) {
+	o.AllowedCollections = v
+}
+
+// GetAllowedSubAgents returns the AllowedSubAgents field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetAllowedSubAgents() []string {
+	if o == nil || IsNil(o.AllowedSubAgents) {
+		var ret []string
+		return ret
+	}
+	return o.AllowedSubAgents
+}
+
+// GetAllowedSubAgentsOk returns a tuple with the AllowedSubAgents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetAllowedSubAgentsOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowedSubAgents) {
+		return nil, false
+	}
+	return o.AllowedSubAgents, true
+}
+
+// HasAllowedSubAgents returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasAllowedSubAgents() bool {
+	if o != nil && !IsNil(o.AllowedSubAgents) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedSubAgents gets a reference to the given []string and assigns it to the AllowedSubAgents field.
+func (o *ListSlackBots200ResponseBotsInner) SetAllowedSubAgents(v []string) {
+	o.AllowedSubAgents = v
+}
+
+// GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetGuardrailPreset() string {
+	if o == nil || IsNil(o.GuardrailPreset) {
+		var ret string
+		return ret
+	}
+	return *o.GuardrailPreset
+}
+
+// GetGuardrailPresetOk returns a tuple with the GuardrailPreset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetGuardrailPresetOk() (*string, bool) {
+	if o == nil || IsNil(o.GuardrailPreset) {
+		return nil, false
+	}
+	return o.GuardrailPreset, true
+}
+
+// HasGuardrailPreset returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasGuardrailPreset() bool {
+	if o != nil && !IsNil(o.GuardrailPreset) {
+		return true
+	}
+
+	return false
+}
+
+// SetGuardrailPreset gets a reference to the given string and assigns it to the GuardrailPreset field.
+func (o *ListSlackBots200ResponseBotsInner) SetGuardrailPreset(v string) {
+	o.GuardrailPreset = &v
+}
+
+// GetFilterPolicies returns the FilterPolicies field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetFilterPolicies() []string {
+	if o == nil || IsNil(o.FilterPolicies) {
+		var ret []string
+		return ret
+	}
+	return o.FilterPolicies
+}
+
+// GetFilterPoliciesOk returns a tuple with the FilterPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetFilterPoliciesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FilterPolicies) {
+		return nil, false
+	}
+	return o.FilterPolicies, true
+}
+
+// HasFilterPolicies returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasFilterPolicies() bool {
+	if o != nil && !IsNil(o.FilterPolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterPolicies gets a reference to the given []string and assigns it to the FilterPolicies field.
+func (o *ListSlackBots200ResponseBotsInner) SetFilterPolicies(v []string) {
+	o.FilterPolicies = v
+}
+
+// GetLongContext returns the LongContext field value if set, zero value otherwise.
+func (o *ListSlackBots200ResponseBotsInner) GetLongContext() bool {
+	if o == nil || IsNil(o.LongContext) {
+		var ret bool
+		return ret
+	}
+	return *o.LongContext
+}
+
+// GetLongContextOk returns a tuple with the LongContext field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ListSlackBots200ResponseBotsInner) GetLongContextOk() (*bool, bool) {
+	if o == nil || IsNil(o.LongContext) {
+		return nil, false
+	}
+	return o.LongContext, true
+}
+
+// HasLongContext returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasLongContext() bool {
+	if o != nil && !IsNil(o.LongContext) {
+		return true
+	}
+
+	return false
+}
+
+// SetLongContext gets a reference to the given bool and assigns it to the LongContext field.
+func (o *ListSlackBots200ResponseBotsInner) SetLongContext(v bool) {
+	o.LongContext = &v
 }
 
 // GetSessionTtlDays returns the SessionTtlDays field value if set, zero value otherwise.
@@ -319,8 +682,8 @@ func (o ListSlackBots200ResponseBotsInner) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.BotId) {
 		toSerialize["botId"] = o.BotId
 	}
-	if !IsNil(o.AgentId) {
-		toSerialize["agentId"] = o.AgentId
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !IsNil(o.SetupType) {
 		toSerialize["setupType"] = o.SetupType
@@ -330,6 +693,39 @@ func (o ListSlackBots200ResponseBotsInner) ToMap() (map[string]interface{}, erro
 	}
 	if !IsNil(o.Connected) {
 		toSerialize["connected"] = o.Connected
+	}
+	if !IsNil(o.SystemPrompt) {
+		toSerialize["systemPrompt"] = o.SystemPrompt
+	}
+	if !IsNil(o.ModelId) {
+		toSerialize["modelId"] = o.ModelId
+	}
+	if !IsNil(o.Temperature) {
+		toSerialize["temperature"] = o.Temperature
+	}
+	if !IsNil(o.MaxTokens) {
+		toSerialize["maxTokens"] = o.MaxTokens
+	}
+	if !IsNil(o.AllowedTools) {
+		toSerialize["allowedTools"] = o.AllowedTools
+	}
+	if !IsNil(o.AssignedSkills) {
+		toSerialize["assignedSkills"] = o.AssignedSkills
+	}
+	if !IsNil(o.AllowedCollections) {
+		toSerialize["allowedCollections"] = o.AllowedCollections
+	}
+	if !IsNil(o.AllowedSubAgents) {
+		toSerialize["allowedSubAgents"] = o.AllowedSubAgents
+	}
+	if !IsNil(o.GuardrailPreset) {
+		toSerialize["guardrailPreset"] = o.GuardrailPreset
+	}
+	if !IsNil(o.FilterPolicies) {
+		toSerialize["filterPolicies"] = o.FilterPolicies
+	}
+	if !IsNil(o.LongContext) {
+		toSerialize["longContext"] = o.LongContext
 	}
 	if !IsNil(o.SessionTtlDays) {
 		toSerialize["sessionTtlDays"] = o.SessionTtlDays
@@ -363,10 +759,21 @@ func (o *ListSlackBots200ResponseBotsInner) UnmarshalJSON(data []byte) (err erro
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "botId")
-		delete(additionalProperties, "agentId")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "setupType")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "connected")
+		delete(additionalProperties, "systemPrompt")
+		delete(additionalProperties, "modelId")
+		delete(additionalProperties, "temperature")
+		delete(additionalProperties, "maxTokens")
+		delete(additionalProperties, "allowedTools")
+		delete(additionalProperties, "assignedSkills")
+		delete(additionalProperties, "allowedCollections")
+		delete(additionalProperties, "allowedSubAgents")
+		delete(additionalProperties, "guardrailPreset")
+		delete(additionalProperties, "filterPolicies")
+		delete(additionalProperties, "longContext")
 		delete(additionalProperties, "sessionTtlDays")
 		delete(additionalProperties, "keywordsEnabled")
 		delete(additionalProperties, "createdAt")
