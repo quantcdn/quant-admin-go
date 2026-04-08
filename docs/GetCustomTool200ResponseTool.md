@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **EdgeFunctionUrl** | Pointer to **string** |  | [optional] 
+**EdgeFunctionCode** | Pointer to **string** | The deployed edge function source code | [optional] 
 **IsAsync** | Pointer to **bool** |  | [optional] 
 **InputSchema** | Pointer to **map[string]interface{}** |  | [optional] 
 **OutputSchema** | Pointer to **map[string]interface{}** |  | [optional] 
@@ -108,6 +109,31 @@ SetEdgeFunctionUrl sets EdgeFunctionUrl field to given value.
 `func (o *GetCustomTool200ResponseTool) HasEdgeFunctionUrl() bool`
 
 HasEdgeFunctionUrl returns a boolean if a field has been set.
+
+### GetEdgeFunctionCode
+
+`func (o *GetCustomTool200ResponseTool) GetEdgeFunctionCode() string`
+
+GetEdgeFunctionCode returns the EdgeFunctionCode field if non-nil, zero value otherwise.
+
+### GetEdgeFunctionCodeOk
+
+`func (o *GetCustomTool200ResponseTool) GetEdgeFunctionCodeOk() (*string, bool)`
+
+GetEdgeFunctionCodeOk returns a tuple with the EdgeFunctionCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEdgeFunctionCode
+
+`func (o *GetCustomTool200ResponseTool) SetEdgeFunctionCode(v string)`
+
+SetEdgeFunctionCode sets EdgeFunctionCode field to given value.
+
+### HasEdgeFunctionCode
+
+`func (o *GetCustomTool200ResponseTool) HasEdgeFunctionCode() bool`
+
+HasEdgeFunctionCode returns a boolean if a field has been set.
 
 ### GetIsAsync
 
