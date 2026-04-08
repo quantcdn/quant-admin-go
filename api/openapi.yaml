@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.15.6
+  version: 4.15.7
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -6777,12 +6777,15 @@ paths:
       - AI Custom Tools
     post:
       description: |-
-        Registers a custom edge function as a tool that AI models can invoke. This enables customers to create their own tools backed by edge functions.
+        Registers a custom edge function as a tool that AI models can invoke. Provide `edgeFunctionCode` (JavaScript) and the API will deploy it to the CDN, compute the edge function URL, and register the tool.
              *
              * **Edge Function Contract:**
              * - Edge functions must accept POST requests with JSON payload
              * - Expected request format: `{ 'toolName': '...', 'input': {...}, 'orgId': '...' }`
              * - Must return JSON response with either `result` or `error` field
+             *
+             * **Idempotent Updates:**
+             * POSTing with the same `name` will update the existing tool — the edge function code is redeployed to the same UUID and the tool registration is updated.
              *
              * **Async Tools:**
              * Set `isAsync: true` for operations >5 seconds. The edge function should return `{ executionId: '...' }` and the AI will poll for completion.
@@ -6813,8 +6816,6 @@ paths:
           description: Invalid request parameters
         "403":
           description: Access denied
-        "409":
-          description: Tool with this name already exists
         "500":
           description: Failed to register custom tool
       summary: Register Custom Edge Function Tool
@@ -6822,8 +6823,7 @@ paths:
       - AI Custom Tools
   /api/v3/organizations/{organisation}/ai/custom-tools/{toolName}:
     delete:
-      description: Deletes a custom tool registration. The underlying edge function
-        is not affected.
+      description: Deletes a custom tool registration and its deployed edge function.
       operationId: deleteCustomTool
       parameters:
       - description: The organisation ID
@@ -20320,9 +20320,8 @@ components:
           description: Human-readable description of what the tool does
           example: Check product inventory levels in warehouse
           type: string
-        edgeFunctionUrl:
-          description: HTTPS URL of the edge function
-          example: https://inventory-api.my-project.quant.cloud
+        edgeFunctionCode:
+          description: JavaScript source code for the edge function
           type: string
         inputSchema:
           description: JSON Schema defining the tool's input parameters
@@ -20360,23 +20359,36 @@ components:
           type: string
       required:
       - description
-      - edgeFunctionUrl
+      - edgeFunctionCode
       - inputSchema
       - name
       type: object
     createCustomTool_201_response:
       example:
         success: true
-        message: Custom tool registered successfully
+        edgeFunctionUrl: https://preview.quantcdn.io/_quant/ai-exec/org/project/uuid
+        message: Custom tool deployed successfully
         tool: "{}"
+        edgeFunctionCode: edgeFunctionCode
+        isUpdate: true
       properties:
         success:
           example: true
           type: boolean
         tool:
           type: object
+        edgeFunctionUrl:
+          description: Computed edge function URL (read-only)
+          example: https://preview.quantcdn.io/_quant/ai-exec/org/project/uuid
+          type: string
+        edgeFunctionCode:
+          description: The deployed edge function code
+          type: string
+        isUpdate:
+          description: Whether this was an update to an existing tool
+          type: boolean
         message:
-          example: Custom tool registered successfully
+          example: Custom tool deployed successfully
           type: string
       type: object
     getCustomTool_200_response_tool:
@@ -20389,8 +20401,9 @@ components:
         isAsync: false
         name: check_inventory
         description: Check product inventory levels
-        edgeFunctionUrl: https://inventory-api.my-project.quant.cloud
+        edgeFunctionUrl: https://preview.quantcdn.io/_quant/ai-exec/org/project/uuid
         category: category
+        edgeFunctionCode: edgeFunctionCode
       properties:
         name:
           example: check_inventory
@@ -20399,7 +20412,10 @@ components:
           example: Check product inventory levels
           type: string
         edgeFunctionUrl:
-          example: https://inventory-api.my-project.quant.cloud
+          example: https://preview.quantcdn.io/_quant/ai-exec/org/project/uuid
+          type: string
+        edgeFunctionCode:
+          description: The deployed edge function source code
           type: string
         isAsync:
           example: false
@@ -20436,8 +20452,9 @@ components:
           isAsync: false
           name: check_inventory
           description: Check product inventory levels
-          edgeFunctionUrl: https://inventory-api.my-project.quant.cloud
+          edgeFunctionUrl: https://preview.quantcdn.io/_quant/ai-exec/org/project/uuid
           category: category
+          edgeFunctionCode: edgeFunctionCode
       properties:
         tool:
           $ref: '#/components/schemas/getCustomTool_200_response_tool'

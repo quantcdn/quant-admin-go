@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Unique tool name (alphanumeric and underscores only) | 
 **Description** | **string** | Human-readable description of what the tool does | 
-**EdgeFunctionUrl** | **string** | HTTPS URL of the edge function | 
+**EdgeFunctionCode** | **string** | JavaScript source code for the edge function | 
 **InputSchema** | **map[string]interface{}** | JSON Schema defining the tool&#39;s input parameters | 
 **IsAsync** | Pointer to **bool** | Whether this tool runs asynchronously (&gt;5 seconds) | [optional] [default to false]
 **TimeoutSeconds** | Pointer to **int32** | Tool execution timeout | [optional] [default to 30]
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCreateCustomToolRequest
 
-`func NewCreateCustomToolRequest(name string, description string, edgeFunctionUrl string, inputSchema map[string]interface{}, ) *CreateCustomToolRequest`
+`func NewCreateCustomToolRequest(name string, description string, edgeFunctionCode string, inputSchema map[string]interface{}, ) *CreateCustomToolRequest`
 
 NewCreateCustomToolRequest instantiates a new CreateCustomToolRequest object
 This constructor will assign default values to properties that have it defined,
@@ -74,24 +74,24 @@ and a boolean to check if the value has been set.
 SetDescription sets Description field to given value.
 
 
-### GetEdgeFunctionUrl
+### GetEdgeFunctionCode
 
-`func (o *CreateCustomToolRequest) GetEdgeFunctionUrl() string`
+`func (o *CreateCustomToolRequest) GetEdgeFunctionCode() string`
 
-GetEdgeFunctionUrl returns the EdgeFunctionUrl field if non-nil, zero value otherwise.
+GetEdgeFunctionCode returns the EdgeFunctionCode field if non-nil, zero value otherwise.
 
-### GetEdgeFunctionUrlOk
+### GetEdgeFunctionCodeOk
 
-`func (o *CreateCustomToolRequest) GetEdgeFunctionUrlOk() (*string, bool)`
+`func (o *CreateCustomToolRequest) GetEdgeFunctionCodeOk() (*string, bool)`
 
-GetEdgeFunctionUrlOk returns a tuple with the EdgeFunctionUrl field if it's non-nil, zero value otherwise
+GetEdgeFunctionCodeOk returns a tuple with the EdgeFunctionCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEdgeFunctionUrl
+### SetEdgeFunctionCode
 
-`func (o *CreateCustomToolRequest) SetEdgeFunctionUrl(v string)`
+`func (o *CreateCustomToolRequest) SetEdgeFunctionCode(v string)`
 
-SetEdgeFunctionUrl sets EdgeFunctionUrl field to given value.
+SetEdgeFunctionCode sets EdgeFunctionCode field to given value.
 
 
 ### GetInputSchema
