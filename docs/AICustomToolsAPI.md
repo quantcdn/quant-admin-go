@@ -33,7 +33,7 @@ import (
 
 func main() {
 	organisation := "organisation_example" // string | The organisation ID
-	createCustomToolRequest := *openapiclient.NewCreateCustomToolRequest("check_inventory", "Check product inventory levels in warehouse", "EdgeFunctionCode_example", map[string]interface{}(123)) // CreateCustomToolRequest | 
+	createCustomToolRequest := *openapiclient.NewCreateCustomToolRequest("check_inventory", "Check product inventory levels in warehouse", "EdgeFunctionCode_example", "InputSchema_example") // CreateCustomToolRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
