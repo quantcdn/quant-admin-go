@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.15.8
+  version: 4.17.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -26,6 +26,9 @@ tags:
   name: AI Monitoring
 - description: Durable batch processing orchestrations with pause/resume support
   name: AI Orchestrations
+- description: "Project-scoped AI Search: site lifecycle, page ingest, semantic search,\
+    \ RAG chat, analytics, and crawl monitoring"
+  name: AI Search
 - description: Conversation session management for multi-turn interactions
   name: AI Sessions
 - description: "Reusable prompts, workflows, and instructions for agents"
@@ -89,6 +92,591 @@ tags:
 - description: AI Usage
   name: AI Usage
 paths:
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search:
+    get:
+      operationId: AiSearch_status
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Status
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Get AI Search status for a project
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/enable:
+    post:
+      operationId: AiSearch_enable
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_enable_request'
+        required: false
+      responses:
+        "200":
+          description: Enabled
+        "400":
+          description: Missing base URL
+        "409":
+          description: Already enabled
+      security:
+      - BearerAuth: []
+      summary: Enable AI Search for a project
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/disable:
+    post:
+      operationId: AiSearch_disable
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Disabled
+        "404":
+          description: Not enabled
+      security:
+      - BearerAuth: []
+      summary: Disable AI Search for a project
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/settings:
+    get:
+      operationId: AiSearch_getSettings
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Settings
+      security:
+      - BearerAuth: []
+      summary: Get AI Search public access and rate limit settings
+      tags:
+      - AI Search
+    put:
+      operationId: AiSearch_updateSettings
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_updateSettings_request'
+        required: true
+      responses:
+        "200":
+          description: Updated
+      security:
+      - BearerAuth: []
+      summary: Update AI Search public access and rate limit settings
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/pages:
+    delete:
+      operationId: AiSearch_deletePages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_deletePages_request'
+        required: true
+      responses:
+        "200":
+          description: Deleted
+      security:
+      - BearerAuth: []
+      summary: Delete pages by URLs or patterns
+      tags:
+      - AI Search
+    get:
+      operationId: AiSearch_listPages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 200
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Pages
+      security:
+      - BearerAuth: []
+      summary: List indexed pages with cursor pagination
+      tags:
+      - AI Search
+    post:
+      operationId: AiSearch_ingestPages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_ingestPages_request'
+        required: true
+      responses:
+        "200":
+          description: Pages processed
+        "422":
+          description: Validation failed
+        "502":
+          description: Upstream failure
+      security:
+      - BearerAuth: []
+      summary: Ingest pages into the AI Search index
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/index:
+    delete:
+      operationId: AiSearch_purgeIndex
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Purged
+      security:
+      - BearerAuth: []
+      summary: Purge the entire AI Search index
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/search:
+    post:
+      operationId: AiSearch_search
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_search_request'
+        required: true
+      responses:
+        "200":
+          description: Results
+      security:
+      - BearerAuth: []
+      summary: Semantic search across the AI Search index
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/usage:
+    get:
+      operationId: AiSearch_usage
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30d
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Usage
+      security:
+      - BearerAuth: []
+      summary: Get usage statistics for the AI Search site
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/top-queries:
+    get:
+      operationId: AiSearch_topQueries
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30d
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: Top queries
+      security:
+      - BearerAuth: []
+      summary: Get the most popular AI Search queries
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/chat:
+    post:
+      operationId: AiSearch_chat
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_chat_request'
+        required: true
+      responses:
+        "200":
+          description: Chat reply
+      security:
+      - BearerAuth: []
+      summary: RAG chat with AI Search content
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/crawls:
+    get:
+      operationId: AiSearch_listCrawls
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 50
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: Jobs
+      security:
+      - BearerAuth: []
+      summary: List AI Search ingest jobs
+      tags:
+      - AI Search
+    post:
+      operationId: AiSearch_triggerCrawl
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_triggerCrawl_request'
+        required: true
+      responses:
+        "200":
+          description: Crawl started
+      security:
+      - BearerAuth: []
+      summary: Trigger a crawler run that ingests into AI Search
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/crawls/{jobId}:
+    get:
+      operationId: AiSearch_getCrawl
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Job status
+      security:
+      - BearerAuth: []
+      summary: Get AI Search ingest job status
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/crawls/{jobId}/pages:
+    get:
+      operationId: AiSearch_getCrawlPages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: statusCode
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: processingStatus
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Pages
+      security:
+      - BearerAuth: []
+      summary: Get per-page ingest results for a crawl job
+      tags:
+      - AI Search
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
       operationId: CrawlerSchedules_list
@@ -16770,6 +17358,109 @@ components:
             $ref: '#/components/schemas/WafConfig_thresholds_inner'
           type: array
       type: object
+    AiSearch_enable_request:
+      properties:
+        baseUrl:
+          format: uri
+          type: string
+        crawlerConfig:
+          type: object
+      type: object
+    AiSearch_updateSettings_request:
+      properties:
+        publicAccess:
+          type: object
+        rateLimits:
+          type: object
+      type: object
+    AiSearch_ingestPages_request_pages_inner:
+      properties:
+        url:
+          format: uri
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        contentType:
+          type: string
+        fetchedAt:
+          type: string
+        preProcessed:
+          type: boolean
+        summary:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        topics:
+          items:
+            type: string
+          type: array
+      required:
+      - content
+      - title
+      - url
+      type: object
+    AiSearch_ingestPages_request:
+      properties:
+        jobId:
+          type: string
+        pages:
+          items:
+            $ref: '#/components/schemas/AiSearch_ingestPages_request_pages_inner'
+          type: array
+      required:
+      - pages
+      type: object
+    AiSearch_deletePages_request:
+      properties:
+        urls:
+          items:
+            format: uri
+            type: string
+          type: array
+        patterns:
+          items:
+            type: string
+          type: array
+      type: object
+    AiSearch_search_request:
+      properties:
+        query:
+          type: string
+        limit:
+          maximum: 50
+          type: integer
+        minScore:
+          type: number
+      required:
+      - query
+      type: object
+    AiSearch_chat_request:
+      properties:
+        message:
+          type: string
+        sessionId:
+          type: string
+        contextUrl:
+          format: uri
+          type: string
+        maxContextChunks:
+          maximum: 20
+          type: integer
+      required:
+      - message
+      type: object
+    AiSearch_triggerCrawl_request:
+      properties:
+        crawler_uuid:
+          format: uuid
+          type: string
+      required:
+      - crawler_uuid
+      type: object
     Crawlers_run_request:
       properties:
         urls:
@@ -20262,7 +20953,7 @@ components:
     listCustomTools_200_response_tools_inner:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        inputSchema: "{}"
+        inputSchema: inputSchema
         isAsync: false
         name: check_inventory
         description: Check product inventory levels
@@ -20281,7 +20972,7 @@ components:
           example: false
           type: boolean
         inputSchema:
-          type: object
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -20291,13 +20982,13 @@ components:
         count: 0
         tools:
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          inputSchema: "{}"
+          inputSchema: inputSchema
           isAsync: false
           name: check_inventory
           description: Check product inventory levels
           edgeFunctionUrl: https://my-edge-function.quant.cloud
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          inputSchema: "{}"
+          inputSchema: inputSchema
           isAsync: false
           name: check_inventory
           description: Check product inventory levels
@@ -20324,8 +21015,8 @@ components:
           description: JavaScript source code for the edge function
           type: string
         inputSchema:
-          description: JSON Schema defining the tool's input parameters
-          type: object
+          description: JSON-encoded JSON Schema object defining the tool's input parameters
+          type: string
         isAsync:
           default: false
           description: Whether this tool runs asynchronously (>5 seconds)
@@ -20337,9 +21028,10 @@ components:
           minimum: 5
           type: integer
         outputSchema:
-          description: JSON Schema defining the tool's output structure
+          description: JSON-encoded JSON Schema object defining the tool's output
+            structure
           nullable: true
-          type: object
+          type: string
         outputSchemaDescription:
           description: Human-readable description of the tool's output
           nullable: true
@@ -20395,9 +21087,9 @@ components:
       example:
         responseMode: llm
         createdAt: 2000-01-23T04:56:07.000+00:00
-        outputSchema: "{}"
+        outputSchema: outputSchema
         outputSchemaDescription: outputSchemaDescription
-        inputSchema: "{}"
+        inputSchema: inputSchema
         isAsync: false
         name: check_inventory
         description: Check product inventory levels
@@ -20421,10 +21113,10 @@ components:
           example: false
           type: boolean
         inputSchema:
-          type: object
+          type: string
         outputSchema:
           nullable: true
-          type: object
+          type: string
         outputSchemaDescription:
           nullable: true
           type: string
@@ -20446,9 +21138,9 @@ components:
         tool:
           responseMode: llm
           createdAt: 2000-01-23T04:56:07.000+00:00
-          outputSchema: "{}"
+          outputSchema: outputSchema
           outputSchemaDescription: outputSchemaDescription
-          inputSchema: "{}"
+          inputSchema: inputSchema
           isAsync: false
           name: check_inventory
           description: Check product inventory levels

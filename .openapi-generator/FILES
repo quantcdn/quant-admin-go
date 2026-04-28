@@ -11,6 +11,7 @@ api_ai_inference.go
 api_ai_models.go
 api_ai_monitoring.go
 api_ai_orchestrations.go
+api_ai_search.go
 api_ai_sessions.go
 api_ai_skills.go
 api_ai_slack_bots.go
@@ -51,6 +52,7 @@ docs/AIInferenceAPI.md
 docs/AIModelsAPI.md
 docs/AIMonitoringAPI.md
 docs/AIOrchestrationsAPI.md
+docs/AISearchAPI.md
 docs/AISessionsAPI.md
 docs/AISkillsAPI.md
 docs/AISlackBotsAPI.md
@@ -58,6 +60,14 @@ docs/AITaskManagementAPI.md
 docs/AIToolsAPI.md
 docs/AIUsageAPI.md
 docs/AIVectorDatabaseAPI.md
+docs/AiSearchChatRequest.md
+docs/AiSearchDeletePagesRequest.md
+docs/AiSearchEnableRequest.md
+docs/AiSearchIngestPagesRequest.md
+docs/AiSearchIngestPagesRequestPagesInner.md
+docs/AiSearchSearchRequest.md
+docs/AiSearchTriggerCrawlRequest.md
+docs/AiSearchUpdateSettingsRequest.md
 docs/Application.md
 docs/ApplicationDatabase.md
 docs/ApplicationDeploymentInformationInner.md
@@ -471,6 +481,14 @@ docs/WafConfigThresholdsInner.md
 git_push.sh
 go.mod
 go.sum
+model_ai_search_chat_request.go
+model_ai_search_delete_pages_request.go
+model_ai_search_enable_request.go
+model_ai_search_ingest_pages_request.go
+model_ai_search_ingest_pages_request_pages_inner.go
+model_ai_search_search_request.go
+model_ai_search_trigger_crawl_request.go
+model_ai_search_update_settings_request.go
 model_application.go
 model_application_database.go
 model_application_deployment_information_inner.go
@@ -869,6 +887,7 @@ test/api_ai_inference_test.go
 test/api_ai_models_test.go
 test/api_ai_monitoring_test.go
 test/api_ai_orchestrations_test.go
+test/api_ai_search_test.go
 test/api_ai_sessions_test.go
 test/api_ai_skills_test.go
 test/api_ai_slack_bots_test.go

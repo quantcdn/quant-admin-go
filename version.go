@@ -1,4 +1,4 @@
 package quantadmingo
 
 // Version of the SDK
-const Version = "4.15.8"
+const Version = "4.17.0"
