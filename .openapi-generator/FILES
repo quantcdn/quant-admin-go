@@ -239,6 +239,8 @@ docs/GetMyUsage200Response.md
 docs/GetMyUsage200ResponseDaily.md
 docs/GetMyUsage200ResponseMonthly.md
 docs/GetMyUsage200ResponseQuota.md
+docs/GetMyUsage200ResponseQuotaDailyLimit.md
+docs/GetMyUsage200ResponseQuotaMonthlyLimit.md
 docs/GetSkill200Response.md
 docs/GetSkill200ResponseSkill.md
 docs/GetSlackBot200Response.md
@@ -649,6 +651,8 @@ model_get_my_usage_200_response.go
 model_get_my_usage_200_response_daily.go
 model_get_my_usage_200_response_monthly.go
 model_get_my_usage_200_response_quota.go
+model_get_my_usage_200_response_quota_daily_limit.go
+model_get_my_usage_200_response_quota_monthly_limit.go
 model_get_skill_200_response.go
 model_get_skill_200_response_skill.go
 model_get_slack_bot_200_response.go

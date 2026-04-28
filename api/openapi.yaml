@@ -23375,28 +23375,84 @@ components:
         spendCents:
           type: integer
       type: object
+    getMyUsage_200_response_quota_monthlyLimit:
+      description: "Per-user monthly spend cap (object form, present when an org-level\
+        \ perUserMonthlyBudget is configured)"
+      example:
+        usedPercent: 5.637377
+        remainingCents: 2
+        limitCents: 5
+      nullable: true
+      properties:
+        limitCents:
+          description: The configured monthly cap in US cents
+          type: integer
+        usedPercent:
+          description: Percentage of the cap consumed this month (0–100+)
+          format: float
+          type: number
+        remainingCents:
+          description: Cents remaining before the cap is hit; can be negative if overspent
+          type: integer
+      type: object
+    getMyUsage_200_response_quota_dailyLimit:
+      description: "Per-user daily spend cap (object form, present when an org-level\
+        \ perUserDailyBudget is configured)"
+      example:
+        usedPercent: 9.301444
+        remainingCents: 3
+        resetsAt: 2000-01-23T04:56:07.000+00:00
+        limitCents: 7
+      nullable: true
+      properties:
+        limitCents:
+          description: The configured daily cap in US cents
+          type: integer
+        usedPercent:
+          description: Percentage of the cap consumed today (0–100+)
+          format: float
+          type: number
+        remainingCents:
+          description: Cents remaining before the cap is hit; can be negative if overspent
+          type: integer
+        resetsAt:
+          description: UTC timestamp when the daily counter resets (always next UTC
+            midnight)
+          format: date-time
+          type: string
+      type: object
     getMyUsage_200_response_quota:
       example:
-        dailyLimit: 5
-        monthlyLimit: 5
+        dailyLimit:
+          usedPercent: 9.301444
+          remainingCents: 3
+          resetsAt: 2000-01-23T04:56:07.000+00:00
+          limitCents: 7
+        monthlyLimit:
+          usedPercent: 5.637377
+          remainingCents: 2
+          limitCents: 5
       nullable: true
       properties:
         monthlyLimit:
-          description: Per-user monthly budget in US cents
-          nullable: true
-          type: integer
+          $ref: '#/components/schemas/getMyUsage_200_response_quota_monthlyLimit'
         dailyLimit:
-          description: Per-user daily budget in US cents
-          nullable: true
-          type: integer
+          $ref: '#/components/schemas/getMyUsage_200_response_quota_dailyLimit'
       type: object
     getMyUsage_200_response:
       example:
         daily:
           spendCents: 1
         quota:
-          dailyLimit: 5
-          monthlyLimit: 5
+          dailyLimit:
+            usedPercent: 9.301444
+            remainingCents: 3
+            resetsAt: 2000-01-23T04:56:07.000+00:00
+            limitCents: 7
+          monthlyLimit:
+            usedPercent: 5.637377
+            remainingCents: 2
+            limitCents: 5
         monthly:
           requestCount: 6
           spendCents: 0

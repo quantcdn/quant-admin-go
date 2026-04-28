@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MonthlyLimit** | Pointer to **NullableInt32** | Per-user monthly budget in US cents | [optional] 
-**DailyLimit** | Pointer to **NullableInt32** | Per-user daily budget in US cents | [optional] 
+**MonthlyLimit** | Pointer to [**NullableGetMyUsage200ResponseQuotaMonthlyLimit**](GetMyUsage200ResponseQuotaMonthlyLimit.md) |  | [optional] 
+**DailyLimit** | Pointer to [**NullableGetMyUsage200ResponseQuotaDailyLimit**](GetMyUsage200ResponseQuotaDailyLimit.md) |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMonthlyLimit
 
-`func (o *GetMyUsage200ResponseQuota) GetMonthlyLimit() int32`
+`func (o *GetMyUsage200ResponseQuota) GetMonthlyLimit() GetMyUsage200ResponseQuotaMonthlyLimit`
 
 GetMonthlyLimit returns the MonthlyLimit field if non-nil, zero value otherwise.
 
 ### GetMonthlyLimitOk
 
-`func (o *GetMyUsage200ResponseQuota) GetMonthlyLimitOk() (*int32, bool)`
+`func (o *GetMyUsage200ResponseQuota) GetMonthlyLimitOk() (*GetMyUsage200ResponseQuotaMonthlyLimit, bool)`
 
 GetMonthlyLimitOk returns a tuple with the MonthlyLimit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMonthlyLimit
 
-`func (o *GetMyUsage200ResponseQuota) SetMonthlyLimit(v int32)`
+`func (o *GetMyUsage200ResponseQuota) SetMonthlyLimit(v GetMyUsage200ResponseQuotaMonthlyLimit)`
 
 SetMonthlyLimit sets MonthlyLimit field to given value.
 
@@ -63,20 +63,20 @@ HasMonthlyLimit returns a boolean if a field has been set.
 UnsetMonthlyLimit ensures that no value is present for MonthlyLimit, not even an explicit nil
 ### GetDailyLimit
 
-`func (o *GetMyUsage200ResponseQuota) GetDailyLimit() int32`
+`func (o *GetMyUsage200ResponseQuota) GetDailyLimit() GetMyUsage200ResponseQuotaDailyLimit`
 
 GetDailyLimit returns the DailyLimit field if non-nil, zero value otherwise.
 
 ### GetDailyLimitOk
 
-`func (o *GetMyUsage200ResponseQuota) GetDailyLimitOk() (*int32, bool)`
+`func (o *GetMyUsage200ResponseQuota) GetDailyLimitOk() (*GetMyUsage200ResponseQuotaDailyLimit, bool)`
 
 GetDailyLimitOk returns a tuple with the DailyLimit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDailyLimit
 
-`func (o *GetMyUsage200ResponseQuota) SetDailyLimit(v int32)`
+`func (o *GetMyUsage200ResponseQuota) SetDailyLimit(v GetMyUsage200ResponseQuotaDailyLimit)`
 
 SetDailyLimit sets DailyLimit field to given value.
 
