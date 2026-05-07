@@ -1,7 +1,7 @@
 /*
 QuantCDN API
 
-Testing ScalingPolicyAPIService
+Testing RestoreManagementAPIService
 
 */
 
@@ -17,35 +17,21 @@ import (
 	openapiclient "github.com/quantcdn/quant-admin-go/v4"
 )
 
-func Test_quantadmingo_ScalingPolicyAPIService(t *testing.T) {
+func Test_quantadmingo_RestoreManagementAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ScalingPolicyAPIService DeleteScalingPolicy", func(t *testing.T) {
+	t.Run("Test RestoreManagementAPIService GetRestoreStatus", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organisation string
 		var application string
 		var environment string
+		var restoreId string
 
-		httpRes, err := apiClient.ScalingPolicyAPI.DeleteScalingPolicy(context.Background(), organisation, application, environment).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ScalingPolicyAPIService ListScalingPolicies", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var organisation string
-		var application string
-		var environment string
-
-		resp, httpRes, err := apiClient.ScalingPolicyAPI.ListScalingPolicies(context.Background(), organisation, application, environment).Execute()
+		resp, httpRes, err := apiClient.RestoreManagementAPI.GetRestoreStatus(context.Background(), organisation, application, environment, restoreId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -53,15 +39,33 @@ func Test_quantadmingo_ScalingPolicyAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ScalingPolicyAPIService UpsertScalingPolicy", func(t *testing.T) {
+	t.Run("Test RestoreManagementAPIService RestoreDatabase", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organisation string
 		var application string
 		var environment string
+		var backupId string
 
-		resp, httpRes, err := apiClient.ScalingPolicyAPI.UpsertScalingPolicy(context.Background(), organisation, application, environment).Execute()
+		resp, httpRes, err := apiClient.RestoreManagementAPI.RestoreDatabase(context.Background(), organisation, application, environment, backupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test RestoreManagementAPIService RestoreFilesystem", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var application string
+		var environment string
+		var backupId string
+
+		resp, httpRes, err := apiClient.RestoreManagementAPI.RestoreFilesystem(context.Background(), organisation, application, environment, backupId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

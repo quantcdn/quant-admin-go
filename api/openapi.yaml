@@ -91,6 +91,8 @@ tags:
   name: AI Filter Policies
 - description: AI Usage
   name: AI Usage
+- description: Restore Management
+  name: Restore Management
 paths:
   /api/v3/organisations/{organisation}/projects/{project}/ai-search:
     get:
@@ -11279,9 +11281,13 @@ paths:
       summary: Generate a download URL for a backup
       tags:
       - Backup Management
-  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
-    get:
-      operationId: getScalingPolicies
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-database:
+    post:
+      description: Initiates an async restore of a database backup into the specified
+        target environment. The backup may originate from a different environment
+        of the same application (cross-env restore). Returns 202 with a restoreId
+        for status polling.
+      operationId: restoreDatabase
       parameters:
       - description: The organisation ID
         example: test-org
@@ -11301,8 +11307,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The environment ID
-        example: test-env
+      - description: The TARGET environment ID to restore INTO
+        example: staging
         explode: false
         in: path
         name: environment
@@ -11310,38 +11316,11 @@ paths:
         schema:
           type: string
         style: simple
-      responses:
-        "200":
-          description: The scaling policy for the environment
-      summary: Get the scaling policies for an environment
-      tags:
-      - ScalingPolicy
-    put:
-      operationId: updateScalingPolicy
-      parameters:
-      - description: The organisation ID
-        example: test-org
+      - description: The backup ID to restore from
+        example: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
         explode: false
         in: path
-        name: organisation
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The application ID
-        example: test-app
-        explode: false
-        in: path
-        name: application
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The environment ID
-        example: test-env
-        explode: false
-        in: path
-        name: environment
+        name: backupId
         required: true
         schema:
           type: string
@@ -11350,17 +11329,95 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScalingPolicy'
+              $ref: '#/components/schemas/restoreDatabase_request'
         required: true
       responses:
-        "200":
-          description: The scaling policy for the environment
-      summary: Update the scaling policy for an environment
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restoreDatabase_202_response'
+          description: Restore operation initiated
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Validation error
+      summary: Restore a database backup to a target environment
       tags:
-      - ScalingPolicy
-  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName}:
-    delete:
-      operationId: deleteScalingPolicy
+      - Restore Management
+  ? /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-filesystem
+  : post:
+      description: Initiates an async restore of a filesystem backup into the specified
+        target environment. The backup may originate from a different environment
+        of the same application (cross-env restore). Returns 202 with a restoreId
+        for status polling.
+      operationId: restoreFilesystem
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The TARGET environment ID to restore INTO
+        example: staging
+        explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The backup ID to restore from
+        example: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
+        explode: false
+        in: path
+        name: backupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restoreFilesystem_request'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restoreFilesystem_202_response'
+          description: Restore operation initiated
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Validation error
+      summary: Restore a filesystem backup to a target environment
+      tags:
+      - Restore Management
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/restores/{restoreId}:
+    get:
+      description: Returns the current status and metadata for a restore operation.
+        Poll this endpoint to track progress.
+      operationId: getRestoreStatus
       parameters:
       - description: The organisation ID
         example: test-org
@@ -11381,7 +11438,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
-        example: test-env
+        example: staging
         explode: false
         in: path
         name: environment
@@ -11389,18 +11446,186 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The policy name
+      - description: The restore operation ID
+        example: restore-abc123
         explode: false
         in: path
-        name: policyName
+        name: restoreId
         required: true
         schema:
           type: string
         style: simple
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRestoreStatus_200_response'
+          description: Restore operation record
+      summary: Get the status of a restore operation
+      tags:
+      - Restore Management
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
+    delete:
+      description: "Deletes a specific scaling policy for the environment. Specify\
+        \ the metric type or policy name to delete a single policy. If neither is\
+        \ provided, all policies will be deleted."
+      operationId: deleteScalingPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional. Delete by metric type.
+        explode: true
+        in: query
+        name: metric
+        required: false
+        schema:
+          enum:
+          - CPUUtilization
+          - MemoryUtilization
+          - RPS
+          type: string
+        style: form
+      - description: Optional. Delete by exact policy name.
+        explode: true
+        in: query
+        name: policyName
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
         "204":
-          description: The scaling policy for the environment
-      summary: Delete the scaling policy for an environment
+          description: Scaling policy deleted successfully.
+      summary: Delete Scaling Policy
+      tags:
+      - ScalingPolicy
+    get:
+      description: "Retrieves all active target tracking scaling policies for the\
+        \ environment. Returns an array of policies, each with its metric, target\
+        \ value, cooldowns, and resource label (if applicable)."
+      operationId: listScalingPolicies
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional. Filter policies by metric type.
+        explode: true
+        in: query
+        name: metric
+        required: false
+        schema:
+          enum:
+          - CPUUtilization
+          - MemoryUtilization
+          - RPS
+          type: string
+        style: form
+      - description: Optional. Filter policies by exact policy name.
+        explode: true
+        in: query
+        name: policyName
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicyListResponse'
+          description: List of scaling policies for the environment.
+      summary: List Scaling Policies
+      tags:
+      - ScalingPolicy
+    put:
+      description: "Creates or updates a target tracking scaling policy for the environment.\
+        \ Specify the metric type and target value. If a policy with the same metric\
+        \ or name exists, it will be updated. Optionally, provide a custom policy\
+        \ name via query."
+      operationId: upsertScalingPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional. Specify a custom policy name to upsert.
+        explode: true
+        in: query
+        name: policyName
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetScalingPolicyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScalingPolicyResponse'
+          description: Scaling policy created or updated successfully.
+      summary: Upsert Scaling Policy
       tags:
       - ScalingPolicy
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/ssh-access:
@@ -12955,12 +13180,46 @@ components:
       required:
       - envName
       type: object
-    ScalingPolicy:
+    SetScalingPolicyRequest:
+      example:
+        scaleOutCooldownSeconds: 6
+        scaleInCooldownSeconds: 0
+        metric: CPUUtilization
+        targetValue: 75
+      properties:
+        metric:
+          description: Metric to track for scaling.
+          enum:
+          - CPUUtilization
+          - MemoryUtilization
+          - RPS
+          type: string
+        targetValue:
+          description: Target value. Percentage for CPU/Memory; req/sec per task for
+            RPS.
+          example: 75
+          format: double
+          type: number
+        scaleInCooldownSeconds:
+          default: 300
+          description: Cooldown (seconds) before another scale-in can start.
+          type: integer
+        scaleOutCooldownSeconds:
+          default: 60
+          description: Cooldown (seconds) before another scale-out can start.
+          type: integer
+      required:
+      - metric
+      - targetValue
+      type: object
+    GetScalingPolicyResponse:
       example:
         scaleOutCooldownSeconds: 1
         scaleInCooldownSeconds: 6
         metric: CPUUtilization
+        policyName: policyName
         targetValue: 0.8008281904610115
+        resourceLabel: resourceLabel
       properties:
         metric:
           enum:
@@ -12969,11 +13228,40 @@ components:
           - RPS
           type: string
         targetValue:
+          format: double
           type: number
         scaleInCooldownSeconds:
           type: integer
         scaleOutCooldownSeconds:
           type: integer
+        policyName:
+          description: Name of the underlying Application Auto Scaling policy.
+          type: string
+        resourceLabel:
+          description: ALB ResourceLabel for RPS policies (target group identifier).
+          nullable: true
+          type: string
+      type: object
+    ScalingPolicyListResponse:
+      example:
+        policies:
+        - scaleOutCooldownSeconds: 1
+          scaleInCooldownSeconds: 6
+          metric: CPUUtilization
+          policyName: policyName
+          targetValue: 0.8008281904610115
+          resourceLabel: resourceLabel
+        - scaleOutCooldownSeconds: 1
+          scaleInCooldownSeconds: 6
+          metric: CPUUtilization
+          policyName: policyName
+          targetValue: 0.8008281904610115
+          resourceLabel: resourceLabel
+      properties:
+        policies:
+          items:
+            $ref: '#/components/schemas/GetScalingPolicyResponse'
+          type: array
       type: object
     SyncOperation:
       example:
@@ -20390,6 +20678,7 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
           type: string
         filterPolicies:
           description: Filter policy IDs to apply to this agent's inference requests
@@ -20568,6 +20857,7 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
           type: string
         filterPolicies:
           description: Filter policy IDs to apply to this agent's inference requests
@@ -20926,6 +21216,7 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
           type: string
         version:
           description: Current version for optimistic concurrency
@@ -23994,6 +24285,118 @@ components:
         filename:
           description: Suggested filename for download
           type: string
+      type: object
+    restoreDatabase_request:
+      properties:
+        backupId:
+          description: The backup ID to restore (must match path param)
+          type: string
+        acknowledgeDataloss:
+          description: Must be true to confirm existing data will be overwritten
+          example: true
+          type: boolean
+      required:
+      - acknowledgeDataloss
+      - backupId
+      type: object
+    restoreDatabase_202_response:
+      example:
+        restoreId: restore-abc123
+        message: Database restore initiated
+        status: in_progress
+      properties:
+        restoreId:
+          example: restore-abc123
+          type: string
+        status:
+          example: in_progress
+          type: string
+        message:
+          example: Database restore initiated
+          type: string
+      type: object
+    restoreFilesystem_request:
+      properties:
+        backupId:
+          description: The backup ID to restore (must match path param)
+          type: string
+        acknowledgeDataloss:
+          description: Must be true. tar extraction overwrites same-named files in
+            the target EFS in place; pre-existing files not in the archive are preserved.
+          type: boolean
+      required:
+      - acknowledgeDataloss
+      - backupId
+      type: object
+    restoreFilesystem_202_response:
+      example:
+        restoreId: restore-abc123
+        message: Filesystem restore initiated
+        status: in_progress
+      properties:
+        restoreId:
+          example: restore-abc123
+          type: string
+        status:
+          example: in_progress
+          type: string
+        message:
+          example: Filesystem restore initiated
+          type: string
+      type: object
+    getRestoreStatus_200_response:
+      example:
+        completedAt: 2000-01-23T04:56:07.000+00:00
+        orgName: test-org
+        appName: test-app
+        envName: staging
+        backupId: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
+        taskArn: taskArn
+        errorMessage: errorMessage
+        restoreId: restore-abc123
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        ttl: 0
+        status: completed
+      properties:
+        restoreId:
+          example: restore-abc123
+          type: string
+        orgName:
+          example: test-org
+          type: string
+        appName:
+          example: test-app
+          type: string
+        envName:
+          example: staging
+          type: string
+        backupId:
+          example: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
+          type: string
+        status:
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          example: completed
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        completedAt:
+          format: date-time
+          nullable: true
+          type: string
+        errorMessage:
+          nullable: true
+          type: string
+        taskArn:
+          nullable: true
+          type: string
+        ttl:
+          nullable: true
+          type: integer
       type: object
     getSshAccessCredentials_200_response_credentials:
       example:

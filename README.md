@@ -261,6 +261,9 @@ Class | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsRead**](docs/ProjectsAPI.md#projectsread) | **Get** /api/v2/organizations/{organization}/projects/{project} | Get details of a single project
 *ProjectsAPI* | [**ProjectsUpdate**](docs/ProjectsAPI.md#projectsupdate) | **Patch** /api/v2/organizations/{organization}/projects/{project} | Update a project
 *PurgeAPI* | [**PurgeCreate**](docs/PurgeAPI.md#purgecreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/purge | Purge cache via URL or cache keys
+*RestoreManagementAPI* | [**GetRestoreStatus**](docs/RestoreManagementAPI.md#getrestorestatus) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/restores/{restoreId} | Get the status of a restore operation
+*RestoreManagementAPI* | [**RestoreDatabase**](docs/RestoreManagementAPI.md#restoredatabase) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-database | Restore a database backup to a target environment
+*RestoreManagementAPI* | [**RestoreFilesystem**](docs/RestoreManagementAPI.md#restorefilesystem) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-filesystem | Restore a filesystem backup to a target environment
 *RulesAPI* | [**RulesAuthCreate**](docs/RulesAPI.md#rulesauthcreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/rules/auth | Create an authentication rule
 *RulesAPI* | [**RulesAuthDelete**](docs/RulesAPI.md#rulesauthdelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule
 *RulesAPI* | [**RulesAuthList**](docs/RulesAPI.md#rulesauthlist) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/auth | List authentication rules
@@ -307,9 +310,9 @@ Class | Method | HTTP request | Description
 *RulesAPI* | [**RulesServeStaticRead**](docs/RulesAPI.md#rulesservestaticread) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/serve-static/{rule} | Get details of a serve static rule
 *RulesAPI* | [**RulesServeStaticUpdate**](docs/RulesAPI.md#rulesservestaticupdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/rules/serve-static/{rule} | Update a serve static rule
 *SSHAccessAPI* | [**GetSshAccessCredentials**](docs/SSHAccessAPI.md#getsshaccesscredentials) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/ssh-access | Get SSH access credentials for an environment
-*ScalingPolicyAPI* | [**DeleteScalingPolicy**](docs/ScalingPolicyAPI.md#deletescalingpolicy) | **Delete** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName} | Delete the scaling policy for an environment
-*ScalingPolicyAPI* | [**GetScalingPolicies**](docs/ScalingPolicyAPI.md#getscalingpolicies) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Get the scaling policies for an environment
-*ScalingPolicyAPI* | [**UpdateScalingPolicy**](docs/ScalingPolicyAPI.md#updatescalingpolicy) | **Put** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Update the scaling policy for an environment
+*ScalingPolicyAPI* | [**DeleteScalingPolicy**](docs/ScalingPolicyAPI.md#deletescalingpolicy) | **Delete** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Delete Scaling Policy
+*ScalingPolicyAPI* | [**ListScalingPolicies**](docs/ScalingPolicyAPI.md#listscalingpolicies) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | List Scaling Policies
+*ScalingPolicyAPI* | [**UpsertScalingPolicy**](docs/ScalingPolicyAPI.md#upsertscalingpolicy) | **Put** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies | Upsert Scaling Policy
 *TokensAPI* | [**TokensCreate**](docs/TokensAPI.md#tokenscreate) | **Post** /api/v2/organizations/{organization}/tokens | Create a new API token scoped to this organization
 *TokensAPI* | [**TokensDelete**](docs/TokensAPI.md#tokensdelete) | **Delete** /api/v2/organizations/{organization}/tokens/{token_id} | Revoke an API token
 *TokensAPI* | [**TokensList**](docs/TokensAPI.md#tokenslist) | **Get** /api/v2/organizations/{organization}/tokens | List API tokens scoped to this organization
@@ -495,6 +498,8 @@ Class | Method | HTTP request | Description
  - [GetMyUsage200ResponseQuota](docs/GetMyUsage200ResponseQuota.md)
  - [GetMyUsage200ResponseQuotaDailyLimit](docs/GetMyUsage200ResponseQuotaDailyLimit.md)
  - [GetMyUsage200ResponseQuotaMonthlyLimit](docs/GetMyUsage200ResponseQuotaMonthlyLimit.md)
+ - [GetRestoreStatus200Response](docs/GetRestoreStatus200Response.md)
+ - [GetScalingPolicyResponse](docs/GetScalingPolicyResponse.md)
  - [GetSkill200Response](docs/GetSkill200Response.md)
  - [GetSkill200ResponseSkill](docs/GetSkill200ResponseSkill.md)
  - [GetSlackBot200Response](docs/GetSlackBot200Response.md)
@@ -570,11 +575,16 @@ Class | Method | HTTP request | Description
  - [QueryVectorCollection200ResponseResultsInner](docs/QueryVectorCollection200ResponseResultsInner.md)
  - [QueryVectorCollectionRequest](docs/QueryVectorCollectionRequest.md)
  - [QueryVectorCollectionRequestFilter](docs/QueryVectorCollectionRequestFilter.md)
- - [ScalingPolicy](docs/ScalingPolicy.md)
+ - [RestoreDatabase202Response](docs/RestoreDatabase202Response.md)
+ - [RestoreDatabaseRequest](docs/RestoreDatabaseRequest.md)
+ - [RestoreFilesystem202Response](docs/RestoreFilesystem202Response.md)
+ - [RestoreFilesystemRequest](docs/RestoreFilesystemRequest.md)
+ - [ScalingPolicyListResponse](docs/ScalingPolicyListResponse.md)
  - [SearchSlackWorkspaceChannels200Response](docs/SearchSlackWorkspaceChannels200Response.md)
  - [SearchSlackWorkspaceChannels200ResponseResultsInner](docs/SearchSlackWorkspaceChannels200ResponseResultsInner.md)
  - [SearchSlackWorkspaceUsers200Response](docs/SearchSlackWorkspaceUsers200Response.md)
  - [SearchSlackWorkspaceUsers200ResponseResultsInner](docs/SearchSlackWorkspaceUsers200ResponseResultsInner.md)
+ - [SetScalingPolicyRequest](docs/SetScalingPolicyRequest.md)
  - [SpotConfiguration](docs/SpotConfiguration.md)
  - [SubmitToolCallback200Response](docs/SubmitToolCallback200Response.md)
  - [SubmitToolCallbackRequest](docs/SubmitToolCallbackRequest.md)

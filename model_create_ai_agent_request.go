@@ -36,7 +36,7 @@ type CreateAIAgentRequest struct {
 	// Enable 1M context window support
 	LongContext *bool `json:"longContext,omitempty"`
 	// Guardrail preset name
-	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
+	GuardrailPreset NullableString `json:"guardrailPreset,omitempty"`
 	// Filter policy IDs to apply to this agent's inference requests
 	FilterPolicies []string `json:"filterPolicies,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -417,36 +417,46 @@ func (o *CreateAIAgentRequest) SetLongContext(v bool) {
 	o.LongContext = &v
 }
 
-// GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise.
+// GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateAIAgentRequest) GetGuardrailPreset() string {
-	if o == nil || IsNil(o.GuardrailPreset) {
+	if o == nil || IsNil(o.GuardrailPreset.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.GuardrailPreset
+	return *o.GuardrailPreset.Get()
 }
 
 // GetGuardrailPresetOk returns a tuple with the GuardrailPreset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateAIAgentRequest) GetGuardrailPresetOk() (*string, bool) {
-	if o == nil || IsNil(o.GuardrailPreset) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GuardrailPreset, true
+	return o.GuardrailPreset.Get(), o.GuardrailPreset.IsSet()
 }
 
 // HasGuardrailPreset returns a boolean if a field has been set.
 func (o *CreateAIAgentRequest) HasGuardrailPreset() bool {
-	if o != nil && !IsNil(o.GuardrailPreset) {
+	if o != nil && o.GuardrailPreset.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGuardrailPreset gets a reference to the given string and assigns it to the GuardrailPreset field.
+// SetGuardrailPreset gets a reference to the given NullableString and assigns it to the GuardrailPreset field.
 func (o *CreateAIAgentRequest) SetGuardrailPreset(v string) {
-	o.GuardrailPreset = &v
+	o.GuardrailPreset.Set(&v)
+}
+// SetGuardrailPresetNil sets the value for GuardrailPreset to be an explicit nil
+func (o *CreateAIAgentRequest) SetGuardrailPresetNil() {
+	o.GuardrailPreset.Set(nil)
+}
+
+// UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
+func (o *CreateAIAgentRequest) UnsetGuardrailPreset() {
+	o.GuardrailPreset.Unset()
 }
 
 // GetFilterPolicies returns the FilterPolicies field value if set, zero value otherwise.
@@ -519,8 +529,8 @@ func (o CreateAIAgentRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LongContext) {
 		toSerialize["longContext"] = o.LongContext
 	}
-	if !IsNil(o.GuardrailPreset) {
-		toSerialize["guardrailPreset"] = o.GuardrailPreset
+	if o.GuardrailPreset.IsSet() {
+		toSerialize["guardrailPreset"] = o.GuardrailPreset.Get()
 	}
 	if !IsNil(o.FilterPolicies) {
 		toSerialize["filterPolicies"] = o.FilterPolicies

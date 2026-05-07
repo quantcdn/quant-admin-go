@@ -115,6 +115,8 @@ type APIClient struct {
 
 	PurgeAPI PurgeAPI
 
+	RestoreManagementAPI RestoreManagementAPI
+
 	RulesAPI RulesAPI
 
 	SSHAccessAPI SSHAccessAPI
@@ -177,6 +179,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.PurgeAPI = (*PurgeAPIService)(&c.common)
+	c.RestoreManagementAPI = (*RestoreManagementAPIService)(&c.common)
 	c.RulesAPI = (*RulesAPIService)(&c.common)
 	c.SSHAccessAPI = (*SSHAccessAPIService)(&c.common)
 	c.ScalingPolicyAPI = (*ScalingPolicyAPIService)(&c.common)
