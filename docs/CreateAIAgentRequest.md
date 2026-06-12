@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **AssignedSkills** | Pointer to **[]string** | Skill IDs to assign to this agent | [optional] 
 **CreatedBy** | Pointer to **string** | User identifier who created the agent | [optional] 
 **LongContext** | Pointer to **bool** | Enable 1M context window support | [optional] 
-**GuardrailPreset** | Pointer to **string** | Guardrail preset name | [optional] 
+**GuardrailPreset** | Pointer to **NullableString** | Guardrail preset name | [optional] 
 **FilterPolicies** | Pointer to **[]string** | Filter policy IDs to apply to this agent&#39;s inference requests | [optional] 
 
 ## Methods
@@ -343,6 +343,16 @@ SetGuardrailPreset sets GuardrailPreset field to given value.
 
 HasGuardrailPreset returns a boolean if a field has been set.
 
+### SetGuardrailPresetNil
+
+`func (o *CreateAIAgentRequest) SetGuardrailPresetNil(b bool)`
+
+ SetGuardrailPresetNil sets the value for GuardrailPreset to be an explicit nil
+
+### UnsetGuardrailPreset
+`func (o *CreateAIAgentRequest) UnsetGuardrailPreset()`
+
+UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
 ### GetFilterPolicies
 
 `func (o *CreateAIAgentRequest) GetFilterPolicies() []string`

@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **EdgeFunctionUrl** | Pointer to **string** |  | [optional] 
 **EdgeFunctionCode** | Pointer to **string** | The deployed edge function source code | [optional] 
 **IsAsync** | Pointer to **bool** |  | [optional] 
-**InputSchema** | Pointer to **map[string]interface{}** |  | [optional] 
-**OutputSchema** | Pointer to **map[string]interface{}** |  | [optional] 
+**InputSchema** | Pointer to **string** |  | [optional] 
+**OutputSchema** | Pointer to **NullableString** |  | [optional] 
 **OutputSchemaDescription** | Pointer to **NullableString** |  | [optional] 
 **Category** | Pointer to **NullableString** |  | [optional] 
 **ResponseMode** | Pointer to **NullableString** |  | [optional] 
@@ -162,20 +162,20 @@ HasIsAsync returns a boolean if a field has been set.
 
 ### GetInputSchema
 
-`func (o *GetCustomTool200ResponseTool) GetInputSchema() map[string]interface{}`
+`func (o *GetCustomTool200ResponseTool) GetInputSchema() string`
 
 GetInputSchema returns the InputSchema field if non-nil, zero value otherwise.
 
 ### GetInputSchemaOk
 
-`func (o *GetCustomTool200ResponseTool) GetInputSchemaOk() (*map[string]interface{}, bool)`
+`func (o *GetCustomTool200ResponseTool) GetInputSchemaOk() (*string, bool)`
 
 GetInputSchemaOk returns a tuple with the InputSchema field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInputSchema
 
-`func (o *GetCustomTool200ResponseTool) SetInputSchema(v map[string]interface{})`
+`func (o *GetCustomTool200ResponseTool) SetInputSchema(v string)`
 
 SetInputSchema sets InputSchema field to given value.
 
@@ -187,20 +187,20 @@ HasInputSchema returns a boolean if a field has been set.
 
 ### GetOutputSchema
 
-`func (o *GetCustomTool200ResponseTool) GetOutputSchema() map[string]interface{}`
+`func (o *GetCustomTool200ResponseTool) GetOutputSchema() string`
 
 GetOutputSchema returns the OutputSchema field if non-nil, zero value otherwise.
 
 ### GetOutputSchemaOk
 
-`func (o *GetCustomTool200ResponseTool) GetOutputSchemaOk() (*map[string]interface{}, bool)`
+`func (o *GetCustomTool200ResponseTool) GetOutputSchemaOk() (*string, bool)`
 
 GetOutputSchemaOk returns a tuple with the OutputSchema field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOutputSchema
 
-`func (o *GetCustomTool200ResponseTool) SetOutputSchema(v map[string]interface{})`
+`func (o *GetCustomTool200ResponseTool) SetOutputSchema(v string)`
 
 SetOutputSchema sets OutputSchema field to given value.
 
