@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **PerUserMonthlyBudgetCents** | Pointer to **NullableInt32** |  | [optional] 
 **PerUserDailyBudgetCents** | Pointer to **NullableInt32** |  | [optional] 
 **WarningThresholdPercent** | Pointer to **NullableInt32** |  | [optional] 
+**InterfaceLimits** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue**](GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue.md) | Aggregate spend caps per interface label (slack, autonomous, api-gateway, streaming, websocket). Keys are interface labels. | [optional] 
+**UserOverrides** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue**](GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue.md) | Per-user budget overrides keyed by userId (numeric portal id, slack-&lt;id&gt;, or system:code-agent). Replaces the flat per-user budget for that user; unlimited&#x3D;true exempts them. | [optional] 
 
 ## Methods
 
@@ -204,6 +206,56 @@ HasWarningThresholdPercent returns a boolean if a field has been set.
 `func (o *GetGovernanceConfig200ResponseSpendLimits) UnsetWarningThresholdPercent()`
 
 UnsetWarningThresholdPercent ensures that no value is present for WarningThresholdPercent, not even an explicit nil
+### GetInterfaceLimits
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetInterfaceLimits() map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue`
+
+GetInterfaceLimits returns the InterfaceLimits field if non-nil, zero value otherwise.
+
+### GetInterfaceLimitsOk
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetInterfaceLimitsOk() (*map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue, bool)`
+
+GetInterfaceLimitsOk returns a tuple with the InterfaceLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterfaceLimits
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetInterfaceLimits(v map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue)`
+
+SetInterfaceLimits sets InterfaceLimits field to given value.
+
+### HasInterfaceLimits
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) HasInterfaceLimits() bool`
+
+HasInterfaceLimits returns a boolean if a field has been set.
+
+### GetUserOverrides
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetUserOverrides() map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue`
+
+GetUserOverrides returns the UserOverrides field if non-nil, zero value otherwise.
+
+### GetUserOverridesOk
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetUserOverridesOk() (*map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue, bool)`
+
+GetUserOverridesOk returns a tuple with the UserOverrides field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserOverrides
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetUserOverrides(v map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue)`
+
+SetUserOverrides sets UserOverrides field to given value.
+
+### HasUserOverrides
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) HasUserOverrides() bool`
+
+HasUserOverrides returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

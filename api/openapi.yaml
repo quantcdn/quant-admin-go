@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.15.8
+  version: 4.19.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -22,10 +22,11 @@ tags:
   name: AI Inference
 - description: Foundation model listing and configuration
   name: AI Models
-- description: Usage statistics and monitoring for AI services
-  name: AI Monitoring
 - description: Durable batch processing orchestrations with pause/resume support
   name: AI Orchestrations
+- description: "Project-scoped AI Search: site lifecycle, page ingest, semantic search,\
+    \ RAG chat, analytics, and crawl monitoring"
+  name: AI Search
 - description: Conversation session management for multi-turn interactions
   name: AI Sessions
 - description: "Reusable prompts, workflows, and instructions for agents"
@@ -80,6 +81,10 @@ tags:
   name: Volumes
 - description: API token management
   name: Tokens
+- description: Subscription
+  name: Subscription
+- description: AI
+  name: AI
 - description: AI Slack Bots
   name: AI Slack Bots
 - description: AI Governance
@@ -88,7 +93,594 @@ tags:
   name: AI Filter Policies
 - description: AI Usage
   name: AI Usage
+- description: Restore Management
+  name: Restore Management
 paths:
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search:
+    get:
+      operationId: AiSearch_status
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Status
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Get AI Search status for a project
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/enable:
+    post:
+      operationId: AiSearch_enable
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_enable_request'
+        required: false
+      responses:
+        "200":
+          description: Enabled
+        "400":
+          description: Missing base URL
+        "409":
+          description: Already enabled
+      security:
+      - BearerAuth: []
+      summary: Enable AI Search for a project
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/disable:
+    post:
+      operationId: AiSearch_disable
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Disabled
+        "404":
+          description: Not enabled
+      security:
+      - BearerAuth: []
+      summary: Disable AI Search for a project
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/settings:
+    get:
+      operationId: AiSearch_getSettings
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Settings
+      security:
+      - BearerAuth: []
+      summary: Get AI Search public access and rate limit settings
+      tags:
+      - AI Search
+    put:
+      operationId: AiSearch_updateSettings
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_updateSettings_request'
+        required: true
+      responses:
+        "200":
+          description: Updated
+      security:
+      - BearerAuth: []
+      summary: Update AI Search public access and rate limit settings
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/pages:
+    delete:
+      operationId: AiSearch_deletePages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_deletePages_request'
+        required: true
+      responses:
+        "200":
+          description: Deleted
+      security:
+      - BearerAuth: []
+      summary: Delete pages by URLs or patterns
+      tags:
+      - AI Search
+    get:
+      operationId: AiSearch_listPages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 200
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Pages
+      security:
+      - BearerAuth: []
+      summary: List indexed pages with cursor pagination
+      tags:
+      - AI Search
+    post:
+      operationId: AiSearch_ingestPages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_ingestPages_request'
+        required: true
+      responses:
+        "200":
+          description: Pages processed
+        "422":
+          description: Validation failed
+        "502":
+          description: Upstream failure
+      security:
+      - BearerAuth: []
+      summary: Ingest pages into the AI Search index
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/index:
+    delete:
+      operationId: AiSearch_purgeIndex
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Purged
+      security:
+      - BearerAuth: []
+      summary: Purge the entire AI Search index
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/search:
+    post:
+      operationId: AiSearch_search
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_search_request'
+        required: true
+      responses:
+        "200":
+          description: Results
+      security:
+      - BearerAuth: []
+      summary: Semantic search across the AI Search index
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/usage:
+    get:
+      operationId: AiSearch_usage
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30d
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Usage
+      security:
+      - BearerAuth: []
+      summary: Get usage statistics for the AI Search site
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/top-queries:
+    get:
+      operationId: AiSearch_topQueries
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30d
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 100
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: Top queries
+      security:
+      - BearerAuth: []
+      summary: Get the most popular AI Search queries
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/chat:
+    post:
+      operationId: AiSearch_chat
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_chat_request'
+        required: true
+      responses:
+        "200":
+          description: Chat reply
+      security:
+      - BearerAuth: []
+      summary: RAG chat with AI Search content
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/crawls:
+    get:
+      operationId: AiSearch_listCrawls
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          maximum: 50
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: Jobs
+      security:
+      - BearerAuth: []
+      summary: List AI Search ingest jobs
+      tags:
+      - AI Search
+    post:
+      operationId: AiSearch_triggerCrawl
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSearch_triggerCrawl_request'
+        required: true
+      responses:
+        "200":
+          description: Crawl started
+      security:
+      - BearerAuth: []
+      summary: Trigger a crawler run that ingests into AI Search
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/crawls/{jobId}:
+    get:
+      operationId: AiSearch_getCrawl
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Job status
+      security:
+      - BearerAuth: []
+      summary: Get AI Search ingest job status
+      tags:
+      - AI Search
+  /api/v3/organisations/{organisation}/projects/{project}/ai-search/crawls/{jobId}/pages:
+    get:
+      operationId: AiSearch_getCrawlPages
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: statusCode
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: processingStatus
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Pages
+      security:
+      - BearerAuth: []
+      summary: Get per-page ingest results for a crawl job
+      tags:
+      - AI Search
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
       operationId: CrawlerSchedules_list
@@ -4710,6 +5302,41 @@ paths:
       summary: Update a serve static rule
       tags:
       - Rules
+  /api/v3/organizations/{organisation}/subscription/cloud-usage:
+    get:
+      description: "Per-project compute/database/storage cost breakdown with spot\
+        \ discount, for the requested month and the month before it. Mirrors the subscription\
+        \ page's Cloud Apps card."
+      operationId: getSubscriptionCloudUsage
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "YYYY-MM, defaults to current month"
+        explode: true
+        in: query
+        name: month
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Usage envelope
+        "403":
+          description: Missing update_subscription permission or subscription:read
+            scope
+        "500":
+          description: Failed to fetch usage data
+      security:
+      - bearerAuth: []
+      summary: Cloud-app cost breakdown for the subscription page
+      tags:
+      - Subscription
   /api/v2/organizations/{organization}/tokens:
     get:
       operationId: Tokens_list
@@ -5578,37 +6205,81 @@ paths:
       - AI Task Management
   /api/v3/organizations/{organisation}/ai/usage:
     get:
+      description: "AI usage from the subscription page's source (cloud-api monthly-usage).\
+        \ Parameterized by month, groupBy (model|user|token) and optional daily series.\
+        \ NOTE: as of API 4.19.0 this endpoint requires the update_subscription permission\
+        \ + subscription:read scope (previously use_ai_services + ai:use). For per-caller\
+        \ spend use /ai/usage/me."
       operationId: getAIUsageStats
       parameters:
-      - description: The organisation ID
-        explode: false
+      - explode: false
         in: path
         name: organisation
         required: true
         schema:
           type: string
         style: simple
-      - description: Month to retrieve statistics for (YYYY-MM format)
+      - description: "YYYY-MM, defaults to current month"
         explode: true
         in: query
         name: month
         required: false
         schema:
-          example: 2025-10
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: groupBy
+        required: false
+        schema:
+          default: model
+          enum:
+          - model
+          - user
+          - token
+          type: string
+        style: form
+      - description: Set to 'daily' to append a 30-day series
+        explode: true
+        in: query
+        name: include
+        required: false
+        schema:
+          enum:
+          - daily
+          type: string
+        style: form
+      - description: Scope the daily series to a user
+        explode: true
+        in: query
+        name: userId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Scope the daily series to a token
+        explode: true
+        in: query
+        name: tokenId
+        required: false
+        schema:
           type: string
         style: form
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getAIUsageStats_200_response'
-          description: Usage statistics
+          description: Usage breakdown
+        "403":
+          description: Missing update_subscription permission or subscription:read
+            scope
+        "422":
+          description: Invalid groupBy
         "500":
-          description: Failed to fetch usage statistics
-      summary: Get AI usage statistics
+          description: Failed to fetch usage data
+      security:
+      - bearerAuth: []
+      summary: Organisation AI usage breakdown (subscription page parity)
       tags:
-      - AI Monitoring
+      - AI
   /api/v3/organizations/{organisation}/ai/chat:
     post:
       description: |-
@@ -10691,9 +11362,13 @@ paths:
       summary: Generate a download URL for a backup
       tags:
       - Backup Management
-  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
-    get:
-      operationId: getScalingPolicies
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-database:
+    post:
+      description: Initiates an async restore of a database backup into the specified
+        target environment. The backup may originate from a different environment
+        of the same application (cross-env restore). Returns 202 with a restoreId
+        for status polling.
+      operationId: restoreDatabase
       parameters:
       - description: The organisation ID
         example: test-org
@@ -10713,8 +11388,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The environment ID
-        example: test-env
+      - description: The TARGET environment ID to restore INTO
+        example: staging
         explode: false
         in: path
         name: environment
@@ -10722,38 +11397,11 @@ paths:
         schema:
           type: string
         style: simple
-      responses:
-        "200":
-          description: The scaling policy for the environment
-      summary: Get the scaling policies for an environment
-      tags:
-      - ScalingPolicy
-    put:
-      operationId: updateScalingPolicy
-      parameters:
-      - description: The organisation ID
-        example: test-org
+      - description: The backup ID to restore from
+        example: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
         explode: false
         in: path
-        name: organisation
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The application ID
-        example: test-app
-        explode: false
-        in: path
-        name: application
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The environment ID
-        example: test-env
-        explode: false
-        in: path
-        name: environment
+        name: backupId
         required: true
         schema:
           type: string
@@ -10762,17 +11410,95 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScalingPolicy'
+              $ref: '#/components/schemas/restoreDatabase_request'
         required: true
       responses:
-        "200":
-          description: The scaling policy for the environment
-      summary: Update the scaling policy for an environment
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restoreDatabase_202_response'
+          description: Restore operation initiated
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Validation error
+      summary: Restore a database backup to a target environment
       tags:
-      - ScalingPolicy
-  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies/{policyName}:
-    delete:
-      operationId: deleteScalingPolicy
+      - Restore Management
+  ? /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/backups/{backupId}/restore-filesystem
+  : post:
+      description: Initiates an async restore of a filesystem backup into the specified
+        target environment. The backup may originate from a different environment
+        of the same application (cross-env restore). Returns 202 with a restoreId
+        for status polling.
+      operationId: restoreFilesystem
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The TARGET environment ID to restore INTO
+        example: staging
+        explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The backup ID to restore from
+        example: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
+        explode: false
+        in: path
+        name: backupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restoreFilesystem_request'
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restoreFilesystem_202_response'
+          description: Restore operation initiated
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Validation error
+      summary: Restore a filesystem backup to a target environment
+      tags:
+      - Restore Management
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/restores/{restoreId}:
+    get:
+      description: Returns the current status and metadata for a restore operation.
+        Poll this endpoint to track progress.
+      operationId: getRestoreStatus
       parameters:
       - description: The organisation ID
         example: test-org
@@ -10793,7 +11519,7 @@ paths:
           type: string
         style: simple
       - description: The environment ID
-        example: test-env
+        example: staging
         explode: false
         in: path
         name: environment
@@ -10801,18 +11527,186 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The policy name
+      - description: The restore operation ID
+        example: restore-abc123
         explode: false
         in: path
-        name: policyName
+        name: restoreId
         required: true
         schema:
           type: string
         style: simple
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getRestoreStatus_200_response'
+          description: Restore operation record
+      summary: Get the status of a restore operation
+      tags:
+      - Restore Management
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
+    delete:
+      description: "Deletes a specific scaling policy for the environment. Specify\
+        \ the metric type or policy name to delete a single policy. If neither is\
+        \ provided, all policies will be deleted."
+      operationId: deleteScalingPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional. Delete by metric type.
+        explode: true
+        in: query
+        name: metric
+        required: false
+        schema:
+          enum:
+          - CPUUtilization
+          - MemoryUtilization
+          - RPS
+          type: string
+        style: form
+      - description: Optional. Delete by exact policy name.
+        explode: true
+        in: query
+        name: policyName
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
         "204":
-          description: The scaling policy for the environment
-      summary: Delete the scaling policy for an environment
+          description: Scaling policy deleted successfully.
+      summary: Delete Scaling Policy
+      tags:
+      - ScalingPolicy
+    get:
+      description: "Retrieves all active target tracking scaling policies for the\
+        \ environment. Returns an array of policies, each with its metric, target\
+        \ value, cooldowns, and resource label (if applicable)."
+      operationId: listScalingPolicies
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional. Filter policies by metric type.
+        explode: true
+        in: query
+        name: metric
+        required: false
+        schema:
+          enum:
+          - CPUUtilization
+          - MemoryUtilization
+          - RPS
+          type: string
+        style: form
+      - description: Optional. Filter policies by exact policy name.
+        explode: true
+        in: query
+        name: policyName
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScalingPolicyListResponse'
+          description: List of scaling policies for the environment.
+      summary: List Scaling Policies
+      tags:
+      - ScalingPolicy
+    put:
+      description: "Creates or updates a target tracking scaling policy for the environment.\
+        \ Specify the metric type and target value. If a policy with the same metric\
+        \ or name exists, it will be updated. Optionally, provide a custom policy\
+        \ name via query."
+      operationId: upsertScalingPolicy
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Optional. Specify a custom policy name to upsert.
+        explode: true
+        in: query
+        name: policyName
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetScalingPolicyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScalingPolicyResponse'
+          description: Scaling policy created or updated successfully.
+      summary: Upsert Scaling Policy
       tags:
       - ScalingPolicy
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/ssh-access:
@@ -11266,6 +12160,7 @@ components:
               ipAllow:
               - ipAllow
               - ipAllow
+              redirectHost: redirectHost
               enabled: true
             memory: 6
             dependsOn:
@@ -11322,6 +12217,7 @@ components:
               ipAllow:
               - ipAllow
               - ipAllow
+              redirectHost: redirectHost
               enabled: true
             memory: 6
             dependsOn:
@@ -11517,6 +12413,7 @@ components:
               ipAllow:
               - ipAllow
               - ipAllow
+              redirectHost: redirectHost
               enabled: true
             memory: 6
             dependsOn:
@@ -11573,6 +12470,7 @@ components:
               ipAllow:
               - ipAllow
               - ipAllow
+              redirectHost: redirectHost
               enabled: true
             memory: 6
             dependsOn:
@@ -11743,6 +12641,7 @@ components:
             ipAllow:
             - ipAllow
             - ipAllow
+            redirectHost: redirectHost
             enabled: true
           memory: 6
           dependsOn:
@@ -11799,6 +12698,7 @@ components:
             ipAllow:
             - ipAllow
             - ipAllow
+            redirectHost: redirectHost
             enabled: true
           memory: 6
           dependsOn:
@@ -11910,6 +12810,7 @@ components:
           ipAllow:
           - ipAllow
           - ipAllow
+          redirectHost: redirectHost
           enabled: true
         memory: 6
         dependsOn:
@@ -12367,12 +13268,46 @@ components:
       required:
       - envName
       type: object
-    ScalingPolicy:
+    SetScalingPolicyRequest:
+      example:
+        scaleOutCooldownSeconds: 6
+        scaleInCooldownSeconds: 0
+        metric: CPUUtilization
+        targetValue: 75
+      properties:
+        metric:
+          description: Metric to track for scaling.
+          enum:
+          - CPUUtilization
+          - MemoryUtilization
+          - RPS
+          type: string
+        targetValue:
+          description: Target value. Percentage for CPU/Memory; req/sec per task for
+            RPS.
+          example: 75
+          format: double
+          type: number
+        scaleInCooldownSeconds:
+          default: 300
+          description: Cooldown (seconds) before another scale-in can start.
+          type: integer
+        scaleOutCooldownSeconds:
+          default: 60
+          description: Cooldown (seconds) before another scale-out can start.
+          type: integer
+      required:
+      - metric
+      - targetValue
+      type: object
+    GetScalingPolicyResponse:
       example:
         scaleOutCooldownSeconds: 1
         scaleInCooldownSeconds: 6
         metric: CPUUtilization
+        policyName: policyName
         targetValue: 0.8008281904610115
+        resourceLabel: resourceLabel
       properties:
         metric:
           enum:
@@ -12381,11 +13316,40 @@ components:
           - RPS
           type: string
         targetValue:
+          format: double
           type: number
         scaleInCooldownSeconds:
           type: integer
         scaleOutCooldownSeconds:
           type: integer
+        policyName:
+          description: Name of the underlying Application Auto Scaling policy.
+          type: string
+        resourceLabel:
+          description: ALB ResourceLabel for RPS policies (target group identifier).
+          nullable: true
+          type: string
+      type: object
+    ScalingPolicyListResponse:
+      example:
+        policies:
+        - scaleOutCooldownSeconds: 1
+          scaleInCooldownSeconds: 6
+          metric: CPUUtilization
+          policyName: policyName
+          targetValue: 0.8008281904610115
+          resourceLabel: resourceLabel
+        - scaleOutCooldownSeconds: 1
+          scaleInCooldownSeconds: 6
+          metric: CPUUtilization
+          policyName: policyName
+          targetValue: 0.8008281904610115
+          resourceLabel: resourceLabel
+      properties:
+        policies:
+          items:
+            $ref: '#/components/schemas/GetScalingPolicyResponse'
+          type: array
       type: object
     SyncOperation:
       example:
@@ -16770,6 +17734,109 @@ components:
             $ref: '#/components/schemas/WafConfig_thresholds_inner'
           type: array
       type: object
+    AiSearch_enable_request:
+      properties:
+        baseUrl:
+          format: uri
+          type: string
+        crawlerConfig:
+          type: object
+      type: object
+    AiSearch_updateSettings_request:
+      properties:
+        publicAccess:
+          type: object
+        rateLimits:
+          type: object
+      type: object
+    AiSearch_ingestPages_request_pages_inner:
+      properties:
+        url:
+          format: uri
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        contentType:
+          type: string
+        fetchedAt:
+          type: string
+        preProcessed:
+          type: boolean
+        summary:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        topics:
+          items:
+            type: string
+          type: array
+      required:
+      - content
+      - title
+      - url
+      type: object
+    AiSearch_ingestPages_request:
+      properties:
+        jobId:
+          type: string
+        pages:
+          items:
+            $ref: '#/components/schemas/AiSearch_ingestPages_request_pages_inner'
+          type: array
+      required:
+      - pages
+      type: object
+    AiSearch_deletePages_request:
+      properties:
+        urls:
+          items:
+            format: uri
+            type: string
+          type: array
+        patterns:
+          items:
+            type: string
+          type: array
+      type: object
+    AiSearch_search_request:
+      properties:
+        query:
+          type: string
+        limit:
+          maximum: 50
+          type: integer
+        minScore:
+          type: number
+      required:
+      - query
+      type: object
+    AiSearch_chat_request:
+      properties:
+        message:
+          type: string
+        sessionId:
+          type: string
+        contextUrl:
+          format: uri
+          type: string
+        maxContextChunks:
+          maximum: 20
+          type: integer
+      required:
+      - message
+      type: object
+    AiSearch_triggerCrawl_request:
+      properties:
+        crawler_uuid:
+          format: uuid
+          type: string
+      required:
+      - crawler_uuid
+      type: object
     Crawlers_run_request:
       properties:
         urls:
@@ -17923,48 +18990,6 @@ components:
         graph:
           description: "Adjacency list with task summaries, dependsOn, and dependents\
             \ arrays"
-          type: object
-      type: object
-    getAIUsageStats_200_response_by_model_value:
-      properties:
-        requests:
-          description: Number of requests for this model
-          type: integer
-        tokens:
-          description: Total tokens for this model
-          type: integer
-      type: object
-    getAIUsageStats_200_response:
-      example:
-        by_model:
-          amazon.nova-lite-v1:0:
-            requests: 100
-            tokens: 25000
-          amazon.nova-pro-v1:0:
-            requests: 50
-            tokens: 20000
-        total_tokens: 45000
-        total_requests: 150
-      properties:
-        total_requests:
-          description: Total number of API requests
-          example: 150
-          type: integer
-        total_tokens:
-          description: Total tokens consumed across all requests
-          example: 45000
-          type: integer
-        by_model:
-          additionalProperties:
-            $ref: '#/components/schemas/getAIUsageStats_200_response_by_model_value'
-          description: Usage breakdown by model ID
-          example:
-            amazon.nova-lite-v1:0:
-              requests: 100
-              tokens: 25000
-            amazon.nova-pro-v1:0:
-              requests: 50
-              tokens: 20000
           type: object
       type: object
     chatInference_request_messages_inner_content_oneOf_inner_oneOf:
@@ -19395,11 +20420,12 @@ components:
       type: object
     getAIOrchestrationStatus_200_response:
       example:
+        result: Based on the image I generated and the web research...
+        duration: 19
         createdAt: 2000-01-23T04:56:07.000+00:00
         completedAt: 2000-01-23T04:56:07.000+00:00
         orchestrationId: orch_abc123def456789012345678901234
         completedTools: 2
-        synthesizedResponse: Based on the image I generated and the web research...
         error: error
         tools:
         - result: "{}"
@@ -19423,7 +20449,7 @@ components:
           description: Current orchestration status
           enum:
           - pending
-          - polling
+          - waiting_tools
           - synthesizing
           - complete
           - failed
@@ -19437,7 +20463,7 @@ components:
           description: Number of tools that have completed
           example: 2
           type: integer
-        synthesizedResponse:
+        result:
           description: AI-synthesized response combining all tool results (only present
             when status=complete)
           example: Based on the image I generated and the web research...
@@ -19458,6 +20484,10 @@ components:
           description: When orchestration completed (if status in complete or failed)
           format: date-time
           type: string
+        duration:
+          description: Seconds from creation to completion (present only once completed)
+          example: 19
+          type: integer
       required:
       - createdAt
       - orchestrationId
@@ -19699,6 +20729,7 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
           type: string
         filterPolicies:
           description: Filter policy IDs to apply to this agent's inference requests
@@ -19877,6 +20908,7 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
           type: string
         filterPolicies:
           description: Filter policy IDs to apply to this agent's inference requests
@@ -20235,6 +21267,7 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
           type: string
         version:
           description: Current version for optimistic concurrency
@@ -20262,7 +21295,7 @@ components:
     listCustomTools_200_response_tools_inner:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
-        inputSchema: "{}"
+        inputSchema: inputSchema
         isAsync: false
         name: check_inventory
         description: Check product inventory levels
@@ -20281,7 +21314,7 @@ components:
           example: false
           type: boolean
         inputSchema:
-          type: object
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -20291,13 +21324,13 @@ components:
         count: 0
         tools:
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          inputSchema: "{}"
+          inputSchema: inputSchema
           isAsync: false
           name: check_inventory
           description: Check product inventory levels
           edgeFunctionUrl: https://my-edge-function.quant.cloud
         - createdAt: 2000-01-23T04:56:07.000+00:00
-          inputSchema: "{}"
+          inputSchema: inputSchema
           isAsync: false
           name: check_inventory
           description: Check product inventory levels
@@ -20324,8 +21357,8 @@ components:
           description: JavaScript source code for the edge function
           type: string
         inputSchema:
-          description: JSON Schema defining the tool's input parameters
-          type: object
+          description: JSON-encoded JSON Schema object defining the tool's input parameters
+          type: string
         isAsync:
           default: false
           description: Whether this tool runs asynchronously (>5 seconds)
@@ -20337,9 +21370,10 @@ components:
           minimum: 5
           type: integer
         outputSchema:
-          description: JSON Schema defining the tool's output structure
+          description: JSON-encoded JSON Schema object defining the tool's output
+            structure
           nullable: true
-          type: object
+          type: string
         outputSchemaDescription:
           description: Human-readable description of the tool's output
           nullable: true
@@ -20395,9 +21429,9 @@ components:
       example:
         responseMode: llm
         createdAt: 2000-01-23T04:56:07.000+00:00
-        outputSchema: "{}"
+        outputSchema: outputSchema
         outputSchemaDescription: outputSchemaDescription
-        inputSchema: "{}"
+        inputSchema: inputSchema
         isAsync: false
         name: check_inventory
         description: Check product inventory levels
@@ -20421,10 +21455,10 @@ components:
           example: false
           type: boolean
         inputSchema:
-          type: object
+          type: string
         outputSchema:
           nullable: true
-          type: object
+          type: string
         outputSchemaDescription:
           nullable: true
           type: string
@@ -20446,9 +21480,9 @@ components:
         tool:
           responseMode: llm
           createdAt: 2000-01-23T04:56:07.000+00:00
-          outputSchema: "{}"
+          outputSchema: outputSchema
           outputSchemaDescription: outputSchemaDescription
-          inputSchema: "{}"
+          inputSchema: inputSchema
           isAsync: false
           name: check_inventory
           description: Check product inventory levels
@@ -22382,13 +23416,50 @@ components:
             $ref: '#/components/schemas/searchSlackWorkspaceChannels_200_response_results_inner'
           type: array
       type: object
+    getGovernanceConfig_200_response_spendLimits_interfaceLimits_value:
+      example:
+        dailyCents: 2
+        monthlyCents: 7
+      properties:
+        dailyCents:
+          nullable: true
+          type: integer
+        monthlyCents:
+          nullable: true
+          type: integer
+      type: object
+    getGovernanceConfig_200_response_spendLimits_userOverrides_value:
+      example:
+        dailyCents: 9
+        unlimited: true
+        monthlyCents: 3
+      properties:
+        dailyCents:
+          nullable: true
+          type: integer
+        monthlyCents:
+          nullable: true
+          type: integer
+        unlimited:
+          nullable: true
+          type: boolean
+      type: object
     getGovernanceConfig_200_response_spendLimits:
       example:
+        userOverrides:
+          key:
+            dailyCents: 9
+            unlimited: true
+            monthlyCents: 3
         monthlyBudgetCents: 0
         perUserDailyBudgetCents: 5
         warningThresholdPercent: 5
         perUserMonthlyBudgetCents: 1
         dailyBudgetCents: 6
+        interfaceLimits:
+          key:
+            dailyCents: 2
+            monthlyCents: 7
       properties:
         monthlyBudgetCents:
           nullable: true
@@ -22405,6 +23476,19 @@ components:
         warningThresholdPercent:
           nullable: true
           type: integer
+        interfaceLimits:
+          additionalProperties:
+            $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits_interfaceLimits_value'
+          description: "Aggregate spend caps per interface label (slack, autonomous,\
+            \ api-gateway, streaming, websocket). Keys are interface labels."
+          type: object
+        userOverrides:
+          additionalProperties:
+            $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits_userOverrides_value'
+          description: "Per-user budget overrides keyed by userId (numeric portal\
+            \ id, slack-<id>, or system:code-agent). Replaces the flat per-user budget\
+            \ for that user; unlimited=true exempts them."
+          type: object
       type: object
     getGovernanceConfig_200_response:
       example:
@@ -22420,11 +23504,20 @@ components:
         version: 2
         orgId: orgId
         spendLimits:
+          userOverrides:
+            key:
+              dailyCents: 9
+              unlimited: true
+              monthlyCents: 3
           monthlyBudgetCents: 0
           perUserDailyBudgetCents: 5
           warningThresholdPercent: 5
           perUserMonthlyBudgetCents: 1
           dailyBudgetCents: 6
+          interfaceLimits:
+            key:
+              dailyCents: 2
+              monthlyCents: 7
       properties:
         orgId:
           type: string
@@ -22683,28 +23776,84 @@ components:
         spendCents:
           type: integer
       type: object
+    getMyUsage_200_response_quota_monthlyLimit:
+      description: "Per-user monthly spend cap (object form, present when an org-level\
+        \ perUserMonthlyBudget is configured)"
+      example:
+        usedPercent: 5.637377
+        remainingCents: 2
+        limitCents: 5
+      nullable: true
+      properties:
+        limitCents:
+          description: The configured monthly cap in US cents
+          type: integer
+        usedPercent:
+          description: Percentage of the cap consumed this month (0–100+)
+          format: float
+          type: number
+        remainingCents:
+          description: Cents remaining before the cap is hit; can be negative if overspent
+          type: integer
+      type: object
+    getMyUsage_200_response_quota_dailyLimit:
+      description: "Per-user daily spend cap (object form, present when an org-level\
+        \ perUserDailyBudget is configured)"
+      example:
+        usedPercent: 9.301444
+        remainingCents: 3
+        resetsAt: 2000-01-23T04:56:07.000+00:00
+        limitCents: 7
+      nullable: true
+      properties:
+        limitCents:
+          description: The configured daily cap in US cents
+          type: integer
+        usedPercent:
+          description: Percentage of the cap consumed today (0–100+)
+          format: float
+          type: number
+        remainingCents:
+          description: Cents remaining before the cap is hit; can be negative if overspent
+          type: integer
+        resetsAt:
+          description: UTC timestamp when the daily counter resets (always next UTC
+            midnight)
+          format: date-time
+          type: string
+      type: object
     getMyUsage_200_response_quota:
       example:
-        dailyLimit: 5
-        monthlyLimit: 5
+        dailyLimit:
+          usedPercent: 9.301444
+          remainingCents: 3
+          resetsAt: 2000-01-23T04:56:07.000+00:00
+          limitCents: 7
+        monthlyLimit:
+          usedPercent: 5.637377
+          remainingCents: 2
+          limitCents: 5
       nullable: true
       properties:
         monthlyLimit:
-          description: Per-user monthly budget in US cents
-          nullable: true
-          type: integer
+          $ref: '#/components/schemas/getMyUsage_200_response_quota_monthlyLimit'
         dailyLimit:
-          description: Per-user daily budget in US cents
-          nullable: true
-          type: integer
+          $ref: '#/components/schemas/getMyUsage_200_response_quota_dailyLimit'
       type: object
     getMyUsage_200_response:
       example:
         daily:
           spendCents: 1
         quota:
-          dailyLimit: 5
-          monthlyLimit: 5
+          dailyLimit:
+            usedPercent: 9.301444
+            remainingCents: 3
+            resetsAt: 2000-01-23T04:56:07.000+00:00
+            limitCents: 7
+          monthlyLimit:
+            usedPercent: 5.637377
+            remainingCents: 2
+            limitCents: 5
         monthly:
           requestCount: 6
           spendCents: 0
@@ -23247,6 +24396,118 @@ components:
           description: Suggested filename for download
           type: string
       type: object
+    restoreDatabase_request:
+      properties:
+        backupId:
+          description: The backup ID to restore (must match path param)
+          type: string
+        acknowledgeDataloss:
+          description: Must be true to confirm existing data will be overwritten
+          example: true
+          type: boolean
+      required:
+      - acknowledgeDataloss
+      - backupId
+      type: object
+    restoreDatabase_202_response:
+      example:
+        restoreId: restore-abc123
+        message: Database restore initiated
+        status: in_progress
+      properties:
+        restoreId:
+          example: restore-abc123
+          type: string
+        status:
+          example: in_progress
+          type: string
+        message:
+          example: Database restore initiated
+          type: string
+      type: object
+    restoreFilesystem_request:
+      properties:
+        backupId:
+          description: The backup ID to restore (must match path param)
+          type: string
+        acknowledgeDataloss:
+          description: Must be true. tar extraction overwrites same-named files in
+            the target EFS in place; pre-existing files not in the archive are preserved.
+          type: boolean
+      required:
+      - acknowledgeDataloss
+      - backupId
+      type: object
+    restoreFilesystem_202_response:
+      example:
+        restoreId: restore-abc123
+        message: Filesystem restore initiated
+        status: in_progress
+      properties:
+        restoreId:
+          example: restore-abc123
+          type: string
+        status:
+          example: in_progress
+          type: string
+        message:
+          example: Filesystem restore initiated
+          type: string
+      type: object
+    getRestoreStatus_200_response:
+      example:
+        completedAt: 2000-01-23T04:56:07.000+00:00
+        orgName: test-org
+        appName: test-app
+        envName: staging
+        backupId: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
+        taskArn: taskArn
+        errorMessage: errorMessage
+        restoreId: restore-abc123
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        ttl: 0
+        status: completed
+      properties:
+        restoreId:
+          example: restore-abc123
+          type: string
+        orgName:
+          example: test-org
+          type: string
+        appName:
+          example: test-app
+          type: string
+        envName:
+          example: staging
+          type: string
+        backupId:
+          example: quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z
+          type: string
+        status:
+          enum:
+          - pending
+          - in_progress
+          - completed
+          - failed
+          example: completed
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        completedAt:
+          format: date-time
+          nullable: true
+          type: string
+        errorMessage:
+          nullable: true
+          type: string
+        taskArn:
+          nullable: true
+          type: string
+        ttl:
+          nullable: true
+          type: integer
+      type: object
     getSshAccessCredentials_200_response_credentials:
       example:
         accessKeyId: accessKeyId
@@ -23622,6 +24883,7 @@ components:
         ipAllow:
         - ipAllow
         - ipAllow
+        redirectHost: redirectHost
         enabled: true
       nullable: true
       properties:
@@ -23637,6 +24899,13 @@ components:
             type: string
           nullable: true
           type: array
+        redirectHost:
+          description: "Optional bare host (e.g. www.example.com). When set, requests\
+            \ denied by origin protection are 302-redirected to https://<redirectHost>\
+            \ with path and query preserved, instead of receiving a 403. Allowed IPs\
+            \ and valid-header (CDN) traffic are unaffected."
+          nullable: true
+          type: string
       type: object
     V2Crawler_sitemap_inner:
       properties:

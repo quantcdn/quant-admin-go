@@ -29,16 +29,15 @@ func Test_quantadmingo_ScalingPolicyAPIService(t *testing.T) {
 		var organisation string
 		var application string
 		var environment string
-		var policyName string
 
-		httpRes, err := apiClient.ScalingPolicyAPI.DeleteScalingPolicy(context.Background(), organisation, application, environment, policyName).Execute()
+		httpRes, err := apiClient.ScalingPolicyAPI.DeleteScalingPolicy(context.Background(), organisation, application, environment).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ScalingPolicyAPIService GetScalingPolicies", func(t *testing.T) {
+	t.Run("Test ScalingPolicyAPIService ListScalingPolicies", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -46,14 +45,15 @@ func Test_quantadmingo_ScalingPolicyAPIService(t *testing.T) {
 		var application string
 		var environment string
 
-		httpRes, err := apiClient.ScalingPolicyAPI.GetScalingPolicies(context.Background(), organisation, application, environment).Execute()
+		resp, httpRes, err := apiClient.ScalingPolicyAPI.ListScalingPolicies(context.Background(), organisation, application, environment).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ScalingPolicyAPIService UpdateScalingPolicy", func(t *testing.T) {
+	t.Run("Test ScalingPolicyAPIService UpsertScalingPolicy", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -61,9 +61,10 @@ func Test_quantadmingo_ScalingPolicyAPIService(t *testing.T) {
 		var application string
 		var environment string
 
-		httpRes, err := apiClient.ScalingPolicyAPI.UpdateScalingPolicy(context.Background(), organisation, application, environment).Execute()
+		resp, httpRes, err := apiClient.ScalingPolicyAPI.UpsertScalingPolicy(context.Background(), organisation, application, environment).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **Name** | **string** | Unique tool name (alphanumeric and underscores only) | 
 **Description** | **string** | Human-readable description of what the tool does | 
 **EdgeFunctionCode** | **string** | JavaScript source code for the edge function | 
-**InputSchema** | **map[string]interface{}** | JSON Schema defining the tool&#39;s input parameters | 
+**InputSchema** | **string** | JSON-encoded JSON Schema object defining the tool&#39;s input parameters | 
 **IsAsync** | Pointer to **bool** | Whether this tool runs asynchronously (&gt;5 seconds) | [optional] [default to false]
 **TimeoutSeconds** | Pointer to **int32** | Tool execution timeout | [optional] [default to 30]
-**OutputSchema** | Pointer to **map[string]interface{}** | JSON Schema defining the tool&#39;s output structure | [optional] 
+**OutputSchema** | Pointer to **NullableString** | JSON-encoded JSON Schema object defining the tool&#39;s output structure | [optional] 
 **OutputSchemaDescription** | Pointer to **NullableString** | Human-readable description of the tool&#39;s output | [optional] 
 **Category** | Pointer to **NullableString** | Category to group related tools | [optional] 
 **ResponseMode** | Pointer to **NullableString** | How the tool response is handled: llm (passed back to model) or direct (returned to user) | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCreateCustomToolRequest
 
-`func NewCreateCustomToolRequest(name string, description string, edgeFunctionCode string, inputSchema map[string]interface{}, ) *CreateCustomToolRequest`
+`func NewCreateCustomToolRequest(name string, description string, edgeFunctionCode string, inputSchema string, ) *CreateCustomToolRequest`
 
 NewCreateCustomToolRequest instantiates a new CreateCustomToolRequest object
 This constructor will assign default values to properties that have it defined,
@@ -96,20 +96,20 @@ SetEdgeFunctionCode sets EdgeFunctionCode field to given value.
 
 ### GetInputSchema
 
-`func (o *CreateCustomToolRequest) GetInputSchema() map[string]interface{}`
+`func (o *CreateCustomToolRequest) GetInputSchema() string`
 
 GetInputSchema returns the InputSchema field if non-nil, zero value otherwise.
 
 ### GetInputSchemaOk
 
-`func (o *CreateCustomToolRequest) GetInputSchemaOk() (*map[string]interface{}, bool)`
+`func (o *CreateCustomToolRequest) GetInputSchemaOk() (*string, bool)`
 
 GetInputSchemaOk returns a tuple with the InputSchema field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInputSchema
 
-`func (o *CreateCustomToolRequest) SetInputSchema(v map[string]interface{})`
+`func (o *CreateCustomToolRequest) SetInputSchema(v string)`
 
 SetInputSchema sets InputSchema field to given value.
 
@@ -166,20 +166,20 @@ HasTimeoutSeconds returns a boolean if a field has been set.
 
 ### GetOutputSchema
 
-`func (o *CreateCustomToolRequest) GetOutputSchema() map[string]interface{}`
+`func (o *CreateCustomToolRequest) GetOutputSchema() string`
 
 GetOutputSchema returns the OutputSchema field if non-nil, zero value otherwise.
 
 ### GetOutputSchemaOk
 
-`func (o *CreateCustomToolRequest) GetOutputSchemaOk() (*map[string]interface{}, bool)`
+`func (o *CreateCustomToolRequest) GetOutputSchemaOk() (*string, bool)`
 
 GetOutputSchemaOk returns a tuple with the OutputSchema field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOutputSchema
 
-`func (o *CreateCustomToolRequest) SetOutputSchema(v map[string]interface{})`
+`func (o *CreateCustomToolRequest) SetOutputSchema(v string)`
 
 SetOutputSchema sets OutputSchema field to given value.
 

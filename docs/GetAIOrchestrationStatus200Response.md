@@ -8,11 +8,12 @@ Name | Type | Description | Notes
 **Status** | **string** | Current orchestration status | 
 **ToolCount** | **int32** | Total number of async tools in this orchestration | 
 **CompletedTools** | Pointer to **int32** | Number of tools that have completed | [optional] 
-**SynthesizedResponse** | Pointer to **string** | AI-synthesized response combining all tool results (only present when status&#x3D;complete) | [optional] 
+**Result** | Pointer to **string** | AI-synthesized response combining all tool results (only present when status&#x3D;complete) | [optional] 
 **Tools** | Pointer to [**[]GetAIOrchestrationStatus200ResponseToolsInner**](GetAIOrchestrationStatus200ResponseToolsInner.md) | Status of individual tool executions | [optional] 
 **Error** | Pointer to **string** | Error message (only present when status&#x3D;failed) | [optional] 
 **CreatedAt** | **time.Time** | When orchestration was created | 
 **CompletedAt** | Pointer to **time.Time** | When orchestration completed (if status in complete or failed) | [optional] 
+**Duration** | Pointer to **int32** | Seconds from creation to completion (present only once completed) | [optional] 
 
 ## Methods
 
@@ -118,30 +119,30 @@ SetCompletedTools sets CompletedTools field to given value.
 
 HasCompletedTools returns a boolean if a field has been set.
 
-### GetSynthesizedResponse
+### GetResult
 
-`func (o *GetAIOrchestrationStatus200Response) GetSynthesizedResponse() string`
+`func (o *GetAIOrchestrationStatus200Response) GetResult() string`
 
-GetSynthesizedResponse returns the SynthesizedResponse field if non-nil, zero value otherwise.
+GetResult returns the Result field if non-nil, zero value otherwise.
 
-### GetSynthesizedResponseOk
+### GetResultOk
 
-`func (o *GetAIOrchestrationStatus200Response) GetSynthesizedResponseOk() (*string, bool)`
+`func (o *GetAIOrchestrationStatus200Response) GetResultOk() (*string, bool)`
 
-GetSynthesizedResponseOk returns a tuple with the SynthesizedResponse field if it's non-nil, zero value otherwise
+GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSynthesizedResponse
+### SetResult
 
-`func (o *GetAIOrchestrationStatus200Response) SetSynthesizedResponse(v string)`
+`func (o *GetAIOrchestrationStatus200Response) SetResult(v string)`
 
-SetSynthesizedResponse sets SynthesizedResponse field to given value.
+SetResult sets Result field to given value.
 
-### HasSynthesizedResponse
+### HasResult
 
-`func (o *GetAIOrchestrationStatus200Response) HasSynthesizedResponse() bool`
+`func (o *GetAIOrchestrationStatus200Response) HasResult() bool`
 
-HasSynthesizedResponse returns a boolean if a field has been set.
+HasResult returns a boolean if a field has been set.
 
 ### GetTools
 
@@ -237,6 +238,31 @@ SetCompletedAt sets CompletedAt field to given value.
 `func (o *GetAIOrchestrationStatus200Response) HasCompletedAt() bool`
 
 HasCompletedAt returns a boolean if a field has been set.
+
+### GetDuration
+
+`func (o *GetAIOrchestrationStatus200Response) GetDuration() int32`
+
+GetDuration returns the Duration field if non-nil, zero value otherwise.
+
+### GetDurationOk
+
+`func (o *GetAIOrchestrationStatus200Response) GetDurationOk() (*int32, bool)`
+
+GetDurationOk returns a tuple with the Duration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDuration
+
+`func (o *GetAIOrchestrationStatus200Response) SetDuration(v int32)`
+
+SetDuration sets Duration field to given value.
+
+### HasDuration
+
+`func (o *GetAIOrchestrationStatus200Response) HasDuration() bool`
+
+HasDuration returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

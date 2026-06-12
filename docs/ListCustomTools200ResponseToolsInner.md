@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** |  | [optional] 
 **EdgeFunctionUrl** | Pointer to **string** |  | [optional] 
 **IsAsync** | Pointer to **bool** |  | [optional] 
-**InputSchema** | Pointer to **map[string]interface{}** |  | [optional] 
+**InputSchema** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -132,20 +132,20 @@ HasIsAsync returns a boolean if a field has been set.
 
 ### GetInputSchema
 
-`func (o *ListCustomTools200ResponseToolsInner) GetInputSchema() map[string]interface{}`
+`func (o *ListCustomTools200ResponseToolsInner) GetInputSchema() string`
 
 GetInputSchema returns the InputSchema field if non-nil, zero value otherwise.
 
 ### GetInputSchemaOk
 
-`func (o *ListCustomTools200ResponseToolsInner) GetInputSchemaOk() (*map[string]interface{}, bool)`
+`func (o *ListCustomTools200ResponseToolsInner) GetInputSchemaOk() (*string, bool)`
 
 GetInputSchemaOk returns a tuple with the InputSchema field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInputSchema
 
-`func (o *ListCustomTools200ResponseToolsInner) SetInputSchema(v map[string]interface{})`
+`func (o *ListCustomTools200ResponseToolsInner) SetInputSchema(v string)`
 
 SetInputSchema sets InputSchema field to given value.
 

@@ -1,7 +1,7 @@
 /*
 QuantCDN API
 
-Testing AIMonitoringAPIService
+Testing SubscriptionAPIService
 
 */
 
@@ -17,21 +17,20 @@ import (
 	openapiclient "github.com/quantcdn/quant-admin-go/v4"
 )
 
-func Test_quantadmingo_AIMonitoringAPIService(t *testing.T) {
+func Test_quantadmingo_SubscriptionAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test AIMonitoringAPIService GetAIUsageStats", func(t *testing.T) {
+	t.Run("Test SubscriptionAPIService GetSubscriptionCloudUsage", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organisation string
 
-		resp, httpRes, err := apiClient.AIMonitoringAPI.GetAIUsageStats(context.Background(), organisation).Execute()
+		httpRes, err := apiClient.SubscriptionAPI.GetSubscriptionCloudUsage(context.Background(), organisation).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

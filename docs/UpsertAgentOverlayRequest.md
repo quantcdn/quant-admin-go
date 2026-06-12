@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **DisabledTools** | Pointer to **[]string** | Tool names to remove | [optional] 
 **SystemPromptAppend** | Pointer to **string** | Text appended to base system prompt | [optional] 
 **AllowedCollections** | Pointer to **[]string** | Vector DB collections | [optional] 
-**GuardrailPreset** | Pointer to **string** | Guardrail preset | [optional] 
+**GuardrailPreset** | Pointer to **NullableString** | Guardrail preset | [optional] 
 **Version** | Pointer to **int32** | Current version for optimistic concurrency | [optional] 
 
 ## Methods
@@ -285,6 +285,16 @@ SetGuardrailPreset sets GuardrailPreset field to given value.
 
 HasGuardrailPreset returns a boolean if a field has been set.
 
+### SetGuardrailPresetNil
+
+`func (o *UpsertAgentOverlayRequest) SetGuardrailPresetNil(b bool)`
+
+ SetGuardrailPresetNil sets the value for GuardrailPreset to be an explicit nil
+
+### UnsetGuardrailPreset
+`func (o *UpsertAgentOverlayRequest) UnsetGuardrailPreset()`
+
+UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
 ### GetVersion
 
 `func (o *UpsertAgentOverlayRequest) GetVersion() int32`
