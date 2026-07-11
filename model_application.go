@@ -26,6 +26,7 @@ type Application struct {
 	Organisation string `json:"organisation"`
 	Database NullableApplicationDatabase `json:"database,omitempty"`
 	Filesystem NullableApplicationFilesystem `json:"filesystem,omitempty"`
+	Cache NullableApplicationCache `json:"cache,omitempty"`
 	ComposeDefinition *Compose `json:"composeDefinition,omitempty"`
 	// Application status
 	Status NullableString `json:"status,omitempty"`
@@ -198,6 +199,48 @@ func (o *Application) SetFilesystemNil() {
 // UnsetFilesystem ensures that no value is present for Filesystem, not even an explicit nil
 func (o *Application) UnsetFilesystem() {
 	o.Filesystem.Unset()
+}
+
+// GetCache returns the Cache field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Application) GetCache() ApplicationCache {
+	if o == nil || IsNil(o.Cache.Get()) {
+		var ret ApplicationCache
+		return ret
+	}
+	return *o.Cache.Get()
+}
+
+// GetCacheOk returns a tuple with the Cache field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Application) GetCacheOk() (*ApplicationCache, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cache.Get(), o.Cache.IsSet()
+}
+
+// HasCache returns a boolean if a field has been set.
+func (o *Application) HasCache() bool {
+	if o != nil && o.Cache.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCache gets a reference to the given NullableApplicationCache and assigns it to the Cache field.
+func (o *Application) SetCache(v ApplicationCache) {
+	o.Cache.Set(&v)
+}
+// SetCacheNil sets the value for Cache to be an explicit nil
+func (o *Application) SetCacheNil() {
+	o.Cache.Set(nil)
+}
+
+// UnsetCache ensures that no value is present for Cache, not even an explicit nil
+func (o *Application) UnsetCache() {
+	o.Cache.Unset()
 }
 
 // GetComposeDefinition returns the ComposeDefinition field value if set, zero value otherwise.
@@ -601,6 +644,9 @@ func (o Application) ToMap() (map[string]interface{}, error) {
 	if o.Filesystem.IsSet() {
 		toSerialize["filesystem"] = o.Filesystem.Get()
 	}
+	if o.Cache.IsSet() {
+		toSerialize["cache"] = o.Cache.Get()
+	}
 	if !IsNil(o.ComposeDefinition) {
 		toSerialize["composeDefinition"] = o.ComposeDefinition
 	}
@@ -679,6 +725,7 @@ func (o *Application) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "organisation")
 		delete(additionalProperties, "database")
 		delete(additionalProperties, "filesystem")
+		delete(additionalProperties, "cache")
 		delete(additionalProperties, "composeDefinition")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "deploymentInformation")

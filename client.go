@@ -109,6 +109,8 @@ type APIClient struct {
 
 	KVAPI KVAPI
 
+	OpenAICompatibilityAPI OpenAICompatibilityAPI
+
 	OrganizationsAPI OrganizationsAPI
 
 	ProjectsAPI ProjectsAPI
@@ -178,6 +180,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.EnvironmentsAPI = (*EnvironmentsAPIService)(&c.common)
 	c.HeadersAPI = (*HeadersAPIService)(&c.common)
 	c.KVAPI = (*KVAPIService)(&c.common)
+	c.OpenAICompatibilityAPI = (*OpenAICompatibilityAPIService)(&c.common)
 	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.PurgeAPI = (*PurgeAPIService)(&c.common)

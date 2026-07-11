@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **EnvName** | **string** | Environment name (e.g., &#39;staging&#39;, &#39;development&#39;) | 
 **MinCapacity** | Pointer to **int32** | Minimum number of instances | [optional] 
 **MaxCapacity** | Pointer to **int32** | Maximum number of instances | [optional] 
+**SingleTaskOnly** | Pointer to **NullableBool** | Optional. Forces single-task mode (max one running task). When omitted, the platform auto-detects stateful containers. | [optional] 
+**StartupGracePeriodSeconds** | Pointer to **NullableInt32** | Optional. Seconds the load balancer waits after a task starts before an unhealthy health check can replace it. If not set, the value from composeDefinition (or default 120) is used. | [optional] [default to 120]
 **CloneConfigurationFrom** | Pointer to **string** | Clone configuration from an existing environment | [optional] 
 **ComposeDefinition** | Pointer to [**Compose**](Compose.md) |  | [optional] 
 **ImageSuffix** | Pointer to **string** | Optional image tag suffix for cloning | [optional] 
@@ -103,6 +105,76 @@ SetMaxCapacity sets MaxCapacity field to given value.
 
 HasMaxCapacity returns a boolean if a field has been set.
 
+### GetSingleTaskOnly
+
+`func (o *CreateEnvironmentRequest) GetSingleTaskOnly() bool`
+
+GetSingleTaskOnly returns the SingleTaskOnly field if non-nil, zero value otherwise.
+
+### GetSingleTaskOnlyOk
+
+`func (o *CreateEnvironmentRequest) GetSingleTaskOnlyOk() (*bool, bool)`
+
+GetSingleTaskOnlyOk returns a tuple with the SingleTaskOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSingleTaskOnly
+
+`func (o *CreateEnvironmentRequest) SetSingleTaskOnly(v bool)`
+
+SetSingleTaskOnly sets SingleTaskOnly field to given value.
+
+### HasSingleTaskOnly
+
+`func (o *CreateEnvironmentRequest) HasSingleTaskOnly() bool`
+
+HasSingleTaskOnly returns a boolean if a field has been set.
+
+### SetSingleTaskOnlyNil
+
+`func (o *CreateEnvironmentRequest) SetSingleTaskOnlyNil(b bool)`
+
+ SetSingleTaskOnlyNil sets the value for SingleTaskOnly to be an explicit nil
+
+### UnsetSingleTaskOnly
+`func (o *CreateEnvironmentRequest) UnsetSingleTaskOnly()`
+
+UnsetSingleTaskOnly ensures that no value is present for SingleTaskOnly, not even an explicit nil
+### GetStartupGracePeriodSeconds
+
+`func (o *CreateEnvironmentRequest) GetStartupGracePeriodSeconds() int32`
+
+GetStartupGracePeriodSeconds returns the StartupGracePeriodSeconds field if non-nil, zero value otherwise.
+
+### GetStartupGracePeriodSecondsOk
+
+`func (o *CreateEnvironmentRequest) GetStartupGracePeriodSecondsOk() (*int32, bool)`
+
+GetStartupGracePeriodSecondsOk returns a tuple with the StartupGracePeriodSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartupGracePeriodSeconds
+
+`func (o *CreateEnvironmentRequest) SetStartupGracePeriodSeconds(v int32)`
+
+SetStartupGracePeriodSeconds sets StartupGracePeriodSeconds field to given value.
+
+### HasStartupGracePeriodSeconds
+
+`func (o *CreateEnvironmentRequest) HasStartupGracePeriodSeconds() bool`
+
+HasStartupGracePeriodSeconds returns a boolean if a field has been set.
+
+### SetStartupGracePeriodSecondsNil
+
+`func (o *CreateEnvironmentRequest) SetStartupGracePeriodSecondsNil(b bool)`
+
+ SetStartupGracePeriodSecondsNil sets the value for StartupGracePeriodSeconds to be an explicit nil
+
+### UnsetStartupGracePeriodSeconds
+`func (o *CreateEnvironmentRequest) UnsetStartupGracePeriodSeconds()`
+
+UnsetStartupGracePeriodSeconds ensures that no value is present for StartupGracePeriodSeconds, not even an explicit nil
 ### GetCloneConfigurationFrom
 
 `func (o *CreateEnvironmentRequest) GetCloneConfigurationFrom() string`

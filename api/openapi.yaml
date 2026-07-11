@@ -95,6 +95,8 @@ tags:
   name: AI Usage
 - description: Restore Management
   name: Restore Management
+- description: OpenAI Compatibility
+  name: OpenAI Compatibility
 paths:
   /api/v3/organisations/{organisation}/projects/{project}/ai-search:
     get:
@@ -11546,6 +11548,117 @@ paths:
       summary: Get the status of a restore operation
       tags:
       - Restore Management
+  /oai/v1/chat/completions:
+    post:
+      description: "Drop-in replacement for OpenAI's POST /v1/chat/completions. Point\
+        \ any OpenAI SDK at base_url=https://<host>/oai/v1 and use a Quant API token\
+        \ (qc_...) as the api_key. Set `stream: true` to receive Server-Sent Events\
+        \ (chat.completion.chunk objects terminated by `data: [DONE]`); otherwise\
+        \ a single chat.completion object is returned. Supports tool/function calling\
+        \ and the standard tool_choice modes."
+      operationId: oaiChatCompletions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/oaiChatCompletions_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oaiChatCompletions_200_response'
+          description: A chat.completion object (or an SSE stream of chat.completion.chunk
+            objects when stream=true)
+        "401":
+          description: Missing or invalid API key
+        "403":
+          description: "Token not scoped to an organisation, or org lacks AI access"
+        "422":
+          description: Invalid request
+      security:
+      - bearerAuth: []
+      summary: Create a chat completion (OpenAI-compatible)
+      tags:
+      - OpenAI Compatibility
+  /oai/v1/embeddings:
+    post:
+      description: Drop-in replacement for OpenAI's POST /v1/embeddings. Accepts a
+        single string or an array of strings in `input` and returns a list of embedding
+        objects.
+      operationId: oaiEmbeddings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/oaiEmbeddings_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oaiEmbeddings_200_response'
+          description: A list of embedding objects
+        "401":
+          description: Missing or invalid API key
+        "403":
+          description: "Token not scoped to an organisation, or org lacks AI access"
+      security:
+      - bearerAuth: []
+      summary: Create embeddings (OpenAI-compatible)
+      tags:
+      - OpenAI Compatibility
+  /oai/v1/models:
+    get:
+      description: Drop-in replacement for OpenAI's GET /v1/models. Returns the model
+        ids available to the organisation; pass one of these ids as `model` in chat/embeddings
+        requests.
+      operationId: oaiListModels
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oaiListModels_200_response'
+          description: A list of model objects
+        "401":
+          description: Missing or invalid API key
+      security:
+      - bearerAuth: []
+      summary: List available models (OpenAI-compatible)
+      tags:
+      - OpenAI Compatibility
+  /oai/v1/models/{model}:
+    get:
+      description: "Drop-in replacement for OpenAI's GET /v1/models/{model}."
+      operationId: oaiGetModel
+      parameters:
+      - example: amazon.nova-micro-v1:0
+        explode: false
+        in: path
+        name: model
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oaiGetModel_200_response'
+          description: A model object
+        "401":
+          description: Missing or invalid API key
+        "404":
+          description: Model not found
+      security:
+      - bearerAuth: []
+      summary: Retrieve a model (OpenAI-compatible)
+      tags:
+      - OpenAI Compatibility
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
     delete:
       description: "Deletes a specific scaling policy for the environment. Specify\
@@ -12151,10 +12264,12 @@ components:
     CreateApplicationRequest:
       example:
         composeDefinition:
+          singleTaskOnly: true
           spotConfiguration:
             strategy: spot-only
-          taskMemory: 2
-          maxCapacity: 7
+          startupGracePeriodSeconds: 368
+          taskMemory: 4
+          maxCapacity: 1
           containers:
           - originProtectionConfig:
               ipAllow:
@@ -12162,7 +12277,7 @@ components:
               - ipAllow
               redirectHost: redirectHost
               enabled: true
-            memory: 6
+            memory: 1
             dependsOn:
             - condition: START
               containerName: containerName
@@ -12172,7 +12287,7 @@ components:
             exposedPorts:
             - 5
             - 5
-            cpu: 0
+            cpu: 6
             imageReference:
               identifier: identifier
               type: internal
@@ -12181,7 +12296,7 @@ components:
               valueFrom: valueFrom
             - name: name
               valueFrom: valueFrom
-            memoryReservation: 1
+            memoryReservation: 5
             command:
             - command
             - command
@@ -12193,13 +12308,13 @@ components:
             readonlyRootFilesystem: false
             originProtection: false
             healthCheck:
-              retries: 7
-              startPeriod: 279
-              interval: 171
+              retries: 9
+              startPeriod: 108
+              interval: 72
               command:
               - command
               - command
-              timeout: 15
+              timeout: 42
             name: name
             mountPoints:
             - readOnly: false
@@ -12219,7 +12334,7 @@ components:
               - ipAllow
               redirectHost: redirectHost
               enabled: true
-            memory: 6
+            memory: 1
             dependsOn:
             - condition: START
               containerName: containerName
@@ -12229,7 +12344,7 @@ components:
             exposedPorts:
             - 5
             - 5
-            cpu: 0
+            cpu: 6
             imageReference:
               identifier: identifier
               type: internal
@@ -12238,7 +12353,7 @@ components:
               valueFrom: valueFrom
             - name: name
               valueFrom: valueFrom
-            memoryReservation: 1
+            memoryReservation: 5
             command:
             - command
             - command
@@ -12250,13 +12365,13 @@ components:
             readonlyRootFilesystem: false
             originProtection: false
             healthCheck:
-              retries: 7
-              startPeriod: 279
-              interval: 171
+              retries: 9
+              startPeriod: 108
+              interval: 72
               command:
               - command
               - command
-              timeout: 15
+              timeout: 42
             name: name
             mountPoints:
             - readOnly: false
@@ -12270,8 +12385,8 @@ components:
             - entryPoint
             user: user
             essential: true
-          minCapacity: 4
-          taskCpu: 3
+          minCapacity: 7
+          taskCpu: 2
           enableCrossAppNetworking: false
           architecture: architecture
           enableCrossEnvNetworking: false
@@ -12371,6 +12486,10 @@ components:
       type: object
     Application:
       example:
+        cache:
+          cacheEndpoint: cacheEndpoint
+          cacheIdentifier: cacheIdentifier
+          dataStorageMaxGb: 0
         appName: appName
         deploymentInformation:
         - createdAt: 2000-01-23T04:56:07.000+00:00
@@ -12386,9 +12505,9 @@ components:
         environmentNames:
         - environmentNames
         - environmentNames
-        desiredCount: 1
+        desiredCount: 7
         organisation: organisation
-        maxCapacity: 1
+        maxCapacity: 6
         imageReference:
           identifier: identifier
           type: internal
@@ -12404,10 +12523,12 @@ components:
           rdsInstanceStatus: rdsInstanceStatus
           rdsInstanceEndpoint: rdsInstanceEndpoint
         composeDefinition:
+          singleTaskOnly: true
           spotConfiguration:
             strategy: spot-only
-          taskMemory: 2
-          maxCapacity: 7
+          startupGracePeriodSeconds: 368
+          taskMemory: 4
+          maxCapacity: 1
           containers:
           - originProtectionConfig:
               ipAllow:
@@ -12415,7 +12536,7 @@ components:
               - ipAllow
               redirectHost: redirectHost
               enabled: true
-            memory: 6
+            memory: 1
             dependsOn:
             - condition: START
               containerName: containerName
@@ -12425,7 +12546,7 @@ components:
             exposedPorts:
             - 5
             - 5
-            cpu: 0
+            cpu: 6
             imageReference:
               identifier: identifier
               type: internal
@@ -12434,7 +12555,7 @@ components:
               valueFrom: valueFrom
             - name: name
               valueFrom: valueFrom
-            memoryReservation: 1
+            memoryReservation: 5
             command:
             - command
             - command
@@ -12446,13 +12567,13 @@ components:
             readonlyRootFilesystem: false
             originProtection: false
             healthCheck:
-              retries: 7
-              startPeriod: 279
-              interval: 171
+              retries: 9
+              startPeriod: 108
+              interval: 72
               command:
               - command
               - command
-              timeout: 15
+              timeout: 42
             name: name
             mountPoints:
             - readOnly: false
@@ -12472,7 +12593,7 @@ components:
               - ipAllow
               redirectHost: redirectHost
               enabled: true
-            memory: 6
+            memory: 1
             dependsOn:
             - condition: START
               containerName: containerName
@@ -12482,7 +12603,7 @@ components:
             exposedPorts:
             - 5
             - 5
-            cpu: 0
+            cpu: 6
             imageReference:
               identifier: identifier
               type: internal
@@ -12491,7 +12612,7 @@ components:
               valueFrom: valueFrom
             - name: name
               valueFrom: valueFrom
-            memoryReservation: 1
+            memoryReservation: 5
             command:
             - command
             - command
@@ -12503,13 +12624,13 @@ components:
             readonlyRootFilesystem: false
             originProtection: false
             healthCheck:
-              retries: 7
-              startPeriod: 279
-              interval: 171
+              retries: 9
+              startPeriod: 108
+              interval: 72
               command:
               - command
               - command
-              timeout: 15
+              timeout: 42
             name: name
             mountPoints:
             - readOnly: false
@@ -12523,12 +12644,12 @@ components:
             - entryPoint
             user: user
             essential: true
-          minCapacity: 4
-          taskCpu: 3
+          minCapacity: 7
+          taskCpu: 2
           enableCrossAppNetworking: false
           architecture: architecture
           enableCrossEnvNetworking: false
-        runningCount: 6
+        runningCount: 1
         minCapacity: 1
         status: status
       properties:
@@ -12542,6 +12663,8 @@ components:
           $ref: '#/components/schemas/Application_database'
         filesystem:
           $ref: '#/components/schemas/Application_filesystem'
+        cache:
+          $ref: '#/components/schemas/Application_cache'
         composeDefinition:
           $ref: '#/components/schemas/Compose'
         status:
@@ -12632,10 +12755,12 @@ components:
       type: object
     Compose:
       example:
+        singleTaskOnly: true
         spotConfiguration:
           strategy: spot-only
-        taskMemory: 2
-        maxCapacity: 7
+        startupGracePeriodSeconds: 368
+        taskMemory: 4
+        maxCapacity: 1
         containers:
         - originProtectionConfig:
             ipAllow:
@@ -12643,7 +12768,7 @@ components:
             - ipAllow
             redirectHost: redirectHost
             enabled: true
-          memory: 6
+          memory: 1
           dependsOn:
           - condition: START
             containerName: containerName
@@ -12653,7 +12778,7 @@ components:
           exposedPorts:
           - 5
           - 5
-          cpu: 0
+          cpu: 6
           imageReference:
             identifier: identifier
             type: internal
@@ -12662,7 +12787,7 @@ components:
             valueFrom: valueFrom
           - name: name
             valueFrom: valueFrom
-          memoryReservation: 1
+          memoryReservation: 5
           command:
           - command
           - command
@@ -12674,13 +12799,13 @@ components:
           readonlyRootFilesystem: false
           originProtection: false
           healthCheck:
-            retries: 7
-            startPeriod: 279
-            interval: 171
+            retries: 9
+            startPeriod: 108
+            interval: 72
             command:
             - command
             - command
-            timeout: 15
+            timeout: 42
           name: name
           mountPoints:
           - readOnly: false
@@ -12700,7 +12825,7 @@ components:
             - ipAllow
             redirectHost: redirectHost
             enabled: true
-          memory: 6
+          memory: 1
           dependsOn:
           - condition: START
             containerName: containerName
@@ -12710,7 +12835,7 @@ components:
           exposedPorts:
           - 5
           - 5
-          cpu: 0
+          cpu: 6
           imageReference:
             identifier: identifier
             type: internal
@@ -12719,7 +12844,7 @@ components:
             valueFrom: valueFrom
           - name: name
             valueFrom: valueFrom
-          memoryReservation: 1
+          memoryReservation: 5
           command:
           - command
           - command
@@ -12731,13 +12856,13 @@ components:
           readonlyRootFilesystem: false
           originProtection: false
           healthCheck:
-            retries: 7
-            startPeriod: 279
-            interval: 171
+            retries: 9
+            startPeriod: 108
+            interval: 72
             command:
             - command
             - command
-            timeout: 15
+            timeout: 42
           name: name
           mountPoints:
           - readOnly: false
@@ -12751,8 +12876,8 @@ components:
           - entryPoint
           user: user
           essential: true
-        minCapacity: 4
-        taskCpu: 3
+        minCapacity: 7
+        taskCpu: 2
         enableCrossAppNetworking: false
         architecture: architecture
         enableCrossEnvNetworking: false
@@ -12780,6 +12905,25 @@ components:
         maxCapacity:
           description: Maximum number of instances
           nullable: false
+          type: integer
+        singleTaskOnly:
+          description: "Optional. Forces single-task mode for data-safe applications\
+            \ (max one running task). When true: capacity is locked to 1. When false:\
+            \ explicitly allows scaling. When omitted: the platform auto-detects stateful\
+            \ containers and enables single-task mode if found."
+          nullable: true
+          type: boolean
+        startupGracePeriodSeconds:
+          default: 120
+          description: "Optional. Seconds the load balancer waits after a task starts\
+            \ before an unhealthy health check can replace it (applied as the ECS\
+            \ service's healthCheckGracePeriodSeconds when a load balancer is attached).\
+            \ Raise for apps that are slow to boot, e.g. run migrations on startup.\
+            \ Tasks that become healthy sooner still enter service immediately. Defaults\
+            \ to 120 when omitted."
+          maximum: 3600
+          minimum: 0
+          nullable: true
           type: integer
         spotConfiguration:
           $ref: '#/components/schemas/SpotConfiguration'
@@ -12812,7 +12956,7 @@ components:
           - ipAllow
           redirectHost: redirectHost
           enabled: true
-        memory: 6
+        memory: 1
         dependsOn:
         - condition: START
           containerName: containerName
@@ -12822,7 +12966,7 @@ components:
         exposedPorts:
         - 5
         - 5
-        cpu: 0
+        cpu: 6
         imageReference:
           identifier: identifier
           type: internal
@@ -12831,7 +12975,7 @@ components:
           valueFrom: valueFrom
         - name: name
           valueFrom: valueFrom
-        memoryReservation: 1
+        memoryReservation: 5
         command:
         - command
         - command
@@ -12843,13 +12987,13 @@ components:
         readonlyRootFilesystem: false
         originProtection: false
         healthCheck:
-          retries: 7
-          startPeriod: 279
-          interval: 171
+          retries: 9
+          startPeriod: 108
+          interval: 72
           command:
           - command
           - command
-          timeout: 15
+          timeout: 42
         name: name
         mountPoints:
         - readOnly: false
@@ -23454,12 +23598,19 @@ components:
         monthlyBudgetCents: 0
         perUserDailyBudgetCents: 5
         warningThresholdPercent: 5
+        perTokenMonthlyBudgetCents: 2
         perUserMonthlyBudgetCents: 1
         dailyBudgetCents: 6
+        tokenOverrides:
+          key:
+            dailyCents: 9
+            unlimited: true
+            monthlyCents: 3
         interfaceLimits:
           key:
             dailyCents: 2
             monthlyCents: 7
+        perTokenDailyBudgetCents: 4
       properties:
         monthlyBudgetCents:
           nullable: true
@@ -23489,6 +23640,22 @@ components:
             \ id, slack-<id>, or system:code-agent). Replaces the flat per-user budget\
             \ for that user; unlimited=true exempts them."
           type: object
+        perTokenMonthlyBudgetCents:
+          description: Flat monthly cap in cents applied to every API token without
+            a named override
+          nullable: true
+          type: integer
+        perTokenDailyBudgetCents:
+          description: Flat daily cap in cents applied to every API token without
+            a named override
+          nullable: true
+          type: integer
+        tokenOverrides:
+          additionalProperties:
+            $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits_userOverrides_value'
+          description: Per-token budget overrides keyed by API token id. Replaces
+            the flat per-token budget for that token; unlimited=true exempts it.
+          type: object
       type: object
     getGovernanceConfig_200_response:
       example:
@@ -23501,7 +23668,7 @@ components:
         modelPolicy: unrestricted
         aiEnabled: true
         mandatoryGuardrailPreset: mandatoryGuardrailPreset
-        version: 2
+        version: 7
         orgId: orgId
         spendLimits:
           userOverrides:
@@ -23512,12 +23679,19 @@ components:
           monthlyBudgetCents: 0
           perUserDailyBudgetCents: 5
           warningThresholdPercent: 5
+          perTokenMonthlyBudgetCents: 2
           perUserMonthlyBudgetCents: 1
           dailyBudgetCents: 6
+          tokenOverrides:
+            key:
+              dailyCents: 9
+              unlimited: true
+              monthlyCents: 3
           interfaceLimits:
             key:
               dailyCents: 2
               monthlyCents: 7
+          perTokenDailyBudgetCents: 4
       properties:
         orgId:
           type: string
@@ -23937,6 +24111,18 @@ components:
           minimum: 1
           nullable: true
           type: integer
+        singleTaskOnly:
+          description: Forces single-task mode (max one running task). Omitted = auto-detect
+            from stateful containers.
+          nullable: true
+          type: boolean
+        startupGracePeriodSeconds:
+          description: Seconds the load balancer waits after a task starts before
+            an unhealthy health check can replace it. Default 120.
+          maximum: 3600
+          minimum: 0
+          nullable: true
+          type: integer
         containers:
           items:
             type: object
@@ -24135,6 +24321,20 @@ components:
           type: integer
         maxCapacity:
           description: Maximum number of instances
+          type: integer
+        singleTaskOnly:
+          description: "Optional. Forces single-task mode (max one running task).\
+            \ When omitted, the platform auto-detects stateful containers."
+          nullable: true
+          type: boolean
+        startupGracePeriodSeconds:
+          default: 120
+          description: "Optional. Seconds the load balancer waits after a task starts\
+            \ before an unhealthy health check can replace it. If not set, the value\
+            \ from composeDefinition (or default 120) is used."
+          maximum: 3600
+          minimum: 0
+          nullable: true
           type: integer
         cloneConfigurationFrom:
           description: Clone configuration from an existing environment
@@ -24508,6 +24708,278 @@ components:
           nullable: true
           type: integer
       type: object
+    oaiChatCompletions_request_messages_inner:
+      properties:
+        role:
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+          type: string
+        content:
+          type: string
+      type: object
+    oaiChatCompletions_request:
+      properties:
+        model:
+          description: A model id from GET /oai/v1/models
+          example: anthropic.claude-sonnet-4-6
+          type: string
+        messages:
+          items:
+            $ref: '#/components/schemas/oaiChatCompletions_request_messages_inner'
+          type: array
+        stream:
+          default: false
+          description: Stream the response as SSE chat.completion.chunk events
+          type: boolean
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+        top_p:
+          type: number
+        tools:
+          description: OpenAI function tool definitions
+          items:
+            type: object
+          type: array
+        tool_choice:
+          description: "auto | none | required | {type:function, function:{name}}"
+        stream_options:
+          description: "{include_usage: true} to emit a final usage chunk when streaming"
+          type: object
+      required:
+      - messages
+      - model
+      type: object
+    oaiChatCompletions_200_response_choices_inner_message:
+      example:
+        role: role
+        tool_calls:
+        - "{}"
+        - "{}"
+        content: content
+      properties:
+        role:
+          type: string
+        content:
+          nullable: true
+          type: string
+        tool_calls:
+          items:
+            type: object
+          type: array
+      type: object
+    oaiChatCompletions_200_response_choices_inner:
+      example:
+        finish_reason: stop
+        index: 6
+        message:
+          role: role
+          tool_calls:
+          - "{}"
+          - "{}"
+          content: content
+      properties:
+        index:
+          type: integer
+        message:
+          $ref: '#/components/schemas/oaiChatCompletions_200_response_choices_inner_message'
+        finish_reason:
+          enum:
+          - stop
+          - tool_calls
+          - length
+          type: string
+      type: object
+    oaiChatCompletions_200_response_usage:
+      example:
+        completion_tokens: 5
+        prompt_tokens: 1
+        total_tokens: 5
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+      type: object
+    oaiChatCompletions_200_response:
+      example:
+        created: 0
+        usage:
+          completion_tokens: 5
+          prompt_tokens: 1
+          total_tokens: 5
+        model: model
+        id: chatcmpl-abc123
+        choices:
+        - finish_reason: stop
+          index: 6
+          message:
+            role: role
+            tool_calls:
+            - "{}"
+            - "{}"
+            content: content
+        - finish_reason: stop
+          index: 6
+          message:
+            role: role
+            tool_calls:
+            - "{}"
+            - "{}"
+            content: content
+        object: chat.completion
+      properties:
+        id:
+          example: chatcmpl-abc123
+          type: string
+        object:
+          example: chat.completion
+          type: string
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          items:
+            $ref: '#/components/schemas/oaiChatCompletions_200_response_choices_inner'
+          type: array
+        usage:
+          $ref: '#/components/schemas/oaiChatCompletions_200_response_usage'
+      type: object
+    oaiEmbeddings_request:
+      properties:
+        model:
+          example: amazon.titan-embed-text-v2:0
+          type: string
+        input:
+          description: A string or array of strings to embed
+      required:
+      - input
+      - model
+      type: object
+    oaiEmbeddings_200_response_data_inner:
+      example:
+        index: 0
+        embedding:
+        - 6.027456183070403
+        - 6.027456183070403
+        object: embedding
+      properties:
+        object:
+          example: embedding
+          type: string
+        index:
+          type: integer
+        embedding:
+          items:
+            type: number
+          type: array
+      type: object
+    oaiEmbeddings_200_response_usage:
+      example:
+        prompt_tokens: 1
+        total_tokens: 5
+      properties:
+        prompt_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+      type: object
+    oaiEmbeddings_200_response:
+      example:
+        data:
+        - index: 0
+          embedding:
+          - 6.027456183070403
+          - 6.027456183070403
+          object: embedding
+        - index: 0
+          embedding:
+          - 6.027456183070403
+          - 6.027456183070403
+          object: embedding
+        usage:
+          prompt_tokens: 1
+          total_tokens: 5
+        model: model
+        object: list
+      properties:
+        object:
+          example: list
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/oaiEmbeddings_200_response_data_inner'
+          type: array
+        model:
+          type: string
+        usage:
+          $ref: '#/components/schemas/oaiEmbeddings_200_response_usage'
+      type: object
+    oaiListModels_200_response_data_inner:
+      example:
+        created: 0
+        owned_by: quant
+        id: anthropic.claude-sonnet-4-6
+        object: model
+      properties:
+        id:
+          example: anthropic.claude-sonnet-4-6
+          type: string
+        object:
+          example: model
+          type: string
+        created:
+          type: integer
+        owned_by:
+          example: quant
+          type: string
+      type: object
+    oaiListModels_200_response:
+      example:
+        data:
+        - created: 0
+          owned_by: quant
+          id: anthropic.claude-sonnet-4-6
+          object: model
+        - created: 0
+          owned_by: quant
+          id: anthropic.claude-sonnet-4-6
+          object: model
+        object: list
+      properties:
+        object:
+          example: list
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/oaiListModels_200_response_data_inner'
+          type: array
+      type: object
+    oaiGetModel_200_response:
+      example:
+        created: 0
+        owned_by: quant
+        id: id
+        object: model
+      properties:
+        id:
+          type: string
+        object:
+          example: model
+          type: string
+        created:
+          type: integer
+        owned_by:
+          example: quant
+          type: string
+      type: object
     getSshAccessCredentials_200_response_credentials:
       example:
         accessKeyId: accessKeyId
@@ -24703,6 +25175,27 @@ components:
           description: Default mount path in containers
           type: string
       type: object
+    Application_cache:
+      description: Managed Valkey cache configuration
+      example:
+        cacheEndpoint: cacheEndpoint
+        cacheIdentifier: cacheIdentifier
+        dataStorageMaxGb: 0
+      nullable: true
+      properties:
+        cacheEndpoint:
+          description: Cache cluster endpoint
+          nullable: true
+          type: string
+        cacheIdentifier:
+          description: Cache cluster identifier
+          nullable: true
+          type: string
+        dataStorageMaxGb:
+          description: Maximum cache storage in GB
+          nullable: true
+          type: integer
+      type: object
     Application_deploymentInformation_inner:
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -24818,13 +25311,13 @@ components:
     Container_healthCheck:
       description: Container health check configuration
       example:
-        retries: 7
-        startPeriod: 279
-        interval: 171
+        retries: 9
+        startPeriod: 108
+        interval: 72
         command:
         - command
         - command
-        timeout: 15
+        timeout: 42
       nullable: true
       properties:
         command:

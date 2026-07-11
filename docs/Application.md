@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Organisation** | **string** | Organisation machine name | 
 **Database** | Pointer to [**NullableApplicationDatabase**](ApplicationDatabase.md) |  | [optional] 
 **Filesystem** | Pointer to [**NullableApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] 
+**Cache** | Pointer to [**NullableApplicationCache**](ApplicationCache.md) |  | [optional] 
 **ComposeDefinition** | Pointer to [**Compose**](Compose.md) |  | [optional] 
 **Status** | Pointer to **NullableString** | Application status | [optional] [readonly] 
 **DeploymentInformation** | Pointer to [**[]ApplicationDeploymentInformationInner**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [readonly] 
@@ -148,6 +149,41 @@ HasFilesystem returns a boolean if a field has been set.
 `func (o *Application) UnsetFilesystem()`
 
 UnsetFilesystem ensures that no value is present for Filesystem, not even an explicit nil
+### GetCache
+
+`func (o *Application) GetCache() ApplicationCache`
+
+GetCache returns the Cache field if non-nil, zero value otherwise.
+
+### GetCacheOk
+
+`func (o *Application) GetCacheOk() (*ApplicationCache, bool)`
+
+GetCacheOk returns a tuple with the Cache field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCache
+
+`func (o *Application) SetCache(v ApplicationCache)`
+
+SetCache sets Cache field to given value.
+
+### HasCache
+
+`func (o *Application) HasCache() bool`
+
+HasCache returns a boolean if a field has been set.
+
+### SetCacheNil
+
+`func (o *Application) SetCacheNil(b bool)`
+
+ SetCacheNil sets the value for Cache to be an explicit nil
+
+### UnsetCache
+`func (o *Application) UnsetCache()`
+
+UnsetCache ensures that no value is present for Cache, not even an explicit nil
 ### GetComposeDefinition
 
 `func (o *Application) GetComposeDefinition() Compose`

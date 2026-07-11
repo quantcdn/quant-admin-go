@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **TaskMemory** | Pointer to **NullableString** |  | [optional] 
 **MinCapacity** | Pointer to **NullableInt32** |  | [optional] 
 **MaxCapacity** | Pointer to **NullableInt32** |  | [optional] 
+**SingleTaskOnly** | Pointer to **NullableBool** | Forces single-task mode (max one running task). Omitted &#x3D; auto-detect from stateful containers. | [optional] 
+**StartupGracePeriodSeconds** | Pointer to **NullableInt32** | Seconds the load balancer waits after a task starts before an unhealthy health check can replace it. Default 120. | [optional] 
 **Containers** | Pointer to **[]map[string]interface{}** |  | [optional] 
 **SpotConfiguration** | Pointer to [**NullablePatchEnvironmentComposeRequestSpotConfiguration**](PatchEnvironmentComposeRequestSpotConfiguration.md) |  | [optional] 
 **EnableCrossEnvNetworking** | Pointer to **NullableBool** |  | [optional] 
@@ -208,6 +210,76 @@ HasMaxCapacity returns a boolean if a field has been set.
 `func (o *PatchEnvironmentComposeRequest) UnsetMaxCapacity()`
 
 UnsetMaxCapacity ensures that no value is present for MaxCapacity, not even an explicit nil
+### GetSingleTaskOnly
+
+`func (o *PatchEnvironmentComposeRequest) GetSingleTaskOnly() bool`
+
+GetSingleTaskOnly returns the SingleTaskOnly field if non-nil, zero value otherwise.
+
+### GetSingleTaskOnlyOk
+
+`func (o *PatchEnvironmentComposeRequest) GetSingleTaskOnlyOk() (*bool, bool)`
+
+GetSingleTaskOnlyOk returns a tuple with the SingleTaskOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSingleTaskOnly
+
+`func (o *PatchEnvironmentComposeRequest) SetSingleTaskOnly(v bool)`
+
+SetSingleTaskOnly sets SingleTaskOnly field to given value.
+
+### HasSingleTaskOnly
+
+`func (o *PatchEnvironmentComposeRequest) HasSingleTaskOnly() bool`
+
+HasSingleTaskOnly returns a boolean if a field has been set.
+
+### SetSingleTaskOnlyNil
+
+`func (o *PatchEnvironmentComposeRequest) SetSingleTaskOnlyNil(b bool)`
+
+ SetSingleTaskOnlyNil sets the value for SingleTaskOnly to be an explicit nil
+
+### UnsetSingleTaskOnly
+`func (o *PatchEnvironmentComposeRequest) UnsetSingleTaskOnly()`
+
+UnsetSingleTaskOnly ensures that no value is present for SingleTaskOnly, not even an explicit nil
+### GetStartupGracePeriodSeconds
+
+`func (o *PatchEnvironmentComposeRequest) GetStartupGracePeriodSeconds() int32`
+
+GetStartupGracePeriodSeconds returns the StartupGracePeriodSeconds field if non-nil, zero value otherwise.
+
+### GetStartupGracePeriodSecondsOk
+
+`func (o *PatchEnvironmentComposeRequest) GetStartupGracePeriodSecondsOk() (*int32, bool)`
+
+GetStartupGracePeriodSecondsOk returns a tuple with the StartupGracePeriodSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartupGracePeriodSeconds
+
+`func (o *PatchEnvironmentComposeRequest) SetStartupGracePeriodSeconds(v int32)`
+
+SetStartupGracePeriodSeconds sets StartupGracePeriodSeconds field to given value.
+
+### HasStartupGracePeriodSeconds
+
+`func (o *PatchEnvironmentComposeRequest) HasStartupGracePeriodSeconds() bool`
+
+HasStartupGracePeriodSeconds returns a boolean if a field has been set.
+
+### SetStartupGracePeriodSecondsNil
+
+`func (o *PatchEnvironmentComposeRequest) SetStartupGracePeriodSecondsNil(b bool)`
+
+ SetStartupGracePeriodSecondsNil sets the value for StartupGracePeriodSeconds to be an explicit nil
+
+### UnsetStartupGracePeriodSeconds
+`func (o *PatchEnvironmentComposeRequest) UnsetStartupGracePeriodSeconds()`
+
+UnsetStartupGracePeriodSeconds ensures that no value is present for StartupGracePeriodSeconds, not even an explicit nil
 ### GetContainers
 
 `func (o *PatchEnvironmentComposeRequest) GetContainers() []map[string]interface{}`

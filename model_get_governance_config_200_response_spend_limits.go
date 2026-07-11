@@ -28,6 +28,12 @@ type GetGovernanceConfig200ResponseSpendLimits struct {
 	InterfaceLimits *map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue `json:"interfaceLimits,omitempty"`
 	// Per-user budget overrides keyed by userId (numeric portal id, slack-<id>, or system:code-agent). Replaces the flat per-user budget for that user; unlimited=true exempts them.
 	UserOverrides *map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue `json:"userOverrides,omitempty"`
+	// Flat monthly cap in cents applied to every API token without a named override
+	PerTokenMonthlyBudgetCents NullableInt32 `json:"perTokenMonthlyBudgetCents,omitempty"`
+	// Flat daily cap in cents applied to every API token without a named override
+	PerTokenDailyBudgetCents NullableInt32 `json:"perTokenDailyBudgetCents,omitempty"`
+	// Per-token budget overrides keyed by API token id. Replaces the flat per-token budget for that token; unlimited=true exempts it.
+	TokenOverrides *map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue `json:"tokenOverrides,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -324,6 +330,122 @@ func (o *GetGovernanceConfig200ResponseSpendLimits) SetUserOverrides(v map[strin
 	o.UserOverrides = &v
 }
 
+// GetPerTokenMonthlyBudgetCents returns the PerTokenMonthlyBudgetCents field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenMonthlyBudgetCents() int32 {
+	if o == nil || IsNil(o.PerTokenMonthlyBudgetCents.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.PerTokenMonthlyBudgetCents.Get()
+}
+
+// GetPerTokenMonthlyBudgetCentsOk returns a tuple with the PerTokenMonthlyBudgetCents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenMonthlyBudgetCentsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PerTokenMonthlyBudgetCents.Get(), o.PerTokenMonthlyBudgetCents.IsSet()
+}
+
+// HasPerTokenMonthlyBudgetCents returns a boolean if a field has been set.
+func (o *GetGovernanceConfig200ResponseSpendLimits) HasPerTokenMonthlyBudgetCents() bool {
+	if o != nil && o.PerTokenMonthlyBudgetCents.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPerTokenMonthlyBudgetCents gets a reference to the given NullableInt32 and assigns it to the PerTokenMonthlyBudgetCents field.
+func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenMonthlyBudgetCents(v int32) {
+	o.PerTokenMonthlyBudgetCents.Set(&v)
+}
+// SetPerTokenMonthlyBudgetCentsNil sets the value for PerTokenMonthlyBudgetCents to be an explicit nil
+func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenMonthlyBudgetCentsNil() {
+	o.PerTokenMonthlyBudgetCents.Set(nil)
+}
+
+// UnsetPerTokenMonthlyBudgetCents ensures that no value is present for PerTokenMonthlyBudgetCents, not even an explicit nil
+func (o *GetGovernanceConfig200ResponseSpendLimits) UnsetPerTokenMonthlyBudgetCents() {
+	o.PerTokenMonthlyBudgetCents.Unset()
+}
+
+// GetPerTokenDailyBudgetCents returns the PerTokenDailyBudgetCents field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenDailyBudgetCents() int32 {
+	if o == nil || IsNil(o.PerTokenDailyBudgetCents.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.PerTokenDailyBudgetCents.Get()
+}
+
+// GetPerTokenDailyBudgetCentsOk returns a tuple with the PerTokenDailyBudgetCents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenDailyBudgetCentsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PerTokenDailyBudgetCents.Get(), o.PerTokenDailyBudgetCents.IsSet()
+}
+
+// HasPerTokenDailyBudgetCents returns a boolean if a field has been set.
+func (o *GetGovernanceConfig200ResponseSpendLimits) HasPerTokenDailyBudgetCents() bool {
+	if o != nil && o.PerTokenDailyBudgetCents.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPerTokenDailyBudgetCents gets a reference to the given NullableInt32 and assigns it to the PerTokenDailyBudgetCents field.
+func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenDailyBudgetCents(v int32) {
+	o.PerTokenDailyBudgetCents.Set(&v)
+}
+// SetPerTokenDailyBudgetCentsNil sets the value for PerTokenDailyBudgetCents to be an explicit nil
+func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenDailyBudgetCentsNil() {
+	o.PerTokenDailyBudgetCents.Set(nil)
+}
+
+// UnsetPerTokenDailyBudgetCents ensures that no value is present for PerTokenDailyBudgetCents, not even an explicit nil
+func (o *GetGovernanceConfig200ResponseSpendLimits) UnsetPerTokenDailyBudgetCents() {
+	o.PerTokenDailyBudgetCents.Unset()
+}
+
+// GetTokenOverrides returns the TokenOverrides field value if set, zero value otherwise.
+func (o *GetGovernanceConfig200ResponseSpendLimits) GetTokenOverrides() map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue {
+	if o == nil || IsNil(o.TokenOverrides) {
+		var ret map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue
+		return ret
+	}
+	return *o.TokenOverrides
+}
+
+// GetTokenOverridesOk returns a tuple with the TokenOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetGovernanceConfig200ResponseSpendLimits) GetTokenOverridesOk() (*map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue, bool) {
+	if o == nil || IsNil(o.TokenOverrides) {
+		return nil, false
+	}
+	return o.TokenOverrides, true
+}
+
+// HasTokenOverrides returns a boolean if a field has been set.
+func (o *GetGovernanceConfig200ResponseSpendLimits) HasTokenOverrides() bool {
+	if o != nil && !IsNil(o.TokenOverrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetTokenOverrides gets a reference to the given map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue and assigns it to the TokenOverrides field.
+func (o *GetGovernanceConfig200ResponseSpendLimits) SetTokenOverrides(v map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue) {
+	o.TokenOverrides = &v
+}
+
 func (o GetGovernanceConfig200ResponseSpendLimits) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -355,6 +477,15 @@ func (o GetGovernanceConfig200ResponseSpendLimits) ToMap() (map[string]interface
 	if !IsNil(o.UserOverrides) {
 		toSerialize["userOverrides"] = o.UserOverrides
 	}
+	if o.PerTokenMonthlyBudgetCents.IsSet() {
+		toSerialize["perTokenMonthlyBudgetCents"] = o.PerTokenMonthlyBudgetCents.Get()
+	}
+	if o.PerTokenDailyBudgetCents.IsSet() {
+		toSerialize["perTokenDailyBudgetCents"] = o.PerTokenDailyBudgetCents.Get()
+	}
+	if !IsNil(o.TokenOverrides) {
+		toSerialize["tokenOverrides"] = o.TokenOverrides
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -384,6 +515,9 @@ func (o *GetGovernanceConfig200ResponseSpendLimits) UnmarshalJSON(data []byte) (
 		delete(additionalProperties, "warningThresholdPercent")
 		delete(additionalProperties, "interfaceLimits")
 		delete(additionalProperties, "userOverrides")
+		delete(additionalProperties, "perTokenMonthlyBudgetCents")
+		delete(additionalProperties, "perTokenDailyBudgetCents")
+		delete(additionalProperties, "tokenOverrides")
 		o.AdditionalProperties = additionalProperties
 	}
 
