@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **TaskMemory** | Pointer to **int32** | Task-level memory in MB | [optional] 
 **MinCapacity** | Pointer to **int32** | Minimum number of instances | [optional] 
 **MaxCapacity** | Pointer to **int32** | Maximum number of instances | [optional] 
+**SingleTaskOnly** | Pointer to **NullableBool** | Optional. Forces single-task mode for data-safe applications (max one running task). When true: capacity is locked to 1. When false: explicitly allows scaling. When omitted: the platform auto-detects stateful containers and enables single-task mode if found. | [optional] 
+**StartupGracePeriodSeconds** | Pointer to **NullableInt32** | Optional. Seconds the load balancer waits after a task starts before an unhealthy health check can replace it (applied as the ECS service&#39;s healthCheckGracePeriodSeconds when a load balancer is attached). Raise for apps that are slow to boot, e.g. run migrations on startup. Tasks that become healthy sooner still enter service immediately. Defaults to 120 when omitted. | [optional] [default to 120]
 **SpotConfiguration** | Pointer to [**SpotConfiguration**](SpotConfiguration.md) |  | [optional] 
 **EnableCrossEnvNetworking** | Pointer to **NullableBool** | Optional. Enable cross-environment networking within the same application. When false (default): Uses shared security group for complete isolation (most secure). When true: Uses app-specific security group to enable communication between environments of the same application (e.g., staging can connect to production database). Note: If enableCrossAppNetworking is true, this setting is overridden. | [optional] [default to false]
 **EnableCrossAppNetworking** | Pointer to **NullableBool** | Optional. Enable cross-application networking within the same organization. When false (default): Uses shared/app-specific security group based on enableCrossEnvNetworking. When true: Uses org-specific security group to enable container-to-container communication with ALL applications in the same organization via service discovery (microservices architecture). This setting takes priority over enableCrossEnvNetworking. | [optional] [default to false]
@@ -183,6 +185,76 @@ SetMaxCapacity sets MaxCapacity field to given value.
 
 HasMaxCapacity returns a boolean if a field has been set.
 
+### GetSingleTaskOnly
+
+`func (o *Compose) GetSingleTaskOnly() bool`
+
+GetSingleTaskOnly returns the SingleTaskOnly field if non-nil, zero value otherwise.
+
+### GetSingleTaskOnlyOk
+
+`func (o *Compose) GetSingleTaskOnlyOk() (*bool, bool)`
+
+GetSingleTaskOnlyOk returns a tuple with the SingleTaskOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSingleTaskOnly
+
+`func (o *Compose) SetSingleTaskOnly(v bool)`
+
+SetSingleTaskOnly sets SingleTaskOnly field to given value.
+
+### HasSingleTaskOnly
+
+`func (o *Compose) HasSingleTaskOnly() bool`
+
+HasSingleTaskOnly returns a boolean if a field has been set.
+
+### SetSingleTaskOnlyNil
+
+`func (o *Compose) SetSingleTaskOnlyNil(b bool)`
+
+ SetSingleTaskOnlyNil sets the value for SingleTaskOnly to be an explicit nil
+
+### UnsetSingleTaskOnly
+`func (o *Compose) UnsetSingleTaskOnly()`
+
+UnsetSingleTaskOnly ensures that no value is present for SingleTaskOnly, not even an explicit nil
+### GetStartupGracePeriodSeconds
+
+`func (o *Compose) GetStartupGracePeriodSeconds() int32`
+
+GetStartupGracePeriodSeconds returns the StartupGracePeriodSeconds field if non-nil, zero value otherwise.
+
+### GetStartupGracePeriodSecondsOk
+
+`func (o *Compose) GetStartupGracePeriodSecondsOk() (*int32, bool)`
+
+GetStartupGracePeriodSecondsOk returns a tuple with the StartupGracePeriodSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartupGracePeriodSeconds
+
+`func (o *Compose) SetStartupGracePeriodSeconds(v int32)`
+
+SetStartupGracePeriodSeconds sets StartupGracePeriodSeconds field to given value.
+
+### HasStartupGracePeriodSeconds
+
+`func (o *Compose) HasStartupGracePeriodSeconds() bool`
+
+HasStartupGracePeriodSeconds returns a boolean if a field has been set.
+
+### SetStartupGracePeriodSecondsNil
+
+`func (o *Compose) SetStartupGracePeriodSecondsNil(b bool)`
+
+ SetStartupGracePeriodSecondsNil sets the value for StartupGracePeriodSeconds to be an explicit nil
+
+### UnsetStartupGracePeriodSeconds
+`func (o *Compose) UnsetStartupGracePeriodSeconds()`
+
+UnsetStartupGracePeriodSeconds ensures that no value is present for StartupGracePeriodSeconds, not even an explicit nil
 ### GetSpotConfiguration
 
 `func (o *Compose) GetSpotConfiguration() SpotConfiguration`
