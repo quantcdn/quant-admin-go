@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **WarningThresholdPercent** | Pointer to **NullableInt32** |  | [optional] 
 **InterfaceLimits** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue**](GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue.md) | Aggregate spend caps per interface label (slack, autonomous, api-gateway, streaming, websocket). Keys are interface labels. | [optional] 
 **UserOverrides** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue**](GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue.md) | Per-user budget overrides keyed by userId (numeric portal id, slack-&lt;id&gt;, or system:code-agent). Replaces the flat per-user budget for that user; unlimited&#x3D;true exempts them. | [optional] 
+**PerTokenMonthlyBudgetCents** | Pointer to **NullableInt32** | Flat monthly cap in cents applied to every API token without a named override | [optional] 
+**PerTokenDailyBudgetCents** | Pointer to **NullableInt32** | Flat daily cap in cents applied to every API token without a named override | [optional] 
+**TokenOverrides** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue**](GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue.md) | Per-token budget overrides keyed by API token id. Replaces the flat per-token budget for that token; unlimited&#x3D;true exempts it. | [optional] 
 
 ## Methods
 
@@ -255,6 +258,101 @@ SetUserOverrides sets UserOverrides field to given value.
 `func (o *GetGovernanceConfig200ResponseSpendLimits) HasUserOverrides() bool`
 
 HasUserOverrides returns a boolean if a field has been set.
+
+### GetPerTokenMonthlyBudgetCents
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenMonthlyBudgetCents() int32`
+
+GetPerTokenMonthlyBudgetCents returns the PerTokenMonthlyBudgetCents field if non-nil, zero value otherwise.
+
+### GetPerTokenMonthlyBudgetCentsOk
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenMonthlyBudgetCentsOk() (*int32, bool)`
+
+GetPerTokenMonthlyBudgetCentsOk returns a tuple with the PerTokenMonthlyBudgetCents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPerTokenMonthlyBudgetCents
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenMonthlyBudgetCents(v int32)`
+
+SetPerTokenMonthlyBudgetCents sets PerTokenMonthlyBudgetCents field to given value.
+
+### HasPerTokenMonthlyBudgetCents
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) HasPerTokenMonthlyBudgetCents() bool`
+
+HasPerTokenMonthlyBudgetCents returns a boolean if a field has been set.
+
+### SetPerTokenMonthlyBudgetCentsNil
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenMonthlyBudgetCentsNil(b bool)`
+
+ SetPerTokenMonthlyBudgetCentsNil sets the value for PerTokenMonthlyBudgetCents to be an explicit nil
+
+### UnsetPerTokenMonthlyBudgetCents
+`func (o *GetGovernanceConfig200ResponseSpendLimits) UnsetPerTokenMonthlyBudgetCents()`
+
+UnsetPerTokenMonthlyBudgetCents ensures that no value is present for PerTokenMonthlyBudgetCents, not even an explicit nil
+### GetPerTokenDailyBudgetCents
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenDailyBudgetCents() int32`
+
+GetPerTokenDailyBudgetCents returns the PerTokenDailyBudgetCents field if non-nil, zero value otherwise.
+
+### GetPerTokenDailyBudgetCentsOk
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetPerTokenDailyBudgetCentsOk() (*int32, bool)`
+
+GetPerTokenDailyBudgetCentsOk returns a tuple with the PerTokenDailyBudgetCents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPerTokenDailyBudgetCents
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenDailyBudgetCents(v int32)`
+
+SetPerTokenDailyBudgetCents sets PerTokenDailyBudgetCents field to given value.
+
+### HasPerTokenDailyBudgetCents
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) HasPerTokenDailyBudgetCents() bool`
+
+HasPerTokenDailyBudgetCents returns a boolean if a field has been set.
+
+### SetPerTokenDailyBudgetCentsNil
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetPerTokenDailyBudgetCentsNil(b bool)`
+
+ SetPerTokenDailyBudgetCentsNil sets the value for PerTokenDailyBudgetCents to be an explicit nil
+
+### UnsetPerTokenDailyBudgetCents
+`func (o *GetGovernanceConfig200ResponseSpendLimits) UnsetPerTokenDailyBudgetCents()`
+
+UnsetPerTokenDailyBudgetCents ensures that no value is present for PerTokenDailyBudgetCents, not even an explicit nil
+### GetTokenOverrides
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetTokenOverrides() map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue`
+
+GetTokenOverrides returns the TokenOverrides field if non-nil, zero value otherwise.
+
+### GetTokenOverridesOk
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) GetTokenOverridesOk() (*map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue, bool)`
+
+GetTokenOverridesOk returns a tuple with the TokenOverrides field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTokenOverrides
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) SetTokenOverrides(v map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue)`
+
+SetTokenOverrides sets TokenOverrides field to given value.
+
+### HasTokenOverrides
+
+`func (o *GetGovernanceConfig200ResponseSpendLimits) HasTokenOverrides() bool`
+
+HasTokenOverrides returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
