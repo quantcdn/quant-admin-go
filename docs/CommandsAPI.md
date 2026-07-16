@@ -4,15 +4,15 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCommand**](CommandsAPI.md#CreateCommand) | **Post** /api/v3/organizations/{organisation}/environments/{environment}/commands | Create a command for an environment
-[**GetCommand**](CommandsAPI.md#GetCommand) | **Get** /api/v3/organizations/{organisation}/environments/{environment}/commands/{command} | Get a command
-[**ListCommands**](CommandsAPI.md#ListCommands) | **Get** /api/v3/organizations/{organisation}/environments/{environment}/commands | Get all commands for an environment
+[**CreateCommand**](CommandsAPI.md#CreateCommand) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands | Create a command for an environment
+[**GetCommand**](CommandsAPI.md#GetCommand) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands/{command} | Get a command
+[**ListCommands**](CommandsAPI.md#ListCommands) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands | Get all commands for an environment
 
 
 
 ## CreateCommand
 
-> Command CreateCommand(ctx, organisation, environment).CreateCommandRequest(createCommandRequest).Execute()
+> Command CreateCommand(ctx, organisation, application, environment).CreateCommandRequest(createCommandRequest).Execute()
 
 Create a command for an environment
 
@@ -30,12 +30,13 @@ import (
 
 func main() {
 	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
 	environment := "test-env" // string | The environment ID
-	createCommandRequest := *openapiclient.NewCreateCommandRequest() // CreateCommandRequest | 
+	createCommandRequest := *openapiclient.NewCreateCommandRequest("Command_example") // CreateCommandRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CommandsAPI.CreateCommand(context.Background(), organisation, environment).CreateCommandRequest(createCommandRequest).Execute()
+	resp, r, err := apiClient.CommandsAPI.CreateCommand(context.Background(), organisation, application, environment).CreateCommandRequest(createCommandRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CommandsAPI.CreateCommand``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -52,6 +53,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organisation** | **string** | The organisation ID | 
+**application** | **string** | The application ID | 
 **environment** | **string** | The environment ID | 
 
 ### Other Parameters
@@ -61,6 +63,7 @@ Other parameters are passed through a pointer to a apiCreateCommandRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
  **createCommandRequest** | [**CreateCommandRequest**](CreateCommandRequest.md) |  | 
@@ -85,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## GetCommand
 
-> Command GetCommand(ctx, organisation, environment, command).Execute()
+> Command GetCommand(ctx, organisation, application, environment, command).Execute()
 
 Get a command
 
@@ -103,12 +106,13 @@ import (
 
 func main() {
 	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
 	environment := "test-env" // string | The environment ID
-	command := "test-cmd" // string | The command ID
+	command := "test-cmd" // string | The command run ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CommandsAPI.GetCommand(context.Background(), organisation, environment, command).Execute()
+	resp, r, err := apiClient.CommandsAPI.GetCommand(context.Background(), organisation, application, environment, command).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CommandsAPI.GetCommand``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -125,8 +129,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organisation** | **string** | The organisation ID | 
+**application** | **string** | The application ID | 
 **environment** | **string** | The environment ID | 
-**command** | **string** | The command ID | 
+**command** | **string** | The command run ID | 
 
 ### Other Parameters
 
@@ -135,6 +140,7 @@ Other parameters are passed through a pointer to a apiGetCommandRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
 
@@ -159,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## ListCommands
 
-> Command ListCommands(ctx, organisation, environment).Execute()
+> ListCommands(ctx, organisation, application, environment).Execute()
 
 Get all commands for an environment
 
@@ -177,17 +183,16 @@ import (
 
 func main() {
 	organisation := "test-org" // string | The organisation ID
+	application := "test-app" // string | The application ID
 	environment := "test-env" // string | The environment ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CommandsAPI.ListCommands(context.Background(), organisation, environment).Execute()
+	r, err := apiClient.CommandsAPI.ListCommands(context.Background(), organisation, application, environment).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CommandsAPI.ListCommands``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListCommands`: Command
-	fmt.Fprintf(os.Stdout, "Response from `CommandsAPI.ListCommands`: %v\n", resp)
 }
 ```
 
@@ -198,6 +203,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **organisation** | **string** | The organisation ID | 
+**application** | **string** | The application ID | 
 **environment** | **string** | The environment ID | 
 
 ### Other Parameters
@@ -210,9 +216,10 @@ Name | Type | Description  | Notes
 
 
 
+
 ### Return type
 
-[**Command**](Command.md)
+ (empty response body)
 
 ### Authorization
 
@@ -221,7 +228,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
