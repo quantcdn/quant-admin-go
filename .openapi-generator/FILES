@@ -31,11 +31,13 @@ api_cron.go
 api_domains.go
 api_environments.go
 api_headers.go
+api_idle_sleep.go
 api_kv.go
 api_open_ai_compatibility.go
 api_organizations.go
 api_projects.go
 api_purge.go
+api_resources.go
 api_restore_management.go
 api_rules.go
 api_scaling_policy.go
@@ -78,6 +80,7 @@ docs/ApplicationDeploymentInformationInner.md
 docs/ApplicationFilesystem.md
 docs/ApplicationImageReference.md
 docs/ApplicationsAPI.md
+docs/AttachOrgResourceRequest.md
 docs/BackupManagementAPI.md
 docs/BulkSetEnvironmentVariablesRequest.md
 docs/BulkSetEnvironmentVariablesRequestEnvironmentInner.md
@@ -160,6 +163,8 @@ docs/CreateFilterPolicyRequestRulesInnerMatch.md
 docs/CreateOrchestrationRequest.md
 docs/CreateOrchestrationRequestInputSource.md
 docs/CreateOrchestrationRequestStopCondition.md
+docs/CreateOrgResourceRequest.md
+docs/CreateOrgResourceRequestConfig.md
 docs/CreateSkill201Response.md
 docs/CreateSkillRequest.md
 docs/CreateSlackBot201Response.md
@@ -257,6 +262,8 @@ docs/GetTask200Response.md
 docs/GetVectorCollection200Response.md
 docs/GetVectorCollection200ResponseCollection.md
 docs/HeadersAPI.md
+docs/IdleSleepAPI.md
+docs/IdleSleepResponse.md
 docs/ImageGeneration200Response.md
 docs/ImageGenerationRequest.md
 docs/ImageGenerationRequestBackgroundRemovalParams.md
@@ -299,6 +306,8 @@ docs/ListCustomTools200Response.md
 docs/ListCustomTools200ResponseToolsInner.md
 docs/ListFiles200Response.md
 docs/ListFiles200ResponseFilesInner.md
+docs/ListMcpServers200Response.md
+docs/ListMcpServers200ResponseServersInner.md
 docs/ListOrchestrationBatches200Response.md
 docs/ListOrchestrationBatches200ResponseBatchesInner.md
 docs/ListOrchestrations200Response.md
@@ -326,6 +335,7 @@ docs/OaiGetModel200Response.md
 docs/OaiListModels200Response.md
 docs/OaiListModels200ResponseDataInner.md
 docs/OpenAICompatibilityAPI.md
+docs/OrgResource.md
 docs/OrganizationsAPI.md
 docs/OrganizationsList200ResponseInner.md
 docs/PatchEnvironmentCompose202Response.md
@@ -341,6 +351,8 @@ docs/QueryVectorCollection200ResponsePagination.md
 docs/QueryVectorCollection200ResponseResultsInner.md
 docs/QueryVectorCollectionRequest.md
 docs/QueryVectorCollectionRequestFilter.md
+docs/ResourceAttachment.md
+docs/ResourcesAPI.md
 docs/RestoreDatabase202Response.md
 docs/RestoreDatabaseRequest.md
 docs/RestoreFilesystem202Response.md
@@ -354,6 +366,7 @@ docs/SearchSlackWorkspaceChannels200Response.md
 docs/SearchSlackWorkspaceChannels200ResponseResultsInner.md
 docs/SearchSlackWorkspaceUsers200Response.md
 docs/SearchSlackWorkspaceUsers200ResponseResultsInner.md
+docs/SetIdleSleepRequest.md
 docs/SetScalingPolicyRequest.md
 docs/SpotConfiguration.md
 docs/SubmitToolCallback200Response.md
@@ -524,6 +537,7 @@ model_application_database.go
 model_application_deployment_information_inner.go
 model_application_filesystem.go
 model_application_image_reference.go
+model_attach_org_resource_request.go
 model_bulk_set_environment_variables_request.go
 model_bulk_set_environment_variables_request_environment_inner.go
 model_chat_inference_200_response.go
@@ -599,6 +613,8 @@ model_create_filter_policy_request_rules_inner_match.go
 model_create_orchestration_request.go
 model_create_orchestration_request_input_source.go
 model_create_orchestration_request_stop_condition.go
+model_create_org_resource_request.go
+model_create_org_resource_request_config.go
 model_create_skill_201_response.go
 model_create_skill_request.go
 model_create_slack_bot_201_response.go
@@ -692,6 +708,7 @@ model_get_ssh_access_credentials_200_response_credentials.go
 model_get_task_200_response.go
 model_get_vector_collection_200_response.go
 model_get_vector_collection_200_response_collection.go
+model_idle_sleep_response.go
 model_image_generation_200_response.go
 model_image_generation_request.go
 model_image_generation_request_background_removal_params.go
@@ -733,6 +750,8 @@ model_list_custom_tools_200_response.go
 model_list_custom_tools_200_response_tools_inner.go
 model_list_files_200_response.go
 model_list_files_200_response_files_inner.go
+model_list_mcp_servers_200_response.go
+model_list_mcp_servers_200_response_servers_inner.go
 model_list_orchestration_batches_200_response.go
 model_list_orchestration_batches_200_response_batches_inner.go
 model_list_orchestrations_200_response.go
@@ -759,6 +778,7 @@ model_oai_embeddings_request.go
 model_oai_get_model_200_response.go
 model_oai_list_models_200_response.go
 model_oai_list_models_200_response_data_inner.go
+model_org_resource.go
 model_organizations_list_200_response_inner.go
 model_patch_environment_compose_202_response.go
 model_patch_environment_compose_202_response_spot_configuration.go
@@ -771,6 +791,7 @@ model_query_vector_collection_200_response_pagination.go
 model_query_vector_collection_200_response_results_inner.go
 model_query_vector_collection_request.go
 model_query_vector_collection_request_filter.go
+model_resource_attachment.go
 model_restore_database_202_response.go
 model_restore_database_request.go
 model_restore_filesystem_202_response.go
@@ -780,6 +801,7 @@ model_search_slack_workspace_channels_200_response.go
 model_search_slack_workspace_channels_200_response_results_inner.go
 model_search_slack_workspace_users_200_response.go
 model_search_slack_workspace_users_200_response_results_inner.go
+model_set_idle_sleep_request.go
 model_set_scaling_policy_request.go
 model_spot_configuration.go
 model_submit_tool_callback_200_response.go
@@ -959,11 +981,13 @@ test/api_cron_test.go
 test/api_domains_test.go
 test/api_environments_test.go
 test/api_headers_test.go
+test/api_idle_sleep_test.go
 test/api_kv_test.go
 test/api_open_ai_compatibility_test.go
 test/api_organizations_test.go
 test/api_projects_test.go
 test/api_purge_test.go
+test/api_resources_test.go
 test/api_restore_management_test.go
 test/api_rules_test.go
 test/api_scaling_policy_test.go

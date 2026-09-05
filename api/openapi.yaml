@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.20.0
+  version: 4.22.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -95,8 +95,12 @@ tags:
   name: AI Usage
 - description: Restore Management
   name: Restore Management
+- description: IdleSleep
+  name: IdleSleep
 - description: OpenAI Compatibility
   name: OpenAI Compatibility
+- description: Resources
+  name: Resources
 paths:
   /api/v3/organisations/{organisation}/projects/{project}/ai-search:
     get:
@@ -7008,6 +7012,35 @@ paths:
       summary: List tool executions for monitoring and debugging
       tags:
       - AI Tools
+  /api/v3/organizations/{organisation}/ai/mcp-servers:
+    get:
+      description: "Lists the organization's registered MCP servers for CLI sync (QuantCode).\
+        \ Each server's `url` is the FULL MCP gateway URL on the AI API host — clients\
+        \ connect there, never to the origin server. Credentials are never exposed."
+      operationId: listMcpServers
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listMcpServers_200_response'
+          description: List of MCP servers retrieved successfully
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to fetch MCP servers
+      summary: List MCP servers with gateway URLs
+      tags:
+      - AI Tools
   /api/v3/organizations/{organisation}/ai/agents:
     get:
       description: |-
@@ -9773,7 +9806,7 @@ paths:
       summary: Get ECR login credentials
       tags:
       - Applications
-  /api/v3/organizations/{organisation}/environments/{environment}/commands:
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands:
     get:
       operationId: listCommands
       parameters:
@@ -9782,6 +9815,15 @@ paths:
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
         required: true
         schema:
           type: string
@@ -9796,12 +9838,8 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Command'
-          description: The commands
+        "501":
+          description: Command history listing is not yet supported
       summary: Get all commands for an environment
       tags:
       - Commands
@@ -9813,6 +9851,15 @@ paths:
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
         required: true
         schema:
           type: string
@@ -9839,10 +9886,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Command'
           description: The command
+        "404":
+          description: The environment not found
       summary: Create a command for an environment
       tags:
       - Commands
-  /api/v3/organizations/{organisation}/environments/{environment}/commands/{command}:
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands/{command}:
     get:
       operationId: getCommand
       parameters:
@@ -9851,6 +9900,15 @@ paths:
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
         required: true
         schema:
           type: string
@@ -9864,7 +9922,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The command ID
+      - description: The command run ID
         example: test-cmd
         explode: false
         in: path
@@ -9880,6 +9938,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Command'
           description: The command
+        "404":
+          description: The command run not found
       summary: Get a command
       tags:
       - Commands
@@ -11548,6 +11608,114 @@ paths:
       summary: Get the status of a restore operation
       tags:
       - Restore Management
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/idle-sleep:
+    get:
+      description: Retrieves the idle sleep setting and the current sleep state for
+        the environment.
+      operationId: getIdleSleep
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdleSleepResponse'
+          description: Idle sleep setting and state.
+        "403":
+          description: The caller lacks the required permission or token scope.
+        "404":
+          description: "Organisation, application or environment not found."
+      summary: Get Idle Sleep Setting
+      tags:
+      - IdleSleep
+    put:
+      description: Enable or disable idle sleep. Only Fargate compute sleeps. Disabling
+        a sleeping environment wakes it first; a 202 means it is still waking.
+      operationId: setIdleSleep
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdleSleepRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdleSleepResponse'
+          description: Applied.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdleSleepResponse'
+          description: Applied; environment still waking.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteAISession_200_response'
+          description: "The environment cannot use idle sleep. It runs on EC2 rather\
+            \ than Fargate, it has no web service, or its hostname is too long to\
+            \ route while asleep."
+        "403":
+          description: The caller lacks the required permission or token scope.
+        "404":
+          description: "Organisation, application or environment not found."
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Validation failed. idleMinutes must be an integer from 10 to
+            1440.
+      summary: Set Idle Sleep Setting
+      tags:
+      - IdleSleep
   /oai/v1/chat/completions:
     post:
       description: "Drop-in replacement for OpenAI's POST /v1/chat/completions. Point\
@@ -11659,6 +11827,236 @@ paths:
       summary: Retrieve a model (OpenAI-compatible)
       tags:
       - OpenAI Compatibility
+  /api/v3/organizations/{organisation}/resources:
+    get:
+      operationId: listOrgResources
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrgResource'
+                type: array
+          description: The organisation's resources
+        "403":
+          description: Cloud access required
+      summary: List an organisation's shared resources
+      tags:
+      - Resources
+    post:
+      description: Object storage is provisioned synchronously and returns status
+        available. A Valkey cache is asynchronous and returns status provisioning;
+        poll the show endpoint until it reports available.
+      operationId: createOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createOrgResource_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgResource'
+          description: The created resource
+        "422":
+          description: "Invalid type, name or cache capacity"
+        "409":
+          description: A resource with this name already exists
+      summary: Create a shared resource
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}:
+    delete:
+      description: Deletes the resource and its contents. This cannot be undone. A
+        resource with live attachments is rejected unless force is set.
+      operationId: deleteOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Delete even if the resource is attached or in an error state
+        explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: Deleted
+        "409":
+          description: The resource is still attached
+      summary: Delete a shared resource
+      tags:
+      - Resources
+    get:
+      operationId: getOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgResource'
+          description: The resource
+        "404":
+          description: Resource not found
+      summary: Get a shared resource and its attachments
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/attachments:
+    post:
+      description: "Object storage credentials are written immediately and take effect\
+        \ on the environment's next deploy. Cache variables are rendered at the next\
+        \ deploy, so a cache may be attached while it is still provisioning. An environment\
+        \ accepts one attachment per resource type."
+      operationId: attachOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/attachOrgResource_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAttachment'
+          description: The attachment
+        "409":
+          description: An attachment of this type already exists for the environment
+      summary: Attach a resource to an application environment
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/attachments/{application}/{environment}:
+    delete:
+      description: "Removes the injected credentials and redeploys the environment\
+        \ so that it stops referencing them, which interrupts the environment briefly.\
+        \ The resource and its contents are not deleted."
+      operationId: detachOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The environment ID
+        example: production
+        explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Detached; the environment is redeploying
+        "404":
+          description: No such attachment
+      summary: Detach a resource from an application environment
+      tags:
+      - Resources
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
     delete:
       description: "Deletes a specific scaling policy for the environment. Specify\
@@ -12437,6 +12835,100 @@ components:
       required:
       - appName
       - composeDefinition
+      type: object
+    OrgResource:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        resourceId: os-buzz-media
+        orgName: test-org
+        scope: org
+        name: buzz-media
+        type: object-storage
+        physical: "{}"
+        config: "{}"
+        status: provisioning
+      properties:
+        orgName:
+          example: test-org
+          type: string
+        resourceId:
+          example: os-buzz-media
+          type: string
+        type:
+          enum:
+          - object-storage
+          - valkey
+          example: object-storage
+          type: string
+        name:
+          example: buzz-media
+          type: string
+        status:
+          enum:
+          - provisioning
+          - available
+          - deleting
+          - error
+          type: string
+        scope:
+          description: org for resources managed by these endpoints. app rows are
+            compatibility records for an application-managed cache and cannot be mutated
+            here.
+          enum:
+          - org
+          - app
+          type: string
+        config:
+          description: "Type-specific settings, such as dataStorageMaxGb for a cache"
+          type: object
+        physical:
+          description: "Provisioned detail: bucket and region for object storage,\
+            \ cache identifier and endpoint for a cache"
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      title: Shared resource
+      type: object
+    ResourceAttachment:
+      example:
+        accessKeyId: accessKeyId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        note: note
+        appName: test-app
+        envName: production
+        envVarPrefix: MEDIA
+        injectedKeys:
+        - injectedKeys
+        - injectedKeys
+      properties:
+        appName:
+          example: test-app
+          type: string
+        envName:
+          example: production
+          type: string
+        envVarPrefix:
+          description: "Namespaces every injected variable, so MEDIA yields MEDIA_S3_BUCKET"
+          example: MEDIA
+          type: string
+        accessKeyId:
+          description: Object storage only. The secret half is written to the environment's
+            secrets and never returned.
+          type: string
+        injectedKeys:
+          description: "The exact variable names this attachment wrote, removed precisely\
+            \ on detach"
+          items:
+            type: string
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        note:
+          description: When the credentials take effect
+          type: string
+      title: Resource attachment
       type: object
     V1SearchHit:
       description: Generic search hit; fields vary by index
@@ -13411,6 +13903,51 @@ components:
           type: string
       required:
       - envName
+      type: object
+    SetIdleSleepRequest:
+      example:
+        enabled: true
+        idleMinutes: 124
+      properties:
+        enabled:
+          description: Whether the environment sleeps when idle.
+          type: boolean
+        idleMinutes:
+          default: 30
+          description: Minutes with no requests before compute sleeps.
+          maximum: 1440
+          minimum: 10
+          type: integer
+      required:
+      - enabled
+      type: object
+    IdleSleepResponse:
+      example:
+        state: awake
+        stateChangedAt: 2000-01-23T04:56:07.000+00:00
+        enabled: true
+        idleMinutes: 0
+      properties:
+        enabled:
+          type: boolean
+        idleMinutes:
+          nullable: true
+          type: integer
+        state:
+          enum:
+          - awake
+          - sleeping
+          - waking
+          type: string
+        stateChangedAt:
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - enabled
+      - idleMinutes
+      - state
+      - stateChangedAt
       type: object
     SetScalingPolicyRequest:
       example:
@@ -20710,6 +21247,59 @@ components:
       - executions
       - orgId
       type: object
+    listMcpServers_200_response_servers_inner:
+      example:
+        displayName: displayName
+        serverName: serverName
+        toolAllowlist:
+        - toolAllowlist
+        - toolAllowlist
+        url: url
+        enabled: true
+      properties:
+        serverName:
+          type: string
+        displayName:
+          type: string
+        url:
+          description: MCP gateway URL
+          type: string
+        enabled:
+          type: boolean
+        toolAllowlist:
+          items:
+            type: string
+          type: array
+      type: object
+    listMcpServers_200_response:
+      example:
+        servers:
+        - displayName: displayName
+          serverName: serverName
+          toolAllowlist:
+          - toolAllowlist
+          - toolAllowlist
+          url: url
+          enabled: true
+        - displayName: displayName
+          serverName: serverName
+          toolAllowlist:
+          - toolAllowlist
+          - toolAllowlist
+          url: url
+          enabled: true
+        gatewayBaseUrl: gatewayBaseUrl
+      properties:
+        gatewayBaseUrl:
+          description: "Origin of the MCP gateway host (scheme://host[:port]) — clients\
+            \ treat gateway URLs on this origin as bearer-authenticated with the end\
+            \ user's Quant token"
+          type: string
+        servers:
+          items:
+            $ref: '#/components/schemas/listMcpServers_200_response_servers_inner'
+          type: array
+      type: object
     listAIAgents_200_response_agents_inner:
       example:
         assignedSkills:
@@ -23631,7 +24221,8 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits_interfaceLimits_value'
           description: "Aggregate spend caps per interface label (slack, autonomous,\
-            \ api-gateway, streaming, websocket). Keys are interface labels."
+            \ api-gateway, streaming, websocket, durable, orchestration, workflow,\
+            \ embedding, ai-search). Keys are interface labels."
           type: object
         userOverrides:
           additionalProperties:
@@ -24080,6 +24671,13 @@ components:
       properties:
         command:
           type: string
+        containerName:
+          description: Target container (defaults to the first container in the task
+            definition)
+          nullable: true
+          type: string
+      required:
+      - command
       type: object
     patchEnvironmentCompose_request_spotConfiguration:
       nullable: true
@@ -24979,6 +25577,50 @@ components:
         owned_by:
           example: quant
           type: string
+      type: object
+    createOrgResource_request_config:
+      description: Valkey only
+      properties:
+        dataStorageMaxGb:
+          example: 2
+          maximum: 50
+          minimum: 1
+          type: integer
+      type: object
+    createOrgResource_request:
+      properties:
+        type:
+          enum:
+          - object-storage
+          - valkey
+          example: object-storage
+          type: string
+        name:
+          description: "Lowercase letters, numbers and hyphens, 2-41 characters, starting\
+            \ with a letter or number"
+          example: buzz-media
+          type: string
+        config:
+          $ref: '#/components/schemas/createOrgResource_request_config'
+      required:
+      - name
+      - type
+      type: object
+    attachOrgResource_request:
+      properties:
+        application:
+          example: test-app
+          type: string
+        environment:
+          example: production
+          type: string
+        envVarPrefix:
+          description: "Namespaces every injected variable, so MEDIA yields MEDIA_S3_BUCKET"
+          example: MEDIA
+          type: string
+      required:
+      - application
+      - environment
       type: object
     getSshAccessCredentials_200_response_credentials:
       example:
