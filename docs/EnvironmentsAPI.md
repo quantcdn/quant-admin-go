@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ## GetEnvironmentLogs
 
-> GetEnvironmentLogs200Response GetEnvironmentLogs(ctx, organisation, application, environment).StartTime(startTime).EndTime(endTime).ContainerName(containerName).FilterPattern(filterPattern).Limit(limit).NextToken(nextToken).Execute()
+> GetEnvironmentLogs200Response GetEnvironmentLogs(ctx, organisation, application, environment).StartTime(startTime).EndTime(endTime).ContainerName(containerName).FilterPattern(filterPattern).Limit(limit).NextToken(nextToken).Order(order).IncludeTotal(includeTotal).Execute()
 
 Get the logs for an environment
 
@@ -263,13 +263,15 @@ func main() {
 	startTime := "startTime_example" // string | Start time for log retrieval (ISO 8601 format or Unix timestamp) (optional)
 	endTime := "endTime_example" // string | End time for log retrieval (ISO 8601 format or Unix timestamp) (optional)
 	containerName := "containerName_example" // string | Filter logs by specific container name (optional)
-	filterPattern := "filterPattern_example" // string | CloudWatch Logs filter pattern for searching log content (optional)
-	limit := int32(56) // int32 | Maximum number of log entries to return per page (optional)
-	nextToken := "nextToken_example" // string | Pagination token from previous response for retrieving next page of results (optional)
+	filterPattern := "filterPattern_example" // string | Literal, case-sensitive text to match anywhere in the log message (optional)
+	limit := int32(56) // int32 | Maximum number of log entries to return per page (default 50) (optional) (default to 50)
+	nextToken := "nextToken_example" // string | Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. (optional)
+	order := "order_example" // string | Sort order. desc returns newest first, asc returns oldest first. (optional) (default to "desc")
+	includeTotal := true // bool | When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EnvironmentsAPI.GetEnvironmentLogs(context.Background(), organisation, application, environment).StartTime(startTime).EndTime(endTime).ContainerName(containerName).FilterPattern(filterPattern).Limit(limit).NextToken(nextToken).Execute()
+	resp, r, err := apiClient.EnvironmentsAPI.GetEnvironmentLogs(context.Background(), organisation, application, environment).StartTime(startTime).EndTime(endTime).ContainerName(containerName).FilterPattern(filterPattern).Limit(limit).NextToken(nextToken).Order(order).IncludeTotal(includeTotal).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.GetEnvironmentLogs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -302,9 +304,11 @@ Name | Type | Description  | Notes
  **startTime** | **string** | Start time for log retrieval (ISO 8601 format or Unix timestamp) | 
  **endTime** | **string** | End time for log retrieval (ISO 8601 format or Unix timestamp) | 
  **containerName** | **string** | Filter logs by specific container name | 
- **filterPattern** | **string** | CloudWatch Logs filter pattern for searching log content | 
- **limit** | **int32** | Maximum number of log entries to return per page | 
- **nextToken** | **string** | Pagination token from previous response for retrieving next page of results | 
+ **filterPattern** | **string** | Literal, case-sensitive text to match anywhere in the log message | 
+ **limit** | **int32** | Maximum number of log entries to return per page (default 50) | [default to 50]
+ **nextToken** | **string** | Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. | 
+ **order** | **string** | Sort order. desc returns newest first, asc returns oldest first. | [default to &quot;desc&quot;]
+ **includeTotal** | **bool** | When true, the response pagination object includes the total log count for the time range. Adds 1-2 seconds of latency. | [default to false]
 
 ### Return type
 

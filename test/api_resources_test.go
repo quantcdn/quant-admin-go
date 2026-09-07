@@ -96,6 +96,21 @@ func Test_quantadmingo_ResourcesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ResourcesAPIService GetOrgResourceCredentials", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var resource string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.GetOrgResourceCredentials(context.Background(), organisation, resource).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ResourcesAPIService ListOrgResources", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -103,6 +118,21 @@ func Test_quantadmingo_ResourcesAPIService(t *testing.T) {
 		var organisation string
 
 		resp, httpRes, err := apiClient.ResourcesAPI.ListOrgResources(context.Background(), organisation).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcesAPIService PurgeOrgResource", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var resource string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.PurgeOrgResource(context.Background(), organisation, resource).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

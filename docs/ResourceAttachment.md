@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **EnvName** | Pointer to **string** |  | [optional] 
 **EnvVarPrefix** | Pointer to **string** | Namespaces every injected variable, so MEDIA yields MEDIA_S3_BUCKET | [optional] 
 **AccessKeyId** | Pointer to **string** | Object storage only. The secret half is written to the environment&#39;s secrets and never returned. | [optional] 
+**CacheUserId** | Pointer to **string** | Cache only. This environment&#39;s own RBAC user, limited to its CACHE_PREFIX with FLUSHALL and FLUSHDB denied, so it cannot touch another environment&#39;s keys. | [optional] 
+**AccessLevel** | Pointer to **string** | Cache only. scoped: the environment holds its own RBAC user. admin: it holds the cache-wide credential and can read, write and flush every attached environment&#39;s keys. Absent on attachments made before access levels existed (treated as scoped). | [optional] 
 **InjectedKeys** | Pointer to **[]string** | The exact variable names this attachment wrote, removed precisely on detach | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 **Note** | Pointer to **string** | When the credentials take effect | [optional] 
@@ -130,6 +132,56 @@ SetAccessKeyId sets AccessKeyId field to given value.
 `func (o *ResourceAttachment) HasAccessKeyId() bool`
 
 HasAccessKeyId returns a boolean if a field has been set.
+
+### GetCacheUserId
+
+`func (o *ResourceAttachment) GetCacheUserId() string`
+
+GetCacheUserId returns the CacheUserId field if non-nil, zero value otherwise.
+
+### GetCacheUserIdOk
+
+`func (o *ResourceAttachment) GetCacheUserIdOk() (*string, bool)`
+
+GetCacheUserIdOk returns a tuple with the CacheUserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCacheUserId
+
+`func (o *ResourceAttachment) SetCacheUserId(v string)`
+
+SetCacheUserId sets CacheUserId field to given value.
+
+### HasCacheUserId
+
+`func (o *ResourceAttachment) HasCacheUserId() bool`
+
+HasCacheUserId returns a boolean if a field has been set.
+
+### GetAccessLevel
+
+`func (o *ResourceAttachment) GetAccessLevel() string`
+
+GetAccessLevel returns the AccessLevel field if non-nil, zero value otherwise.
+
+### GetAccessLevelOk
+
+`func (o *ResourceAttachment) GetAccessLevelOk() (*string, bool)`
+
+GetAccessLevelOk returns a tuple with the AccessLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessLevel
+
+`func (o *ResourceAttachment) SetAccessLevel(v string)`
+
+SetAccessLevel sets AccessLevel field to given value.
+
+### HasAccessLevel
+
+`func (o *ResourceAttachment) HasAccessLevel() bool`
+
+HasAccessLevel returns a boolean if a field has been set.
 
 ### GetInjectedKeys
 

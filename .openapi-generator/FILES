@@ -233,6 +233,7 @@ docs/GetDurableExecutionStatus200ResponseResultUsage.md
 docs/GetEcrLoginCredentials200Response.md
 docs/GetEnvironmentLogs200Response.md
 docs/GetEnvironmentLogs200ResponseLogEventsInner.md
+docs/GetEnvironmentLogs200ResponsePagination.md
 docs/GetFile200Response.md
 docs/GetGovernanceConfig200Response.md
 docs/GetGovernanceConfig200ResponseSpendLimits.md
@@ -250,6 +251,10 @@ docs/GetMyUsage200ResponseMonthly.md
 docs/GetMyUsage200ResponseQuota.md
 docs/GetMyUsage200ResponseQuotaDailyLimit.md
 docs/GetMyUsage200ResponseQuotaMonthlyLimit.md
+docs/GetOrgResourceCredentials200Response.md
+docs/GetProjectLogs200Response.md
+docs/GetProjectLogs200ResponseLogsInner.md
+docs/GetProjectLogs400Response.md
 docs/GetRestoreStatus200Response.md
 docs/GetScalingPolicyResponse.md
 docs/GetSkill200Response.md
@@ -280,8 +285,11 @@ docs/ImportSkillCollectionRequestSource.md
 docs/ImportSkillRequest.md
 docs/ImportSkillRequestSource.md
 docs/KVAPI.md
+docs/KVDelete409Response.md
 docs/KVItemsCreate200Response.md
 docs/KVItemsDelete200Response.md
+docs/KVItemsPurge200Response.md
+docs/KVItemsPurge202Response.md
 docs/KVItemsShow200Response.md
 docs/KVItemsShow200ResponseValue.md
 docs/KVLinkToProject200Response.md
@@ -346,6 +354,8 @@ docs/PatchEnvironmentComposeRequestSpotConfiguration.md
 docs/ProjectsAPI.md
 docs/PurgeAPI.md
 docs/PurgeCreateRequest.md
+docs/PurgeOrgResource200Response.md
+docs/PurgeOrgResourceRequest.md
 docs/QueryVectorCollection200Response.md
 docs/QueryVectorCollection200ResponsePagination.md
 docs/QueryVectorCollection200ResponseResultsInner.md
@@ -680,6 +690,7 @@ model_get_durable_execution_status_200_response_result_usage.go
 model_get_ecr_login_credentials_200_response.go
 model_get_environment_logs_200_response.go
 model_get_environment_logs_200_response_log_events_inner.go
+model_get_environment_logs_200_response_pagination.go
 model_get_file_200_response.go
 model_get_governance_config_200_response.go
 model_get_governance_config_200_response_spend_limits.go
@@ -697,6 +708,10 @@ model_get_my_usage_200_response_monthly.go
 model_get_my_usage_200_response_quota.go
 model_get_my_usage_200_response_quota_daily_limit.go
 model_get_my_usage_200_response_quota_monthly_limit.go
+model_get_org_resource_credentials_200_response.go
+model_get_project_logs_200_response.go
+model_get_project_logs_200_response_logs_inner.go
+model_get_project_logs_400_response.go
 model_get_restore_status_200_response.go
 model_get_scaling_policy_response.go
 model_get_skill_200_response.go
@@ -724,8 +739,11 @@ model_import_skill_collection_request.go
 model_import_skill_collection_request_source.go
 model_import_skill_request.go
 model_import_skill_request_source.go
+model_kv_delete_409_response.go
 model_kv_items_create_200_response.go
 model_kv_items_delete_200_response.go
+model_kv_items_purge_200_response.go
+model_kv_items_purge_202_response.go
 model_kv_items_show_200_response.go
 model_kv_items_show_200_response_value.go
 model_kv_link_to_project_200_response.go
@@ -786,6 +804,8 @@ model_patch_environment_compose_400_response.go
 model_patch_environment_compose_request.go
 model_patch_environment_compose_request_spot_configuration.go
 model_purge_create_request.go
+model_purge_org_resource_200_response.go
+model_purge_org_resource_request.go
 model_query_vector_collection_200_response.go
 model_query_vector_collection_200_response_pagination.go
 model_query_vector_collection_200_response_results_inner.go

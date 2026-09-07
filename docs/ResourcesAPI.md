@@ -9,7 +9,9 @@ Method | HTTP request | Description
 [**DeleteOrgResource**](ResourcesAPI.md#DeleteOrgResource) | **Delete** /api/v3/organizations/{organisation}/resources/{resource} | Delete a shared resource
 [**DetachOrgResource**](ResourcesAPI.md#DetachOrgResource) | **Delete** /api/v3/organizations/{organisation}/resources/{resource}/attachments/{application}/{environment} | Detach a resource from an application environment
 [**GetOrgResource**](ResourcesAPI.md#GetOrgResource) | **Get** /api/v3/organizations/{organisation}/resources/{resource} | Get a shared resource and its attachments
+[**GetOrgResourceCredentials**](ResourcesAPI.md#GetOrgResourceCredentials) | **Get** /api/v3/organizations/{organisation}/resources/{resource}/credentials | Get a cache&#39;s administrative credential
 [**ListOrgResources**](ResourcesAPI.md#ListOrgResources) | **Get** /api/v3/organizations/{organisation}/resources | List an organisation&#39;s shared resources
+[**PurgeOrgResource**](ResourcesAPI.md#PurgeOrgResource) | **Post** /api/v3/organizations/{organisation}/resources/{resource}/purge | Purge keys from a cache
 
 
 
@@ -381,6 +383,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetOrgResourceCredentials
+
+> GetOrgResourceCredentials200Response GetOrgResourceCredentials(ctx, organisation, resource).Execute()
+
+Get a cache's administrative credential
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "test-org" // string | The organisation ID
+	resource := "vk-sessions" // string | The resource ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.GetOrgResourceCredentials(context.Background(), organisation, resource).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.GetOrgResourceCredentials``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrgResourceCredentials`: GetOrgResourceCredentials200Response
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.GetOrgResourceCredentials`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**resource** | **string** | The resource ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrgResourceCredentialsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetOrgResourceCredentials200Response**](GetOrgResourceCredentials200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListOrgResources
 
 > []OrgResource ListOrgResources(ctx, organisation).Execute()
@@ -442,6 +517,81 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PurgeOrgResource
+
+> PurgeOrgResource200Response PurgeOrgResource(ctx, organisation, resource).PurgeOrgResourceRequest(purgeOrgResourceRequest).Execute()
+
+Purge keys from a cache
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "test-org" // string | The organisation ID
+	resource := "vk-sessions" // string | The resource ID
+	purgeOrgResourceRequest := *openapiclient.NewPurgeOrgResourceRequest("Scope_example") // PurgeOrgResourceRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ResourcesAPI.PurgeOrgResource(context.Background(), organisation, resource).PurgeOrgResourceRequest(purgeOrgResourceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ResourcesAPI.PurgeOrgResource``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PurgeOrgResource`: PurgeOrgResource200Response
+	fmt.Fprintf(os.Stdout, "Response from `ResourcesAPI.PurgeOrgResource`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation ID | 
+**resource** | **string** | The resource ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPurgeOrgResourceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **purgeOrgResourceRequest** | [**PurgeOrgResourceRequest**](PurgeOrgResourceRequest.md) |  | 
+
+### Return type
+
+[**PurgeOrgResource200Response**](PurgeOrgResource200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

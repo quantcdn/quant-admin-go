@@ -21,7 +21,10 @@ var _ MappedNullable = &GetEnvironmentLogs200Response{}
 type GetEnvironmentLogs200Response struct {
 	// Array of log events
 	LogEvents []GetEnvironmentLogs200ResponseLogEventsInner `json:"logEvents,omitempty"`
-	// Token for fetching next page of results (null if no more pages)
+	// CloudWatch log group the events were read from
+	LogGroupName NullableString `json:"logGroupName,omitempty"`
+	Pagination *GetEnvironmentLogs200ResponsePagination `json:"pagination,omitempty"`
+	// Same as pagination.nextToken; kept for backward compatibility
 	NextToken NullableString `json:"nextToken,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -75,6 +78,80 @@ func (o *GetEnvironmentLogs200Response) HasLogEvents() bool {
 // SetLogEvents gets a reference to the given []GetEnvironmentLogs200ResponseLogEventsInner and assigns it to the LogEvents field.
 func (o *GetEnvironmentLogs200Response) SetLogEvents(v []GetEnvironmentLogs200ResponseLogEventsInner) {
 	o.LogEvents = v
+}
+
+// GetLogGroupName returns the LogGroupName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetEnvironmentLogs200Response) GetLogGroupName() string {
+	if o == nil || IsNil(o.LogGroupName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LogGroupName.Get()
+}
+
+// GetLogGroupNameOk returns a tuple with the LogGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetEnvironmentLogs200Response) GetLogGroupNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogGroupName.Get(), o.LogGroupName.IsSet()
+}
+
+// HasLogGroupName returns a boolean if a field has been set.
+func (o *GetEnvironmentLogs200Response) HasLogGroupName() bool {
+	if o != nil && o.LogGroupName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogGroupName gets a reference to the given NullableString and assigns it to the LogGroupName field.
+func (o *GetEnvironmentLogs200Response) SetLogGroupName(v string) {
+	o.LogGroupName.Set(&v)
+}
+// SetLogGroupNameNil sets the value for LogGroupName to be an explicit nil
+func (o *GetEnvironmentLogs200Response) SetLogGroupNameNil() {
+	o.LogGroupName.Set(nil)
+}
+
+// UnsetLogGroupName ensures that no value is present for LogGroupName, not even an explicit nil
+func (o *GetEnvironmentLogs200Response) UnsetLogGroupName() {
+	o.LogGroupName.Unset()
+}
+
+// GetPagination returns the Pagination field value if set, zero value otherwise.
+func (o *GetEnvironmentLogs200Response) GetPagination() GetEnvironmentLogs200ResponsePagination {
+	if o == nil || IsNil(o.Pagination) {
+		var ret GetEnvironmentLogs200ResponsePagination
+		return ret
+	}
+	return *o.Pagination
+}
+
+// GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetEnvironmentLogs200Response) GetPaginationOk() (*GetEnvironmentLogs200ResponsePagination, bool) {
+	if o == nil || IsNil(o.Pagination) {
+		return nil, false
+	}
+	return o.Pagination, true
+}
+
+// HasPagination returns a boolean if a field has been set.
+func (o *GetEnvironmentLogs200Response) HasPagination() bool {
+	if o != nil && !IsNil(o.Pagination) {
+		return true
+	}
+
+	return false
+}
+
+// SetPagination gets a reference to the given GetEnvironmentLogs200ResponsePagination and assigns it to the Pagination field.
+func (o *GetEnvironmentLogs200Response) SetPagination(v GetEnvironmentLogs200ResponsePagination) {
+	o.Pagination = &v
 }
 
 // GetNextToken returns the NextToken field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -132,6 +209,12 @@ func (o GetEnvironmentLogs200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LogEvents) {
 		toSerialize["logEvents"] = o.LogEvents
 	}
+	if o.LogGroupName.IsSet() {
+		toSerialize["logGroupName"] = o.LogGroupName.Get()
+	}
+	if !IsNil(o.Pagination) {
+		toSerialize["pagination"] = o.Pagination
+	}
 	if o.NextToken.IsSet() {
 		toSerialize["nextToken"] = o.NextToken.Get()
 	}
@@ -158,6 +241,8 @@ func (o *GetEnvironmentLogs200Response) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "logEvents")
+		delete(additionalProperties, "logGroupName")
+		delete(additionalProperties, "pagination")
 		delete(additionalProperties, "nextToken")
 		o.AdditionalProperties = additionalProperties
 	}

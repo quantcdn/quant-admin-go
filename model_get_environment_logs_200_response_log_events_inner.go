@@ -20,9 +20,13 @@ var _ MappedNullable = &GetEnvironmentLogs200ResponseLogEventsInner{}
 // GetEnvironmentLogs200ResponseLogEventsInner struct for GetEnvironmentLogs200ResponseLogEventsInner
 type GetEnvironmentLogs200ResponseLogEventsInner struct {
 	// Unix timestamp in milliseconds
-	Timestamp *int32 `json:"timestamp,omitempty"`
+	Timestamp *int64 `json:"timestamp,omitempty"`
 	// Log message content
 	Message *string `json:"message,omitempty"`
+	// Unix timestamp in milliseconds when CloudWatch ingested the event
+	IngestionTime NullableInt64 `json:"ingestionTime,omitempty"`
+	// CloudWatch log stream, named container/container/taskId
+	LogStreamName NullableString `json:"logStreamName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,9 +50,9 @@ func NewGetEnvironmentLogs200ResponseLogEventsInnerWithDefaults() *GetEnvironmen
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetTimestamp() int32 {
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetTimestamp() int64 {
 	if o == nil || IsNil(o.Timestamp) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Timestamp
@@ -56,7 +60,7 @@ func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetTimestamp() int32 {
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetTimestampOk() (*int32, bool) {
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetTimestampOk() (*int64, bool) {
 	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
@@ -72,8 +76,8 @@ func (o *GetEnvironmentLogs200ResponseLogEventsInner) HasTimestamp() bool {
 	return false
 }
 
-// SetTimestamp gets a reference to the given int32 and assigns it to the Timestamp field.
-func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetTimestamp(v int32) {
+// SetTimestamp gets a reference to the given int64 and assigns it to the Timestamp field.
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetTimestamp(v int64) {
 	o.Timestamp = &v
 }
 
@@ -109,6 +113,90 @@ func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetMessage(v string) {
 	o.Message = &v
 }
 
+// GetIngestionTime returns the IngestionTime field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetIngestionTime() int64 {
+	if o == nil || IsNil(o.IngestionTime.Get()) {
+		var ret int64
+		return ret
+	}
+	return *o.IngestionTime.Get()
+}
+
+// GetIngestionTimeOk returns a tuple with the IngestionTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetIngestionTimeOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IngestionTime.Get(), o.IngestionTime.IsSet()
+}
+
+// HasIngestionTime returns a boolean if a field has been set.
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) HasIngestionTime() bool {
+	if o != nil && o.IngestionTime.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIngestionTime gets a reference to the given NullableInt64 and assigns it to the IngestionTime field.
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetIngestionTime(v int64) {
+	o.IngestionTime.Set(&v)
+}
+// SetIngestionTimeNil sets the value for IngestionTime to be an explicit nil
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetIngestionTimeNil() {
+	o.IngestionTime.Set(nil)
+}
+
+// UnsetIngestionTime ensures that no value is present for IngestionTime, not even an explicit nil
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) UnsetIngestionTime() {
+	o.IngestionTime.Unset()
+}
+
+// GetLogStreamName returns the LogStreamName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetLogStreamName() string {
+	if o == nil || IsNil(o.LogStreamName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LogStreamName.Get()
+}
+
+// GetLogStreamNameOk returns a tuple with the LogStreamName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) GetLogStreamNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LogStreamName.Get(), o.LogStreamName.IsSet()
+}
+
+// HasLogStreamName returns a boolean if a field has been set.
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) HasLogStreamName() bool {
+	if o != nil && o.LogStreamName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLogStreamName gets a reference to the given NullableString and assigns it to the LogStreamName field.
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetLogStreamName(v string) {
+	o.LogStreamName.Set(&v)
+}
+// SetLogStreamNameNil sets the value for LogStreamName to be an explicit nil
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) SetLogStreamNameNil() {
+	o.LogStreamName.Set(nil)
+}
+
+// UnsetLogStreamName ensures that no value is present for LogStreamName, not even an explicit nil
+func (o *GetEnvironmentLogs200ResponseLogEventsInner) UnsetLogStreamName() {
+	o.LogStreamName.Unset()
+}
+
 func (o GetEnvironmentLogs200ResponseLogEventsInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -124,6 +212,12 @@ func (o GetEnvironmentLogs200ResponseLogEventsInner) ToMap() (map[string]interfa
 	}
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
+	}
+	if o.IngestionTime.IsSet() {
+		toSerialize["ingestionTime"] = o.IngestionTime.Get()
+	}
+	if o.LogStreamName.IsSet() {
+		toSerialize["logStreamName"] = o.LogStreamName.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -149,6 +243,8 @@ func (o *GetEnvironmentLogs200ResponseLogEventsInner) UnmarshalJSON(data []byte)
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "timestamp")
 		delete(additionalProperties, "message")
+		delete(additionalProperties, "ingestionTime")
+		delete(additionalProperties, "logStreamName")
 		o.AdditionalProperties = additionalProperties
 	}
 

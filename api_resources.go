@@ -100,6 +100,22 @@ type ResourcesAPI interface {
 	GetOrgResourceExecute(r ResourcesAPIGetOrgResourceRequest) (*OrgResource, *http.Response, error)
 
 	/*
+	GetOrgResourceCredentials Get a cache's administrative credential
+
+	Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organisation The organisation ID
+	@param resource The resource ID
+	@return ResourcesAPIGetOrgResourceCredentialsRequest
+	*/
+	GetOrgResourceCredentials(ctx context.Context, organisation string, resource string) ResourcesAPIGetOrgResourceCredentialsRequest
+
+	// GetOrgResourceCredentialsExecute executes the request
+	//  @return GetOrgResourceCredentials200Response
+	GetOrgResourceCredentialsExecute(r ResourcesAPIGetOrgResourceCredentialsRequest) (*GetOrgResourceCredentials200Response, *http.Response, error)
+
+	/*
 	ListOrgResources List an organisation's shared resources
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -111,6 +127,22 @@ type ResourcesAPI interface {
 	// ListOrgResourcesExecute executes the request
 	//  @return []OrgResource
 	ListOrgResourcesExecute(r ResourcesAPIListOrgResourcesRequest) ([]OrgResource, *http.Response, error)
+
+	/*
+	PurgeOrgResource Purge keys from a cache
+
+	Cache resources only. scope environment deletes that environment's keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organisation The organisation ID
+	@param resource The resource ID
+	@return ResourcesAPIPurgeOrgResourceRequest
+	*/
+	PurgeOrgResource(ctx context.Context, organisation string, resource string) ResourcesAPIPurgeOrgResourceRequest
+
+	// PurgeOrgResourceExecute executes the request
+	//  @return PurgeOrgResource200Response
+	PurgeOrgResourceExecute(r ResourcesAPIPurgeOrgResourceRequest) (*PurgeOrgResource200Response, *http.Response, error)
 }
 
 // ResourcesAPIService ResourcesAPI service
@@ -663,6 +695,113 @@ func (a *ResourcesAPIService) GetOrgResourceExecute(r ResourcesAPIGetOrgResource
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ResourcesAPIGetOrgResourceCredentialsRequest struct {
+	ctx context.Context
+	ApiService ResourcesAPI
+	organisation string
+	resource string
+}
+
+func (r ResourcesAPIGetOrgResourceCredentialsRequest) Execute() (*GetOrgResourceCredentials200Response, *http.Response, error) {
+	return r.ApiService.GetOrgResourceCredentialsExecute(r)
+}
+
+/*
+GetOrgResourceCredentials Get a cache's administrative credential
+
+Cache resources only. Returns the cache-wide user (every key, every command, including FLUSHDB) with host and port. Environments attached to the cache use their own scoped users; this credential is for operators who genuinely need unrestricted access. Every read is audit-logged against the requesting user.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organisation The organisation ID
+ @param resource The resource ID
+ @return ResourcesAPIGetOrgResourceCredentialsRequest
+*/
+func (a *ResourcesAPIService) GetOrgResourceCredentials(ctx context.Context, organisation string, resource string) ResourcesAPIGetOrgResourceCredentialsRequest {
+	return ResourcesAPIGetOrgResourceCredentialsRequest{
+		ApiService: a,
+		ctx: ctx,
+		organisation: organisation,
+		resource: resource,
+	}
+}
+
+// Execute executes the request
+//  @return GetOrgResourceCredentials200Response
+func (a *ResourcesAPIService) GetOrgResourceCredentialsExecute(r ResourcesAPIGetOrgResourceCredentialsRequest) (*GetOrgResourceCredentials200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetOrgResourceCredentials200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.GetOrgResourceCredentials")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v3/organizations/{organisation}/resources/{resource}/credentials"
+	localVarPath = strings.Replace(localVarPath, "{"+"organisation"+"}", url.PathEscape(parameterValueToString(r.organisation, "organisation")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"resource"+"}", url.PathEscape(parameterValueToString(r.resource, "resource")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ResourcesAPIListOrgResourcesRequest struct {
 	ctx context.Context
 	ApiService ResourcesAPI
@@ -727,6 +866,124 @@ func (a *ResourcesAPIService) ListOrgResourcesExecute(r ResourcesAPIListOrgResou
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ResourcesAPIPurgeOrgResourceRequest struct {
+	ctx context.Context
+	ApiService ResourcesAPI
+	organisation string
+	resource string
+	purgeOrgResourceRequest *PurgeOrgResourceRequest
+}
+
+func (r ResourcesAPIPurgeOrgResourceRequest) PurgeOrgResourceRequest(purgeOrgResourceRequest PurgeOrgResourceRequest) ResourcesAPIPurgeOrgResourceRequest {
+	r.purgeOrgResourceRequest = &purgeOrgResourceRequest
+	return r
+}
+
+func (r ResourcesAPIPurgeOrgResourceRequest) Execute() (*PurgeOrgResource200Response, *http.Response, error) {
+	return r.ApiService.PurgeOrgResourceExecute(r)
+}
+
+/*
+PurgeOrgResource Purge keys from a cache
+
+Cache resources only. scope environment deletes that environment's keys, using the CACHE_PREFIX recorded on its attachment rather than anything in the request. scope all flushes every key for every attached environment and requires confirm=true. A large environment purge may return complete=false with a cursor to resume.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organisation The organisation ID
+ @param resource The resource ID
+ @return ResourcesAPIPurgeOrgResourceRequest
+*/
+func (a *ResourcesAPIService) PurgeOrgResource(ctx context.Context, organisation string, resource string) ResourcesAPIPurgeOrgResourceRequest {
+	return ResourcesAPIPurgeOrgResourceRequest{
+		ApiService: a,
+		ctx: ctx,
+		organisation: organisation,
+		resource: resource,
+	}
+}
+
+// Execute executes the request
+//  @return PurgeOrgResource200Response
+func (a *ResourcesAPIService) PurgeOrgResourceExecute(r ResourcesAPIPurgeOrgResourceRequest) (*PurgeOrgResource200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PurgeOrgResource200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ResourcesAPIService.PurgeOrgResource")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v3/organizations/{organisation}/resources/{resource}/purge"
+	localVarPath = strings.Replace(localVarPath, "{"+"organisation"+"}", url.PathEscape(parameterValueToString(r.organisation, "organisation")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"resource"+"}", url.PathEscape(parameterValueToString(r.resource, "resource")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.purgeOrgResourceRequest == nil {
+		return localVarReturnValue, nil, reportError("purgeOrgResourceRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.purgeOrgResourceRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

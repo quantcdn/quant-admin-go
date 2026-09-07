@@ -24,6 +24,8 @@ type AttachOrgResourceRequest struct {
 	Environment string `json:"environment"`
 	// Namespaces every injected variable, so MEDIA yields MEDIA_S3_BUCKET
 	EnvVarPrefix *string `json:"envVarPrefix,omitempty"`
+	// Cache only. scoped injects an RBAC user limited to this environment's CACHE_PREFIX (plain and {hash-tag} forms) with FLUSHALL and FLUSHDB denied. admin injects the cache-wide credential for integrations that require FLUSHDB, such as Laravel Cache::flush() or the WordPress object cache without selective flush; it can read, write and flush every attached environment's keys.
+	AccessLevel *string `json:"accessLevel,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,6 +39,8 @@ func NewAttachOrgResourceRequest(application string, environment string) *Attach
 	this := AttachOrgResourceRequest{}
 	this.Application = application
 	this.Environment = environment
+	var accessLevel string = "scoped"
+	this.AccessLevel = &accessLevel
 	return &this
 }
 
@@ -45,6 +49,8 @@ func NewAttachOrgResourceRequest(application string, environment string) *Attach
 // but it doesn't guarantee that properties required by API are set
 func NewAttachOrgResourceRequestWithDefaults() *AttachOrgResourceRequest {
 	this := AttachOrgResourceRequest{}
+	var accessLevel string = "scoped"
+	this.AccessLevel = &accessLevel
 	return &this
 }
 
@@ -128,6 +134,38 @@ func (o *AttachOrgResourceRequest) SetEnvVarPrefix(v string) {
 	o.EnvVarPrefix = &v
 }
 
+// GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
+func (o *AttachOrgResourceRequest) GetAccessLevel() string {
+	if o == nil || IsNil(o.AccessLevel) {
+		var ret string
+		return ret
+	}
+	return *o.AccessLevel
+}
+
+// GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AttachOrgResourceRequest) GetAccessLevelOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessLevel) {
+		return nil, false
+	}
+	return o.AccessLevel, true
+}
+
+// HasAccessLevel returns a boolean if a field has been set.
+func (o *AttachOrgResourceRequest) HasAccessLevel() bool {
+	if o != nil && !IsNil(o.AccessLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLevel gets a reference to the given string and assigns it to the AccessLevel field.
+func (o *AttachOrgResourceRequest) SetAccessLevel(v string) {
+	o.AccessLevel = &v
+}
+
 func (o AttachOrgResourceRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -142,6 +180,9 @@ func (o AttachOrgResourceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["environment"] = o.Environment
 	if !IsNil(o.EnvVarPrefix) {
 		toSerialize["envVarPrefix"] = o.EnvVarPrefix
+	}
+	if !IsNil(o.AccessLevel) {
+		toSerialize["accessLevel"] = o.AccessLevel
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -190,6 +231,7 @@ func (o *AttachOrgResourceRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "application")
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "envVarPrefix")
+		delete(additionalProperties, "accessLevel")
 		o.AdditionalProperties = additionalProperties
 	}
 

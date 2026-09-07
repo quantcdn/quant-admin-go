@@ -26,6 +26,10 @@ type ResourceAttachment struct {
 	EnvVarPrefix *string `json:"envVarPrefix,omitempty"`
 	// Object storage only. The secret half is written to the environment's secrets and never returned.
 	AccessKeyId *string `json:"accessKeyId,omitempty"`
+	// Cache only. This environment's own RBAC user, limited to its CACHE_PREFIX with FLUSHALL and FLUSHDB denied, so it cannot touch another environment's keys.
+	CacheUserId *string `json:"cacheUserId,omitempty"`
+	// Cache only. scoped: the environment holds its own RBAC user. admin: it holds the cache-wide credential and can read, write and flush every attached environment's keys. Absent on attachments made before access levels existed (treated as scoped).
+	AccessLevel *string `json:"accessLevel,omitempty"`
 	// The exact variable names this attachment wrote, removed precisely on detach
 	InjectedKeys []string `json:"injectedKeys,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -181,6 +185,70 @@ func (o *ResourceAttachment) SetAccessKeyId(v string) {
 	o.AccessKeyId = &v
 }
 
+// GetCacheUserId returns the CacheUserId field value if set, zero value otherwise.
+func (o *ResourceAttachment) GetCacheUserId() string {
+	if o == nil || IsNil(o.CacheUserId) {
+		var ret string
+		return ret
+	}
+	return *o.CacheUserId
+}
+
+// GetCacheUserIdOk returns a tuple with the CacheUserId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAttachment) GetCacheUserIdOk() (*string, bool) {
+	if o == nil || IsNil(o.CacheUserId) {
+		return nil, false
+	}
+	return o.CacheUserId, true
+}
+
+// HasCacheUserId returns a boolean if a field has been set.
+func (o *ResourceAttachment) HasCacheUserId() bool {
+	if o != nil && !IsNil(o.CacheUserId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCacheUserId gets a reference to the given string and assigns it to the CacheUserId field.
+func (o *ResourceAttachment) SetCacheUserId(v string) {
+	o.CacheUserId = &v
+}
+
+// GetAccessLevel returns the AccessLevel field value if set, zero value otherwise.
+func (o *ResourceAttachment) GetAccessLevel() string {
+	if o == nil || IsNil(o.AccessLevel) {
+		var ret string
+		return ret
+	}
+	return *o.AccessLevel
+}
+
+// GetAccessLevelOk returns a tuple with the AccessLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResourceAttachment) GetAccessLevelOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessLevel) {
+		return nil, false
+	}
+	return o.AccessLevel, true
+}
+
+// HasAccessLevel returns a boolean if a field has been set.
+func (o *ResourceAttachment) HasAccessLevel() bool {
+	if o != nil && !IsNil(o.AccessLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessLevel gets a reference to the given string and assigns it to the AccessLevel field.
+func (o *ResourceAttachment) SetAccessLevel(v string) {
+	o.AccessLevel = &v
+}
+
 // GetInjectedKeys returns the InjectedKeys field value if set, zero value otherwise.
 func (o *ResourceAttachment) GetInjectedKeys() []string {
 	if o == nil || IsNil(o.InjectedKeys) {
@@ -299,6 +367,12 @@ func (o ResourceAttachment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessKeyId) {
 		toSerialize["accessKeyId"] = o.AccessKeyId
 	}
+	if !IsNil(o.CacheUserId) {
+		toSerialize["cacheUserId"] = o.CacheUserId
+	}
+	if !IsNil(o.AccessLevel) {
+		toSerialize["accessLevel"] = o.AccessLevel
+	}
 	if !IsNil(o.InjectedKeys) {
 		toSerialize["injectedKeys"] = o.InjectedKeys
 	}
@@ -334,6 +408,8 @@ func (o *ResourceAttachment) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "envName")
 		delete(additionalProperties, "envVarPrefix")
 		delete(additionalProperties, "accessKeyId")
+		delete(additionalProperties, "cacheUserId")
+		delete(additionalProperties, "accessLevel")
 		delete(additionalProperties, "injectedKeys")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "note")

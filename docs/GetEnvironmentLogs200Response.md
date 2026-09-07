@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **LogEvents** | Pointer to [**[]GetEnvironmentLogs200ResponseLogEventsInner**](GetEnvironmentLogs200ResponseLogEventsInner.md) | Array of log events | [optional] 
-**NextToken** | Pointer to **NullableString** | Token for fetching next page of results (null if no more pages) | [optional] 
+**LogGroupName** | Pointer to **NullableString** | CloudWatch log group the events were read from | [optional] 
+**Pagination** | Pointer to [**GetEnvironmentLogs200ResponsePagination**](GetEnvironmentLogs200ResponsePagination.md) |  | [optional] 
+**NextToken** | Pointer to **NullableString** | Same as pagination.nextToken; kept for backward compatibility | [optional] 
 
 ## Methods
 
@@ -50,6 +52,66 @@ SetLogEvents sets LogEvents field to given value.
 `func (o *GetEnvironmentLogs200Response) HasLogEvents() bool`
 
 HasLogEvents returns a boolean if a field has been set.
+
+### GetLogGroupName
+
+`func (o *GetEnvironmentLogs200Response) GetLogGroupName() string`
+
+GetLogGroupName returns the LogGroupName field if non-nil, zero value otherwise.
+
+### GetLogGroupNameOk
+
+`func (o *GetEnvironmentLogs200Response) GetLogGroupNameOk() (*string, bool)`
+
+GetLogGroupNameOk returns a tuple with the LogGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogGroupName
+
+`func (o *GetEnvironmentLogs200Response) SetLogGroupName(v string)`
+
+SetLogGroupName sets LogGroupName field to given value.
+
+### HasLogGroupName
+
+`func (o *GetEnvironmentLogs200Response) HasLogGroupName() bool`
+
+HasLogGroupName returns a boolean if a field has been set.
+
+### SetLogGroupNameNil
+
+`func (o *GetEnvironmentLogs200Response) SetLogGroupNameNil(b bool)`
+
+ SetLogGroupNameNil sets the value for LogGroupName to be an explicit nil
+
+### UnsetLogGroupName
+`func (o *GetEnvironmentLogs200Response) UnsetLogGroupName()`
+
+UnsetLogGroupName ensures that no value is present for LogGroupName, not even an explicit nil
+### GetPagination
+
+`func (o *GetEnvironmentLogs200Response) GetPagination() GetEnvironmentLogs200ResponsePagination`
+
+GetPagination returns the Pagination field if non-nil, zero value otherwise.
+
+### GetPaginationOk
+
+`func (o *GetEnvironmentLogs200Response) GetPaginationOk() (*GetEnvironmentLogs200ResponsePagination, bool)`
+
+GetPaginationOk returns a tuple with the Pagination field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPagination
+
+`func (o *GetEnvironmentLogs200Response) SetPagination(v GetEnvironmentLogs200ResponsePagination)`
+
+SetPagination sets Pagination field to given value.
+
+### HasPagination
+
+`func (o *GetEnvironmentLogs200Response) HasPagination() bool`
+
+HasPagination returns a boolean if a field has been set.
 
 ### GetNextToken
 
