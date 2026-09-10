@@ -58,7 +58,7 @@ type V2CrawlerRequest struct {
 	Sitemap []V2CrawlerSitemapInner `json:"sitemap,omitempty"`
 	// Allowed domains for multi-domain crawling, automatically enables merge_domains
 	AllowedDomains []string `json:"allowed_domains,omitempty"`
-	// Custom user agent, only when browser_mode is false
+	// Custom user agent. Valid with or without browser_mode.
 	UserAgent *string `json:"user_agent,omitempty"`
 	Assets *V2CrawlerAssets `json:"assets,omitempty"`
 	// Maximum errors before stopping crawl

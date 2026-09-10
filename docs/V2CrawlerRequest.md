@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **StatusOk** | Pointer to **[]int32** | HTTP status codes that will result in content being captured and pushed to Quant | [optional] 
 **Sitemap** | Pointer to [**[]V2CrawlerSitemapInner**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] 
 **AllowedDomains** | Pointer to **[]string** | Allowed domains for multi-domain crawling, automatically enables merge_domains | [optional] 
-**UserAgent** | Pointer to **string** | Custom user agent, only when browser_mode is false | [optional] 
+**UserAgent** | Pointer to **string** | Custom user agent. Valid with or without browser_mode. | [optional] 
 **Assets** | Pointer to [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] 
 **MaxErrors** | Pointer to **int32** | Maximum errors before stopping crawl | [optional] 
 

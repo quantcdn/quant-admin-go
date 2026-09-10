@@ -14899,7 +14899,7 @@ components:
             type: string
           type: array
         user_agent:
-          description: "Custom user agent, only when browser_mode is false"
+          description: Custom user agent. Valid with or without browser_mode.
           example: Mozilla/5.0...
           type: string
         assets:
