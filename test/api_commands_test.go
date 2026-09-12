@@ -27,9 +27,10 @@ func Test_quantadmingo_CommandsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var organisation string
+		var application string
 		var environment string
 
-		resp, httpRes, err := apiClient.CommandsAPI.CreateCommand(context.Background(), organisation, environment).Execute()
+		resp, httpRes, err := apiClient.CommandsAPI.CreateCommand(context.Background(), organisation, application, environment).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -42,10 +43,11 @@ func Test_quantadmingo_CommandsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var organisation string
+		var application string
 		var environment string
 		var command string
 
-		resp, httpRes, err := apiClient.CommandsAPI.GetCommand(context.Background(), organisation, environment, command).Execute()
+		resp, httpRes, err := apiClient.CommandsAPI.GetCommand(context.Background(), organisation, application, environment, command).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -58,12 +60,12 @@ func Test_quantadmingo_CommandsAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var organisation string
+		var application string
 		var environment string
 
-		resp, httpRes, err := apiClient.CommandsAPI.ListCommands(context.Background(), organisation, environment).Execute()
+		httpRes, err := apiClient.CommandsAPI.ListCommands(context.Background(), organisation, application, environment).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

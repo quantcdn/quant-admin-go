@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**KVItemsCreate**](KVAPI.md#KVItemsCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | Add an item to a kv store
 [**KVItemsDelete**](KVAPI.md#KVItemsDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Delete an item from a kv store
 [**KVItemsList**](KVAPI.md#KVItemsList) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | List items in a kv store
+[**KVItemsPurge**](KVAPI.md#KVItemsPurge) | **Delete** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items | Delete items in bulk by prefix and/or age
 [**KVItemsShow**](KVAPI.md#KVItemsShow) | **Get** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Get an item from a kv store
 [**KVItemsUpdate**](KVAPI.md#KVItemsUpdate) | **Put** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items/{key} | Update an item in a kv store
 [**KVLinkToProject**](KVAPI.md#KVLinkToProject) | **Post** /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/link | Link a KV store to another project
@@ -93,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## KVDelete
 
-> KVDelete(ctx, organization, project, storeId).Execute()
+> KVDelete(ctx, organization, project, storeId).Force(force).Execute()
 
 Delete a kv store
 
@@ -113,10 +114,11 @@ func main() {
 	organization := "test-org" // string | Organization identifier
 	project := "test-project" // string | Project identifier
 	storeId := "0000" // string | 
+	force := true // bool | Delete the store even if it still holds keys. Without it a non-empty store returns 409. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.KVAPI.KVDelete(context.Background(), organization, project, storeId).Execute()
+	r, err := apiClient.KVAPI.KVDelete(context.Background(), organization, project, storeId).Force(force).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVDelete``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -144,6 +146,7 @@ Name | Type | Description  | Notes
 
 
 
+ **force** | **bool** | Delete the store even if it still holds keys. Without it a non-empty store returns 409. | [default to false]
 
 ### Return type
 
@@ -383,6 +386,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V2StoreItemsListResponse**](V2StoreItemsListResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KVItemsPurge
+
+> KVItemsPurge200Response KVItemsPurge(ctx, organization, project, storeId).Prefix(prefix).OlderThan(olderThan).Execute()
+
+Delete items in bulk by prefix and/or age
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "test-org" // string | Organization identifier
+	project := "test-project" // string | Project identifier
+	storeId := "0000" // string | 
+	prefix := "oauth_state:" // string | Only delete keys that start with this string. (optional)
+	olderThan := "24h" // string | Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KVAPI.KVItemsPurge(context.Background(), organization, project, storeId).Prefix(prefix).OlderThan(olderThan).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KVAPI.KVItemsPurge``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KVItemsPurge`: KVItemsPurge200Response
+	fmt.Fprintf(os.Stdout, "Response from `KVAPI.KVItemsPurge`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**storeId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKVItemsPurgeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **prefix** | **string** | Only delete keys that start with this string. | 
+ **olderThan** | **string** | Only delete keys last updated before this instant. ISO 8601, or a duration with unit s, m, h or d. | 
+
+### Return type
+
+[**KVItemsPurge200Response**](KVItemsPurge200Response.md)
 
 ### Authorization
 

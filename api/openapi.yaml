@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.20.0
+  version: 4.22.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -95,8 +95,12 @@ tags:
   name: AI Usage
 - description: Restore Management
   name: Restore Management
+- description: IdleSleep
+  name: IdleSleep
 - description: OpenAI Compatibility
   name: OpenAI Compatibility
+- description: Resources
+  name: Resources
 paths:
   /api/v3/organisations/{organisation}/projects/{project}/ai-search:
     get:
@@ -1959,6 +1963,16 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Delete the store even if it still holds keys. Without it a non-empty
+          store returns 409.
+        explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       responses:
         "204":
           description: The request has succeeded.
@@ -1969,6 +1983,13 @@ paths:
                 $ref: '#/components/schemas/V2Error'
           description: The server could not understand the request due to invalid
             syntax.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KV_delete_409_response'
+          description: The store is not empty. Clear its keys in the dashboard or
+            pass force=true.
         "403":
           content:
             application/json:
@@ -2151,6 +2172,87 @@ paths:
       tags:
       - KV
   /api/v2/organizations/{organization}/projects/{project}/kv/{store_id}/items:
+    delete:
+      description: Deletes every item matching the filters. With no filters the whole
+        store is cleared. A small purge finishes in the request and returns 200; a
+        large one returns 202 with the counts so far and continues in the background.
+        Idempotent.
+      operationId: KV_items_purge
+      parameters:
+      - description: Organization identifier
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        example: test-project
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: "0000"
+        explode: false
+        in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Only delete keys that start with this string.
+        example: 'oauth_state:'
+        explode: true
+        in: query
+        name: prefix
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Only delete keys last updated before this instant. ISO 8601,\
+          \ or a duration with unit s, m, h or d."
+        example: 24h
+        explode: true
+        in: query
+        name: older_than
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KV_items_purge_200_response'
+          description: The purge finished.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KV_items_purge_202_response'
+          description: The purge continues in the background.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Insufficient permissions.
+      summary: Delete items in bulk by prefix and/or age
+      tags:
+      - KV
     get:
       operationId: KV_items_list
       parameters:
@@ -3115,6 +3217,121 @@ paths:
       summary: Purge cache via URL or cache keys
       tags:
       - Purge
+  /api/v2/organizations/{organization}/projects/{project}/logs:
+    get:
+      description: Retrieves CloudFront access log entries for an AWS-platform project.
+        Results are always scoped to the project; the optional filter can only narrow
+        them. Entries are returned oldest first; pass nextToken from the previous
+        response to fetch the next page. Logs are retained for 30 days.
+      operationId: getProjectLogs
+      parameters:
+      - description: The organization machine name
+        example: test-org
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The project machine name
+        example: test-project
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Maximum number of log entries to return per page (default 100)
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 10000
+          minimum: 1
+          type: integer
+        style: form
+      - description: Start of the time range. ISO 8601 or Unix epoch milliseconds.
+        example: 2024-11-16T00:00:00Z
+        explode: true
+        in: query
+        name: startTime
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: End of the time range. ISO 8601 or Unix epoch milliseconds.
+        example: 2024-11-16T23:59:59Z
+        explode: true
+        in: query
+        name: endTime
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "CloudWatch JSON filter expression AND-ed with the project constraint,\
+          \ e.g. $.status_code = 404. Outer braces are optional; nested braces are\
+          \ rejected."
+        example: $.status_code = 404
+        explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Only return entries for this domain
+        example: www.example.com
+        explode: true
+        in: query
+        name: domain
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Opaque pagination token from the previous response. Pass back
+          unchanged to fetch the next page.
+        explode: true
+        in: query
+        name: nextToken
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProjectLogs_200_response'
+          description: Access log entries
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProjectLogs_400_response'
+          description: Invalid filter or time range
+        "401":
+          description: Unauthenticated
+        "403":
+          description: Token lacks the projects:read scope or the user lacks browse_projects
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProjectLogs_400_response'
+          description: "The project is not on the AWS platform, or its access logs\
+            \ are not enabled yet"
+        "422":
+          description: Validation error
+      security:
+      - bearerAuth: []
+      summary: Get CDN access logs for a project
+      tags:
+      - Projects
   /api/v2/organizations/{organization}/projects/{project}/rules/auth:
     get:
       operationId: RulesAuth_list
@@ -7008,6 +7225,35 @@ paths:
       summary: List tool executions for monitoring and debugging
       tags:
       - AI Tools
+  /api/v3/organizations/{organisation}/ai/mcp-servers:
+    get:
+      description: "Lists the organization's registered MCP servers for CLI sync (QuantCode).\
+        \ Each server's `url` is the FULL MCP gateway URL on the AI API host — clients\
+        \ connect there, never to the origin server. Credentials are never exposed."
+      operationId: listMcpServers
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listMcpServers_200_response'
+          description: List of MCP servers retrieved successfully
+        "403":
+          description: Access denied
+        "500":
+          description: Failed to fetch MCP servers
+      summary: List MCP servers with gateway URLs
+      tags:
+      - AI Tools
   /api/v3/organizations/{organisation}/ai/agents:
     get:
       description: |-
@@ -9773,7 +10019,7 @@ paths:
       summary: Get ECR login credentials
       tags:
       - Applications
-  /api/v3/organizations/{organisation}/environments/{environment}/commands:
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands:
     get:
       operationId: listCommands
       parameters:
@@ -9782,6 +10028,15 @@ paths:
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
         required: true
         schema:
           type: string
@@ -9796,12 +10051,8 @@ paths:
           type: string
         style: simple
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Command'
-          description: The commands
+        "501":
+          description: Command history listing is not yet supported
       summary: Get all commands for an environment
       tags:
       - Commands
@@ -9813,6 +10064,15 @@ paths:
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
         required: true
         schema:
           type: string
@@ -9839,10 +10099,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Command'
           description: The command
+        "404":
+          description: The environment not found
       summary: Create a command for an environment
       tags:
       - Commands
-  /api/v3/organizations/{organisation}/environments/{environment}/commands/{command}:
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands/{command}:
     get:
       operationId: getCommand
       parameters:
@@ -9851,6 +10113,15 @@ paths:
         explode: false
         in: path
         name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
         required: true
         schema:
           type: string
@@ -9864,7 +10135,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The command ID
+      - description: The command run ID
         example: test-cmd
         explode: false
         in: path
@@ -9880,6 +10151,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Command'
           description: The command
+        "404":
+          description: The command run not found
       summary: Get a command
       tags:
       - Commands
@@ -10765,8 +11038,9 @@ paths:
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/logs:
     get:
       description: "Retrieves logs from CloudWatch for the specified environment with\
-        \ optional filtering by time range, container, and pattern matching. Supports\
-        \ pagination via nextToken."
+        \ optional filtering by time range, container, and literal text. Newest-first\
+        \ by default; pass the nextToken from the previous response to fetch the next\
+        \ page."
       operationId: getEnvironmentLogs
       parameters:
       - description: The organisation ID
@@ -10820,7 +11094,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: CloudWatch Logs filter pattern for searching log content
+      - description: "Literal, case-sensitive text to match anywhere in the log message"
         explode: true
         in: query
         name: filterPattern
@@ -10828,24 +11102,47 @@ paths:
         schema:
           type: string
         style: form
-      - description: Maximum number of log entries to return per page
+      - description: Maximum number of log entries to return per page (default 50)
         explode: true
         in: query
         name: limit
         required: false
         schema:
-          maximum: 10000
+          default: 50
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
-      - description: Pagination token from previous response for retrieving next page
-          of results
+      - description: Opaque pagination token from the previous response. Pass back
+          unchanged to fetch the next page.
         explode: true
         in: query
         name: nextToken
         required: false
         schema:
           type: string
+        style: form
+      - description: "Sort order. desc returns newest first, asc returns oldest first."
+        explode: true
+        in: query
+        name: order
+        required: false
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - description: "When true, the response pagination object includes the total\
+          \ log count for the time range. Adds 1-2 seconds of latency."
+        explode: true
+        in: query
+        name: includeTotal
+        required: false
+        schema:
+          default: false
+          type: boolean
         style: form
       responses:
         "200":
@@ -10854,6 +11151,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/getEnvironmentLogs_200_response'
           description: The logs
+        "400":
+          description: Invalid startTime or endTime
         "404":
           description: The environment not found
         "422":
@@ -11548,6 +11847,114 @@ paths:
       summary: Get the status of a restore operation
       tags:
       - Restore Management
+  /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/idle-sleep:
+    get:
+      description: Retrieves the idle sleep setting and the current sleep state for
+        the environment.
+      operationId: getIdleSleep
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdleSleepResponse'
+          description: Idle sleep setting and state.
+        "403":
+          description: The caller lacks the required permission or token scope.
+        "404":
+          description: "Organisation, application or environment not found."
+      summary: Get Idle Sleep Setting
+      tags:
+      - IdleSleep
+    put:
+      description: Enable or disable idle sleep. Only Fargate compute sleeps. Disabling
+        a sleeping environment wakes it first; a 202 means it is still waking.
+      operationId: setIdleSleep
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdleSleepRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdleSleepResponse'
+          description: Applied.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdleSleepResponse'
+          description: Applied; environment still waking.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteAISession_200_response'
+          description: "The environment cannot use idle sleep. It runs on EC2 rather\
+            \ than Fargate, it has no web service, or its hostname is too long to\
+            \ route while asleep."
+        "403":
+          description: The caller lacks the required permission or token scope.
+        "404":
+          description: "Organisation, application or environment not found."
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
+          description: Validation failed. idleMinutes must be an integer from 10 to
+            1440.
+      summary: Set Idle Sleep Setting
+      tags:
+      - IdleSleep
   /oai/v1/chat/completions:
     post:
       description: "Drop-in replacement for OpenAI's POST /v1/chat/completions. Point\
@@ -11659,6 +12066,323 @@ paths:
       summary: Retrieve a model (OpenAI-compatible)
       tags:
       - OpenAI Compatibility
+  /api/v3/organizations/{organisation}/resources:
+    get:
+      operationId: listOrgResources
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrgResource'
+                type: array
+          description: The organisation's resources
+        "403":
+          description: Cloud access required
+      summary: List an organisation's shared resources
+      tags:
+      - Resources
+    post:
+      description: Object storage is provisioned synchronously and returns status
+        available. A Valkey cache is asynchronous and returns status provisioning;
+        poll the show endpoint until it reports available.
+      operationId: createOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createOrgResource_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgResource'
+          description: The created resource
+        "422":
+          description: "Invalid type, name or cache capacity"
+        "409":
+          description: A resource with this name already exists
+      summary: Create a shared resource
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}:
+    delete:
+      description: Deletes the resource and its contents. This cannot be undone. A
+        resource with live attachments is rejected unless force is set.
+      operationId: deleteOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Delete even if the resource is attached or in an error state
+        explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: Deleted
+        "409":
+          description: The resource is still attached
+      summary: Delete a shared resource
+      tags:
+      - Resources
+    get:
+      operationId: getOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgResource'
+          description: The resource
+        "404":
+          description: Resource not found
+      summary: Get a shared resource and its attachments
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/attachments:
+    post:
+      description: "Object storage credentials are written immediately and take effect\
+        \ on the environment's next deploy. Cache variables are rendered at the next\
+        \ deploy, so a cache may be attached while it is still provisioning. An environment\
+        \ accepts one attachment per resource type."
+      operationId: attachOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/attachOrgResource_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAttachment'
+          description: The attachment
+        "409":
+          description: An attachment of this type already exists for the environment
+      summary: Attach a resource to an application environment
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/attachments/{application}/{environment}:
+    delete:
+      description: "Removes the injected credentials and redeploys the environment\
+        \ so that it stops referencing them, which interrupts the environment briefly.\
+        \ The resource and its contents are not deleted."
+      operationId: detachOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: res-abc123
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The environment ID
+        example: production
+        explode: false
+        in: path
+        name: environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Detached; the environment is redeploying
+        "404":
+          description: No such attachment
+      summary: Detach a resource from an application environment
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/credentials:
+    get:
+      description: "Cache resources only. Returns the cache-wide user (every key,\
+        \ every command, including FLUSHDB) with host and port. Environments attached\
+        \ to the cache use their own scoped users; this credential is for operators\
+        \ who genuinely need unrestricted access. Every read is audit-logged against\
+        \ the requesting user."
+      operationId: getOrgResourceCredentials
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: vk-sessions
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getOrgResourceCredentials_200_response'
+          description: The admin credential
+        "409":
+          description: "Not a cache resource, or not yet available"
+      summary: Get a cache's administrative credential
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/purge:
+    post:
+      description: "Cache resources only. scope environment deletes that environment's\
+        \ keys, using the CACHE_PREFIX recorded on its attachment rather than anything\
+        \ in the request. scope all flushes every key for every attached environment\
+        \ and requires confirm=true. A large environment purge may return complete=false\
+        \ with a cursor to resume."
+      operationId: purgeOrgResource
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The resource ID
+        example: vk-sessions
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/purgeOrgResource_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purgeOrgResource_200_response'
+          description: Purge result
+        "422":
+          description: "Invalid scope, missing application/environment, or scope all\
+            \ without confirm"
+        "404":
+          description: No such attachment
+      summary: Purge keys from a cache
+      tags:
+      - Resources
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
     delete:
       description: "Deletes a specific scaling policy for the environment. Specify\
@@ -12437,6 +13161,116 @@ components:
       required:
       - appName
       - composeDefinition
+      type: object
+    OrgResource:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        resourceId: os-buzz-media
+        orgName: test-org
+        scope: org
+        name: buzz-media
+        type: object-storage
+        physical: "{}"
+        config: "{}"
+        status: provisioning
+      properties:
+        orgName:
+          example: test-org
+          type: string
+        resourceId:
+          example: os-buzz-media
+          type: string
+        type:
+          enum:
+          - object-storage
+          - valkey
+          example: object-storage
+          type: string
+        name:
+          example: buzz-media
+          type: string
+        status:
+          enum:
+          - provisioning
+          - available
+          - deleting
+          - error
+          type: string
+        scope:
+          description: org for resources managed by these endpoints. app rows are
+            compatibility records for an application-managed cache and cannot be mutated
+            here.
+          enum:
+          - org
+          - app
+          type: string
+        config:
+          description: "Type-specific settings, such as dataStorageMaxGb for a cache"
+          type: object
+        physical:
+          description: "Provisioned detail: bucket and region for object storage,\
+            \ cache identifier and endpoint for a cache"
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      title: Shared resource
+      type: object
+    ResourceAttachment:
+      example:
+        accessKeyId: accessKeyId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        note: note
+        cacheUserId: cacheUserId
+        accessLevel: scoped
+        appName: test-app
+        envName: production
+        envVarPrefix: MEDIA
+        injectedKeys:
+        - injectedKeys
+        - injectedKeys
+      properties:
+        appName:
+          example: test-app
+          type: string
+        envName:
+          example: production
+          type: string
+        envVarPrefix:
+          description: "Namespaces every injected variable, so MEDIA yields MEDIA_S3_BUCKET"
+          example: MEDIA
+          type: string
+        accessKeyId:
+          description: Object storage only. The secret half is written to the environment's
+            secrets and never returned.
+          type: string
+        cacheUserId:
+          description: "Cache only. This environment's own RBAC user, limited to its\
+            \ CACHE_PREFIX with FLUSHALL and FLUSHDB denied, so it cannot touch another\
+            \ environment's keys."
+          type: string
+        accessLevel:
+          description: "Cache only. scoped: the environment holds its own RBAC user.\
+            \ admin: it holds the cache-wide credential and can read, write and flush\
+            \ every attached environment's keys. Absent on attachments made before\
+            \ access levels existed (treated as scoped)."
+          enum:
+          - scoped
+          - admin
+          type: string
+        injectedKeys:
+          description: "The exact variable names this attachment wrote, removed precisely\
+            \ on detach"
+          items:
+            type: string
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        note:
+          description: When the credentials take effect
+          type: string
+      title: Resource attachment
       type: object
     V1SearchHit:
       description: Generic search hit; fields vary by index
@@ -13412,6 +14246,51 @@ components:
       required:
       - envName
       type: object
+    SetIdleSleepRequest:
+      example:
+        enabled: true
+        idleMinutes: 124
+      properties:
+        enabled:
+          description: Whether the environment sleeps when idle.
+          type: boolean
+        idleMinutes:
+          default: 30
+          description: Minutes with no requests before compute sleeps.
+          maximum: 1440
+          minimum: 10
+          type: integer
+      required:
+      - enabled
+      type: object
+    IdleSleepResponse:
+      example:
+        state: awake
+        stateChangedAt: 2000-01-23T04:56:07.000+00:00
+        enabled: true
+        idleMinutes: 0
+      properties:
+        enabled:
+          type: boolean
+        idleMinutes:
+          nullable: true
+          type: integer
+        state:
+          enum:
+          - awake
+          - sleeping
+          - waking
+          type: string
+        stateChangedAt:
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - enabled
+      - idleMinutes
+      - state
+      - stateChangedAt
+      type: object
     SetScalingPolicyRequest:
       example:
         scaleOutCooldownSeconds: 6
@@ -14020,7 +14899,7 @@ components:
             type: string
           type: array
         user_agent:
-          description: "Custom user agent, only when browser_mode is false"
+          description: Custom user agent. Valid with or without browser_mode.
           example: Mozilla/5.0...
           type: string
         assets:
@@ -18005,6 +18884,23 @@ components:
           example: "12345"
           type: string
       type: object
+    KV_delete_409_response:
+      example:
+        hint: "Purge its keys first, or pass force=true to delete it with its data"
+        error: true
+        message: KV store is not empty
+      properties:
+        error:
+          example: true
+          type: boolean
+        message:
+          example: KV store is not empty
+          type: string
+        hint:
+          example: "Purge its keys first, or pass force=true to delete it with its\
+            \ data"
+          type: string
+      type: object
     KV_link_to_project_request:
       properties:
         project_id:
@@ -18038,6 +18934,38 @@ components:
           type: string
         value:
           type: string
+      type: object
+    KV_items_purge_200_response:
+      example:
+        deleted: 12
+        scanned: 40
+        status: complete
+      properties:
+        status:
+          example: complete
+          type: string
+        deleted:
+          example: 12
+          type: integer
+        scanned:
+          example: 40
+          type: integer
+      type: object
+    KV_items_purge_202_response:
+      example:
+        deleted: 21825
+        scanned: 22000
+        status: in_progress
+      properties:
+        status:
+          example: in_progress
+          type: string
+        deleted:
+          example: 21825
+          type: integer
+        scanned:
+          example: 22000
+          type: integer
       type: object
     KV_items_show_200_response_value:
       description: "Item value (decoded from JSON if applicable). Returns '[ENCRYPTED]'\
@@ -18105,6 +19033,109 @@ components:
       required:
       - cache_keys
       - scope
+      type: object
+    getProjectLogs_200_response_logs_inner:
+      example:
+        status_code: 0
+        method: method
+        bytes: 6
+        domain: domain
+        project: project
+        client_ip: client_ip
+        cache_status: cache_status
+        uri: uri
+        user_agent: user_agent
+        time_taken: 1.4658129
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        project:
+          nullable: true
+          type: string
+        domain:
+          nullable: true
+          type: string
+        method:
+          nullable: true
+          type: string
+        uri:
+          nullable: true
+          type: string
+        status_code:
+          nullable: true
+          type: integer
+        cache_status:
+          nullable: true
+          type: string
+        client_ip:
+          nullable: true
+          type: string
+        user_agent:
+          nullable: true
+          type: string
+        bytes:
+          nullable: true
+          type: integer
+        time_taken:
+          format: float
+          nullable: true
+          type: number
+      type: object
+    getProjectLogs_200_response:
+      example:
+        nextToken: nextToken
+        count: 5
+        logs:
+        - status_code: 0
+          method: method
+          bytes: 6
+          domain: domain
+          project: project
+          client_ip: client_ip
+          cache_status: cache_status
+          uri: uri
+          user_agent: user_agent
+          time_taken: 1.4658129
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - status_code: 0
+          method: method
+          bytes: 6
+          domain: domain
+          project: project
+          client_ip: client_ip
+          cache_status: cache_status
+          uri: uri
+          user_agent: user_agent
+          time_taken: 1.4658129
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        logs:
+          description: "Structured CloudFront access log entries. Each entry carries\
+            \ request, response, timing and cache fields as emitted by the edge."
+          items:
+            $ref: '#/components/schemas/getProjectLogs_200_response_logs_inner'
+          type: array
+        count:
+          description: Number of entries in this response
+          type: integer
+        nextToken:
+          description: "Token for the next page, or null when there are no more entries"
+          nullable: true
+          type: string
+      type: object
+    getProjectLogs_400_response:
+      example:
+        error: true
+        message: message
+      properties:
+        error:
+          example: true
+          type: boolean
+        message:
+          type: string
       type: object
     Tokens_list_200_response_inner:
       example:
@@ -20709,6 +21740,59 @@ components:
       - count
       - executions
       - orgId
+      type: object
+    listMcpServers_200_response_servers_inner:
+      example:
+        displayName: displayName
+        serverName: serverName
+        toolAllowlist:
+        - toolAllowlist
+        - toolAllowlist
+        url: url
+        enabled: true
+      properties:
+        serverName:
+          type: string
+        displayName:
+          type: string
+        url:
+          description: MCP gateway URL
+          type: string
+        enabled:
+          type: boolean
+        toolAllowlist:
+          items:
+            type: string
+          type: array
+      type: object
+    listMcpServers_200_response:
+      example:
+        servers:
+        - displayName: displayName
+          serverName: serverName
+          toolAllowlist:
+          - toolAllowlist
+          - toolAllowlist
+          url: url
+          enabled: true
+        - displayName: displayName
+          serverName: serverName
+          toolAllowlist:
+          - toolAllowlist
+          - toolAllowlist
+          url: url
+          enabled: true
+        gatewayBaseUrl: gatewayBaseUrl
+      properties:
+        gatewayBaseUrl:
+          description: "Origin of the MCP gateway host (scheme://host[:port]) — clients\
+            \ treat gateway URLs on this origin as bearer-authenticated with the end\
+            \ user's Quant token"
+          type: string
+        servers:
+          items:
+            $ref: '#/components/schemas/listMcpServers_200_response_servers_inner'
+          type: array
       type: object
     listAIAgents_200_response_agents_inner:
       example:
@@ -23631,7 +24715,8 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/getGovernanceConfig_200_response_spendLimits_interfaceLimits_value'
           description: "Aggregate spend caps per interface label (slack, autonomous,\
-            \ api-gateway, streaming, websocket). Keys are interface labels."
+            \ api-gateway, streaming, websocket, durable, orchestration, workflow,\
+            \ embedding, ai-search). Keys are interface labels."
           type: object
         userOverrides:
           additionalProperties:
@@ -24080,6 +25165,13 @@ components:
       properties:
         command:
           type: string
+        containerName:
+          description: Target container (defaults to the first container in the task
+            definition)
+          nullable: true
+          type: string
+      required:
+      - command
       type: object
     patchEnvironmentCompose_request_spotConfiguration:
       nullable: true
@@ -24401,23 +25493,74 @@ components:
       type: object
     getEnvironmentLogs_200_response_logEvents_inner:
       example:
+        ingestionTime: 6
+        logStreamName: logStreamName
         message: message
         timestamp: 0
       properties:
         timestamp:
           description: Unix timestamp in milliseconds
+          format: int64
           type: integer
         message:
           description: Log message content
           type: string
+        ingestionTime:
+          description: Unix timestamp in milliseconds when CloudWatch ingested the
+            event
+          format: int64
+          nullable: true
+          type: integer
+        logStreamName:
+          description: "CloudWatch log stream, named container/container/taskId"
+          nullable: true
+          type: string
+      type: object
+    getEnvironmentLogs_200_response_pagination:
+      example:
+        total: 5
+        nextToken: nextToken
+        limit: 1
+        hasMore: true
+        totalPages: 5
+      properties:
+        limit:
+          description: Page size that was applied
+          type: integer
+        hasMore:
+          description: True when another page is available
+          type: boolean
+        nextToken:
+          description: Token for the next page. Present only when hasMore is true.
+          nullable: true
+          type: string
+        total:
+          description: Total events in the time range. Present only when includeTotal=true.
+          nullable: true
+          type: integer
+        totalPages:
+          description: ceil(total / limit). Present only when includeTotal=true.
+          nullable: true
+          type: integer
       type: object
     getEnvironmentLogs_200_response:
       example:
         logEvents:
-        - message: message
+        - ingestionTime: 6
+          logStreamName: logStreamName
+          message: message
           timestamp: 0
-        - message: message
+        - ingestionTime: 6
+          logStreamName: logStreamName
+          message: message
           timestamp: 0
+        pagination:
+          total: 5
+          nextToken: nextToken
+          limit: 1
+          hasMore: true
+          totalPages: 5
+        logGroupName: logGroupName
         nextToken: nextToken
       properties:
         logEvents:
@@ -24425,8 +25568,14 @@ components:
           items:
             $ref: '#/components/schemas/getEnvironmentLogs_200_response_logEvents_inner'
           type: array
+        logGroupName:
+          description: CloudWatch log group the events were read from
+          nullable: true
+          type: string
+        pagination:
+          $ref: '#/components/schemas/getEnvironmentLogs_200_response_pagination'
         nextToken:
-          description: Token for fetching next page of results (null if no more pages)
+          description: Same as pagination.nextToken; kept for backward compatibility
           nullable: true
           type: string
       type: object
@@ -24979,6 +26128,132 @@ components:
         owned_by:
           example: quant
           type: string
+      type: object
+    createOrgResource_request_config:
+      description: Valkey only
+      properties:
+        dataStorageMaxGb:
+          example: 2
+          maximum: 50
+          minimum: 1
+          type: integer
+      type: object
+    createOrgResource_request:
+      properties:
+        type:
+          enum:
+          - object-storage
+          - valkey
+          example: object-storage
+          type: string
+        name:
+          description: "Lowercase letters, numbers and hyphens, 2-41 characters, starting\
+            \ with a letter or number"
+          example: buzz-media
+          type: string
+        config:
+          $ref: '#/components/schemas/createOrgResource_request_config'
+      required:
+      - name
+      - type
+      type: object
+    attachOrgResource_request:
+      properties:
+        application:
+          example: test-app
+          type: string
+        environment:
+          example: production
+          type: string
+        envVarPrefix:
+          description: "Namespaces every injected variable, so MEDIA yields MEDIA_S3_BUCKET"
+          example: MEDIA
+          type: string
+        accessLevel:
+          default: scoped
+          description: "Cache only. scoped injects an RBAC user limited to this environment's\
+            \ CACHE_PREFIX (plain and {hash-tag} forms) with FLUSHALL and FLUSHDB\
+            \ denied. admin injects the cache-wide credential for integrations that\
+            \ require FLUSHDB, such as Laravel Cache::flush() or the WordPress object\
+            \ cache without selective flush; it can read, write and flush every attached\
+            \ environment's keys."
+          enum:
+          - scoped
+          - admin
+          type: string
+      required:
+      - application
+      - environment
+      type: object
+    getOrgResourceCredentials_200_response:
+      example:
+        note: note
+        password: password
+        port: 6379
+        host: host
+        tls: true
+        username: username
+      properties:
+        host:
+          type: string
+        port:
+          example: 6379
+          type: integer
+        tls:
+          example: true
+          type: boolean
+        username:
+          type: string
+        password:
+          type: string
+        note:
+          type: string
+      type: object
+    purgeOrgResource_request:
+      properties:
+        scope:
+          enum:
+          - environment
+          - all
+          type: string
+        application:
+          description: scope environment only
+          example: test-app
+          type: string
+        environment:
+          description: scope environment only
+          example: production
+          type: string
+        confirm:
+          description: scope all only; must be true
+          type: boolean
+        cursor:
+          description: scope environment only; resume a partial purge
+          type: string
+      required:
+      - scope
+      type: object
+    purgeOrgResource_200_response:
+      example:
+        cursor: cursor
+        prefix: prefix
+        scope: scope
+        deletedKeys: 0
+        complete: true
+        flushed: true
+      properties:
+        scope:
+          type: string
+        prefix:
+          type: string
+        deletedKeys:
+          type: integer
+        complete:
+          type: boolean
+        cursor:
+          type: string
+        flushed:
+          type: boolean
       type: object
     getSshAccessCredentials_200_response_credentials:
       example:

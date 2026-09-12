@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **PerUserMonthlyBudgetCents** | Pointer to **NullableInt32** |  | [optional] 
 **PerUserDailyBudgetCents** | Pointer to **NullableInt32** |  | [optional] 
 **WarningThresholdPercent** | Pointer to **NullableInt32** |  | [optional] 
-**InterfaceLimits** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue**](GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue.md) | Aggregate spend caps per interface label (slack, autonomous, api-gateway, streaming, websocket). Keys are interface labels. | [optional] 
+**InterfaceLimits** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue**](GetGovernanceConfig200ResponseSpendLimitsInterfaceLimitsValue.md) | Aggregate spend caps per interface label (slack, autonomous, api-gateway, streaming, websocket, durable, orchestration, workflow, embedding, ai-search). Keys are interface labels. | [optional] 
 **UserOverrides** | Pointer to [**map[string]GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue**](GetGovernanceConfig200ResponseSpendLimitsUserOverridesValue.md) | Per-user budget overrides keyed by userId (numeric portal id, slack-&lt;id&gt;, or system:code-agent). Replaces the flat per-user budget for that user; unlimited&#x3D;true exempts them. | [optional] 
 **PerTokenMonthlyBudgetCents** | Pointer to **NullableInt32** | Flat monthly cap in cents applied to every API token without a named override | [optional] 
 **PerTokenDailyBudgetCents** | Pointer to **NullableInt32** | Flat daily cap in cents applied to every API token without a named override | [optional] 

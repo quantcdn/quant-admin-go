@@ -22,6 +22,21 @@ func Test_quantadmingo_ProjectsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test ProjectsAPIService GetProjectLogs", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+
+		resp, httpRes, err := apiClient.ProjectsAPI.GetProjectLogs(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ProjectsAPIService ProjectsCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

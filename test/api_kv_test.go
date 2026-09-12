@@ -101,6 +101,22 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KVAPIService KVItemsPurge", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVItemsPurge(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KVAPIService KVItemsShow", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
