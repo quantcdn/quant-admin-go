@@ -45,6 +45,8 @@ type V2Crawler struct {
 	WebhookExtraVars *string `json:"webhook_extra_vars,omitempty"`
 	// Browser mode enabled
 	BrowserMode *bool `json:"browser_mode,omitempty"`
+	// Content tracking enabled: the crawl reports progress and page status to the project tracking site
+	Tracking *bool `json:"tracking,omitempty"`
 	// Number of concurrent workers
 	Workers *int32 `json:"workers,omitempty"`
 	// Delay between requests in seconds
@@ -455,6 +457,38 @@ func (o *V2Crawler) HasBrowserMode() bool {
 // SetBrowserMode gets a reference to the given bool and assigns it to the BrowserMode field.
 func (o *V2Crawler) SetBrowserMode(v bool) {
 	o.BrowserMode = &v
+}
+
+// GetTracking returns the Tracking field value if set, zero value otherwise.
+func (o *V2Crawler) GetTracking() bool {
+	if o == nil || IsNil(o.Tracking) {
+		var ret bool
+		return ret
+	}
+	return *o.Tracking
+}
+
+// GetTrackingOk returns a tuple with the Tracking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetTrackingOk() (*bool, bool) {
+	if o == nil || IsNil(o.Tracking) {
+		return nil, false
+	}
+	return o.Tracking, true
+}
+
+// HasTracking returns a boolean if a field has been set.
+func (o *V2Crawler) HasTracking() bool {
+	if o != nil && !IsNil(o.Tracking) {
+		return true
+	}
+
+	return false
+}
+
+// SetTracking gets a reference to the given bool and assigns it to the Tracking field.
+func (o *V2Crawler) SetTracking(v bool) {
+	o.Tracking = &v
 }
 
 // GetWorkers returns the Workers field value if set, zero value otherwise.
@@ -1111,6 +1145,9 @@ func (o V2Crawler) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BrowserMode) {
 		toSerialize["browser_mode"] = o.BrowserMode
 	}
+	if !IsNil(o.Tracking) {
+		toSerialize["tracking"] = o.Tracking
+	}
 	if !IsNil(o.Workers) {
 		toSerialize["workers"] = o.Workers
 	}
@@ -1227,6 +1264,7 @@ func (o *V2Crawler) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "webhook_auth_header")
 		delete(additionalProperties, "webhook_extra_vars")
 		delete(additionalProperties, "browser_mode")
+		delete(additionalProperties, "tracking")
 		delete(additionalProperties, "workers")
 		delete(additionalProperties, "delay")
 		delete(additionalProperties, "depth")
