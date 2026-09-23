@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **MaxCapacity** | Pointer to **int32** | Maximum capacity for autoscaling | [optional] 
 **PublicIpAddress** | Pointer to **NullableString** | Public IP address for SSH access | [optional] [readonly] 
 **DeploymentStatus** | Pointer to **string** | Current deployment status | [optional] [readonly] 
-**DeploymentFailureType** | Pointer to **NullableString** | Type of deployment failure | [optional] [readonly] 
+**DeploymentFailureType** | Pointer to **NullableString** | Why the most recent task stopped. SPOT_INTERRUPTION is informational: AWS reclaimed the task and ECS replaces it. | [optional] [readonly] 
 **DeploymentFailureReason** | Pointer to **NullableString** | Reason for deployment failure | [optional] [readonly] 
 **TaskDefinition** | Pointer to **map[string]interface{}** | ECS task definition details | [optional] [readonly] 
 **Service** | Pointer to **map[string]interface{}** | ECS service details | [optional] [readonly] 

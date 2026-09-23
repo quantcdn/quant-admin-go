@@ -37,7 +37,7 @@ type EnvironmentResponse struct {
 	PublicIpAddress NullableString `json:"publicIpAddress,omitempty"`
 	// Current deployment status
 	DeploymentStatus *string `json:"deploymentStatus,omitempty"`
-	// Type of deployment failure
+	// Why the most recent task stopped. SPOT_INTERRUPTION is informational: AWS reclaimed the task and ECS replaces it.
 	DeploymentFailureType NullableString `json:"deploymentFailureType,omitempty"`
 	// Reason for deployment failure
 	DeploymentFailureReason NullableString `json:"deploymentFailureReason,omitempty"`

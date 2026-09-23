@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Crawler name | [optional] 
 **Domain** | **string** | Domain to crawl | 
 **BrowserMode** | Pointer to **bool** | Enable browser mode | [optional] [default to false]
+**Tracking** | Pointer to **bool** | Enable content tracking. Records crawl progress and per-page status against the project tracking site. Needs no domain verification. | [optional] [default to false]
 **Urls** | Pointer to **[]string** | URLs to crawl | [optional] 
 **StartUrls** | Pointer to **[]string** | Starting URLs for crawl | [optional] 
 **Headers** | Pointer to **map[string]string** | Custom headers | [optional] 
@@ -115,6 +116,31 @@ SetBrowserMode sets BrowserMode field to given value.
 `func (o *V2CrawlerRequest) HasBrowserMode() bool`
 
 HasBrowserMode returns a boolean if a field has been set.
+
+### GetTracking
+
+`func (o *V2CrawlerRequest) GetTracking() bool`
+
+GetTracking returns the Tracking field if non-nil, zero value otherwise.
+
+### GetTrackingOk
+
+`func (o *V2CrawlerRequest) GetTrackingOk() (*bool, bool)`
+
+GetTrackingOk returns a tuple with the Tracking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTracking
+
+`func (o *V2CrawlerRequest) SetTracking(v bool)`
+
+SetTracking sets Tracking field to given value.
+
+### HasTracking
+
+`func (o *V2CrawlerRequest) HasTracking() bool`
+
+HasTracking returns a boolean if a field has been set.
 
 ### GetUrls
 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **WebhookAuthHeader** | Pointer to **string** | Authorization header for webhook | [optional] 
 **WebhookExtraVars** | Pointer to **string** | Extra variables for webhook | [optional] 
 **BrowserMode** | Pointer to **bool** | Browser mode enabled | [optional] 
+**Tracking** | Pointer to **bool** | Content tracking enabled: the crawl reports progress and page status to the project tracking site | [optional] 
 **Workers** | Pointer to **int32** | Number of concurrent workers | [optional] 
 **Delay** | Pointer to **float32** | Delay between requests in seconds | [optional] 
 **Depth** | Pointer to **int32** | Maximum crawl depth | [optional] 
@@ -329,6 +330,31 @@ SetBrowserMode sets BrowserMode field to given value.
 `func (o *V2Crawler) HasBrowserMode() bool`
 
 HasBrowserMode returns a boolean if a field has been set.
+
+### GetTracking
+
+`func (o *V2Crawler) GetTracking() bool`
+
+GetTracking returns the Tracking field if non-nil, zero value otherwise.
+
+### GetTrackingOk
+
+`func (o *V2Crawler) GetTrackingOk() (*bool, bool)`
+
+GetTrackingOk returns a tuple with the Tracking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTracking
+
+`func (o *V2Crawler) SetTracking(v bool)`
+
+SetTracking sets Tracking field to given value.
+
+### HasTracking
+
+`func (o *V2Crawler) HasTracking() bool`
+
+HasTracking returns a boolean if a field has been set.
 
 ### GetWorkers
 
