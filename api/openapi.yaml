@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: Unified API for QuantCDN Admin and QuantCloud Platform services
   title: QuantCDN API
-  version: 4.22.0
+  version: 4.24.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -4560,6 +4560,252 @@ paths:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
       summary: Update an edge function rule
+      tags:
+      - Rules
+  /api/v2/organizations/{organization}/projects/{project}/rules/error-page:
+    get:
+      operationId: RulesErrorPage_list
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/V2RuleErrorPage'
+                type: array
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: List custom error page rules
+      tags:
+      - Rules
+    post:
+      operationId: RulesErrorPage_create
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V2RuleErrorPageRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2RuleErrorPage'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: Create a custom error page rule
+      tags:
+      - Rules
+  /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule}:
+    delete:
+      operationId: RulesErrorPage_delete
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Rule identifier
+        explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: Delete a custom error page rule
+      tags:
+      - Rules
+    get:
+      operationId: RulesErrorPage_read
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Rule identifier
+        explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2RuleErrorPage'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: Get details of a custom error page rule
+      tags:
+      - Rules
+    patch:
+      operationId: RulesErrorPage_update
+      parameters:
+      - description: Organization identifier
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Project identifier
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Rule identifier
+        explode: false
+        in: path
+        name: rule
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V2RuleErrorPageRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2RuleErrorPage'
+          description: The request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The server could not understand the request due to invalid
+            syntax.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: Update a custom error page rule
       tags:
       - Rules
   /api/v2/organizations/{organization}/projects/{project}/rules/headers:
@@ -17311,6 +17557,143 @@ components:
         - GET
         - POST
         ip: ip_is
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        country_is_not:
+        - CN
+        - RU
+        asn_is_not:
+        - "13335"
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        disabled: false
+        asn: any
+      type: object
+    V2RuleErrorPageAction:
+      example:
+        error_page_path: /fr/_quant404
+        status_codes:
+        - "404"
+      properties:
+        error_page_path:
+          description: Published path of the page to serve as the error page
+          example: /fr/_quant404
+          type: string
+        status_codes:
+          description: Status codes this page is served for
+          example:
+          - "404"
+          items:
+            type: string
+          type: array
+      required:
+      - error_page_path
+      - status_codes
+      type: object
+    V2RuleErrorPage:
+      allOf:
+      - $ref: '#/components/schemas/V2Rule'
+      - properties:
+          action_config:
+            $ref: '#/components/schemas/V2RuleErrorPageAction'
+        required:
+        - action_config
+        type: object
+      example:
+        country: US
+        asn_is:
+        - "15169"
+        - "8075"
+        method: GET
+        ip_is_not:
+        - 172.16.0.0/12
+        only_with_cookie: session_id
+        method_is:
+        - GET
+        - POST
+        ip: 192.168.1.1
+        weight: 100
+        country_is:
+        - US
+        - CA
+        - GB
+        method_is_not:
+        - DELETE
+        - PUT
+        uuid: 123e4567-e89b-12d3-a456-426614174000
+        url:
+        - /old-path/*
+        - /legacy/*
+        rule_id: rule-001
+        asn_is_not:
+        - "13335"
+        country_is_not:
+        - CN
+        - RU
+        domain:
+        - test-domain.com
+        - '*.test-domain.com'
+        name: Test redirect rule
+        ip_is:
+        - 192.168.1.0/24
+        - 10.0.0.1
+        action: redirect
+        disabled: false
+        asn: any
+        action_config:
+          error_page_path: /fr/_quant404
+          status_codes:
+          - "404"
+      type: object
+    V2RuleErrorPageRequest:
+      allOf:
+      - $ref: '#/components/schemas/V2RuleRequest'
+      - properties:
+          error_page_path:
+            description: Published path of the page to serve as the error page
+            example: /fr/_quant404
+            type: string
+          status_codes:
+            description: Status codes this page is served for
+            example:
+            - "404"
+            items:
+              type: string
+            type: array
+        required:
+        - error_page_path
+        - status_codes
+        type: object
+      example:
+        country: country_is
+        asn_is:
+        - "15169"
+        - "8075"
+        method: method_is
+        ip_is_not:
+        - 172.16.0.0/12
+        method_is:
+        - GET
+        - POST
+        ip: ip_is
+        error_page_path: /fr/_quant404
+        status_codes:
+        - "404"
         weight: 100
         country_is:
         - US

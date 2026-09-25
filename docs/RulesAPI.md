@@ -24,6 +24,11 @@ Method | HTTP request | Description
 [**RulesCustomResponseList**](RulesAPI.md#RulesCustomResponseList) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/custom-response | List custom response rules
 [**RulesCustomResponseRead**](RulesAPI.md#RulesCustomResponseRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Get details of a custom response rule
 [**RulesCustomResponseUpdate**](RulesAPI.md#RulesCustomResponseUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/rules/custom-response/{rule} | Update a custom response rule
+[**RulesErrorPageCreate**](RulesAPI.md#RulesErrorPageCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/rules/error-page | Create a custom error page rule
+[**RulesErrorPageDelete**](RulesAPI.md#RulesErrorPageDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule} | Delete a custom error page rule
+[**RulesErrorPageList**](RulesAPI.md#RulesErrorPageList) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/error-page | List custom error page rules
+[**RulesErrorPageRead**](RulesAPI.md#RulesErrorPageRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule} | Get details of a custom error page rule
+[**RulesErrorPageUpdate**](RulesAPI.md#RulesErrorPageUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/rules/error-page/{rule} | Update a custom error page rule
 [**RulesFunctionCreate**](RulesAPI.md#RulesFunctionCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/rules/function | Create an edge function rule
 [**RulesFunctionDelete**](RulesAPI.md#RulesFunctionDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/rules/function/{rule} | Delete an edge function rule
 [**RulesFunctionList**](RulesAPI.md#RulesFunctionList) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/function | List edge function rules
@@ -1501,6 +1506,372 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**V2RuleCustomResponse**](V2RuleCustomResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesErrorPageCreate
+
+> V2RuleErrorPage RulesErrorPageCreate(ctx, organization, project).V2RuleErrorPageRequest(v2RuleErrorPageRequest).Execute()
+
+Create a custom error page rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	v2RuleErrorPageRequest := *openapiclient.NewV2RuleErrorPageRequest([]string{"Domain_example"}, []string{"Url_example"}, "/fr/_quant404", []string{"StatusCodes_example"}) // V2RuleErrorPageRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesErrorPageCreate(context.Background(), organization, project).V2RuleErrorPageRequest(v2RuleErrorPageRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesErrorPageCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesErrorPageCreate`: V2RuleErrorPage
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesErrorPageCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesErrorPageCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **v2RuleErrorPageRequest** | [**V2RuleErrorPageRequest**](V2RuleErrorPageRequest.md) |  | 
+
+### Return type
+
+[**V2RuleErrorPage**](V2RuleErrorPage.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesErrorPageDelete
+
+> RulesErrorPageDelete(ctx, organization, project, rule).Execute()
+
+Delete a custom error page rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	rule := "rule_example" // string | Rule identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.RulesAPI.RulesErrorPageDelete(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesErrorPageDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**rule** | **string** | Rule identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesErrorPageDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesErrorPageList
+
+> []V2RuleErrorPage RulesErrorPageList(ctx, organization, project).Execute()
+
+List custom error page rules
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesErrorPageList(context.Background(), organization, project).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesErrorPageList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesErrorPageList`: []V2RuleErrorPage
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesErrorPageList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesErrorPageListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]V2RuleErrorPage**](V2RuleErrorPage.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesErrorPageRead
+
+> V2RuleErrorPage RulesErrorPageRead(ctx, organization, project, rule).Execute()
+
+Get details of a custom error page rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	rule := "rule_example" // string | Rule identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesErrorPageRead(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesErrorPageRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesErrorPageRead`: V2RuleErrorPage
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesErrorPageRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**rule** | **string** | Rule identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesErrorPageReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**V2RuleErrorPage**](V2RuleErrorPage.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesErrorPageUpdate
+
+> V2RuleErrorPage RulesErrorPageUpdate(ctx, organization, project, rule).V2RuleErrorPageRequest(v2RuleErrorPageRequest).Execute()
+
+Update a custom error page rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	rule := "rule_example" // string | Rule identifier
+	v2RuleErrorPageRequest := *openapiclient.NewV2RuleErrorPageRequest([]string{"Domain_example"}, []string{"Url_example"}, "/fr/_quant404", []string{"StatusCodes_example"}) // V2RuleErrorPageRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesErrorPageUpdate(context.Background(), organization, project, rule).V2RuleErrorPageRequest(v2RuleErrorPageRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesErrorPageUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesErrorPageUpdate`: V2RuleErrorPage
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesErrorPageUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**rule** | **string** | Rule identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesErrorPageUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **v2RuleErrorPageRequest** | [**V2RuleErrorPageRequest**](V2RuleErrorPageRequest.md) |  | 
+
+### Return type
+
+[**V2RuleErrorPage**](V2RuleErrorPage.md)
 
 ### Authorization
 

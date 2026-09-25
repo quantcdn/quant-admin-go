@@ -493,6 +493,9 @@ docs/V2RuleContentFilterRequest.md
 docs/V2RuleCustomResponse.md
 docs/V2RuleCustomResponseAction.md
 docs/V2RuleCustomResponseRequest.md
+docs/V2RuleErrorPage.md
+docs/V2RuleErrorPageAction.md
+docs/V2RuleErrorPageRequest.md
 docs/V2RuleFunction.md
 docs/V2RuleFunctionAction.md
 docs/V2RuleFunctionRequest.md
@@ -936,6 +939,9 @@ model_v2_rule_content_filter_request.go
 model_v2_rule_custom_response.go
 model_v2_rule_custom_response_action.go
 model_v2_rule_custom_response_request.go
+model_v2_rule_error_page.go
+model_v2_rule_error_page_action.go
+model_v2_rule_error_page_request.go
 model_v2_rule_function.go
 model_v2_rule_function_action.go
 model_v2_rule_function_request.go
