@@ -19,7 +19,7 @@ var _ MappedNullable = &GetMyUsage200ResponseMonthly{}
 
 // GetMyUsage200ResponseMonthly struct for GetMyUsage200ResponseMonthly
 type GetMyUsage200ResponseMonthly struct {
-	SpendCents *int32 `json:"spendCents,omitempty"`
+	SpendCents *float32 `json:"spendCents,omitempty"`
 	RequestCount *int32 `json:"requestCount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -44,9 +44,9 @@ func NewGetMyUsage200ResponseMonthlyWithDefaults() *GetMyUsage200ResponseMonthly
 }
 
 // GetSpendCents returns the SpendCents field value if set, zero value otherwise.
-func (o *GetMyUsage200ResponseMonthly) GetSpendCents() int32 {
+func (o *GetMyUsage200ResponseMonthly) GetSpendCents() float32 {
 	if o == nil || IsNil(o.SpendCents) {
-		var ret int32
+		var ret float32
 		return ret
 	}
 	return *o.SpendCents
@@ -54,7 +54,7 @@ func (o *GetMyUsage200ResponseMonthly) GetSpendCents() int32 {
 
 // GetSpendCentsOk returns a tuple with the SpendCents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetMyUsage200ResponseMonthly) GetSpendCentsOk() (*int32, bool) {
+func (o *GetMyUsage200ResponseMonthly) GetSpendCentsOk() (*float32, bool) {
 	if o == nil || IsNil(o.SpendCents) {
 		return nil, false
 	}
@@ -70,8 +70,8 @@ func (o *GetMyUsage200ResponseMonthly) HasSpendCents() bool {
 	return false
 }
 
-// SetSpendCents gets a reference to the given int32 and assigns it to the SpendCents field.
-func (o *GetMyUsage200ResponseMonthly) SetSpendCents(v int32) {
+// SetSpendCents gets a reference to the given float32 and assigns it to the SpendCents field.
+func (o *GetMyUsage200ResponseMonthly) SetSpendCents(v float32) {
 	o.SpendCents = &v
 }
 

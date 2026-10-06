@@ -23,6 +23,65 @@ import (
 type DomainsAPI interface {
 
 	/*
+	DNSCreateRecord Create an A record
+
+	dns:write and add_domains are required. Existing names are rejected; this endpoint does not update records. Only organization-wide tokens are accepted.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param zoneId
+	@return DomainsAPIDNSCreateRecordRequest
+	*/
+	DNSCreateRecord(ctx context.Context, organization string, zoneId string) DomainsAPIDNSCreateRecordRequest
+
+	// DNSCreateRecordExecute executes the request
+	DNSCreateRecordExecute(r DomainsAPIDNSCreateRecordRequest) (*http.Response, error)
+
+	/*
+	DNSListRecords List DNS records
+
+	dns:read and browse_domains are required. Filters: type, name, limit (1–1000), offset, sync (true/false).
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param zoneId
+	@return DomainsAPIDNSListRecordsRequest
+	*/
+	DNSListRecords(ctx context.Context, organization string, zoneId string) DomainsAPIDNSListRecordsRequest
+
+	// DNSListRecordsExecute executes the request
+	DNSListRecordsExecute(r DomainsAPIDNSListRecordsRequest) (*http.Response, error)
+
+	/*
+	DNSListZones List organization DNS zones
+
+	dns:read and browse_domains are required.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@return DomainsAPIDNSListZonesRequest
+	*/
+	DNSListZones(ctx context.Context, organization string) DomainsAPIDNSListZonesRequest
+
+	// DNSListZonesExecute executes the request
+	DNSListZonesExecute(r DomainsAPIDNSListZonesRequest) (*http.Response, error)
+
+	/*
+	DNSShowZone Get a DNS zone
+
+	dns:read and browse_domains are required. The zone must belong to the organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization
+	@param zoneId
+	@return DomainsAPIDNSShowZoneRequest
+	*/
+	DNSShowZone(ctx context.Context, organization string, zoneId string) DomainsAPIDNSShowZoneRequest
+
+	// DNSShowZoneExecute executes the request
+	DNSShowZoneExecute(r DomainsAPIDNSShowZoneRequest) (*http.Response, error)
+
+	/*
 	DomainsCreate Add a new domain
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -96,6 +155,451 @@ type DomainsAPI interface {
 
 // DomainsAPIService DomainsAPI service
 type DomainsAPIService service
+
+type DomainsAPIDNSCreateRecordRequest struct {
+	ctx context.Context
+	ApiService DomainsAPI
+	organization string
+	zoneId string
+	dNSCreateRecordRequest *DNSCreateRecordRequest
+}
+
+func (r DomainsAPIDNSCreateRecordRequest) DNSCreateRecordRequest(dNSCreateRecordRequest DNSCreateRecordRequest) DomainsAPIDNSCreateRecordRequest {
+	r.dNSCreateRecordRequest = &dNSCreateRecordRequest
+	return r
+}
+
+func (r DomainsAPIDNSCreateRecordRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DNSCreateRecordExecute(r)
+}
+
+/*
+DNSCreateRecord Create an A record
+
+dns:write and add_domains are required. Existing names are rejected; this endpoint does not update records. Only organization-wide tokens are accepted.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param zoneId
+ @return DomainsAPIDNSCreateRecordRequest
+*/
+func (a *DomainsAPIService) DNSCreateRecord(ctx context.Context, organization string, zoneId string) DomainsAPIDNSCreateRecordRequest {
+	return DomainsAPIDNSCreateRecordRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		zoneId: zoneId,
+	}
+}
+
+// Execute executes the request
+func (a *DomainsAPIService) DNSCreateRecordExecute(r DomainsAPIDNSCreateRecordRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.DNSCreateRecord")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/dns/zones/{zoneId}/records"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.dNSCreateRecordRequest == nil {
+		return nil, reportError("dNSCreateRecordRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.dNSCreateRecordRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type DomainsAPIDNSListRecordsRequest struct {
+	ctx context.Context
+	ApiService DomainsAPI
+	organization string
+	zoneId string
+	type_ *string
+	name *string
+	limit *int32
+	offset *int32
+	sync *bool
+}
+
+func (r DomainsAPIDNSListRecordsRequest) Type_(type_ string) DomainsAPIDNSListRecordsRequest {
+	r.type_ = &type_
+	return r
+}
+
+func (r DomainsAPIDNSListRecordsRequest) Name(name string) DomainsAPIDNSListRecordsRequest {
+	r.name = &name
+	return r
+}
+
+func (r DomainsAPIDNSListRecordsRequest) Limit(limit int32) DomainsAPIDNSListRecordsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r DomainsAPIDNSListRecordsRequest) Offset(offset int32) DomainsAPIDNSListRecordsRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r DomainsAPIDNSListRecordsRequest) Sync(sync bool) DomainsAPIDNSListRecordsRequest {
+	r.sync = &sync
+	return r
+}
+
+func (r DomainsAPIDNSListRecordsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DNSListRecordsExecute(r)
+}
+
+/*
+DNSListRecords List DNS records
+
+dns:read and browse_domains are required. Filters: type, name, limit (1–1000), offset, sync (true/false).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param zoneId
+ @return DomainsAPIDNSListRecordsRequest
+*/
+func (a *DomainsAPIService) DNSListRecords(ctx context.Context, organization string, zoneId string) DomainsAPIDNSListRecordsRequest {
+	return DomainsAPIDNSListRecordsRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		zoneId: zoneId,
+	}
+}
+
+// Execute executes the request
+func (a *DomainsAPIService) DNSListRecordsExecute(r DomainsAPIDNSListRecordsRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.DNSListRecords")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/dns/zones/{zoneId}/records"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.type_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
+	}
+	if r.name != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	} else {
+		var defaultValue int32 = 0
+		r.offset = &defaultValue
+	}
+	if r.sync != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sync", r.sync, "form", "")
+	} else {
+		var defaultValue bool = false
+		r.sync = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type DomainsAPIDNSListZonesRequest struct {
+	ctx context.Context
+	ApiService DomainsAPI
+	organization string
+}
+
+func (r DomainsAPIDNSListZonesRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DNSListZonesExecute(r)
+}
+
+/*
+DNSListZones List organization DNS zones
+
+dns:read and browse_domains are required.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @return DomainsAPIDNSListZonesRequest
+*/
+func (a *DomainsAPIService) DNSListZones(ctx context.Context, organization string) DomainsAPIDNSListZonesRequest {
+	return DomainsAPIDNSListZonesRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+	}
+}
+
+// Execute executes the request
+func (a *DomainsAPIService) DNSListZonesExecute(r DomainsAPIDNSListZonesRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.DNSListZones")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/dns/zones"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type DomainsAPIDNSShowZoneRequest struct {
+	ctx context.Context
+	ApiService DomainsAPI
+	organization string
+	zoneId string
+}
+
+func (r DomainsAPIDNSShowZoneRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DNSShowZoneExecute(r)
+}
+
+/*
+DNSShowZone Get a DNS zone
+
+dns:read and browse_domains are required. The zone must belong to the organization.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization
+ @param zoneId
+ @return DomainsAPIDNSShowZoneRequest
+*/
+func (a *DomainsAPIService) DNSShowZone(ctx context.Context, organization string, zoneId string) DomainsAPIDNSShowZoneRequest {
+	return DomainsAPIDNSShowZoneRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		zoneId: zoneId,
+	}
+}
+
+// Execute executes the request
+func (a *DomainsAPIService) DNSShowZoneExecute(r DomainsAPIDNSShowZoneRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainsAPIService.DNSShowZone")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/dns/zones/{zoneId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
 
 type DomainsAPIDomainsCreateRequest struct {
 	ctx context.Context

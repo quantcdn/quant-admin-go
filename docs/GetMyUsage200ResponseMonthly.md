@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SpendCents** | Pointer to **int32** |  | [optional] 
+**SpendCents** | Pointer to **float32** |  | [optional] 
 **RequestCount** | Pointer to **int32** |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSpendCents
 
-`func (o *GetMyUsage200ResponseMonthly) GetSpendCents() int32`
+`func (o *GetMyUsage200ResponseMonthly) GetSpendCents() float32`
 
 GetSpendCents returns the SpendCents field if non-nil, zero value otherwise.
 
 ### GetSpendCentsOk
 
-`func (o *GetMyUsage200ResponseMonthly) GetSpendCentsOk() (*int32, bool)`
+`func (o *GetMyUsage200ResponseMonthly) GetSpendCentsOk() (*float32, bool)`
 
 GetSpendCentsOk returns a tuple with the SpendCents field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpendCents
 
-`func (o *GetMyUsage200ResponseMonthly) SetSpendCents(v int32)`
+`func (o *GetMyUsage200ResponseMonthly) SetSpendCents(v float32)`
 
 SetSpendCents sets SpendCents field to given value.
 

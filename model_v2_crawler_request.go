@@ -63,6 +63,7 @@ type V2CrawlerRequest struct {
 	// Custom user agent. Valid with or without browser_mode.
 	UserAgent *string `json:"user_agent,omitempty"`
 	Assets *V2CrawlerAssets `json:"assets,omitempty"`
+	BrowserConfig *V2CrawlerBrowserConfig `json:"browser_config,omitempty"`
 	// Maximum errors before stopping crawl
 	MaxErrors *int32 `json:"max_errors,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -792,6 +793,38 @@ func (o *V2CrawlerRequest) SetAssets(v V2CrawlerAssets) {
 	o.Assets = &v
 }
 
+// GetBrowserConfig returns the BrowserConfig field value if set, zero value otherwise.
+func (o *V2CrawlerRequest) GetBrowserConfig() V2CrawlerBrowserConfig {
+	if o == nil || IsNil(o.BrowserConfig) {
+		var ret V2CrawlerBrowserConfig
+		return ret
+	}
+	return *o.BrowserConfig
+}
+
+// GetBrowserConfigOk returns a tuple with the BrowserConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2CrawlerRequest) GetBrowserConfigOk() (*V2CrawlerBrowserConfig, bool) {
+	if o == nil || IsNil(o.BrowserConfig) {
+		return nil, false
+	}
+	return o.BrowserConfig, true
+}
+
+// HasBrowserConfig returns a boolean if a field has been set.
+func (o *V2CrawlerRequest) HasBrowserConfig() bool {
+	if o != nil && !IsNil(o.BrowserConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetBrowserConfig gets a reference to the given V2CrawlerBrowserConfig and assigns it to the BrowserConfig field.
+func (o *V2CrawlerRequest) SetBrowserConfig(v V2CrawlerBrowserConfig) {
+	o.BrowserConfig = &v
+}
+
 // GetMaxErrors returns the MaxErrors field value if set, zero value otherwise.
 func (o *V2CrawlerRequest) GetMaxErrors() int32 {
 	if o == nil || IsNil(o.MaxErrors) {
@@ -898,6 +931,9 @@ func (o V2CrawlerRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Assets) {
 		toSerialize["assets"] = o.Assets
 	}
+	if !IsNil(o.BrowserConfig) {
+		toSerialize["browser_config"] = o.BrowserConfig
+	}
 	if !IsNil(o.MaxErrors) {
 		toSerialize["max_errors"] = o.MaxErrors
 	}
@@ -966,6 +1002,7 @@ func (o *V2CrawlerRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "allowed_domains")
 		delete(additionalProperties, "user_agent")
 		delete(additionalProperties, "assets")
+		delete(additionalProperties, "browser_config")
 		delete(additionalProperties, "max_errors")
 		o.AdditionalProperties = additionalProperties
 	}

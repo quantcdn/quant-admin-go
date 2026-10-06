@@ -595,6 +595,8 @@ paths:
       responses:
         "200":
           description: Crawl started
+        "409":
+          description: A run of this crawler is already active
       security:
       - BearerAuth: []
       summary: Trigger a crawler run that ingests into AI Search
@@ -1287,6 +1289,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: The resource was not found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: A run of this crawler is already active
         "500":
           content:
             application/json:
@@ -1586,6 +1594,217 @@ paths:
       summary: Create or update custom headers
       tags:
       - Headers
+  /api/v2/organizations/{organization}/dns/zones:
+    get:
+      description: dns:read and browse_domains are required.
+      operationId: DNS_listZones
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Missing or invalid API token
+        "403":
+          description: "Token scope, organization or role permission denied"
+        "404":
+          description: Zone not found in this organization
+        "409":
+          description: A record already exists for this name
+        "422":
+          description: Invalid request
+        "503":
+          description: DNS service unavailable
+      security:
+      - BearerAuth: []
+      summary: List organization DNS zones
+      tags:
+      - Domains
+  /api/v2/organizations/{organization}/dns/zones/{zoneId}:
+    get:
+      description: dns:read and browse_domains are required. The zone must belong
+        to the organization.
+      operationId: DNS_showZone
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: zoneId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Missing or invalid API token
+        "403":
+          description: "Token scope, organization or role permission denied"
+        "404":
+          description: Zone not found in this organization
+        "409":
+          description: A record already exists for this name
+        "422":
+          description: Invalid request
+        "503":
+          description: DNS service unavailable
+      security:
+      - BearerAuth: []
+      summary: Get a DNS zone
+      tags:
+      - Domains
+  /api/v2/organizations/{organization}/dns/zones/{zoneId}/records:
+    get:
+      description: "dns:read and browse_domains are required. Filters: type, name,\
+        \ limit (1–1000), offset, sync (true/false)."
+      operationId: DNS_listRecords
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: zoneId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - A
+          - AAAA
+          - CNAME
+          - MX
+          - TXT
+          - NS
+          - SRV
+          - CAA
+          - PTR
+          - ALIAS
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          maxLength: 253
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          maximum: 1000000
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sync
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Missing or invalid API token
+        "403":
+          description: "Token scope, organization or role permission denied"
+        "404":
+          description: Zone not found in this organization
+        "409":
+          description: A record already exists for this name
+        "422":
+          description: Invalid request
+        "503":
+          description: DNS service unavailable
+      security:
+      - BearerAuth: []
+      summary: List DNS records
+      tags:
+      - Domains
+    post:
+      description: dns:write and add_domains are required. Existing names are rejected;
+        this endpoint does not update records. Only organization-wide tokens are accepted.
+      operationId: DNS_createRecord
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: zoneId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DNS_createRecord_request'
+        required: true
+      responses:
+        "201":
+          description: Success
+        "401":
+          description: Missing or invalid API token
+        "403":
+          description: "Token scope, organization or role permission denied"
+        "404":
+          description: Zone not found in this organization
+        "409":
+          description: A record already exists for this name
+        "422":
+          description: Invalid request
+        "503":
+          description: DNS service unavailable
+      security:
+      - BearerAuth: []
+      summary: Create an A record
+      tags:
+      - Domains
   /api/v2/organizations/{organization}/projects/{project}/domains:
     get:
       operationId: Domains_list
@@ -14808,6 +15027,8 @@ components:
         browser_mode: false
         max_html: 50
         deleted_at: 2000-01-23T04:56:07.000+00:00
+        browser_config:
+          capture_api_responses: true
         delay: 4
         depth: -1
         max_hits: 0
@@ -14963,6 +15184,8 @@ components:
           type: array
         assets:
           $ref: '#/components/schemas/V2Crawler_assets'
+        browser_config:
+          $ref: '#/components/schemas/V2Crawler_browser_config'
         created_at:
           description: Creation timestamp
           example: 2024-01-20T09:15:00Z
@@ -15001,6 +15224,8 @@ components:
         browser_mode: false
         max_html: 50
         tracking: false
+        browser_config:
+          capture_api_responses: true
         urls:
         - /
         - /about
@@ -15171,6 +15396,8 @@ components:
           type: string
         assets:
           $ref: '#/components/schemas/V2Crawler_assets'
+        browser_config:
+          $ref: '#/components/schemas/V2Crawler_browser_config'
         max_errors:
           description: Maximum errors before stopping crawl
           example: 100
@@ -19287,6 +19514,30 @@ components:
           description: The crawler run ID
           example: "12345"
           type: string
+      type: object
+    DNS_createRecord_request:
+      properties:
+        name:
+          description: Name relative to the zone; @ denotes the apex
+          example: dragon-den
+          type: string
+        type:
+          enum:
+          - A
+          type: string
+        value:
+          example: 203.0.113.10
+          format: ipv4
+          type: string
+        ttl:
+          default: 300
+          maximum: 86400
+          minimum: 1
+          type: integer
+      required:
+      - name
+      - type
+      - value
       type: object
     KV_delete_409_response:
       example:
@@ -25255,22 +25506,22 @@ components:
     getGovernanceSpend_200_response_orgTotal:
       example:
         requestCount: 6
-        spendCents: 0
+        spendCents: 0.8008281904610115
       properties:
         spendCents:
-          description: Total org spend in US cents
-          type: integer
+          description: "Total org spend in US cents, exact to 6 decimal places"
+          type: number
         requestCount:
           type: integer
       type: object
     getGovernanceSpend_200_response_todayTotal:
       example:
         requestCount: 5
-        spendCents: 1
+        spendCents: 1.4658129805029452
       properties:
         spendCents:
-          description: Org spend today in US cents
-          type: integer
+          description: "Org spend today in US cents, exact to 6 decimal places"
+          type: number
         requestCount:
           type: integer
       type: object
@@ -25319,7 +25570,7 @@ components:
       example:
         todayTotal:
           requestCount: 5
-          spendCents: 1
+          spendCents: 1.4658129805029452
         dailyBudget:
           usedPercent: 3.6160767
           remainingCents: 2
@@ -25329,7 +25580,7 @@ components:
           monthlySpendCents: 4
         orgTotal:
           requestCount: 6
-          spendCents: 0
+          spendCents: 0.8008281904610115
         budget:
           monthlyBudgetCents: 5
           usedPercent: 2.302136
@@ -25425,19 +25676,19 @@ components:
     getMyUsage_200_response_monthly:
       example:
         requestCount: 6
-        spendCents: 0
+        spendCents: 0.8008281904610115
       properties:
         spendCents:
-          type: integer
+          type: number
         requestCount:
           type: integer
       type: object
     getMyUsage_200_response_daily:
       example:
-        spendCents: 1
+        spendCents: 1.4658129805029452
       properties:
         spendCents:
-          type: integer
+          type: number
       type: object
     getMyUsage_200_response_quota_monthlyLimit:
       description: "Per-user monthly spend cap (object form, present when an org-level\
@@ -25506,7 +25757,7 @@ components:
     getMyUsage_200_response:
       example:
         daily:
-          spendCents: 1
+          spendCents: 1.4658129805029452
         quota:
           dailyLimit:
             usedPercent: 9.301444
@@ -25519,7 +25770,7 @@ components:
             limitCents: 5
         monthly:
           requestCount: 6
-          spendCents: 0
+          spendCents: 0.8008281904610115
         currentMonth: 2026-03
         userId: userId
       properties:
@@ -27128,6 +27379,28 @@ components:
           $ref: '#/components/schemas/V2Crawler_assets_network_intercept'
         parser:
           $ref: '#/components/schemas/V2Crawler_assets_parser'
+      type: object
+    V2Crawler_browser_config:
+      description: Browser-mode behaviour. Only applies when browser_mode is true.
+      example:
+        capture_api_responses: true
+      properties:
+        capture_api_responses:
+          description: "Store XHR/fetch responses as files, so a static copy can serve\
+            \ a site whose navigation or content is rendered client-side from a JSON\
+            \ endpoint"
+          example: true
+          type: boolean
+        wait_for_network_idle:
+          description: "Wait for the network to settle before capture, in milliseconds.\
+            \ Useful for API-driven sites"
+          example: 5000
+          type: integer
+        use_rendered_html:
+          description: Store the JavaScript-modified DOM instead of the original HTML
+            response
+          example: false
+          type: boolean
       type: object
     V2Domain_dns_validation_records_inner:
       properties:

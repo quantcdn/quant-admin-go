@@ -78,6 +78,7 @@ type V2Crawler struct {
 	// Allowed domains
 	AllowedDomains []string `json:"allowed_domains,omitempty"`
 	Assets *V2CrawlerAssets `json:"assets,omitempty"`
+	BrowserConfig *V2CrawlerBrowserConfig `json:"browser_config,omitempty"`
 	// Creation timestamp
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Last update timestamp
@@ -1003,6 +1004,38 @@ func (o *V2Crawler) SetAssets(v V2CrawlerAssets) {
 	o.Assets = &v
 }
 
+// GetBrowserConfig returns the BrowserConfig field value if set, zero value otherwise.
+func (o *V2Crawler) GetBrowserConfig() V2CrawlerBrowserConfig {
+	if o == nil || IsNil(o.BrowserConfig) {
+		var ret V2CrawlerBrowserConfig
+		return ret
+	}
+	return *o.BrowserConfig
+}
+
+// GetBrowserConfigOk returns a tuple with the BrowserConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V2Crawler) GetBrowserConfigOk() (*V2CrawlerBrowserConfig, bool) {
+	if o == nil || IsNil(o.BrowserConfig) {
+		return nil, false
+	}
+	return o.BrowserConfig, true
+}
+
+// HasBrowserConfig returns a boolean if a field has been set.
+func (o *V2Crawler) HasBrowserConfig() bool {
+	if o != nil && !IsNil(o.BrowserConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetBrowserConfig gets a reference to the given V2CrawlerBrowserConfig and assigns it to the BrowserConfig field.
+func (o *V2Crawler) SetBrowserConfig(v V2CrawlerBrowserConfig) {
+	o.BrowserConfig = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *V2Crawler) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -1196,6 +1229,9 @@ func (o V2Crawler) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Assets) {
 		toSerialize["assets"] = o.Assets
 	}
+	if !IsNil(o.BrowserConfig) {
+		toSerialize["browser_config"] = o.BrowserConfig
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -1281,6 +1317,7 @@ func (o *V2Crawler) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sitemap")
 		delete(additionalProperties, "allowed_domains")
 		delete(additionalProperties, "assets")
+		delete(additionalProperties, "browser_config")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "deleted_at")
