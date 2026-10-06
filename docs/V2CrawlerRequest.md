@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **AllowedDomains** | Pointer to **[]string** | Allowed domains for multi-domain crawling, automatically enables merge_domains | [optional] 
 **UserAgent** | Pointer to **string** | Custom user agent. Valid with or without browser_mode. | [optional] 
 **Assets** | Pointer to [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] 
+**BrowserConfig** | Pointer to [**V2CrawlerBrowserConfig**](V2CrawlerBrowserConfig.md) |  | [optional] 
 **MaxErrors** | Pointer to **int32** | Maximum errors before stopping crawl | [optional] 
 
 ## Methods
@@ -591,6 +592,31 @@ SetAssets sets Assets field to given value.
 `func (o *V2CrawlerRequest) HasAssets() bool`
 
 HasAssets returns a boolean if a field has been set.
+
+### GetBrowserConfig
+
+`func (o *V2CrawlerRequest) GetBrowserConfig() V2CrawlerBrowserConfig`
+
+GetBrowserConfig returns the BrowserConfig field if non-nil, zero value otherwise.
+
+### GetBrowserConfigOk
+
+`func (o *V2CrawlerRequest) GetBrowserConfigOk() (*V2CrawlerBrowserConfig, bool)`
+
+GetBrowserConfigOk returns a tuple with the BrowserConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrowserConfig
+
+`func (o *V2CrawlerRequest) SetBrowserConfig(v V2CrawlerBrowserConfig)`
+
+SetBrowserConfig sets BrowserConfig field to given value.
+
+### HasBrowserConfig
+
+`func (o *V2CrawlerRequest) HasBrowserConfig() bool`
+
+HasBrowserConfig returns a boolean if a field has been set.
 
 ### GetMaxErrors
 

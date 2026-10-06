@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **Sitemap** | Pointer to [**[]V2CrawlerSitemapInner**](V2CrawlerSitemapInner.md) | Sitemap configuration | [optional] 
 **AllowedDomains** | Pointer to **[]string** | Allowed domains | [optional] 
 **Assets** | Pointer to [**V2CrawlerAssets**](V2CrawlerAssets.md) |  | [optional] 
+**BrowserConfig** | Pointer to [**V2CrawlerBrowserConfig**](V2CrawlerBrowserConfig.md) |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Creation timestamp | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Last update timestamp | [optional] 
 **DeletedAt** | Pointer to **NullableTime** | Deletion timestamp | [optional] 
@@ -755,6 +756,31 @@ SetAssets sets Assets field to given value.
 `func (o *V2Crawler) HasAssets() bool`
 
 HasAssets returns a boolean if a field has been set.
+
+### GetBrowserConfig
+
+`func (o *V2Crawler) GetBrowserConfig() V2CrawlerBrowserConfig`
+
+GetBrowserConfig returns the BrowserConfig field if non-nil, zero value otherwise.
+
+### GetBrowserConfigOk
+
+`func (o *V2Crawler) GetBrowserConfigOk() (*V2CrawlerBrowserConfig, bool)`
+
+GetBrowserConfigOk returns a tuple with the BrowserConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrowserConfig
+
+`func (o *V2Crawler) SetBrowserConfig(v V2CrawlerBrowserConfig)`
+
+SetBrowserConfig sets BrowserConfig field to given value.
+
+### HasBrowserConfig
+
+`func (o *V2Crawler) HasBrowserConfig() bool`
+
+HasBrowserConfig returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
