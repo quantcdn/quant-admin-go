@@ -22,6 +22,61 @@ func Test_quantadmingo_DomainsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test DomainsAPIService DNSCreateRecord", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var zoneId string
+
+		httpRes, err := apiClient.DomainsAPI.DNSCreateRecord(context.Background(), organization, zoneId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService DNSListRecords", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var zoneId string
+
+		httpRes, err := apiClient.DomainsAPI.DNSListRecords(context.Background(), organization, zoneId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService DNSListZones", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+
+		httpRes, err := apiClient.DomainsAPI.DNSListZones(context.Background(), organization).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainsAPIService DNSShowZone", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var zoneId string
+
+		httpRes, err := apiClient.DomainsAPI.DNSShowZone(context.Background(), organization, zoneId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DomainsAPIService DomainsCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
