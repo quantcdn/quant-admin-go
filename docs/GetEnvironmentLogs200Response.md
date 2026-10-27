@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **LogEvents** | Pointer to [**[]GetEnvironmentLogs200ResponseLogEventsInner**](GetEnvironmentLogs200ResponseLogEventsInner.md) | Array of log events | [optional] 
-**LogGroupName** | Pointer to **NullableString** | CloudWatch log group the events were read from | [optional] 
+**LogGroupName** | Pointer to **NullableString** | Platform log group the events were read from | [optional] 
 **Pagination** | Pointer to [**GetEnvironmentLogs200ResponsePagination**](GetEnvironmentLogs200ResponsePagination.md) |  | [optional] 
 **NextToken** | Pointer to **NullableString** | Same as pagination.nextToken; kept for backward compatibility | [optional] 
 

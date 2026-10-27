@@ -39,7 +39,7 @@ func main() {
 	limit := int32(56) // int32 | Maximum number of log entries to return per page (default 100) (optional) (default to 100)
 	startTime := "2024-11-16T00:00:00Z" // string | Start of the time range. ISO 8601 or Unix epoch milliseconds. (optional)
 	endTime := "2024-11-16T23:59:59Z" // string | End of the time range. ISO 8601 or Unix epoch milliseconds. (optional)
-	filter := "$.status_code = 404" // string | CloudWatch JSON filter expression AND-ed with the project constraint, e.g. $.status_code = 404. Outer braces are optional; nested braces are rejected. (optional)
+	filter := "$.status_code = 404" // string | JSON filter expression AND-ed with the project constraint, e.g. $.status_code = 404. Outer braces are optional; nested braces are rejected. (optional)
 	domain := "www.example.com" // string | Only return entries for this domain (optional)
 	nextToken := "nextToken_example" // string | Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. (optional)
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** | Maximum number of log entries to return per page (default 100) | [default to 100]
  **startTime** | **string** | Start of the time range. ISO 8601 or Unix epoch milliseconds. | 
  **endTime** | **string** | End of the time range. ISO 8601 or Unix epoch milliseconds. | 
- **filter** | **string** | CloudWatch JSON filter expression AND-ed with the project constraint, e.g. $.status_code &#x3D; 404. Outer braces are optional; nested braces are rejected. | 
+ **filter** | **string** | JSON filter expression AND-ed with the project constraint, e.g. $.status_code &#x3D; 404. Outer braces are optional; nested braces are rejected. | 
  **domain** | **string** | Only return entries for this domain | 
  **nextToken** | **string** | Opaque pagination token from the previous response. Pass back unchanged to fetch the next page. | 
 

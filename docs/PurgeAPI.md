@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## PurgeCreate
 
-> string PurgeCreate(ctx, organization, project).PurgeCreateRequest(purgeCreateRequest).Execute()
+> PurgeCreate200Response PurgeCreate(ctx, organization, project).PurgeCreateRequest(purgeCreateRequest).Execute()
 
 Purge cache via URL or cache keys
 
@@ -29,7 +29,7 @@ import (
 func main() {
 	organization := "test-org" // string | Organization identifier
 	project := "test-project" // string | Project identifier
-	purgeCreateRequest := *openapiclient.NewPurgeCreateRequest([]string{"CacheKeys_example"}, "Scope_example") // PurgeCreateRequest | 
+	purgeCreateRequest := *openapiclient.NewPurgeCreateRequest() // PurgeCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -38,7 +38,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PurgeAPI.PurgeCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PurgeCreate`: string
+	// response from `PurgeCreate`: PurgeCreate200Response
 	fmt.Fprintf(os.Stdout, "Response from `PurgeAPI.PurgeCreate`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**PurgeCreate200Response**](PurgeCreate200Response.md)
 
 ### Authorization
 

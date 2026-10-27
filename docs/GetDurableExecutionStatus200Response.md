@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **RequestId** | Pointer to **string** |  | [optional] 
 **ExecutionArn** | Pointer to **string** |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
-**AwsStatus** | Pointer to **string** | Raw AWS Step Functions status | [optional] 
+**AwsStatus** | Pointer to **string** | Raw status reported by the underlying execution service | [optional] 
 **CallbackId** | Pointer to **string** | Present when status is waiting_callback - use with /chat/callback | [optional] 
 **PendingTools** | Pointer to [**[]GetDurableExecutionStatus200ResponsePendingToolsInner**](GetDurableExecutionStatus200ResponsePendingToolsInner.md) | Present when status is waiting_callback - tools waiting for results | [optional] 
 **Result** | Pointer to [**GetDurableExecutionStatus200ResponseResult**](GetDurableExecutionStatus200ResponseResult.md) |  | [optional] 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Logs** | Pointer to [**[]GetProjectLogs200ResponseLogsInner**](GetProjectLogs200ResponseLogsInner.md) | Structured CloudFront access log entries. Each entry carries request, response, timing and cache fields as emitted by the edge. | [optional] 
+**Logs** | Pointer to [**[]GetProjectLogs200ResponseLogsInner**](GetProjectLogs200ResponseLogsInner.md) | Structured CDN access log entries. Each entry carries request, response, timing and cache fields as emitted by the edge. | [optional] 
 **Count** | Pointer to **int32** | Number of entries in this response | [optional] 
 **NextToken** | Pointer to **NullableString** | Token for the next page, or null when there are no more entries | [optional] 
 

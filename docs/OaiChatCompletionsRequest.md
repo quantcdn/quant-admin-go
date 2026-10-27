@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Tools** | Pointer to **[]map[string]interface{}** | OpenAI function tool definitions | [optional] 
 **ToolChoice** | Pointer to **interface{}** | auto | none | required | {type:function, function:{name}} | [optional] 
 **StreamOptions** | Pointer to **map[string]interface{}** | {include_usage: true} to emit a final usage chunk when streaming | [optional] 
+**ReasoningEffort** | Pointer to **string** | none or minimal turns off default thinking on models that allow it (Claude Haiku 5.5); ignored where it cannot be turned off | [optional] 
 
 ## Methods
 
@@ -257,6 +258,31 @@ SetStreamOptions sets StreamOptions field to given value.
 `func (o *OaiChatCompletionsRequest) HasStreamOptions() bool`
 
 HasStreamOptions returns a boolean if a field has been set.
+
+### GetReasoningEffort
+
+`func (o *OaiChatCompletionsRequest) GetReasoningEffort() string`
+
+GetReasoningEffort returns the ReasoningEffort field if non-nil, zero value otherwise.
+
+### GetReasoningEffortOk
+
+`func (o *OaiChatCompletionsRequest) GetReasoningEffortOk() (*string, bool)`
+
+GetReasoningEffortOk returns a tuple with the ReasoningEffort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningEffort
+
+`func (o *OaiChatCompletionsRequest) SetReasoningEffort(v string)`
+
+SetReasoningEffort sets ReasoningEffort field to given value.
+
+### HasReasoningEffort
+
+`func (o *OaiChatCompletionsRequest) HasReasoningEffort() bool`
+
+HasReasoningEffort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | **string** | Rule UUID | 
 **RuleId** | Pointer to **string** | Rule ID | [optional] 
-**Weight** | Pointer to **int32** | Rule weight | [optional] [default to 0]
+**Weight** | Pointer to **int32** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] 
 **Url** | Pointer to **[]string** | URL patterns | [optional] 
-**Domain** | Pointer to **[]string** | Domain patterns | [optional] 
+**Domain** | Pointer to **[]string** | Exact hostnames the rule matches, or &#39;any&#39;. Wildcards are not supported. | [optional] 
 **Disabled** | **bool** | Whether rule is disabled | [default to false]
 **OnlyWithCookie** | Pointer to **string** | Only apply with cookie | [optional] 
 **Method** | Pointer to **string** | HTTP method | [optional] 
@@ -18,9 +18,15 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP address | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] 
+**Asn** | Pointer to **string** | ASN condition type (asn_is, asn_is_not, any) | [optional] 
 **AsnIs** | Pointer to **[]string** | Allowed AS numbers | [optional] 
 **AsnIsNot** | Pointer to **[]string** | Excluded AS numbers | [optional] 
+**Ua** | Pointer to **string** | User agent condition type (ua_is, ua_is_not, any) | [optional] 
+**UaIs** | Pointer to **[]string** | User agent strings to match | [optional] 
+**UaIsNot** | Pointer to **[]string** | User agent strings to exclude | [optional] 
+**TrafficSource** | Pointer to **string** | Traffic source condition type (traffic_source_is, traffic_source_is_not, any) | [optional] 
+**TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match (cloud, vpn, tor-exit, abuser, crawler) | [optional] 
+**TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude (cloud, vpn, tor-exit, abuser, crawler) | [optional] 
 **Country** | Pointer to **string** | Country code | [optional] 
 **CountryIs** | Pointer to **[]string** | Allowed countries | [optional] 
 **CountryIsNot** | Pointer to **[]string** | Excluded countries | [optional] 
@@ -460,6 +466,156 @@ SetAsnIsNot sets AsnIsNot field to given value.
 `func (o *V2RuleRedirect) HasAsnIsNot() bool`
 
 HasAsnIsNot returns a boolean if a field has been set.
+
+### GetUa
+
+`func (o *V2RuleRedirect) GetUa() string`
+
+GetUa returns the Ua field if non-nil, zero value otherwise.
+
+### GetUaOk
+
+`func (o *V2RuleRedirect) GetUaOk() (*string, bool)`
+
+GetUaOk returns a tuple with the Ua field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUa
+
+`func (o *V2RuleRedirect) SetUa(v string)`
+
+SetUa sets Ua field to given value.
+
+### HasUa
+
+`func (o *V2RuleRedirect) HasUa() bool`
+
+HasUa returns a boolean if a field has been set.
+
+### GetUaIs
+
+`func (o *V2RuleRedirect) GetUaIs() []string`
+
+GetUaIs returns the UaIs field if non-nil, zero value otherwise.
+
+### GetUaIsOk
+
+`func (o *V2RuleRedirect) GetUaIsOk() (*[]string, bool)`
+
+GetUaIsOk returns a tuple with the UaIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIs
+
+`func (o *V2RuleRedirect) SetUaIs(v []string)`
+
+SetUaIs sets UaIs field to given value.
+
+### HasUaIs
+
+`func (o *V2RuleRedirect) HasUaIs() bool`
+
+HasUaIs returns a boolean if a field has been set.
+
+### GetUaIsNot
+
+`func (o *V2RuleRedirect) GetUaIsNot() []string`
+
+GetUaIsNot returns the UaIsNot field if non-nil, zero value otherwise.
+
+### GetUaIsNotOk
+
+`func (o *V2RuleRedirect) GetUaIsNotOk() (*[]string, bool)`
+
+GetUaIsNotOk returns a tuple with the UaIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIsNot
+
+`func (o *V2RuleRedirect) SetUaIsNot(v []string)`
+
+SetUaIsNot sets UaIsNot field to given value.
+
+### HasUaIsNot
+
+`func (o *V2RuleRedirect) HasUaIsNot() bool`
+
+HasUaIsNot returns a boolean if a field has been set.
+
+### GetTrafficSource
+
+`func (o *V2RuleRedirect) GetTrafficSource() string`
+
+GetTrafficSource returns the TrafficSource field if non-nil, zero value otherwise.
+
+### GetTrafficSourceOk
+
+`func (o *V2RuleRedirect) GetTrafficSourceOk() (*string, bool)`
+
+GetTrafficSourceOk returns a tuple with the TrafficSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSource
+
+`func (o *V2RuleRedirect) SetTrafficSource(v string)`
+
+SetTrafficSource sets TrafficSource field to given value.
+
+### HasTrafficSource
+
+`func (o *V2RuleRedirect) HasTrafficSource() bool`
+
+HasTrafficSource returns a boolean if a field has been set.
+
+### GetTrafficSourceIs
+
+`func (o *V2RuleRedirect) GetTrafficSourceIs() []string`
+
+GetTrafficSourceIs returns the TrafficSourceIs field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsOk
+
+`func (o *V2RuleRedirect) GetTrafficSourceIsOk() (*[]string, bool)`
+
+GetTrafficSourceIsOk returns a tuple with the TrafficSourceIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIs
+
+`func (o *V2RuleRedirect) SetTrafficSourceIs(v []string)`
+
+SetTrafficSourceIs sets TrafficSourceIs field to given value.
+
+### HasTrafficSourceIs
+
+`func (o *V2RuleRedirect) HasTrafficSourceIs() bool`
+
+HasTrafficSourceIs returns a boolean if a field has been set.
+
+### GetTrafficSourceIsNot
+
+`func (o *V2RuleRedirect) GetTrafficSourceIsNot() []string`
+
+GetTrafficSourceIsNot returns the TrafficSourceIsNot field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsNotOk
+
+`func (o *V2RuleRedirect) GetTrafficSourceIsNotOk() (*[]string, bool)`
+
+GetTrafficSourceIsNotOk returns a tuple with the TrafficSourceIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIsNot
+
+`func (o *V2RuleRedirect) SetTrafficSourceIsNot(v []string)`
+
+SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
+
+### HasTrafficSourceIsNot
+
+`func (o *V2RuleRedirect) HasTrafficSourceIsNot() bool`
+
+HasTrafficSourceIsNot returns a boolean if a field has been set.
 
 ### GetCountry
 

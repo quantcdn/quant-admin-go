@@ -1,0 +1,738 @@
+# V2RuleAuthFunction
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Name** | Pointer to **string** | Rule name | [optional] 
+**Uuid** | **string** | Rule UUID | 
+**RuleId** | Pointer to **string** | Rule ID | [optional] 
+**Weight** | Pointer to **int32** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] 
+**Url** | Pointer to **[]string** | URL patterns | [optional] 
+**Domain** | Pointer to **[]string** | Exact hostnames the rule matches, or &#39;any&#39;. Wildcards are not supported. | [optional] 
+**Disabled** | **bool** | Whether rule is disabled | [default to false]
+**OnlyWithCookie** | Pointer to **string** | Only apply with cookie | [optional] 
+**Method** | Pointer to **string** | HTTP method | [optional] 
+**MethodIs** | Pointer to **[]string** | Allowed HTTP methods | [optional] 
+**MethodIsNot** | Pointer to **[]string** | Excluded HTTP methods | [optional] 
+**Ip** | Pointer to **string** | IP address | [optional] 
+**IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
+**IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
+**Asn** | Pointer to **string** | ASN condition type (asn_is, asn_is_not, any) | [optional] 
+**AsnIs** | Pointer to **[]string** | Allowed AS numbers | [optional] 
+**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers | [optional] 
+**Ua** | Pointer to **string** | User agent condition type (ua_is, ua_is_not, any) | [optional] 
+**UaIs** | Pointer to **[]string** | User agent strings to match | [optional] 
+**UaIsNot** | Pointer to **[]string** | User agent strings to exclude | [optional] 
+**TrafficSource** | Pointer to **string** | Traffic source condition type (traffic_source_is, traffic_source_is_not, any) | [optional] 
+**TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match (cloud, vpn, tor-exit, abuser, crawler) | [optional] 
+**TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude (cloud, vpn, tor-exit, abuser, crawler) | [optional] 
+**Country** | Pointer to **string** | Country code | [optional] 
+**CountryIs** | Pointer to **[]string** | Allowed countries | [optional] 
+**CountryIsNot** | Pointer to **[]string** | Excluded countries | [optional] 
+**Action** | **string** | Rule action | 
+**ActionConfig** | [**V2RuleAuthFunctionAction**](V2RuleAuthFunctionAction.md) |  | 
+
+## Methods
+
+### NewV2RuleAuthFunction
+
+`func NewV2RuleAuthFunction(uuid string, disabled bool, action string, actionConfig V2RuleAuthFunctionAction, ) *V2RuleAuthFunction`
+
+NewV2RuleAuthFunction instantiates a new V2RuleAuthFunction object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewV2RuleAuthFunctionWithDefaults
+
+`func NewV2RuleAuthFunctionWithDefaults() *V2RuleAuthFunction`
+
+NewV2RuleAuthFunctionWithDefaults instantiates a new V2RuleAuthFunction object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *V2RuleAuthFunction) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *V2RuleAuthFunction) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *V2RuleAuthFunction) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *V2RuleAuthFunction) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### GetUuid
+
+`func (o *V2RuleAuthFunction) GetUuid() string`
+
+GetUuid returns the Uuid field if non-nil, zero value otherwise.
+
+### GetUuidOk
+
+`func (o *V2RuleAuthFunction) GetUuidOk() (*string, bool)`
+
+GetUuidOk returns a tuple with the Uuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUuid
+
+`func (o *V2RuleAuthFunction) SetUuid(v string)`
+
+SetUuid sets Uuid field to given value.
+
+
+### GetRuleId
+
+`func (o *V2RuleAuthFunction) GetRuleId() string`
+
+GetRuleId returns the RuleId field if non-nil, zero value otherwise.
+
+### GetRuleIdOk
+
+`func (o *V2RuleAuthFunction) GetRuleIdOk() (*string, bool)`
+
+GetRuleIdOk returns a tuple with the RuleId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRuleId
+
+`func (o *V2RuleAuthFunction) SetRuleId(v string)`
+
+SetRuleId sets RuleId field to given value.
+
+### HasRuleId
+
+`func (o *V2RuleAuthFunction) HasRuleId() bool`
+
+HasRuleId returns a boolean if a field has been set.
+
+### GetWeight
+
+`func (o *V2RuleAuthFunction) GetWeight() int32`
+
+GetWeight returns the Weight field if non-nil, zero value otherwise.
+
+### GetWeightOk
+
+`func (o *V2RuleAuthFunction) GetWeightOk() (*int32, bool)`
+
+GetWeightOk returns a tuple with the Weight field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWeight
+
+`func (o *V2RuleAuthFunction) SetWeight(v int32)`
+
+SetWeight sets Weight field to given value.
+
+### HasWeight
+
+`func (o *V2RuleAuthFunction) HasWeight() bool`
+
+HasWeight returns a boolean if a field has been set.
+
+### GetUrl
+
+`func (o *V2RuleAuthFunction) GetUrl() []string`
+
+GetUrl returns the Url field if non-nil, zero value otherwise.
+
+### GetUrlOk
+
+`func (o *V2RuleAuthFunction) GetUrlOk() (*[]string, bool)`
+
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrl
+
+`func (o *V2RuleAuthFunction) SetUrl(v []string)`
+
+SetUrl sets Url field to given value.
+
+### HasUrl
+
+`func (o *V2RuleAuthFunction) HasUrl() bool`
+
+HasUrl returns a boolean if a field has been set.
+
+### GetDomain
+
+`func (o *V2RuleAuthFunction) GetDomain() []string`
+
+GetDomain returns the Domain field if non-nil, zero value otherwise.
+
+### GetDomainOk
+
+`func (o *V2RuleAuthFunction) GetDomainOk() (*[]string, bool)`
+
+GetDomainOk returns a tuple with the Domain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDomain
+
+`func (o *V2RuleAuthFunction) SetDomain(v []string)`
+
+SetDomain sets Domain field to given value.
+
+### HasDomain
+
+`func (o *V2RuleAuthFunction) HasDomain() bool`
+
+HasDomain returns a boolean if a field has been set.
+
+### GetDisabled
+
+`func (o *V2RuleAuthFunction) GetDisabled() bool`
+
+GetDisabled returns the Disabled field if non-nil, zero value otherwise.
+
+### GetDisabledOk
+
+`func (o *V2RuleAuthFunction) GetDisabledOk() (*bool, bool)`
+
+GetDisabledOk returns a tuple with the Disabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisabled
+
+`func (o *V2RuleAuthFunction) SetDisabled(v bool)`
+
+SetDisabled sets Disabled field to given value.
+
+
+### GetOnlyWithCookie
+
+`func (o *V2RuleAuthFunction) GetOnlyWithCookie() string`
+
+GetOnlyWithCookie returns the OnlyWithCookie field if non-nil, zero value otherwise.
+
+### GetOnlyWithCookieOk
+
+`func (o *V2RuleAuthFunction) GetOnlyWithCookieOk() (*string, bool)`
+
+GetOnlyWithCookieOk returns a tuple with the OnlyWithCookie field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnlyWithCookie
+
+`func (o *V2RuleAuthFunction) SetOnlyWithCookie(v string)`
+
+SetOnlyWithCookie sets OnlyWithCookie field to given value.
+
+### HasOnlyWithCookie
+
+`func (o *V2RuleAuthFunction) HasOnlyWithCookie() bool`
+
+HasOnlyWithCookie returns a boolean if a field has been set.
+
+### GetMethod
+
+`func (o *V2RuleAuthFunction) GetMethod() string`
+
+GetMethod returns the Method field if non-nil, zero value otherwise.
+
+### GetMethodOk
+
+`func (o *V2RuleAuthFunction) GetMethodOk() (*string, bool)`
+
+GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMethod
+
+`func (o *V2RuleAuthFunction) SetMethod(v string)`
+
+SetMethod sets Method field to given value.
+
+### HasMethod
+
+`func (o *V2RuleAuthFunction) HasMethod() bool`
+
+HasMethod returns a boolean if a field has been set.
+
+### GetMethodIs
+
+`func (o *V2RuleAuthFunction) GetMethodIs() []string`
+
+GetMethodIs returns the MethodIs field if non-nil, zero value otherwise.
+
+### GetMethodIsOk
+
+`func (o *V2RuleAuthFunction) GetMethodIsOk() (*[]string, bool)`
+
+GetMethodIsOk returns a tuple with the MethodIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMethodIs
+
+`func (o *V2RuleAuthFunction) SetMethodIs(v []string)`
+
+SetMethodIs sets MethodIs field to given value.
+
+### HasMethodIs
+
+`func (o *V2RuleAuthFunction) HasMethodIs() bool`
+
+HasMethodIs returns a boolean if a field has been set.
+
+### GetMethodIsNot
+
+`func (o *V2RuleAuthFunction) GetMethodIsNot() []string`
+
+GetMethodIsNot returns the MethodIsNot field if non-nil, zero value otherwise.
+
+### GetMethodIsNotOk
+
+`func (o *V2RuleAuthFunction) GetMethodIsNotOk() (*[]string, bool)`
+
+GetMethodIsNotOk returns a tuple with the MethodIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMethodIsNot
+
+`func (o *V2RuleAuthFunction) SetMethodIsNot(v []string)`
+
+SetMethodIsNot sets MethodIsNot field to given value.
+
+### HasMethodIsNot
+
+`func (o *V2RuleAuthFunction) HasMethodIsNot() bool`
+
+HasMethodIsNot returns a boolean if a field has been set.
+
+### GetIp
+
+`func (o *V2RuleAuthFunction) GetIp() string`
+
+GetIp returns the Ip field if non-nil, zero value otherwise.
+
+### GetIpOk
+
+`func (o *V2RuleAuthFunction) GetIpOk() (*string, bool)`
+
+GetIpOk returns a tuple with the Ip field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIp
+
+`func (o *V2RuleAuthFunction) SetIp(v string)`
+
+SetIp sets Ip field to given value.
+
+### HasIp
+
+`func (o *V2RuleAuthFunction) HasIp() bool`
+
+HasIp returns a boolean if a field has been set.
+
+### GetIpIs
+
+`func (o *V2RuleAuthFunction) GetIpIs() []string`
+
+GetIpIs returns the IpIs field if non-nil, zero value otherwise.
+
+### GetIpIsOk
+
+`func (o *V2RuleAuthFunction) GetIpIsOk() (*[]string, bool)`
+
+GetIpIsOk returns a tuple with the IpIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpIs
+
+`func (o *V2RuleAuthFunction) SetIpIs(v []string)`
+
+SetIpIs sets IpIs field to given value.
+
+### HasIpIs
+
+`func (o *V2RuleAuthFunction) HasIpIs() bool`
+
+HasIpIs returns a boolean if a field has been set.
+
+### GetIpIsNot
+
+`func (o *V2RuleAuthFunction) GetIpIsNot() []string`
+
+GetIpIsNot returns the IpIsNot field if non-nil, zero value otherwise.
+
+### GetIpIsNotOk
+
+`func (o *V2RuleAuthFunction) GetIpIsNotOk() (*[]string, bool)`
+
+GetIpIsNotOk returns a tuple with the IpIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpIsNot
+
+`func (o *V2RuleAuthFunction) SetIpIsNot(v []string)`
+
+SetIpIsNot sets IpIsNot field to given value.
+
+### HasIpIsNot
+
+`func (o *V2RuleAuthFunction) HasIpIsNot() bool`
+
+HasIpIsNot returns a boolean if a field has been set.
+
+### GetAsn
+
+`func (o *V2RuleAuthFunction) GetAsn() string`
+
+GetAsn returns the Asn field if non-nil, zero value otherwise.
+
+### GetAsnOk
+
+`func (o *V2RuleAuthFunction) GetAsnOk() (*string, bool)`
+
+GetAsnOk returns a tuple with the Asn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsn
+
+`func (o *V2RuleAuthFunction) SetAsn(v string)`
+
+SetAsn sets Asn field to given value.
+
+### HasAsn
+
+`func (o *V2RuleAuthFunction) HasAsn() bool`
+
+HasAsn returns a boolean if a field has been set.
+
+### GetAsnIs
+
+`func (o *V2RuleAuthFunction) GetAsnIs() []string`
+
+GetAsnIs returns the AsnIs field if non-nil, zero value otherwise.
+
+### GetAsnIsOk
+
+`func (o *V2RuleAuthFunction) GetAsnIsOk() (*[]string, bool)`
+
+GetAsnIsOk returns a tuple with the AsnIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsnIs
+
+`func (o *V2RuleAuthFunction) SetAsnIs(v []string)`
+
+SetAsnIs sets AsnIs field to given value.
+
+### HasAsnIs
+
+`func (o *V2RuleAuthFunction) HasAsnIs() bool`
+
+HasAsnIs returns a boolean if a field has been set.
+
+### GetAsnIsNot
+
+`func (o *V2RuleAuthFunction) GetAsnIsNot() []string`
+
+GetAsnIsNot returns the AsnIsNot field if non-nil, zero value otherwise.
+
+### GetAsnIsNotOk
+
+`func (o *V2RuleAuthFunction) GetAsnIsNotOk() (*[]string, bool)`
+
+GetAsnIsNotOk returns a tuple with the AsnIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsnIsNot
+
+`func (o *V2RuleAuthFunction) SetAsnIsNot(v []string)`
+
+SetAsnIsNot sets AsnIsNot field to given value.
+
+### HasAsnIsNot
+
+`func (o *V2RuleAuthFunction) HasAsnIsNot() bool`
+
+HasAsnIsNot returns a boolean if a field has been set.
+
+### GetUa
+
+`func (o *V2RuleAuthFunction) GetUa() string`
+
+GetUa returns the Ua field if non-nil, zero value otherwise.
+
+### GetUaOk
+
+`func (o *V2RuleAuthFunction) GetUaOk() (*string, bool)`
+
+GetUaOk returns a tuple with the Ua field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUa
+
+`func (o *V2RuleAuthFunction) SetUa(v string)`
+
+SetUa sets Ua field to given value.
+
+### HasUa
+
+`func (o *V2RuleAuthFunction) HasUa() bool`
+
+HasUa returns a boolean if a field has been set.
+
+### GetUaIs
+
+`func (o *V2RuleAuthFunction) GetUaIs() []string`
+
+GetUaIs returns the UaIs field if non-nil, zero value otherwise.
+
+### GetUaIsOk
+
+`func (o *V2RuleAuthFunction) GetUaIsOk() (*[]string, bool)`
+
+GetUaIsOk returns a tuple with the UaIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIs
+
+`func (o *V2RuleAuthFunction) SetUaIs(v []string)`
+
+SetUaIs sets UaIs field to given value.
+
+### HasUaIs
+
+`func (o *V2RuleAuthFunction) HasUaIs() bool`
+
+HasUaIs returns a boolean if a field has been set.
+
+### GetUaIsNot
+
+`func (o *V2RuleAuthFunction) GetUaIsNot() []string`
+
+GetUaIsNot returns the UaIsNot field if non-nil, zero value otherwise.
+
+### GetUaIsNotOk
+
+`func (o *V2RuleAuthFunction) GetUaIsNotOk() (*[]string, bool)`
+
+GetUaIsNotOk returns a tuple with the UaIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIsNot
+
+`func (o *V2RuleAuthFunction) SetUaIsNot(v []string)`
+
+SetUaIsNot sets UaIsNot field to given value.
+
+### HasUaIsNot
+
+`func (o *V2RuleAuthFunction) HasUaIsNot() bool`
+
+HasUaIsNot returns a boolean if a field has been set.
+
+### GetTrafficSource
+
+`func (o *V2RuleAuthFunction) GetTrafficSource() string`
+
+GetTrafficSource returns the TrafficSource field if non-nil, zero value otherwise.
+
+### GetTrafficSourceOk
+
+`func (o *V2RuleAuthFunction) GetTrafficSourceOk() (*string, bool)`
+
+GetTrafficSourceOk returns a tuple with the TrafficSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSource
+
+`func (o *V2RuleAuthFunction) SetTrafficSource(v string)`
+
+SetTrafficSource sets TrafficSource field to given value.
+
+### HasTrafficSource
+
+`func (o *V2RuleAuthFunction) HasTrafficSource() bool`
+
+HasTrafficSource returns a boolean if a field has been set.
+
+### GetTrafficSourceIs
+
+`func (o *V2RuleAuthFunction) GetTrafficSourceIs() []string`
+
+GetTrafficSourceIs returns the TrafficSourceIs field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsOk
+
+`func (o *V2RuleAuthFunction) GetTrafficSourceIsOk() (*[]string, bool)`
+
+GetTrafficSourceIsOk returns a tuple with the TrafficSourceIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIs
+
+`func (o *V2RuleAuthFunction) SetTrafficSourceIs(v []string)`
+
+SetTrafficSourceIs sets TrafficSourceIs field to given value.
+
+### HasTrafficSourceIs
+
+`func (o *V2RuleAuthFunction) HasTrafficSourceIs() bool`
+
+HasTrafficSourceIs returns a boolean if a field has been set.
+
+### GetTrafficSourceIsNot
+
+`func (o *V2RuleAuthFunction) GetTrafficSourceIsNot() []string`
+
+GetTrafficSourceIsNot returns the TrafficSourceIsNot field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsNotOk
+
+`func (o *V2RuleAuthFunction) GetTrafficSourceIsNotOk() (*[]string, bool)`
+
+GetTrafficSourceIsNotOk returns a tuple with the TrafficSourceIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIsNot
+
+`func (o *V2RuleAuthFunction) SetTrafficSourceIsNot(v []string)`
+
+SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
+
+### HasTrafficSourceIsNot
+
+`func (o *V2RuleAuthFunction) HasTrafficSourceIsNot() bool`
+
+HasTrafficSourceIsNot returns a boolean if a field has been set.
+
+### GetCountry
+
+`func (o *V2RuleAuthFunction) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *V2RuleAuthFunction) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *V2RuleAuthFunction) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
+
+### HasCountry
+
+`func (o *V2RuleAuthFunction) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
+
+### GetCountryIs
+
+`func (o *V2RuleAuthFunction) GetCountryIs() []string`
+
+GetCountryIs returns the CountryIs field if non-nil, zero value otherwise.
+
+### GetCountryIsOk
+
+`func (o *V2RuleAuthFunction) GetCountryIsOk() (*[]string, bool)`
+
+GetCountryIsOk returns a tuple with the CountryIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountryIs
+
+`func (o *V2RuleAuthFunction) SetCountryIs(v []string)`
+
+SetCountryIs sets CountryIs field to given value.
+
+### HasCountryIs
+
+`func (o *V2RuleAuthFunction) HasCountryIs() bool`
+
+HasCountryIs returns a boolean if a field has been set.
+
+### GetCountryIsNot
+
+`func (o *V2RuleAuthFunction) GetCountryIsNot() []string`
+
+GetCountryIsNot returns the CountryIsNot field if non-nil, zero value otherwise.
+
+### GetCountryIsNotOk
+
+`func (o *V2RuleAuthFunction) GetCountryIsNotOk() (*[]string, bool)`
+
+GetCountryIsNotOk returns a tuple with the CountryIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountryIsNot
+
+`func (o *V2RuleAuthFunction) SetCountryIsNot(v []string)`
+
+SetCountryIsNot sets CountryIsNot field to given value.
+
+### HasCountryIsNot
+
+`func (o *V2RuleAuthFunction) HasCountryIsNot() bool`
+
+HasCountryIsNot returns a boolean if a field has been set.
+
+### GetAction
+
+`func (o *V2RuleAuthFunction) GetAction() string`
+
+GetAction returns the Action field if non-nil, zero value otherwise.
+
+### GetActionOk
+
+`func (o *V2RuleAuthFunction) GetActionOk() (*string, bool)`
+
+GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAction
+
+`func (o *V2RuleAuthFunction) SetAction(v string)`
+
+SetAction sets Action field to given value.
+
+
+### GetActionConfig
+
+`func (o *V2RuleAuthFunction) GetActionConfig() V2RuleAuthFunctionAction`
+
+GetActionConfig returns the ActionConfig field if non-nil, zero value otherwise.
+
+### GetActionConfigOk
+
+`func (o *V2RuleAuthFunction) GetActionConfigOk() (*V2RuleAuthFunctionAction, bool)`
+
+GetActionConfigOk returns a tuple with the ActionConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionConfig
+
+`func (o *V2RuleAuthFunction) SetActionConfig(v V2RuleAuthFunctionAction)`
+
+SetActionConfig sets ActionConfig field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

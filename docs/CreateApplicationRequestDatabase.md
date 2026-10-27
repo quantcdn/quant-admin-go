@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Engine** | Pointer to **string** | Database engine type (MySQL 8.4, Postgres) | [optional] [default to "mysql"]
-**InstanceClass** | Pointer to **string** | RDS instance class | [optional] [default to "db.t4g.micro"]
+**InstanceClass** | Pointer to **string** | Database instance class | [optional] [default to "db.t4g.micro"]
 **StorageGb** | Pointer to **int32** | Allocated storage in GiB | [optional] [default to 20]
 **MultiAz** | Pointer to **bool** | Enable Multi-AZ deployment (higher availability and cost) | [optional] [default to false]
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GuardrailIdentifier** | Pointer to **string** | Guardrail identifier from AWS Bedrock | [optional] 
+**GuardrailIdentifier** | Pointer to **string** | Guardrail identifier | [optional] 
 **GuardrailVersion** | Pointer to **string** | Guardrail version | [optional] 
 **Trace** | Pointer to **string** | Enable guardrail trace output | [optional] 
 

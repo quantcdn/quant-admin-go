@@ -79,20 +79,6 @@ func Test_quantadmingo_AIInferenceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test AIInferenceAPIService ImageGeneration", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var organisation string
-
-		resp, httpRes, err := apiClient.AIInferenceAPI.ImageGeneration(context.Background(), organisation).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test AIInferenceAPIService SubmitToolCallback", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

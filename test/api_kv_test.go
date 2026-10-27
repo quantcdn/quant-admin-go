@@ -22,6 +22,98 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test KVAPIService KVArchivesList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+
+		resp, httpRes, err := apiClient.KVAPI.KVArchivesList(context.Background(), organization).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVArchivesPurge", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var storeName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVArchivesPurge(context.Background(), organization, storeName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVArchivesPurgeManifest", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var storeName string
+		var purgeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVArchivesPurgeManifest(context.Background(), organization, storeName, purgeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVArchivesPurgeReceipt", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var storeName string
+		var purgeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVArchivesPurgeReceipt(context.Background(), organization, storeName, purgeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVArchivesPurgeShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var storeName string
+		var purgeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVArchivesPurgeShow(context.Background(), organization, storeName, purgeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVArchivesShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var storeName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVArchivesShow(context.Background(), organization, storeName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KVAPIService KVCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -48,6 +140,238 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 		httpRes, err := apiClient.KVAPI.KVDelete(context.Background(), organization, project, storeId).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVEntriesDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var key string
+
+		resp, httpRes, err := apiClient.KVAPI.KVEntriesDelete(context.Background(), organization, project, storeId, key).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVEntriesPut", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var key string
+
+		resp, httpRes, err := apiClient.KVAPI.KVEntriesPut(context.Background(), organization, project, storeId, key).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVEntriesShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var key string
+
+		resp, httpRes, err := apiClient.KVAPI.KVEntriesShow(context.Background(), organization, project, storeId, key).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVExportCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVExportCreate(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVExportResume", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVExportResume(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVExportShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVExportShow(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesCount", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var indexName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesCount(context.Background(), organization, project, storeId, indexName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesCreate(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var indexName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesDelete(context.Background(), organization, project, storeId, indexName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesList(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesLookup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var indexName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesLookup(context.Background(), organization, project, storeId, indexName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesResume", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var indexName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesResume(context.Background(), organization, project, storeId, indexName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVIndexesShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var indexName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVIndexesShow(context.Background(), organization, project, storeId, indexName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVItemsBatchGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVItemsBatchGet(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -85,6 +409,23 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KVAPIService KVItemsIncrement", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var key string
+
+		resp, httpRes, err := apiClient.KVAPI.KVItemsIncrement(context.Background(), organization, project, storeId, key).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KVAPIService KVItemsList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -94,6 +435,23 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 		var storeId string
 
 		resp, httpRes, err := apiClient.KVAPI.KVItemsList(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVItemsPatch", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var key string
+
+		resp, httpRes, err := apiClient.KVAPI.KVItemsPatch(context.Background(), organization, project, storeId, key).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -134,6 +492,22 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KVAPIService KVItemsTransact", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVItemsTransact(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KVAPIService KVItemsUpdate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -144,6 +518,327 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 		var key string
 
 		resp, httpRes, err := apiClient.KVAPI.KVItemsUpdate(context.Background(), organization, project, storeId, key).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVKeysList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVKeysList(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersAppend", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersAppend(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersArchive", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersArchive(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersCreate(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersDelete", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersDelete(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersList(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersProof", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersProof(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersPublicKey", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersPublicKey(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersShow(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersShred", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersShred(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersShredsEntries", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+		var shredId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersShredsEntries(context.Background(), organization, project, storeId, ledgerName, shredId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersShredsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersShredsList(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersShredsReceipt", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+		var shredId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersShredsReceipt(context.Background(), organization, project, storeId, ledgerName, shredId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersStatus(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersSubjectEntries", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersSubjectEntries(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersSubjectPreview", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersSubjectPreview(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersUpdate(context.Background(), organization, project, storeId, ledgerName).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersVerificationsReport", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+		var verificationId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersVerificationsReport(context.Background(), organization, project, storeId, ledgerName, verificationId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVLedgersVerify", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+		var ledgerName string
+
+		resp, httpRes, err := apiClient.KVAPI.KVLedgersVerify(context.Background(), organization, project, storeId, ledgerName).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -207,6 +902,54 @@ func Test_quantadmingo_KVAPIService(t *testing.T) {
 		var storeId string
 
 		resp, httpRes, err := apiClient.KVAPI.KVUnlinkFromProject(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVUpgradeCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVUpgradeCreate(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVUpgradeShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVUpgradeShow(context.Background(), organization, project, storeId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KVAPIService KVUsageShow", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+		var storeId string
+
+		resp, httpRes, err := apiClient.KVAPI.KVUsageShow(context.Background(), organization, project, storeId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

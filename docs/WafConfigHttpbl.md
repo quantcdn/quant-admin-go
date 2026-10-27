@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **BlockHarvester** | Pointer to **bool** | Block email harvesters | [optional] [default to false]
 **BlockSpam** | Pointer to **bool** | Block spam sources | [optional] [default to false]
 **BlockSearchEngine** | Pointer to **bool** | Block search engines | [optional] [default to false]
-**HttpblKey** | Pointer to **string** | HTTP:BL API key | [optional] 
+**HttpblKey** | Pointer to **string** | HTTP:BL API key. The deprecated write alias api_key is still accepted. | [optional] 
 
 ## Methods
 

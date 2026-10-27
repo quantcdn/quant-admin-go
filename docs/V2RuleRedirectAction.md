@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **To** | **string** | Redirect destination URL | 
-**StatusCode** | Pointer to **string** | HTTP status code for redirect | [optional] [default to "301"]
+**StatusCode** | Pointer to **string** | HTTP status code for the redirect: 301, 302, 303, 307 or 308. Defaults to 301 when omitted on create. | [optional] [default to "301"]
 
 ## Methods
 

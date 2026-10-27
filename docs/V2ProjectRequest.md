@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **BasicAuthUsername** | Pointer to **string** | Basic auth username | [optional] 
 **BasicAuthPassword** | Pointer to **string** | Basic auth password | [optional] 
 **BasicAuthPreviewOnly** | Pointer to **bool** | Apply basic auth to preview domain only | [optional] [default to false]
+**SearchEnabled** | Pointer to **bool** | Enable the project&#39;s search index. Rejected when the organisation has no search subscription. | [optional] 
+**SearchConfig** | Pointer to [**V2SearchConfig**](V2SearchConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -231,6 +233,56 @@ SetBasicAuthPreviewOnly sets BasicAuthPreviewOnly field to given value.
 `func (o *V2ProjectRequest) HasBasicAuthPreviewOnly() bool`
 
 HasBasicAuthPreviewOnly returns a boolean if a field has been set.
+
+### GetSearchEnabled
+
+`func (o *V2ProjectRequest) GetSearchEnabled() bool`
+
+GetSearchEnabled returns the SearchEnabled field if non-nil, zero value otherwise.
+
+### GetSearchEnabledOk
+
+`func (o *V2ProjectRequest) GetSearchEnabledOk() (*bool, bool)`
+
+GetSearchEnabledOk returns a tuple with the SearchEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchEnabled
+
+`func (o *V2ProjectRequest) SetSearchEnabled(v bool)`
+
+SetSearchEnabled sets SearchEnabled field to given value.
+
+### HasSearchEnabled
+
+`func (o *V2ProjectRequest) HasSearchEnabled() bool`
+
+HasSearchEnabled returns a boolean if a field has been set.
+
+### GetSearchConfig
+
+`func (o *V2ProjectRequest) GetSearchConfig() V2SearchConfig`
+
+GetSearchConfig returns the SearchConfig field if non-nil, zero value otherwise.
+
+### GetSearchConfigOk
+
+`func (o *V2ProjectRequest) GetSearchConfigOk() (*V2SearchConfig, bool)`
+
+GetSearchConfigOk returns a tuple with the SearchConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchConfig
+
+`func (o *V2ProjectRequest) SetSearchConfig(v V2SearchConfig)`
+
+SetSearchConfig sets SearchConfig field to given value.
+
+### HasSearchConfig
+
+`func (o *V2ProjectRequest) HasSearchConfig() bool`
+
+HasSearchConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

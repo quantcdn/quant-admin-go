@@ -7,8 +7,10 @@ Method | HTTP request | Description
 [**CreateApplication**](ApplicationsAPI.md#CreateApplication) | **Post** /api/v3/organizations/{organisation}/applications | Create a new application
 [**DeleteApplication**](ApplicationsAPI.md#DeleteApplication) | **Delete** /api/v3/organizations/{organisation}/applications/{application} | Delete an application
 [**GetApplication**](ApplicationsAPI.md#GetApplication) | **Get** /api/v3/organizations/{organisation}/applications/{application} | Get a single application
-[**GetEcrLoginCredentials**](ApplicationsAPI.md#GetEcrLoginCredentials) | **Get** /api/v3/organizations/{organisation}/applications/ecr-login | Get ECR login credentials
+[**GetEcrLoginCredentials**](ApplicationsAPI.md#GetEcrLoginCredentials) | **Get** /api/v3/organizations/{organisation}/applications/ecr-login | Get container registry login credentials
 [**ListApplications**](ApplicationsAPI.md#ListApplications) | **Get** /api/v3/organizations/{organisation}/applications | Get all applications for an organisation
+[**PatchApplicationMetadata**](ApplicationsAPI.md#PatchApplicationMetadata) | **Patch** /api/v3/organizations/{organisation}/applications/{application}/metadata | Merge-patch application metadata
+[**PutApplicationMetadata**](ApplicationsAPI.md#PutApplicationMetadata) | **Put** /api/v3/organizations/{organisation}/applications/{application}/metadata | Replace application metadata
 
 
 
@@ -226,7 +228,7 @@ Name | Type | Description  | Notes
 
 > GetEcrLoginCredentials200Response GetEcrLoginCredentials(ctx, organisation).Execute()
 
-Get ECR login credentials
+Get container registry login credentials
 
 ### Example
 
@@ -292,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## ListApplications
 
-> []Application ListApplications(ctx, organisation).Execute()
+> []Application ListApplications(ctx, organisation).Metadata(metadata).Execute()
 
 Get all applications for an organisation
 
@@ -310,10 +312,11 @@ import (
 
 func main() {
 	organisation := "organisation_example" // string | The organisation ID
+	metadata := map[string]string{"key": map[string]string{"key": "Inner_example"}} // map[string]string | Filter by metadata, e.g. metadata[team]=web. Exact, case-sensitive match; multiple pairs are ANDed. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ApplicationsAPI.ListApplications(context.Background(), organisation).Execute()
+	resp, r, err := apiClient.ApplicationsAPI.ListApplications(context.Background(), organisation).Metadata(metadata).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationsAPI.ListApplications``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -339,6 +342,7 @@ Other parameters are passed through a pointer to a apiListApplicationsRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **metadata** | **map[string]map[string]string** | Filter by metadata, e.g. metadata[team]&#x3D;web. Exact, case-sensitive match; multiple pairs are ANDed. | 
 
 ### Return type
 
@@ -351,6 +355,156 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchApplicationMetadata
+
+> ApplicationMetadataResponse PatchApplicationMetadata(ctx, organisation, application).RequestBody(requestBody).Execute()
+
+Merge-patch application metadata
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | 
+	application := "application_example" // string | 
+	requestBody := map[string]string{"key": "Inner_example"} // map[string]string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationsAPI.PatchApplicationMetadata(context.Background(), organisation, application).RequestBody(requestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationsAPI.PatchApplicationMetadata``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PatchApplicationMetadata`: ApplicationMetadataResponse
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationsAPI.PatchApplicationMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** |  | 
+**application** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchApplicationMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **requestBody** | **map[string]string** |  | 
+
+### Return type
+
+[**ApplicationMetadataResponse**](ApplicationMetadataResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PutApplicationMetadata
+
+> ApplicationMetadataResponse PutApplicationMetadata(ctx, organisation, application).RequestBody(requestBody).Execute()
+
+Replace application metadata
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | 
+	application := "application_example" // string | 
+	requestBody := map[string]string{"key": "Inner_example"} // map[string]string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ApplicationsAPI.PutApplicationMetadata(context.Background(), organisation, application).RequestBody(requestBody).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ApplicationsAPI.PutApplicationMetadata``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PutApplicationMetadata`: ApplicationMetadataResponse
+	fmt.Fprintf(os.Stdout, "Response from `ApplicationsAPI.PutApplicationMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** |  | 
+**application** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPutApplicationMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **requestBody** | **map[string]string** |  | 
+
+### Return type
+
+[**ApplicationMetadataResponse**](ApplicationMetadataResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

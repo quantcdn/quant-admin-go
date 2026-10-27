@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Domain** | **[]string** | Domain patterns (default: any) | 
+**Domain** | **[]string** | Exact hostnames the rule matches, or &#39;any&#39; (the default). Wildcards such as *.example.com are not supported. | 
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | Pointer to **string** | Rule UUID | [optional] 
-**Weight** | Pointer to **int32** | Rule weight | [optional] [default to 0]
+**Weight** | Pointer to **int32** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] 
 **Disabled** | Pointer to **bool** | Whether rule is disabled | [optional] [default to false]
 **Url** | **[]string** | URL patterns | 
 **Country** | Pointer to **string** | Country filter type (country_is, country_is_not, any) | [optional] 
@@ -19,9 +19,16 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] 
-**AsnIs** | Pointer to **[]string** | Allowed AS numbers | [optional] 
-**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers | [optional] 
+**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any). A PATCH that omits it keeps the current value. Invalid values return 422. | [optional] 
+**AsnIs** | Pointer to **[]string** | Allowed AS numbers. Positive integers up to 4294967295, stored as strings. A PATCH replaces the list. | [optional] 
+**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers. Positive integers up to 4294967295, stored as strings. A PATCH replaces the list. | [optional] 
+**Ua** | Pointer to **string** | User agent filter type (ua_is, ua_is_not, any). Invalid values return 422. | [optional] 
+**UaIs** | Pointer to **[]string** | User agent strings to match. Each item has at most 255 characters. A PATCH replaces the list. | [optional] 
+**UaIsNot** | Pointer to **[]string** | User agent strings to exclude. Each item has at most 255 characters. A PATCH replaces the list. | [optional] 
+**TrafficSource** | Pointer to **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] 
+**TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match. A PATCH replaces the list. | [optional] 
+**TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude. A PATCH replaces the list. | [optional] 
+**CookieName** | Pointer to **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] 
 **StaticFilePath** | **string** | Path to the static file to serve | 
 
 ## Methods
@@ -482,6 +489,181 @@ SetAsnIsNot sets AsnIsNot field to given value.
 `func (o *V2RuleServeStaticRequest) HasAsnIsNot() bool`
 
 HasAsnIsNot returns a boolean if a field has been set.
+
+### GetUa
+
+`func (o *V2RuleServeStaticRequest) GetUa() string`
+
+GetUa returns the Ua field if non-nil, zero value otherwise.
+
+### GetUaOk
+
+`func (o *V2RuleServeStaticRequest) GetUaOk() (*string, bool)`
+
+GetUaOk returns a tuple with the Ua field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUa
+
+`func (o *V2RuleServeStaticRequest) SetUa(v string)`
+
+SetUa sets Ua field to given value.
+
+### HasUa
+
+`func (o *V2RuleServeStaticRequest) HasUa() bool`
+
+HasUa returns a boolean if a field has been set.
+
+### GetUaIs
+
+`func (o *V2RuleServeStaticRequest) GetUaIs() []string`
+
+GetUaIs returns the UaIs field if non-nil, zero value otherwise.
+
+### GetUaIsOk
+
+`func (o *V2RuleServeStaticRequest) GetUaIsOk() (*[]string, bool)`
+
+GetUaIsOk returns a tuple with the UaIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIs
+
+`func (o *V2RuleServeStaticRequest) SetUaIs(v []string)`
+
+SetUaIs sets UaIs field to given value.
+
+### HasUaIs
+
+`func (o *V2RuleServeStaticRequest) HasUaIs() bool`
+
+HasUaIs returns a boolean if a field has been set.
+
+### GetUaIsNot
+
+`func (o *V2RuleServeStaticRequest) GetUaIsNot() []string`
+
+GetUaIsNot returns the UaIsNot field if non-nil, zero value otherwise.
+
+### GetUaIsNotOk
+
+`func (o *V2RuleServeStaticRequest) GetUaIsNotOk() (*[]string, bool)`
+
+GetUaIsNotOk returns a tuple with the UaIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIsNot
+
+`func (o *V2RuleServeStaticRequest) SetUaIsNot(v []string)`
+
+SetUaIsNot sets UaIsNot field to given value.
+
+### HasUaIsNot
+
+`func (o *V2RuleServeStaticRequest) HasUaIsNot() bool`
+
+HasUaIsNot returns a boolean if a field has been set.
+
+### GetTrafficSource
+
+`func (o *V2RuleServeStaticRequest) GetTrafficSource() string`
+
+GetTrafficSource returns the TrafficSource field if non-nil, zero value otherwise.
+
+### GetTrafficSourceOk
+
+`func (o *V2RuleServeStaticRequest) GetTrafficSourceOk() (*string, bool)`
+
+GetTrafficSourceOk returns a tuple with the TrafficSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSource
+
+`func (o *V2RuleServeStaticRequest) SetTrafficSource(v string)`
+
+SetTrafficSource sets TrafficSource field to given value.
+
+### HasTrafficSource
+
+`func (o *V2RuleServeStaticRequest) HasTrafficSource() bool`
+
+HasTrafficSource returns a boolean if a field has been set.
+
+### GetTrafficSourceIs
+
+`func (o *V2RuleServeStaticRequest) GetTrafficSourceIs() []string`
+
+GetTrafficSourceIs returns the TrafficSourceIs field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsOk
+
+`func (o *V2RuleServeStaticRequest) GetTrafficSourceIsOk() (*[]string, bool)`
+
+GetTrafficSourceIsOk returns a tuple with the TrafficSourceIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIs
+
+`func (o *V2RuleServeStaticRequest) SetTrafficSourceIs(v []string)`
+
+SetTrafficSourceIs sets TrafficSourceIs field to given value.
+
+### HasTrafficSourceIs
+
+`func (o *V2RuleServeStaticRequest) HasTrafficSourceIs() bool`
+
+HasTrafficSourceIs returns a boolean if a field has been set.
+
+### GetTrafficSourceIsNot
+
+`func (o *V2RuleServeStaticRequest) GetTrafficSourceIsNot() []string`
+
+GetTrafficSourceIsNot returns the TrafficSourceIsNot field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsNotOk
+
+`func (o *V2RuleServeStaticRequest) GetTrafficSourceIsNotOk() (*[]string, bool)`
+
+GetTrafficSourceIsNotOk returns a tuple with the TrafficSourceIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIsNot
+
+`func (o *V2RuleServeStaticRequest) SetTrafficSourceIsNot(v []string)`
+
+SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
+
+### HasTrafficSourceIsNot
+
+`func (o *V2RuleServeStaticRequest) HasTrafficSourceIsNot() bool`
+
+HasTrafficSourceIsNot returns a boolean if a field has been set.
+
+### GetCookieName
+
+`func (o *V2RuleServeStaticRequest) GetCookieName() string`
+
+GetCookieName returns the CookieName field if non-nil, zero value otherwise.
+
+### GetCookieNameOk
+
+`func (o *V2RuleServeStaticRequest) GetCookieNameOk() (*string, bool)`
+
+GetCookieNameOk returns a tuple with the CookieName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCookieName
+
+`func (o *V2RuleServeStaticRequest) SetCookieName(v string)`
+
+SetCookieName sets CookieName field to given value.
+
+### HasCookieName
+
+`func (o *V2RuleServeStaticRequest) HasCookieName() bool`
+
+HasCookieName returns a boolean if a field has been set.
 
 ### GetStaticFilePath
 

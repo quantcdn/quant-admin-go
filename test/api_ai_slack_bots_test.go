@@ -66,6 +66,39 @@ func Test_quantadmingo_AISlackBotsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AISlackBotsAPIService GetSlackBotThread", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+		var channel string
+		var threadTs string
+
+		resp, httpRes, err := apiClient.AISlackBotsAPI.GetSlackBotThread(context.Background(), organisation, botId, channel, threadTs).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AISlackBotsAPIService ListSlackBotChannelMessages", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+		var channel string
+
+		resp, httpRes, err := apiClient.AISlackBotsAPI.ListSlackBotChannelMessages(context.Background(), organisation, botId, channel).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AISlackBotsAPIService ListSlackBots", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -73,6 +106,35 @@ func Test_quantadmingo_AISlackBotsAPIService(t *testing.T) {
 		var organisation string
 
 		resp, httpRes, err := apiClient.AISlackBotsAPI.ListSlackBots(context.Background(), organisation).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AISlackBotsAPIService ListSlackBotsApiEnabled", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+
+		resp, httpRes, err := apiClient.AISlackBotsAPI.ListSlackBotsApiEnabled(context.Background(), organisation).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AISlackBotsAPIService PostSlackBotMessage", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+
+		resp, httpRes, err := apiClient.AISlackBotsAPI.PostSlackBotMessage(context.Background(), organisation, botId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

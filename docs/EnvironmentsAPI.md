@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetEnvironment**](EnvironmentsAPI.md#GetEnvironment) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Get a single environment
 [**GetEnvironmentLogs**](EnvironmentsAPI.md#GetEnvironmentLogs) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/logs | Get the logs for an environment
 [**GetEnvironmentMetrics**](EnvironmentsAPI.md#GetEnvironmentMetrics) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/metrics | Get the metrics for an environment
+[**GetEnvironmentSlowQueries**](EnvironmentsAPI.md#GetEnvironmentSlowQueries) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/slow-queries | Get MySQL slow queries for an environment
 [**ListEnvironments**](EnvironmentsAPI.md#ListEnvironments) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments | Get all environments for an application
 [**ListSyncOperations**](EnvironmentsAPI.md#ListSyncOperations) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment
 [**SyncToEnvironment**](EnvironmentsAPI.md#SyncToEnvironment) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment
@@ -355,7 +356,7 @@ func main() {
 	startTime := int32(56) // int32 | Start time for metrics retrieval (Unix timestamp in milliseconds) (optional)
 	endTime := int32(56) // int32 | End time for metrics retrieval (Unix timestamp in milliseconds) (optional)
 	period := int32(56) // int32 | Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) (optional)
-	statistics := "statistics_example" // string | Comma-separated list of CloudWatch statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) (optional)
+	statistics := "statistics_example" // string | Comma-separated list of metric statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) (optional)
 	containerName := "containerName_example" // string | Filter metrics by specific container name (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -393,8 +394,92 @@ Name | Type | Description  | Notes
  **startTime** | **int32** | Start time for metrics retrieval (Unix timestamp in milliseconds) | 
  **endTime** | **int32** | End time for metrics retrieval (Unix timestamp in milliseconds) | 
  **period** | **int32** | Period in seconds for metric aggregation (e.g., 60 for 1 minute, 300 for 5 minutes) | 
- **statistics** | **string** | Comma-separated list of CloudWatch statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) | 
+ **statistics** | **string** | Comma-separated list of metric statistics (e.g., Average, Maximum, Minimum, Sum, SampleCount) | 
  **containerName** | **string** | Filter metrics by specific container name | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetEnvironmentSlowQueries
+
+> map[string]interface{} GetEnvironmentSlowQueries(ctx, organisation, application, environment).StartTime(startTime).EndTime(endTime).View(view).Limit(limit).Execute()
+
+Get MySQL slow queries for an environment
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | 
+	application := "application_example" // string | 
+	environment := "environment_example" // string | 
+	startTime := "startTime_example" // string | ISO 8601 or Unix epoch ms. Default: 24 hours before endTime. (optional)
+	endTime := "endTime_example" // string | ISO 8601 or Unix epoch ms. Default: now. Window max 30 days. (optional)
+	view := "view_example" // string |  (optional) (default to "summary")
+	limit := int32(56) // int32 | entries: 1-500; summary: 1-100 shapes (optional) (default to 50)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EnvironmentsAPI.GetEnvironmentSlowQueries(context.Background(), organisation, application, environment).StartTime(startTime).EndTime(endTime).View(view).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.GetEnvironmentSlowQueries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEnvironmentSlowQueries`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.GetEnvironmentSlowQueries`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** |  | 
+**application** | **string** |  | 
+**environment** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetEnvironmentSlowQueriesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **startTime** | **string** | ISO 8601 or Unix epoch ms. Default: 24 hours before endTime. | 
+ **endTime** | **string** | ISO 8601 or Unix epoch ms. Default: now. Window max 30 days. | 
+ **view** | **string** |  | [default to &quot;summary&quot;]
+ **limit** | **int32** | entries: 1-500; summary: 1-100 shapes | [default to 50]
 
 ### Return type
 

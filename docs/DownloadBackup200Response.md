@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DownloadUrl** | Pointer to **string** | Pre-signed S3 URL for download | [optional] 
+**DownloadUrl** | Pointer to **string** | Pre-signed URL for download | [optional] 
 **ExpiresAt** | Pointer to **time.Time** | URL expiration time | [optional] 
 **Filename** | Pointer to **string** | Suggested filename for download | [optional] 
 

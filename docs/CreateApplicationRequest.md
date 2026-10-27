@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Database** | Pointer to [**NullableCreateApplicationRequestDatabase**](CreateApplicationRequestDatabase.md) |  | [optional] 
 **Filesystem** | Pointer to [**NullableCreateApplicationRequestFilesystem**](CreateApplicationRequestFilesystem.md) |  | [optional] 
 **Environment** | Pointer to [**[]CreateApplicationRequestEnvironmentInner**](CreateApplicationRequestEnvironmentInner.md) | Optional. Initial environment variables for the production environment. | [optional] 
+**Metadata** | Pointer to **map[string]string** | Free-form key/value metadata. Maximum 50 pairs. Keys are 1-128 characters, values 0-256 characters. Letters, digits, space and + - &#x3D; . _ : / @ only. Keys starting with &#39;quant:&#39; are reserved. | [optional] 
 
 ## Methods
 
@@ -246,6 +247,31 @@ HasEnvironment returns a boolean if a field has been set.
 `func (o *CreateApplicationRequest) UnsetEnvironment()`
 
 UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
+### GetMetadata
+
+`func (o *CreateApplicationRequest) GetMetadata() map[string]string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *CreateApplicationRequest) GetMetadataOk() (*map[string]string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *CreateApplicationRequest) SetMetadata(v map[string]string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *CreateApplicationRequest) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

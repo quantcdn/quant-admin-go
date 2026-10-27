@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **Name** | **string** | Unique tool name (alphanumeric and underscores only) | 
 **Description** | **string** | Human-readable description of what the tool does | 
 **EdgeFunctionCode** | **string** | JavaScript source code for the edge function | 
-**InputSchema** | **string** | JSON-encoded JSON Schema object defining the tool&#39;s input parameters | 
+**InputSchema** | **string** | JSON Schema defining the tool&#39;s input parameters. The API accepts a JSON object here and rejects a JSON-encoded string with a 422; the declared type string is a known inaccuracy kept to avoid changing generated clients. | 
 **IsAsync** | Pointer to **bool** | Whether this tool runs asynchronously (&gt;5 seconds) | [optional] [default to false]
 **TimeoutSeconds** | Pointer to **int32** | Tool execution timeout | [optional] [default to 30]
-**OutputSchema** | Pointer to **NullableString** | JSON-encoded JSON Schema object defining the tool&#39;s output structure | [optional] 
+**OutputSchema** | Pointer to **NullableString** | JSON Schema defining the tool&#39;s output structure. The API accepts a JSON object here and rejects a JSON-encoded string with a 422; the declared type string is a known inaccuracy kept to avoid changing generated clients. | [optional] 
 **OutputSchemaDescription** | Pointer to **NullableString** | Human-readable description of the tool&#39;s output | [optional] 
 **Category** | Pointer to **NullableString** | Category to group related tools | [optional] 
 **ResponseMode** | Pointer to **NullableString** | How the tool response is handled: llm (passed back to model) or direct (returned to user) | [optional] 

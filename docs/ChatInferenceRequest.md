@@ -15,8 +15,12 @@ Name | Type | Description | Notes
 **ResponseFormat** | Pointer to [**ChatInferenceRequestResponseFormat**](ChatInferenceRequestResponseFormat.md) |  | [optional] 
 **ToolConfig** | Pointer to [**ChatInferenceRequestToolConfig**](ChatInferenceRequestToolConfig.md) |  | [optional] 
 **SessionId** | Pointer to **string** | Optional session ID for conversation continuity. Omit to use stateless mode, include to continue an existing session. | [optional] 
+**ProposalIds** | Pointer to **[]string** | Tool approval proposal ids this turn relates to. Forwarded to the AI API unchanged. | [optional] 
+**ClientSessionId** | Pointer to **string** | Client session id used by the AI API to scope tool approval grants. Forwarded unchanged. | [optional] 
 **Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl instead of waiting for completion. Use for long-running inference, client-executed tools, or operations &gt;30 seconds. | [optional] [default to false]
 **AllowedTools** | Pointer to **[]string** | Top-level convenience alias for toolConfig.allowedTools. Whitelists which tools can be auto-executed. | [optional] 
+**AutoExecute** | Pointer to [**ChatInferenceRequestAutoExecute**](ChatInferenceRequestAutoExecute.md) |  | [optional] 
+**MaxToolIterations** | Pointer to **int32** | Maximum tool auto-execution iterations for this request | [optional] 
 **Guardrails** | Pointer to [**ChatInferenceRequestGuardrails**](ChatInferenceRequestGuardrails.md) |  | [optional] 
 **LongContext** | Pointer to **bool** | Enable 1M context window support regardless of token estimation. Use when sending large payloads (&gt;200K tokens). | [optional] [default to false]
 
@@ -304,6 +308,56 @@ SetSessionId sets SessionId field to given value.
 
 HasSessionId returns a boolean if a field has been set.
 
+### GetProposalIds
+
+`func (o *ChatInferenceRequest) GetProposalIds() []string`
+
+GetProposalIds returns the ProposalIds field if non-nil, zero value otherwise.
+
+### GetProposalIdsOk
+
+`func (o *ChatInferenceRequest) GetProposalIdsOk() (*[]string, bool)`
+
+GetProposalIdsOk returns a tuple with the ProposalIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProposalIds
+
+`func (o *ChatInferenceRequest) SetProposalIds(v []string)`
+
+SetProposalIds sets ProposalIds field to given value.
+
+### HasProposalIds
+
+`func (o *ChatInferenceRequest) HasProposalIds() bool`
+
+HasProposalIds returns a boolean if a field has been set.
+
+### GetClientSessionId
+
+`func (o *ChatInferenceRequest) GetClientSessionId() string`
+
+GetClientSessionId returns the ClientSessionId field if non-nil, zero value otherwise.
+
+### GetClientSessionIdOk
+
+`func (o *ChatInferenceRequest) GetClientSessionIdOk() (*string, bool)`
+
+GetClientSessionIdOk returns a tuple with the ClientSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientSessionId
+
+`func (o *ChatInferenceRequest) SetClientSessionId(v string)`
+
+SetClientSessionId sets ClientSessionId field to given value.
+
+### HasClientSessionId
+
+`func (o *ChatInferenceRequest) HasClientSessionId() bool`
+
+HasClientSessionId returns a boolean if a field has been set.
+
 ### GetAsync
 
 `func (o *ChatInferenceRequest) GetAsync() bool`
@@ -353,6 +407,56 @@ SetAllowedTools sets AllowedTools field to given value.
 `func (o *ChatInferenceRequest) HasAllowedTools() bool`
 
 HasAllowedTools returns a boolean if a field has been set.
+
+### GetAutoExecute
+
+`func (o *ChatInferenceRequest) GetAutoExecute() ChatInferenceRequestAutoExecute`
+
+GetAutoExecute returns the AutoExecute field if non-nil, zero value otherwise.
+
+### GetAutoExecuteOk
+
+`func (o *ChatInferenceRequest) GetAutoExecuteOk() (*ChatInferenceRequestAutoExecute, bool)`
+
+GetAutoExecuteOk returns a tuple with the AutoExecute field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoExecute
+
+`func (o *ChatInferenceRequest) SetAutoExecute(v ChatInferenceRequestAutoExecute)`
+
+SetAutoExecute sets AutoExecute field to given value.
+
+### HasAutoExecute
+
+`func (o *ChatInferenceRequest) HasAutoExecute() bool`
+
+HasAutoExecute returns a boolean if a field has been set.
+
+### GetMaxToolIterations
+
+`func (o *ChatInferenceRequest) GetMaxToolIterations() int32`
+
+GetMaxToolIterations returns the MaxToolIterations field if non-nil, zero value otherwise.
+
+### GetMaxToolIterationsOk
+
+`func (o *ChatInferenceRequest) GetMaxToolIterationsOk() (*int32, bool)`
+
+GetMaxToolIterationsOk returns a tuple with the MaxToolIterations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxToolIterations
+
+`func (o *ChatInferenceRequest) SetMaxToolIterations(v int32)`
+
+SetMaxToolIterations sets MaxToolIterations field to given value.
+
+### HasMaxToolIterations
+
+`func (o *ChatInferenceRequest) HasMaxToolIterations() bool`
+
+HasMaxToolIterations returns a boolean if a field has been set.
 
 ### GetGuardrails
 
