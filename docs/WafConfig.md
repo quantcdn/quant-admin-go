@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **BlockAsn** | Pointer to **[]string** | ASN numbers to block | [optional] 
 **BlockUa** | Pointer to **[]string** | User agent patterns to block | [optional] 
 **BlockReferer** | Pointer to **[]string** | Referer patterns to block | [optional] 
-**NotifySlack** | Pointer to **string** | Slack webhook URL for notifications | [optional] 
-**NotifySlackHitsRpm** | Pointer to **int32** | Minimum hits per minute to trigger Slack notification | [optional] 
+**NotifySlack** | Pointer to **string** | Slack webhook URL for notifications. The deprecated write alias notify_slack_webhook is still accepted | [optional] 
+**NotifySlackHitsRpm** | Pointer to **int32** | Minimum hits per minute to trigger Slack notification. Send a positive integer. 0, null or an empty string turns it off (reads back null). Other values return 400. The deprecated write alias notify_slack_rpm is still accepted | [optional] 
 **NotifyEmail** | Pointer to **[]string** | Email addresses for notifications | [optional] 
 **Httpbl** | Pointer to [**WafConfigHttpbl**](WafConfigHttpbl.md) |  | [optional] 
 **BlockLists** | Pointer to [**WafConfigBlockLists**](WafConfigBlockLists.md) |  | [optional] 
-**Thresholds** | Pointer to [**[]WafConfigThresholdsInner**](WafConfigThresholdsInner.md) | Rate limiting thresholds | [optional] 
+**Thresholds** | Pointer to [**[]WafConfigThresholdsInner**](WafConfigThresholdsInner.md) | Rate limiting thresholds. Entries are merged by type on update: only the listed types change. A request without thresholds keeps the stored ones. To turn a limit off, send its type with mode disabled. rps, hits and minutes are integers of 1 or more; cooldown is 0 or more. Invalid values return 400. An empty list changes nothing. A request that sets notify_slack copies that webhook into every threshold that the same request does not give its own notify_slack. Deprecated write aliases, still accepted: ip_ratelimit_rps, ip_ratelimit_cooldown, ip_ratelimit_mode, header_ratelimit_rps, header_ratelimit_cooldown, header_ratelimit_value, header_ratelimit_mode, hit_ratelimit_hits, hit_ratelimit_minutes, hit_ratelimit_cooldown, hit_ratelimit_mode. When thresholds and an alias set the same value, thresholds wins. | [optional] 
 
 ## Methods
 

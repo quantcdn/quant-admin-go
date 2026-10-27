@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CacheKeys** | **[]string** | Cache keys to purge | 
-**Urls** | Pointer to **[]string** | URLs to purge | [optional] 
-**Scope** | **string** | Purge scope (org or project) | [default to "project"]
-**Soft** | Pointer to **bool** | Soft purge | [optional] [default to true]
+**CacheKeys** | Pointer to **[]string** | Cache keys to purge. Optional when urls is set. | [optional] 
+**Urls** | Pointer to **[]string** | URL paths to purge, each starting with a slash (for example /contact). Use /_* to purge the whole project. At most 100 per request; a single string is also accepted. The whole list is validated before any purge is sent. Optional when cache_keys is set. | [optional] 
+**Scope** | Pointer to **string** | Purge scope for cache_keys (project or org). Not used for urls. | [optional] [default to "project"]
+**Soft** | Pointer to **bool** | Soft purge: mark cached content stale instead of removing it. When omitted, the purge is soft (true). Send false for a hard purge. | [optional] [default to true]
 
 ## Methods
 
 ### NewPurgeCreateRequest
 
-`func NewPurgeCreateRequest(cacheKeys []string, scope string, ) *PurgeCreateRequest`
+`func NewPurgeCreateRequest() *PurgeCreateRequest`
 
 NewPurgeCreateRequest instantiates a new PurgeCreateRequest object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +47,11 @@ and a boolean to check if the value has been set.
 
 SetCacheKeys sets CacheKeys field to given value.
 
+### HasCacheKeys
+
+`func (o *PurgeCreateRequest) HasCacheKeys() bool`
+
+HasCacheKeys returns a boolean if a field has been set.
 
 ### GetUrls
 
@@ -92,6 +97,11 @@ and a boolean to check if the value has been set.
 
 SetScope sets Scope field to given value.
 
+### HasScope
+
+`func (o *PurgeCreateRequest) HasScope() bool`
+
+HasScope returns a boolean if a field has been set.
 
 ### GetSoft
 

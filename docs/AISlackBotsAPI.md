@@ -7,7 +7,11 @@ Method | HTTP request | Description
 [**CreateSlackBot**](AISlackBotsAPI.md#CreateSlackBot) | **Post** /api/v3/organizations/{organisation}/ai/slack-bots | Create Slack Bot
 [**DeleteSlackBot**](AISlackBotsAPI.md#DeleteSlackBot) | **Delete** /api/v3/organizations/{organisation}/ai/slack-bots/{botId} | Delete Slack Bot
 [**GetSlackBot**](AISlackBotsAPI.md#GetSlackBot) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots/{botId} | Get Slack Bot
+[**GetSlackBotThread**](AISlackBotsAPI.md#GetSlackBotThread) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/threads/{channel}/{threadTs} | Read a thread
+[**ListSlackBotChannelMessages**](AISlackBotsAPI.md#ListSlackBotChannelMessages) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/channels/{channel}/messages | Read recent channel messages
 [**ListSlackBots**](AISlackBotsAPI.md#ListSlackBots) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots | List Slack Bots
+[**ListSlackBotsApiEnabled**](AISlackBotsAPI.md#ListSlackBotsApiEnabled) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots/api-enabled | List API-enabled Slack bots
+[**PostSlackBotMessage**](AISlackBotsAPI.md#PostSlackBotMessage) | **Post** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/messages | Post a message as the bot
 [**SearchSlackWorkspaceChannels**](AISlackBotsAPI.md#SearchSlackWorkspaceChannels) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/workspace/channels | Search Slack Workspace Channels
 [**SearchSlackWorkspaceUsers**](AISlackBotsAPI.md#SearchSlackWorkspaceUsers) | **Get** /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/workspace/users | Search Slack Workspace Users
 [**UpdateSlackBot**](AISlackBotsAPI.md#UpdateSlackBot) | **Put** /api/v3/organizations/{organisation}/ai/slack-bots/{botId} | Update Slack Bot
@@ -232,6 +236,173 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetSlackBotThread
+
+> GetSlackBotThread200Response GetSlackBotThread(ctx, organisation, botId, channel, threadTs).Since(since).Limit(limit).Cursor(cursor).Execute()
+
+Read a thread
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation machine name
+	botId := "botId_example" // string | 
+	channel := "channel_example" // string | 
+	threadTs := "threadTs_example" // string | 
+	since := "since_example" // string | Slack ts, exclusive. Only replies after it; the root is always included. (optional)
+	limit := int32(56) // int32 |  (optional) (default to 100)
+	cursor := "cursor_example" // string |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISlackBotsAPI.GetSlackBotThread(context.Background(), organisation, botId, channel, threadTs).Since(since).Limit(limit).Cursor(cursor).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISlackBotsAPI.GetSlackBotThread``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSlackBotThread`: GetSlackBotThread200Response
+	fmt.Fprintf(os.Stdout, "Response from `AISlackBotsAPI.GetSlackBotThread`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation machine name | 
+**botId** | **string** |  | 
+**channel** | **string** |  | 
+**threadTs** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSlackBotThreadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **since** | **string** | Slack ts, exclusive. Only replies after it; the root is always included. | 
+ **limit** | **int32** |  | [default to 100]
+ **cursor** | **string** |  | 
+
+### Return type
+
+[**GetSlackBotThread200Response**](GetSlackBotThread200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListSlackBotChannelMessages
+
+> ListSlackBotChannelMessages200Response ListSlackBotChannelMessages(ctx, organisation, botId, channel).Since(since).Limit(limit).Cursor(cursor).Execute()
+
+Read recent channel messages
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation machine name
+	botId := "botId_example" // string | 
+	channel := "channel_example" // string | 
+	since := "since_example" // string | Slack ts, exclusive (optional)
+	limit := int32(56) // int32 |  (optional) (default to 20)
+	cursor := "cursor_example" // string |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISlackBotsAPI.ListSlackBotChannelMessages(context.Background(), organisation, botId, channel).Since(since).Limit(limit).Cursor(cursor).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISlackBotsAPI.ListSlackBotChannelMessages``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSlackBotChannelMessages`: ListSlackBotChannelMessages200Response
+	fmt.Fprintf(os.Stdout, "Response from `AISlackBotsAPI.ListSlackBotChannelMessages`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation machine name | 
+**botId** | **string** |  | 
+**channel** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSlackBotChannelMessagesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **since** | **string** | Slack ts, exclusive | 
+ **limit** | **int32** |  | [default to 20]
+ **cursor** | **string** |  | 
+
+### Return type
+
+[**ListSlackBotChannelMessages200Response**](ListSlackBotChannelMessages200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListSlackBots
 
 > ListSlackBots200Response ListSlackBots(ctx, organisation).Execute()
@@ -295,6 +466,153 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListSlackBotsApiEnabled
+
+> ListSlackBotsApiEnabled200Response ListSlackBotsApiEnabled(ctx, organisation).Execute()
+
+List API-enabled Slack bots
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation machine name
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISlackBotsAPI.ListSlackBotsApiEnabled(context.Background(), organisation).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISlackBotsAPI.ListSlackBotsApiEnabled``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListSlackBotsApiEnabled`: ListSlackBotsApiEnabled200Response
+	fmt.Fprintf(os.Stdout, "Response from `AISlackBotsAPI.ListSlackBotsApiEnabled`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation machine name | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSlackBotsApiEnabledRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ListSlackBotsApiEnabled200Response**](ListSlackBotsApiEnabled200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PostSlackBotMessage
+
+> PostSlackBotMessage201Response PostSlackBotMessage(ctx, organisation, botId).PostSlackBotMessageRequest(postSlackBotMessageRequest).IdempotencyKey(idempotencyKey).Execute()
+
+Post a message as the bot
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organisation := "organisation_example" // string | The organisation machine name
+	botId := "botId_example" // string | 
+	postSlackBotMessageRequest := *openapiclient.NewPostSlackBotMessageRequest("Channel_example", "Text_example") // PostSlackBotMessageRequest | 
+	idempotencyKey := "idempotencyKey_example" // string | 8-128 visible ASCII characters. An empty Idempotency-Key header is refused with 400 INVALID_REQUEST. The same key and body within 10 minutes returns the first result and does not post again. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AISlackBotsAPI.PostSlackBotMessage(context.Background(), organisation, botId).PostSlackBotMessageRequest(postSlackBotMessageRequest).IdempotencyKey(idempotencyKey).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AISlackBotsAPI.PostSlackBotMessage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostSlackBotMessage`: PostSlackBotMessage201Response
+	fmt.Fprintf(os.Stdout, "Response from `AISlackBotsAPI.PostSlackBotMessage`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organisation** | **string** | The organisation machine name | 
+**botId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPostSlackBotMessageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **postSlackBotMessageRequest** | [**PostSlackBotMessageRequest**](PostSlackBotMessageRequest.md) |  | 
+ **idempotencyKey** | **string** | 8-128 visible ASCII characters. An empty Idempotency-Key header is refused with 400 INVALID_REQUEST. The same key and body within 10 minutes returns the first result and does not post again. | 
+
+### Return type
+
+[**PostSlackBotMessage201Response**](PostSlackBotMessage201Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

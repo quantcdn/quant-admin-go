@@ -6,6 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**RulesAuthCreate**](RulesAPI.md#RulesAuthCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/rules/auth | Create an authentication rule
 [**RulesAuthDelete**](RulesAPI.md#RulesAuthDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Delete an authentication rule
+[**RulesAuthFunctionCreate**](RulesAPI.md#RulesAuthFunctionCreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function | Create an auth function rule
+[**RulesAuthFunctionDelete**](RulesAPI.md#RulesAuthFunctionDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function/{rule} | Delete an auth function rule
+[**RulesAuthFunctionList**](RulesAPI.md#RulesAuthFunctionList) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function | List auth function rules
+[**RulesAuthFunctionRead**](RulesAPI.md#RulesAuthFunctionRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function/{rule} | Get details of an auth function rule
+[**RulesAuthFunctionUpdate**](RulesAPI.md#RulesAuthFunctionUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/rules/auth-function/{rule} | Update an auth function rule
 [**RulesAuthList**](RulesAPI.md#RulesAuthList) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/auth | List authentication rules
 [**RulesAuthRead**](RulesAPI.md#RulesAuthRead) | **Get** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Get details of an authentication rule
 [**RulesAuthUpdate**](RulesAPI.md#RulesAuthUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project}/rules/auth/{rule} | Update an authentication rule
@@ -202,11 +207,379 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RulesAuthFunctionCreate
+
+> V2RuleAuthFunction RulesAuthFunctionCreate(ctx, organization, project).V2RuleAuthFunctionRequest(v2RuleAuthFunctionRequest).Execute()
+
+Create an auth function rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	v2RuleAuthFunctionRequest := *openapiclient.NewV2RuleAuthFunctionRequest([]string{"Domain_example"}, []string{"Url_example"}, "7c9e6679-7425-40de-944b-e07fc1f90ae7") // V2RuleAuthFunctionRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesAuthFunctionCreate(context.Background(), organization, project).V2RuleAuthFunctionRequest(v2RuleAuthFunctionRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesAuthFunctionCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesAuthFunctionCreate`: V2RuleAuthFunction
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesAuthFunctionCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesAuthFunctionCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **v2RuleAuthFunctionRequest** | [**V2RuleAuthFunctionRequest**](V2RuleAuthFunctionRequest.md) |  | 
+
+### Return type
+
+[**V2RuleAuthFunction**](V2RuleAuthFunction.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesAuthFunctionDelete
+
+> RulesAuthFunctionDelete(ctx, organization, project, rule).Execute()
+
+Delete an auth function rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	rule := "rule_example" // string | Rule identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.RulesAPI.RulesAuthFunctionDelete(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesAuthFunctionDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**rule** | **string** | Rule identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesAuthFunctionDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesAuthFunctionList
+
+> []V2RuleAuthFunction RulesAuthFunctionList(ctx, organization, project).Execute()
+
+List auth function rules
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesAuthFunctionList(context.Background(), organization, project).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesAuthFunctionList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesAuthFunctionList`: []V2RuleAuthFunction
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesAuthFunctionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesAuthFunctionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]V2RuleAuthFunction**](V2RuleAuthFunction.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesAuthFunctionRead
+
+> V2RuleAuthFunction RulesAuthFunctionRead(ctx, organization, project, rule).Execute()
+
+Get details of an auth function rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	rule := "rule_example" // string | Rule identifier
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesAuthFunctionRead(context.Background(), organization, project, rule).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesAuthFunctionRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesAuthFunctionRead`: V2RuleAuthFunction
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesAuthFunctionRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**rule** | **string** | Rule identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesAuthFunctionReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**V2RuleAuthFunction**](V2RuleAuthFunction.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RulesAuthFunctionUpdate
+
+> V2RuleAuthFunction RulesAuthFunctionUpdate(ctx, organization, project, rule).V2RuleAuthFunctionRequest(v2RuleAuthFunctionRequest).Execute()
+
+Update an auth function rule
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | Organization identifier
+	project := "project_example" // string | Project identifier
+	rule := "rule_example" // string | Rule identifier
+	v2RuleAuthFunctionRequest := *openapiclient.NewV2RuleAuthFunctionRequest([]string{"Domain_example"}, []string{"Url_example"}, "7c9e6679-7425-40de-944b-e07fc1f90ae7") // V2RuleAuthFunctionRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RulesAPI.RulesAuthFunctionUpdate(context.Background(), organization, project, rule).V2RuleAuthFunctionRequest(v2RuleAuthFunctionRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RulesAPI.RulesAuthFunctionUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RulesAuthFunctionUpdate`: V2RuleAuthFunction
+	fmt.Fprintf(os.Stdout, "Response from `RulesAPI.RulesAuthFunctionUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | Organization identifier | 
+**project** | **string** | Project identifier | 
+**rule** | **string** | Rule identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRulesAuthFunctionUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **v2RuleAuthFunctionRequest** | [**V2RuleAuthFunctionRequest**](V2RuleAuthFunctionRequest.md) |  | 
+
+### Return type
+
+[**V2RuleAuthFunction**](V2RuleAuthFunction.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RulesAuthList
 
 > []V2RuleAuth RulesAuthList(ctx, organization, project).Execute()
 
 List authentication rules
+
+
 
 ### Example
 

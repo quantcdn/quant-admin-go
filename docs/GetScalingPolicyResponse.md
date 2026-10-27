@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ScaleInCooldownSeconds** | Pointer to **int32** |  | [optional] 
 **ScaleOutCooldownSeconds** | Pointer to **int32** |  | [optional] 
 **PolicyName** | Pointer to **string** | Name of the underlying Application Auto Scaling policy. | [optional] 
-**ResourceLabel** | Pointer to **NullableString** | ALB ResourceLabel for RPS policies (target group identifier). | [optional] 
+**ResourceLabel** | Pointer to **NullableString** | Load balancer resource label for RPS policies (target group identifier). | [optional] 
 
 ## Methods
 

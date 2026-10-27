@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Content** | Pointer to **string** | Base64-encoded file content (for direct upload). Required unless using requestUploadUrl. | [optional] 
-**RequestUploadUrl** | Pointer to **bool** | Set to true to get a presigned S3 upload URL instead of uploading directly. | [optional] [default to false]
+**RequestUploadUrl** | Pointer to **bool** | Set to true to get a presigned upload URL instead of uploading directly. | [optional] [default to false]
 **Size** | Pointer to **int32** | File size in bytes. Optional but recommended for presigned uploads. | [optional] 
 **Filename** | Pointer to **string** | Original filename | [optional] 
 **ContentType** | **string** | MIME type of the file | 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ExecutionId** | **string** |  | 
 **ToolName** | **string** |  | 
 **Status** | **string** | Execution status: pending, running, complete, or failed | 
-**Result** | Pointer to [**GetAIToolExecutionStatus200ResponseResult**](GetAIToolExecutionStatus200ResponseResult.md) |  | [optional] 
+**Result** | Pointer to **map[string]interface{}** | Tool execution result (only present when status&#x3D;&#39;complete&#39;). Structure varies by tool type. | [optional] 
 **Error** | Pointer to **string** | Error message (only present when status&#x3D;&#39;failed&#39;) | [optional] 
 **CreatedAt** | **int32** | Unix timestamp when execution was created | 
 **StartedAt** | Pointer to **int32** | Unix timestamp when execution started (if status &gt;&#x3D; &#39;running&#39;) | [optional] 
@@ -95,20 +95,20 @@ SetStatus sets Status field to given value.
 
 ### GetResult
 
-`func (o *GetAIToolExecutionStatus200Response) GetResult() GetAIToolExecutionStatus200ResponseResult`
+`func (o *GetAIToolExecutionStatus200Response) GetResult() map[string]interface{}`
 
 GetResult returns the Result field if non-nil, zero value otherwise.
 
 ### GetResultOk
 
-`func (o *GetAIToolExecutionStatus200Response) GetResultOk() (*GetAIToolExecutionStatus200ResponseResult, bool)`
+`func (o *GetAIToolExecutionStatus200Response) GetResultOk() (*map[string]interface{}, bool)`
 
 GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResult
 
-`func (o *GetAIToolExecutionStatus200Response) SetResult(v GetAIToolExecutionStatus200ResponseResult)`
+`func (o *GetAIToolExecutionStatus200Response) SetResult(v map[string]interface{})`
 
 SetResult sets Result field to given value.
 

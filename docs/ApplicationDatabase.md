@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RdsInstanceIdentifier** | Pointer to **string** | RDS instance identifier | [optional] 
-**RdsInstanceEndpoint** | Pointer to **string** | RDS instance endpoint address | [optional] 
+**RdsInstanceIdentifier** | Pointer to **string** | Database instance identifier | [optional] 
+**RdsInstanceEndpoint** | Pointer to **string** | Database instance endpoint address | [optional] 
 **RdsInstanceEngine** | Pointer to **string** | Database engine | [optional] 
-**RdsInstanceStatus** | Pointer to **string** | RDS instance status | [optional] 
+**RdsInstanceStatus** | Pointer to **string** | Database instance status | [optional] 
 
 ## Methods
 

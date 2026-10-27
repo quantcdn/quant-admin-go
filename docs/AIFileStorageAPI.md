@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**DeleteFile**](AIFileStorageAPI.md#DeleteFile) | **Delete** /api/v3/organizations/{organisation}/ai/files/{fileId} | Delete File
 [**GetFile**](AIFileStorageAPI.md#GetFile) | **Get** /api/v3/organizations/{organisation}/ai/files/{fileId} | Get File
 [**ListFiles**](AIFileStorageAPI.md#ListFiles) | **Get** /api/v3/organizations/{organisation}/ai/files | List Files
-[**UploadFile**](AIFileStorageAPI.md#UploadFile) | **Post** /api/v3/organizations/{organisation}/ai/files | Upload File to S3
+[**UploadFile**](AIFileStorageAPI.md#UploadFile) | **Post** /api/v3/organizations/{organisation}/ai/files | Upload File to object storage
 
 
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 > UploadFile201Response UploadFile(ctx, organisation).UploadFileRequest(uploadFileRequest).Execute()
 
-Upload File to S3
+Upload File to object storage
 
 
 

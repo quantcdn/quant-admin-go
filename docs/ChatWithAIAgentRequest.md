@@ -6,13 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Message** | **string** | The user&#39;s message to the agent | 
 **SessionId** | Pointer to **string** | Optional session ID to continue a conversation | [optional] 
-**UserId** | Pointer to **string** | Optional user identifier for session isolation | [optional] 
+**UserId** | Pointer to **string** | Ignored by the API since 4.28.0; the portal sets the requester. | [optional] 
+**AllowedCollections** | Pointer to **[]string** | Ignored by the API since 4.28.0; the portal sets the requester. | [optional] 
 **Stream** | Pointer to **bool** | Whether to stream the response (SSE) | [optional] [default to false]
 **Async** | Pointer to **bool** | Enable async/durable execution mode. When true, returns 202 with pollUrl. Use for long-running agent tasks. | [optional] [default to false]
 **System** | Pointer to **string** | Optional additional system prompt (appended to agent&#39;s configured prompt) | [optional] 
 **LongContext** | Pointer to **bool** | Per-request override to force 1M context window routing | [optional] [default to false]
+**ProposalIds** | Pointer to **[]string** | Tool approval proposal ids this turn relates to. Forwarded unchanged. | [optional] 
+**ClientSessionId** | Pointer to **string** | Client session id used to scope tool approval grants. Forwarded unchanged. | [optional] 
 **MaxToolIterations** | Pointer to **int32** | Maximum tool auto-execution iterations for this request | [optional] 
-**AllowedCollections** | Pointer to **[]string** | Per-request override for vector DB collections the agent can query | [optional] 
 
 ## Methods
 
@@ -102,6 +104,31 @@ SetUserId sets UserId field to given value.
 `func (o *ChatWithAIAgentRequest) HasUserId() bool`
 
 HasUserId returns a boolean if a field has been set.
+
+### GetAllowedCollections
+
+`func (o *ChatWithAIAgentRequest) GetAllowedCollections() []string`
+
+GetAllowedCollections returns the AllowedCollections field if non-nil, zero value otherwise.
+
+### GetAllowedCollectionsOk
+
+`func (o *ChatWithAIAgentRequest) GetAllowedCollectionsOk() (*[]string, bool)`
+
+GetAllowedCollectionsOk returns a tuple with the AllowedCollections field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedCollections
+
+`func (o *ChatWithAIAgentRequest) SetAllowedCollections(v []string)`
+
+SetAllowedCollections sets AllowedCollections field to given value.
+
+### HasAllowedCollections
+
+`func (o *ChatWithAIAgentRequest) HasAllowedCollections() bool`
+
+HasAllowedCollections returns a boolean if a field has been set.
 
 ### GetStream
 
@@ -203,6 +230,56 @@ SetLongContext sets LongContext field to given value.
 
 HasLongContext returns a boolean if a field has been set.
 
+### GetProposalIds
+
+`func (o *ChatWithAIAgentRequest) GetProposalIds() []string`
+
+GetProposalIds returns the ProposalIds field if non-nil, zero value otherwise.
+
+### GetProposalIdsOk
+
+`func (o *ChatWithAIAgentRequest) GetProposalIdsOk() (*[]string, bool)`
+
+GetProposalIdsOk returns a tuple with the ProposalIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProposalIds
+
+`func (o *ChatWithAIAgentRequest) SetProposalIds(v []string)`
+
+SetProposalIds sets ProposalIds field to given value.
+
+### HasProposalIds
+
+`func (o *ChatWithAIAgentRequest) HasProposalIds() bool`
+
+HasProposalIds returns a boolean if a field has been set.
+
+### GetClientSessionId
+
+`func (o *ChatWithAIAgentRequest) GetClientSessionId() string`
+
+GetClientSessionId returns the ClientSessionId field if non-nil, zero value otherwise.
+
+### GetClientSessionIdOk
+
+`func (o *ChatWithAIAgentRequest) GetClientSessionIdOk() (*string, bool)`
+
+GetClientSessionIdOk returns a tuple with the ClientSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientSessionId
+
+`func (o *ChatWithAIAgentRequest) SetClientSessionId(v string)`
+
+SetClientSessionId sets ClientSessionId field to given value.
+
+### HasClientSessionId
+
+`func (o *ChatWithAIAgentRequest) HasClientSessionId() bool`
+
+HasClientSessionId returns a boolean if a field has been set.
+
 ### GetMaxToolIterations
 
 `func (o *ChatWithAIAgentRequest) GetMaxToolIterations() int32`
@@ -227,31 +304,6 @@ SetMaxToolIterations sets MaxToolIterations field to given value.
 `func (o *ChatWithAIAgentRequest) HasMaxToolIterations() bool`
 
 HasMaxToolIterations returns a boolean if a field has been set.
-
-### GetAllowedCollections
-
-`func (o *ChatWithAIAgentRequest) GetAllowedCollections() []string`
-
-GetAllowedCollections returns the AllowedCollections field if non-nil, zero value otherwise.
-
-### GetAllowedCollectionsOk
-
-`func (o *ChatWithAIAgentRequest) GetAllowedCollectionsOk() (*[]string, bool)`
-
-GetAllowedCollectionsOk returns a tuple with the AllowedCollections field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowedCollections
-
-`func (o *ChatWithAIAgentRequest) SetAllowedCollections(v []string)`
-
-SetAllowedCollections sets AllowedCollections field to given value.
-
-### HasAllowedCollections
-
-`func (o *ChatWithAIAgentRequest) HasAllowedCollections() bool`
-
-HasAllowedCollections returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

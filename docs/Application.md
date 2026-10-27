@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Filesystem** | Pointer to [**NullableApplicationFilesystem**](ApplicationFilesystem.md) |  | [optional] 
 **Cache** | Pointer to [**NullableApplicationCache**](ApplicationCache.md) |  | [optional] 
 **ComposeDefinition** | Pointer to [**Compose**](Compose.md) |  | [optional] 
+**Metadata** | Pointer to **map[string]string** | Free-form key/value metadata. Maximum 50 pairs. Keys are 1-128 characters, values 0-256 characters. Letters, digits, space and + - &#x3D; . _ : / @ only. Keys starting with &#39;quant:&#39; are reserved. | [optional] 
+**MetadataAvailable** | Pointer to **bool** | Present on the detail response; false when metadata could not be read | [optional] [readonly] 
 **Status** | Pointer to **NullableString** | Application status | [optional] [readonly] 
 **DeploymentInformation** | Pointer to [**[]ApplicationDeploymentInformationInner**](ApplicationDeploymentInformationInner.md) | Deployment history | [optional] [readonly] 
 **ImageReference** | Pointer to [**NullableApplicationImageReference**](ApplicationImageReference.md) |  | [optional] 
@@ -208,6 +210,56 @@ SetComposeDefinition sets ComposeDefinition field to given value.
 `func (o *Application) HasComposeDefinition() bool`
 
 HasComposeDefinition returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *Application) GetMetadata() map[string]string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *Application) GetMetadataOk() (*map[string]string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *Application) SetMetadata(v map[string]string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *Application) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
+### GetMetadataAvailable
+
+`func (o *Application) GetMetadataAvailable() bool`
+
+GetMetadataAvailable returns the MetadataAvailable field if non-nil, zero value otherwise.
+
+### GetMetadataAvailableOk
+
+`func (o *Application) GetMetadataAvailableOk() (*bool, bool)`
+
+GetMetadataAvailableOk returns a tuple with the MetadataAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadataAvailable
+
+`func (o *Application) SetMetadataAvailable(v bool)`
+
+SetMetadataAvailable sets MetadataAvailable field to given value.
+
+### HasMetadataAvailable
+
+`func (o *Application) HasMetadataAvailable() bool`
+
+HasMetadataAvailable returns a boolean if a field has been set.
 
 ### GetStatus
 

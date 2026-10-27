@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **Name** | **string** | Project name | 
 **MachineName** | **string** | Project machine name | 
 **WriteToken** | Pointer to **string** | Write token for API access | [optional] 
+**SearchEnabled** | Pointer to **bool** | Whether the project&#39;s search index is enabled. Requires an organisation search subscription. | [optional] 
+**SearchConfig** | Pointer to [**NullableV2SearchConfig**](V2SearchConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -134,6 +136,66 @@ SetWriteToken sets WriteToken field to given value.
 
 HasWriteToken returns a boolean if a field has been set.
 
+### GetSearchEnabled
+
+`func (o *V2Project) GetSearchEnabled() bool`
+
+GetSearchEnabled returns the SearchEnabled field if non-nil, zero value otherwise.
+
+### GetSearchEnabledOk
+
+`func (o *V2Project) GetSearchEnabledOk() (*bool, bool)`
+
+GetSearchEnabledOk returns a tuple with the SearchEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchEnabled
+
+`func (o *V2Project) SetSearchEnabled(v bool)`
+
+SetSearchEnabled sets SearchEnabled field to given value.
+
+### HasSearchEnabled
+
+`func (o *V2Project) HasSearchEnabled() bool`
+
+HasSearchEnabled returns a boolean if a field has been set.
+
+### GetSearchConfig
+
+`func (o *V2Project) GetSearchConfig() V2SearchConfig`
+
+GetSearchConfig returns the SearchConfig field if non-nil, zero value otherwise.
+
+### GetSearchConfigOk
+
+`func (o *V2Project) GetSearchConfigOk() (*V2SearchConfig, bool)`
+
+GetSearchConfigOk returns a tuple with the SearchConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchConfig
+
+`func (o *V2Project) SetSearchConfig(v V2SearchConfig)`
+
+SetSearchConfig sets SearchConfig field to given value.
+
+### HasSearchConfig
+
+`func (o *V2Project) HasSearchConfig() bool`
+
+HasSearchConfig returns a boolean if a field has been set.
+
+### SetSearchConfigNil
+
+`func (o *V2Project) SetSearchConfigNil(b bool)`
+
+ SetSearchConfigNil sets the value for SearchConfig to be an explicit nil
+
+### UnsetSearchConfig
+`func (o *V2Project) UnsetSearchConfig()`
+
+UnsetSearchConfig ensures that no value is present for SearchConfig, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

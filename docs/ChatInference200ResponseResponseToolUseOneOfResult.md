@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Images** | Pointer to **[]string** | Base64 data URIs for images | [optional] 
-**S3Urls** | Pointer to **[]string** | Signed S3 URLs for downloads | [optional] 
+**S3Urls** | Pointer to **[]string** | Signed URLs for downloads | [optional] 
 
 ## Methods
 

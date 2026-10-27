@@ -100,6 +100,22 @@ func Test_quantadmingo_EnvironmentsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test EnvironmentsAPIService GetEnvironmentSlowQueries", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var application string
+		var environment string
+
+		resp, httpRes, err := apiClient.EnvironmentsAPI.GetEnvironmentSlowQueries(context.Background(), organisation, application, environment).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test EnvironmentsAPIService ListEnvironments", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

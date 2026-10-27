@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FilesystemId** | Pointer to **string** | EFS filesystem ID | [optional] 
+**FilesystemId** | Pointer to **string** | Shared filesystem ID | [optional] 
 **MountPath** | Pointer to **string** | Default mount path in containers | [optional] 
 
 ## Methods

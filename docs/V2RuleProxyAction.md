@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **DisableSslVerify** | Pointer to **bool** | Disable SSL verification | [optional] [default to false]
 **CacheLifetime** | Pointer to **NullableString** | Cache lifetime | [optional] 
 **OnlyProxy404** | Pointer to **bool** | Only proxy 404 responses | [optional] [default to false]
-**InjectHeaders** | Pointer to **map[string]string** | Headers to inject | [optional] 
+**InjectHeaders** | Pointer to **map[string]string** | Headers added to (or replacing headers on) the request sent to the origin. They are not added to the response sent to the visitor. | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** | Headers to strip from response | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** | Headers to strip from request | [optional] 
-**OriginTimeout** | Pointer to **string** | Origin timeout | [optional] 
+**OriginTimeout** | Pointer to **string** | Origin timeout in milliseconds. Defaults to 30000 when omitted on create. | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** | Status codes for failover (default: 200,404,301,302,304) | [optional] 
@@ -31,8 +31,8 @@ Name | Type | Description | Notes
 **ApplicationContainer** | Pointer to **string** | Quant Cloud application container (required when application_proxy is true) | [optional] 
 **ApplicationPort** | Pointer to **int32** | Quant Cloud application port (required when application_proxy is true) | [optional] 
 **QuantCloudSelection** | Pointer to [**NullableV2RuleProxyActionQuantCloudSelection**](V2RuleProxyActionQuantCloudSelection.md) |  | [optional] 
-**StaticErrorPage** | Pointer to **NullableString** | Static error page content (HTML) to serve on origin errors | [optional] 
-**StaticErrorPageStatusCodes** | Pointer to **[]string** | Origin status codes that trigger static error page | [optional] 
+**StaticErrorPage** | Pointer to **NullableString** | On/off switch, not page content. Send a string: any non-empty string (for example the text true) turns it on; an empty string or null turns it off. Write the text true to enable and an empty string to disable; do not send the text false, because any non-empty string counts as on. A JSON boolean is rejected on write. A boolean stored by the dashboard reads back as the string true, or an empty string when off. When on, an origin response whose status is in static_error_page_status_codes is replaced by the project&#39;s published /_quant&lt;status&gt; page (for example /_quant503). | [optional] 
+**StaticErrorPageStatusCodes** | Pointer to **[]string** | Origin status codes that serve the published /_quant&lt;status&gt; page when static_error_page is on | [optional] 
 
 ## Methods
 

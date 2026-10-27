@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FileId** | Pointer to **string** |  | [optional] 
-**S3Uri** | Pointer to **string** | S3 URI (direct upload only) | [optional] 
+**S3Uri** | Pointer to **string** | Object storage URI (direct upload only) | [optional] 
 **Url** | Pointer to **string** | Presigned download URL (direct upload only) | [optional] 
 **UploadUrl** | Pointer to **string** | Presigned PUT URL (presigned upload only) | [optional] 
-**S3Key** | Pointer to **string** | S3 object key (presigned upload only) | [optional] 
+**S3Key** | Pointer to **string** | Object storage key (presigned upload only) | [optional] 
 **ExpiresIn** | Pointer to **int32** | URL expiry in seconds (presigned upload only) | [optional] 
 **Filename** | Pointer to **string** |  | [optional] 
 **ContentType** | Pointer to **string** |  | [optional] 

@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Timestamp** | Pointer to **int64** | Unix timestamp in milliseconds | [optional] 
 **Message** | Pointer to **string** | Log message content | [optional] 
-**IngestionTime** | Pointer to **NullableInt64** | Unix timestamp in milliseconds when CloudWatch ingested the event | [optional] 
-**LogStreamName** | Pointer to **NullableString** | CloudWatch log stream, named container/container/taskId | [optional] 
+**IngestionTime** | Pointer to **NullableInt64** | Unix timestamp in milliseconds when the platform ingested the event | [optional] 
+**LogStreamName** | Pointer to **NullableString** | Platform log stream, named container/container/taskId | [optional] 
 
 ## Methods
 

@@ -113,7 +113,7 @@ func main() {
 	organisation := "test-org" // string | The organisation ID
 	application := "test-app" // string | The application ID
 	environment := "staging" // string | The TARGET environment ID to restore INTO
-	backupId := "quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z" // string | The backup ID to restore from
+	backupId := "backup-0001" // string | The backup ID to restore from
 	restoreDatabaseRequest := *openapiclient.NewRestoreDatabaseRequest("BackupId_example", true) // RestoreDatabaseRequest | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -194,7 +194,7 @@ func main() {
 	organisation := "test-org" // string | The organisation ID
 	application := "test-app" // string | The application ID
 	environment := "staging" // string | The TARGET environment ID to restore INTO
-	backupId := "quant-gov-dashboard-staging-2025-09-19T21-50-27-145Z" // string | The backup ID to restore from
+	backupId := "backup-0001" // string | The backup ID to restore from
 	restoreFilesystemRequest := *openapiclient.NewRestoreFilesystemRequest("BackupId_example", false) // RestoreFilesystemRequest | 
 
 	configuration := openapiclient.NewConfiguration()

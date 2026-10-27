@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Domain** | **[]string** | Domain patterns (default: any) | 
+**Domain** | **[]string** | Exact hostnames the rule matches, or &#39;any&#39; (the default). Wildcards such as *.example.com are not supported. | 
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | Pointer to **string** | Rule UUID | [optional] 
-**Weight** | Pointer to **int32** | Rule weight | [optional] [default to 0]
+**Weight** | Pointer to **int32** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] 
 **Disabled** | Pointer to **bool** | Whether rule is disabled | [optional] [default to false]
 **Url** | **[]string** | URL patterns | 
 **Country** | Pointer to **string** | Country filter type (country_is, country_is_not, any) | [optional] 
@@ -19,9 +19,16 @@ Name | Type | Description | Notes
 **Ip** | Pointer to **string** | IP filter type (ip_is, ip_is_not, any) | [optional] 
 **IpIs** | Pointer to **[]string** | Allowed IP addresses | [optional] 
 **IpIsNot** | Pointer to **[]string** | Excluded IP addresses | [optional] 
-**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any) | [optional] 
-**AsnIs** | Pointer to **[]string** | Allowed AS numbers | [optional] 
-**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers | [optional] 
+**Asn** | Pointer to **string** | ASN filter type (asn_is, asn_is_not, any). A PATCH that omits it keeps the current value. Invalid values return 422. | [optional] 
+**AsnIs** | Pointer to **[]string** | Allowed AS numbers. Positive integers up to 4294967295, stored as strings. A PATCH replaces the list. | [optional] 
+**AsnIsNot** | Pointer to **[]string** | Excluded AS numbers. Positive integers up to 4294967295, stored as strings. A PATCH replaces the list. | [optional] 
+**Ua** | Pointer to **string** | User agent filter type (ua_is, ua_is_not, any). Invalid values return 422. | [optional] 
+**UaIs** | Pointer to **[]string** | User agent strings to match. Each item has at most 255 characters. A PATCH replaces the list. | [optional] 
+**UaIsNot** | Pointer to **[]string** | User agent strings to exclude. Each item has at most 255 characters. A PATCH replaces the list. | [optional] 
+**TrafficSource** | Pointer to **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] 
+**TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match. A PATCH replaces the list. | [optional] 
+**TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude. A PATCH replaces the list. | [optional] 
+**CookieName** | Pointer to **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] 
 **To** | **string** | Target URL to proxy to | 
 **Host** | Pointer to **string** | Host header override | [optional] 
 **AuthUser** | Pointer to **string** | Basic auth username | [optional] [default to ""]
@@ -29,10 +36,10 @@ Name | Type | Description | Notes
 **DisableSslVerify** | Pointer to **bool** | Disable SSL verification | [optional] [default to false]
 **CacheLifetime** | Pointer to **NullableString** | Cache lifetime | [optional] 
 **OnlyProxy404** | Pointer to **bool** | Only proxy 404 responses | [optional] [default to false]
-**InjectHeaders** | Pointer to **map[string]string** | Headers to inject | [optional] 
+**InjectHeaders** | Pointer to **map[string]string** | Headers added to (or replacing headers on) the request sent to the origin. They are not added to the response sent to the visitor. | [optional] 
 **ProxyStripHeaders** | Pointer to **[]string** | Headers to strip from response | [optional] 
 **ProxyStripRequestHeaders** | Pointer to **[]string** | Headers to strip from request | [optional] 
-**OriginTimeout** | Pointer to **string** | Origin timeout | [optional] 
+**OriginTimeout** | Pointer to **string** | Origin timeout in milliseconds. Defaults to 30000 when omitted on create. | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold in milliseconds | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** | Origin status codes that trigger failover | [optional] 
@@ -45,8 +52,8 @@ Name | Type | Description | Notes
 **ApplicationEnvironment** | Pointer to **string** | Quant Cloud application environment (required when application_proxy is true) | [optional] 
 **ApplicationContainer** | Pointer to **string** | Quant Cloud application container (required when application_proxy is true) | [optional] 
 **ApplicationPort** | Pointer to **int32** | Quant Cloud application port (required when application_proxy is true) | [optional] 
-**StaticErrorPage** | Pointer to **NullableString** | Static error page content (HTML) to serve on origin errors | [optional] 
-**StaticErrorPageStatusCodes** | Pointer to **[]string** | Origin status codes that trigger static error page | [optional] 
+**StaticErrorPage** | Pointer to **NullableString** | On/off switch, not page content. Send a string: any non-empty string (for example the text true) turns it on; an empty string or null turns it off. Write the text true to enable and an empty string to disable; do not send the text false, because any non-empty string counts as on. A JSON boolean is rejected on write. A boolean stored by the dashboard reads back as the string true, or an empty string when off. When on, an origin response whose status is in static_error_page_status_codes is replaced by the project&#39;s published /_quant&lt;status&gt; page (for example /_quant503). | [optional] 
+**StaticErrorPageStatusCodes** | Pointer to **[]string** | Origin status codes that serve the published /_quant&lt;status&gt; page when static_error_page is on | [optional] 
 
 ## Methods
 
@@ -506,6 +513,181 @@ SetAsnIsNot sets AsnIsNot field to given value.
 `func (o *V2RuleProxyRequest) HasAsnIsNot() bool`
 
 HasAsnIsNot returns a boolean if a field has been set.
+
+### GetUa
+
+`func (o *V2RuleProxyRequest) GetUa() string`
+
+GetUa returns the Ua field if non-nil, zero value otherwise.
+
+### GetUaOk
+
+`func (o *V2RuleProxyRequest) GetUaOk() (*string, bool)`
+
+GetUaOk returns a tuple with the Ua field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUa
+
+`func (o *V2RuleProxyRequest) SetUa(v string)`
+
+SetUa sets Ua field to given value.
+
+### HasUa
+
+`func (o *V2RuleProxyRequest) HasUa() bool`
+
+HasUa returns a boolean if a field has been set.
+
+### GetUaIs
+
+`func (o *V2RuleProxyRequest) GetUaIs() []string`
+
+GetUaIs returns the UaIs field if non-nil, zero value otherwise.
+
+### GetUaIsOk
+
+`func (o *V2RuleProxyRequest) GetUaIsOk() (*[]string, bool)`
+
+GetUaIsOk returns a tuple with the UaIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIs
+
+`func (o *V2RuleProxyRequest) SetUaIs(v []string)`
+
+SetUaIs sets UaIs field to given value.
+
+### HasUaIs
+
+`func (o *V2RuleProxyRequest) HasUaIs() bool`
+
+HasUaIs returns a boolean if a field has been set.
+
+### GetUaIsNot
+
+`func (o *V2RuleProxyRequest) GetUaIsNot() []string`
+
+GetUaIsNot returns the UaIsNot field if non-nil, zero value otherwise.
+
+### GetUaIsNotOk
+
+`func (o *V2RuleProxyRequest) GetUaIsNotOk() (*[]string, bool)`
+
+GetUaIsNotOk returns a tuple with the UaIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUaIsNot
+
+`func (o *V2RuleProxyRequest) SetUaIsNot(v []string)`
+
+SetUaIsNot sets UaIsNot field to given value.
+
+### HasUaIsNot
+
+`func (o *V2RuleProxyRequest) HasUaIsNot() bool`
+
+HasUaIsNot returns a boolean if a field has been set.
+
+### GetTrafficSource
+
+`func (o *V2RuleProxyRequest) GetTrafficSource() string`
+
+GetTrafficSource returns the TrafficSource field if non-nil, zero value otherwise.
+
+### GetTrafficSourceOk
+
+`func (o *V2RuleProxyRequest) GetTrafficSourceOk() (*string, bool)`
+
+GetTrafficSourceOk returns a tuple with the TrafficSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSource
+
+`func (o *V2RuleProxyRequest) SetTrafficSource(v string)`
+
+SetTrafficSource sets TrafficSource field to given value.
+
+### HasTrafficSource
+
+`func (o *V2RuleProxyRequest) HasTrafficSource() bool`
+
+HasTrafficSource returns a boolean if a field has been set.
+
+### GetTrafficSourceIs
+
+`func (o *V2RuleProxyRequest) GetTrafficSourceIs() []string`
+
+GetTrafficSourceIs returns the TrafficSourceIs field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsOk
+
+`func (o *V2RuleProxyRequest) GetTrafficSourceIsOk() (*[]string, bool)`
+
+GetTrafficSourceIsOk returns a tuple with the TrafficSourceIs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIs
+
+`func (o *V2RuleProxyRequest) SetTrafficSourceIs(v []string)`
+
+SetTrafficSourceIs sets TrafficSourceIs field to given value.
+
+### HasTrafficSourceIs
+
+`func (o *V2RuleProxyRequest) HasTrafficSourceIs() bool`
+
+HasTrafficSourceIs returns a boolean if a field has been set.
+
+### GetTrafficSourceIsNot
+
+`func (o *V2RuleProxyRequest) GetTrafficSourceIsNot() []string`
+
+GetTrafficSourceIsNot returns the TrafficSourceIsNot field if non-nil, zero value otherwise.
+
+### GetTrafficSourceIsNotOk
+
+`func (o *V2RuleProxyRequest) GetTrafficSourceIsNotOk() (*[]string, bool)`
+
+GetTrafficSourceIsNotOk returns a tuple with the TrafficSourceIsNot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrafficSourceIsNot
+
+`func (o *V2RuleProxyRequest) SetTrafficSourceIsNot(v []string)`
+
+SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
+
+### HasTrafficSourceIsNot
+
+`func (o *V2RuleProxyRequest) HasTrafficSourceIsNot() bool`
+
+HasTrafficSourceIsNot returns a boolean if a field has been set.
+
+### GetCookieName
+
+`func (o *V2RuleProxyRequest) GetCookieName() string`
+
+GetCookieName returns the CookieName field if non-nil, zero value otherwise.
+
+### GetCookieNameOk
+
+`func (o *V2RuleProxyRequest) GetCookieNameOk() (*string, bool)`
+
+GetCookieNameOk returns a tuple with the CookieName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCookieName
+
+`func (o *V2RuleProxyRequest) SetCookieName(v string)`
+
+SetCookieName sets CookieName field to given value.
+
+### HasCookieName
+
+`func (o *V2RuleProxyRequest) HasCookieName() bool`
+
+HasCookieName returns a boolean if a field has been set.
 
 ### GetTo
 
