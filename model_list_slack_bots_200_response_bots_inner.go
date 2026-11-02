@@ -36,6 +36,8 @@ type ListSlackBots200ResponseBotsInner struct {
 	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
 	FilterPolicies []string `json:"filterPolicies,omitempty"`
 	LongContext *bool `json:"longContext,omitempty"`
+	// Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+	ReasoningEffort NullableString `json:"reasoningEffort,omitempty"`
 	SessionTtlDays *int32 `json:"sessionTtlDays,omitempty"`
 	KeywordsEnabled *bool `json:"keywordsEnabled,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -573,6 +575,48 @@ func (o *ListSlackBots200ResponseBotsInner) SetLongContext(v bool) {
 	o.LongContext = &v
 }
 
+// GetReasoningEffort returns the ReasoningEffort field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ListSlackBots200ResponseBotsInner) GetReasoningEffort() string {
+	if o == nil || IsNil(o.ReasoningEffort.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReasoningEffort.Get()
+}
+
+// GetReasoningEffortOk returns a tuple with the ReasoningEffort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ListSlackBots200ResponseBotsInner) GetReasoningEffortOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReasoningEffort.Get(), o.ReasoningEffort.IsSet()
+}
+
+// HasReasoningEffort returns a boolean if a field has been set.
+func (o *ListSlackBots200ResponseBotsInner) HasReasoningEffort() bool {
+	if o != nil && o.ReasoningEffort.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReasoningEffort gets a reference to the given NullableString and assigns it to the ReasoningEffort field.
+func (o *ListSlackBots200ResponseBotsInner) SetReasoningEffort(v string) {
+	o.ReasoningEffort.Set(&v)
+}
+// SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+func (o *ListSlackBots200ResponseBotsInner) SetReasoningEffortNil() {
+	o.ReasoningEffort.Set(nil)
+}
+
+// UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
+func (o *ListSlackBots200ResponseBotsInner) UnsetReasoningEffort() {
+	o.ReasoningEffort.Unset()
+}
+
 // GetSessionTtlDays returns the SessionTtlDays field value if set, zero value otherwise.
 func (o *ListSlackBots200ResponseBotsInner) GetSessionTtlDays() int32 {
 	if o == nil || IsNil(o.SessionTtlDays) {
@@ -727,6 +771,9 @@ func (o ListSlackBots200ResponseBotsInner) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.LongContext) {
 		toSerialize["longContext"] = o.LongContext
 	}
+	if o.ReasoningEffort.IsSet() {
+		toSerialize["reasoningEffort"] = o.ReasoningEffort.Get()
+	}
 	if !IsNil(o.SessionTtlDays) {
 		toSerialize["sessionTtlDays"] = o.SessionTtlDays
 	}
@@ -774,6 +821,7 @@ func (o *ListSlackBots200ResponseBotsInner) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "guardrailPreset")
 		delete(additionalProperties, "filterPolicies")
 		delete(additionalProperties, "longContext")
+		delete(additionalProperties, "reasoningEffort")
 		delete(additionalProperties, "sessionTtlDays")
 		delete(additionalProperties, "keywordsEnabled")
 		delete(additionalProperties, "createdAt")

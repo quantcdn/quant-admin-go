@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **GuardrailPreset** | Pointer to **string** |  | [optional] 
 **FilterPolicies** | Pointer to **[]string** |  | [optional] 
 **LongContext** | Pointer to **bool** |  | [optional] 
+**ReasoningEffort** | Pointer to **NullableString** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] 
 **SessionTtlDays** | Pointer to **int32** |  | [optional] 
 **KeywordsEnabled** | Pointer to **bool** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
@@ -443,6 +444,41 @@ SetLongContext sets LongContext field to given value.
 
 HasLongContext returns a boolean if a field has been set.
 
+### GetReasoningEffort
+
+`func (o *ListSlackBots200ResponseBotsInner) GetReasoningEffort() string`
+
+GetReasoningEffort returns the ReasoningEffort field if non-nil, zero value otherwise.
+
+### GetReasoningEffortOk
+
+`func (o *ListSlackBots200ResponseBotsInner) GetReasoningEffortOk() (*string, bool)`
+
+GetReasoningEffortOk returns a tuple with the ReasoningEffort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningEffort
+
+`func (o *ListSlackBots200ResponseBotsInner) SetReasoningEffort(v string)`
+
+SetReasoningEffort sets ReasoningEffort field to given value.
+
+### HasReasoningEffort
+
+`func (o *ListSlackBots200ResponseBotsInner) HasReasoningEffort() bool`
+
+HasReasoningEffort returns a boolean if a field has been set.
+
+### SetReasoningEffortNil
+
+`func (o *ListSlackBots200ResponseBotsInner) SetReasoningEffortNil(b bool)`
+
+ SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+
+### UnsetReasoningEffort
+`func (o *ListSlackBots200ResponseBotsInner) UnsetReasoningEffort()`
+
+UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
 ### GetSessionTtlDays
 
 `func (o *ListSlackBots200ResponseBotsInner) GetSessionTtlDays() int32`

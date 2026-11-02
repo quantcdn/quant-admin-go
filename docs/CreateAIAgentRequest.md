@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **AssignedSkills** | Pointer to **[]string** | Skill IDs to assign to this agent | [optional] 
 **CreatedBy** | Pointer to **string** | User identifier who created the agent | [optional] 
 **LongContext** | Pointer to **bool** | Enable 1M context window support | [optional] 
+**ReasoningEffort** | Pointer to **NullableString** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] 
 **GuardrailPreset** | Pointer to **NullableString** | Guardrail preset name | [optional] 
 **FilterPolicies** | Pointer to **[]string** | Filter policy IDs to apply to this agent&#39;s inference requests | [optional] 
 
@@ -318,6 +319,41 @@ SetLongContext sets LongContext field to given value.
 
 HasLongContext returns a boolean if a field has been set.
 
+### GetReasoningEffort
+
+`func (o *CreateAIAgentRequest) GetReasoningEffort() string`
+
+GetReasoningEffort returns the ReasoningEffort field if non-nil, zero value otherwise.
+
+### GetReasoningEffortOk
+
+`func (o *CreateAIAgentRequest) GetReasoningEffortOk() (*string, bool)`
+
+GetReasoningEffortOk returns a tuple with the ReasoningEffort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningEffort
+
+`func (o *CreateAIAgentRequest) SetReasoningEffort(v string)`
+
+SetReasoningEffort sets ReasoningEffort field to given value.
+
+### HasReasoningEffort
+
+`func (o *CreateAIAgentRequest) HasReasoningEffort() bool`
+
+HasReasoningEffort returns a boolean if a field has been set.
+
+### SetReasoningEffortNil
+
+`func (o *CreateAIAgentRequest) SetReasoningEffortNil(b bool)`
+
+ SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+
+### UnsetReasoningEffort
+`func (o *CreateAIAgentRequest) UnsetReasoningEffort()`
+
+UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
 ### GetGuardrailPreset
 
 `func (o *CreateAIAgentRequest) GetGuardrailPreset() string`

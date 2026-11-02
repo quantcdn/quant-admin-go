@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **AllowedTools** | Pointer to **[]string** |  | [optional] 
 **AssignedSkills** | Pointer to **[]string** |  | [optional] 
 **LongContext** | Pointer to **bool** |  | [optional] 
+**ReasoningEffort** | Pointer to **NullableString** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] 
 **GuardrailPreset** | Pointer to **string** |  | [optional] 
 **IsGlobal** | Pointer to **bool** |  | [optional] 
 **HasOverlay** | Pointer to **bool** |  | [optional] 
@@ -289,6 +290,41 @@ SetLongContext sets LongContext field to given value.
 
 HasLongContext returns a boolean if a field has been set.
 
+### GetReasoningEffort
+
+`func (o *ListAIAgents200ResponseAgentsInner) GetReasoningEffort() string`
+
+GetReasoningEffort returns the ReasoningEffort field if non-nil, zero value otherwise.
+
+### GetReasoningEffortOk
+
+`func (o *ListAIAgents200ResponseAgentsInner) GetReasoningEffortOk() (*string, bool)`
+
+GetReasoningEffortOk returns a tuple with the ReasoningEffort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningEffort
+
+`func (o *ListAIAgents200ResponseAgentsInner) SetReasoningEffort(v string)`
+
+SetReasoningEffort sets ReasoningEffort field to given value.
+
+### HasReasoningEffort
+
+`func (o *ListAIAgents200ResponseAgentsInner) HasReasoningEffort() bool`
+
+HasReasoningEffort returns a boolean if a field has been set.
+
+### SetReasoningEffortNil
+
+`func (o *ListAIAgents200ResponseAgentsInner) SetReasoningEffortNil(b bool)`
+
+ SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+
+### UnsetReasoningEffort
+`func (o *ListAIAgents200ResponseAgentsInner) UnsetReasoningEffort()`
+
+UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
 ### GetGuardrailPreset
 
 `func (o *ListAIAgents200ResponseAgentsInner) GetGuardrailPreset() string`

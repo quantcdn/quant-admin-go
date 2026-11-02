@@ -29,6 +29,8 @@ type GetAgentOverlay200ResponseOverlay struct {
 	SystemPromptAppend *string `json:"systemPromptAppend,omitempty"`
 	AllowedCollections []string `json:"allowedCollections,omitempty"`
 	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
+	// Reasoning effort for this organisation. Overrides the global agent value.
+	ReasoningEffort NullableString `json:"reasoningEffort,omitempty"`
 	Version *int32 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -372,6 +374,48 @@ func (o *GetAgentOverlay200ResponseOverlay) SetGuardrailPreset(v string) {
 	o.GuardrailPreset = &v
 }
 
+// GetReasoningEffort returns the ReasoningEffort field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetAgentOverlay200ResponseOverlay) GetReasoningEffort() string {
+	if o == nil || IsNil(o.ReasoningEffort.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReasoningEffort.Get()
+}
+
+// GetReasoningEffortOk returns a tuple with the ReasoningEffort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetAgentOverlay200ResponseOverlay) GetReasoningEffortOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReasoningEffort.Get(), o.ReasoningEffort.IsSet()
+}
+
+// HasReasoningEffort returns a boolean if a field has been set.
+func (o *GetAgentOverlay200ResponseOverlay) HasReasoningEffort() bool {
+	if o != nil && o.ReasoningEffort.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReasoningEffort gets a reference to the given NullableString and assigns it to the ReasoningEffort field.
+func (o *GetAgentOverlay200ResponseOverlay) SetReasoningEffort(v string) {
+	o.ReasoningEffort.Set(&v)
+}
+// SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+func (o *GetAgentOverlay200ResponseOverlay) SetReasoningEffortNil() {
+	o.ReasoningEffort.Set(nil)
+}
+
+// UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
+func (o *GetAgentOverlay200ResponseOverlay) UnsetReasoningEffort() {
+	o.ReasoningEffort.Unset()
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *GetAgentOverlay200ResponseOverlay) GetVersion() int32 {
 	if o == nil || IsNil(o.Version) {
@@ -444,6 +488,9 @@ func (o GetAgentOverlay200ResponseOverlay) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.GuardrailPreset) {
 		toSerialize["guardrailPreset"] = o.GuardrailPreset
 	}
+	if o.ReasoningEffort.IsSet() {
+		toSerialize["reasoningEffort"] = o.ReasoningEffort.Get()
+	}
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
@@ -479,6 +526,7 @@ func (o *GetAgentOverlay200ResponseOverlay) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "systemPromptAppend")
 		delete(additionalProperties, "allowedCollections")
 		delete(additionalProperties, "guardrailPreset")
+		delete(additionalProperties, "reasoningEffort")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -33,6 +33,8 @@ type GetAIAgent200ResponseAgent struct {
 	AssignedSkills []string `json:"assignedSkills,omitempty"`
 	// Whether 1M context window is enabled
 	LongContext *bool `json:"longContext,omitempty"`
+	// Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default.
+	ReasoningEffort NullableString `json:"reasoningEffort,omitempty"`
 	// Guardrail preset name
 	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
 	// Whether this is a platform-managed global agent
@@ -448,6 +450,48 @@ func (o *GetAIAgent200ResponseAgent) SetLongContext(v bool) {
 	o.LongContext = &v
 }
 
+// GetReasoningEffort returns the ReasoningEffort field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetAIAgent200ResponseAgent) GetReasoningEffort() string {
+	if o == nil || IsNil(o.ReasoningEffort.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReasoningEffort.Get()
+}
+
+// GetReasoningEffortOk returns a tuple with the ReasoningEffort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetAIAgent200ResponseAgent) GetReasoningEffortOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReasoningEffort.Get(), o.ReasoningEffort.IsSet()
+}
+
+// HasReasoningEffort returns a boolean if a field has been set.
+func (o *GetAIAgent200ResponseAgent) HasReasoningEffort() bool {
+	if o != nil && o.ReasoningEffort.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReasoningEffort gets a reference to the given NullableString and assigns it to the ReasoningEffort field.
+func (o *GetAIAgent200ResponseAgent) SetReasoningEffort(v string) {
+	o.ReasoningEffort.Set(&v)
+}
+// SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+func (o *GetAIAgent200ResponseAgent) SetReasoningEffortNil() {
+	o.ReasoningEffort.Set(nil)
+}
+
+// UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
+func (o *GetAIAgent200ResponseAgent) UnsetReasoningEffort() {
+	o.ReasoningEffort.Unset()
+}
+
 // GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise.
 func (o *GetAIAgent200ResponseAgent) GetGuardrailPreset() string {
 	if o == nil || IsNil(o.GuardrailPreset) {
@@ -686,6 +730,9 @@ func (o GetAIAgent200ResponseAgent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LongContext) {
 		toSerialize["longContext"] = o.LongContext
 	}
+	if o.ReasoningEffort.IsSet() {
+		toSerialize["reasoningEffort"] = o.ReasoningEffort.Get()
+	}
 	if !IsNil(o.GuardrailPreset) {
 		toSerialize["guardrailPreset"] = o.GuardrailPreset
 	}
@@ -738,6 +785,7 @@ func (o *GetAIAgent200ResponseAgent) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "allowedCollections")
 		delete(additionalProperties, "assignedSkills")
 		delete(additionalProperties, "longContext")
+		delete(additionalProperties, "reasoningEffort")
 		delete(additionalProperties, "guardrailPreset")
 		delete(additionalProperties, "isGlobal")
 		delete(additionalProperties, "hasOverlay")

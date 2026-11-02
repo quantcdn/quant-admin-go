@@ -113,8 +113,8 @@ type CronAPI interface {
 	ListCronJobs(ctx context.Context, organisation string, application string, environment string) CronAPIListCronJobsRequest
 
 	// ListCronJobsExecute executes the request
-	//  @return Cron
-	ListCronJobsExecute(r CronAPIListCronJobsRequest) (*Cron, *http.Response, error)
+	//  @return []Cron
+	ListCronJobsExecute(r CronAPIListCronJobsRequest) ([]Cron, *http.Response, error)
 
 	/*
 	UpdateCronJob Update a cron job
@@ -719,7 +719,7 @@ type CronAPIListCronJobsRequest struct {
 	environment string
 }
 
-func (r CronAPIListCronJobsRequest) Execute() (*Cron, *http.Response, error) {
+func (r CronAPIListCronJobsRequest) Execute() ([]Cron, *http.Response, error) {
 	return r.ApiService.ListCronJobsExecute(r)
 }
 
@@ -743,13 +743,13 @@ func (a *CronAPIService) ListCronJobs(ctx context.Context, organisation string, 
 }
 
 // Execute executes the request
-//  @return Cron
-func (a *CronAPIService) ListCronJobsExecute(r CronAPIListCronJobsRequest) (*Cron, *http.Response, error) {
+//  @return []Cron
+func (a *CronAPIService) ListCronJobsExecute(r CronAPIListCronJobsRequest) ([]Cron, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Cron
+		localVarReturnValue  []Cron
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CronAPIService.ListCronJobs")
