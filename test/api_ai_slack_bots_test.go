@@ -22,6 +22,21 @@ func Test_quantadmingo_AISlackBotsAPIService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
+	t.Run("Test AISlackBotsAPIService CancelSlackInteraction", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+		var interactionId string
+
+		httpRes, err := apiClient.AISlackBotsAPI.CancelSlackInteraction(context.Background(), organisation, botId, interactionId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AISlackBotsAPIService CreateSlackBot", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -32,6 +47,20 @@ func Test_quantadmingo_AISlackBotsAPIService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AISlackBotsAPIService CreateSlackInteraction", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+
+		httpRes, err := apiClient.AISlackBotsAPI.CreateSlackInteraction(context.Background(), organisation, botId).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -83,6 +112,21 @@ func Test_quantadmingo_AISlackBotsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AISlackBotsAPIService GetSlackInteraction", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+		var interactionId string
+
+		httpRes, err := apiClient.AISlackBotsAPI.GetSlackInteraction(context.Background(), organisation, botId, interactionId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AISlackBotsAPIService ListSlackBotChannelMessages", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -120,6 +164,21 @@ func Test_quantadmingo_AISlackBotsAPIService(t *testing.T) {
 		var organisation string
 
 		resp, httpRes, err := apiClient.AISlackBotsAPI.ListSlackBotsApiEnabled(context.Background(), organisation).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AISlackBotsAPIService PostSlackBotFile", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var botId string
+
+		resp, httpRes, err := apiClient.AISlackBotsAPI.PostSlackBotFile(context.Background(), organisation, botId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

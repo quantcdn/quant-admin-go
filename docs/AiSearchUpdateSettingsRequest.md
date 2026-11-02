@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PublicAccess** | Pointer to **map[string]interface{}** |  | [optional] 
 **RateLimits** | Pointer to **map[string]interface{}** |  | [optional] 
+**QueryTextRetention** | Pointer to **string** | What analytics keeps of a visitor&#39;s query. default: the organisation default (store, or hash for strict organisations). | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetRateLimits sets RateLimits field to given value.
 `func (o *AiSearchUpdateSettingsRequest) HasRateLimits() bool`
 
 HasRateLimits returns a boolean if a field has been set.
+
+### GetQueryTextRetention
+
+`func (o *AiSearchUpdateSettingsRequest) GetQueryTextRetention() string`
+
+GetQueryTextRetention returns the QueryTextRetention field if non-nil, zero value otherwise.
+
+### GetQueryTextRetentionOk
+
+`func (o *AiSearchUpdateSettingsRequest) GetQueryTextRetentionOk() (*string, bool)`
+
+GetQueryTextRetentionOk returns a tuple with the QueryTextRetention field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueryTextRetention
+
+`func (o *AiSearchUpdateSettingsRequest) SetQueryTextRetention(v string)`
+
+SetQueryTextRetention sets QueryTextRetention field to given value.
+
+### HasQueryTextRetention
+
+`func (o *AiSearchUpdateSettingsRequest) HasQueryTextRetention() bool`
+
+HasQueryTextRetention returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

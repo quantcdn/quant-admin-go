@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Key** | **string** |  | 
-**Value** | Pointer to **interface{}** | The stored JSON value. | [optional] 
+**Value** | Pointer to **interface{}** | The stored JSON value. For a secret write (secret true) it reads \&quot;[ENCRYPTED]\&quot;: secret values are write-only through the API. | [optional] 
 **Status** | **string** |  | 
 **Message** | **string** |  | 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 

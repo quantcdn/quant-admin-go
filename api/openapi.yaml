@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.29.0
+  version: 4.30.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -81,6 +81,8 @@ tags:
   name: Rules
 - description: Auto-scaling policies and configuration
   name: ScalingPolicy
+- description: Environment secret management (values are write-only)
+  name: Secrets
 - description: SSH key management for container access
   name: SSH Access
 - description: Environment variable management
@@ -89,6 +91,8 @@ tags:
   name: Volumes
 - description: API token management
   name: Tokens
+- description: AI Audit
+  name: AI Audit
 - description: AI Slack Bots
   name: AI Slack Bots
 - description: Subscription
@@ -112,6 +116,654 @@ tags:
 - description: Resources
   name: Resources
 paths:
+  /api/v3/organizations/{organisation}/ai/audit/records:
+    get:
+      description: "One page of the organisation's AI audit records (inference, tool\
+        \ approvals and denials, Slack bot API calls, audit log reads). Filters match\
+        \ exactly. A page stops at limit rows, at 1,000 scanned records or at 20 seconds,\
+        \ so it can hold fewer rows than limit while hasMore is true: pass nextCursor\
+        \ back as cursor until hasMore is false. Order: by day, then by key. prompt\
+        \ and response are returned only when the record stores them. Records older\
+        \ than 365 days are archived (skippedArchived). Each call is recorded in the\
+        \ audit log (recordType audit_access) before it reads; when that record cannot\
+        \ be written the answer is 503 and nothing is read. Needs the view_ai_audit\
+        \ permission and, for a scoped token, ai:audit:read."
+      operationId: aiAuditRecordsList
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "First UTC day (inclusive). At most 31 days, not in the future,\
+          \ not older than 365 days."
+        explode: true
+        in: query
+        name: startDate
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Last UTC day (inclusive).
+        explode: true
+        in: query
+        name: endDate
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Record time from (inclusive).
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Record time to (exclusive).
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: "Portal user id (also matches the requester, approver and reader\
+          \ of tool and access records)."
+        explode: true
+        in: query
+        name: userId
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tokenId
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: modelId
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - example: inference
+        explode: true
+        in: query
+        name: recordType
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - description: "approved, rejected, expired, or denied (tool_denied)."
+        example: approved
+        explode: true
+        in: query
+        name: decision
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tool
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - description: "outcome or status: succeeded, failed, blocked, ok, refused,\
+          \ error."
+        example: failed
+        explode: true
+        in: query
+        name: outcome
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - example: api-gateway
+        explode: true
+        in: query
+        name: interface
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          maximum: 200
+          minimum: 1
+          type: integer
+        style: form
+      - description: nextCursor of the previous page (same organisation and range).
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditRecordsPage'
+          description: One page.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: "Invalid range, filter, limit or cursor."
+        "401":
+          description: Invalid or expired token
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: The AI audit log could not be reached.
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: "UNAVAILABLE: the read could not be recorded, so it was not\
+            \ made. Retry."
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: List AI audit records
+      tags:
+      - AI Audit
+  /api/v3/organizations/{organisation}/ai/audit/record:
+    get:
+      description: "One record by key (a key from aiAuditRecordsList). A key of another\
+        \ organisation is 400. prompt and response are returned only when the record\
+        \ stores them. The read is recorded in the audit log first (503 when it cannot\
+        \ be). Needs view_ai_audit and, for a scoped token, ai:audit:read."
+      operationId: aiAuditRecordGet
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: key
+        required: true
+        schema:
+          maxLength: 1024
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aiAuditRecordGet_200_response'
+          description: The record.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: The key is not a record key of this organisation.
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: "Not found, or archived (older than 365 days)."
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: "UNAVAILABLE: the read could not be recorded, so it was not\
+            \ made."
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: Get one AI audit record
+      tags:
+      - AI Audit
+  /api/v3/organizations/{organisation}/ai/audit/export:
+    get:
+      description: "Every record of the range that matches the filters (the filters\
+        \ of aiAuditRecordsList), one JSON object per line (the row: key, date, summary,\
+        \ record). At most 100 pages of 200 records; a longer export ends with an\
+        \ error line. A failed page ends the file with an error line. Each page read\
+        \ is recorded in the audit log (action export). Needs view_ai_audit and, for\
+        \ a scoped token, ai:audit:read. Limit: 10 requests per minute."
+      operationId: aiAuditExport
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: startDate
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: endDate
+        required: true
+        schema:
+          format: date
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: userId
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: modelId
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: recordType
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: decision
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tool
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: outcome
+        required: false
+        schema:
+          maxLength: 256
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/x-ndjson:
+              schema:
+                type: string
+          description: JSON Lines.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiAuditError'
+          description: Invalid range.
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "429":
+          description: Too many exports. See Retry-After.
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: Export AI audit records as JSON Lines
+      tags:
+      - AI Audit
+  /api/v3/organizations/{organisation}/ai/audit/ledger:
+    get:
+      description: "The organisation's AI governance ledger (store int-ai-governance,\
+        \ ledger governance): definition, retention, instances and shards with head\
+        \ sequence, archive lag, last digest and last verify. The same answer as KV_ledgers_status.\
+        \ 404 STORE_NOT_FOUND or LEDGER_NOT_FOUND when the organisation has no governance\
+        \ ledger. The read is recorded in the audit log first (503 UNAVAILABLE when\
+        \ it cannot be). Needs view_ai_audit and, for a scoped token, ai:audit:read."
+      operationId: aiAuditLedgerStatus
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The next_cursor of the previous page.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvLedgerStatus'
+          description: One page of instances.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "Invalid request: VALIDATION, LIMIT_EXCEEDED, CURSOR_INVALID,\
+            \ REQUIRES_FORMAT_2 and the route-specific 400 codes."
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "KEY_NOT_FOUND, STORE_NOT_FOUND, LEDGER_NOT_FOUND, SUBJECT_NOT_FOUND,\
+            \ EXPORT_NOT_FOUND, VERIFICATION_NOT_FOUND, SHRED_NOT_FOUND, INDEX_NOT_FOUND\
+            \ or NOT_FOUND (no archive, tombstone or purge)."
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: Get the AI governance ledger status
+      tags:
+      - AI Audit
+  /api/v3/organizations/{organisation}/ai/audit/ledger/entries:
+    get:
+      description: "The entries of the collection events:governance, with values,\
+        \ in pages: follow next_cursor while has_more is true. Each entry has its\
+        \ ledger block (seq, hash, prevHash, shard) for verification; open a proof\
+        \ with aiAuditLedgerProof and check entries offline with kv-ledger-verify\
+        \ and aiAuditLedgerPublicKey. Events are hash-only (no prompt or response).\
+        \ The read is recorded in the audit log first (503 UNAVAILABLE when it cannot\
+        \ be). Needs view_ai_audit and, for a scoped token, ai:audit:read."
+      operationId: aiAuditLedgerEntries
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Epoch milliseconds or ISO 8601 with a zone. Inclusive.
+        explode: true
+        in: query
+        name: since
+        required: false
+        schema:
+          maxLength: 64
+          type: string
+        style: form
+      - description: Epoch milliseconds or ISO 8601 with a zone. Exclusive.
+        explode: true
+        in: query
+        name: until
+        required: false
+        schema:
+          maxLength: 64
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: The next_cursor of the previous page.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvKeysPage'
+          description: One page.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "Invalid request: VALIDATION, LIMIT_EXCEEDED, CURSOR_INVALID,\
+            \ REQUIRES_FORMAT_2 and the route-specific 400 codes."
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "KEY_NOT_FOUND, STORE_NOT_FOUND, LEDGER_NOT_FOUND, SUBJECT_NOT_FOUND,\
+            \ EXPORT_NOT_FOUND, VERIFICATION_NOT_FOUND, SHRED_NOT_FOUND, INDEX_NOT_FOUND\
+            \ or NOT_FOUND (no archive, tombstone or purge)."
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: List AI governance ledger entries
+      tags:
+      - AI Audit
+  /api/v3/organizations/{organisation}/ai/audit/ledger/proof:
+    get:
+      description: "The Merkle inclusion proof of one entry (key events:governance:...):\
+        \ entry, hash, period, merkleRoot, auditPath, the signed digest and keyId,\
+        \ or status pending until the entry is archived. Returned byte for byte, as\
+        \ KV_ledgers_proof. The read is recorded in the audit log first (503 UNAVAILABLE\
+        \ when it cannot be). Needs view_ai_audit and, for a scoped token, ai:audit:read."
+      operationId: aiAuditLedgerProof
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: events:governance:01JB0000000000000000000000
+        explode: true
+        in: query
+        name: key
+        required: true
+        schema:
+          maxLength: 1024
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvLedgerProof'
+          description: "The proof, or pending."
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "Invalid request: VALIDATION, LIMIT_EXCEEDED, CURSOR_INVALID,\
+            \ REQUIRES_FORMAT_2 and the route-specific 400 codes."
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "KEY_NOT_FOUND, STORE_NOT_FOUND, LEDGER_NOT_FOUND, SUBJECT_NOT_FOUND,\
+            \ EXPORT_NOT_FOUND, VERIFICATION_NOT_FOUND, SHRED_NOT_FOUND, INDEX_NOT_FOUND\
+            \ or NOT_FOUND (no archive, tombstone or purge)."
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: Get the inclusion proof of a governance ledger entry
+      tags:
+      - AI Audit
+  /api/v3/organizations/{organisation}/ai/audit/ledger/public-key:
+    get:
+      description: "The public key that verifies the ledger digests and receipts offline\
+        \ (kv-ledger-verify). The same answer as KV_ledgers_public_key. Needs view_ai_audit\
+        \ and, for a scoped token, ai:audit:read."
+      operationId: aiAuditLedgerPublicKey
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvLedgerPublicKey'
+          description: The key (the PEM is in publicKeyPem).
+        "403":
+          description: PERMISSION_DENIED or SCOPE_REQUIRED
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "KEY_NOT_FOUND, STORE_NOT_FOUND, LEDGER_NOT_FOUND, SUBJECT_NOT_FOUND,\
+            \ EXPORT_NOT_FOUND, VERIFICATION_NOT_FOUND, SHRED_NOT_FOUND, INDEX_NOT_FOUND\
+            \ or NOT_FOUND (no archive, tombstone or purge)."
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - BearerAuth:
+        - ai:audit:read
+      summary: Get the governance ledger public key
+      tags:
+      - AI Audit
   /api/v3/organisations/{organisation}/projects/{project}/ai-search:
     get:
       operationId: AiSearch_status
@@ -473,6 +1125,10 @@ paths:
       - AI Search
   /api/v3/organisations/{organisation}/projects/{project}/ai-search/top-queries:
     get:
+      description: "A site with queryTextRetention hash keeps no query text: its queries\
+        \ are grouped by a keyed hash and listed as query 'Hidden query #<8 hex>'\
+        \ with hashed=true and queryHash. A site with none adds no rows. hashedQueries\
+        \ counts the hashed rows."
       operationId: AiSearch_topQueries
       parameters:
       - explode: false
@@ -1104,6 +1760,243 @@ paths:
                 $ref: '#/components/schemas/AiSlackBotApiError'
           description: SLACK_ERROR. slackError carries the Slack error string.
       summary: Post a message as the bot
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/files:
+    post:
+      description: "The bot uploads one image in an allowed channel or thread, with\
+        \ an attribution line that shows your name. The type comes from the bytes:\
+        \ PNG, JPEG, GIF or WebP, at most 4 MiB decoded. Counts as one write. Needs\
+        \ the explicit `ai:slack` scope, `use_ai_services` and a verified email."
+      operationId: postSlackBotFile
+      parameters:
+      - description: The organisation machine name
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          pattern: "^[a-zA-Z0-9_-]+$"
+          type: string
+        style: simple
+      - description: 8-128 visible ASCII characters. The same key and body within
+          10 minutes returns the first result and does not upload again.
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          maxLength: 128
+          minLength: 8
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postSlackBotFile_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postSlackBotFile_201_response'
+          description: Uploaded
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: "INVALID_REQUEST: the body is not a JSON object, has an unknown\
+            \ field or a field that is not valid, the content is not a PNG, JPEG,\
+            \ GIF or WebP image or is larger than 4 MiB, or the Idempotency-Key is\
+            \ not valid"
+        "401":
+          description: Invalid or expired token
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: "SCOPE_REQUIRED, EMAIL_NOT_VERIFIED, IDENTITY_REQUIRED, CHANNEL_NOT_ALLOWED,\
+            \ USER_NOT_ALLOWED, PERMISSION_DENIED, or AI is off for the organisation"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: "BOT_NOT_FOUND, or NOT_FOUND when the Slack bot API is not\
+            \ enabled"
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: "BOT_INACTIVE, or REQUEST_IN_PROGRESS (retryable) while the\
+            \ first call with this Idempotency-Key runs"
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: "IDEMPOTENCY_KEY_MISMATCH: the Idempotency-Key was used with\
+            \ a different body"
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: RATE_LIMITED. See the Retry-After header.
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSlackBotApiError'
+          description: SLACK_ERROR. slackError carries the Slack error string.
+      summary: Post an image as the bot
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/interactions:
+    post:
+      description: "External-agent interaction, not a platform tool approval. Requires\
+        \ explicit ai:slack, verified email and use_ai_services. The caller owns the\
+        \ meaning of the response. Feature must be enabled on this environment."
+      operationId: createSlackInteraction
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          maxLength: 128
+          minLength: 8
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createSlackInteraction_request'
+        required: true
+      responses:
+        "201":
+          description: Card delivered; interaction awaits a response
+        "202":
+          description: Read returned interactionId to obtain delivery or recorded
+            response state
+        "400":
+          description: Invalid request
+        "403":
+          description: Access denied
+        "422":
+          description: Idempotency key reused with a different request
+        "503":
+          description: Audit persistence unavailable; retry with the same key
+      summary: Ask for a single Slack button response
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/interactions/{interactionId}:
+    get:
+      description: "Owner-bound to the creating org, bot, user and token. Recorded\
+        \ responses identify Slack workspace/user and actionId. Silence, expiry and\
+        \ intermediate states do not mean approval."
+      operationId: getSlackInteraction
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: interactionId
+        required: true
+        schema:
+          pattern: "^si_[a-f0-9]{64}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: "Current state, immutable request, expiry and audited response\
+            \ when terminal"
+        "404":
+          description: "Unknown, foreign or disabled"
+        "503":
+          description: Audit unavailable
+      summary: Read an external Slack interaction
+      tags:
+      - AI Slack Bots
+  /api/v3/organizations/{organisation}/ai/slack-bots/{botId}/interactions/{interactionId}/cancel:
+    post:
+      operationId: cancelSlackInteraction
+      parameters:
+      - explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: botId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: interactionId
+        required: true
+        schema:
+          pattern: "^si_[a-f0-9]{64}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Cancelled; repeated cancellation is idempotent
+        "409":
+          description: A response or expiry already won
+        "404":
+          description: "Unknown, foreign or disabled"
+      summary: Cancel an unanswered Slack interaction
       tags:
       - AI Slack Bots
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
@@ -4736,7 +5629,8 @@ paths:
           retryable: true
     put:
       description: "value is any JSON value ({} stays an object). secret encrypts\
-        \ the value with KMS (lists show [ENCRYPTED]). ttl is 60 to 31,536,000 seconds;\
+        \ the value with KMS. Secret values are write-only through the API: reads,\
+        \ lists and this answer show [ENCRYPTED]. ttl is 60 to 31,536,000 seconds;\
         \ a write without ttl removes any expiry. Format 2 conditions: ifAbsent (201\
         \ on success) or ifVersion. A failed condition is 409 CONFLICT with reason\
         \ and currentVersion. In a collection with a unique index, 409 UNIQUE_VIOLATION\
@@ -13246,6 +14140,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects_delete_409_response'
+          description: "KV_LEDGER_PRESENT: a KV store of the project has a ledger,\
+            \ and a ledger cannot be deleted before its retention ends. Nothing is\
+            \ deleted. The body lists the store IDs in stores. Otherwise every KV\
+            \ store of the project is deleted with the project, and a store linked\
+            \ from another project is only unlinked."
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects_delete_503_response'
+          description: "KV_STORES_UNREADABLE: the KV stores or their ledgers could\
+            \ not be read, so nothing is deleted. KV_STORE_DELETE_FAILED: a KV store\
+            \ could not be deleted, so the project is kept (the message names the\
+            \ stores already deleted). Both are retryable."
       summary: Delete a project
       tags:
       - Projects
@@ -13412,10 +14325,13 @@ paths:
       - Purge
   /api/v2/organizations/{organization}/projects/{project}/logs:
     get:
-      description: Retrieves CDN access log entries for a QuantGov Cloud project.
-        Results are always scoped to the project; the optional filter can only narrow
-        them. Entries are returned oldest first; pass nextToken from the previous
-        response to fetch the next page. Logs are retained for 30 days.
+      description: "Retrieves CDN access log entries for a project. Results are always\
+        \ scoped to the project; the optional filter can only narrow them. Entries\
+        \ are returned oldest first; pass nextToken from the previous response to\
+        \ fetch the next page. Logs are retained for 30 days. For QuantCDN (Fastly)\
+        \ projects, entries are up to about 30 minutes behind, and a slow query can\
+        \ return an empty page with a nextToken: call again with it to collect the\
+        \ entries."
       operationId: getProjectLogs
       parameters:
       - description: The organization machine name
@@ -13515,8 +14431,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getProjectLogs_400_response'
-          description: "The project is not a QuantGov Cloud project, or its access\
-            \ logs are not enabled yet"
+          description: "Access logs are not available for this project, or are not\
+            \ enabled yet"
         "422":
           description: Validation error
       security:
@@ -13616,6 +14532,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -13671,6 +14594,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -13785,6 +14715,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -13891,8 +14828,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
-          description: fn_uuid does not name a published function of type edge_auth
-            in this project. Checked on create and when fn_uuid changes.
+          description: "fn_uuid does not name a published function of type edge_auth\
+            \ in this project. Checked on create and when fn_uuid changes. Or: The\
+            \ rule order cannot be kept (two rules managed in code leave no legal\
+            \ weight). Permanent until support repairs the order; do not retry."
         "409":
           content:
             application/json:
@@ -13948,6 +14887,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14067,8 +15013,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
-          description: fn_uuid does not name a published function of type edge_auth
-            in this project. Checked on create and when fn_uuid changes.
+          description: "fn_uuid does not name a published function of type edge_auth\
+            \ in this project. Checked on create and when fn_uuid changes. Or: The\
+            \ rule order cannot be kept (two rules managed in code leave no legal\
+            \ weight). Permanent until support repairs the order; do not retry."
         "409":
           content:
             application/json:
@@ -14170,6 +15118,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14225,6 +15180,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14339,6 +15301,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14445,8 +15414,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
-          description: fn_uuid does not name a published function of type edge_filter
-            or edge_function in this project. Checked on create and when fn_uuid changes.
+          description: "fn_uuid does not name a published function of type edge_filter\
+            \ or edge_function in this project. Checked on create and when fn_uuid\
+            \ changes. Or: The rule order cannot be kept (two rules managed in code\
+            \ leave no legal weight). Permanent until support repairs the order; do\
+            \ not retry."
         "409":
           content:
             application/json:
@@ -14502,6 +15474,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14621,8 +15600,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
-          description: fn_uuid does not name a published function of type edge_filter
-            or edge_function in this project. Checked on create and when fn_uuid changes.
+          description: "fn_uuid does not name a published function of type edge_filter\
+            \ or edge_function in this project. Checked on create and when fn_uuid\
+            \ changes. Or: The rule order cannot be kept (two rules managed in code\
+            \ leave no legal weight). Permanent until support repairs the order; do\
+            \ not retry."
         "409":
           content:
             application/json:
@@ -14724,6 +15706,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14779,6 +15768,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14893,6 +15889,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -14999,8 +16002,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
-          description: fn_uuid does not name a published function of type edge_function
-            in this project. Checked on create and when fn_uuid changes.
+          description: "fn_uuid does not name a published function of type edge_function\
+            \ in this project. Checked on create and when fn_uuid changes. Or: The\
+            \ rule order cannot be kept (two rules managed in code leave no legal\
+            \ weight). Permanent until support repairs the order; do not retry."
         "409":
           content:
             application/json:
@@ -15056,6 +16061,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15175,8 +16187,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
-          description: fn_uuid does not name a published function of type edge_function
-            in this project. Checked on create and when fn_uuid changes.
+          description: "fn_uuid does not name a published function of type edge_function\
+            \ in this project. Checked on create and when fn_uuid changes. Or: The\
+            \ rule order cannot be kept (two rules managed in code leave no legal\
+            \ weight). Permanent until support repairs the order; do not retry."
         "409":
           content:
             application/json:
@@ -15278,6 +16292,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15333,6 +16354,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15447,6 +16475,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15548,6 +16583,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15603,6 +16645,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15717,6 +16766,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15815,6 +16871,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15867,6 +16930,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -15975,6 +17045,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16072,6 +17149,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16124,6 +17208,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16232,6 +17323,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16333,6 +17431,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16388,6 +17493,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16502,6 +17614,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
           description: Access is forbidden.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: The rule order cannot be kept (two rules managed in code leave
+            no legal weight). Permanent until support repairs the order; do not retry.
         "409":
           content:
             application/json:
@@ -16511,6 +17630,52 @@ paths:
             \ is managed in code. Retry after a short delay; a managed rule changes\
             \ only through a rules deploy."
       summary: Update a serve static rule
+      tags:
+      - Rules
+  /api/v2/organizations/{organization}/projects/{project}/rules:
+    get:
+      description: "Returns every rule in the order the edge runs them. Each item\
+        \ has the fields of the per-type list for its rule type, plus `position` (0-based\
+        \ index in this order) and `managed` (true when a template deploy owns the\
+        \ rule in this project). For a trial organisation without a payment method,\
+        \ the list is partial: it leaves out functions, content filters and auth functions,\
+        \ as their per-type lists refuse that caller (the same gate, with the same\
+        \ superadmin masquerade bypass), so `position` values can have gaps. Do not\
+        \ treat a partial list as a full mirror of the edge rules. One malformed stored\
+        \ rule fails the whole request, so a client never receives an order with a\
+        \ silent hole."
+      operationId: RulesIndex_list
+      parameters:
+      - explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RulesIndex_list_200_response_inner'
+                type: array
+          description: The request has succeeded.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Access is forbidden.
+      summary: List all rules in edge order
       tags:
       - Rules
   /api/v3/organizations/{organisation}/subscription/cloud-usage:
@@ -23753,6 +24918,173 @@ paths:
       summary: Upsert Scaling Policy
       tags:
       - ScalingPolicy
+  /api/v3/organizations/{api_organisation}/applications/{api_application}/environments/{api_environment}/secrets:
+    get:
+      description: Returns the names of the environment's secrets. Secret values are
+        write-only and are never returned.
+      operationId: listEnvironmentSecrets
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: api_organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: api_application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The environment ID
+        example: test-env
+        explode: false
+        in: path
+        name: api_environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SecretKey'
+                type: array
+          description: The secret names
+      summary: List the secret names for an environment
+      tags:
+      - Secrets
+  /api/v3/organizations/{api_organisation}/applications/{api_application}/environments/{api_environment}/secrets/{api_secret}:
+    delete:
+      description: Deletes the secret. The change takes effect on the next redeploy
+        of the environment. A 200 with warnings means the deployed revision still
+        references the secret and cannot start a replacement task until it is redeployed.
+      operationId: deleteEnvironmentSecret
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: api_organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        explode: false
+        in: path
+        name: api_application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The environment ID
+        explode: false
+        in: path
+        name: api_environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The secret key
+        explode: false
+        in: path
+        name: api_secret
+        required: true
+        schema:
+          pattern: "^[A-Za-z_][A-Za-z0-9_.-]*$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: The secret is deleted (or did not exist). It takes effect on
+            the next redeploy.
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteEnvironmentSecret_200_response'
+          description: "The secret is deleted, with warnings from Quant Cloud"
+        "422":
+          description: The key is not valid
+      summary: Delete a secret
+      tags:
+      - Secrets
+    put:
+      description: "Sets the secret value. The value is write-only: the response returns\
+        \ the key only. The change takes effect on the next redeploy of the environment.\
+        \ A name that already exists as an environment variable is refused with 409."
+      operationId: updateEnvironmentSecret
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: api_organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The application ID
+        example: test-app
+        explode: false
+        in: path
+        name: api_application
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The environment ID
+        example: test-env
+        explode: false
+        in: path
+        name: api_environment
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The secret key
+        example: DB_PASSWORD
+        explode: false
+        in: path
+        name: api_secret
+        required: true
+        schema:
+          pattern: "^[A-Za-z_][A-Za-z0-9_.-]*$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateEnvironmentSecret_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretWriteResult'
+          description: The secret is set. It takes effect on the next redeploy.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretError'
+          description: The name already exists as an environment variable
+        "422":
+          description: The key or the value is not valid
+      summary: Create or replace a secret
+      tags:
+      - Secrets
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/ssh-access:
     get:
       operationId: getSshAccessCredentials
@@ -24406,6 +25738,220 @@ components:
             type: integer
           style: simple
   schemas:
+    AiAuditRecordSummary:
+      allOf:
+      - $ref: '#/components/schemas/V2Error'
+      - properties:
+          recordType:
+            description: "inference for a record without recordType; tool_denied,\
+              \ tool_proposal, tool_decision, tool_outcome, slack_bot_api, audit_access,\
+              \ ...; unknown for an unreadable object"
+            type: string
+          timestamp:
+            format: date-time
+            type: string
+          userId:
+            type: string
+          tokenId:
+            type: string
+          modelId:
+            type: string
+          interface:
+            type: string
+          tools:
+            items:
+              type: string
+            type: array
+          decision:
+            type: string
+          outcome:
+            type: string
+        type: object
+      description: Normalised fields of any record type. A field with an unexpected
+        type is left out.
+      example:
+        tokenId: tokenId
+        decision: decision
+        modelId: modelId
+        recordType: recordType
+        message: The requested resource was not found
+        error: true
+        interface: interface
+        userId: userId
+        tools:
+        - tools
+        - tools
+        outcome: outcome
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      required:
+      - recordType
+      - tools
+      type: object
+    AiAuditRecordRow:
+      allOf:
+      - $ref: '#/components/schemas/V2Error'
+      - properties:
+          key:
+            example: orgs/my-org/2026-10-28/req-123-ab12cd34.json
+            type: string
+          date:
+            format: date
+            type: string
+          summary:
+            $ref: '#/components/schemas/AiAuditRecordSummary'
+          record:
+            additionalProperties: true
+            description: The stored record. prompt and response are present only when
+              the record has promptStored or responseStored true.
+            type: object
+          omitted:
+            description: "too-large: read the record with aiAuditRecordGet."
+            enum:
+            - too-large
+            - unreadable
+            type: string
+        type: object
+      example:
+        date: 2000-01-23
+        summary:
+          tokenId: tokenId
+          decision: decision
+          modelId: modelId
+          recordType: recordType
+          message: The requested resource was not found
+          error: true
+          interface: interface
+          userId: userId
+          tools:
+          - tools
+          - tools
+          outcome: outcome
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        record:
+          key: ""
+        omitted: too-large
+        message: The requested resource was not found
+        error: true
+        key: orgs/my-org/2026-10-28/req-123-ab12cd34.json
+      required:
+      - date
+      - key
+      - summary
+      type: object
+    AiAuditRecordsPage:
+      allOf:
+      - $ref: '#/components/schemas/V2Error'
+      - properties:
+          orgId:
+            type: string
+          startDate:
+            format: date
+            type: string
+          endDate:
+            format: date
+            type: string
+          count:
+            type: integer
+          records:
+            items:
+              $ref: '#/components/schemas/AiAuditRecordRow'
+            type: array
+          scanned:
+            description: Keys examined by this call
+            type: integer
+          skippedArchived:
+            description: Records older than 365 days (archived) that this call left
+              out
+            type: integer
+          hasMore:
+            type: boolean
+          nextCursor:
+            type: string
+        type: object
+      example:
+        nextCursor: nextCursor
+        endDate: 2000-01-23
+        records:
+        - date: 2000-01-23
+          summary:
+            tokenId: tokenId
+            decision: decision
+            modelId: modelId
+            recordType: recordType
+            message: The requested resource was not found
+            error: true
+            interface: interface
+            userId: userId
+            tools:
+            - tools
+            - tools
+            outcome: outcome
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          record:
+            key: ""
+          omitted: too-large
+          message: The requested resource was not found
+          error: true
+          key: orgs/my-org/2026-10-28/req-123-ab12cd34.json
+        - date: 2000-01-23
+          summary:
+            tokenId: tokenId
+            decision: decision
+            modelId: modelId
+            recordType: recordType
+            message: The requested resource was not found
+            error: true
+            interface: interface
+            userId: userId
+            tools:
+            - tools
+            - tools
+            outcome: outcome
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          record:
+            key: ""
+          omitted: too-large
+          message: The requested resource was not found
+          error: true
+          key: orgs/my-org/2026-10-28/req-123-ab12cd34.json
+        scanned: 6
+        count: 0
+        skippedArchived: 1
+        hasMore: true
+        message: The requested resource was not found
+        error: true
+        orgId: orgId
+        startDate: 2000-01-23
+      required:
+      - count
+      - endDate
+      - hasMore
+      - orgId
+      - records
+      - scanned
+      - skippedArchived
+      - startDate
+      type: object
+    AiAuditError:
+      allOf:
+      - $ref: '#/components/schemas/V2Error'
+      - properties:
+          error:
+            type: string
+          code:
+            example: UNAVAILABLE
+            type: string
+          retryable:
+            type: boolean
+        type: object
+      example:
+        retryable: true
+        code: UNAVAILABLE
+        message: The requested resource was not found
+        error: error
+      required:
+      - error
+      type: object
     AiSlackBotApiError:
       allOf:
       - $ref: '#/components/schemas/V2Error'
@@ -24756,14 +26302,18 @@ components:
           enum:
           - object-storage
           - valkey
+          - ci-runner-pool
           example: object-storage
           type: string
         name:
           example: buzz-media
           type: string
         status:
+          description: creating and updating apply to a CI runner pool
           enum:
           - provisioning
+          - creating
+          - updating
           - available
           - deleting
           - error
@@ -24781,7 +26331,8 @@ components:
           type: object
         physical:
           description: "Provisioned detail: bucket and region for object storage,\
-            \ cache identifier and endpoint for a cache"
+            \ cache identifier and endpoint for a cache. Not returned for a CI runner\
+            \ pool."
           type: object
         createdAt:
           format: date-time
@@ -25523,9 +27074,11 @@ components:
     Cron:
       example:
         targetContainerName: targetContainerName
+        lastRun: ""
         scheduleExpression: scheduleExpression
         isEnabled: true
         name: name
+        consecutiveFailures: 0
         description: description
         command:
         - command
@@ -25547,6 +27100,50 @@ components:
           type: string
         isEnabled:
           type: boolean
+        lastRun:
+          allOf:
+          - $ref: '#/components/schemas/CronLastRun'
+          description: The newest run of the job. Null when the job has never run.
+            Sent by the cron list.
+          nullable: true
+        consecutiveFailures:
+          description: "Failed runs (FAILED or FAILED_TO_START) from the newest run\
+            \ back to the first run that did not fail, counted over the latest 10\
+            \ runs. 0 when the newest run did not fail. Sent by the cron list."
+          example: 0
+          maximum: 10
+          minimum: 0
+          type: integer
+      type: object
+    CronLastRun:
+      description: Summary of the newest run of a cron job.
+      properties:
+        runId:
+          type: string
+        status:
+          description: "FAILED_TO_START: the task could not be launched, so the command\
+            \ never ran (for example, the job targets a container that no longer exists)."
+          enum:
+          - PENDING
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - FAILED_TO_START
+          - EXPIRED
+          - TIMED_OUT
+          type: string
+        createdAt:
+          format: date-time
+          nullable: true
+          type: string
+        exitCode:
+          nullable: true
+          type: integer
+        errorMessage:
+          description: "Why the run failed, in plain text. Set when the status is\
+            \ FAILED_TO_START."
+          nullable: true
+          type: string
       type: object
     CronRun:
       example:
@@ -25556,6 +27153,7 @@ components:
         scheduleName: scheduleName
         targetContainerName: targetContainerName
         runType: EXEC
+        errorMessage: errorMessage
         exitCode: 0
         startTime: 2000-01-23T04:56:07.000+00:00
         runId: runId
@@ -25574,13 +27172,22 @@ components:
           nullable: true
           type: string
         status:
+          description: "FAILED_TO_START: the task could not be launched, so the command\
+            \ never ran (for example, the job targets a container that no longer exists)."
           enum:
           - PENDING
           - RUNNING
           - SUCCEEDED
           - FAILED
+          - FAILED_TO_START
+          - EXPIRED
           - TIMED_OUT
           - UNKNOWN
+          type: string
+        errorMessage:
+          description: "Why the run failed, in plain text. Set when the status is\
+            \ FAILED_TO_START."
+          nullable: true
           type: string
         startTime:
           format: date-time
@@ -25673,17 +27280,21 @@ components:
       example:
         cron:
         - targetContainerName: targetContainerName
+          lastRun: ""
           scheduleExpression: scheduleExpression
           isEnabled: true
           name: name
+          consecutiveFailures: 0
           description: description
           command:
           - command
           - command
         - targetContainerName: targetContainerName
+          lastRun: ""
           scheduleExpression: scheduleExpression
           isEnabled: true
           name: name
+          consecutiveFailures: 0
           description: description
           command:
           - command
@@ -27260,7 +28871,8 @@ components:
         key:
           type: string
         value:
-          description: The stored JSON value.
+          description: "The stored JSON value. For a secret write (secret true) it\
+            \ reads \"[ENCRYPTED]\": secret values are write-only through the API."
         status:
           enum:
           - created
@@ -28259,7 +29871,10 @@ components:
             bytes of json.
           type: string
         keyId:
-          description: The KMS key ARN of the ledger key.
+          description: "The public id of the ledger signing key: the KMS key id (a\
+            \ UUID). It holds no account id or region. Documents signed before 2026-10-29\
+            \ may name the full key ARN inside their signed json; a verifier matches\
+            \ the key id at the end of that ARN."
           type: string
         algorithm:
           enum:
@@ -28804,10 +30419,10 @@ components:
         \ verify, or the last complete API or dashboard verify). ok is true only when\
         \ complete is true and no shard failed."
       example:
-        entries: 5
-        shardsFailed: 2
+        entries: 9
+        shardsFailed: 3
         at: 2000-01-23T04:56:07.000+00:00
-        pages: 7
+        pages: 2
         scope:
           until: 2000-01-23T04:56:07.000+00:00
           collection: collection
@@ -28817,12 +30432,12 @@ components:
         trigger: scheduled
         ok: true
         complete: true
-        durationMs: 5
+        durationMs: 7
         firstFailure:
           reason: hash_mismatch
           collection: collection
           shard: shard
-          seq: 9
+          seq: 4
       properties:
         id:
           description: The verification record; KV_ledgers_verifications_report returns
@@ -28872,7 +30487,7 @@ components:
         reason: hash_mismatch
         collection: collection
         shard: shard
-        seq: 9
+        seq: 4
       properties:
         collection:
           type: string
@@ -28999,10 +30614,10 @@ components:
         at: 2000-01-23T04:56:07.000+00:00
         archiveLagSeconds: 1
         lastVerify:
-          entries: 5
-          shardsFailed: 2
+          entries: 9
+          shardsFailed: 3
           at: 2000-01-23T04:56:07.000+00:00
-          pages: 7
+          pages: 2
           scope:
             until: 2000-01-23T04:56:07.000+00:00
             collection: collection
@@ -29012,12 +30627,12 @@ components:
           trigger: scheduled
           ok: true
           complete: true
-          durationMs: 5
+          durationMs: 7
           firstFailure:
             reason: hash_mismatch
             collection: collection
             shard: shard
-            seq: 9
+            seq: 4
       properties:
         archiveLagSeconds:
           type: integer
@@ -29056,10 +30671,10 @@ components:
           at: 2000-01-23T04:56:07.000+00:00
           archiveLagSeconds: 1
           lastVerify:
-            entries: 5
-            shardsFailed: 2
+            entries: 9
+            shardsFailed: 3
             at: 2000-01-23T04:56:07.000+00:00
-            pages: 7
+            pages: 2
             scope:
               until: 2000-01-23T04:56:07.000+00:00
               collection: collection
@@ -29069,12 +30684,12 @@ components:
             trigger: scheduled
             ok: true
             complete: true
-            durationMs: 5
+            durationMs: 7
             firstFailure:
               reason: hash_mismatch
               collection: collection
               shard: shard
-              seq: 9
+              seq: 4
         lockMode: governance
         chains: 6
         subjectMode: pseudonym
@@ -29112,10 +30727,10 @@ components:
             at: 2000-01-23T04:56:07.000+00:00
             archiveLagSeconds: 1
             lastVerify:
-              entries: 5
-              shardsFailed: 2
+              entries: 9
+              shardsFailed: 3
               at: 2000-01-23T04:56:07.000+00:00
-              pages: 7
+              pages: 2
               scope:
                 until: 2000-01-23T04:56:07.000+00:00
                 collection: collection
@@ -29125,12 +30740,12 @@ components:
               trigger: scheduled
               ok: true
               complete: true
-              durationMs: 5
+              durationMs: 7
               firstFailure:
                 reason: hash_mismatch
                 collection: collection
                 shard: shard
-                seq: 9
+                seq: 4
           lockMode: governance
           chains: 6
           subjectMode: pseudonym
@@ -29165,10 +30780,10 @@ components:
             at: 2000-01-23T04:56:07.000+00:00
             archiveLagSeconds: 1
             lastVerify:
-              entries: 5
-              shardsFailed: 2
+              entries: 9
+              shardsFailed: 3
               at: 2000-01-23T04:56:07.000+00:00
-              pages: 7
+              pages: 2
               scope:
                 until: 2000-01-23T04:56:07.000+00:00
                 collection: collection
@@ -29178,12 +30793,12 @@ components:
               trigger: scheduled
               ok: true
               complete: true
-              durationMs: 5
+              durationMs: 7
               firstFailure:
                 reason: hash_mismatch
                 collection: collection
                 shard: shard
-                seq: 9
+                seq: 4
           lockMode: governance
           chains: 6
           subjectMode: pseudonym
@@ -29242,10 +30857,10 @@ components:
         lockMode: governance
         chains: 6
         lastVerify:
-          entries: 5
-          shardsFailed: 2
+          entries: 9
+          shardsFailed: 3
           at: 2000-01-23T04:56:07.000+00:00
-          pages: 7
+          pages: 2
           scope:
             until: 2000-01-23T04:56:07.000+00:00
             collection: collection
@@ -29255,12 +30870,12 @@ components:
           trigger: scheduled
           ok: true
           complete: true
-          durationMs: 5
+          durationMs: 7
           firstFailure:
             reason: hash_mismatch
             collection: collection
             shard: shard
-            seq: 9
+            seq: 4
         subjectMode: pseudonym
         collection: collection
         error: error
@@ -29370,10 +30985,10 @@ components:
           shard: shard
         modeRetryAfter: 2000-01-23T04:56:07.000+00:00
         lastVerify:
-          entries: 5
-          shardsFailed: 2
+          entries: 9
+          shardsFailed: 3
           at: 2000-01-23T04:56:07.000+00:00
-          pages: 7
+          pages: 2
           scope:
             until: 2000-01-23T04:56:07.000+00:00
             collection: collection
@@ -29383,12 +30998,12 @@ components:
           trigger: scheduled
           ok: true
           complete: true
-          durationMs: 5
+          durationMs: 7
           firstFailure:
             reason: hash_mismatch
             collection: collection
             shard: shard
-            seq: 9
+            seq: 4
         verifyProgress:
           key: ""
         anchor:
@@ -29465,7 +31080,10 @@ components:
         algorithm: ECDSA_SHA_256
       properties:
         keyId:
-          description: The KMS key ARN.
+          description: "The public id of the ledger signing key: the KMS key id (a\
+            \ UUID). It holds no account id or region. Documents signed before 2026-10-29\
+            \ may name the full key ARN inside their signed json; a verifier matches\
+            \ the key id at the end of that ARN."
           type: string
         algorithm:
           enum:
@@ -29627,11 +31245,11 @@ components:
           - reason: hash_mismatch
             collection: collection
             shard: shard
-            seq: 9
+            seq: 4
           - reason: hash_mismatch
             collection: collection
             shard: shard
-            seq: 9
+            seq: 4
           org: org
           startedAt: 2000-01-23T04:56:07.000+00:00
           store: store
@@ -30258,11 +31876,6 @@ components:
         - invalidKeys
         - invalidKeys
         - invalidKeys
-        dryRun: true
-        copied: 6
-        startedAt: 2000-01-23T04:56:07.000+00:00
-        v2Table: v2Table
-        error: error
         switchedAt: 2000-01-23T04:56:07.000+00:00
         total: 0
         oversizeKeys:
@@ -30271,8 +31884,11 @@ components:
         - oversizeKeys
         - oversizeKeys
         - oversizeKeys
+        dryRun: true
         retainUntil: 2000-01-23T04:56:07.000+00:00
-        v1Table: v1Table
+        copied: 6
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        error: error
         frozenAt: 2000-01-23T04:56:07.000+00:00
       properties:
         phase:
@@ -30293,10 +31909,6 @@ components:
           type: string
         dryRun:
           type: boolean
-        v1Table:
-          type: string
-        v2Table:
-          type: string
         startedAt:
           format: date-time
           type: string
@@ -30338,19 +31950,14 @@ components:
       - dryRun
       - phase
       - startedAt
-      - v1Table
-      - v2Table
       type: object
     V2KvUpgradeState:
       example:
         format: 1
         state: active
-        table: au-prd-acme-kvstore-acme-web-orders
         upgrade:
           phase: checked
           dryRun: true
-          v1Table: au-prd-acme-kvstore-acme-web-orders
-          v2Table: au-prd-acme-kvstore-acme-web-orders-v2
           startedAt: 2026-10-16T00:00:00.000Z
           total: 1200
           copied: 0
@@ -30366,9 +31973,6 @@ components:
           - active
           - migrating
           type: string
-        table:
-          description: The table that serves the store.
-          type: string
         upgrade:
           allOf:
           - $ref: '#/components/schemas/V2KvUpgradeStatus'
@@ -30378,7 +31982,6 @@ components:
       required:
       - format
       - state
-      - table
       - upgrade
       type: object
     V2KvUpgradeRequest:
@@ -30417,11 +32020,6 @@ components:
           - invalidKeys
           - invalidKeys
           - invalidKeys
-          dryRun: true
-          copied: 6
-          startedAt: 2000-01-23T04:56:07.000+00:00
-          v2Table: v2Table
-          error: error
           switchedAt: 2000-01-23T04:56:07.000+00:00
           total: 0
           oversizeKeys:
@@ -30430,8 +32028,11 @@ components:
           - oversizeKeys
           - oversizeKeys
           - oversizeKeys
+          dryRun: true
           retainUntil: 2000-01-23T04:56:07.000+00:00
-          v1Table: v1Table
+          copied: 6
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          error: error
           frozenAt: 2000-01-23T04:56:07.000+00:00
       properties:
         upgrade:
@@ -30450,7 +32051,6 @@ components:
           days: 2
           end: 2000-01-23
         retainedTable:
-          name: name
           sizeBytes: 5
         daily:
         - date: 2000-01-23
@@ -30480,7 +32080,6 @@ components:
           readUnits: 3.616076749251911
         table:
           indexSizeBytes: 5
-          name: name
           itemCount: 6
           sizeBytes: 1
       properties:
@@ -31133,7 +32732,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -31310,7 +32912,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -31915,7 +33520,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -32707,7 +34315,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -32962,7 +34573,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -33220,7 +34834,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -33981,7 +35598,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -34301,7 +35921,10 @@ components:
           type: string
         weight:
           description: "Rule order. Must be 0 or greater; lower weights are processed\
-            \ first. If omitted on create, the rule is placed last."
+            \ first. If omitted on create, the rule is placed last. A reorder in the\
+            \ Quant dashboard changes this rule's weight; if `weight` is set in configuration,\
+            \ the next plan shows the difference and apply restores the configured\
+            \ order."
           example: 100
           minimum: 0
           type: integer
@@ -34786,6 +36409,49 @@ components:
         traffic_source_is:
         - tor-exit
         asn: asn_is
+      type: object
+    SecretKey:
+      example:
+        key: DB_PASSWORD
+      properties:
+        key:
+          description: The secret name
+          example: DB_PASSWORD
+          type: string
+      required:
+      - key
+      type: object
+    SecretWriteResult:
+      example:
+        warnings:
+        - warnings
+        - warnings
+        key: DB_PASSWORD
+      properties:
+        key:
+          description: The secret name
+          example: DB_PASSWORD
+          type: string
+        warnings:
+          description: Notices from Quant Cloud about the change. Present only when
+            there is at least one.
+          items:
+            type: string
+          type: array
+      required:
+      - key
+      type: object
+    SecretError:
+      example:
+        message: Cannot create/update secret 'DB_PASSWORD' as it already exists as
+          an environment variable.
+      properties:
+        message:
+          example: Cannot create/update secret 'DB_PASSWORD' as it already exists
+            as an environment variable.
+          type: string
+      required:
+      - message
       type: object
     V2SecretStore:
       properties:
@@ -35619,6 +37285,43 @@ components:
             $ref: '#/components/schemas/WafConfig_thresholds_inner'
           type: array
       type: object
+    aiAuditRecordGet_200_response:
+      example:
+        date: 2000-01-23
+        summary:
+          tokenId: tokenId
+          decision: decision
+          modelId: modelId
+          recordType: recordType
+          message: The requested resource was not found
+          error: true
+          interface: interface
+          userId: userId
+          tools:
+          - tools
+          - tools
+          outcome: outcome
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        record:
+          key: ""
+        key: key
+      properties:
+        key:
+          type: string
+        date:
+          format: date
+          type: string
+        summary:
+          $ref: '#/components/schemas/AiAuditRecordSummary'
+        record:
+          additionalProperties: true
+          type: object
+      required:
+      - date
+      - key
+      - record
+      - summary
+      type: object
     AiSearch_enable_request:
       properties:
         baseUrl:
@@ -35633,6 +37336,15 @@ components:
           type: object
         rateLimits:
           type: object
+        queryTextRetention:
+          description: "What analytics keeps of a visitor's query. default: the organisation\
+            \ default (store, or hash for strict organisations)."
+          enum:
+          - default
+          - store
+          - hash
+          - none
+          type: string
       type: object
     AiSearch_ingestPages_request_pages_inner:
       properties:
@@ -35967,6 +37679,119 @@ components:
         permalink:
           type: string
       type: object
+    postSlackBotFile_request:
+      additionalProperties: false
+      properties:
+        channel:
+          pattern: "^[CG][A-Z0-9]{8,}$"
+          type: string
+        threadTs:
+          description: "Absent: a root post"
+          pattern: "^\\d{10}\\.\\d{6}$"
+          type: string
+        content:
+          description: "The image, base64 (standard alphabet, no whitespace, no data:\
+            \ prefix). 1 byte to 4 MiB decoded."
+          type: string
+        filename:
+          description: "Default screenshot.<ext>. The extension must match the image\
+            \ type (png, jpg, jpeg, gif, webp)."
+          pattern: "^[A-Za-z0-9._-]{1,100}$"
+          type: string
+        title:
+          maxLength: 200
+          minLength: 1
+          type: string
+        altText:
+          maxLength: 1000
+          minLength: 1
+          type: string
+        text:
+          description: Caption. Same mention rules as a message.
+          maxLength: 3000
+          minLength: 1
+          type: string
+      required:
+      - channel
+      - content
+      type: object
+    postSlackBotFile_201_response:
+      example:
+        channel: channel
+        threadTs: threadTs
+        permalink: permalink
+        fileId: fileId
+      properties:
+        channel:
+          type: string
+        threadTs:
+          nullable: true
+          type: string
+        fileId:
+          type: string
+        permalink:
+          nullable: true
+          type: string
+      type: object
+    createSlackInteraction_request_actions_inner:
+      additionalProperties: false
+      properties:
+        id:
+          pattern: "^[a-zA-Z0-9_-]{1,64}$"
+          type: string
+        label:
+          maxLength: 75
+          minLength: 1
+          type: string
+        style:
+          enum:
+          - primary
+          - danger
+          type: string
+      required:
+      - id
+      - label
+      type: object
+    createSlackInteraction_request:
+      additionalProperties: false
+      properties:
+        channel:
+          type: string
+        threadTs:
+          type: string
+        text:
+          maxLength: 3000
+          minLength: 1
+          type: string
+        actions:
+          items:
+            $ref: '#/components/schemas/createSlackInteraction_request_actions_inner'
+          maxItems: 5
+          minItems: 1
+          type: array
+        responseMode:
+          enum:
+          - single
+          type: string
+        expiresInSeconds:
+          default: 3600
+          maximum: 86400
+          minimum: 60
+          type: integer
+        allowedUsers:
+          items:
+            type: string
+          maxItems: 50
+          minItems: 1
+          type: array
+        metadata:
+          description: "Opaque caller data, at most 4096 bytes of canonical JSON"
+          type: object
+      required:
+      - actions
+      - channel
+      - text
+      type: object
     Crawlers_run_request:
       properties:
         urls:
@@ -36047,6 +37872,8 @@ components:
           example: user-session-123
           type: string
         value:
+          description: "The value written. '[ENCRYPTED]' when secret is true: secret\
+            \ values are write-only through the API."
           type: string
       type: object
     KV_items_purge_200_response:
@@ -36123,6 +37950,61 @@ components:
           description: Organization machine name
           example: test-org
           type: string
+      type: object
+    Projects_delete_409_response:
+      example:
+        retryable: false
+        code: KV_LEDGER_PRESENT
+        stores:
+        - stores
+        - stores
+        error: true
+        message: message
+      properties:
+        error:
+          example: true
+          type: boolean
+        message:
+          type: string
+        code:
+          enum:
+          - KV_LEDGER_PRESENT
+          type: string
+        retryable:
+          example: false
+          type: boolean
+        stores:
+          items:
+            type: string
+          type: array
+      type: object
+    Projects_delete_503_response:
+      example:
+        retryable: true
+        code: KV_STORES_UNREADABLE
+        stores:
+        - stores
+        - stores
+        error: true
+        message: message
+      properties:
+        error:
+          example: true
+          type: boolean
+        message:
+          type: string
+        code:
+          enum:
+          - KV_STORES_UNREADABLE
+          - KV_STORE_DELETE_FAILED
+          type: string
+        retryable:
+          example: true
+          type: boolean
+        stores:
+          items:
+            type: string
+          type: array
       type: object
     Purge_create_request:
       description: "Send cache_keys, urls, or both. At least one of them must be non-empty."
@@ -36264,6 +38146,20 @@ components:
           type: boolean
         message:
           type: string
+      type: object
+    RulesIndex_list_200_response_inner:
+      additionalProperties: true
+      example:
+        managed: true
+        position: 0
+      properties:
+        position:
+          description: 0-based index in the stored order.
+          minimum: 0
+          type: integer
+        managed:
+          description: True when a template deploy owns the rule in this project.
+          type: boolean
       type: object
     Tokens_list_200_response_inner:
       example:
@@ -39763,6 +41659,7 @@ components:
             type: string
           type: array
         namespace:
+          pattern: "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$"
           type: string
         files:
           type: object
@@ -39910,6 +41807,7 @@ components:
             type: string
           type: array
         namespace:
+          pattern: "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$"
           type: string
       type: object
     updateSkill_200_response:
@@ -43254,6 +45152,28 @@ components:
         flushed:
           type: boolean
       type: object
+    updateEnvironmentSecret_request:
+      properties:
+        value:
+          format: password
+          type: string
+          writeOnly: true
+      required:
+      - value
+      type: object
+    deleteEnvironmentSecret_200_response:
+      example:
+        warnings:
+        - warnings
+        - warnings
+      properties:
+        warnings:
+          items:
+            type: string
+          type: array
+      required:
+      - warnings
+      type: object
     getSshAccessCredentials_200_response_credentials:
       example:
         accessKeyId: accessKeyId
@@ -43986,11 +45906,11 @@ components:
         - reason: hash_mismatch
           collection: collection
           shard: shard
-          seq: 9
+          seq: 4
         - reason: hash_mismatch
           collection: collection
           shard: shard
-          seq: 9
+          seq: 4
         org: org
         startedAt: 2000-01-23T04:56:07.000+00:00
         store: store
@@ -44149,12 +46069,9 @@ components:
     V2KvUsage_table:
       example:
         indexSizeBytes: 5
-        name: name
         itemCount: 6
         sizeBytes: 1
       properties:
-        name:
-          type: string
         itemCount:
           type: integer
         sizeBytes:
@@ -44166,21 +46083,16 @@ components:
       required:
       - indexSizeBytes
       - itemCount
-      - name
       - sizeBytes
       type: object
     V2KvUsage_retainedTable:
       description: Only while an upgrade keeps the format 1 table after the switch.
       example:
-        name: name
         sizeBytes: 5
       properties:
-        name:
-          type: string
         sizeBytes:
           type: integer
       required:
-      - name
       - sizeBytes
       type: object
     V2KvUsage_period:

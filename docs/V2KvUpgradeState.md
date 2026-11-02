@@ -6,14 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Format** | **int32** |  | 
 **State** | **string** | migrating while writes are frozen (an upgrade copy or a rollback). | 
-**Table** | **string** | The table that serves the store. | 
 **Upgrade** | [**NullableV2KvUpgradeStatus**](V2KvUpgradeStatus.md) | Null when the store was never upgraded. | 
 
 ## Methods
 
 ### NewV2KvUpgradeState
 
-`func NewV2KvUpgradeState(format int32, state string, table string, upgrade NullableV2KvUpgradeStatus, ) *V2KvUpgradeState`
+`func NewV2KvUpgradeState(format int32, state string, upgrade NullableV2KvUpgradeStatus, ) *V2KvUpgradeState`
 
 NewV2KvUpgradeState instantiates a new V2KvUpgradeState object
 This constructor will assign default values to properties that have it defined,
@@ -66,26 +65,6 @@ and a boolean to check if the value has been set.
 `func (o *V2KvUpgradeState) SetState(v string)`
 
 SetState sets State field to given value.
-
-
-### GetTable
-
-`func (o *V2KvUpgradeState) GetTable() string`
-
-GetTable returns the Table field if non-nil, zero value otherwise.
-
-### GetTableOk
-
-`func (o *V2KvUpgradeState) GetTableOk() (*string, bool)`
-
-GetTableOk returns a tuple with the Table field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTable
-
-`func (o *V2KvUpgradeState) SetTable(v string)`
-
-SetTable sets Table field to given value.
 
 
 ### GetUpgrade

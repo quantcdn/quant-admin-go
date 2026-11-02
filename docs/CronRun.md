@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **RunId** | Pointer to **string** |  | [optional] 
 **RunType** | Pointer to **string** |  | [optional] 
 **Command** | Pointer to **NullableString** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
+**Status** | Pointer to **string** | FAILED_TO_START: the task could not be launched, so the command never ran (for example, the job targets a container that no longer exists). | [optional] 
+**ErrorMessage** | Pointer to **NullableString** | Why the run failed, in plain text. Set when the status is FAILED_TO_START. | [optional] 
 **StartTime** | Pointer to **NullableTime** |  | [optional] 
 **EndTime** | Pointer to **NullableTime** |  | [optional] 
 **ExitCode** | Pointer to **NullableInt32** |  | [optional] 
@@ -144,6 +145,41 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### GetErrorMessage
+
+`func (o *CronRun) GetErrorMessage() string`
+
+GetErrorMessage returns the ErrorMessage field if non-nil, zero value otherwise.
+
+### GetErrorMessageOk
+
+`func (o *CronRun) GetErrorMessageOk() (*string, bool)`
+
+GetErrorMessageOk returns a tuple with the ErrorMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorMessage
+
+`func (o *CronRun) SetErrorMessage(v string)`
+
+SetErrorMessage sets ErrorMessage field to given value.
+
+### HasErrorMessage
+
+`func (o *CronRun) HasErrorMessage() bool`
+
+HasErrorMessage returns a boolean if a field has been set.
+
+### SetErrorMessageNil
+
+`func (o *CronRun) SetErrorMessageNil(b bool)`
+
+ SetErrorMessageNil sets the value for ErrorMessage to be an explicit nil
+
+### UnsetErrorMessage
+`func (o *CronRun) UnsetErrorMessage()`
+
+UnsetErrorMessage ensures that no value is present for ErrorMessage, not even an explicit nil
 ### GetStartTime
 
 `func (o *CronRun) GetStartTime() time.Time`

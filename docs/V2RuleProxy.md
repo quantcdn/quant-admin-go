@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Rule name | [optional] 
 **Uuid** | **string** | Rule UUID | 
 **RuleId** | Pointer to **string** | Rule ID | [optional] 
-**Weight** | Pointer to **int32** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. | [optional] 
+**Weight** | Pointer to **int32** | Rule order. Must be 0 or greater; lower weights are processed first. If omitted on create, the rule is placed last. A reorder in the Quant dashboard changes this rule&#39;s weight; if &#x60;weight&#x60; is set in configuration, the next plan shows the difference and apply restores the configured order. | [optional] 
 **Url** | Pointer to **[]string** | URL patterns | [optional] 
 **Domain** | Pointer to **[]string** | Exact hostnames the rule matches, or &#39;any&#39;. Wildcards are not supported. | [optional] 
 **Disabled** | **bool** | Whether rule is disabled | [default to false]
