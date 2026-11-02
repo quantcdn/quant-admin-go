@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**KeyId** | **string** | The KMS key ARN. | 
+**KeyId** | **string** | The public id of the ledger signing key: the KMS key id (a UUID). It holds no account id or region. Documents signed before 2026-10-29 may name the full key ARN inside their signed json; a verifier matches the key id at the end of that ARN. | 
 **Algorithm** | **string** |  | 
 **Curve** | **string** |  | 
 **PublicKeyPem** | **string** | SubjectPublicKeyInfo, PEM. | 

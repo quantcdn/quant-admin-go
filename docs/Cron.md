@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Command** | Pointer to **[]string** |  | [optional] 
 **TargetContainerName** | Pointer to **NullableString** |  | [optional] 
 **IsEnabled** | Pointer to **bool** |  | [optional] 
+**LastRun** | Pointer to [**NullableCronLastRun**](CronLastRun.md) | The newest run of the job. Null when the job has never run. Sent by the cron list. | [optional] 
+**ConsecutiveFailures** | Pointer to **int32** | Failed runs (FAILED or FAILED_TO_START) from the newest run back to the first run that did not fail, counted over the latest 10 runs. 0 when the newest run did not fail. Sent by the cron list. | [optional] 
 
 ## Methods
 
@@ -199,6 +201,66 @@ SetIsEnabled sets IsEnabled field to given value.
 `func (o *Cron) HasIsEnabled() bool`
 
 HasIsEnabled returns a boolean if a field has been set.
+
+### GetLastRun
+
+`func (o *Cron) GetLastRun() CronLastRun`
+
+GetLastRun returns the LastRun field if non-nil, zero value otherwise.
+
+### GetLastRunOk
+
+`func (o *Cron) GetLastRunOk() (*CronLastRun, bool)`
+
+GetLastRunOk returns a tuple with the LastRun field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastRun
+
+`func (o *Cron) SetLastRun(v CronLastRun)`
+
+SetLastRun sets LastRun field to given value.
+
+### HasLastRun
+
+`func (o *Cron) HasLastRun() bool`
+
+HasLastRun returns a boolean if a field has been set.
+
+### SetLastRunNil
+
+`func (o *Cron) SetLastRunNil(b bool)`
+
+ SetLastRunNil sets the value for LastRun to be an explicit nil
+
+### UnsetLastRun
+`func (o *Cron) UnsetLastRun()`
+
+UnsetLastRun ensures that no value is present for LastRun, not even an explicit nil
+### GetConsecutiveFailures
+
+`func (o *Cron) GetConsecutiveFailures() int32`
+
+GetConsecutiveFailures returns the ConsecutiveFailures field if non-nil, zero value otherwise.
+
+### GetConsecutiveFailuresOk
+
+`func (o *Cron) GetConsecutiveFailuresOk() (*int32, bool)`
+
+GetConsecutiveFailuresOk returns a tuple with the ConsecutiveFailures field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConsecutiveFailures
+
+`func (o *Cron) SetConsecutiveFailures(v int32)`
+
+SetConsecutiveFailures sets ConsecutiveFailures field to given value.
+
+### HasConsecutiveFailures
+
+`func (o *Cron) HasConsecutiveFailures() bool`
+
+HasConsecutiveFailures returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

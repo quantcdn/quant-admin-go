@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | Pointer to **bool** |  | [optional] 
 **Key** | Pointer to **string** |  | [optional] 
-**Value** | Pointer to **string** |  | [optional] 
+**Value** | Pointer to **string** | The value written. &#39;[ENCRYPTED]&#39; when secret is true: secret values are write-only through the API. | [optional] 
 
 ## Methods
 

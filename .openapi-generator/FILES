@@ -4,6 +4,7 @@ README.md
 api/openapi.yaml
 api_ai.go
 api_ai_agents.go
+api_ai_audit.go
 api_ai_custom_tools.go
 api_ai_file_storage.go
 api_ai_filter_policies.go
@@ -42,6 +43,7 @@ api_resources.go
 api_restore_management.go
 api_rules.go
 api_scaling_policy.go
+api_secrets.go
 api_ssh_access.go
 api_subscription.go
 api_tokens.go
@@ -51,6 +53,7 @@ client.go
 configuration.go
 docs/AIAPI.md
 docs/AIAgentsAPI.md
+docs/AIAuditAPI.md
 docs/AICustomToolsAPI.md
 docs/AIFileStorageAPI.md
 docs/AIFilterPoliciesAPI.md
@@ -67,6 +70,11 @@ docs/AIToolApprovalAPI.md
 docs/AIToolsAPI.md
 docs/AIUsageAPI.md
 docs/AIVectorDatabaseAPI.md
+docs/AiAuditError.md
+docs/AiAuditRecordGet200Response.md
+docs/AiAuditRecordRow.md
+docs/AiAuditRecordSummary.md
+docs/AiAuditRecordsPage.md
 docs/AiSearchChatRequest.md
 docs/AiSearchDeletePagesRequest.md
 docs/AiSearchEnableRequest.md
@@ -177,6 +185,8 @@ docs/CreateSkill201Response.md
 docs/CreateSkillRequest.md
 docs/CreateSlackBot201Response.md
 docs/CreateSlackBotRequest.md
+docs/CreateSlackInteractionRequest.md
+docs/CreateSlackInteractionRequestActionsInner.md
 docs/CreateTask201Response.md
 docs/CreateTaskRequest.md
 docs/CreateVectorCollection201Response.md
@@ -185,6 +195,7 @@ docs/CreateVectorCollectionRequest.md
 docs/CreateVolumeRequest.md
 docs/Cron.md
 docs/CronAPI.md
+docs/CronLastRun.md
 docs/CronRun.md
 docs/DNSCreateRecordRequest.md
 docs/DecideToolProposalRequest.md
@@ -193,6 +204,7 @@ docs/DeleteAISession200Response.md
 docs/DeleteAgentOverlay200Response.md
 docs/DeleteBackup200Response.md
 docs/DeleteCustomTool200Response.md
+docs/DeleteEnvironmentSecret200Response.md
 docs/DeleteFile200Response.md
 docs/DeleteSkill200Response.md
 docs/DeleteSkillCollection200Response.md
@@ -358,9 +370,13 @@ docs/PatchEnvironmentCompose202ResponseSpotConfiguration.md
 docs/PatchEnvironmentCompose400Response.md
 docs/PatchEnvironmentComposeRequest.md
 docs/PatchEnvironmentComposeRequestSpotConfiguration.md
+docs/PostSlackBotFile201Response.md
+docs/PostSlackBotFileRequest.md
 docs/PostSlackBotMessage201Response.md
 docs/PostSlackBotMessageRequest.md
 docs/ProjectsAPI.md
+docs/ProjectsDelete409Response.md
+docs/ProjectsDelete503Response.md
 docs/PurgeAPI.md
 docs/PurgeCreate200Response.md
 docs/PurgeCreateRequest.md
@@ -380,6 +396,7 @@ docs/RestoreFilesystem202Response.md
 docs/RestoreFilesystemRequest.md
 docs/RestoreManagementAPI.md
 docs/RulesAPI.md
+docs/RulesIndexList200ResponseInner.md
 docs/SSHAccessAPI.md
 docs/ScalingPolicyAPI.md
 docs/ScalingPolicyListResponse.md
@@ -387,6 +404,10 @@ docs/SearchSlackWorkspaceChannels200Response.md
 docs/SearchSlackWorkspaceChannels200ResponseResultsInner.md
 docs/SearchSlackWorkspaceUsers200Response.md
 docs/SearchSlackWorkspaceUsers200ResponseResultsInner.md
+docs/SecretError.md
+docs/SecretKey.md
+docs/SecretWriteResult.md
+docs/SecretsAPI.md
 docs/SetIdleSleepRequest.md
 docs/SetScalingPolicyRequest.md
 docs/SpotConfiguration.md
@@ -409,6 +430,7 @@ docs/UpdateAISessionRequest.md
 docs/UpdateAISessionRequestNewMessagesInner.md
 docs/UpdateCronJobRequest.md
 docs/UpdateEnvironmentRequest.md
+docs/UpdateEnvironmentSecretRequest.md
 docs/UpdateEnvironmentStateRequest.md
 docs/UpdateEnvironmentVariableRequest.md
 docs/UpdateFilterPolicyRequest.md
@@ -652,6 +674,11 @@ docs/WafConfigThresholdsInner.md
 git_push.sh
 go.mod
 go.sum
+model_ai_audit_error.go
+model_ai_audit_record_get_200_response.go
+model_ai_audit_record_row.go
+model_ai_audit_record_summary.go
+model_ai_audit_records_page.go
 model_ai_search_chat_request.go
 model_ai_search_delete_pages_request.go
 model_ai_search_enable_request.go
@@ -754,6 +781,8 @@ model_create_skill_201_response.go
 model_create_skill_request.go
 model_create_slack_bot_201_response.go
 model_create_slack_bot_request.go
+model_create_slack_interaction_request.go
+model_create_slack_interaction_request_actions_inner.go
 model_create_task_201_response.go
 model_create_task_request.go
 model_create_vector_collection_201_response.go
@@ -761,6 +790,7 @@ model_create_vector_collection_201_response_collection.go
 model_create_vector_collection_request.go
 model_create_volume_request.go
 model_cron.go
+model_cron_last_run.go
 model_cron_run.go
 model_decide_tool_proposal_request.go
 model_delete_agent_overlay_200_response.go
@@ -768,6 +798,7 @@ model_delete_ai_agent_200_response.go
 model_delete_ai_session_200_response.go
 model_delete_backup_200_response.go
 model_delete_custom_tool_200_response.go
+model_delete_environment_secret_200_response.go
 model_delete_file_200_response.go
 model_delete_skill_200_response.go
 model_delete_skill_collection_200_response.go
@@ -927,8 +958,12 @@ model_patch_environment_compose_202_response_spot_configuration.go
 model_patch_environment_compose_400_response.go
 model_patch_environment_compose_request.go
 model_patch_environment_compose_request_spot_configuration.go
+model_post_slack_bot_file_201_response.go
+model_post_slack_bot_file_request.go
 model_post_slack_bot_message_201_response.go
 model_post_slack_bot_message_request.go
+model_projects_delete_409_response.go
+model_projects_delete_503_response.go
 model_purge_create_200_response.go
 model_purge_create_request.go
 model_purge_org_resource_200_response.go
@@ -944,11 +979,15 @@ model_restore_database_202_response.go
 model_restore_database_request.go
 model_restore_filesystem_202_response.go
 model_restore_filesystem_request.go
+model_rules_index_list_200_response_inner.go
 model_scaling_policy_list_response.go
 model_search_slack_workspace_channels_200_response.go
 model_search_slack_workspace_channels_200_response_results_inner.go
 model_search_slack_workspace_users_200_response.go
 model_search_slack_workspace_users_200_response_results_inner.go
+model_secret_error.go
+model_secret_key.go
+model_secret_write_result.go
 model_set_idle_sleep_request.go
 model_set_scaling_policy_request.go
 model_spot_configuration.go
@@ -969,6 +1008,7 @@ model_update_ai_session_request.go
 model_update_ai_session_request_new_messages_inner.go
 model_update_cron_job_request.go
 model_update_environment_request.go
+model_update_environment_secret_request.go
 model_update_environment_state_request.go
 model_update_environment_variable_request.go
 model_update_filter_policy_request.go
@@ -1209,6 +1249,7 @@ model_waf_config_httpbl.go
 model_waf_config_thresholds_inner.go
 response.go
 test/api_ai_agents_test.go
+test/api_ai_audit_test.go
 test/api_ai_custom_tools_test.go
 test/api_ai_file_storage_test.go
 test/api_ai_filter_policies_test.go
@@ -1248,6 +1289,7 @@ test/api_resources_test.go
 test/api_restore_management_test.go
 test/api_rules_test.go
 test/api_scaling_policy_test.go
+test/api_secrets_test.go
 test/api_ssh_access_test.go
 test/api_subscription_test.go
 test/api_tokens_test.go

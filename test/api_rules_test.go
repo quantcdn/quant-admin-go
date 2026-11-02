@@ -638,6 +638,21 @@ func Test_quantadmingo_RulesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test RulesAPIService RulesIndexList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organization string
+		var project string
+
+		resp, httpRes, err := apiClient.RulesAPI.RulesIndexList(context.Background(), organization, project).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test RulesAPIService RulesProxyCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

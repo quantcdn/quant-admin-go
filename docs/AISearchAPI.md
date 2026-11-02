@@ -957,6 +957,8 @@ Name | Type | Description  | Notes
 
 Get the most popular AI Search queries
 
+
+
 ### Example
 
 ```go

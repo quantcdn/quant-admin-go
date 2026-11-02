@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Phase** | **string** | The current upgrade phase. | 
 **DryRun** | **bool** |  | 
-**V1Table** | **string** |  | 
-**V2Table** | **string** |  | 
 **StartedAt** | **time.Time** |  | 
 **FrozenAt** | Pointer to **time.Time** | When writes were last frozen. | [optional] 
 **SwitchedAt** | Pointer to **time.Time** |  | [optional] 
@@ -22,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewV2KvUpgradeStatus
 
-`func NewV2KvUpgradeStatus(phase string, dryRun bool, v1Table string, v2Table string, startedAt time.Time, ) *V2KvUpgradeStatus`
+`func NewV2KvUpgradeStatus(phase string, dryRun bool, startedAt time.Time, ) *V2KvUpgradeStatus`
 
 NewV2KvUpgradeStatus instantiates a new V2KvUpgradeStatus object
 This constructor will assign default values to properties that have it defined,
@@ -75,46 +73,6 @@ and a boolean to check if the value has been set.
 `func (o *V2KvUpgradeStatus) SetDryRun(v bool)`
 
 SetDryRun sets DryRun field to given value.
-
-
-### GetV1Table
-
-`func (o *V2KvUpgradeStatus) GetV1Table() string`
-
-GetV1Table returns the V1Table field if non-nil, zero value otherwise.
-
-### GetV1TableOk
-
-`func (o *V2KvUpgradeStatus) GetV1TableOk() (*string, bool)`
-
-GetV1TableOk returns a tuple with the V1Table field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetV1Table
-
-`func (o *V2KvUpgradeStatus) SetV1Table(v string)`
-
-SetV1Table sets V1Table field to given value.
-
-
-### GetV2Table
-
-`func (o *V2KvUpgradeStatus) GetV2Table() string`
-
-GetV2Table returns the V2Table field if non-nil, zero value otherwise.
-
-### GetV2TableOk
-
-`func (o *V2KvUpgradeStatus) GetV2TableOk() (*string, bool)`
-
-GetV2TableOk returns a tuple with the V2Table field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetV2Table
-
-`func (o *V2KvUpgradeStatus) SetV2Table(v string)`
-
-SetV2Table sets V2Table field to given value.
 
 
 ### GetStartedAt

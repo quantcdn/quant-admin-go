@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **ResourceId** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
+**Status** | Pointer to **string** | creating and updating apply to a CI runner pool | [optional] 
 **Scope** | Pointer to **string** | org for resources managed by these endpoints. app rows are compatibility records for an application-managed cache and cannot be mutated here. | [optional] 
 **Config** | Pointer to **map[string]interface{}** | Type-specific settings, such as dataStorageMaxGb for a cache | [optional] 
-**Physical** | Pointer to **map[string]interface{}** | Provisioned detail: bucket and region for object storage, cache identifier and endpoint for a cache | [optional] 
+**Physical** | Pointer to **map[string]interface{}** | Provisioned detail: bucket and region for object storage, cache identifier and endpoint for a cache. Not returned for a CI runner pool. | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods

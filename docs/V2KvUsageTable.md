@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
 **ItemCount** | **int32** |  | 
 **SizeBytes** | **int32** | Table data only. | 
 **IndexSizeBytes** | **int32** | Sum of the secondary index sizes (0 when none). | 
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewV2KvUsageTable
 
-`func NewV2KvUsageTable(name string, itemCount int32, sizeBytes int32, indexSizeBytes int32, ) *V2KvUsageTable`
+`func NewV2KvUsageTable(itemCount int32, sizeBytes int32, indexSizeBytes int32, ) *V2KvUsageTable`
 
 NewV2KvUsageTable instantiates a new V2KvUsageTable object
 This constructor will assign default values to properties that have it defined,
@@ -27,26 +26,6 @@ will change when the set of required properties is changed
 NewV2KvUsageTableWithDefaults instantiates a new V2KvUsageTable object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetName
-
-`func (o *V2KvUsageTable) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *V2KvUsageTable) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *V2KvUsageTable) SetName(v string)`
-
-SetName sets Name field to given value.
-
 
 ### GetItemCount
 
