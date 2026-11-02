@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **SystemPromptAppend** | Pointer to **string** |  | [optional] 
 **AllowedCollections** | Pointer to **[]string** |  | [optional] 
 **GuardrailPreset** | Pointer to **string** |  | [optional] 
+**ReasoningEffort** | Pointer to **NullableString** | Reasoning effort for this organisation. Overrides the global agent value. | [optional] 
 **Version** | Pointer to **int32** |  | [optional] 
 
 ## Methods
@@ -285,6 +286,41 @@ SetGuardrailPreset sets GuardrailPreset field to given value.
 
 HasGuardrailPreset returns a boolean if a field has been set.
 
+### GetReasoningEffort
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetReasoningEffort() string`
+
+GetReasoningEffort returns the ReasoningEffort field if non-nil, zero value otherwise.
+
+### GetReasoningEffortOk
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetReasoningEffortOk() (*string, bool)`
+
+GetReasoningEffortOk returns a tuple with the ReasoningEffort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningEffort
+
+`func (o *GetAgentOverlay200ResponseOverlay) SetReasoningEffort(v string)`
+
+SetReasoningEffort sets ReasoningEffort field to given value.
+
+### HasReasoningEffort
+
+`func (o *GetAgentOverlay200ResponseOverlay) HasReasoningEffort() bool`
+
+HasReasoningEffort returns a boolean if a field has been set.
+
+### SetReasoningEffortNil
+
+`func (o *GetAgentOverlay200ResponseOverlay) SetReasoningEffortNil(b bool)`
+
+ SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+
+### UnsetReasoningEffort
+`func (o *GetAgentOverlay200ResponseOverlay) UnsetReasoningEffort()`
+
+UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
 ### GetVersion
 
 `func (o *GetAgentOverlay200ResponseOverlay) GetVersion() int32`

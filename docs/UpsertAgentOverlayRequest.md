@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **SystemPromptAppend** | Pointer to **string** | Text appended to base system prompt | [optional] 
 **AllowedCollections** | Pointer to **[]string** | Vector DB collections | [optional] 
 **GuardrailPreset** | Pointer to **NullableString** | Guardrail preset | [optional] 
+**ReasoningEffort** | Pointer to **NullableString** | Override the reasoning effort. Must be one of the levels the effective model lists in capabilities.effortLevels. Omit or null to use the global agent value. | [optional] 
 **Version** | Pointer to **int32** | Current version for optimistic concurrency | [optional] 
 
 ## Methods
@@ -295,6 +296,41 @@ HasGuardrailPreset returns a boolean if a field has been set.
 `func (o *UpsertAgentOverlayRequest) UnsetGuardrailPreset()`
 
 UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
+### GetReasoningEffort
+
+`func (o *UpsertAgentOverlayRequest) GetReasoningEffort() string`
+
+GetReasoningEffort returns the ReasoningEffort field if non-nil, zero value otherwise.
+
+### GetReasoningEffortOk
+
+`func (o *UpsertAgentOverlayRequest) GetReasoningEffortOk() (*string, bool)`
+
+GetReasoningEffortOk returns a tuple with the ReasoningEffort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasoningEffort
+
+`func (o *UpsertAgentOverlayRequest) SetReasoningEffort(v string)`
+
+SetReasoningEffort sets ReasoningEffort field to given value.
+
+### HasReasoningEffort
+
+`func (o *UpsertAgentOverlayRequest) HasReasoningEffort() bool`
+
+HasReasoningEffort returns a boolean if a field has been set.
+
+### SetReasoningEffortNil
+
+`func (o *UpsertAgentOverlayRequest) SetReasoningEffortNil(b bool)`
+
+ SetReasoningEffortNil sets the value for ReasoningEffort to be an explicit nil
+
+### UnsetReasoningEffort
+`func (o *UpsertAgentOverlayRequest) UnsetReasoningEffort()`
+
+UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
 ### GetVersion
 
 `func (o *UpsertAgentOverlayRequest) GetVersion() int32`
