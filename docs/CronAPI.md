@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 ## ListCronJobs
 
-> Cron ListCronJobs(ctx, organisation, application, environment).Execute()
+> []Cron ListCronJobs(ctx, organisation, application, environment).Execute()
 
 Get all cron jobs for an environment
 
@@ -429,7 +429,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `CronAPI.ListCronJobs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListCronJobs`: Cron
+	// response from `ListCronJobs`: []Cron
 	fmt.Fprintf(os.Stdout, "Response from `CronAPI.ListCronJobs`: %v\n", resp)
 }
 ```
@@ -457,7 +457,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Cron**](Cron.md)
+[**[]Cron**](Cron.md)
 
 ### Authorization
 

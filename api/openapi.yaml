@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.30.0
+  version: 4.31.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -22746,7 +22746,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cron'
+                items:
+                  $ref: '#/components/schemas/Cron'
+                type: array
           description: The cron jobs
         "404":
           description: The environment not found
@@ -40618,6 +40620,7 @@ components:
         guardrailPreset: guardrailPreset
         modelId: modelId
         description: description
+        reasoningEffort: low
         hasOverlay: true
         createdAt: 2000-01-23T04:56:07.000+00:00
         longContext: true
@@ -40656,6 +40659,18 @@ components:
           type: array
         longContext:
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         guardrailPreset:
           type: string
         isGlobal:
@@ -40679,6 +40694,7 @@ components:
           guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          reasoningEffort: low
           hasOverlay: true
           createdAt: 2000-01-23T04:56:07.000+00:00
           longContext: true
@@ -40698,6 +40714,7 @@ components:
           guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          reasoningEffort: low
           hasOverlay: true
           createdAt: 2000-01-23T04:56:07.000+00:00
           longContext: true
@@ -40766,6 +40783,18 @@ components:
         longContext:
           description: Enable 1M context window support
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         guardrailPreset:
           description: Guardrail preset name
           enum:
@@ -40809,6 +40838,7 @@ components:
         guardrailPreset: guardrailPreset
         modelId: modelId
         description: description
+        reasoningEffort: low
         hasOverlay: true
         systemPrompt: systemPrompt
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -40859,6 +40889,18 @@ components:
         longContext:
           description: Whether 1M context window is enabled
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         guardrailPreset:
           description: Guardrail preset name
           type: string
@@ -40888,6 +40930,7 @@ components:
           guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          reasoningEffort: low
           hasOverlay: true
           systemPrompt: systemPrompt
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -40945,6 +40988,18 @@ components:
         longContext:
           description: Enable 1M context window support
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default. null clears it.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         guardrailPreset:
           description: Guardrail preset name
           enum:
@@ -41169,6 +41224,7 @@ components:
         - allowedCollections
         - allowedCollections
         systemPromptAppend: systemPromptAppend
+        reasoningEffort: low
         version: 1
         additionalTools:
         - additionalTools
@@ -41204,6 +41260,17 @@ components:
             type: string
           type: array
         guardrailPreset:
+          type: string
+        reasoningEffort:
+          description: Reasoning effort for this organisation. Overrides the global
+            agent value.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
           type: string
         version:
           type: integer
@@ -41256,6 +41323,7 @@ components:
           - allowedCollections
           - allowedCollections
           systemPromptAppend: systemPromptAppend
+          reasoningEffort: low
           version: 1
           additionalTools:
           - additionalTools
@@ -41324,6 +41392,18 @@ components:
           - official
           - official-sensitive
           - protected
+          nullable: true
+          type: string
+        reasoningEffort:
+          description: Override the reasoning effort. Must be one of the levels the
+            effective model lists in capabilities.effortLevels. Omit or null to use
+            the global agent value.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
           nullable: true
           type: string
         version:
@@ -42884,6 +42964,7 @@ components:
         - assignedSkills
         guardrailPreset: guardrailPreset
         modelId: modelId
+        reasoningEffort: low
         connected: true
         systemPrompt: systemPrompt
         allowedSubAgents:
@@ -42957,6 +43038,18 @@ components:
           type: array
         longContext:
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         sessionTtlDays:
           type: integer
         keywordsEnabled:
@@ -42973,6 +43066,7 @@ components:
           - assignedSkills
           guardrailPreset: guardrailPreset
           modelId: modelId
+          reasoningEffort: low
           connected: true
           systemPrompt: systemPrompt
           allowedSubAgents:
@@ -43002,6 +43096,7 @@ components:
           - assignedSkills
           guardrailPreset: guardrailPreset
           modelId: modelId
+          reasoningEffort: low
           connected: true
           systemPrompt: systemPrompt
           allowedSubAgents:
@@ -43089,6 +43184,18 @@ components:
         longContext:
           description: Enable long context mode
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         sessionTtlDays:
           description: Session TTL in days
           maximum: 90
@@ -43148,6 +43255,7 @@ components:
         - keywords
         - keywords
         modelId: modelId
+        reasoningEffort: low
         allowedSubAgents:
         - allowedSubAgents
         - allowedSubAgents
@@ -43235,6 +43343,18 @@ components:
           type: array
         longContext:
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         sessionTtlDays:
           type: integer
         allowedChannels:
@@ -43278,6 +43398,7 @@ components:
           - keywords
           - keywords
           modelId: modelId
+          reasoningEffort: low
           allowedSubAgents:
           - allowedSubAgents
           - allowedSubAgents
@@ -43377,6 +43498,18 @@ components:
         longContext:
           description: Enable long context mode
           type: boolean
+        reasoningEffort:
+          description: Reasoning effort (Anthropic effort). Must be one of the levels
+            the model lists in capabilities.effortLevels. Unset uses the caller or
+            model default. null clears it.
+          enum:
+          - low
+          - medium
+          - high
+          - xhigh
+          - max
+          nullable: true
+          type: string
         sessionTtlDays:
           description: Session TTL in days
           maximum: 90
