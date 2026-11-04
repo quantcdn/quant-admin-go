@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.32.0
+  version: 4.33.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -41059,6 +41059,21 @@ components:
             $ref: '#/components/schemas/listMcpServers_200_response_servers_inner'
           type: array
       type: object
+    listAIAgents_200_response_agents_inner_mcpServers_inner:
+      example:
+        server: server
+        tools:
+        - tools
+        - tools
+      properties:
+        server:
+          type: string
+        tools:
+          description: "Absent: every tool the server allows. Empty: none."
+          items:
+            type: string
+          type: array
+      type: object
     listAIAgents_200_response_agents_inner:
       example:
         assignedSkills:
@@ -41068,6 +41083,15 @@ components:
         guardrailPreset: guardrailPreset
         modelId: modelId
         description: description
+        mcpServers:
+        - server: server
+          tools:
+          - tools
+          - tools
+        - server: server
+          tools:
+          - tools
+          - tools
         reasoningEffort: low
         hasOverlay: true
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -41076,6 +41100,9 @@ components:
         temperature: 0.8008281904610115
         maxTokens: 6
         isGlobal: true
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
         group: group
         allowedTools:
         - allowedTools
@@ -41121,6 +41148,18 @@ components:
           type: string
         guardrailPreset:
           type: string
+        filterPolicies:
+          description: Filter policy IDs applied to this agent's requests (organisation
+            agents)
+          items:
+            type: string
+          type: array
+        mcpServers:
+          description: Attached MCP servers. A platform agent shows its organisation
+            overlay's attachments.
+          items:
+            $ref: '#/components/schemas/listAIAgents_200_response_agents_inner_mcpServers_inner'
+          type: array
         isGlobal:
           type: boolean
         hasOverlay:
@@ -41142,6 +41181,15 @@ components:
           guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          mcpServers:
+          - server: server
+            tools:
+            - tools
+            - tools
+          - server: server
+            tools:
+            - tools
+            - tools
           reasoningEffort: low
           hasOverlay: true
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -41150,6 +41198,9 @@ components:
           temperature: 0.8008281904610115
           maxTokens: 6
           isGlobal: true
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           group: group
           allowedTools:
           - allowedTools
@@ -41162,6 +41213,15 @@ components:
           guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          mcpServers:
+          - server: server
+            tools:
+            - tools
+            - tools
+          - server: server
+            tools:
+            - tools
+            - tools
           reasoningEffort: low
           hasOverlay: true
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -41170,6 +41230,9 @@ components:
           temperature: 0.8008281904610115
           maxTokens: 6
           isGlobal: true
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           group: group
           allowedTools:
           - allowedTools
@@ -41308,6 +41371,15 @@ components:
         guardrailPreset: guardrailPreset
         modelId: modelId
         description: description
+        mcpServers:
+        - server: server
+          tools:
+          - tools
+          - tools
+        - server: server
+          tools:
+          - tools
+          - tools
         reasoningEffort: low
         hasOverlay: true
         systemPrompt: systemPrompt
@@ -41321,6 +41393,9 @@ components:
         - allowedCollections
         - allowedCollections
         isGlobal: true
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
         group: group
         allowedTools:
         - allowedTools
@@ -41374,6 +41449,18 @@ components:
         guardrailPreset:
           description: Guardrail preset name
           type: string
+        filterPolicies:
+          description: Filter policy IDs applied to this agent's requests (organisation
+            agents)
+          items:
+            type: string
+          type: array
+        mcpServers:
+          description: Attached MCP servers. A platform agent shows its organisation
+            overlay's attachments.
+          items:
+            $ref: '#/components/schemas/listAIAgents_200_response_agents_inner_mcpServers_inner'
+          type: array
         isGlobal:
           description: Whether this is a platform-managed global agent
           type: boolean
@@ -41400,6 +41487,15 @@ components:
           guardrailPreset: guardrailPreset
           modelId: modelId
           description: description
+          mcpServers:
+          - server: server
+            tools:
+            - tools
+            - tools
+          - server: server
+            tools:
+            - tools
+            - tools
           reasoningEffort: low
           hasOverlay: true
           systemPrompt: systemPrompt
@@ -41413,6 +41509,9 @@ components:
           - allowedCollections
           - allowedCollections
           isGlobal: true
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
           group: group
           allowedTools:
           - allowedTools
