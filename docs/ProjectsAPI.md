@@ -4,6 +4,7 @@ All URIs are relative to *https://dashboard.quantcdn.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetProjectEdgeEvents**](ProjectsAPI.md#GetProjectEdgeEvents) | **Get** /api/v2/organizations/{organization}/projects/{project}/edge-events | Get edge events for a project
 [**GetProjectLogs**](ProjectsAPI.md#GetProjectLogs) | **Get** /api/v2/organizations/{organization}/projects/{project}/logs | Get CDN access logs for a project
 [**ProjectsCreate**](ProjectsAPI.md#ProjectsCreate) | **Post** /api/v2/organizations/{organization}/projects | Create a new project
 [**ProjectsDelete**](ProjectsAPI.md#ProjectsDelete) | **Delete** /api/v2/organizations/{organization}/projects/{project} | Delete a project
@@ -11,6 +12,95 @@ Method | HTTP request | Description
 [**ProjectsRead**](ProjectsAPI.md#ProjectsRead) | **Get** /api/v2/organizations/{organization}/projects/{project} | Get details of a single project
 [**ProjectsUpdate**](ProjectsAPI.md#ProjectsUpdate) | **Patch** /api/v2/organizations/{organization}/projects/{project} | Update a project
 
+
+
+## GetProjectEdgeEvents
+
+> GetProjectEdgeEvents200Response GetProjectEdgeEvents(ctx, organization, project).Type_(type_).Function(function).Level(level).Search(search).Limit(limit).StartTime(startTime).EndTime(endTime).NextToken(nextToken).Execute()
+
+Get edge events for a project
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/quantcdn/quant-admin-go"
+)
+
+func main() {
+	organization := "organization_example" // string | The organization machine name
+	project := "project_example" // string | The project machine name
+	type_ := "console,function" // string | Comma-separated event types: console, function, waf-hit, static-failover (optional)
+	function := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Only events from this edge function (UUID) (optional)
+	level := "level_example" // string | Only console events at this level (optional)
+	search := "search_example" // string | Case-insensitive substring of the message (optional)
+	limit := int32(56) // int32 | Maximum number of events per page (default 100) (optional) (default to 100)
+	startTime := "startTime_example" // string | Start of the time range. ISO 8601 or Unix epoch milliseconds. (optional)
+	endTime := "endTime_example" // string | End of the time range. ISO 8601 or Unix epoch milliseconds. (optional)
+	nextToken := "nextToken_example" // string | Opaque pagination token from the previous response (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ProjectsAPI.GetProjectEdgeEvents(context.Background(), organization, project).Type_(type_).Function(function).Level(level).Search(search).Limit(limit).StartTime(startTime).EndTime(endTime).NextToken(nextToken).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ProjectsAPI.GetProjectEdgeEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetProjectEdgeEvents`: GetProjectEdgeEvents200Response
+	fmt.Fprintf(os.Stdout, "Response from `ProjectsAPI.GetProjectEdgeEvents`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organization** | **string** | The organization machine name | 
+**project** | **string** | The project machine name | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetProjectEdgeEventsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **type_** | **string** | Comma-separated event types: console, function, waf-hit, static-failover | 
+ **function** | **string** | Only events from this edge function (UUID) | 
+ **level** | **string** | Only console events at this level | 
+ **search** | **string** | Case-insensitive substring of the message | 
+ **limit** | **int32** | Maximum number of events per page (default 100) | [default to 100]
+ **startTime** | **string** | Start of the time range. ISO 8601 or Unix epoch milliseconds. | 
+ **endTime** | **string** | End of the time range. ISO 8601 or Unix epoch milliseconds. | 
+ **nextToken** | **string** | Opaque pagination token from the previous response | 
+
+### Return type
+
+[**GetProjectEdgeEvents200Response**](GetProjectEdgeEvents200Response.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetProjectLogs

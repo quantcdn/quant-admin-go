@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **LongContext** | Pointer to **bool** | Enable 1M context window support | [optional] 
 **ReasoningEffort** | Pointer to **NullableString** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. null clears it. | [optional] 
 **GuardrailPreset** | Pointer to **NullableString** | Guardrail preset name | [optional] 
+**McpServers** | Pointer to [**[]CreateAIAgentRequestMcpServersInner**](CreateAIAgentRequestMcpServersInner.md) | Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. On update, an empty array removes every attachment. | [optional] 
 **FilterPolicies** | Pointer to **[]string** | Filter policy IDs to apply to this agent&#39;s inference requests | [optional] 
 
 ## Methods
@@ -383,6 +384,31 @@ HasGuardrailPreset returns a boolean if a field has been set.
 `func (o *UpdateAIAgentRequest) UnsetGuardrailPreset()`
 
 UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
+### GetMcpServers
+
+`func (o *UpdateAIAgentRequest) GetMcpServers() []CreateAIAgentRequestMcpServersInner`
+
+GetMcpServers returns the McpServers field if non-nil, zero value otherwise.
+
+### GetMcpServersOk
+
+`func (o *UpdateAIAgentRequest) GetMcpServersOk() (*[]CreateAIAgentRequestMcpServersInner, bool)`
+
+GetMcpServersOk returns a tuple with the McpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMcpServers
+
+`func (o *UpdateAIAgentRequest) SetMcpServers(v []CreateAIAgentRequestMcpServersInner)`
+
+SetMcpServers sets McpServers field to given value.
+
+### HasMcpServers
+
+`func (o *UpdateAIAgentRequest) HasMcpServers() bool`
+
+HasMcpServers returns a boolean if a field has been set.
+
 ### GetFilterPolicies
 
 `func (o *UpdateAIAgentRequest) GetFilterPolicies() []string`
