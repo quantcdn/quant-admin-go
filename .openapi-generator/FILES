@@ -319,6 +319,7 @@ docs/KVLinkToProject200Response.md
 docs/KVLinkToProjectRequest.md
 docs/ListAIAgents200Response.md
 docs/ListAIAgents200ResponseAgentsInner.md
+docs/ListAIAgents200ResponseAgentsInnerMcpServersInner.md
 docs/ListAIModels200Response.md
 docs/ListAIModels200ResponseModelsInner.md
 docs/ListAIModels200ResponseModelsInnerCapabilities.md
@@ -918,6 +919,7 @@ model_kv_link_to_project_200_response.go
 model_kv_link_to_project_request.go
 model_list_ai_agents_200_response.go
 model_list_ai_agents_200_response_agents_inner.go
+model_list_ai_agents_200_response_agents_inner_mcp_servers_inner.go
 model_list_ai_models_200_response.go
 model_list_ai_models_200_response_models_inner.go
 model_list_ai_models_200_response_models_inner_capabilities.go

@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **LongContext** | Pointer to **bool** |  | [optional] 
 **ReasoningEffort** | Pointer to **NullableString** | Reasoning effort (Anthropic effort). Must be one of the levels the model lists in capabilities.effortLevels. Unset uses the caller or model default. | [optional] 
 **GuardrailPreset** | Pointer to **string** |  | [optional] 
+**FilterPolicies** | Pointer to **[]string** | Filter policy IDs applied to this agent&#39;s requests (organisation agents) | [optional] 
+**McpServers** | Pointer to [**[]ListAIAgents200ResponseAgentsInnerMcpServersInner**](ListAIAgents200ResponseAgentsInnerMcpServersInner.md) | Attached MCP servers. A platform agent shows its organisation overlay&#39;s attachments. | [optional] 
 **IsGlobal** | Pointer to **bool** |  | [optional] 
 **HasOverlay** | Pointer to **bool** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
@@ -349,6 +351,56 @@ SetGuardrailPreset sets GuardrailPreset field to given value.
 `func (o *ListAIAgents200ResponseAgentsInner) HasGuardrailPreset() bool`
 
 HasGuardrailPreset returns a boolean if a field has been set.
+
+### GetFilterPolicies
+
+`func (o *ListAIAgents200ResponseAgentsInner) GetFilterPolicies() []string`
+
+GetFilterPolicies returns the FilterPolicies field if non-nil, zero value otherwise.
+
+### GetFilterPoliciesOk
+
+`func (o *ListAIAgents200ResponseAgentsInner) GetFilterPoliciesOk() (*[]string, bool)`
+
+GetFilterPoliciesOk returns a tuple with the FilterPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterPolicies
+
+`func (o *ListAIAgents200ResponseAgentsInner) SetFilterPolicies(v []string)`
+
+SetFilterPolicies sets FilterPolicies field to given value.
+
+### HasFilterPolicies
+
+`func (o *ListAIAgents200ResponseAgentsInner) HasFilterPolicies() bool`
+
+HasFilterPolicies returns a boolean if a field has been set.
+
+### GetMcpServers
+
+`func (o *ListAIAgents200ResponseAgentsInner) GetMcpServers() []ListAIAgents200ResponseAgentsInnerMcpServersInner`
+
+GetMcpServers returns the McpServers field if non-nil, zero value otherwise.
+
+### GetMcpServersOk
+
+`func (o *ListAIAgents200ResponseAgentsInner) GetMcpServersOk() (*[]ListAIAgents200ResponseAgentsInnerMcpServersInner, bool)`
+
+GetMcpServersOk returns a tuple with the McpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMcpServers
+
+`func (o *ListAIAgents200ResponseAgentsInner) SetMcpServers(v []ListAIAgents200ResponseAgentsInnerMcpServersInner)`
+
+SetMcpServers sets McpServers field to given value.
+
+### HasMcpServers
+
+`func (o *ListAIAgents200ResponseAgentsInner) HasMcpServers() bool`
+
+HasMcpServers returns a boolean if a field has been set.
 
 ### GetIsGlobal
 
