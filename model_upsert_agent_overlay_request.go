@@ -37,8 +37,14 @@ type UpsertAgentOverlayRequest struct {
 	SystemPromptAppend *string `json:"systemPromptAppend,omitempty"`
 	// Vector DB collections
 	AllowedCollections []string `json:"allowedCollections,omitempty"`
+	// Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. The overlay PUT replaces the whole overlay: omit the field or send an empty array to remove every attachment.
+	McpServers []CreateAIAgentRequestMcpServersInner `json:"mcpServers,omitempty"`
 	// Guardrail preset
 	GuardrailPreset NullableString `json:"guardrailPreset,omitempty"`
+	// Force the 1M context window on (true) or off (false) for this organisation. Omit or null to use the platform default.
+	LongContext NullableBool `json:"longContext,omitempty"`
+	// Filter policy IDs applied to this agent's requests for this organisation, with any organisation-wide mandatory policies
+	FilterPolicies []string `json:"filterPolicies,omitempty"`
 	// Override the reasoning effort. Must be one of the levels the effective model lists in capabilities.effortLevels. Omit or null to use the global agent value.
 	ReasoningEffort NullableString `json:"reasoningEffort,omitempty"`
 	// Current version for optimistic concurrency
@@ -353,6 +359,38 @@ func (o *UpsertAgentOverlayRequest) SetAllowedCollections(v []string) {
 	o.AllowedCollections = v
 }
 
+// GetMcpServers returns the McpServers field value if set, zero value otherwise.
+func (o *UpsertAgentOverlayRequest) GetMcpServers() []CreateAIAgentRequestMcpServersInner {
+	if o == nil || IsNil(o.McpServers) {
+		var ret []CreateAIAgentRequestMcpServersInner
+		return ret
+	}
+	return o.McpServers
+}
+
+// GetMcpServersOk returns a tuple with the McpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpsertAgentOverlayRequest) GetMcpServersOk() ([]CreateAIAgentRequestMcpServersInner, bool) {
+	if o == nil || IsNil(o.McpServers) {
+		return nil, false
+	}
+	return o.McpServers, true
+}
+
+// HasMcpServers returns a boolean if a field has been set.
+func (o *UpsertAgentOverlayRequest) HasMcpServers() bool {
+	if o != nil && !IsNil(o.McpServers) {
+		return true
+	}
+
+	return false
+}
+
+// SetMcpServers gets a reference to the given []CreateAIAgentRequestMcpServersInner and assigns it to the McpServers field.
+func (o *UpsertAgentOverlayRequest) SetMcpServers(v []CreateAIAgentRequestMcpServersInner) {
+	o.McpServers = v
+}
+
 // GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpsertAgentOverlayRequest) GetGuardrailPreset() string {
 	if o == nil || IsNil(o.GuardrailPreset.Get()) {
@@ -393,6 +431,80 @@ func (o *UpsertAgentOverlayRequest) SetGuardrailPresetNil() {
 // UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
 func (o *UpsertAgentOverlayRequest) UnsetGuardrailPreset() {
 	o.GuardrailPreset.Unset()
+}
+
+// GetLongContext returns the LongContext field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpsertAgentOverlayRequest) GetLongContext() bool {
+	if o == nil || IsNil(o.LongContext.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.LongContext.Get()
+}
+
+// GetLongContextOk returns a tuple with the LongContext field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpsertAgentOverlayRequest) GetLongContextOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LongContext.Get(), o.LongContext.IsSet()
+}
+
+// HasLongContext returns a boolean if a field has been set.
+func (o *UpsertAgentOverlayRequest) HasLongContext() bool {
+	if o != nil && o.LongContext.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLongContext gets a reference to the given NullableBool and assigns it to the LongContext field.
+func (o *UpsertAgentOverlayRequest) SetLongContext(v bool) {
+	o.LongContext.Set(&v)
+}
+// SetLongContextNil sets the value for LongContext to be an explicit nil
+func (o *UpsertAgentOverlayRequest) SetLongContextNil() {
+	o.LongContext.Set(nil)
+}
+
+// UnsetLongContext ensures that no value is present for LongContext, not even an explicit nil
+func (o *UpsertAgentOverlayRequest) UnsetLongContext() {
+	o.LongContext.Unset()
+}
+
+// GetFilterPolicies returns the FilterPolicies field value if set, zero value otherwise.
+func (o *UpsertAgentOverlayRequest) GetFilterPolicies() []string {
+	if o == nil || IsNil(o.FilterPolicies) {
+		var ret []string
+		return ret
+	}
+	return o.FilterPolicies
+}
+
+// GetFilterPoliciesOk returns a tuple with the FilterPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpsertAgentOverlayRequest) GetFilterPoliciesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FilterPolicies) {
+		return nil, false
+	}
+	return o.FilterPolicies, true
+}
+
+// HasFilterPolicies returns a boolean if a field has been set.
+func (o *UpsertAgentOverlayRequest) HasFilterPolicies() bool {
+	if o != nil && !IsNil(o.FilterPolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterPolicies gets a reference to the given []string and assigns it to the FilterPolicies field.
+func (o *UpsertAgentOverlayRequest) SetFilterPolicies(v []string) {
+	o.FilterPolicies = v
 }
 
 // GetReasoningEffort returns the ReasoningEffort field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -506,8 +618,17 @@ func (o UpsertAgentOverlayRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AllowedCollections) {
 		toSerialize["allowedCollections"] = o.AllowedCollections
 	}
+	if !IsNil(o.McpServers) {
+		toSerialize["mcpServers"] = o.McpServers
+	}
 	if o.GuardrailPreset.IsSet() {
 		toSerialize["guardrailPreset"] = o.GuardrailPreset.Get()
+	}
+	if o.LongContext.IsSet() {
+		toSerialize["longContext"] = o.LongContext.Get()
+	}
+	if !IsNil(o.FilterPolicies) {
+		toSerialize["filterPolicies"] = o.FilterPolicies
 	}
 	if o.ReasoningEffort.IsSet() {
 		toSerialize["reasoningEffort"] = o.ReasoningEffort.Get()
@@ -546,7 +667,10 @@ func (o *UpsertAgentOverlayRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "disabledTools")
 		delete(additionalProperties, "systemPromptAppend")
 		delete(additionalProperties, "allowedCollections")
+		delete(additionalProperties, "mcpServers")
 		delete(additionalProperties, "guardrailPreset")
+		delete(additionalProperties, "longContext")
+		delete(additionalProperties, "filterPolicies")
 		delete(additionalProperties, "reasoningEffort")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties

@@ -24,6 +24,7 @@ api_ai_vector_database.go
 api_applications.go
 api_backup_management.go
 api_cdn_metrics.go
+api_ci_values.go
 api_commands.go
 api_compose.go
 api_containers.go
@@ -100,6 +101,7 @@ docs/BackupManagementAPI.md
 docs/BulkSetEnvironmentVariablesRequest.md
 docs/BulkSetEnvironmentVariablesRequestEnvironmentInner.md
 docs/CDNMetricsAPI.md
+docs/CIValuesAPI.md
 docs/ChatInference200Response.md
 docs/ChatInference200ResponseResponse.md
 docs/ChatInference200ResponseResponseToolUse.md
@@ -137,6 +139,9 @@ docs/ChatWithAIAgent200ResponseResponse.md
 docs/ChatWithAIAgent200ResponseResponseUsage.md
 docs/ChatWithAIAgent202Response.md
 docs/ChatWithAIAgentRequest.md
+docs/CiValue.md
+docs/CiValueError.md
+docs/CiValueWriteResult.md
 docs/Command.md
 docs/CommandsAPI.md
 docs/Compose.md
@@ -156,6 +161,7 @@ docs/CrawlersRun200Response.md
 docs/CrawlersRunRequest.md
 docs/CreateAIAgent201Response.md
 docs/CreateAIAgentRequest.md
+docs/CreateAIAgentRequestMcpServersInner.md
 docs/CreateAISession201Response.md
 docs/CreateAISessionRequest.md
 docs/CreateAISessionRequestInitialMessagesInner.md
@@ -242,6 +248,7 @@ docs/GetAIToolExecutionStatus404Response.md
 docs/GetAgentOverlay200Response.md
 docs/GetAgentOverlay200ResponseBase.md
 docs/GetAgentOverlay200ResponseOverlay.md
+docs/GetAgentOverlay200ResponseOverlayMcpServersInner.md
 docs/GetCustomTool200Response.md
 docs/GetCustomTool200ResponseTool.md
 docs/GetDependencyGraph200Response.md
@@ -273,6 +280,8 @@ docs/GetMyUsage200ResponseQuota.md
 docs/GetMyUsage200ResponseQuotaDailyLimit.md
 docs/GetMyUsage200ResponseQuotaMonthlyLimit.md
 docs/GetOrgResourceCredentials200Response.md
+docs/GetProjectEdgeEvents200Response.md
+docs/GetProjectEdgeEvents200ResponseEventsInner.md
 docs/GetProjectLogs200Response.md
 docs/GetProjectLogs200ResponseLogsInner.md
 docs/GetProjectLogs400Response.md
@@ -325,6 +334,7 @@ docs/ListApplications503Response.md
 docs/ListBackups200Response.md
 docs/ListBackups200ResponseBackupsInner.md
 docs/ListBackups422Response.md
+docs/ListCiValues200Response.md
 docs/ListCustomTools200Response.md
 docs/ListCustomTools200ResponseToolsInner.md
 docs/ListFiles200Response.md
@@ -383,6 +393,7 @@ docs/PurgeCreateRequest.md
 docs/PurgeOrgResource200Response.md
 docs/PurgeOrgResourceRequest.md
 docs/PutApplicationMetadata400Response.md
+docs/PutCiValueRequest.md
 docs/QueryVectorCollection200Response.md
 docs/QueryVectorCollection200ResponsePagination.md
 docs/QueryVectorCollection200ResponseResultsInner.md
@@ -738,6 +749,9 @@ model_chat_with_ai_agent_200_response_response.go
 model_chat_with_ai_agent_200_response_response_usage.go
 model_chat_with_ai_agent_202_response.go
 model_chat_with_ai_agent_request.go
+model_ci_value.go
+model_ci_value_error.go
+model_ci_value_write_result.go
 model_command.go
 model_compose.go
 model_container.go
@@ -752,6 +766,7 @@ model_crawlers_run_200_response.go
 model_crawlers_run_request.go
 model_create_ai_agent_201_response.go
 model_create_ai_agent_request.go
+model_create_ai_agent_request_mcp_servers_inner.go
 model_create_ai_session_201_response.go
 model_create_ai_session_request.go
 model_create_ai_session_request_initial_messages_inner.go
@@ -823,6 +838,7 @@ model_extend_ai_session_request.go
 model_get_agent_overlay_200_response.go
 model_get_agent_overlay_200_response_base.go
 model_get_agent_overlay_200_response_overlay.go
+model_get_agent_overlay_200_response_overlay_mcp_servers_inner.go
 model_get_ai_agent_200_response.go
 model_get_ai_agent_200_response_agent.go
 model_get_ai_model_200_response.go
@@ -866,6 +882,8 @@ model_get_my_usage_200_response_quota.go
 model_get_my_usage_200_response_quota_daily_limit.go
 model_get_my_usage_200_response_quota_monthly_limit.go
 model_get_org_resource_credentials_200_response.go
+model_get_project_edge_events_200_response.go
+model_get_project_edge_events_200_response_events_inner.go
 model_get_project_logs_200_response.go
 model_get_project_logs_200_response_logs_inner.go
 model_get_project_logs_400_response.go
@@ -915,6 +933,7 @@ model_list_applications_503_response.go
 model_list_backups_200_response.go
 model_list_backups_200_response_backups_inner.go
 model_list_backups_422_response.go
+model_list_ci_values_200_response.go
 model_list_custom_tools_200_response.go
 model_list_custom_tools_200_response_tools_inner.go
 model_list_files_200_response.go
@@ -969,6 +988,7 @@ model_purge_create_request.go
 model_purge_org_resource_200_response.go
 model_purge_org_resource_request.go
 model_put_application_metadata_400_response.go
+model_put_ci_value_request.go
 model_query_vector_collection_200_response.go
 model_query_vector_collection_200_response_pagination.go
 model_query_vector_collection_200_response_results_inner.go
@@ -1270,6 +1290,7 @@ test/api_ai_vector_database_test.go
 test/api_applications_test.go
 test/api_backup_management_test.go
 test/api_cdn_metrics_test.go
+test/api_ci_values_test.go
 test/api_commands_test.go
 test/api_compose_test.go
 test/api_containers_test.go

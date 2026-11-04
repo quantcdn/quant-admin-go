@@ -13,8 +13,11 @@ Name | Type | Description | Notes
 **DisabledTools** | Pointer to **[]string** |  | [optional] 
 **SystemPromptAppend** | Pointer to **string** |  | [optional] 
 **AllowedCollections** | Pointer to **[]string** |  | [optional] 
+**McpServers** | Pointer to [**[]GetAgentOverlay200ResponseOverlayMcpServersInner**](GetAgentOverlay200ResponseOverlayMcpServersInner.md) |  | [optional] 
 **GuardrailPreset** | Pointer to **string** |  | [optional] 
 **ReasoningEffort** | Pointer to **NullableString** | Reasoning effort for this organisation. Overrides the global agent value. | [optional] 
+**LongContext** | Pointer to **bool** |  | [optional] 
+**FilterPolicies** | Pointer to **[]string** |  | [optional] 
 **Version** | Pointer to **int32** |  | [optional] 
 
 ## Methods
@@ -261,6 +264,31 @@ SetAllowedCollections sets AllowedCollections field to given value.
 
 HasAllowedCollections returns a boolean if a field has been set.
 
+### GetMcpServers
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetMcpServers() []GetAgentOverlay200ResponseOverlayMcpServersInner`
+
+GetMcpServers returns the McpServers field if non-nil, zero value otherwise.
+
+### GetMcpServersOk
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetMcpServersOk() (*[]GetAgentOverlay200ResponseOverlayMcpServersInner, bool)`
+
+GetMcpServersOk returns a tuple with the McpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMcpServers
+
+`func (o *GetAgentOverlay200ResponseOverlay) SetMcpServers(v []GetAgentOverlay200ResponseOverlayMcpServersInner)`
+
+SetMcpServers sets McpServers field to given value.
+
+### HasMcpServers
+
+`func (o *GetAgentOverlay200ResponseOverlay) HasMcpServers() bool`
+
+HasMcpServers returns a boolean if a field has been set.
+
 ### GetGuardrailPreset
 
 `func (o *GetAgentOverlay200ResponseOverlay) GetGuardrailPreset() string`
@@ -321,6 +349,56 @@ HasReasoningEffort returns a boolean if a field has been set.
 `func (o *GetAgentOverlay200ResponseOverlay) UnsetReasoningEffort()`
 
 UnsetReasoningEffort ensures that no value is present for ReasoningEffort, not even an explicit nil
+### GetLongContext
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *GetAgentOverlay200ResponseOverlay) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *GetAgentOverlay200ResponseOverlay) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
+
+### GetFilterPolicies
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetFilterPolicies() []string`
+
+GetFilterPolicies returns the FilterPolicies field if non-nil, zero value otherwise.
+
+### GetFilterPoliciesOk
+
+`func (o *GetAgentOverlay200ResponseOverlay) GetFilterPoliciesOk() (*[]string, bool)`
+
+GetFilterPoliciesOk returns a tuple with the FilterPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterPolicies
+
+`func (o *GetAgentOverlay200ResponseOverlay) SetFilterPolicies(v []string)`
+
+SetFilterPolicies sets FilterPolicies field to given value.
+
+### HasFilterPolicies
+
+`func (o *GetAgentOverlay200ResponseOverlay) HasFilterPolicies() bool`
+
+HasFilterPolicies returns a boolean if a field has been set.
+
 ### GetVersion
 
 `func (o *GetAgentOverlay200ResponseOverlay) GetVersion() int32`

@@ -222,6 +222,9 @@ Class | Method | HTTP request | Description
 *CDNMetricsAPI* | [**GetDailyMetrics**](docs/CDNMetricsAPI.md#getdailymetrics) | **Get** /v2/organizations/{organization}/projects/{project}/metrics/daily | Get daily metrics
 *CDNMetricsAPI* | [**GetHourlyMetrics**](docs/CDNMetricsAPI.md#gethourlymetrics) | **Get** /v2/organizations/{organization}/projects/{project}/metrics/hourly | Get hourly metrics
 *CDNMetricsAPI* | [**GetMonthlyMetrics**](docs/CDNMetricsAPI.md#getmonthlymetrics) | **Get** /v2/organizations/{organization}/projects/{project}/metrics/monthly | Get monthly metrics
+*CIValuesAPI* | [**DeleteCiValue**](docs/CIValuesAPI.md#deletecivalue) | **Delete** /api/v3/organizations/{organisation}/ci/values/{name} | Delete a CI secret or variable
+*CIValuesAPI* | [**ListCiValues**](docs/CIValuesAPI.md#listcivalues) | **Get** /api/v3/organizations/{organisation}/ci/values | List the CI secrets and variables
+*CIValuesAPI* | [**PutCiValue**](docs/CIValuesAPI.md#putcivalue) | **Put** /api/v3/organizations/{organisation}/ci/values/{name} | Create or replace a CI secret or variable
 *CommandsAPI* | [**CreateCommand**](docs/CommandsAPI.md#createcommand) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands | Create a command for an environment
 *CommandsAPI* | [**GetCommand**](docs/CommandsAPI.md#getcommand) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands/{command} | Get a command
 *CommandsAPI* | [**ListCommands**](docs/CommandsAPI.md#listcommands) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands | Get all commands for an environment
@@ -338,6 +341,7 @@ Class | Method | HTTP request | Description
 *OpenAICompatibilityAPI* | [**OaiListModels**](docs/OpenAICompatibilityAPI.md#oailistmodels) | **Get** /oai/v1/models | List available models (OpenAI-compatible)
 *OrganizationsAPI* | [**OrganizationsList**](docs/OrganizationsAPI.md#organizationslist) | **Get** /api/v2/organizations | Retrieve all organizations
 *OrganizationsAPI* | [**OrganizationsRead**](docs/OrganizationsAPI.md#organizationsread) | **Get** /api/v2/organizations/{organization} | Get details of a single organization
+*ProjectsAPI* | [**GetProjectEdgeEvents**](docs/ProjectsAPI.md#getprojectedgeevents) | **Get** /api/v2/organizations/{organization}/projects/{project}/edge-events | Get edge events for a project
 *ProjectsAPI* | [**GetProjectLogs**](docs/ProjectsAPI.md#getprojectlogs) | **Get** /api/v2/organizations/{organization}/projects/{project}/logs | Get CDN access logs for a project
 *ProjectsAPI* | [**ProjectsCreate**](docs/ProjectsAPI.md#projectscreate) | **Post** /api/v2/organizations/{organization}/projects | Create a new project
 *ProjectsAPI* | [**ProjectsDelete**](docs/ProjectsAPI.md#projectsdelete) | **Delete** /api/v2/organizations/{organization}/projects/{project} | Delete a project
@@ -499,6 +503,9 @@ Class | Method | HTTP request | Description
  - [ChatWithAIAgent200ResponseResponseUsage](docs/ChatWithAIAgent200ResponseResponseUsage.md)
  - [ChatWithAIAgent202Response](docs/ChatWithAIAgent202Response.md)
  - [ChatWithAIAgentRequest](docs/ChatWithAIAgentRequest.md)
+ - [CiValue](docs/CiValue.md)
+ - [CiValueError](docs/CiValueError.md)
+ - [CiValueWriteResult](docs/CiValueWriteResult.md)
  - [Command](docs/Command.md)
  - [Compose](docs/Compose.md)
  - [Container](docs/Container.md)
@@ -513,6 +520,7 @@ Class | Method | HTTP request | Description
  - [CrawlersRunRequest](docs/CrawlersRunRequest.md)
  - [CreateAIAgent201Response](docs/CreateAIAgent201Response.md)
  - [CreateAIAgentRequest](docs/CreateAIAgentRequest.md)
+ - [CreateAIAgentRequestMcpServersInner](docs/CreateAIAgentRequestMcpServersInner.md)
  - [CreateAISession201Response](docs/CreateAISession201Response.md)
  - [CreateAISessionRequest](docs/CreateAISessionRequest.md)
  - [CreateAISessionRequestInitialMessagesInner](docs/CreateAISessionRequestInitialMessagesInner.md)
@@ -596,6 +604,7 @@ Class | Method | HTTP request | Description
  - [GetAgentOverlay200Response](docs/GetAgentOverlay200Response.md)
  - [GetAgentOverlay200ResponseBase](docs/GetAgentOverlay200ResponseBase.md)
  - [GetAgentOverlay200ResponseOverlay](docs/GetAgentOverlay200ResponseOverlay.md)
+ - [GetAgentOverlay200ResponseOverlayMcpServersInner](docs/GetAgentOverlay200ResponseOverlayMcpServersInner.md)
  - [GetCustomTool200Response](docs/GetCustomTool200Response.md)
  - [GetCustomTool200ResponseTool](docs/GetCustomTool200ResponseTool.md)
  - [GetDependencyGraph200Response](docs/GetDependencyGraph200Response.md)
@@ -627,6 +636,8 @@ Class | Method | HTTP request | Description
  - [GetMyUsage200ResponseQuotaDailyLimit](docs/GetMyUsage200ResponseQuotaDailyLimit.md)
  - [GetMyUsage200ResponseQuotaMonthlyLimit](docs/GetMyUsage200ResponseQuotaMonthlyLimit.md)
  - [GetOrgResourceCredentials200Response](docs/GetOrgResourceCredentials200Response.md)
+ - [GetProjectEdgeEvents200Response](docs/GetProjectEdgeEvents200Response.md)
+ - [GetProjectEdgeEvents200ResponseEventsInner](docs/GetProjectEdgeEvents200ResponseEventsInner.md)
  - [GetProjectLogs200Response](docs/GetProjectLogs200Response.md)
  - [GetProjectLogs200ResponseLogsInner](docs/GetProjectLogs200ResponseLogsInner.md)
  - [GetProjectLogs400Response](docs/GetProjectLogs400Response.md)
@@ -676,6 +687,7 @@ Class | Method | HTTP request | Description
  - [ListBackups200Response](docs/ListBackups200Response.md)
  - [ListBackups200ResponseBackupsInner](docs/ListBackups200ResponseBackupsInner.md)
  - [ListBackups422Response](docs/ListBackups422Response.md)
+ - [ListCiValues200Response](docs/ListCiValues200Response.md)
  - [ListCustomTools200Response](docs/ListCustomTools200Response.md)
  - [ListCustomTools200ResponseToolsInner](docs/ListCustomTools200ResponseToolsInner.md)
  - [ListFiles200Response](docs/ListFiles200Response.md)
@@ -730,6 +742,7 @@ Class | Method | HTTP request | Description
  - [PurgeOrgResource200Response](docs/PurgeOrgResource200Response.md)
  - [PurgeOrgResourceRequest](docs/PurgeOrgResourceRequest.md)
  - [PutApplicationMetadata400Response](docs/PutApplicationMetadata400Response.md)
+ - [PutCiValueRequest](docs/PutCiValueRequest.md)
  - [QueryVectorCollection200Response](docs/QueryVectorCollection200Response.md)
  - [QueryVectorCollection200ResponsePagination](docs/QueryVectorCollection200ResponsePagination.md)
  - [QueryVectorCollection200ResponseResultsInner](docs/QueryVectorCollection200ResponseResultsInner.md)

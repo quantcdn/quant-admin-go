@@ -107,6 +107,8 @@ tags:
   name: AI Usage
 - description: AI Tool Approval
   name: AI Tool Approval
+- description: CI Values
+  name: CI Values
 - description: Restore Management
   name: Restore Management
 - description: IdleSleep
@@ -14440,6 +14442,139 @@ paths:
       summary: Get CDN access logs for a project
       tags:
       - Projects
+  /api/v2/organizations/{organization}/projects/{project}/edge-events:
+    get:
+      description: "Output of the project's edge functions and content filters (console.*\
+        \ as type console, quantLog() as type function), WAF hits and static failover.\
+        \ Entries are returned oldest first, up to about 10 minutes behind, kept 31\
+        \ days; pass nextToken from the previous response, with the same filters,\
+        \ to fetch the next page. A slow query can return an empty page with a nextToken.\
+        \ An edge function invocation keeps at most 100 console lines of up to 8 KB\
+        \ each."
+      operationId: getProjectEdgeEvents
+      parameters:
+      - description: The organization machine name
+        explode: false
+        in: path
+        name: organization
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The project machine name
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Comma-separated event types: console, function, waf-hit, static-failover"
+        example: "console,function"
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Only events from this edge function (UUID)
+        explode: true
+        in: query
+        name: function
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Only console events at this level
+        explode: true
+        in: query
+        name: level
+        required: false
+        schema:
+          enum:
+          - log
+          - info
+          - warn
+          - error
+          - debug
+          type: string
+        style: form
+      - description: Case-insensitive substring of the message
+        explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          maxLength: 200
+          type: string
+        style: form
+      - description: Maximum number of events per page (default 100)
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 10000
+          minimum: 1
+          type: integer
+        style: form
+      - description: Start of the time range. ISO 8601 or Unix epoch milliseconds.
+        explode: true
+        in: query
+        name: startTime
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: End of the time range. ISO 8601 or Unix epoch milliseconds.
+        explode: true
+        in: query
+        name: endTime
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Opaque pagination token from the previous response
+        explode: true
+        in: query
+        name: nextToken
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProjectEdgeEvents_200_response'
+          description: Edge events
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProjectLogs_400_response'
+          description: "Invalid filter, time range or token"
+        "401":
+          description: Unauthenticated
+        "403":
+          description: Token lacks the projects:read scope or the user lacks browse_projects
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getProjectLogs_400_response'
+          description: Edge events are not available for this project
+        "422":
+          description: Validation error
+      security:
+      - bearerAuth: []
+      summary: Get edge events for a project
+      tags:
+      - Projects
   /api/v2/organizations/{organization}/projects/{project}/rules/auth:
     get:
       description: Lists basic authentication rules (username and password). Rules
@@ -22313,6 +22448,140 @@ paths:
       summary: Get container registry login credentials
       tags:
       - Applications
+  /api/v3/organizations/{organisation}/ci/values:
+    get:
+      description: "Returns the organisation's CI values and, without the repo filter,\
+        \ every repository's values. A variable carries its value. A secret never\
+        \ does. Quant gives the values to CI jobs on the organisation's runner pools\
+        \ as environment variables, so a workflow uses `${{ env.NAME }}` instead of\
+        \ `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature."
+      operationId: listCiValues
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Only the organisation's values and this repository's values.
+          Lower-cased by the server.
+        example: acme/web
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listCiValues_200_response'
+          description: The values
+        "404":
+          description: The organisation does not have CI runners
+      summary: List the CI secrets and variables
+      tags:
+      - CI Values
+  /api/v3/organizations/{organisation}/ci/values/{name}:
+    delete:
+      description: Deletes one value. It answers 204 also when the value does not
+        exist. Needs the cloud:write scope and the delete_applications permission.
+      operationId: deleteCiValue
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "The name, such as DEPLOY_KEY"
+        example: DEPLOY_KEY
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Delete the repository's value of this name. Leave out for the
+          organisation's value. Lower-cased by the server.
+        example: acme/web
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "204":
+          description: Deleted (or did not exist)
+        "404":
+          description: The organisation does not have CI runners
+      summary: Delete a CI secret or variable
+      tags:
+      - CI Values
+    put:
+      description: "Sets one value for the organisation, or for one repository when\
+        \ repo is set. The value is write-only for a secret: the response never carries\
+        \ it. The backend validates the name, the value and the limits and answers\
+        \ 400 with a message. Needs the cloud:write scope and the delete_applications\
+        \ permission."
+      operationId: putCiValue
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "The name, such as DEPLOY_KEY"
+        example: DEPLOY_KEY
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/putCiValue_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiValueWriteResult'
+          description: The value is saved
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiValueError'
+          description: "The name, the value or a limit is not valid"
+        "404":
+          description: The organisation does not have CI runners
+        "422":
+          description: The request body has the wrong shape
+      summary: Create or replace a CI secret or variable
+      tags:
+      - CI Values
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/commands:
     get:
       operationId: listCommands
@@ -26281,6 +26550,96 @@ components:
           type: object
       required:
       - metadata
+      type: object
+    CiValue:
+      example:
+        updatedBy: updatedBy
+        kind: secret
+        scope: org
+        repo: acme/web
+        name: DEPLOY_KEY
+        branches:
+        - branches
+        - branches
+        value: value
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        name:
+          example: DEPLOY_KEY
+          type: string
+        kind:
+          enum:
+          - secret
+          - var
+          type: string
+        scope:
+          enum:
+          - org
+          - repo
+          type: string
+        repo:
+          description: Lower-case owner/name. Present when scope is repo.
+          example: acme/web
+          type: string
+        branches:
+          description: The branch rule. Absent when the value applies to every branch.
+          items:
+            type: string
+          type: array
+        updatedAt:
+          format: date-time
+          type: string
+        updatedBy:
+          type: string
+        value:
+          description: Variables only. A secret value is never returned.
+          type: string
+      title: CI secret or variable
+      type: object
+    CiValueWriteResult:
+      example:
+        kind: secret
+        scope: org
+        repo: acme/web
+        name: DEPLOY_KEY
+        branches:
+        - branches
+        - branches
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        name:
+          example: DEPLOY_KEY
+          type: string
+        kind:
+          enum:
+          - secret
+          - var
+          type: string
+        scope:
+          enum:
+          - org
+          - repo
+          type: string
+        repo:
+          example: acme/web
+          type: string
+        branches:
+          items:
+            type: string
+          type: array
+        updatedAt:
+          format: date-time
+          type: string
+      title: CI value write result
+      type: object
+    CiValueError:
+      example:
+        message: "Name must match ^[A-Z_][A-Z0-9_]*$."
+      properties:
+        message:
+          example: "Name must match ^[A-Z_][A-Z0-9_]*$."
+          type: string
+      title: CI value validation error
       type: object
     OrgResource:
       example:
@@ -31682,7 +32041,7 @@ components:
         | CONFIRMATION_REQUIRED | 400 | false | confirm is missing or does not equal the store name. |
         | SCOPE_REQUIRED | 403 | false | The token does not list the scope that the route needs. |
         | PERMISSION_DENIED | 403 | false | The role of the token user does not have the permission. |
-        | FORBIDDEN | 403 | false | The store is a system store and cannot be purged. |
+        | FORBIDDEN | 403 | false | The store is a system store and cannot be purged, or it is linked from another project and only that project can delete or purge it. |
         | KEY_NOT_FOUND | 404 | false | The key does not exist or has expired. |
         | STORE_NOT_FOUND | 404 | false | The store does not exist or is not in this project. |
         | EXPORT_NOT_FOUND | 404 | false | The store has no export. |
@@ -38149,6 +38508,95 @@ components:
         message:
           type: string
       type: object
+    getProjectEdgeEvents_200_response_events_inner:
+      example:
+        rule_id: rule_id
+        path: path
+        waf_mode: waf_mode
+        level: level
+        host: host
+        truncated: true
+        function_uuid: function_uuid
+        client_ip: client_ip
+        type: console
+        message: message
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        timestamp:
+          format: date-time
+          type: string
+        type:
+          enum:
+          - console
+          - function
+          - waf-hit
+          - static-failover
+          - other
+          type: string
+        level:
+          nullable: true
+          type: string
+        function_uuid:
+          nullable: true
+          type: string
+        message:
+          type: string
+        truncated:
+          type: boolean
+        host:
+          nullable: true
+          type: string
+        path:
+          nullable: true
+          type: string
+        client_ip:
+          nullable: true
+          type: string
+        rule_id:
+          nullable: true
+          type: string
+        waf_mode:
+          nullable: true
+          type: string
+      type: object
+    getProjectEdgeEvents_200_response:
+      example:
+        nextToken: nextToken
+        count: 0
+        events:
+        - rule_id: rule_id
+          path: path
+          waf_mode: waf_mode
+          level: level
+          host: host
+          truncated: true
+          function_uuid: function_uuid
+          client_ip: client_ip
+          type: console
+          message: message
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - rule_id: rule_id
+          path: path
+          waf_mode: waf_mode
+          level: level
+          host: host
+          truncated: true
+          function_uuid: function_uuid
+          client_ip: client_ip
+          type: console
+          message: message
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/getProjectEdgeEvents_200_response_events_inner'
+          type: array
+        count:
+          type: integer
+        nextToken:
+          nullable: true
+          type: string
+      type: object
     RulesIndex_list_200_response_inner:
       additionalProperties: true
       example:
@@ -40733,6 +41181,21 @@ components:
             $ref: '#/components/schemas/listAIAgents_200_response_agents_inner'
           type: array
       type: object
+    createAIAgent_request_mcpServers_inner:
+      properties:
+        server:
+          description: The registered server name
+          pattern: "^[a-z0-9][a-z0-9-]{0,62}$"
+          type: string
+        tools:
+          description: Optional. Only these tools of the server. Omit for every tool
+            the server allows; an empty array allows none.
+          items:
+            type: string
+          type: array
+      required:
+      - server
+      type: object
     createAIAgent_request:
       properties:
         name:
@@ -40803,6 +41266,13 @@ components:
           - protected
           nullable: true
           type: string
+        mcpServers:
+          description: "Registered MCP servers to attach. The agent gets the tools\
+            \ of each server in dashboard chat and in QuantCode. On update, an empty\
+            \ array removes every attachment."
+          items:
+            $ref: '#/components/schemas/createAIAgent_request_mcpServers_inner'
+          type: array
         filterPolicies:
           description: Filter policy IDs to apply to this agent's inference requests
           items:
@@ -41008,6 +41478,13 @@ components:
           - protected
           nullable: true
           type: string
+        mcpServers:
+          description: "Registered MCP servers to attach. The agent gets the tools\
+            \ of each server in dashboard chat and in QuantCode. On update, an empty\
+            \ array removes every attachment."
+          items:
+            $ref: '#/components/schemas/createAIAgent_request_mcpServers_inner'
+          type: array
         filterPolicies:
           description: Filter policy IDs to apply to this agent's inference requests
           items:
@@ -41205,16 +41682,46 @@ components:
       - requestId
       - status
       type: object
+    getAgentOverlay_200_response_overlay_mcpServers_inner:
+      example:
+        server: server
+        tools:
+        - tools
+        - tools
+      properties:
+        server:
+          type: string
+        tools:
+          items:
+            type: string
+          type: array
+      type: object
     getAgentOverlay_200_response_overlay:
       example:
-        disabledSkills:
-        - disabledSkills
-        - disabledSkills
         guardrailPreset: guardrailPreset
         modelId: modelId
         disabledTools:
         - disabledTools
         - disabledTools
+        mcpServers:
+        - server: server
+          tools:
+          - tools
+          - tools
+        - server: server
+          tools:
+          - tools
+          - tools
+        systemPromptAppend: systemPromptAppend
+        reasoningEffort: low
+        version: 1
+        additionalTools:
+        - additionalTools
+        - additionalTools
+        disabledSkills:
+        - disabledSkills
+        - disabledSkills
+        longContext: true
         temperature: 0.8008281904610115
         maxTokens: 6
         additionalSkills:
@@ -41223,12 +41730,9 @@ components:
         allowedCollections:
         - allowedCollections
         - allowedCollections
-        systemPromptAppend: systemPromptAppend
-        reasoningEffort: low
-        version: 1
-        additionalTools:
-        - additionalTools
-        - additionalTools
+        filterPolicies:
+        - filterPolicies
+        - filterPolicies
       nullable: true
       properties:
         modelId:
@@ -41259,6 +41763,10 @@ components:
           items:
             type: string
           type: array
+        mcpServers:
+          items:
+            $ref: '#/components/schemas/getAgentOverlay_200_response_overlay_mcpServers_inner'
+          type: array
         guardrailPreset:
           type: string
         reasoningEffort:
@@ -41272,6 +41780,12 @@ components:
           - max
           nullable: true
           type: string
+        longContext:
+          type: boolean
+        filterPolicies:
+          items:
+            type: string
+          type: array
         version:
           type: integer
       type: object
@@ -41306,14 +41820,30 @@ components:
     getAgentOverlay_200_response:
       example:
         overlay:
-          disabledSkills:
-          - disabledSkills
-          - disabledSkills
           guardrailPreset: guardrailPreset
           modelId: modelId
           disabledTools:
           - disabledTools
           - disabledTools
+          mcpServers:
+          - server: server
+            tools:
+            - tools
+            - tools
+          - server: server
+            tools:
+            - tools
+            - tools
+          systemPromptAppend: systemPromptAppend
+          reasoningEffort: low
+          version: 1
+          additionalTools:
+          - additionalTools
+          - additionalTools
+          disabledSkills:
+          - disabledSkills
+          - disabledSkills
+          longContext: true
           temperature: 0.8008281904610115
           maxTokens: 6
           additionalSkills:
@@ -41322,12 +41852,9 @@ components:
           allowedCollections:
           - allowedCollections
           - allowedCollections
-          systemPromptAppend: systemPromptAppend
-          reasoningEffort: low
-          version: 1
-          additionalTools:
-          - additionalTools
-          - additionalTools
+          filterPolicies:
+          - filterPolicies
+          - filterPolicies
         base:
           assignedSkillIds:
           - assignedSkillIds
@@ -41386,6 +41913,14 @@ components:
           items:
             type: string
           type: array
+        mcpServers:
+          description: "Registered MCP servers to attach. The agent gets the tools\
+            \ of each server in dashboard chat and in QuantCode. The overlay PUT replaces\
+            \ the whole overlay: omit the field or send an empty array to remove every\
+            \ attachment."
+          items:
+            $ref: '#/components/schemas/createAIAgent_request_mcpServers_inner'
+          type: array
         guardrailPreset:
           description: Guardrail preset
           enum:
@@ -41394,6 +41929,17 @@ components:
           - protected
           nullable: true
           type: string
+        longContext:
+          description: Force the 1M context window on (true) or off (false) for this
+            organisation. Omit or null to use the platform default.
+          nullable: true
+          type: boolean
+        filterPolicies:
+          description: "Filter policy IDs applied to this agent's requests for this\
+            \ organisation, with any organisation-wide mandatory policies"
+          items:
+            type: string
+          type: array
         reasoningEffort:
           description: Override the reasoning effort. Must be one of the levels the
             effective model lists in capabilities.effortLevels. Omit or null to use
@@ -44179,6 +44725,61 @@ components:
           type: string
         endpoint:
           type: string
+      type: object
+    listCiValues_200_response:
+      example:
+        values:
+        - updatedBy: updatedBy
+          kind: secret
+          scope: org
+          repo: acme/web
+          name: DEPLOY_KEY
+          branches:
+          - branches
+          - branches
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - updatedBy: updatedBy
+          kind: secret
+          scope: org
+          repo: acme/web
+          name: DEPLOY_KEY
+          branches:
+          - branches
+          - branches
+          value: value
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/CiValue'
+          type: array
+      type: object
+    putCiValue_request:
+      properties:
+        kind:
+          enum:
+          - secret
+          - var
+          type: string
+        value:
+          format: password
+          type: string
+          writeOnly: true
+        repo:
+          description: Owner/name. Lower-cased by the server. Leave out for an organisation
+            value.
+          example: acme/web
+          type: string
+        branches:
+          description: Only jobs on these branches get the value. Leave out for every
+            branch.
+          items:
+            type: string
+          type: array
+      required:
+      - kind
+      - value
       type: object
     createCommand_request:
       properties:

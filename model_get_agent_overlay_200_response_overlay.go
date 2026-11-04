@@ -28,9 +28,12 @@ type GetAgentOverlay200ResponseOverlay struct {
 	DisabledTools []string `json:"disabledTools,omitempty"`
 	SystemPromptAppend *string `json:"systemPromptAppend,omitempty"`
 	AllowedCollections []string `json:"allowedCollections,omitempty"`
+	McpServers []GetAgentOverlay200ResponseOverlayMcpServersInner `json:"mcpServers,omitempty"`
 	GuardrailPreset *string `json:"guardrailPreset,omitempty"`
 	// Reasoning effort for this organisation. Overrides the global agent value.
 	ReasoningEffort NullableString `json:"reasoningEffort,omitempty"`
+	LongContext *bool `json:"longContext,omitempty"`
+	FilterPolicies []string `json:"filterPolicies,omitempty"`
 	Version *int32 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -342,6 +345,38 @@ func (o *GetAgentOverlay200ResponseOverlay) SetAllowedCollections(v []string) {
 	o.AllowedCollections = v
 }
 
+// GetMcpServers returns the McpServers field value if set, zero value otherwise.
+func (o *GetAgentOverlay200ResponseOverlay) GetMcpServers() []GetAgentOverlay200ResponseOverlayMcpServersInner {
+	if o == nil || IsNil(o.McpServers) {
+		var ret []GetAgentOverlay200ResponseOverlayMcpServersInner
+		return ret
+	}
+	return o.McpServers
+}
+
+// GetMcpServersOk returns a tuple with the McpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAgentOverlay200ResponseOverlay) GetMcpServersOk() ([]GetAgentOverlay200ResponseOverlayMcpServersInner, bool) {
+	if o == nil || IsNil(o.McpServers) {
+		return nil, false
+	}
+	return o.McpServers, true
+}
+
+// HasMcpServers returns a boolean if a field has been set.
+func (o *GetAgentOverlay200ResponseOverlay) HasMcpServers() bool {
+	if o != nil && !IsNil(o.McpServers) {
+		return true
+	}
+
+	return false
+}
+
+// SetMcpServers gets a reference to the given []GetAgentOverlay200ResponseOverlayMcpServersInner and assigns it to the McpServers field.
+func (o *GetAgentOverlay200ResponseOverlay) SetMcpServers(v []GetAgentOverlay200ResponseOverlayMcpServersInner) {
+	o.McpServers = v
+}
+
 // GetGuardrailPreset returns the GuardrailPreset field value if set, zero value otherwise.
 func (o *GetAgentOverlay200ResponseOverlay) GetGuardrailPreset() string {
 	if o == nil || IsNil(o.GuardrailPreset) {
@@ -416,6 +451,70 @@ func (o *GetAgentOverlay200ResponseOverlay) UnsetReasoningEffort() {
 	o.ReasoningEffort.Unset()
 }
 
+// GetLongContext returns the LongContext field value if set, zero value otherwise.
+func (o *GetAgentOverlay200ResponseOverlay) GetLongContext() bool {
+	if o == nil || IsNil(o.LongContext) {
+		var ret bool
+		return ret
+	}
+	return *o.LongContext
+}
+
+// GetLongContextOk returns a tuple with the LongContext field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAgentOverlay200ResponseOverlay) GetLongContextOk() (*bool, bool) {
+	if o == nil || IsNil(o.LongContext) {
+		return nil, false
+	}
+	return o.LongContext, true
+}
+
+// HasLongContext returns a boolean if a field has been set.
+func (o *GetAgentOverlay200ResponseOverlay) HasLongContext() bool {
+	if o != nil && !IsNil(o.LongContext) {
+		return true
+	}
+
+	return false
+}
+
+// SetLongContext gets a reference to the given bool and assigns it to the LongContext field.
+func (o *GetAgentOverlay200ResponseOverlay) SetLongContext(v bool) {
+	o.LongContext = &v
+}
+
+// GetFilterPolicies returns the FilterPolicies field value if set, zero value otherwise.
+func (o *GetAgentOverlay200ResponseOverlay) GetFilterPolicies() []string {
+	if o == nil || IsNil(o.FilterPolicies) {
+		var ret []string
+		return ret
+	}
+	return o.FilterPolicies
+}
+
+// GetFilterPoliciesOk returns a tuple with the FilterPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetAgentOverlay200ResponseOverlay) GetFilterPoliciesOk() ([]string, bool) {
+	if o == nil || IsNil(o.FilterPolicies) {
+		return nil, false
+	}
+	return o.FilterPolicies, true
+}
+
+// HasFilterPolicies returns a boolean if a field has been set.
+func (o *GetAgentOverlay200ResponseOverlay) HasFilterPolicies() bool {
+	if o != nil && !IsNil(o.FilterPolicies) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterPolicies gets a reference to the given []string and assigns it to the FilterPolicies field.
+func (o *GetAgentOverlay200ResponseOverlay) SetFilterPolicies(v []string) {
+	o.FilterPolicies = v
+}
+
 // GetVersion returns the Version field value if set, zero value otherwise.
 func (o *GetAgentOverlay200ResponseOverlay) GetVersion() int32 {
 	if o == nil || IsNil(o.Version) {
@@ -485,11 +584,20 @@ func (o GetAgentOverlay200ResponseOverlay) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.AllowedCollections) {
 		toSerialize["allowedCollections"] = o.AllowedCollections
 	}
+	if !IsNil(o.McpServers) {
+		toSerialize["mcpServers"] = o.McpServers
+	}
 	if !IsNil(o.GuardrailPreset) {
 		toSerialize["guardrailPreset"] = o.GuardrailPreset
 	}
 	if o.ReasoningEffort.IsSet() {
 		toSerialize["reasoningEffort"] = o.ReasoningEffort.Get()
+	}
+	if !IsNil(o.LongContext) {
+		toSerialize["longContext"] = o.LongContext
+	}
+	if !IsNil(o.FilterPolicies) {
+		toSerialize["filterPolicies"] = o.FilterPolicies
 	}
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
@@ -525,8 +633,11 @@ func (o *GetAgentOverlay200ResponseOverlay) UnmarshalJSON(data []byte) (err erro
 		delete(additionalProperties, "disabledTools")
 		delete(additionalProperties, "systemPromptAppend")
 		delete(additionalProperties, "allowedCollections")
+		delete(additionalProperties, "mcpServers")
 		delete(additionalProperties, "guardrailPreset")
 		delete(additionalProperties, "reasoningEffort")
+		delete(additionalProperties, "longContext")
+		delete(additionalProperties, "filterPolicies")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -13,7 +13,10 @@ Name | Type | Description | Notes
 **DisabledTools** | Pointer to **[]string** | Tool names to remove | [optional] 
 **SystemPromptAppend** | Pointer to **string** | Text appended to base system prompt | [optional] 
 **AllowedCollections** | Pointer to **[]string** | Vector DB collections | [optional] 
+**McpServers** | Pointer to [**[]CreateAIAgentRequestMcpServersInner**](CreateAIAgentRequestMcpServersInner.md) | Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. The overlay PUT replaces the whole overlay: omit the field or send an empty array to remove every attachment. | [optional] 
 **GuardrailPreset** | Pointer to **NullableString** | Guardrail preset | [optional] 
+**LongContext** | Pointer to **NullableBool** | Force the 1M context window on (true) or off (false) for this organisation. Omit or null to use the platform default. | [optional] 
+**FilterPolicies** | Pointer to **[]string** | Filter policy IDs applied to this agent&#39;s requests for this organisation, with any organisation-wide mandatory policies | [optional] 
 **ReasoningEffort** | Pointer to **NullableString** | Override the reasoning effort. Must be one of the levels the effective model lists in capabilities.effortLevels. Omit or null to use the global agent value. | [optional] 
 **Version** | Pointer to **int32** | Current version for optimistic concurrency | [optional] 
 
@@ -261,6 +264,31 @@ SetAllowedCollections sets AllowedCollections field to given value.
 
 HasAllowedCollections returns a boolean if a field has been set.
 
+### GetMcpServers
+
+`func (o *UpsertAgentOverlayRequest) GetMcpServers() []CreateAIAgentRequestMcpServersInner`
+
+GetMcpServers returns the McpServers field if non-nil, zero value otherwise.
+
+### GetMcpServersOk
+
+`func (o *UpsertAgentOverlayRequest) GetMcpServersOk() (*[]CreateAIAgentRequestMcpServersInner, bool)`
+
+GetMcpServersOk returns a tuple with the McpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMcpServers
+
+`func (o *UpsertAgentOverlayRequest) SetMcpServers(v []CreateAIAgentRequestMcpServersInner)`
+
+SetMcpServers sets McpServers field to given value.
+
+### HasMcpServers
+
+`func (o *UpsertAgentOverlayRequest) HasMcpServers() bool`
+
+HasMcpServers returns a boolean if a field has been set.
+
 ### GetGuardrailPreset
 
 `func (o *UpsertAgentOverlayRequest) GetGuardrailPreset() string`
@@ -296,6 +324,66 @@ HasGuardrailPreset returns a boolean if a field has been set.
 `func (o *UpsertAgentOverlayRequest) UnsetGuardrailPreset()`
 
 UnsetGuardrailPreset ensures that no value is present for GuardrailPreset, not even an explicit nil
+### GetLongContext
+
+`func (o *UpsertAgentOverlayRequest) GetLongContext() bool`
+
+GetLongContext returns the LongContext field if non-nil, zero value otherwise.
+
+### GetLongContextOk
+
+`func (o *UpsertAgentOverlayRequest) GetLongContextOk() (*bool, bool)`
+
+GetLongContextOk returns a tuple with the LongContext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLongContext
+
+`func (o *UpsertAgentOverlayRequest) SetLongContext(v bool)`
+
+SetLongContext sets LongContext field to given value.
+
+### HasLongContext
+
+`func (o *UpsertAgentOverlayRequest) HasLongContext() bool`
+
+HasLongContext returns a boolean if a field has been set.
+
+### SetLongContextNil
+
+`func (o *UpsertAgentOverlayRequest) SetLongContextNil(b bool)`
+
+ SetLongContextNil sets the value for LongContext to be an explicit nil
+
+### UnsetLongContext
+`func (o *UpsertAgentOverlayRequest) UnsetLongContext()`
+
+UnsetLongContext ensures that no value is present for LongContext, not even an explicit nil
+### GetFilterPolicies
+
+`func (o *UpsertAgentOverlayRequest) GetFilterPolicies() []string`
+
+GetFilterPolicies returns the FilterPolicies field if non-nil, zero value otherwise.
+
+### GetFilterPoliciesOk
+
+`func (o *UpsertAgentOverlayRequest) GetFilterPoliciesOk() (*[]string, bool)`
+
+GetFilterPoliciesOk returns a tuple with the FilterPolicies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterPolicies
+
+`func (o *UpsertAgentOverlayRequest) SetFilterPolicies(v []string)`
+
+SetFilterPolicies sets FilterPolicies field to given value.
+
+### HasFilterPolicies
+
+`func (o *UpsertAgentOverlayRequest) HasFilterPolicies() bool`
+
+HasFilterPolicies returns a boolean if a field has been set.
+
 ### GetReasoningEffort
 
 `func (o *UpsertAgentOverlayRequest) GetReasoningEffort() string`

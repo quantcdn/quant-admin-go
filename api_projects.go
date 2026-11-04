@@ -23,6 +23,22 @@ import (
 type ProjectsAPI interface {
 
 	/*
+	GetProjectEdgeEvents Get edge events for a project
+
+	Output of the project's edge functions and content filters (console.* as type console, quantLog() as type function), WAF hits and static failover. Entries are returned oldest first, up to about 10 minutes behind, kept 31 days; pass nextToken from the previous response, with the same filters, to fetch the next page. A slow query can return an empty page with a nextToken. An edge function invocation keeps at most 100 console lines of up to 8 KB each.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param organization The organization machine name
+	@param project The project machine name
+	@return ProjectsAPIGetProjectEdgeEventsRequest
+	*/
+	GetProjectEdgeEvents(ctx context.Context, organization string, project string) ProjectsAPIGetProjectEdgeEventsRequest
+
+	// GetProjectEdgeEventsExecute executes the request
+	//  @return GetProjectEdgeEvents200Response
+	GetProjectEdgeEventsExecute(r ProjectsAPIGetProjectEdgeEventsRequest) (*GetProjectEdgeEvents200Response, *http.Response, error)
+
+	/*
 	GetProjectLogs Get CDN access logs for a project
 
 	Retrieves CDN access log entries for a project. Results are always scoped to the project; the optional filter can only narrow them. Entries are returned oldest first; pass nextToken from the previous response to fetch the next page. Logs are retained for 30 days. For QuantCDN (Fastly) projects, entries are up to about 30 minutes behind, and a slow query can return an empty page with a nextToken: call again with it to collect the entries.
@@ -108,6 +124,218 @@ type ProjectsAPI interface {
 
 // ProjectsAPIService ProjectsAPI service
 type ProjectsAPIService service
+
+type ProjectsAPIGetProjectEdgeEventsRequest struct {
+	ctx context.Context
+	ApiService ProjectsAPI
+	organization string
+	project string
+	type_ *string
+	function *string
+	level *string
+	search *string
+	limit *int32
+	startTime *string
+	endTime *string
+	nextToken *string
+}
+
+// Comma-separated event types: console, function, waf-hit, static-failover
+func (r ProjectsAPIGetProjectEdgeEventsRequest) Type_(type_ string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.type_ = &type_
+	return r
+}
+
+// Only events from this edge function (UUID)
+func (r ProjectsAPIGetProjectEdgeEventsRequest) Function(function string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.function = &function
+	return r
+}
+
+// Only console events at this level
+func (r ProjectsAPIGetProjectEdgeEventsRequest) Level(level string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.level = &level
+	return r
+}
+
+// Case-insensitive substring of the message
+func (r ProjectsAPIGetProjectEdgeEventsRequest) Search(search string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.search = &search
+	return r
+}
+
+// Maximum number of events per page (default 100)
+func (r ProjectsAPIGetProjectEdgeEventsRequest) Limit(limit int32) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Start of the time range. ISO 8601 or Unix epoch milliseconds.
+func (r ProjectsAPIGetProjectEdgeEventsRequest) StartTime(startTime string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// End of the time range. ISO 8601 or Unix epoch milliseconds.
+func (r ProjectsAPIGetProjectEdgeEventsRequest) EndTime(endTime string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.endTime = &endTime
+	return r
+}
+
+// Opaque pagination token from the previous response
+func (r ProjectsAPIGetProjectEdgeEventsRequest) NextToken(nextToken string) ProjectsAPIGetProjectEdgeEventsRequest {
+	r.nextToken = &nextToken
+	return r
+}
+
+func (r ProjectsAPIGetProjectEdgeEventsRequest) Execute() (*GetProjectEdgeEvents200Response, *http.Response, error) {
+	return r.ApiService.GetProjectEdgeEventsExecute(r)
+}
+
+/*
+GetProjectEdgeEvents Get edge events for a project
+
+Output of the project's edge functions and content filters (console.* as type console, quantLog() as type function), WAF hits and static failover. Entries are returned oldest first, up to about 10 minutes behind, kept 31 days; pass nextToken from the previous response, with the same filters, to fetch the next page. A slow query can return an empty page with a nextToken. An edge function invocation keeps at most 100 console lines of up to 8 KB each.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organization The organization machine name
+ @param project The project machine name
+ @return ProjectsAPIGetProjectEdgeEventsRequest
+*/
+func (a *ProjectsAPIService) GetProjectEdgeEvents(ctx context.Context, organization string, project string) ProjectsAPIGetProjectEdgeEventsRequest {
+	return ProjectsAPIGetProjectEdgeEventsRequest{
+		ApiService: a,
+		ctx: ctx,
+		organization: organization,
+		project: project,
+	}
+}
+
+// Execute executes the request
+//  @return GetProjectEdgeEvents200Response
+func (a *ProjectsAPIService) GetProjectEdgeEventsExecute(r ProjectsAPIGetProjectEdgeEventsRequest) (*GetProjectEdgeEvents200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetProjectEdgeEvents200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectsAPIService.GetProjectEdgeEvents")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v2/organizations/{organization}/projects/{project}/edge-events"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization"+"}", url.PathEscape(parameterValueToString(r.organization, "organization")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project"+"}", url.PathEscape(parameterValueToString(r.project, "project")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.type_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
+	}
+	if r.function != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "function", r.function, "form", "")
+	}
+	if r.level != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "level", r.level, "form", "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "form", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
+	}
+	if r.startTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "form", "")
+	}
+	if r.endTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "form", "")
+	}
+	if r.nextToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nextToken", r.nextToken, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v GetProjectLogs400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v GetProjectLogs400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type ProjectsAPIGetProjectLogsRequest struct {
 	ctx context.Context

@@ -93,6 +93,8 @@ type APIClient struct {
 
 	CDNMetricsAPI CDNMetricsAPI
 
+	CIValuesAPI CIValuesAPI
+
 	CommandsAPI CommandsAPI
 
 	ComposeAPI ComposeAPI
@@ -182,6 +184,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ApplicationsAPI = (*ApplicationsAPIService)(&c.common)
 	c.BackupManagementAPI = (*BackupManagementAPIService)(&c.common)
 	c.CDNMetricsAPI = (*CDNMetricsAPIService)(&c.common)
+	c.CIValuesAPI = (*CIValuesAPIService)(&c.common)
 	c.CommandsAPI = (*CommandsAPIService)(&c.common)
 	c.ComposeAPI = (*ComposeAPIService)(&c.common)
 	c.ContainersAPI = (*ContainersAPIService)(&c.common)

@@ -39,6 +39,8 @@ type CreateAIAgentRequest struct {
 	ReasoningEffort NullableString `json:"reasoningEffort,omitempty"`
 	// Guardrail preset name
 	GuardrailPreset NullableString `json:"guardrailPreset,omitempty"`
+	// Registered MCP servers to attach. The agent gets the tools of each server in dashboard chat and in QuantCode. On update, an empty array removes every attachment.
+	McpServers []CreateAIAgentRequestMcpServersInner `json:"mcpServers,omitempty"`
 	// Filter policy IDs to apply to this agent's inference requests
 	FilterPolicies []string `json:"filterPolicies,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -503,6 +505,38 @@ func (o *CreateAIAgentRequest) UnsetGuardrailPreset() {
 	o.GuardrailPreset.Unset()
 }
 
+// GetMcpServers returns the McpServers field value if set, zero value otherwise.
+func (o *CreateAIAgentRequest) GetMcpServers() []CreateAIAgentRequestMcpServersInner {
+	if o == nil || IsNil(o.McpServers) {
+		var ret []CreateAIAgentRequestMcpServersInner
+		return ret
+	}
+	return o.McpServers
+}
+
+// GetMcpServersOk returns a tuple with the McpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAIAgentRequest) GetMcpServersOk() ([]CreateAIAgentRequestMcpServersInner, bool) {
+	if o == nil || IsNil(o.McpServers) {
+		return nil, false
+	}
+	return o.McpServers, true
+}
+
+// HasMcpServers returns a boolean if a field has been set.
+func (o *CreateAIAgentRequest) HasMcpServers() bool {
+	if o != nil && !IsNil(o.McpServers) {
+		return true
+	}
+
+	return false
+}
+
+// SetMcpServers gets a reference to the given []CreateAIAgentRequestMcpServersInner and assigns it to the McpServers field.
+func (o *CreateAIAgentRequest) SetMcpServers(v []CreateAIAgentRequestMcpServersInner) {
+	o.McpServers = v
+}
+
 // GetFilterPolicies returns the FilterPolicies field value if set, zero value otherwise.
 func (o *CreateAIAgentRequest) GetFilterPolicies() []string {
 	if o == nil || IsNil(o.FilterPolicies) {
@@ -579,6 +613,9 @@ func (o CreateAIAgentRequest) ToMap() (map[string]interface{}, error) {
 	if o.GuardrailPreset.IsSet() {
 		toSerialize["guardrailPreset"] = o.GuardrailPreset.Get()
 	}
+	if !IsNil(o.McpServers) {
+		toSerialize["mcpServers"] = o.McpServers
+	}
 	if !IsNil(o.FilterPolicies) {
 		toSerialize["filterPolicies"] = o.FilterPolicies
 	}
@@ -642,6 +679,7 @@ func (o *CreateAIAgentRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "longContext")
 		delete(additionalProperties, "reasoningEffort")
 		delete(additionalProperties, "guardrailPreset")
+		delete(additionalProperties, "mcpServers")
 		delete(additionalProperties, "filterPolicies")
 		o.AdditionalProperties = additionalProperties
 	}
