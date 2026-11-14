@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.33.0
+  version: 4.34.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -45,6 +45,9 @@ tags:
   name: AI Tools
 - description: Vector database collections for RAG and semantic search
   name: AI Vector Database
+- description: Organisation alert channels (Slack and email destinations for platform
+    and form alerts); read-only
+  name: Alert Channels
 - description: Cloud application lifecycle management
   name: Applications
 - description: Backup and restore operations for applications
@@ -101,6 +104,8 @@ tags:
   name: AI
 - description: AI Governance
   name: AI Governance
+- description: AI Auto Mode
+  name: AI Auto Mode
 - description: AI Filter Policies
   name: AI Filter Policies
 - description: AI Usage
@@ -2001,6 +2006,69 @@ paths:
       summary: Cancel an unanswered Slack interaction
       tags:
       - AI Slack Bots
+  /api/v3/organizations/{organisation}/projects/{project}/alert-channels:
+    get:
+      description: "Returns every alert channel of the organisation (channels are\
+        \ organisation-wide; the project segment lets a project-limited token call\
+        \ it). Each item has the ID, name, type and a masked hint only. Needs the\
+        \ alert-channels:read scope and the view_alert_channels permission."
+      operationId: AlertChannels_list
+      parameters:
+      - description: The organisation machine name
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The project machine name
+        example: test-project
+        explode: false
+        in: path
+        name: project
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertChannelList'
+          description: The organisation's alert channels
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+          description: "The token or role cannot read alert channels, or the token\
+            \ is limited to another project"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertChannelError'
+          description: Alert channels are not available on this platform
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertChannelError'
+          description: The alerts service did not answer
+      security:
+      - BearerAuth: []
+      summary: List the organisation's alert channels
+      tags:
+      - Alert Channels
   /api/v2/organizations/{organization}/projects/{project}/crawlers/{crawler}/schedules:
     get:
       operationId: CrawlerSchedules_list
@@ -17771,14 +17839,15 @@ paths:
     get:
       description: "Returns every rule in the order the edge runs them. Each item\
         \ has the fields of the per-type list for its rule type, plus `position` (0-based\
-        \ index in this order) and `managed` (true when a template deploy owns the\
-        \ rule in this project). For a trial organisation without a payment method,\
-        \ the list is partial: it leaves out functions, content filters and auth functions,\
-        \ as their per-type lists refuse that caller (the same gate, with the same\
-        \ superadmin masquerade bypass), so `position` values can have gaps. Do not\
-        \ treat a partial list as a full mirror of the edge rules. One malformed stored\
-        \ rule fails the whole request, so a client never receives an order with a\
-        \ silent hole."
+        \ index in this order), `managed` (true when a template deploy owns the rule\
+        \ in this project) and, on a rule written by a deploy of `quant/edge-rules.json`,\
+        \ `deployment` (its namespace and id in that file). For a trial organisation\
+        \ without a payment method, the list is partial: it leaves out functions,\
+        \ content filters and auth functions, as their per-type lists refuse that\
+        \ caller (the same gate, with the same superadmin masquerade bypass), so `position`\
+        \ values can have gaps. Do not treat a partial list as a full mirror of the\
+        \ edge rules. One malformed stored rule fails the whole request, so a client\
+        \ never receives an order with a silent hole."
       operationId: RulesIndex_list
       parameters:
       - explode: false
@@ -21836,6 +21905,114 @@ paths:
       summary: Update AI governance configuration for an organisation
       tags:
       - AI Governance
+  /api/v3/organizations/{organisation}/ai/auto-mode:
+    delete:
+      operationId: deleteAutoMode
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deleteAutoMode_200_response'
+          description: The setting is removed
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAutoMode_409_response'
+          description: "Another change to the setting happened at the same time. Read\
+            \ the setting again, then retry."
+        "502":
+          description: The AI service is not available
+        "503":
+          description: The AI service cannot remove the setting now (the audit ledger
+            is not available)
+      summary: Remove the auto mode setting for an organisation
+      tags:
+      - AI Auto Mode
+    get:
+      operationId: getAutoMode
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAutoMode_200_response'
+          description: The auto mode setting and the eligibility report
+        "502":
+          description: The AI service is not available
+      summary: Get the auto mode setting for an organisation
+      tags:
+      - AI Auto Mode
+    put:
+      operationId: updateAutoMode
+      parameters:
+      - description: The organisation ID
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIAutoModeInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAutoMode_200_response'
+          description: The saved setting
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAutoMode_400_response'
+          description: "The setting is refused. When the models are not usable, eligible\
+            \ carries the eligibility report; it is null for a body shape error or\
+            \ an unknown organisation portal."
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateAutoMode_409_response'
+          description: "Conflict: the group revision is stale (another change was\
+            \ saved after the last read), the governance settings changed between\
+            \ the read and the write, or the organisation governance settings are\
+            \ not saved yet (error: \"Save the organisation governance settings first\"\
+            ). Read the setting again, then retry."
+        "422":
+          description: Validation error
+        "502":
+          description: The AI service is not available
+        "503":
+          description: The AI service cannot save the setting now
+      summary: Save the auto mode setting for an organisation
+      tags:
+      - AI Auto Mode
   /api/v3/organizations/{organisation}/ai/governance/spend:
     get:
       operationId: getGovernanceSpend
@@ -22452,9 +22629,9 @@ paths:
     get:
       description: "Returns the organisation's CI values and, without the repo filter,\
         \ every repository's values. A variable carries its value. A secret never\
-        \ does. Quant gives the values to CI jobs on the organisation's runner pools\
-        \ as environment variables, so a workflow uses `${{ env.NAME }}` instead of\
-        \ `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature."
+        \ does. Quant gives the values to CI jobs on the organisation's runner pools.\
+        \ A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{\
+        \ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature."
       operationId: listCiValues
       parameters:
       - description: The organisation ID
@@ -22927,6 +23104,14 @@ paths:
       - Containers
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/containers/{container}:
     put:
+      description: "Updates one container in the environment's compose definition\
+        \ and redeploys the environment. The fields in the request body replace the\
+        \ same fields of the container. Fields that the request body omits keep their\
+        \ current values. Other containers and the task-level settings do not change.\
+        \ To clear a field, send it as null. The container name in the body must match\
+        \ the name in the path: a container cannot be renamed. Container updates to\
+        \ one environment run one at a time. A compose change made at the same moment\
+        \ through another endpoint can still overwrite this update."
       operationId: updateContainer
       parameters:
       - description: The organisation ID
@@ -22956,13 +23141,14 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The container ID
-        example: test-container
+      - description: The container name
+        example: app
         explode: false
         in: path
         name: container
         required: true
         schema:
+          pattern: "^[a-zA-Z0-9_-]+$"
           type: string
         style: simple
       requestBody:
@@ -22973,9 +23159,40 @@ paths:
         required: true
       responses:
         "200":
-          description: The updated container
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+          description: The updated container. The environment redeploys in the background.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateContainer_400_response'
+          description: Quant Cloud refused the updated definition
+        "403":
+          description: Permission or token scope missing
         "404":
-          description: The container not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateContainer_400_response'
+          description: The environment has no container with this name
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateContainer_400_response'
+          description: Another container update for this environment is in progress
+        "422":
+          description: "Invalid container definition, or the body name does not match\
+            \ the path name"
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/updateContainer_400_response'
+          description: Quant Cloud did not accept the request
       summary: Update a container in an environment
       tags:
       - Containers
@@ -23501,58 +23718,6 @@ paths:
         "404":
           description: The environment not found
       summary: Get a single environment
-      tags:
-      - Environments
-    put:
-      description: "Replaces the entire task definition for the environment based\
-        \ on the provided multi-container compose definition. This will create a new\
-        \ task definition revision and update the container service, triggering a\
-        \ redeployment. Optionally accepts minCapacity and maxCapacity at the root\
-        \ level for convenience."
-      operationId: updateEnvironment
-      parameters:
-      - description: The organisation ID
-        explode: false
-        in: path
-        name: organisation
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The application ID
-        explode: false
-        in: path
-        name: application
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The environment ID
-        explode: false
-        in: path
-        name: environment
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/updateEnvironment_request'
-        required: true
-      responses:
-        "202":
-          description: "Request accepted, compose definition update is processing."
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/patchEnvironmentCompose_400_response'
-          description: Invalid compose definition or validation failed.
-        "404":
-          description: Application or environment not found
-      summary: Update Environment Compose Definition
       tags:
       - Environments
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/state:
@@ -28007,6 +28172,269 @@ components:
           type: string
         accessPointArn:
           type: string
+      type: object
+    AlertChannelSummary:
+      description: An alert channel as the public API returns it. The secret (webhook
+        URL or address list) is never returned.
+      example:
+        hint: hooks.slack.com/…/AbCd
+        name: Ops Slack
+        id: ch_abcdefghijklmnopqrst
+        type: slack
+      properties:
+        id:
+          description: The channel ID
+          example: ch_abcdefghijklmnopqrst
+          pattern: "^ch_[a-z2-7]{20}$"
+          type: string
+        name:
+          example: Ops Slack
+          maxLength: 80
+          type: string
+        type:
+          enum:
+          - slack
+          - email
+          example: slack
+          type: string
+        hint:
+          description: A masked hint of the destination
+          example: hooks.slack.com/…/AbCd
+          type: string
+      required:
+      - hint
+      - id
+      - name
+      - type
+      type: object
+    AlertChannelList:
+      example:
+        channels:
+        - hint: hooks.slack.com/…/AbCd
+          name: Ops Slack
+          id: ch_abcdefghijklmnopqrst
+          type: slack
+        - hint: hooks.slack.com/…/AbCd
+          name: Ops Slack
+          id: ch_abcdefghijklmnopqrst
+          type: slack
+      properties:
+        channels:
+          items:
+            $ref: '#/components/schemas/AlertChannelSummary'
+          type: array
+      required:
+      - channels
+      type: object
+    AlertChannelError:
+      example:
+        error: Alert channels are unavailable
+      properties:
+        error:
+          example: Alert channels are unavailable
+          type: string
+      required:
+      - error
+      type: object
+    AIModelEligibility:
+      example:
+        reason: unknown
+        modelId: modelId
+        eligible: true
+        resolvedId: resolvedId
+      properties:
+        modelId:
+          type: string
+        resolvedId:
+          type: string
+        eligible:
+          type: boolean
+        reason:
+          enum:
+          - unknown
+          - no_tools
+          - policy
+          - residency
+          type: string
+      required:
+      - eligible
+      - modelId
+      - resolvedId
+      type: object
+    AIAutoModeEligibility:
+      example:
+        orchestrator:
+          reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+        usable: true
+        roles:
+          standard:
+          - reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          - reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          deep:
+          - reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          - reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          fast:
+          - reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          - reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+      properties:
+        orchestrator:
+          $ref: '#/components/schemas/AIModelEligibility'
+        roles:
+          $ref: '#/components/schemas/AIAutoModeEligibility_roles'
+        usable:
+          type: boolean
+      required:
+      - orchestrator
+      - roles
+      - usable
+      type: object
+    AIAutoModeConfig:
+      example:
+        updatedBy: updatedBy
+        autonomousDefault: true
+        watcherIntervalMinutes: 36
+        orchestratorModel: orchestratorModel
+        enforcement: default
+        maxParallelTasks: 3
+        enabled: true
+        group:
+          roles:
+            standard:
+            - standard
+            - standard
+            - standard
+            - standard
+            - standard
+            deep:
+            - deep
+            - deep
+            - deep
+            - deep
+            - deep
+            fast:
+            - fast
+            - fast
+            - fast
+            - fast
+            - fast
+          revision: 0
+        updatedAt: updatedAt
+      properties:
+        enabled:
+          type: boolean
+        orchestratorModel:
+          description: Empty when the setting was saved off without an orchestrator.
+          type: string
+        group:
+          $ref: '#/components/schemas/AIAutoModeConfig_group'
+        watcherIntervalMinutes:
+          maximum: 60
+          minimum: 0
+          type: integer
+        maxParallelTasks:
+          maximum: 16
+          minimum: 1
+          type: integer
+        enforcement:
+          enum:
+          - default
+          - required
+          type: string
+        autonomousDefault:
+          type: boolean
+        updatedAt:
+          type: string
+        updatedBy:
+          type: string
+      required:
+      - autonomousDefault
+      - enabled
+      - enforcement
+      - group
+      - orchestratorModel
+      - updatedAt
+      - watcherIntervalMinutes
+      type: object
+    AIAutoModeInput:
+      example:
+        autonomousDefault: true
+        watcherIntervalMinutes: 36
+        orchestratorModel: orchestratorModel
+        enforcement: default
+        maxParallelTasks: 3
+        enabled: true
+        group:
+          roles:
+            standard:
+            - standard
+            - standard
+            - standard
+            - standard
+            - standard
+            deep:
+            - deep
+            - deep
+            - deep
+            - deep
+            - deep
+            fast:
+            - fast
+            - fast
+            - fast
+            - fast
+            - fast
+          revision: 0
+      properties:
+        enabled:
+          type: boolean
+        orchestratorModel:
+          description: Required when enabled is true. May be left out when enabled
+            is false.
+          type: string
+        group:
+          $ref: '#/components/schemas/AIAutoModeInput_group'
+        watcherIntervalMinutes:
+          maximum: 60
+          minimum: 0
+          type: integer
+        maxParallelTasks:
+          maximum: 16
+          minimum: 1
+          type: integer
+        enforcement:
+          enum:
+          - default
+          - required
+          type: string
+        autonomousDefault:
+          type: boolean
+      required:
+      - autonomousDefault
+      - enabled
+      - enforcement
+      - group
+      - watcherIntervalMinutes
       type: object
     V2CrawlerSchedule:
       example:
@@ -33547,10 +33975,10 @@ components:
           paranoia_level: 1
         failover_origin_status_codes:
         - "200"
-        - "404"
         - "301"
         - "302"
         - "304"
+        - "404"
         proxy_alert_enabled: false
       properties:
         to:
@@ -33626,13 +34054,17 @@ components:
           example: "2000"
           type: string
         failover_origin_status_codes:
-          description: "Status codes for failover (default: 200,404,301,302,304)"
+          description: "Origin statuses that do not trigger failover. Any other origin\
+            \ status switches the rule to the static copy. With failover_mode true,\
+            \ a list left out gets the default 200, 301, 302, 304, 404, and an empty\
+            \ list is refused with 422 (it would fail over on every response). A PATCH\
+            \ replaces the list."
           example:
           - "200"
-          - "404"
           - "301"
           - "302"
           - "304"
+          - "404"
           items:
             type: string
           type: array
@@ -33764,9 +34196,11 @@ components:
         - 10.0.0.1
         failover_lifetime: "300"
         failover_origin_status_codes:
-        - "502"
-        - "503"
-        - "504"
+        - "200"
+        - "301"
+        - "302"
+        - "304"
+        - "404"
         asn_is:
         - "15169"
         cache_lifetime: "3600"
@@ -34125,11 +34559,16 @@ components:
           example: "2000"
           type: string
         failover_origin_status_codes:
-          description: Origin status codes that trigger failover
+          description: "Origin statuses that do not trigger failover. Any other origin\
+            \ status switches the rule to the static copy. With failover_mode true,\
+            \ a list left out gets the default 200, 301, 302, 304, 404, and an empty\
+            \ list is refused with 422. A PATCH replaces the list."
           example:
-          - "502"
-          - "503"
-          - "504"
+          - "200"
+          - "301"
+          - "302"
+          - "304"
+          - "404"
           items:
             type: string
           type: array
@@ -34335,10 +34774,10 @@ components:
             paranoia_level: 1
           failover_origin_status_codes:
           - "200"
-          - "404"
           - "301"
           - "302"
           - "304"
+          - "404"
           proxy_alert_enabled: false
         traffic_source_is_not:
         - crawler
@@ -38597,11 +39036,41 @@ components:
           nullable: true
           type: string
       type: object
+    RulesIndex_list_200_response_inner_deployment:
+      description: "Present only on a rule that a deploy of `quant/edge-rules.json`\
+        \ wrote, or a copy of one. `namespace` is the file's top-level namespace and\
+        \ `id` is the rule's id in that file; a later deploy matches its rules to\
+        \ stored rules by this pair. A copy in another project (an environment or\
+        \ a clone) can keep the marker but has `managed` false."
+      example:
+        namespace: namespace
+        id: id
+        hash: hash
+      properties:
+        namespace:
+          description: The `namespace` of the edge-rules file that wrote the rule.
+          type: string
+        id:
+          description: The `id` of the rule in that file.
+          type: string
+        hash:
+          description: "Hash of the rule as the deploy last wrote it, used to detect\
+            \ changes by other paths."
+          nullable: true
+          type: string
+      required:
+      - id
+      - namespace
+      type: object
     RulesIndex_list_200_response_inner:
       additionalProperties: true
       example:
         managed: true
         position: 0
+        deployment:
+          namespace: namespace
+          id: id
+          hash: hash
       properties:
         position:
           description: 0-based index in the stored order.
@@ -38610,6 +39079,8 @@ components:
         managed:
           description: True when a template deploy owns the rule in this project.
           type: boolean
+        deployment:
+          $ref: '#/components/schemas/RulesIndex_list_200_response_inner_deployment'
       type: object
     Tokens_list_200_response_inner:
       example:
@@ -44460,6 +44931,182 @@ components:
         config:
           type: object
       type: object
+    getAutoMode_200_response:
+      example:
+        eligible:
+          orchestrator:
+            reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          usable: true
+          roles:
+            standard:
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            deep:
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            fast:
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+        autoMode:
+          updatedBy: updatedBy
+          autonomousDefault: true
+          watcherIntervalMinutes: 36
+          orchestratorModel: orchestratorModel
+          enforcement: default
+          maxParallelTasks: 3
+          enabled: true
+          group:
+            roles:
+              standard:
+              - standard
+              - standard
+              - standard
+              - standard
+              - standard
+              deep:
+              - deep
+              - deep
+              - deep
+              - deep
+              - deep
+              fast:
+              - fast
+              - fast
+              - fast
+              - fast
+              - fast
+            revision: 0
+          updatedAt: updatedAt
+      properties:
+        autoMode:
+          $ref: '#/components/schemas/AIAutoModeConfig'
+        eligible:
+          $ref: '#/components/schemas/AIAutoModeEligibility'
+      required:
+      - autoMode
+      - eligible
+      type: object
+    updateAutoMode_200_response:
+      example:
+        autoMode:
+          updatedBy: updatedBy
+          autonomousDefault: true
+          watcherIntervalMinutes: 36
+          orchestratorModel: orchestratorModel
+          enforcement: default
+          maxParallelTasks: 3
+          enabled: true
+          group:
+            roles:
+              standard:
+              - standard
+              - standard
+              - standard
+              - standard
+              - standard
+              deep:
+              - deep
+              - deep
+              - deep
+              - deep
+              - deep
+              fast:
+              - fast
+              - fast
+              - fast
+              - fast
+              - fast
+            revision: 0
+          updatedAt: updatedAt
+      properties:
+        autoMode:
+          $ref: '#/components/schemas/AIAutoModeConfig'
+      type: object
+    updateAutoMode_400_response:
+      example:
+        eligible:
+          orchestrator:
+            reason: unknown
+            modelId: modelId
+            eligible: true
+            resolvedId: resolvedId
+          usable: true
+          roles:
+            standard:
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            deep:
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            fast:
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+            - reason: unknown
+              modelId: modelId
+              eligible: true
+              resolvedId: resolvedId
+        error: error
+      properties:
+        error:
+          type: string
+        eligible:
+          $ref: '#/components/schemas/AIAutoModeEligibility'
+      required:
+      - error
+      type: object
+    updateAutoMode_409_response:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    deleteAutoMode_200_response:
+      example:
+        autoMode: "{}"
+      properties:
+        autoMode:
+          nullable: true
+          type: object
+          example: null
+      type: object
     getGovernanceSpend_200_response_orgTotal:
       example:
         requestCount: 6
@@ -45068,6 +45715,13 @@ components:
           example: Invalid YAML
           type: string
       type: object
+    updateContainer_400_response:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
+      type: object
     createCronJob_request:
       properties:
         name:
@@ -45183,25 +45837,6 @@ components:
           example: Application my-app has reached the maximum number of allowed environments
             (5/5). Please contact support to increase your limit.
           type: string
-      type: object
-    updateEnvironment_request:
-      properties:
-        composeDefinition:
-          $ref: '#/components/schemas/Compose'
-        minCapacity:
-          description: "Optional. Minimum number of tasks for auto-scaling. If provided\
-            \ at root level, will be merged into composeDefinition."
-          minimum: 0
-          nullable: true
-          type: integer
-        maxCapacity:
-          description: "Optional. Maximum number of tasks for auto-scaling. If provided\
-            \ at root level, will be merged into composeDefinition."
-          minimum: 1
-          nullable: true
-          type: integer
-      required:
-      - composeDefinition
       type: object
     updateEnvironmentState_request:
       properties:
@@ -46460,6 +47095,158 @@ components:
             \ and valid-header (CDN) traffic are unaffected."
           nullable: true
           type: string
+      type: object
+    AIAutoModeEligibility_roles:
+      example:
+        standard:
+        - reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+        - reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+        deep:
+        - reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+        - reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+        fast:
+        - reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+        - reason: unknown
+          modelId: modelId
+          eligible: true
+          resolvedId: resolvedId
+      properties:
+        fast:
+          items:
+            $ref: '#/components/schemas/AIModelEligibility'
+          type: array
+        standard:
+          items:
+            $ref: '#/components/schemas/AIModelEligibility'
+          type: array
+        deep:
+          items:
+            $ref: '#/components/schemas/AIModelEligibility'
+          type: array
+      required:
+      - deep
+      - fast
+      - standard
+      type: object
+    AIAutoModeConfig_group_roles:
+      example:
+        standard:
+        - standard
+        - standard
+        - standard
+        - standard
+        - standard
+        deep:
+        - deep
+        - deep
+        - deep
+        - deep
+        - deep
+        fast:
+        - fast
+        - fast
+        - fast
+        - fast
+        - fast
+      properties:
+        fast:
+          items:
+            type: string
+          maxItems: 5
+          type: array
+        standard:
+          items:
+            type: string
+          maxItems: 5
+          type: array
+        deep:
+          items:
+            type: string
+          maxItems: 5
+          type: array
+      required:
+      - deep
+      - fast
+      - standard
+      type: object
+    AIAutoModeConfig_group:
+      example:
+        roles:
+          standard:
+          - standard
+          - standard
+          - standard
+          - standard
+          - standard
+          deep:
+          - deep
+          - deep
+          - deep
+          - deep
+          - deep
+          fast:
+          - fast
+          - fast
+          - fast
+          - fast
+          - fast
+        revision: 0
+      properties:
+        revision:
+          minimum: 0
+          type: integer
+        roles:
+          $ref: '#/components/schemas/AIAutoModeConfig_group_roles'
+      required:
+      - revision
+      - roles
+      type: object
+    AIAutoModeInput_group:
+      example:
+        roles:
+          standard:
+          - standard
+          - standard
+          - standard
+          - standard
+          - standard
+          deep:
+          - deep
+          - deep
+          - deep
+          - deep
+          - deep
+          fast:
+          - fast
+          - fast
+          - fast
+          - fast
+          - fast
+        revision: 0
+      properties:
+        revision:
+          description: Revision from the last read. A stale value returns 409.
+          minimum: 0
+          type: integer
+        roles:
+          $ref: '#/components/schemas/AIAutoModeConfig_group_roles'
+      required:
+      - roles
       type: object
     V2Crawler_sitemap_inner:
       properties:

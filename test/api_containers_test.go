@@ -46,9 +46,10 @@ func Test_quantadmingo_ContainersAPIService(t *testing.T) {
 		var environment string
 		var container string
 
-		httpRes, err := apiClient.ContainersAPI.UpdateContainer(context.Background(), organisation, application, environment, container).Execute()
+		resp, httpRes, err := apiClient.ContainersAPI.UpdateContainer(context.Background(), organisation, application, environment, container).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
