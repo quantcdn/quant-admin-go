@@ -463,6 +463,7 @@ docs/UpdateAutoMode400Response.md
 docs/UpdateAutoMode409Response.md
 docs/UpdateContainer400Response.md
 docs/UpdateCronJobRequest.md
+docs/UpdateEnvironmentRequest.md
 docs/UpdateEnvironmentSecretRequest.md
 docs/UpdateEnvironmentStateRequest.md
 docs/UpdateEnvironmentVariableRequest.md
@@ -1068,6 +1069,7 @@ model_update_auto_mode_400_response.go
 model_update_auto_mode_409_response.go
 model_update_container_400_response.go
 model_update_cron_job_request.go
+model_update_environment_request.go
 model_update_environment_secret_request.go
 model_update_environment_state_request.go
 model_update_environment_variable_request.go
