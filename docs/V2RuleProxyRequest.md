@@ -42,7 +42,7 @@ Name | Type | Description | Notes
 **OriginTimeout** | Pointer to **string** | Origin timeout in milliseconds. Defaults to 30000 when omitted on create. | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold in milliseconds | [optional] [default to "2000"]
-**FailoverOriginStatusCodes** | Pointer to **[]string** | Origin status codes that trigger failover | [optional] 
+**FailoverOriginStatusCodes** | Pointer to **[]string** | Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422. A PATCH replaces the list. | [optional] 
 **FailoverLifetime** | Pointer to **string** | Failover cache lifetime in seconds | [optional] [default to "300"]
 **ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] [default to false]
 **WafEnabled** | Pointer to **bool** | WAF enabled | [optional] [default to false]

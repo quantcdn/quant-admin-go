@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **OriginTimeout** | Pointer to **string** | Origin timeout in milliseconds. Defaults to 30000 when omitted on create. | [optional] 
 **FailoverMode** | Pointer to **bool** | Enable failover mode | [optional] [default to false]
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold | [optional] [default to "2000"]
-**FailoverOriginStatusCodes** | Pointer to **[]string** | Status codes for failover (default: 200,404,301,302,304) | [optional] 
+**FailoverOriginStatusCodes** | Pointer to **[]string** | Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422 (it would fail over on every response). A PATCH replaces the list. | [optional] 
 **FailoverLifetime** | Pointer to **string** | Failover cache lifetime | [optional] [default to "300"]
 **Notify** | Pointer to **string** | Notification type (none, slack) | [optional] [default to "none"]
 **NotifyConfig** | Pointer to [**NullableV2RuleProxyActionNotifyConfig**](V2RuleProxyActionNotifyConfig.md) |  | [optional] 
