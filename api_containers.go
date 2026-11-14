@@ -39,17 +39,20 @@ type ContainersAPI interface {
 	/*
 	UpdateContainer Update a container in an environment
 
+	Updates one container in the environment's compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organisation The organisation ID
 	@param application The application ID
 	@param environment The environment ID
-	@param container The container ID
+	@param container The container name
 	@return ContainersAPIUpdateContainerRequest
 	*/
 	UpdateContainer(ctx context.Context, organisation string, application string, environment string, container string) ContainersAPIUpdateContainerRequest
 
 	// UpdateContainerExecute executes the request
-	UpdateContainerExecute(r ContainersAPIUpdateContainerRequest) (*http.Response, error)
+	//  @return Container
+	UpdateContainerExecute(r ContainersAPIUpdateContainerRequest) (*Container, *http.Response, error)
 }
 
 // ContainersAPIService ContainersAPI service
@@ -168,18 +171,20 @@ func (r ContainersAPIUpdateContainerRequest) Container2(container2 Container) Co
 	return r
 }
 
-func (r ContainersAPIUpdateContainerRequest) Execute() (*http.Response, error) {
+func (r ContainersAPIUpdateContainerRequest) Execute() (*Container, *http.Response, error) {
 	return r.ApiService.UpdateContainerExecute(r)
 }
 
 /*
 UpdateContainer Update a container in an environment
 
+Updates one container in the environment's compose definition and redeploys the environment. The fields in the request body replace the same fields of the container. Fields that the request body omits keep their current values. Other containers and the task-level settings do not change. To clear a field, send it as null. The container name in the body must match the name in the path: a container cannot be renamed. Container updates to one environment run one at a time. A compose change made at the same moment through another endpoint can still overwrite this update.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organisation The organisation ID
  @param application The application ID
  @param environment The environment ID
- @param container The container ID
+ @param container The container name
  @return ContainersAPIUpdateContainerRequest
 */
 func (a *ContainersAPIService) UpdateContainer(ctx context.Context, organisation string, application string, environment string, container string) ContainersAPIUpdateContainerRequest {
@@ -194,16 +199,18 @@ func (a *ContainersAPIService) UpdateContainer(ctx context.Context, organisation
 }
 
 // Execute executes the request
-func (a *ContainersAPIService) UpdateContainerExecute(r ContainersAPIUpdateContainerRequest) (*http.Response, error) {
+//  @return Container
+func (a *ContainersAPIService) UpdateContainerExecute(r ContainersAPIUpdateContainerRequest) (*Container, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *Container
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainersAPIService.UpdateContainer")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/containers/{container}"
@@ -216,7 +223,7 @@ func (a *ContainersAPIService) UpdateContainerExecute(r ContainersAPIUpdateConta
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.container2 == nil {
-		return nil, reportError("container2 is required and must be specified")
+		return localVarReturnValue, nil, reportError("container2 is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -229,7 +236,7 @@ func (a *ContainersAPIService) UpdateContainerExecute(r ContainersAPIUpdateConta
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -240,19 +247,19 @@ func (a *ContainersAPIService) UpdateContainerExecute(r ContainersAPIUpdateConta
 	localVarPostBody = r.container2
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -260,8 +267,60 @@ func (a *ContainersAPIService) UpdateContainerExecute(r ContainersAPIUpdateConta
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v UpdateContainer400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v UpdateContainer400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v UpdateContainer400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 502 {
+			var v UpdateContainer400Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

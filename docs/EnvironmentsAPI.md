@@ -13,7 +13,6 @@ Method | HTTP request | Description
 [**ListEnvironments**](EnvironmentsAPI.md#ListEnvironments) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments | Get all environments for an application
 [**ListSyncOperations**](EnvironmentsAPI.md#ListSyncOperations) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment
 [**SyncToEnvironment**](EnvironmentsAPI.md#SyncToEnvironment) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment
-[**UpdateEnvironment**](EnvironmentsAPI.md#UpdateEnvironment) | **Put** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Update Environment Compose Definition
 [**UpdateEnvironmentState**](EnvironmentsAPI.md#UpdateEnvironmentState) | **Put** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment
 
 
@@ -711,82 +710,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SyncOperation**](SyncOperation.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateEnvironment
-
-> UpdateEnvironment(ctx, organisation, application, environment).UpdateEnvironmentRequest(updateEnvironmentRequest).Execute()
-
-Update Environment Compose Definition
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/quantcdn/quant-admin-go"
-)
-
-func main() {
-	organisation := "organisation_example" // string | The organisation ID
-	application := "application_example" // string | The application ID
-	environment := "environment_example" // string | The environment ID
-	updateEnvironmentRequest := *openapiclient.NewUpdateEnvironmentRequest(*openapiclient.NewCompose()) // UpdateEnvironmentRequest | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EnvironmentsAPI.UpdateEnvironment(context.Background(), organisation, application, environment).UpdateEnvironmentRequest(updateEnvironmentRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.UpdateEnvironment``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organisation** | **string** | The organisation ID | 
-**application** | **string** | The application ID | 
-**environment** | **string** | The environment ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateEnvironmentRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **updateEnvironmentRequest** | [**UpdateEnvironmentRequest**](UpdateEnvironmentRequest.md) |  | 
-
-### Return type
-
- (empty response body)
 
 ### Authorization
 

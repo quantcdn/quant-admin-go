@@ -46,7 +46,7 @@ type V2RuleProxyAction struct {
 	FailoverMode *bool `json:"failover_mode,omitempty"`
 	// Failover TTFB threshold
 	FailoverOriginTtfb *string `json:"failover_origin_ttfb,omitempty"`
-	// Status codes for failover (default: 200,404,301,302,304)
+	// Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422 (it would fail over on every response). A PATCH replaces the list.
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	// Failover cache lifetime
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`

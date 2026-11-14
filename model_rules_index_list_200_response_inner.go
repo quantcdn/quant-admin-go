@@ -23,6 +23,7 @@ type RulesIndexList200ResponseInner struct {
 	Position *int32 `json:"position,omitempty"`
 	// True when a template deploy owns the rule in this project.
 	Managed *bool `json:"managed,omitempty"`
+	Deployment *RulesIndexList200ResponseInnerDeployment `json:"deployment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,6 +110,38 @@ func (o *RulesIndexList200ResponseInner) SetManaged(v bool) {
 	o.Managed = &v
 }
 
+// GetDeployment returns the Deployment field value if set, zero value otherwise.
+func (o *RulesIndexList200ResponseInner) GetDeployment() RulesIndexList200ResponseInnerDeployment {
+	if o == nil || IsNil(o.Deployment) {
+		var ret RulesIndexList200ResponseInnerDeployment
+		return ret
+	}
+	return *o.Deployment
+}
+
+// GetDeploymentOk returns a tuple with the Deployment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RulesIndexList200ResponseInner) GetDeploymentOk() (*RulesIndexList200ResponseInnerDeployment, bool) {
+	if o == nil || IsNil(o.Deployment) {
+		return nil, false
+	}
+	return o.Deployment, true
+}
+
+// HasDeployment returns a boolean if a field has been set.
+func (o *RulesIndexList200ResponseInner) HasDeployment() bool {
+	if o != nil && !IsNil(o.Deployment) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeployment gets a reference to the given RulesIndexList200ResponseInnerDeployment and assigns it to the Deployment field.
+func (o *RulesIndexList200ResponseInner) SetDeployment(v RulesIndexList200ResponseInnerDeployment) {
+	o.Deployment = &v
+}
+
 func (o RulesIndexList200ResponseInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -124,6 +157,9 @@ func (o RulesIndexList200ResponseInner) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.Managed) {
 		toSerialize["managed"] = o.Managed
+	}
+	if !IsNil(o.Deployment) {
+		toSerialize["deployment"] = o.Deployment
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -149,6 +185,7 @@ func (o *RulesIndexList200ResponseInner) UnmarshalJSON(data []byte) (err error) 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "position")
 		delete(additionalProperties, "managed")
+		delete(additionalProperties, "deployment")
 		o.AdditionalProperties = additionalProperties
 	}
 

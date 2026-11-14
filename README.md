@@ -102,6 +102,9 @@ Class | Method | HTTP request | Description
 *AIAuditAPI* | [**AiAuditLedgerStatus**](docs/AIAuditAPI.md#aiauditledgerstatus) | **Get** /api/v3/organizations/{organisation}/ai/audit/ledger | Get the AI governance ledger status
 *AIAuditAPI* | [**AiAuditRecordGet**](docs/AIAuditAPI.md#aiauditrecordget) | **Get** /api/v3/organizations/{organisation}/ai/audit/record | Get one AI audit record
 *AIAuditAPI* | [**AiAuditRecordsList**](docs/AIAuditAPI.md#aiauditrecordslist) | **Get** /api/v3/organizations/{organisation}/ai/audit/records | List AI audit records
+*AIAutoModeAPI* | [**DeleteAutoMode**](docs/AIAutoModeAPI.md#deleteautomode) | **Delete** /api/v3/organizations/{organisation}/ai/auto-mode | Remove the auto mode setting for an organisation
+*AIAutoModeAPI* | [**GetAutoMode**](docs/AIAutoModeAPI.md#getautomode) | **Get** /api/v3/organizations/{organisation}/ai/auto-mode | Get the auto mode setting for an organisation
+*AIAutoModeAPI* | [**UpdateAutoMode**](docs/AIAutoModeAPI.md#updateautomode) | **Put** /api/v3/organizations/{organisation}/ai/auto-mode | Save the auto mode setting for an organisation
 *AICustomToolsAPI* | [**CreateCustomTool**](docs/AICustomToolsAPI.md#createcustomtool) | **Post** /api/v3/organizations/{organisation}/ai/custom-tools | Register Custom Edge Function Tool
 *AICustomToolsAPI* | [**DeleteCustomTool**](docs/AICustomToolsAPI.md#deletecustomtool) | **Delete** /api/v3/organizations/{organisation}/ai/custom-tools/{toolName} | Delete Custom Tool
 *AICustomToolsAPI* | [**GetCustomTool**](docs/AICustomToolsAPI.md#getcustomtool) | **Get** /api/v3/organizations/{organisation}/ai/custom-tools/{toolName} | Get Custom Tool
@@ -208,6 +211,7 @@ Class | Method | HTTP request | Description
 *AIVectorDatabaseAPI* | [**ListVectorDocuments**](docs/AIVectorDatabaseAPI.md#listvectordocuments) | **Get** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | List Documents in Collection
 *AIVectorDatabaseAPI* | [**QueryVectorCollection**](docs/AIVectorDatabaseAPI.md#queryvectorcollection) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/query | Semantic Search Query
 *AIVectorDatabaseAPI* | [**UploadVectorDocuments**](docs/AIVectorDatabaseAPI.md#uploadvectordocuments) | **Post** /api/v3/organizations/{organisation}/ai/vector-db/collections/{collectionId}/documents | Upload Documents to Collection
+*AlertChannelsAPI* | [**AlertChannelsList**](docs/AlertChannelsAPI.md#alertchannelslist) | **Get** /api/v3/organizations/{organisation}/projects/{project}/alert-channels | List the organisation&#39;s alert channels
 *ApplicationsAPI* | [**CreateApplication**](docs/ApplicationsAPI.md#createapplication) | **Post** /api/v3/organizations/{organisation}/applications | Create a new application
 *ApplicationsAPI* | [**DeleteApplication**](docs/ApplicationsAPI.md#deleteapplication) | **Delete** /api/v3/organizations/{organisation}/applications/{application} | Delete an application
 *ApplicationsAPI* | [**GetApplication**](docs/ApplicationsAPI.md#getapplication) | **Get** /api/v3/organizations/{organisation}/applications/{application} | Get a single application
@@ -271,7 +275,6 @@ Class | Method | HTTP request | Description
 *EnvironmentsAPI* | [**ListEnvironments**](docs/EnvironmentsAPI.md#listenvironments) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments | Get all environments for an application
 *EnvironmentsAPI* | [**ListSyncOperations**](docs/EnvironmentsAPI.md#listsyncoperations) | **Get** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | List the sync operations for an environment
 *EnvironmentsAPI* | [**SyncToEnvironment**](docs/EnvironmentsAPI.md#synctoenvironment) | **Post** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/sync/{type} | Perform a sync operation from a source environment to the current environment
-*EnvironmentsAPI* | [**UpdateEnvironment**](docs/EnvironmentsAPI.md#updateenvironment) | **Put** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment} | Update Environment Compose Definition
 *EnvironmentsAPI* | [**UpdateEnvironmentState**](docs/EnvironmentsAPI.md#updateenvironmentstate) | **Put** /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/state | Update the state of an environment
 *HeadersAPI* | [**HeadersCreate**](docs/HeadersAPI.md#headerscreate) | **Post** /api/v2/organizations/{organization}/projects/{project}/custom-headers | Create or update custom headers
 *HeadersAPI* | [**HeadersDelete**](docs/HeadersAPI.md#headersdelete) | **Delete** /api/v2/organizations/{organization}/projects/{project}/custom-headers | Delete custom headers
@@ -439,6 +442,14 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AIAutoModeConfig](docs/AIAutoModeConfig.md)
+ - [AIAutoModeConfigGroup](docs/AIAutoModeConfigGroup.md)
+ - [AIAutoModeConfigGroupRoles](docs/AIAutoModeConfigGroupRoles.md)
+ - [AIAutoModeEligibility](docs/AIAutoModeEligibility.md)
+ - [AIAutoModeEligibilityRoles](docs/AIAutoModeEligibilityRoles.md)
+ - [AIAutoModeInput](docs/AIAutoModeInput.md)
+ - [AIAutoModeInputGroup](docs/AIAutoModeInputGroup.md)
+ - [AIModelEligibility](docs/AIModelEligibility.md)
  - [AiAuditError](docs/AiAuditError.md)
  - [AiAuditRecordGet200Response](docs/AiAuditRecordGet200Response.md)
  - [AiAuditRecordRow](docs/AiAuditRecordRow.md)
@@ -456,6 +467,9 @@ Class | Method | HTTP request | Description
  - [AiSlackBotApiMessage](docs/AiSlackBotApiMessage.md)
  - [AiSlackBotApiMessageAllOfAuthor](docs/AiSlackBotApiMessageAllOfAuthor.md)
  - [AiSlackBotApiMessageAllOfFiles](docs/AiSlackBotApiMessageAllOfFiles.md)
+ - [AlertChannelError](docs/AlertChannelError.md)
+ - [AlertChannelList](docs/AlertChannelList.md)
+ - [AlertChannelSummary](docs/AlertChannelSummary.md)
  - [Application](docs/Application.md)
  - [ApplicationCache](docs/ApplicationCache.md)
  - [ApplicationDatabase](docs/ApplicationDatabase.md)
@@ -566,6 +580,7 @@ Class | Method | HTTP request | Description
  - [DeleteAIAgent200Response](docs/DeleteAIAgent200Response.md)
  - [DeleteAISession200Response](docs/DeleteAISession200Response.md)
  - [DeleteAgentOverlay200Response](docs/DeleteAgentOverlay200Response.md)
+ - [DeleteAutoMode200Response](docs/DeleteAutoMode200Response.md)
  - [DeleteBackup200Response](docs/DeleteBackup200Response.md)
  - [DeleteCustomTool200Response](docs/DeleteCustomTool200Response.md)
  - [DeleteEnvironmentSecret200Response](docs/DeleteEnvironmentSecret200Response.md)
@@ -605,6 +620,7 @@ Class | Method | HTTP request | Description
  - [GetAgentOverlay200ResponseBase](docs/GetAgentOverlay200ResponseBase.md)
  - [GetAgentOverlay200ResponseOverlay](docs/GetAgentOverlay200ResponseOverlay.md)
  - [GetAgentOverlay200ResponseOverlayMcpServersInner](docs/GetAgentOverlay200ResponseOverlayMcpServersInner.md)
+ - [GetAutoMode200Response](docs/GetAutoMode200Response.md)
  - [GetCustomTool200Response](docs/GetCustomTool200Response.md)
  - [GetCustomTool200ResponseTool](docs/GetCustomTool200ResponseTool.md)
  - [GetDependencyGraph200Response](docs/GetDependencyGraph200Response.md)
@@ -755,6 +771,7 @@ Class | Method | HTTP request | Description
  - [RestoreFilesystem202Response](docs/RestoreFilesystem202Response.md)
  - [RestoreFilesystemRequest](docs/RestoreFilesystemRequest.md)
  - [RulesIndexList200ResponseInner](docs/RulesIndexList200ResponseInner.md)
+ - [RulesIndexList200ResponseInnerDeployment](docs/RulesIndexList200ResponseInnerDeployment.md)
  - [ScalingPolicyListResponse](docs/ScalingPolicyListResponse.md)
  - [SearchSlackWorkspaceChannels200Response](docs/SearchSlackWorkspaceChannels200Response.md)
  - [SearchSlackWorkspaceChannels200ResponseResultsInner](docs/SearchSlackWorkspaceChannels200ResponseResultsInner.md)
@@ -781,8 +798,11 @@ Class | Method | HTTP request | Description
  - [UpdateAISession200Response](docs/UpdateAISession200Response.md)
  - [UpdateAISessionRequest](docs/UpdateAISessionRequest.md)
  - [UpdateAISessionRequestNewMessagesInner](docs/UpdateAISessionRequestNewMessagesInner.md)
+ - [UpdateAutoMode200Response](docs/UpdateAutoMode200Response.md)
+ - [UpdateAutoMode400Response](docs/UpdateAutoMode400Response.md)
+ - [UpdateAutoMode409Response](docs/UpdateAutoMode409Response.md)
+ - [UpdateContainer400Response](docs/UpdateContainer400Response.md)
  - [UpdateCronJobRequest](docs/UpdateCronJobRequest.md)
- - [UpdateEnvironmentRequest](docs/UpdateEnvironmentRequest.md)
  - [UpdateEnvironmentSecretRequest](docs/UpdateEnvironmentSecretRequest.md)
  - [UpdateEnvironmentStateRequest](docs/UpdateEnvironmentStateRequest.md)
  - [UpdateEnvironmentVariableRequest](docs/UpdateEnvironmentVariableRequest.md)

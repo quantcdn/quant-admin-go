@@ -40,7 +40,7 @@ type CIValuesAPI interface {
 	/*
 	ListCiValues List the CI secrets and variables
 
-	Returns the organisation's CI values and, without the repo filter, every repository's values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation's runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+	Returns the organisation's CI values and, without the repo filter, every repository's values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation's runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param organisation The organisation ID
@@ -198,7 +198,7 @@ func (r CIValuesAPIListCiValuesRequest) Execute() (*ListCiValues200Response, *ht
 /*
 ListCiValues List the CI secrets and variables
 
-Returns the organisation's CI values and, without the repo filter, every repository's values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation's runner pools as environment variables, so a workflow uses `${{ env.NAME }}` instead of `${{ secrets.NAME }}`. Needs the cloud:read scope and the CI runners feature.
+Returns the organisation's CI values and, without the repo filter, every repository's values. A variable carries its value. A secret never does. Quant gives the values to CI jobs on the organisation's runner pools. A workflow reads a secret as `${{ secrets.NAME }}` and a variable as `${{ vars.NAME }}`. Needs the cloud:read scope and the CI runners feature.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organisation The organisation ID

@@ -5,6 +5,7 @@ api/openapi.yaml
 api_ai.go
 api_ai_agents.go
 api_ai_audit.go
+api_ai_auto_mode.go
 api_ai_custom_tools.go
 api_ai_file_storage.go
 api_ai_filter_policies.go
@@ -21,6 +22,7 @@ api_ai_tool_approval.go
 api_ai_tools.go
 api_ai_usage.go
 api_ai_vector_database.go
+api_alert_channels.go
 api_applications.go
 api_backup_management.go
 api_cdn_metrics.go
@@ -55,11 +57,20 @@ configuration.go
 docs/AIAPI.md
 docs/AIAgentsAPI.md
 docs/AIAuditAPI.md
+docs/AIAutoModeAPI.md
+docs/AIAutoModeConfig.md
+docs/AIAutoModeConfigGroup.md
+docs/AIAutoModeConfigGroupRoles.md
+docs/AIAutoModeEligibility.md
+docs/AIAutoModeEligibilityRoles.md
+docs/AIAutoModeInput.md
+docs/AIAutoModeInputGroup.md
 docs/AICustomToolsAPI.md
 docs/AIFileStorageAPI.md
 docs/AIFilterPoliciesAPI.md
 docs/AIGovernanceAPI.md
 docs/AIInferenceAPI.md
+docs/AIModelEligibility.md
 docs/AIModelsAPI.md
 docs/AIOrchestrationsAPI.md
 docs/AISearchAPI.md
@@ -88,6 +99,10 @@ docs/AiSlackBotApiError.md
 docs/AiSlackBotApiMessage.md
 docs/AiSlackBotApiMessageAllOfAuthor.md
 docs/AiSlackBotApiMessageAllOfFiles.md
+docs/AlertChannelError.md
+docs/AlertChannelList.md
+docs/AlertChannelSummary.md
+docs/AlertChannelsAPI.md
 docs/Application.md
 docs/ApplicationCache.md
 docs/ApplicationDatabase.md
@@ -208,6 +223,7 @@ docs/DecideToolProposalRequest.md
 docs/DeleteAIAgent200Response.md
 docs/DeleteAISession200Response.md
 docs/DeleteAgentOverlay200Response.md
+docs/DeleteAutoMode200Response.md
 docs/DeleteBackup200Response.md
 docs/DeleteCustomTool200Response.md
 docs/DeleteEnvironmentSecret200Response.md
@@ -249,6 +265,7 @@ docs/GetAgentOverlay200Response.md
 docs/GetAgentOverlay200ResponseBase.md
 docs/GetAgentOverlay200ResponseOverlay.md
 docs/GetAgentOverlay200ResponseOverlayMcpServersInner.md
+docs/GetAutoMode200Response.md
 docs/GetCustomTool200Response.md
 docs/GetCustomTool200ResponseTool.md
 docs/GetDependencyGraph200Response.md
@@ -409,6 +426,7 @@ docs/RestoreFilesystemRequest.md
 docs/RestoreManagementAPI.md
 docs/RulesAPI.md
 docs/RulesIndexList200ResponseInner.md
+docs/RulesIndexList200ResponseInnerDeployment.md
 docs/SSHAccessAPI.md
 docs/ScalingPolicyAPI.md
 docs/ScalingPolicyListResponse.md
@@ -440,8 +458,11 @@ docs/UpdateAIAgentRequest.md
 docs/UpdateAISession200Response.md
 docs/UpdateAISessionRequest.md
 docs/UpdateAISessionRequestNewMessagesInner.md
+docs/UpdateAutoMode200Response.md
+docs/UpdateAutoMode400Response.md
+docs/UpdateAutoMode409Response.md
+docs/UpdateContainer400Response.md
 docs/UpdateCronJobRequest.md
-docs/UpdateEnvironmentRequest.md
 docs/UpdateEnvironmentSecretRequest.md
 docs/UpdateEnvironmentStateRequest.md
 docs/UpdateEnvironmentVariableRequest.md
@@ -691,6 +712,14 @@ model_ai_audit_record_get_200_response.go
 model_ai_audit_record_row.go
 model_ai_audit_record_summary.go
 model_ai_audit_records_page.go
+model_ai_auto_mode_config.go
+model_ai_auto_mode_config_group.go
+model_ai_auto_mode_config_group_roles.go
+model_ai_auto_mode_eligibility.go
+model_ai_auto_mode_eligibility_roles.go
+model_ai_auto_mode_input.go
+model_ai_auto_mode_input_group.go
+model_ai_model_eligibility.go
 model_ai_search_chat_request.go
 model_ai_search_delete_pages_request.go
 model_ai_search_enable_request.go
@@ -703,6 +732,9 @@ model_ai_slack_bot_api_error.go
 model_ai_slack_bot_api_message.go
 model_ai_slack_bot_api_message_all_of_author.go
 model_ai_slack_bot_api_message_all_of_files.go
+model_alert_channel_error.go
+model_alert_channel_list.go
+model_alert_channel_summary.go
 model_application.go
 model_application_cache.go
 model_application_database.go
@@ -812,6 +844,7 @@ model_decide_tool_proposal_request.go
 model_delete_agent_overlay_200_response.go
 model_delete_ai_agent_200_response.go
 model_delete_ai_session_200_response.go
+model_delete_auto_mode_200_response.go
 model_delete_backup_200_response.go
 model_delete_custom_tool_200_response.go
 model_delete_environment_secret_200_response.go
@@ -852,6 +885,7 @@ model_get_ai_orchestration_status_404_response.go
 model_get_ai_session_200_response.go
 model_get_ai_tool_execution_status_200_response.go
 model_get_ai_tool_execution_status_404_response.go
+model_get_auto_mode_200_response.go
 model_get_custom_tool_200_response.go
 model_get_custom_tool_200_response_tool.go
 model_get_dependency_graph_200_response.go
@@ -1002,6 +1036,7 @@ model_restore_database_request.go
 model_restore_filesystem_202_response.go
 model_restore_filesystem_request.go
 model_rules_index_list_200_response_inner.go
+model_rules_index_list_200_response_inner_deployment.go
 model_scaling_policy_list_response.go
 model_search_slack_workspace_channels_200_response.go
 model_search_slack_workspace_channels_200_response_results_inner.go
@@ -1028,8 +1063,11 @@ model_update_ai_agent_request.go
 model_update_ai_session_200_response.go
 model_update_ai_session_request.go
 model_update_ai_session_request_new_messages_inner.go
+model_update_auto_mode_200_response.go
+model_update_auto_mode_400_response.go
+model_update_auto_mode_409_response.go
+model_update_container_400_response.go
 model_update_cron_job_request.go
-model_update_environment_request.go
 model_update_environment_secret_request.go
 model_update_environment_state_request.go
 model_update_environment_variable_request.go
@@ -1272,6 +1310,7 @@ model_waf_config_thresholds_inner.go
 response.go
 test/api_ai_agents_test.go
 test/api_ai_audit_test.go
+test/api_ai_auto_mode_test.go
 test/api_ai_custom_tools_test.go
 test/api_ai_file_storage_test.go
 test/api_ai_filter_policies_test.go
@@ -1289,6 +1328,7 @@ test/api_ai_tool_approval_test.go
 test/api_ai_tools_test.go
 test/api_ai_usage_test.go
 test/api_ai_vector_database_test.go
+test/api_alert_channels_test.go
 test/api_applications_test.go
 test/api_backup_management_test.go
 test/api_cdn_metrics_test.go

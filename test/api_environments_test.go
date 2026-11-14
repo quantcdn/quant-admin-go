@@ -165,21 +165,6 @@ func Test_quantadmingo_EnvironmentsAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test EnvironmentsAPIService UpdateEnvironment", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var organisation string
-		var application string
-		var environment string
-
-		httpRes, err := apiClient.EnvironmentsAPI.UpdateEnvironment(context.Background(), organisation, application, environment).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test EnvironmentsAPIService UpdateEnvironmentState", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

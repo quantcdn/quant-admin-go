@@ -83,9 +83,11 @@ Name | Type | Description  | Notes
 
 ## UpdateContainer
 
-> UpdateContainer(ctx, organisation, application, environment, container).Container2(container2).Execute()
+> Container UpdateContainer(ctx, organisation, application, environment, container).Container2(container2).Execute()
 
 Update a container in an environment
+
+
 
 ### Example
 
@@ -103,16 +105,18 @@ func main() {
 	organisation := "test-org" // string | The organisation ID
 	application := "test-app" // string | The application ID
 	environment := "test-env" // string | The environment ID
-	container := "test-container" // string | The container ID
+	container := "app" // string | The container name
 	container2 := *openapiclient.NewContainer("Name_example", *openapiclient.NewContainerImageReference("Type_example", "Identifier_example")) // Container | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.ContainersAPI.UpdateContainer(context.Background(), organisation, application, environment, container).Container2(container2).Execute()
+	resp, r, err := apiClient.ContainersAPI.UpdateContainer(context.Background(), organisation, application, environment, container).Container2(container2).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContainersAPI.UpdateContainer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `UpdateContainer`: Container
+	fmt.Fprintf(os.Stdout, "Response from `ContainersAPI.UpdateContainer`: %v\n", resp)
 }
 ```
 
@@ -125,7 +129,7 @@ Name | Type | Description  | Notes
 **organisation** | **string** | The organisation ID | 
 **application** | **string** | The application ID | 
 **environment** | **string** | The environment ID | 
-**container** | **string** | The container ID | 
+**container** | **string** | The container name | 
 
 ### Other Parameters
 
@@ -142,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**Container**](Container.md)
 
 ### Authorization
 
@@ -151,7 +155,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

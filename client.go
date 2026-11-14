@@ -55,6 +55,8 @@ type APIClient struct {
 
 	AIAuditAPI AIAuditAPI
 
+	AIAutoModeAPI AIAutoModeAPI
+
 	AICustomToolsAPI AICustomToolsAPI
 
 	AIFileStorageAPI AIFileStorageAPI
@@ -86,6 +88,8 @@ type APIClient struct {
 	AIUsageAPI AIUsageAPI
 
 	AIVectorDatabaseAPI AIVectorDatabaseAPI
+
+	AlertChannelsAPI AlertChannelsAPI
 
 	ApplicationsAPI ApplicationsAPI
 
@@ -165,6 +169,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AIAPI = (*AIAPIService)(&c.common)
 	c.AIAgentsAPI = (*AIAgentsAPIService)(&c.common)
 	c.AIAuditAPI = (*AIAuditAPIService)(&c.common)
+	c.AIAutoModeAPI = (*AIAutoModeAPIService)(&c.common)
 	c.AICustomToolsAPI = (*AICustomToolsAPIService)(&c.common)
 	c.AIFileStorageAPI = (*AIFileStorageAPIService)(&c.common)
 	c.AIFilterPoliciesAPI = (*AIFilterPoliciesAPIService)(&c.common)
@@ -181,6 +186,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AIToolsAPI = (*AIToolsAPIService)(&c.common)
 	c.AIUsageAPI = (*AIUsageAPIService)(&c.common)
 	c.AIVectorDatabaseAPI = (*AIVectorDatabaseAPIService)(&c.common)
+	c.AlertChannelsAPI = (*AlertChannelsAPIService)(&c.common)
 	c.ApplicationsAPI = (*ApplicationsAPIService)(&c.common)
 	c.BackupManagementAPI = (*BackupManagementAPIService)(&c.common)
 	c.CDNMetricsAPI = (*CDNMetricsAPIService)(&c.common)
