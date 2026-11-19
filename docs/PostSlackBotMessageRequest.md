@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Channel** | **string** |  | 
 **ThreadTs** | Pointer to **string** | Absent: a root post | [optional] 
 **Text** | **string** | 1-8000 characters after trim | 
+**Format** | Pointer to **string** | mrkdwn: Slack mrkdwn sections (default). markdown: standard Markdown in one Slack markdown block, including tables. | [optional] [default to "mrkdwn"]
 
 ## Methods
 
@@ -91,6 +92,31 @@ and a boolean to check if the value has been set.
 
 SetText sets Text field to given value.
 
+
+### GetFormat
+
+`func (o *PostSlackBotMessageRequest) GetFormat() string`
+
+GetFormat returns the Format field if non-nil, zero value otherwise.
+
+### GetFormatOk
+
+`func (o *PostSlackBotMessageRequest) GetFormatOk() (*string, bool)`
+
+GetFormatOk returns a tuple with the Format field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFormat
+
+`func (o *PostSlackBotMessageRequest) SetFormat(v string)`
+
+SetFormat sets Format field to given value.
+
+### HasFormat
+
+`func (o *PostSlackBotMessageRequest) HasFormat() bool`
+
+HasFormat returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

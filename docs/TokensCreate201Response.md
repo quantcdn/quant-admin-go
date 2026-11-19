@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Projects** | Pointer to **[]int32** |  | [optional] 
 **Preset** | Pointer to **NullableString** |  | [optional] 
 **ExpiresAt** | Pointer to **NullableTime** |  | [optional] 
+**ExpiryLimitedByParent** | Pointer to **bool** | True when expires_at was cut to the expiry of the token that made this request. A token cannot create a token that expires after it. | [optional] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -247,6 +248,31 @@ HasExpiresAt returns a boolean if a field has been set.
 `func (o *TokensCreate201Response) UnsetExpiresAt()`
 
 UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+### GetExpiryLimitedByParent
+
+`func (o *TokensCreate201Response) GetExpiryLimitedByParent() bool`
+
+GetExpiryLimitedByParent returns the ExpiryLimitedByParent field if non-nil, zero value otherwise.
+
+### GetExpiryLimitedByParentOk
+
+`func (o *TokensCreate201Response) GetExpiryLimitedByParentOk() (*bool, bool)`
+
+GetExpiryLimitedByParentOk returns a tuple with the ExpiryLimitedByParent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryLimitedByParent
+
+`func (o *TokensCreate201Response) SetExpiryLimitedByParent(v bool)`
+
+SetExpiryLimitedByParent sets ExpiryLimitedByParent field to given value.
+
+### HasExpiryLimitedByParent
+
+`func (o *TokensCreate201Response) HasExpiryLimitedByParent() bool`
+
+HasExpiryLimitedByParent returns a boolean if a field has been set.
+
 ### GetCreatedAt
 
 `func (o *TokensCreate201Response) GetCreatedAt() time.Time`
