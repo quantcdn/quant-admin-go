@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **User** | Pointer to **NullableString** |  | [optional] 
 **OriginProtection** | Pointer to **NullableBool** | Enable origin protection for all exposed ports on this container. Use originProtectionConfig for advanced options like IP allow lists. | [optional] [default to false]
 **OriginProtectionConfig** | Pointer to [**NullableContainerOriginProtectionConfig**](ContainerOriginProtectionConfig.md) |  | [optional] 
+**LoadBalancerHealthCheck** | Pointer to [**NullableContainerLoadBalancerHealthCheck**](ContainerLoadBalancerHealthCheck.md) |  | [optional] 
 
 ## Methods
 
@@ -678,6 +679,41 @@ HasOriginProtectionConfig returns a boolean if a field has been set.
 `func (o *Container) UnsetOriginProtectionConfig()`
 
 UnsetOriginProtectionConfig ensures that no value is present for OriginProtectionConfig, not even an explicit nil
+### GetLoadBalancerHealthCheck
+
+`func (o *Container) GetLoadBalancerHealthCheck() ContainerLoadBalancerHealthCheck`
+
+GetLoadBalancerHealthCheck returns the LoadBalancerHealthCheck field if non-nil, zero value otherwise.
+
+### GetLoadBalancerHealthCheckOk
+
+`func (o *Container) GetLoadBalancerHealthCheckOk() (*ContainerLoadBalancerHealthCheck, bool)`
+
+GetLoadBalancerHealthCheckOk returns a tuple with the LoadBalancerHealthCheck field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoadBalancerHealthCheck
+
+`func (o *Container) SetLoadBalancerHealthCheck(v ContainerLoadBalancerHealthCheck)`
+
+SetLoadBalancerHealthCheck sets LoadBalancerHealthCheck field to given value.
+
+### HasLoadBalancerHealthCheck
+
+`func (o *Container) HasLoadBalancerHealthCheck() bool`
+
+HasLoadBalancerHealthCheck returns a boolean if a field has been set.
+
+### SetLoadBalancerHealthCheckNil
+
+`func (o *Container) SetLoadBalancerHealthCheckNil(b bool)`
+
+ SetLoadBalancerHealthCheckNil sets the value for LoadBalancerHealthCheck to be an explicit nil
+
+### UnsetLoadBalancerHealthCheck
+`func (o *Container) UnsetLoadBalancerHealthCheck()`
+
+UnsetLoadBalancerHealthCheck ensures that no value is present for LoadBalancerHealthCheck, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

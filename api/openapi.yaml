@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.34.1
+  version: 4.35.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -1665,8 +1665,12 @@ paths:
     post:
       description: "The bot posts the text in an allowed channel, with an attribution\
         \ line that shows your name. The bot does not answer the post. Mentions keep\
-        \ only the `<@U…>` form (at most 10 users); other control forms show as text.\
-        \ Needs the explicit `ai:slack` scope, `use_ai_services` and a verified email."
+        \ only the `<@U…>` form (at most 10 users); https links (`<https://…|label>`,\
+        \ a bare `https://` URL, or `[text](https://…)` in markdown) become links;\
+        \ broadcasts and other control forms show as text. With `format` `markdown`,\
+        \ the text is standard Markdown (headings, lists, tables, code blocks) in\
+        \ one Slack markdown block. Needs the explicit `ai:slack` scope, `use_ai_services`\
+        \ and a verified email."
       operationId: postSlackBotMessage
       parameters:
       - description: The organisation machine name
@@ -8545,6 +8549,22 @@ paths:
                 minimum: 0
                 type: integer
               style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
       security:
       - BearerAuth:
         - kv:read
@@ -8677,6 +8697,22 @@ paths:
                 minimum: 0
                 type: integer
               style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
       security:
       - BearerAuth:
         - kv:write
@@ -8805,6 +8841,22 @@ paths:
                 minimum: 0
                 type: integer
               style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
       security:
       - BearerAuth:
         - kv:write
@@ -8928,6 +8980,22 @@ paths:
               explode: false
               schema:
                 minimum: 0
+                type: integer
+              style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
                 type: integer
               style: simple
       security:
@@ -9072,6 +9140,22 @@ paths:
                 minimum: 0
                 type: integer
               style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
+                type: integer
+              style: simple
       security:
       - BearerAuth:
         - kv:write
@@ -9209,6 +9293,22 @@ paths:
               explode: false
               schema:
                 minimum: 0
+                type: integer
+              style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2KvError'
+          description: "STORE_MIGRATING (retryable, Retry-After) or UNAVAILABLE. UNAVAILABLE\
+            \ with retryable true (for example a new store whose table is still being\
+            \ created, with Retry-After 5) is safe to retry with backoff; honour Retry-After.\
+            \ With retryable false the outcome of a write is unknown: read before\
+            \ you write again."
+          headers:
+            Retry-After:
+              explode: false
+              schema:
                 type: integer
               style: simple
       security:
@@ -26569,6 +26669,9 @@ components:
             exposedPorts:
             - 5
             - 5
+            loadBalancerHealthCheck:
+              path: /_quant/health
+              intervalSeconds: 60
             cpu: 6
             imageReference:
               identifier: identifier
@@ -26626,6 +26729,9 @@ components:
             exposedPorts:
             - 5
             - 5
+            loadBalancerHealthCheck:
+              path: /_quant/health
+              intervalSeconds: 60
             cpu: 6
             imageReference:
               identifier: identifier
@@ -27085,6 +27191,9 @@ components:
             exposedPorts:
             - 5
             - 5
+            loadBalancerHealthCheck:
+              path: /_quant/health
+              intervalSeconds: 60
             cpu: 6
             imageReference:
               identifier: identifier
@@ -27142,6 +27251,9 @@ components:
             exposedPorts:
             - 5
             - 5
+            loadBalancerHealthCheck:
+              path: /_quant/health
+              intervalSeconds: 60
             cpu: 6
             imageReference:
               identifier: identifier
@@ -27334,6 +27446,9 @@ components:
           exposedPorts:
           - 5
           - 5
+          loadBalancerHealthCheck:
+            path: /_quant/health
+            intervalSeconds: 60
           cpu: 6
           imageReference:
             identifier: identifier
@@ -27391,6 +27506,9 @@ components:
           exposedPorts:
           - 5
           - 5
+          loadBalancerHealthCheck:
+            path: /_quant/health
+            intervalSeconds: 60
           cpu: 6
           imageReference:
             identifier: identifier
@@ -27522,6 +27640,9 @@ components:
         exposedPorts:
         - 5
         - 5
+        loadBalancerHealthCheck:
+          path: /_quant/health
+          intervalSeconds: 60
         cpu: 6
         imageReference:
           identifier: identifier
@@ -27645,6 +27766,8 @@ components:
           type: boolean
         originProtectionConfig:
           $ref: '#/components/schemas/Container_originProtectionConfig'
+        loadBalancerHealthCheck:
+          $ref: '#/components/schemas/Container_loadBalancerHealthCheck'
       required:
       - imageReference
       - name
@@ -38511,6 +38634,14 @@ components:
           maxLength: 8000
           minLength: 1
           type: string
+        format:
+          default: mrkdwn
+          description: "mrkdwn: Slack mrkdwn sections (default). markdown: standard\
+            \ Markdown in one Slack markdown block, including tables."
+          enum:
+          - mrkdwn
+          - markdown
+          type: string
       required:
       - channel
       - text
@@ -39196,6 +39327,7 @@ components:
       type: object
     Tokens_create_201_response:
       example:
+        expiry_limited_by_parent: false
         projects:
         - 6
         - 6
@@ -39234,6 +39366,11 @@ components:
           format: date-time
           nullable: true
           type: string
+        expiry_limited_by_parent:
+          description: True when expires_at was cut to the expiry of the token that
+            made this request. A token cannot create a token that expires after it.
+          example: false
+          type: boolean
         created_at:
           format: date-time
           type: string
@@ -47166,6 +47303,43 @@ components:
             \ and valid-header (CDN) traffic are unaffected."
           nullable: true
           type: string
+      type: object
+    Container_loadBalancerHealthCheck:
+      additionalProperties: false
+      description: "Load balancer health check for the ports this container exposes.\
+        \ Null or omitted uses the platform default (GET / every 45 seconds). Each\
+        \ property is optional; an omitted or null property takes its default. The\
+        \ check passes when the response status is 2xx or one of 300, 301, 302, 304,\
+        \ 308, 400, 401, 403 and 404, so it confirms the container answers, not that\
+        \ the application is correct. A change applies to the load balancer when it\
+        \ is saved. Distinct from healthCheck, which is the container-level command\
+        \ check. Quant base images (app-apache-php and images built on it) serve /_quant/health\
+        \ as a static response without running the application or reading shared volumes:\
+        \ use it when rendering the home page is expensive. On a container update,\
+        \ the object replaces the stored one; null resets it to the default. Compose\
+        \ import maps the service labels quant.healthcheck.path and quant.healthcheck.interval\
+        \ to it."
+      example:
+        path: /_quant/health
+        intervalSeconds: 60
+      nullable: true
+      properties:
+        path:
+          default: /
+          description: Path the load balancer requests. Starts with /.
+          example: /_quant/health
+          maxLength: 1024
+          nullable: true
+          pattern: "^/[A-Za-z0-9._~\\-/]*(\\?[A-Za-z0-9._~\\-=&]*)?$"
+          type: string
+        intervalSeconds:
+          default: 45
+          description: Seconds between checks.
+          example: 60
+          maximum: 300
+          minimum: 15
+          nullable: true
+          type: integer
       type: object
     AIAutoModeEligibility_roles:
       example:
