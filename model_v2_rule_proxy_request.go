@@ -100,6 +100,8 @@ type V2RuleProxyRequest struct {
 	FailoverOriginStatusCodes []string `json:"failover_origin_status_codes,omitempty"`
 	// Failover cache lifetime in seconds
 	FailoverLifetime *string `json:"failover_lifetime,omitempty"`
+	// Failures (a status outside failover_origin_status_codes, a connection error or no first byte inside failover_origin_ttfb) within 10 seconds before failover starts. Null or 0 uses the default (3).
+	FailoverThreshold NullableInt32 `json:"failover_threshold,omitempty"`
 	// Proxy alert enabled
 	ProxyAlertEnabled *bool `json:"proxy_alert_enabled,omitempty"`
 	// WAF enabled
@@ -1455,6 +1457,48 @@ func (o *V2RuleProxyRequest) SetFailoverLifetime(v string) {
 	o.FailoverLifetime = &v
 }
 
+// GetFailoverThreshold returns the FailoverThreshold field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *V2RuleProxyRequest) GetFailoverThreshold() int32 {
+	if o == nil || IsNil(o.FailoverThreshold.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.FailoverThreshold.Get()
+}
+
+// GetFailoverThresholdOk returns a tuple with the FailoverThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *V2RuleProxyRequest) GetFailoverThresholdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FailoverThreshold.Get(), o.FailoverThreshold.IsSet()
+}
+
+// HasFailoverThreshold returns a boolean if a field has been set.
+func (o *V2RuleProxyRequest) HasFailoverThreshold() bool {
+	if o != nil && o.FailoverThreshold.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFailoverThreshold gets a reference to the given NullableInt32 and assigns it to the FailoverThreshold field.
+func (o *V2RuleProxyRequest) SetFailoverThreshold(v int32) {
+	o.FailoverThreshold.Set(&v)
+}
+// SetFailoverThresholdNil sets the value for FailoverThreshold to be an explicit nil
+func (o *V2RuleProxyRequest) SetFailoverThresholdNil() {
+	o.FailoverThreshold.Set(nil)
+}
+
+// UnsetFailoverThreshold ensures that no value is present for FailoverThreshold, not even an explicit nil
+func (o *V2RuleProxyRequest) UnsetFailoverThreshold() {
+	o.FailoverThreshold.Unset()
+}
+
 // GetProxyAlertEnabled returns the ProxyAlertEnabled field value if set, zero value otherwise.
 func (o *V2RuleProxyRequest) GetProxyAlertEnabled() bool {
 	if o == nil || IsNil(o.ProxyAlertEnabled) {
@@ -1919,6 +1963,9 @@ func (o V2RuleProxyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailoverLifetime) {
 		toSerialize["failover_lifetime"] = o.FailoverLifetime
 	}
+	if o.FailoverThreshold.IsSet() {
+		toSerialize["failover_threshold"] = o.FailoverThreshold.Get()
+	}
 	if !IsNil(o.ProxyAlertEnabled) {
 		toSerialize["proxy_alert_enabled"] = o.ProxyAlertEnabled
 	}
@@ -2034,6 +2081,7 @@ func (o *V2RuleProxyRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "failover_origin_ttfb")
 		delete(additionalProperties, "failover_origin_status_codes")
 		delete(additionalProperties, "failover_lifetime")
+		delete(additionalProperties, "failover_threshold")
 		delete(additionalProperties, "proxy_alert_enabled")
 		delete(additionalProperties, "waf_enabled")
 		delete(additionalProperties, "waf_config")

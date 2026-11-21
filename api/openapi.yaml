@@ -34077,6 +34077,7 @@ components:
         proxy_inline_fn_enabled: false
         auth_pass: secure_password
         application_port: 80
+        failover_threshold: 3
         static_error_page_status_codes:
         - "500"
         - "502"
@@ -34248,6 +34249,15 @@ components:
           description: Failover cache lifetime
           example: "300"
           type: string
+        failover_threshold:
+          description: "Failures (a status outside failover_origin_status_codes, a\
+            \ connection error or no first byte inside failover_origin_ttfb) within\
+            \ 10 seconds before failover starts. Null or 0 uses the default (3)."
+          example: 3
+          maximum: 100
+          minimum: 1
+          nullable: true
+          type: integer
         notify:
           default: none
           description: "Notification type (none, slack)"
@@ -34392,6 +34402,7 @@ components:
         waf_enabled: false
         auth_pass: secure_pass
         disabled: false
+        failover_threshold: 3
         static_error_page_status_codes:
         - "500"
         - "502"
@@ -34752,6 +34763,15 @@ components:
           description: Failover cache lifetime in seconds
           example: "300"
           type: string
+        failover_threshold:
+          description: "Failures (a status outside failover_origin_status_codes, a\
+            \ connection error or no first byte inside failover_origin_ttfb) within\
+            \ 10 seconds before failover starts. Null or 0 uses the default (3)."
+          example: 3
+          maximum: 100
+          minimum: 1
+          nullable: true
+          type: integer
         proxy_alert_enabled:
           default: false
           description: Proxy alert enabled
@@ -34876,6 +34896,7 @@ components:
           proxy_inline_fn_enabled: false
           auth_pass: secure_password
           application_port: 80
+          failover_threshold: 3
           static_error_page_status_codes:
           - "500"
           - "502"
