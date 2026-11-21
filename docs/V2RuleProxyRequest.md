@@ -44,6 +44,7 @@ Name | Type | Description | Notes
 **FailoverOriginTtfb** | Pointer to **string** | Failover TTFB threshold in milliseconds | [optional] [default to "2000"]
 **FailoverOriginStatusCodes** | Pointer to **[]string** | Origin statuses that do not trigger failover. Any other origin status switches the rule to the static copy. With failover_mode true, a list left out gets the default 200, 301, 302, 304, 404, and an empty list is refused with 422. A PATCH replaces the list. | [optional] 
 **FailoverLifetime** | Pointer to **string** | Failover cache lifetime in seconds | [optional] [default to "300"]
+**FailoverThreshold** | Pointer to **NullableInt32** | Failures (a status outside failover_origin_status_codes, a connection error or no first byte inside failover_origin_ttfb) within 10 seconds before failover starts. Null or 0 uses the default (3). | [optional] 
 **ProxyAlertEnabled** | Pointer to **bool** | Proxy alert enabled | [optional] [default to false]
 **WafEnabled** | Pointer to **bool** | WAF enabled | [optional] [default to false]
 **WafConfig** | Pointer to [**NullableWafConfig**](WafConfig.md) |  | [optional] 
@@ -1079,6 +1080,41 @@ SetFailoverLifetime sets FailoverLifetime field to given value.
 
 HasFailoverLifetime returns a boolean if a field has been set.
 
+### GetFailoverThreshold
+
+`func (o *V2RuleProxyRequest) GetFailoverThreshold() int32`
+
+GetFailoverThreshold returns the FailoverThreshold field if non-nil, zero value otherwise.
+
+### GetFailoverThresholdOk
+
+`func (o *V2RuleProxyRequest) GetFailoverThresholdOk() (*int32, bool)`
+
+GetFailoverThresholdOk returns a tuple with the FailoverThreshold field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailoverThreshold
+
+`func (o *V2RuleProxyRequest) SetFailoverThreshold(v int32)`
+
+SetFailoverThreshold sets FailoverThreshold field to given value.
+
+### HasFailoverThreshold
+
+`func (o *V2RuleProxyRequest) HasFailoverThreshold() bool`
+
+HasFailoverThreshold returns a boolean if a field has been set.
+
+### SetFailoverThresholdNil
+
+`func (o *V2RuleProxyRequest) SetFailoverThresholdNil(b bool)`
+
+ SetFailoverThresholdNil sets the value for FailoverThreshold to be an explicit nil
+
+### UnsetFailoverThreshold
+`func (o *V2RuleProxyRequest) UnsetFailoverThreshold()`
+
+UnsetFailoverThreshold ensures that no value is present for FailoverThreshold, not even an explicit nil
 ### GetProxyAlertEnabled
 
 `func (o *V2RuleProxyRequest) GetProxyAlertEnabled() bool`

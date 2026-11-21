@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.35.0
+  version: 4.36.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -34077,6 +34077,7 @@ components:
         proxy_inline_fn_enabled: false
         auth_pass: secure_password
         application_port: 80
+        failover_threshold: 3
         static_error_page_status_codes:
         - "500"
         - "502"
@@ -34248,6 +34249,15 @@ components:
           description: Failover cache lifetime
           example: "300"
           type: string
+        failover_threshold:
+          description: "Failures (a status outside failover_origin_status_codes, a\
+            \ connection error or no first byte inside failover_origin_ttfb) within\
+            \ 10 seconds before failover starts. Null or 0 uses the default (3)."
+          example: 3
+          maximum: 100
+          minimum: 1
+          nullable: true
+          type: integer
         notify:
           default: none
           description: "Notification type (none, slack)"
@@ -34392,6 +34402,7 @@ components:
         waf_enabled: false
         auth_pass: secure_pass
         disabled: false
+        failover_threshold: 3
         static_error_page_status_codes:
         - "500"
         - "502"
@@ -34752,6 +34763,15 @@ components:
           description: Failover cache lifetime in seconds
           example: "300"
           type: string
+        failover_threshold:
+          description: "Failures (a status outside failover_origin_status_codes, a\
+            \ connection error or no first byte inside failover_origin_ttfb) within\
+            \ 10 seconds before failover starts. Null or 0 uses the default (3)."
+          example: 3
+          maximum: 100
+          minimum: 1
+          nullable: true
+          type: integer
         proxy_alert_enabled:
           default: false
           description: Proxy alert enabled
@@ -34876,6 +34896,7 @@ components:
           proxy_inline_fn_enabled: false
           auth_pass: secure_password
           application_port: 80
+          failover_threshold: 3
           static_error_page_status_codes:
           - "500"
           - "502"
