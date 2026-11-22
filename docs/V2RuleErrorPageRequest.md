@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **TrafficSource** | Pointer to **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] 
 **TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match. A PATCH replaces the list. | [optional] 
 **TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude. A PATCH replaces the list. | [optional] 
+**Schedule** | Pointer to [**V2RuleSchedule**](V2RuleSchedule.md) |  | [optional] 
 **CookieName** | Pointer to **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] 
 **ErrorPagePath** | **string** | Published path of the page to serve as the error page | 
 **StatusCodes** | **[]string** | Status codes this page is served for | 
@@ -640,6 +641,31 @@ SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
 `func (o *V2RuleErrorPageRequest) HasTrafficSourceIsNot() bool`
 
 HasTrafficSourceIsNot returns a boolean if a field has been set.
+
+### GetSchedule
+
+`func (o *V2RuleErrorPageRequest) GetSchedule() V2RuleSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *V2RuleErrorPageRequest) GetScheduleOk() (*V2RuleSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *V2RuleErrorPageRequest) SetSchedule(v V2RuleSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *V2RuleErrorPageRequest) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
 
 ### GetCookieName
 

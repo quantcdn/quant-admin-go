@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **TrafficSource** | Pointer to **string** | Traffic source filter type (traffic_source_is, traffic_source_is_not, any). Invalid values return 422. | [optional] 
 **TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match. A PATCH replaces the list. | [optional] 
 **TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude. A PATCH replaces the list. | [optional] 
+**Schedule** | Pointer to [**NullableV2RuleSchedule**](V2RuleSchedule.md) |  | [optional] 
 **CookieName** | Pointer to **string** | Write name of only_with_cookie: the rule applies only when this cookie is present. Empty string clears it. | [optional] 
 **CustomResponseBody** | **string** | Custom response body content | 
 **CustomResponseStatusCode** | Pointer to **int32** | HTTP status code for custom response | [optional] [default to 200]
@@ -643,6 +644,41 @@ SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
 
 HasTrafficSourceIsNot returns a boolean if a field has been set.
 
+### GetSchedule
+
+`func (o *V2RuleCustomResponseRequest) GetSchedule() V2RuleSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *V2RuleCustomResponseRequest) GetScheduleOk() (*V2RuleSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *V2RuleCustomResponseRequest) SetSchedule(v V2RuleSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *V2RuleCustomResponseRequest) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
+
+### SetScheduleNil
+
+`func (o *V2RuleCustomResponseRequest) SetScheduleNil(b bool)`
+
+ SetScheduleNil sets the value for Schedule to be an explicit nil
+
+### UnsetSchedule
+`func (o *V2RuleCustomResponseRequest) UnsetSchedule()`
+
+UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
 ### GetCookieName
 
 `func (o *V2RuleCustomResponseRequest) GetCookieName() string`
