@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **TrafficSource** | Pointer to **string** | Traffic source condition type (traffic_source_is, traffic_source_is_not, any) | [optional] 
 **TrafficSourceIs** | Pointer to **[]string** | Traffic sources to match (cloud, vpn, tor-exit, abuser, crawler) | [optional] 
 **TrafficSourceIsNot** | Pointer to **[]string** | Traffic sources to exclude (cloud, vpn, tor-exit, abuser, crawler) | [optional] 
+**Schedule** | Pointer to [**NullableV2RuleSchedule**](V2RuleSchedule.md) |  | [optional] 
 **Country** | Pointer to **string** | Country code | [optional] 
 **CountryIs** | Pointer to **[]string** | Allowed countries | [optional] 
 **CountryIsNot** | Pointer to **[]string** | Excluded countries | [optional] 
@@ -616,6 +617,41 @@ SetTrafficSourceIsNot sets TrafficSourceIsNot field to given value.
 
 HasTrafficSourceIsNot returns a boolean if a field has been set.
 
+### GetSchedule
+
+`func (o *V2Rule) GetSchedule() V2RuleSchedule`
+
+GetSchedule returns the Schedule field if non-nil, zero value otherwise.
+
+### GetScheduleOk
+
+`func (o *V2Rule) GetScheduleOk() (*V2RuleSchedule, bool)`
+
+GetScheduleOk returns a tuple with the Schedule field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchedule
+
+`func (o *V2Rule) SetSchedule(v V2RuleSchedule)`
+
+SetSchedule sets Schedule field to given value.
+
+### HasSchedule
+
+`func (o *V2Rule) HasSchedule() bool`
+
+HasSchedule returns a boolean if a field has been set.
+
+### SetScheduleNil
+
+`func (o *V2Rule) SetScheduleNil(b bool)`
+
+ SetScheduleNil sets the value for Schedule to be an explicit nil
+
+### UnsetSchedule
+`func (o *V2Rule) UnsetSchedule()`
+
+UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
 ### GetCountry
 
 `func (o *V2Rule) GetCountry() string`

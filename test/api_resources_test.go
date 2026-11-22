@@ -51,6 +51,21 @@ func Test_quantadmingo_ResourcesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ResourcesAPIService DeleteCiRunnerPoolCache", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var resource string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.DeleteCiRunnerPoolCache(context.Background(), organisation, resource).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ResourcesAPIService DeleteOrgResource", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -81,6 +96,21 @@ func Test_quantadmingo_ResourcesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test ResourcesAPIService GetCiRunnerPoolCacheStats", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var resource string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.GetCiRunnerPoolCacheStats(context.Background(), organisation, resource).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test ResourcesAPIService GetOrgResource", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -104,6 +134,21 @@ func Test_quantadmingo_ResourcesAPIService(t *testing.T) {
 		var resource string
 
 		resp, httpRes, err := apiClient.ResourcesAPI.GetOrgResourceCredentials(context.Background(), organisation, resource).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ResourcesAPIService ListCiRunnerPoolCache", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organisation string
+		var resource string
+
+		resp, httpRes, err := apiClient.ResourcesAPI.ListCiRunnerPoolCache(context.Background(), organisation, resource).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

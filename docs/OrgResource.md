@@ -10,8 +10,9 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Status** | Pointer to **string** | creating and updating apply to a CI runner pool | [optional] 
 **Scope** | Pointer to **string** | org for resources managed by these endpoints. app rows are compatibility records for an application-managed cache and cannot be mutated here. | [optional] 
-**Config** | Pointer to **map[string]interface{}** | Type-specific settings, such as dataStorageMaxGb for a cache | [optional] 
+**Config** | Pointer to **map[string]interface{}** | Type-specific settings: dataStorageMaxGb for a cache, and a CiRunnerPoolConfig for a CI runner pool. | [optional] 
 **Physical** | Pointer to **map[string]interface{}** | Provisioned detail: bucket and region for object storage, cache identifier and endpoint for a cache. Not returned for a CI runner pool. | [optional] 
+**EffectiveCacheResidency** | Pointer to **string** | CI runner pool only (absent on other types): the cache residency the pool runs with. It is config.cacheResidency when set; otherwise allow-github for a pool that accepts public repositories, and au-only for every other pool. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -232,6 +233,31 @@ SetPhysical sets Physical field to given value.
 `func (o *OrgResource) HasPhysical() bool`
 
 HasPhysical returns a boolean if a field has been set.
+
+### GetEffectiveCacheResidency
+
+`func (o *OrgResource) GetEffectiveCacheResidency() string`
+
+GetEffectiveCacheResidency returns the EffectiveCacheResidency field if non-nil, zero value otherwise.
+
+### GetEffectiveCacheResidencyOk
+
+`func (o *OrgResource) GetEffectiveCacheResidencyOk() (*string, bool)`
+
+GetEffectiveCacheResidencyOk returns a tuple with the EffectiveCacheResidency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEffectiveCacheResidency
+
+`func (o *OrgResource) SetEffectiveCacheResidency(v string)`
+
+SetEffectiveCacheResidency sets EffectiveCacheResidency field to given value.
+
+### HasEffectiveCacheResidency
+
+`func (o *OrgResource) HasEffectiveCacheResidency() bool`
+
+HasEffectiveCacheResidency returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

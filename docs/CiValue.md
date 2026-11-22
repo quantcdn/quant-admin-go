@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] 
 **UpdatedBy** | Pointer to **string** |  | [optional] 
 **Value** | Pointer to **string** | Variables only. A secret value is never returned. | [optional] 
+**WithheldReason** | Pointer to **string** | Present on a repository value that jobs do not get. repo_identity_unproven: the value was saved before values were bound to repository IDs, and its repository was created after the value was last saved. Save the value again to fix this. | [optional] 
+**WithheldAt** | Pointer to **time.Time** | When the value was first withheld. Present with withheldReason. | [optional] 
 
 ## Methods
 
@@ -231,6 +233,56 @@ SetValue sets Value field to given value.
 `func (o *CiValue) HasValue() bool`
 
 HasValue returns a boolean if a field has been set.
+
+### GetWithheldReason
+
+`func (o *CiValue) GetWithheldReason() string`
+
+GetWithheldReason returns the WithheldReason field if non-nil, zero value otherwise.
+
+### GetWithheldReasonOk
+
+`func (o *CiValue) GetWithheldReasonOk() (*string, bool)`
+
+GetWithheldReasonOk returns a tuple with the WithheldReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWithheldReason
+
+`func (o *CiValue) SetWithheldReason(v string)`
+
+SetWithheldReason sets WithheldReason field to given value.
+
+### HasWithheldReason
+
+`func (o *CiValue) HasWithheldReason() bool`
+
+HasWithheldReason returns a boolean if a field has been set.
+
+### GetWithheldAt
+
+`func (o *CiValue) GetWithheldAt() time.Time`
+
+GetWithheldAt returns the WithheldAt field if non-nil, zero value otherwise.
+
+### GetWithheldAtOk
+
+`func (o *CiValue) GetWithheldAtOk() (*time.Time, bool)`
+
+GetWithheldAtOk returns a tuple with the WithheldAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWithheldAt
+
+`func (o *CiValue) SetWithheldAt(v time.Time)`
+
+SetWithheldAt sets WithheldAt field to given value.
+
+### HasWithheldAt
+
+`func (o *CiValue) HasWithheldAt() bool`
+
+HasWithheldAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

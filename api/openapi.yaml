@@ -10,7 +10,7 @@ info:
     - **KV per project.** Some KV operations also have a limit per project, shared by every token: kv-admin 10 requests per minute (index create, delete and resume; upgrade; export create and resume; ledger declare, raise and drop), kv-erase 30 (ledger subject preview and shred), kv-verify 6 (ledger verify).
     - **Responses.** Over a limit the answer is 429 with a Retry-After header (seconds). KV routes answer the V2KvError body with code RATE_LIMITED and retryable true; other routes answer {"message": "Too Many Attempts."}. Rate-limited routes send RateLimit-Limit, RateLimit-Remaining and RateLimit-Reset (IETF draft; Reset is seconds until the window resets) and X-RateLimit-Limit and X-RateLimit-Remaining on the responses of requests that reach a limiter, and X-RateLimit-Reset (Unix time) on a 429. A request refused before a limiter runs (for example a 401, 403 or 404 from an earlier check) can come back without these headers. When two limits apply, the headers describe the one with fewer requests left. Wait Retry-After seconds, then send the request again.
   title: QuantCDN API
-  version: 4.36.0
+  version: 4.38.0
 servers:
 - description: QuantCDN Public Cloud
   url: https://dashboard.quantcdn.io
@@ -22856,6 +22856,28 @@ paths:
           description: The organisation does not have CI runners
         "422":
           description: The request body has the wrong shape
+        "502":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/putCiValue_502_response'
+          description: The CI values service failed
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/putCiValue_503_response'
+          description: "GitHub is unavailable, so the repository of a repository value\
+            \ could not be checked. Nothing was saved. Try again after Retry-After\
+            \ seconds."
+          headers:
+            Retry-After:
+              description: Seconds to wait before a retry
+              explode: false
+              schema:
+                example: 30
+                type: integer
+              style: simple
       summary: Create or replace a CI secret or variable
       tags:
       - CI Values
@@ -23268,7 +23290,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/updateContainer_400_response'
+                $ref: '#/components/schemas/putCiValue_502_response'
           description: Quant Cloud refused the updated definition
         "403":
           description: Permission or token scope missing
@@ -23276,13 +23298,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/updateContainer_400_response'
+                $ref: '#/components/schemas/putCiValue_502_response'
           description: The environment has no container with this name
         "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/updateContainer_400_response'
+                $ref: '#/components/schemas/putCiValue_502_response'
           description: Another container update for this environment is in progress
         "422":
           description: "Invalid container definition, or the body name does not match\
@@ -23291,7 +23313,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/updateContainer_400_response'
+                $ref: '#/components/schemas/putCiValue_502_response'
           description: Quant Cloud did not accept the request
       summary: Update a container in an environment
       tags:
@@ -25343,6 +25365,228 @@ paths:
       summary: Purge keys from a cache
       tags:
       - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/cache:
+    delete:
+      description: "Deletes the part of the pool's build cache that the body names:\
+        \ one entry (repoId, ref, version and key), one version of a ref (repoId,\
+        \ ref, version), one ref (repoId, ref), one repository (repoId) or, with exactly\
+        \ {\"all\": true}, the whole cache. A missing or empty body is refused. Only\
+        \ the named scope is deleted; a delete is permanent, and a later job saves\
+        \ a new entry. A large delete stops after about 12 seconds and returns complete\
+        \ false with what it deleted so far; send the same request again until complete\
+        \ is true. complete false means: send the same request again. If a call returns\
+        \ complete false with deletedEntries 0, stop and try again later, because\
+        \ a storage call failed, timed out or refused objects. After a 502 the delete\
+        \ may still be running on the platform; the request is idempotent, so a client\
+        \ can send the same request again."
+      operationId: deleteCiRunnerPoolCache
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The CI runner pool resource ID
+        example: cr-0123456789abcdef
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              entry:
+                summary: One entry
+                value:
+                  repoId: 123456
+                  ref: refs/heads/main
+                  version: a1b2c3
+                  key: node-cache-Linux-x64-npm-abc
+              branch:
+                summary: One branch
+                value:
+                  repoId: 123456
+                  ref: refs/heads/main
+              repository:
+                summary: One repository
+                value:
+                  repoId: 123456
+              wholeCache:
+                summary: The whole cache
+                value:
+                  all: true
+            schema:
+              $ref: '#/components/schemas/CiCacheDeleteRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiCacheDeleteResult'
+          description: Deleted
+        "400":
+          description: The platform refused the scope
+        "403":
+          description: The delete_applications permission and the cloud:write scope
+            are required
+        "404":
+          description: "Resource not found, the resource is not a CI runner pool,\
+            \ or the organisation does not have CI runners"
+        "422":
+          description: "The body is missing, empty or not a JSON object; all is not\
+            \ exactly true or is sent with another field; the body has an unknown\
+            \ field, an invalid field, or a field without the fields it needs (key\
+            \ needs repoId, ref and version; version needs repoId and ref; ref needs\
+            \ repoId)"
+        "502":
+          description: The build cache service is unavailable
+      summary: Delete build cache entries of a CI runner pool
+      tags:
+      - Resources
+    get:
+      description: "Lists the GitHub Actions cache entries of a CI runner pool, in\
+        \ storage order (repository id, then ref, version and key). totalBytes and\
+        \ entryCount cover every entry that matches the filter, not only this page;\
+        \ on a very large cache the count stops after about 10 seconds and totalsComplete\
+        \ is false. A page holds at most 500 entries; pass nextCursor as cursor, with\
+        \ the same filter, until it is null. repo is null when no repository name\
+        \ is recorded."
+      operationId: listCiRunnerPoolCache
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The CI runner pool resource ID
+        example: cr-0123456789abcdef
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Only the entries of this GitHub repository id.
+        explode: true
+        in: query
+        name: repoId
+        required: false
+        schema:
+          format: int64
+          minimum: 0
+          type: integer
+        style: form
+      - description: Only the entries saved by this git ref. Needs repoId. Must start
+          with refs/ and be a valid git ref name without %.
+        explode: true
+        in: query
+        name: ref
+        required: false
+        schema:
+          example: refs/heads/main
+          maxLength: 512
+          type: string
+        style: form
+      - description: Opaque nextCursor from the previous page of the same filter.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiCacheList'
+          description: The entries
+        "400":
+          description: The cursor is not valid for this filter
+        "403":
+          description: Cloud access required
+        "404":
+          description: "Resource not found, the resource is not a CI runner pool,\
+            \ or the organisation does not have CI runners"
+        "422":
+          description: "repoId is not a non-negative integer, or ref is not valid\
+            \ or is sent without repoId"
+        "502":
+          description: The build cache service is unavailable
+      summary: List the build cache entries of a CI runner pool
+      tags:
+      - Resources
+  /api/v3/organizations/{organisation}/resources/{resource}/cache/stats:
+    get:
+      description: "Sums of the pool's build cache hits, misses, saves and bytes over\
+        \ the last days days. hitRate is hits / (hits + misses), or null when both\
+        \ are 0."
+      operationId: getCiRunnerPoolCacheStats
+      parameters:
+      - description: The organisation ID
+        example: test-org
+        explode: false
+        in: path
+        name: organisation
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The CI runner pool resource ID
+        example: cr-0123456789abcdef
+        explode: false
+        in: path
+        name: resource
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: days
+        required: false
+        schema:
+          default: 7
+          maximum: 30
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CiCacheStats'
+          description: The statistics
+        "400":
+          description: The platform refused the request
+        "403":
+          description: Cloud access required
+        "404":
+          description: "Resource not found, the resource is not a CI runner pool,\
+            \ or the organisation does not have CI runners"
+        "422":
+          description: days is not an integer from 1 to 30
+        "502":
+          description: The build cache service is unavailable
+      summary: Get build cache statistics of a CI runner pool
+      tags:
+      - Resources
   /api/v3/organizations/{organisation}/applications/{application}/environments/{environment}/scaling-policies:
     delete:
       description: "Deletes a specific scaling policy for the environment. Specify\
@@ -26876,7 +27120,9 @@ components:
       type: object
     CiValue:
       example:
+        withheldAt: 2000-01-23T04:56:07.000+00:00
         updatedBy: updatedBy
+        withheldReason: repo_identity_unproven
         kind: secret
         scope: org
         repo: acme/web
@@ -26916,6 +27162,17 @@ components:
           type: string
         value:
           description: Variables only. A secret value is never returned.
+          type: string
+        withheldReason:
+          description: "Present on a repository value that jobs do not get. repo_identity_unproven:\
+            \ the value was saved before values were bound to repository IDs, and\
+            \ its repository was created after the value was last saved. Save the\
+            \ value again to fix this."
+          example: repo_identity_unproven
+          type: string
+        withheldAt:
+          description: When the value was first withheld. Present with withheldReason.
+          format: date-time
           type: string
       title: CI secret or variable
       type: object
@@ -26966,6 +27223,7 @@ components:
       type: object
     OrgResource:
       example:
+        effectiveCacheResidency: au-only
         createdAt: 2000-01-23T04:56:07.000+00:00
         resourceId: os-buzz-media
         orgName: test-org
@@ -27011,17 +27269,337 @@ components:
           - app
           type: string
         config:
-          description: "Type-specific settings, such as dataStorageMaxGb for a cache"
+          description: "Type-specific settings: dataStorageMaxGb for a cache, and\
+            \ a CiRunnerPoolConfig for a CI runner pool."
           type: object
         physical:
           description: "Provisioned detail: bucket and region for object storage,\
             \ cache identifier and endpoint for a cache. Not returned for a CI runner\
             \ pool."
           type: object
+        effectiveCacheResidency:
+          description: "CI runner pool only (absent on other types): the cache residency\
+            \ the pool runs with. It is config.cacheResidency when set; otherwise\
+            \ allow-github for a pool that accepts public repositories, and au-only\
+            \ for every other pool."
+          enum:
+          - au-only
+          - allow-github
+          readOnly: true
+          type: string
         createdAt:
           format: date-time
           type: string
       title: Shared resource
+      type: object
+    CiRunnerPoolConfig:
+      description: "The config of a ci-runner-pool resource. connection and alerts\
+        \ are set by Quant: they are ignored on input and kept on update."
+      properties:
+        tier:
+          description: "Hard cap on concurrent jobs: small 2, medium 4, large 8. When\
+            \ the pool is full, jobs wait."
+          enum:
+          - small
+          - medium
+          - large
+          type: string
+        architectures:
+          default:
+          - x64
+          items:
+            enum:
+            - arm64
+            - x64
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+        networkMode:
+          default: public
+          enum:
+          - public
+          - restricted
+          type: string
+        egressAllowlist:
+          description: Domains allowed when networkMode is restricted. Wildcard only
+            as a leading *. label.
+          items:
+            example: '*.npmjs.org'
+            type: string
+          maxItems: 100
+          type: array
+        idleTimeoutMinutes:
+          default: 15
+          maximum: 120
+          minimum: 5
+          type: integer
+        businessHoursWarm:
+          $ref: '#/components/schemas/CiRunnerPoolConfig_businessHoursWarm'
+        connection:
+          $ref: '#/components/schemas/CiRunnerPoolConfig_connection'
+        cacheResidency:
+          description: "Where the pool's GitHub Actions build cache may live. au-only\
+            \ keeps cache data in Australia; if the pool's cache is unavailable, jobs\
+            \ run without a cache. allow-github lets jobs use GitHub's cache when\
+            \ the pool's cache is unavailable. When not set, a pool that accepts public\
+            \ repositories uses allow-github and every other pool uses au-only. A\
+            \ change applies to the next job each runner machine starts."
+          enum:
+          - au-only
+          - allow-github
+          type: string
+        alerts:
+          items:
+            $ref: '#/components/schemas/CiRunnerPoolConfig_alerts_inner'
+          readOnly: true
+          type: array
+      required:
+      - tier
+      title: CI runner pool config
+      type: object
+    CiCacheEntry:
+      example:
+        repoId: 123456
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        ref: refs/heads/main
+        repo: acme/web
+        version: a1b2c3
+        key: node-cache-Linux-x64-npm-abc
+        sizeBytes: 104857600
+      properties:
+        repoId:
+          description: GitHub repository id.
+          example: 123456
+          format: int64
+          type: integer
+        repo:
+          description: "owner/name recorded for repoId, or null when none is recorded."
+          example: acme/web
+          nullable: true
+          type: string
+        ref:
+          description: The git ref that saved the entry. A pull request saves to refs/pull/<number>/merge.
+          example: refs/heads/main
+          type: string
+        key:
+          description: The actions/cache key.
+          example: node-cache-Linux-x64-npm-abc
+          type: string
+        version:
+          description: The cache version (a hash of the paths and compression the
+            job used).
+          example: a1b2c3
+          type: string
+        sizeBytes:
+          example: 104857600
+          format: int64
+          type: integer
+        createdAt:
+          description: When the entry was saved. Entries expire 14 days after they
+            are saved.
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - createdAt
+      - key
+      - ref
+      - repo
+      - repoId
+      - sizeBytes
+      - version
+      title: CI build cache entry
+      type: object
+    CiCacheList:
+      example:
+        nextCursor: nextCursor
+        entries:
+        - repoId: 123456
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ref: refs/heads/main
+          repo: acme/web
+          version: a1b2c3
+          key: node-cache-Linux-x64-npm-abc
+          sizeBytes: 104857600
+        - repoId: 123456
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ref: refs/heads/main
+          repo: acme/web
+          version: a1b2c3
+          key: node-cache-Linux-x64-npm-abc
+          sizeBytes: 104857600
+        - repoId: 123456
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ref: refs/heads/main
+          repo: acme/web
+          version: a1b2c3
+          key: node-cache-Linux-x64-npm-abc
+          sizeBytes: 104857600
+        - repoId: 123456
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ref: refs/heads/main
+          repo: acme/web
+          version: a1b2c3
+          key: node-cache-Linux-x64-npm-abc
+          sizeBytes: 104857600
+        - repoId: 123456
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ref: refs/heads/main
+          repo: acme/web
+          version: a1b2c3
+          key: node-cache-Linux-x64-npm-abc
+          sizeBytes: 104857600
+        entryCount: 6
+        totalsComplete: true
+        totalBytes: 0
+      properties:
+        totalBytes:
+          description: Size of every entry that matches the filter (partial when totalsComplete
+            is false).
+          format: int64
+          type: integer
+        entryCount:
+          description: Number of entries that match the filter (partial when totalsComplete
+            is false).
+          format: int64
+          type: integer
+        totalsComplete:
+          description: false when the count stopped at its time limit (about 10 seconds)
+            on a very large cache; totalBytes and entryCount then cover only the part
+            counted.
+          type: boolean
+        entries:
+          items:
+            $ref: '#/components/schemas/CiCacheEntry'
+          maxItems: 500
+          type: array
+        nextCursor:
+          description: "Opaque. Pass as cursor, with the same filter, for the next\
+            \ page; null on the last page."
+          nullable: true
+          type: string
+      required:
+      - entries
+      - entryCount
+      - nextCursor
+      - totalBytes
+      - totalsComplete
+      title: CI build cache entries
+      type: object
+    CiCacheDeleteRequest:
+      additionalProperties: false
+      description: "The scope to delete: either {\"all\": true} alone (the whole cache\
+        \ of the pool), or repoId with optionally ref, version and key, where a field\
+        \ needs every field before it (repoId, ref, version, key). An empty object\
+        \ is refused."
+      example:
+        all: true
+        repoId: 0
+        ref: refs/heads/main
+        version: version
+        key: key
+      minProperties: 1
+      properties:
+        all:
+          description: true clears the whole cache of the pool. Must be the only field.
+          type: boolean
+        repoId:
+          description: GitHub repository id. A digit string is also accepted.
+          format: int64
+          minimum: 0
+          type: integer
+        ref:
+          description: "Git ref; starts with refs/, a valid git ref name without %."
+          example: refs/heads/main
+          maxLength: 512
+          type: string
+        version:
+          pattern: "^[A-Za-z0-9]{1,128}$"
+          type: string
+        key:
+          description: "The exact cache key. Deletes only that entry, not keys that\
+            \ start with it."
+          maxLength: 512
+          minLength: 1
+          type: string
+      title: CI build cache delete scope
+      type: object
+    CiCacheDeleteResult:
+      example:
+        deletedBytes: 6
+        complete: true
+        deletedEntries: 0
+      properties:
+        deletedEntries:
+          format: int64
+          type: integer
+        deletedBytes:
+          format: int64
+          type: integer
+        complete:
+          description: "false when the delete stopped at its time limit (about 12\
+            \ seconds), a storage call failed or timed out, or storage refused some\
+            \ objects. false means: send the same request again until it is true.\
+            \ If a call returns false with deletedEntries 0, stop and try again later,\
+            \ because a storage call failed, timed out or refused objects."
+          type: boolean
+      required:
+      - complete
+      - deletedBytes
+      - deletedEntries
+      title: CI build cache delete result
+      type: object
+    CiCacheStats:
+      example:
+        hits: 6.027456183070403
+        saves: 5.962133916683182
+        misses: 1.4658129805029452
+        days: 3
+        hitRate: 0.7061401241503109
+        bytesIn: 5.637376656633329
+        bytesOut: 2.3021358869347655
+      properties:
+        days:
+          maximum: 30
+          minimum: 1
+          type: integer
+        hits:
+          description: Cache lookups that found an entry.
+          format: double
+          type: number
+        misses:
+          description: Cache lookups that found no entry.
+          format: double
+          type: number
+        saves:
+          description: Entries saved.
+          format: double
+          type: number
+        bytesIn:
+          description: Bytes saved to the cache.
+          format: double
+          type: number
+        bytesOut:
+          description: Bytes restored from the cache.
+          format: double
+          type: number
+        hitRate:
+          description: hits / (hits + misses); null when both are 0.
+          format: double
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
+      required:
+      - bytesIn
+      - bytesOut
+      - days
+      - hitRate
+      - hits
+      - misses
+      - saves
+      title: CI build cache statistics
       type: object
     ResourceAttachment:
       example:
@@ -33825,6 +34403,8 @@ components:
           items:
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         country:
           description: Country code
           example: US
@@ -34041,6 +34621,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -34419,6 +35001,46 @@ components:
         url:
         - /api/*
         - /backend/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         only_proxy_404: false
         traffic_source_is:
         - tor-exit
@@ -34666,6 +35288,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -34996,6 +35620,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule_id
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35076,6 +35740,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35155,6 +35859,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35229,6 +35973,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35281,6 +36065,46 @@ components:
         url:
         - /old-path/*
         - /legacy/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35476,6 +36300,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -35539,6 +36365,46 @@ components:
         url:
         - /maintenance
         - /down
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35734,6 +36600,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -35800,6 +36668,46 @@ components:
         url:
         - /*
         fn_uuid: 8d3f4820-8536-51ef-b827-f18gc2g01bf8
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -35994,6 +36902,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -36073,6 +36983,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36134,6 +37084,46 @@ components:
         url:
         - /old-path/*
         - /legacy/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36220,6 +37210,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36291,6 +37321,46 @@ components:
         url:
         - /old-path/*
         - /legacy/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36373,6 +37443,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36440,6 +37550,46 @@ components:
         url:
         - /old-path/*
         - /legacy/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36514,6 +37664,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36564,6 +37754,46 @@ components:
         url:
         - /*
         fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36758,6 +37988,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -36837,6 +38069,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -36887,6 +38159,46 @@ components:
         url:
         - /*
         fn_uuid: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -37081,6 +38393,8 @@ components:
             - crawler
             type: string
           type: array
+        schedule:
+          $ref: '#/components/schemas/V2RuleSchedule'
         cookie_name:
           description: "Write name of only_with_cookie: the rule applies only when\
             \ this cookie is present. Empty string clears it."
@@ -37174,6 +38488,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -37246,6 +38600,46 @@ components:
         url:
         - /old-path/*
         - /legacy/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         robot_challenge_verification_ttl: 10800
         domain:
         - test-domain.com
@@ -37328,6 +38722,46 @@ components:
         - /old-path/*
         - /legacy/*
         rule_id: rule-001
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -37395,6 +38829,46 @@ components:
         url:
         - /old-path/*
         - /legacy/*
+        schedule:
+          mode: active_during
+          once:
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          - start: 2026-12-24T18:00
+            end: 2026-12-27T09:00
+          timezone: Australia/Sydney
+          weekly:
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
+          - start: 22:00
+            days:
+            - sat
+            - sun
+            end: 07:00
         domain:
         - test-domain.com
         - www.test-domain.com
@@ -37405,6 +38879,80 @@ components:
         traffic_source_is:
         - tor-exit
         asn: asn_is
+      type: object
+    V2RuleSchedule:
+      description: "Weekly windows and one-off ranges in local wall time for one IANA\
+        \ time zone. Start is inclusive, end is exclusive. A weekly window whose end\
+        \ is not later than its start crosses midnight. With no windows the rule always\
+        \ applies."
+      example:
+        mode: active_during
+        once:
+        - start: 2026-12-24T18:00
+          end: 2026-12-27T09:00
+        - start: 2026-12-24T18:00
+          end: 2026-12-27T09:00
+        - start: 2026-12-24T18:00
+          end: 2026-12-27T09:00
+        - start: 2026-12-24T18:00
+          end: 2026-12-27T09:00
+        - start: 2026-12-24T18:00
+          end: 2026-12-27T09:00
+        timezone: Australia/Sydney
+        weekly:
+        - start: 22:00
+          days:
+          - sat
+          - sun
+          end: 07:00
+        - start: 22:00
+          days:
+          - sat
+          - sun
+          end: 07:00
+        - start: 22:00
+          days:
+          - sat
+          - sun
+          end: 07:00
+        - start: 22:00
+          days:
+          - sat
+          - sun
+          end: 07:00
+        - start: 22:00
+          days:
+          - sat
+          - sun
+          end: 07:00
+      properties:
+        timezone:
+          description: "IANA time zone name, or UTC. Invalid values return 422."
+          example: Australia/Sydney
+          type: string
+        mode:
+          description: "active_during: the rule applies only inside the windows. inactive_during:\
+            \ the rule applies only outside them."
+          enum:
+          - active_during
+          - inactive_during
+          example: active_during
+          type: string
+        weekly:
+          description: Weekly windows. Stored as an empty list when omitted.
+          items:
+            $ref: '#/components/schemas/V2RuleSchedule_weekly_inner'
+          maxItems: 50
+          type: array
+        once:
+          description: One-off ranges. Stored as an empty list when omitted.
+          items:
+            $ref: '#/components/schemas/V2RuleSchedule_once_inner'
+          maxItems: 50
+          type: array
+      required:
+      - mode
+      - timezone
       type: object
     SecretKey:
       example:
@@ -45685,7 +47233,9 @@ components:
     listCiValues_200_response:
       example:
         values:
-        - updatedBy: updatedBy
+        - withheldAt: 2000-01-23T04:56:07.000+00:00
+          updatedBy: updatedBy
+          withheldReason: repo_identity_unproven
           kind: secret
           scope: org
           repo: acme/web
@@ -45695,7 +47245,9 @@ components:
           - branches
           value: value
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - updatedBy: updatedBy
+        - withheldAt: 2000-01-23T04:56:07.000+00:00
+          updatedBy: updatedBy
+          withheldReason: repo_identity_unproven
           kind: secret
           scope: org
           repo: acme/web
@@ -45736,6 +47288,23 @@ components:
       required:
       - kind
       - value
+      type: object
+    putCiValue_502_response:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
+      type: object
+    putCiValue_503_response:
+      example:
+        error: "GitHub is unavailable, so Quant could not check the repository. Nothing\
+          \ was saved. Try again in a minute."
+      properties:
+        error:
+          example: "GitHub is unavailable, so Quant could not check the repository.\
+            \ Nothing was saved. Try again in a minute."
+          type: string
       type: object
     createCommand_request:
       properties:
@@ -45923,13 +47492,6 @@ components:
       properties:
         error:
           example: Invalid YAML
-          type: string
-      type: object
-    updateContainer_400_response:
-      example:
-        error: error
-      properties:
-        error:
           type: string
       type: object
     createCronJob_request:
@@ -47061,6 +48623,63 @@ components:
           description: Environment variable value
           type: string
       type: object
+    CiRunnerPoolConfig_businessHoursWarm:
+      properties:
+        enabled:
+          default: false
+          type: boolean
+        timezone:
+          example: Australia/Melbourne
+          type: string
+        start:
+          description: HH:MM
+          example: 08:00
+          type: string
+        end:
+          description: HH:MM
+          example: 18:00
+          type: string
+      type: object
+    CiRunnerPoolConfig_connection:
+      properties:
+        provider:
+          enum:
+          - github
+          type: string
+        installationId:
+          format: int64
+          type: integer
+        githubOrg:
+          type: string
+        appId:
+          description: The GitHub App that owns the installation.
+          format: int64
+          type: integer
+        status:
+          enum:
+          - connected
+          - disconnected
+          type: string
+      readOnly: true
+      type: object
+    CiRunnerPoolConfig_alerts_inner:
+      properties:
+        type:
+          description: "pool_error: runner VMs failed to start, VMs reported themselves\
+            \ unhealthy, or a job never reached this pool's runners (detail says which).\
+            \ labels_unfit: a job asked for labels or an architecture this pool's\
+            \ runners do not have, so the pool did not take it."
+          enum:
+          - queue_wait
+          - at_capacity
+          - pool_error
+          - labels_unfit
+          type: string
+        since:
+          type: string
+        detail:
+          type: string
+      type: object
     Application_database:
       description: Database configuration
       example:
@@ -48159,6 +49778,64 @@ components:
           description: Container port
           example: 80
           type: integer
+      type: object
+    V2RuleSchedule_weekly_inner:
+      example:
+        start: 22:00
+        days:
+        - sat
+        - sun
+        end: 07:00
+      properties:
+        days:
+          example:
+          - sat
+          - sun
+          items:
+            enum:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+            - sat
+            - sun
+            type: string
+          minItems: 1
+          type: array
+        start:
+          description: "Local time HH:MM, 00:00 to 23:59."
+          example: 22:00
+          pattern: "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+          type: string
+        end:
+          description: "Local time HH:MM, 00:00 to 24:00."
+          example: 07:00
+          pattern: "^(([01][0-9]|2[0-3]):[0-5][0-9]|24:00)$"
+          type: string
+      required:
+      - days
+      - end
+      - start
+      type: object
+    V2RuleSchedule_once_inner:
+      example:
+        start: 2026-12-24T18:00
+        end: 2026-12-27T09:00
+      properties:
+        start:
+          description: "Local date and time, YYYY-MM-DDTHH:MM, no offset."
+          example: 2026-12-24T18:00
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):[0-5][0-9]$"
+          type: string
+        end:
+          description: "Local date and time after start, YYYY-MM-DDTHH:MM, no offset."
+          example: 2026-12-27T09:00
+          pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):[0-5][0-9]$"
+          type: string
+      required:
+      - end
+      - start
       type: object
     V1GetMetricsResponse_data:
       oneOf:
